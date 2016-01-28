@@ -1,0 +1,25 @@
+{
+  "name": "generator-chisel",
+  "version": "0.0.1",
+  "description": "A Yeoman generator for scaffolding WordPress projects based on Timber.",
+  "homepage": "",
+  "author": {
+    "name": "Xfive",
+    "email": "hello@xfive.co",
+    "url": "https://www.xfive.co"
+  },
+  "files": [
+    "generators/app"
+  ],
+  "main": "generators\\index.js",
+  "keywords": [
+    "yeoman-generator",
+    "wordpress"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.22.5"
+  },
+  "devDependencies": {},
+  "repository": "git@github.com:xfiveco/generator-chisel.git",
+  "license": "MIT"
+}
