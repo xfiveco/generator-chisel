@@ -1,22 +1,13 @@
 # Chisel
-Chisel will be a Yeoman generator for scaffolding WordPress projects based on [Timber](http://upstatement.com/timber/) library. 
-
-It will allow an effective WordPress themes development by merging front-end and back-end development into one workflow. It's based on workflow and solutions used at [Xfive.co](https://www.xfive.co/) website.
-
-Chisel doesn't do anything yet, but below are some of planned features. 
+Chisel will be a Yeoman generator for scaffolding front-end and WordPress projects. Chisel doesn't do anything yet, but below are some of planned features. 
 
 ## Planned features
-- [Timber](http://upstatement.com/timber/) based starter theme
-- npm scripts for development worflow
-- SCSS
-- ITCSS
-- Browserify
+- Gulp build system
 - Browsersync
-- SVG sprites
-- Performance optimization
-  - SVG symbols
-  - critical CSS
-  - font-loading optimization
-  - automatic CSS minification for production
-
+- Twig templating for front-end projects
+- [Timber](http://upstatement.com/timber/) or X5 starter theme for WP projects
+- Sass
+- OOCSS or ITCSS
+- Browserify / Babel
+- Performance optimization tasks
 
