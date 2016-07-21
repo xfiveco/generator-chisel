@@ -1,0 +1,10 @@
+// Clearfix
+
+// Use with @extend %clearfix;
+%clearfix {
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}

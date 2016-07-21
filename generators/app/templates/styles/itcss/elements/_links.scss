@@ -1,0 +1,10 @@
+// Links
+
+a {
+  color: $color-link;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-text;
+  }
+}

@@ -1,0 +1,21 @@
+// Lists
+
+li {
+  margin-bottom: 0.5rem;
+
+  > ul,
+  > ol {
+    margin-bottom: 0;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}

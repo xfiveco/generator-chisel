@@ -1,0 +1,24 @@
+// Utilities
+
+/* Hide visually but not from screen readers */
+// Allow important defs in utility class
+.u-hide {
+  left: -9999em !important;
+  position: absolute !important;
+}
+
+.u-spacer {
+  margin-bottom: 1rem;
+}
+
+.u-noscroll {
+  overflow: hidden;
+}
+
+.u-hide\@small {
+  display: none;
+
+  @include bp-medium {
+    display: block;
+  }
+}

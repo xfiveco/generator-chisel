@@ -17,7 +17,7 @@
     "wordpress"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.22.5"
+    "yeoman-generator": "^0.24.1"
   },
   "devDependencies": {},
   "repository": "git@github.com:xfiveco/generator-chisel.git",

@@ -1,7 +1,8 @@
 'use strict';
-var yeoman = require('yeoman-generator');
 
-module.exports = yeoman.generators.Base.extend({
+var generators = require('yeoman-generator');
+
+module.exports = generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
