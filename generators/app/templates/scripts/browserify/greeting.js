@@ -1,9 +1,7 @@
 'use strict';
 
-var $ = require('jquery');
-
 var greeting = function (name) {
-  $('.js-greeting').text(name);
+  document.querySelector('.js-greeting').innerHTML = name;
 };
 
 module.exports = greeting;

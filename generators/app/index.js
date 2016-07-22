@@ -4,14 +4,16 @@ var yeoman = require('yeoman-generator');
 var utils = require('./utils');
 
 var Chisel = yeoman.Base.extend({
+
   constructor: function () {
     yeoman.Base.apply(this, arguments);
   },
 
   prompting: function () {
+
     var done = this.async();
 
-    this.prompt(utils.prompts.questions, function (answers) {
+    this.prompt(utils.prompts.questions).then(function (answers) {
       utils.prompts.setAnswers.apply(this, [answers]);
       done();
     }.bind(this));

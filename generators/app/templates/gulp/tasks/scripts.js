@@ -9,7 +9,6 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
 
   function bundle(bundler) {
     return bundler
-      .transform("babelify", { presets: ["es2015"] })
       .bundle()
       .pipe(plugins.vinylSourceStream('bundle.js'))
       .pipe(plugins.vinylBuffer())
@@ -20,7 +19,7 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
       .pipe(gulp.dest(config.dest.scripts))
       .pipe(plugins.browserSync.stream());
   }
-  
+
   gulp.task('scripts-build', ['lint', 'styles-build'], function () {
     return bundle(plugins.browserify(customOpts))
       .pipe(plugins.rev())
@@ -28,7 +27,7 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.rev.manifest({
         path: config.dest.revManifest,
         base: config.dest.base,
-        merge: true 
+        merge: true
       }))
       .pipe(gulp.dest(config.dest.base));
   });
