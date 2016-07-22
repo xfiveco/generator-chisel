@@ -1,12 +1,57 @@
 'use strict';
 
-var generators = require('yeoman-generator');
+var yeoman = require('yeoman-generator');
+var utils = require('./utils');
 
-module.exports = generators.Base.extend({
+var Chisel = yeoman.Base.extend({
+  constructor: function () {
+    yeoman.Base.apply(this, arguments);
+  },
+
   prompting: function () {
     var done = this.async();
 
-    this.log('Chisel generator doesn\'t do anything yet. To learn about planned features visit https://github.com/xfiveco/generator-chisel');
-  }
+    this.prompt(utils.prompts.questions, function (answers) {
+      utils.prompts.setAnswers.apply(this, [answers]);
+      done();
+    }.bind(this));
+  },
 
+  configuring: function () {
+
+    // Yeoman config file
+    utils.generator.config.call(this);
+
+    // Project configuration files
+    utils.generator.dotfiles.call(this);
+
+    // Application files
+    utils.generator.appfiles.call(this);
+  },
+
+  writing: function () {
+
+    // Project index
+    utils.generator.projectInfo.call(this);
+
+    // Template files
+    utils.generator.templates.call(this);
+
+    // Stylesheet files
+    utils.generator.stylesheets.call(this);
+
+    // JavaScript files
+    utils.generator.javascripts.call(this);
+
+    // Gulp modules
+    utils.generator.gulpfiles.call(this);
+  },
+
+  install: function () {
+    this.installDependencies({
+      skipInstall: this.options['skip-install']
+    });
+  }
 });
+
+module.exports = Chisel;

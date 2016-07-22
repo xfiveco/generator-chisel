@@ -1,13 +1,12 @@
 {
-  "name": "chisel-sample",
+  "name": "<%= nameSlug %>",
   "version": "0.0.1",
-  "description": "Chisel sample project",
+  "author": "<%= author %>",
+  "description": "<%= nameSlug %>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Xfive",
-  "license": "ISC",
   "chisel": {
     "src": {
       "assets": "src/assets/**/*",
@@ -50,6 +49,7 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "normalize-scss": "^5.0.3"
+    "normalize-scss": "^5.0.3"<% if (features.has_jquery) { %>,
+    "jquery": "^3.1.0"<% } %>
   }
 }
