@@ -23,6 +23,10 @@ var Prompts = {
         name: 'jQuery',
         value: 'has_jquery',
         checked: false
+      }, {
+        name: 'ES2015 with Babel',
+        value: 'has_babel',
+        checked: false
       }]
     }
   ],
