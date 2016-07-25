@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" prefix="og: http://ogp.me/ns#">
+<html class="no-js" lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Project name</title>
+  <title>Project Index - <%= name %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>document.querySelector('html').classList.remove('no-js');</script>
 </head>
-<body class="no-js">
-  <h1>Project name</h1>
+<body>
+  <h1><%= name %></h1>
   <ul>
-    <li><a href="dist/index.html">Index</a></li>
+    <%% for (var i = 0; i < pages.length; i++) { %>
+      <li>
+        <a href="dist/<%%= pages[i]['slug'] %>.html"><%%= pages[i]['name'] %></a>
+      </li>
+    <%% } %>
   </ul>
 </body>
 </html>
