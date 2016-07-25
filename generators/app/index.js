@@ -50,7 +50,7 @@ var Chisel = yeoman.Base.extend({
   },
 
   install: function () {
-    this.installDependencies({
+    this.npmInstall({
       skipInstall: this.options['skip-install']
     });
   }
