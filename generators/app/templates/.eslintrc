@@ -1,5 +1,8 @@
 {
   "rules": {
     "indent": ["error", 2]
+  },
+  "parserOptions": {<% if (features.has_babel) { %>
+    "ecmaVersion": 6<% } %>
   }
 }
