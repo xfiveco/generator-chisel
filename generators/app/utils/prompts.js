@@ -6,14 +6,14 @@ var Prompts = {
   questions: [
     {
       name: 'name',
-      message: 'Please enter the project name',
+      message: 'Please enter the project name:',
       validate: function (input) {
         return !!input;
       }
     },
     {
       name: 'author',
-      message: 'Please enter your name'
+      message: 'Please enter author name:'
     },
     {
       type: 'checkbox',
