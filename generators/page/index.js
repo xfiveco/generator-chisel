@@ -97,8 +97,8 @@ var PageChisel = yeoman.Base.extend({
         var fileName = _.kebabCase(pageName) + '.twig';
 
         // Write file if not exists
-        if (!this.fs.exists(this.destinationPath('src/' + fileName))) {
-          this.fs.copyTpl(this.templatePath('src/templates/index.twig'), this.destinationPath('src/templates/' + fileName), {
+        if (!this.fs.exists(this.destinationPath('src/templates/' + fileName))) {
+          this.fs.copyTpl(this.templatePath('src/templates/template.twig'), this.destinationPath('src/templates/' + fileName), {
             pageName: pageName
           });
         }
@@ -116,7 +116,7 @@ var PageChisel = yeoman.Base.extend({
         pagesObject.push({ name: page, slug: _.kebabCase(page) });
       });
 
-      this.fs.copyTpl(this.templatePath('index.html'), this.destinationPath('index.html'), { pages: pagesObject });
+      this.fs.copyTpl(this.templatePath('project-index.html'), this.destinationPath('index.html'), { pages: pagesObject });
     },
 
     /**
@@ -124,7 +124,7 @@ var PageChisel = yeoman.Base.extend({
      * @public
      */
     removeTemplate: function () {
-      this.fs.delete(this.templatePath('src/templates/template.twig'));
+      // this.fs.delete(this.templatePath('src/templates/template.twig'));
     }
   },
 

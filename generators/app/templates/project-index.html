@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Project Index - <%= name %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Amiko:400,700" rel="stylesheet">
+  <style>
+    body {
+      color: #333;
+      font-family: 'Amiko', monospace;
+    }
+    .c-col {
+      margin: 0 auto;
+      max-width: 600px;
+      padding: 1em;
+    }
+    .c-file-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .c-file-list li {
+      margin-bottom: 0.5em;
+    }
+    .c-footer {
+      border-top: 1px solid #ccc;
+      margin-top: 1em;
+      padding-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="c-col">
+    <header>
+      <h1><%= name %></h1>
+    </header>
+    <main>
+      <ul class="c-file-list">
+        <%% for (var i = 0; i < pages.length; i++) { %>
+          <li>
+            <a href="dist/<%%= pages[i]['slug'] %>.html"><%%= pages[i]['name'] %></a>
+          </li>
+        <%% } %>
+      </ul>
+    </main>
+    <footer class="c-footer">
+      Powered by <a href="https://github.com/xfiveco/generator-chisel">Chisel</a>
+    </footer>
+  </div>
+</body>
+</html>

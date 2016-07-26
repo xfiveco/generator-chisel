@@ -30,7 +30,7 @@ var Generator = {
   },
 
   projectInfo: function () {
-    helpers.copy.call(this, 'index.html', 'index.html', this.prompts);
+    helpers.copy.call(this, 'project-index.html', 'project-index.html', this.prompts);
     helpers.copy.call(this, 'README.md', 'README.md', this.prompts);
   },
 
