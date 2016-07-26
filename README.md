@@ -7,7 +7,7 @@
 - Browsersync
 - [Twig](http://twig.sensiolabs.org/) templating engine
 - SCSS with [ITCSS architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)
-- Browserify with Watchify
+- [Browserify](http://browserify.org/) with Watchify
 - [gulp-rev](https://github.com/sindresorhus/gulp-rev) support
 - ESLint
 - optional ES2015 with Babel
