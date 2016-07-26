@@ -17,25 +17,25 @@
 
 ## Getting started
 
-The following software needs to be installed if you want to develop &amp; build projects created with Chisel Generator. These installations need to be done just once so you can skip this section if you have the software already installed.
+The following software needs to be installed if you want to develop &amp; build projects created with Chisel. These installations need to be done just once so you can skip this section if you have the software already installed.
 
 ### Node.js
 Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package manager.
 
 ### Yeoman, Gulp &amp; Chisel
-Install [Yeoman](http://yeoman.io/), [Gulp](http://gulpjs.com/) and Chisel generator globally.
+Install [Yeoman](http://yeoman.io/), [Gulp](http://gulpjs.com/) and Chisel globally.
 
 ```bash
 npm install -g yo gulp-cli generator-chisel
 ```
 
-Congratulations, you are now ready to use Chisel Generator!
+Congratulations, you are now ready to use Chisel!
 
 ## Usage
 
 ### Project generation
 
-To create a project with Chisel Generator, create a new folder, open a command line in it and type:
+To create a project with Chisel, create a new folder, open a command line in it and type:
 
 ```bash
 yo chisel
@@ -79,7 +79,7 @@ The file structure in generated project looks like this:
 On a typical project, you will work in `src` folder and check your work in `dist` folder so you don’t have to touch other files.
 
 ### Adding pages to the project
-Once you have basic project structure generated, you should add pages you will be working on. Chisel Generator comes with a subgenerator for adding new pages to the project.
+Once you have basic project structure generated, you should add pages you will be working on. Chisel comes with a subgenerator for adding new pages to the project.
 
 From the command line type:
 
@@ -125,9 +125,9 @@ When `gulp build` is run, first the `dist` folder is cleaned and then build task
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `assetPath` function.
 
 ## Credits
-A lot of Chisel generator functionality is copied from or inspired by [Limelight Generator](https://github.com/piotrkulpinski/generator-limelight). Thanks, Piotrek ;)
+A lot of Chisel functionality is copied from or inspired by [Limelight Generator](https://github.com/piotrkulpinski/generator-limelight). Thanks, Piotrek ;)
 
 ## License
-Limelight Generator is licensed under [MIT License](LICENSE).
+Chisel is licensed under [MIT License](LICENSE).
 
 
