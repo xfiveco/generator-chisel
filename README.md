@@ -1,6 +1,8 @@
-# Chisel
+# Chisel [![Build Status](https://travis-ci.org/xfiveco/generator-chisel.svg?branch=master)](https://travis-ci.org/xfiveco/generator-chisel) [![NPM version](https://badge.fury.io/js/generator-chisel.svg)](https://badge.fury.io/js/generator-chisel) [![NPM dependiencies](https://david-dm.org/xfiveco/generator-chisel.svg)](https://david-dm.org/xfiveco/generator-chisel)
 
 > Chisel is a [Yeoman](http://yeoman.io) generator for scaffolding front-end and WordPress (coming soon) projects.
+
+[![NPM](https://nodei.co/npm/generator-chisel.png?downloads=true)](https://nodei.co/npm/generator-chisel/)
 
 ## Features
 - [Gulp](http://gulpjs.com/) build system
