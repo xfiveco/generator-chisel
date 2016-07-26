@@ -17,7 +17,7 @@ var Generator = {
 
   dotfiles: function () {
     helpers.copy.call(this, '.*', '');
-    helpers.copy.call(this, 'assets/{fonts,images}/.*', 'src/assets/');
+    helpers.copy.call(this, 'assets/**/.*', 'src/assets/');
   },
 
   appfiles: function () {

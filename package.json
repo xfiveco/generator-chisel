@@ -14,15 +14,25 @@
   "main": "generators\\index.js",
   "keywords": [
     "yeoman-generator",
-    "wordpress"
+    "twig",
+    "wordpress",
+    "scss",
+    "itcss",
+    "browserify",
+    "babel"
   ],
+  "scripts": {
+    "test": "mocha test/**/*.test.js -b --reporter spec"
+  },
   "dependencies": {
     "lodash": "^4.12.0",
     "yeoman-assert": "^2.2.1",
     "yeoman-generator": "^0.24.1",
     "yeoman-test": "^1.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  },
   "repository": "git@github.com:xfiveco/generator-chisel.git",
   "license": "MIT"
 }
