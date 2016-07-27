@@ -126,7 +126,10 @@ var PageChisel = yeoman.Base.extend({
    * @public
    */
   install: function () {
-    this.spawnCommand('gulp', ['build']);
+    if (!this.options['skip-build']) {
+      this.spawnCommand('gulp', ['build']);
+    }
+
     this.log('All done!');
   }
 });
