@@ -117,15 +117,8 @@ var PageChisel = yeoman.Base.extend({
       });
 
       this.fs.copyTpl(this.templatePath('project-index.html'), this.destinationPath('index.html'), { pages: pagesObject });
-    },
-
-    /**
-     * Removes template file
-     * @public
-     */
-    removeTemplate: function () {
-      // this.fs.delete(this.templatePath('src/templates/template.twig'));
     }
+
   },
 
   /**
