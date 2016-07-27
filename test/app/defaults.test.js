@@ -70,7 +70,24 @@ describe('Chisel Generator with default options', function () {
 
   it('should generate stylesheets', function (done) {
     assert.file([
-      'src/styles/main.scss'
+      'src/styles/main.scss',
+      'src/styles/settings/_colors.scss',
+      'src/styles/settings/_global.scss',
+      'src/styles/tools/_mixins.scss',
+      'src/styles/generic/_box-sizing.scss',
+      'src/styles/generic/_reset.scss',
+      'src/styles/generic/_shared.scss',
+      'src/styles/elements/_headings.scss',
+      'src/styles/elements/_hr.scss',
+      'src/styles/elements/_links.scss',
+      'src/styles/elements/_lists.scss',
+      'src/styles/elements/_page.scss',
+      'src/styles/objects/_list-bare.scss',
+      'src/styles/settings/_global.scss',
+      'src/styles/components/_footer.scss',
+      'src/styles/components/_layout.scss',
+      'src/styles/trumps/_clearfix.scss',
+      'src/styles/trumps/_utilities.scss'
     ]);
 
     done();
