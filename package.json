@@ -25,6 +25,7 @@
     "test": "mocha test/**/*.test.js -b --reporter spec"
   },
   "dependencies": {
+    "async": "^2.0.1",
     "lodash": "^4.12.0",
     "yeoman-assert": "^2.2.1",
     "yeoman-generator": "^0.24.1",
