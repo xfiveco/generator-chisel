@@ -31,7 +31,7 @@ describe('Chisel Generator with default options', function () {
     assert.file([
       '.editorconfig',
       '.gitattributes',
-      '.eslintrc',
+      '.eslintrc.yml',
       '.gitignore',
       'package.json',
       'project-index.html',
