@@ -107,7 +107,7 @@ yo chisel:page "Home" "About Us" "Contact Us" "News"
 
 ### Development
 
-When you have the basic setup done, you can start development. To re-compile Twig / SCSS file in real time you can use default task. Type
+When you have the basic setup done, you can start development. To re-compile Twig, SCSS and JavaScript files in real time you can use default task. Type
 
 ```
 gulp
