@@ -1,0 +1,29 @@
+rules:
+  indent: ["error", 2]
+  no-cond-assign: "error"
+  no-empty: "error"
+  no-extra-semi: "error"
+  no-irregular-whitespace: "error"
+  no-unreachable: "error"
+  curly: "error"
+  no-eval: "error"
+  no-floating-decimal: "error"
+  no-magic-numbers: "error"
+  no-native-reassign: "error"
+  no-octal: "error"
+  no-redeclare: "error"
+  no-unused-vars: "error"
+  block-spacing: "error"
+  brace-style: "error"
+  comma-style: ["error", "last"]
+  consistent-this: ["error", "that"]
+  eol-last: "error"
+  no-spaced-func: "error"
+  no-trailing-spaces: "error"
+
+env:
+  commonjs: true
+<% if (features.has_babel) {%>
+parserOptions:
+  ecmaVersion: 6<% } %>
+
