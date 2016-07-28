@@ -29,7 +29,6 @@ describe('Chisel Generator with default options', function () {
 
   it('should generate configuration files', function (done) {
     assert.file([
-      '.bowerrc',
       '.editorconfig',
       '.gitattributes',
       '.eslintrc',
