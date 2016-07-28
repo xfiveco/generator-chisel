@@ -39,8 +39,7 @@ tmp
 .tmp
 node_modules
 src/bower_components
-src/**/iconfont.*
-src/**/_icons.*
+dist
 
 # Others
 npm-debug.log
