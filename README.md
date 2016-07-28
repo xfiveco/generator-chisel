@@ -80,7 +80,7 @@ The file structure in generated project looks like this:
 - `.editorconfig` - [EditorConfig](http://editorconfig.org/) configuration file to achieve consistent coding style
 - `.gitattributes` - [Git](http://git-scm.com/) configuration file to force Unix line ending in all text files
 - `.gitignore` - default Git ignore files and folders
-- `.eslintrc` - [ESLint](http://eslint.org/) configuration
+- `.eslintrc.yml` - [ESLint](http://eslint.org/) configuration
 
 On a typical project, you will work in `src` folder and check your work in `dist` folder so you don’t have to touch other files.
 
