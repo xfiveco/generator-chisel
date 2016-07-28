@@ -34,7 +34,6 @@ describe('Chisel Generator with default options', function () {
       '.gitattributes',
       '.eslintrc',
       '.gitignore',
-      '.npmignore',
       'package.json',
       'project-index.html',
       'README.md'
