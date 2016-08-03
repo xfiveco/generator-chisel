@@ -17,6 +17,7 @@
       "templates": "src/templates/**/*.{twig,html}"
     },
     "dest": {
+      "assets": "dist/assets",
       "base": "dist",
       "revManifest": "dist/rev-manifest.json",
       "scripts": "dist/scripts",

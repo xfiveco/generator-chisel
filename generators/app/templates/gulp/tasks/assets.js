@@ -1,7 +1,9 @@
 'use strict';
 
 var assetsTask = function (gulp, plugins, config, helpers) {
-  gulp.task('assets', ['clean'], function () {
+  gulp.task('assets', function () {
+
+    plugins.del([config.dest.assets]);
 
     var stream = gulp.src([config.src.assets, '!**/.keep'], { base: config.src.base })
       .pipe(plugins.newer(config.dest.base))
