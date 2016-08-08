@@ -9,7 +9,8 @@
     "url": "https://www.xfive.co"
   },
   "files": [
-    "generators/app"
+    "generators/app",
+    "generators/page"
   ],
   "main": "generators\\index.js",
   "keywords": [
