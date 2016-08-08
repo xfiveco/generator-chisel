@@ -1,6 +1,6 @@
 {
   "name": "generator-chisel",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Yeoman generator for scaffolding front-end and WordPress projects",
   "homepage": "",
   "author": {
