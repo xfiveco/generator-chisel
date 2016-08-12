@@ -13,7 +13,7 @@ var stylesTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.browserSync.stream({ match: '**/*.css' }));
   });
 
-  gulp.task('styles-build', ['assets'], function() {
+  gulp.task('styles-build', ['assets', 'lint-css'], function() {
 
     var postcssPlugins = [
       require('autoprefixer')()

@@ -1,14 +1,17 @@
 rules:
-  # selector-class-pattern: - add regexp
+  at-rule-name-case: lower
   block-closing-brace-empty-line-before: never
   block-closing-brace-newline-after: always
   block-no-empty: true
   block-opening-brace-newline-after: always-multi-line
-  block-opening-brace-newline-before: always-multi-line
-  block-opening-brace-space-after: always
+  block-opening-brace-newline-before: never-single-line
+  block-opening-brace-space-after: always-single-line
   block-opening-brace-space-before: always
   color-hex-case: lower
   color-no-invalid-hex: true
+  comment-empty-line-before: always
+  comment-no-empty: true
+  comment-whitespace-inside: always
   declaration-block-no-duplicate-properties: true
   declaration-block-no-ignored-properties: true
   declaration-block-no-shorthand-property-overrides: true
@@ -28,6 +31,7 @@ rules:
   length-zero-no-unit: true
   max-empty-lines: 2
   max-nesting-depth: 2
+  media-feature-no-missing-punctuation: true
   no-duplicate-selectors: true
   no-eol-whitespace: true
   no-extra-semicolons: true
@@ -37,19 +41,32 @@ rules:
   number-no-trailing-zeros: true
   property-case: lower
   property-no-vendor-prefix: true
-  rule-non-nested-empty-line-before: always # except: after-single-line-comment
+  rule-nested-empty-line-before:
+    - always
+    - except:
+      - first-nested
+    - ignore:
+      - after-comment
+  rule-non-nested-empty-line-before:
+    - always
+    - ignore:
+      - after-comment
   selector-attribute-brackets-space-inside: never
   selector-attribute-operator-space-after: never
   selector-attribute-operator-space-before: never
   selector-attribute-quotes: never
+  selector-class-pattern: ^(?:(?:a|o|c|u|t|s|is|has|_|js|qa)-)?[a-zA-Z0-9]+(?:-[a-zA-Z0-9\\@]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:\\[.+\\])?$
   selector-combinator-space-after: always
   selector-combinator-space-before: always
-  selector-list-comma-space-after: always
+  selector-list-comma-space-after: always-single-line
   selector-list-comma-space-before: never
   selector-max-compound-selectors: 3
   selector-max-empty-lines: 0
   selector-no-id: true
-  selector-no-qualifying-type: true
+  selector-no-qualifying-type:
+    - true
+    - ignore:
+      - attribute
   selector-pseudo-class-case: lower
   selector-pseudo-class-no-unknown: true
   selector-pseudo-element-case: lower

@@ -32,6 +32,7 @@ describe('Chisel Generator with default options', function () {
       '.editorconfig',
       '.gitattributes',
       '.eslintrc.yml',
+      '.stylelintrc.yml',
       '.gitignore',
       'package.json',
       'project-index.html',

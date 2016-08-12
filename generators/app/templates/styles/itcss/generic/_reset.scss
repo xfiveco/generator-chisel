@@ -4,7 +4,6 @@
  * As well as using normalize.css, it is often advantageous to remove all
  * margins from certain elements.
  */
-// scss-lint:disable SingleLinePerSelector
 body,
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
@@ -16,8 +15,6 @@ hr {
   margin: 0;
   padding: 0;
 }
-
-// scss-lint:disable QualifyingElement
 
 /**
  * Give a help cursor to elements that give extra info on `:hover`.
