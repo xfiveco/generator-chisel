@@ -11,6 +11,7 @@
 - SCSS with [ITCSS architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)
 - [Browserify](http://browserify.org/) with Watchify
 - [gulp-rev](https://github.com/sindresorhus/gulp-rev) support
+- [stylelint](http://stylelint.io/)
 - [ESLint](http://eslint.org/)
 - optional ES2015 with [Babel](https://babeljs.io/)
 - optional jQuery
@@ -19,7 +20,6 @@
 - optional WordPress setup
   - [Timber](http://upstatement.com/timber/) library installation
   - a base WordPress theme based on Timber with the same workflow as for front-end projects
-- [stylelint](http://stylelint.io/)
 
 ## Getting started
 
