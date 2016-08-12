@@ -7,7 +7,8 @@ var templatesTask = function (gulp, plugins, config, helpers) {
   function templates(manifest) {
     return gulp.src(config.src.templates)
       .pipe(plugins.plumber(helpers.onError))
-      .pipe(plugins.twigUpToDate({ 
+      .pipe(plugins.twigUpToDate({
+        base: config.src.templatesPath,
         functions: [
           {
             name: "assetPath",
@@ -20,7 +21,7 @@ var templatesTask = function (gulp, plugins, config, helpers) {
             }
           }
         ],
-        errorLogToConsole: true 
+        errorLogToConsole: true
       }))
       .pipe(plugins.prettify({ indent_size: 2, preserve_newlines: true }))
       .pipe(gulp.dest(config.dest.base))

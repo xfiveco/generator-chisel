@@ -14,7 +14,8 @@
       "scripts": "src/scripts/**/*",
       "styles": "src/styles/**/*",
       "stylesMain": "src/styles/*.scss",
-      "templates": "src/templates/**/*.{twig,html}"
+      "templates": "src/templates/**/*.{twig,html}",
+      "templatesPath": "src/templates/"
     },
     "dest": {
       "assets": "dist/assets",
