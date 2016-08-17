@@ -1,1 +1,11 @@
-* text eol=lf
+# Enforce Unix newlines on text files
+*.css   text eol=lf
+*.html  text eol=lf
+*.twig  text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.less  text eol=lf
+*.scss  text eol=lf
+*.php   text eol=lf
+*.md    text eol=lf
+*.yml   text eol=lf
