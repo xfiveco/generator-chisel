@@ -78,7 +78,7 @@ The file structure in generated project looks like this:
 - `package.json` - npm packages dependencies
 - `.yo-rc.json` - Yeoman generator configuration file
 - `.editorconfig` - [EditorConfig](http://editorconfig.org/) configuration file to achieve consistent coding style
-- `.gitattributes` - [Git](http://git-scm.com/) configuration file to force Unix line ending in all text files
+- `.gitattributes` - [Git](http://git-scm.com/) configuration file to force Unix line ending in text files
 - `.gitignore` - default Git ignore files and folders
 - `.eslintrc.yml` - [ESLint](http://eslint.org/) configuration file to achieve consistent JavaScript coding style (you can update it to your preference)
 - `.stylintrc.yml` - [stylelint](http://stylelint.io/) configuration file to achieve consistent CSS coding style (you can update it to your preference)
