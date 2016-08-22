@@ -63,7 +63,7 @@ var PageChisel = yeoman.Base.extend({
      * @public
      */
     checkReservedNames: function () {
-      var reservedNames = ['template'];
+      var reservedNames = ['_template'];
       var isReserved = function (page) {
         return _.includes(reservedNames, _.kebabCase(page));
       };
@@ -98,7 +98,7 @@ var PageChisel = yeoman.Base.extend({
 
         // Write file if not exists
         if (!this.fs.exists(this.destinationPath('src/templates/' + fileName))) {
-          this.fs.copyTpl(this.templatePath('src/templates/template.twig'), this.destinationPath('src/templates/' + fileName), {
+          this.fs.copyTpl(this.templatePath('src/templates/_template.twig'), this.destinationPath('src/templates/' + fileName), {
             pageName: pageName
           });
         }
