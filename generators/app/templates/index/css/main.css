@@ -16,12 +16,6 @@ html {
   }
 }
 
-@media only screen and (min-width: 1200px) {
-  html {
-    font-size: 1.5em;
-  }
-}
-
 body {
   background: #f2e9da;
   background-image: repeating-linear-gradient(180deg, transparent, transparent 40px, #eae3d7 40px, #eae3d7 41px),
@@ -79,7 +73,7 @@ p {
 
 .c-section__img {
   display: none;
-  padding-top: 0; 
+  padding-top: 0;
   width: 35%;
 }
 
@@ -91,10 +85,6 @@ p {
 
 .c-section__img img {
   max-width: 100%;
-}
-
-.c-section__img--alt {
-  width: 40%;
 }
 
 /* Header */
