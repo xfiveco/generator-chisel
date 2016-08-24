@@ -1,52 +1,70 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Project Index - <%= name %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Amiko:400,700" rel="stylesheet">
-  <style>
-    body {
-      color: #333;
-      font-family: 'Amiko', monospace;
-    }
-    .c-col {
-      margin: 0 auto;
-      max-width: 600px;
-      padding: 1em;
-    }
-    .c-file-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .c-file-list li {
-      margin-bottom: 0.5em;
-    }
-    .c-footer {
-      border-top: 1px solid #ccc;
-      margin-top: 1em;
-      padding-top: 1em;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+  <link href="index/css/main.css" rel="stylesheet">
 </head>
 <body>
-  <div class="c-col">
-    <header>
-      <h1><%= name %></h1>
-    </header>
-    <main>
-      <ul class="c-file-list">
-        <%% for (var i = 0; i < pages.length; i++) { %>
-          <li>
-            <a href="dist/<%%= pages[i]['slug'] %>.html"><%%= pages[i]['name'] %></a>
-          </li>
-        <%% } %>
-      </ul>
-    </main>
-    <footer class="c-footer">
-      Powered by <a href="https://github.com/xfiveco/generator-chisel">Chisel</a>
-    </footer>
+  <div class="c-wrapper">
+    <h1 class="c-page-title"><%= name %></h1>
+    <h2 class="c-page-subtitle">Project index</h2>
+
+    <div class="c-section c-section--first">
+      <div class="c-section__content">
+        <p class="c-intro">This project is powered by <a href="https://github.com/xfiveco/generator-chisel">Chisel</a>, a&nbsp;tool for setting up and developing front-end and WordPress projects.</p>
+        <h2 class="c-heading">Pages</h2>
+        <ul class="c-list">
+          <%% for (var i = 0; i < pages.length; i++) { %>
+            <li>
+              <a href="dist/<%%= pages[i]['slug'] %>.html" class="c-page"><span class="c-page__link"><%%= pages[i]['name'] %></span> <span class="c-page__name"><%%= pages[i]['slug'] %>.html</span></a>
+            </li>
+          <%% } %>
+        </ul>
+      </div>
+      <div class="c-section__img c-section__img--alt">
+        <img src="index/img/1.png" alt="">
+      </div>
+    </div>
+    <!-- c-section -->
+
+    <section class="c-section">
+      <div class="c-section__img">
+        <img src="index/img/3.png" alt="">
+      </div>
+      <div class="c-section__content">
+        <h2 class="c-heading">Features</h2>
+        <ul class="c-list">
+          <li><a href="http://gulpjs.com/">Gulp</a> build system</li>
+          <li><a href="https://www.browsersync.io/">Browsersync</a></li>
+          <li><a href="http://twig.sensiolabs.org/">Twig</a> templating engine</li>
+          <li>SCSS with <a href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/">ITCSS architecture</a></li>
+          <li><a href="http://browserify.org/">Browserify</a> with Watchify</li>
+          <li><a href="https://github.com/sindresorhus/gulp-rev">gulp-rev</a> support</li>
+          <li><a href="http://stylelint.io/">stylelint</a></li>
+          <li><a href="http://eslint.org/">ESLint</a></li>
+          <li>ES2015 with <a href="https://babeljs.io/">Babel</a></li>
+          <li>jQuery</li>
+        </ul>
+      </div>
+    </section>
+    <!-- c-section -->
+
+    <section class="c-section">
+      <div class="c-section__content">
+        <h2 class="c-heading">Documentation</h2>
+        <p><strong>Chisel supports modern web development workflows and helps developers to create a code base which is easy to develop and maintain. </strong></p>
+        <p>For detailed information how Chisel works, please check out its <a href="https://github.com/xfiveco/generator-chisel">documentation at Github</a>.</p>
+        <p>If you are just looking for your deliverable files, they are located inside the <code>dist</code> folder. No files found outside of that folder should usually be uploaded to your server (e.g. this file).</p>
+      </div>
+      <div class="c-section__img">
+        <img src="index/img/2.png" alt="">
+      </div>
+    </section>
+    <!-- c-section -->
   </div>
+  <!-- c-wrapper -->
 </body>
 </html>
