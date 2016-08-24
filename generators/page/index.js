@@ -116,7 +116,7 @@ var PageChisel = yeoman.Base.extend({
         pagesObject.push({ name: page, slug: _.kebabCase(page) });
       });
 
-      this.fs.copyTpl(this.templatePath('project-index.html'), this.destinationPath('index.html'), { pages: pagesObject });
+      this.fs.copyTpl(this.templatePath('index/project-index.html'), this.destinationPath('index.html'), { pages: pagesObject });
     }
 
   },

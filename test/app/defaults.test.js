@@ -35,7 +35,8 @@ describe('Chisel Generator with default options', function () {
       '.stylelintrc.yml',
       '.gitignore',
       'package.json',
-      'project-index.html',
+      'index/project-index.html',
+      'index/css/main.css',
       'README.md'
     ]);
 
@@ -112,7 +113,7 @@ describe('Chisel Generator with default options', function () {
 
   it('should generate proper app name in every file', function (done) {
     assert.fileContent('package.json', '"name": "test-project"');
-    assert.fileContent('project-index.html', 'Project Index - Test Project');
+    assert.fileContent('index/project-index.html', 'Project Index - Test Project');
 
     done();
   });
