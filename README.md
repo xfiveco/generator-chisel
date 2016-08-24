@@ -4,6 +4,8 @@
 
 [![NPM](https://nodei.co/npm/generator-chisel.png?downloads=true)](https://nodei.co/npm/generator-chisel/)
 
+![Project index](docs/img/project-index.png)
+
 ## Features
 - [Gulp](http://gulpjs.com/) build system
 - Browsersync
@@ -75,6 +77,7 @@ The file structure in generated project looks like this:
     - `template.twig` - a template from which the other pages are generated
     - `*.twig` - separate twig page templates
 - `index.html` - project index with project pages listed
+- `index` - images and styles for the project index
 - `package.json` - npm packages dependencies
 - `.yo-rc.json` - Yeoman generator configuration file
 - `.editorconfig` - [EditorConfig](http://editorconfig.org/) configuration file to achieve consistent coding style
