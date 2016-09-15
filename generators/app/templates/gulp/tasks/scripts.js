@@ -5,7 +5,9 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
     var props = {
       entries: config.src.app,
       debug: true,
+      <% if(features.has_babel) { %>
       transform: [["babelify", { "presets": ["es2015"] }]]
+      <% } %>
     };
 
     var bundler = watch ? plugins.watchify(plugins.browserify(props)) : plugins.browserify(props);
@@ -23,20 +25,13 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
         .pipe(plugins.browserSync.stream());
     }
 
-    bundler.on('update', () => {
-      rebundle();
-    })
+    bundler.on('update', rebundle);
 
     return rebundle();
   }
 
-  gulp.task('scripts', () => {
-      return buildScript(false);
-  });
-
-  gulp.task('watchify', ['scripts'], () => {
-    return buildScript(true);
-  });
+  gulp.task('scripts', () => buildScript(false));
+  gulp.task('watchify', ['scripts'], () => buildScript(true));
 };
 
 module.exports = scriptsTask;
