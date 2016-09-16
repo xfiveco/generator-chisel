@@ -32,7 +32,7 @@ var templatesTask = function (gulp, plugins, config, helpers) {
     templates();
   });
 
-  gulp.task('templates-build', ['scripts-build'], function() {
+  gulp.task('templates-build', ['scripts'], function() {
     var manifest = JSON.parse(fs.readFileSync(config.dest.revManifest, 'utf8'));
     templates(manifest);
   });
