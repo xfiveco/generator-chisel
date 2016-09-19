@@ -8,13 +8,14 @@
 
 ## Features
 - [Gulp](http://gulpjs.com/) build system
-- Browsersync
+- [Browsersync](https://www.browsersync.io/)
 - [Twig](http://twig.sensiolabs.org/) templating engine
 - SCSS with [ITCSS architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)
 - [Browserify](http://browserify.org/) with Watchify
 - [gulp-rev](https://github.com/sindresorhus/gulp-rev) support
 - [stylelint](http://stylelint.io/)
 - [ESLint](http://eslint.org/)
+- HTML validation with [htmlhint](https://github.com/bezoerb/gulp-htmlhint)
 - optional ES2015 with [Babel](https://babeljs.io/)
 - optional jQuery
 
@@ -28,7 +29,7 @@
 The following software needs to be installed if you want to develop &amp; build projects created with Chisel. These installations need to be done just once so you can skip this section if you have the software already installed.
 
 ### Node.js
-Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package manager.
+Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package manager. Version 4.5+ is required.
 
 ### Yeoman, Gulp &amp; Chisel
 Install [Yeoman](http://yeoman.io/), [Gulp](http://gulpjs.com/) and Chisel globally.
