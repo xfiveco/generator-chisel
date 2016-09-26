@@ -15,7 +15,6 @@ rules:
   declaration-block-no-duplicate-properties: true
   declaration-block-no-ignored-properties: true
   declaration-block-no-shorthand-property-overrides: true
-  declaration-block-properties-order: alphabetical
   declaration-block-semicolon-newline-after: always-multi-line
   declaration-block-trailing-semicolon: always
   declaration-colon-space-after: always
