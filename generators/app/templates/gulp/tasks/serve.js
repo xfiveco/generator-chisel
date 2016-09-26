@@ -3,7 +3,8 @@
 var serveTask = function (gulp, plugins, config) {
   gulp.task('serve', ['styles-watch', 'templates-watch'], function() {
     plugins.browserSync.init({
-      server: './'
+      server: './',
+      online: true
     });
 
     gulp.watch(config.src.styles, ['styles-watch']);
