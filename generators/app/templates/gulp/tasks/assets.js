@@ -5,7 +5,7 @@ var assetsTask = function (gulp, plugins, config, helpers) {
     return plugins.del([config.dest.assets]);
   })
 
-  gulp.task('assets', ['assets-clean'], function () {
+  gulp.task('assets-build', ['assets-clean'], function () {
     return gulp.src([config.src.assets, '!**/.keep'], { base: config.src.base })
       .pipe(gulp.dest(config.dest.base))
       .on('end', plugins.browserSync.reload);
