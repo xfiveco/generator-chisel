@@ -4,13 +4,13 @@ html {
   line-height: 1.5;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   html {
     font-size: 1.125em;
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media (min-width: 1024px) {
   html {
     font-size: 1.25em;
   }
@@ -50,7 +50,7 @@ p {
   margin-top: 1em;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .c-section {
     flex-direction: row;
     margin-top: 3em;
@@ -65,7 +65,7 @@ p {
   width: 100%;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .c-section__content {
     width: 60%;
   }
@@ -77,7 +77,7 @@ p {
   width: 35%;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .c-section__img {
     display: block;
   }
