@@ -2,28 +2,28 @@
 
 /* 320px */
 @mixin bp-small {
-  @media (min-width: 320px) {
+  @media (min-width: $bp-small) {
     @content;
   }
 }
 
 /* 768px */
 @mixin bp-medium {
-  @media (min-width: 768px) {
+  @media (min-width: $bp-medium) {
     @content;
   }
 }
 
 /* 1024px */
 @mixin bp-large {
-  @media (min-width: 1024px) {
+  @media (min-width: $bp-large) {
     @content;
   }
 }
 
 /* 1600px */
 @mixin bp-full {
-  @media (min-width: 1600px) {
+  @media (min-width: $bp-full) {
     @content;
   }
 }
