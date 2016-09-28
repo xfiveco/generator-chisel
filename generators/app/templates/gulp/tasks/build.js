@@ -6,7 +6,7 @@ var buildTask = function (gulp, plugins, config) {
     return plugins.del([config.dest.base]);
   });
 
-  gulp.task('build', plugins.sequence('lint-js', 'scripts-build', 'styles-build', 'templates-build', 'validate-html'))
+  gulp.task('build', plugins.sequence('styles-build', 'lint-js', 'scripts-build', 'templates-build', 'validate-html'))
 };
 
 module.exports = buildTask;
