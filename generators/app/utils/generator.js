@@ -38,6 +38,8 @@ var Generator = {
   },
 
   templates: function () {
+    if(this.prompts.features.has_wp)
+      return;
     helpers.copy.call(this, 'templates/twig/**/*', 'src/templates/', this.prompts);
   },
 
