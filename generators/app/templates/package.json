@@ -25,7 +25,9 @@
       ],
       "templatesPath": "src/templates/"
     },
-    "dest": {
+    "dest": {<% if (features.has_wp) { %>
+      "wordpress": "wp",
+      "wordpressTheme": "x5-theme",<% } %>
       "assets": "dist/assets",
       "base": "dist",
       "revManifest": "dist/rev-manifest.json",
