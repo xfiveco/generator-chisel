@@ -4,7 +4,9 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')({ pattern: '*' });
 var config  = require('./package.json').chisel;
 var helpers = require('./gulp/helpers')(gulp, plugins, config);
-
+<% if (features.has_wp) { %>
+config = require('./gulp/wpConfig')(config);
+<% } %>
 /**
  * Batch tasks loader
  */
