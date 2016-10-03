@@ -49,3 +49,4 @@ npm-debug.log
 .ruby-version
 .rvmrc
 .vagrant
+dev-vhost.conf
