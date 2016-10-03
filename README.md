@@ -18,8 +18,6 @@
 - HTML validation with [htmlhint](https://github.com/bezoerb/gulp-htmlhint)
 - optional ES2015 with [Babel](https://babeljs.io/)
 - optional jQuery
-
-### Planned features
 - optional WordPress setup
   - [Timber](http://upstatement.com/timber/) library installation
   - a base WordPress theme based on Timber with the same workflow as for front-end projects
