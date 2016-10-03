@@ -49,12 +49,22 @@ var Chisel = yeoman.Base.extend({
     utils.generator.gulpfiles.call(this);
   },
 
-  install: function () {
-    this.installDependencies({
-      npm: true,
-      bower: false,
-      skipInstall: this.options['skip-install']
-    });
+  install: {
+    installWordpress: function() {
+      if(!this.prompts.features.has_wp)
+        return;
+      var done = this.async();
+      yeoman().run(__dirname+'/../wp', () => {
+        yeoman().run(__dirname+'/../wp-config', done);
+      });
+    },
+    installNpm: function() {
+      this.installDependencies({
+        npm: true,
+        bower: false,
+        skipInstall: this.options['skip-install']
+      });
+    }
   }
 });
 
