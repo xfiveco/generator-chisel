@@ -2,10 +2,17 @@
 
 var serveTask = function (gulp, plugins, config) {
   gulp.task('serve', ['styles-watch', 'templates-watch', 'assets-watch'], function() {
-    plugins.browserSync.init({
+    var browserSyncConfig = {
       server: './',
       online: true
-    });
+    }
+    <% if(features.has_wp) { %>
+    delete browserSyncConfig.server;
+    var yo = require('./../../.yo-rc.json');
+    var name = yo['generator-chisel'].config.nameSlug;
+    browserSyncConfig.proxy = name+'.dev';
+    <% } %>
+    plugins.browserSync.init(browserSyncConfig);
 
     gulp.watch(config.src.styles, ['styles-watch']);
     gulp.watch(config.src.templates, ['templates-watch']); // Build templates in front-end project
