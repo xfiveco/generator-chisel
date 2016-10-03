@@ -51,7 +51,7 @@ var Chisel = yeoman.Base.extend({
 
   install: {
     installWordpress: function() {
-      if(!this.prompts.features.has_wp)
+      if(!this.prompts.features.has_wp || this.options['skip-install'])
         return;
       var done = this.async();
       yeoman().run(__dirname+'/../wp', () => {
