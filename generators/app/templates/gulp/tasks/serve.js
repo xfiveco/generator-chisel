@@ -1,16 +1,18 @@
 'use strict';
 
-var serveTask = function (gulp, plugins, config) {
+var serveTask = function (gulp, plugins, config, helpers, generator_config) {
   gulp.task('serve', ['styles-watch', 'templates-watch', 'assets-watch'], function() {
+    <% if(features.has_wp) { %>
+    var name = generator_config.nameSlug;
+    var browserSyncConfig = {
+      proxy: name+'.dev',
+      online: true
+    }
+    <% } else { %>
     var browserSyncConfig = {
       server: './',
       online: true
     }
-    <% if(features.has_wp) { %>
-    delete browserSyncConfig.server;
-    var yo = require('./../../.yo-rc.json');
-    var name = yo['generator-chisel'].config.nameSlug;
-    browserSyncConfig.proxy = name+'.dev';
     <% } %>
     plugins.browserSync.init(browserSyncConfig);
 
