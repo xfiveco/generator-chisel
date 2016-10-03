@@ -38,23 +38,11 @@ var WpGenerator = yeoman.Base.extend({
         name: 'databasePassword',
         message: 'Enter the database password',
         default: '$_SERVER[\'DB_PASSWORD\']'
-      }, {
-        type: 'checkbox',
-        name: 'features',
-        message: 'Choose additional features',
-        choices: [
-          {
-            name: 'Timber',
-            value: 'installTimber',
-            checked: true
-          }
-        ]
       }
     ];
 
     var done = this.async();
     this.prompt(prompts).then((answers) => {
-      answers.features = answers.features.reduce((o, v) => (o[v]=!!1) && o, {})
       this.prompts = answers;
       done();
     });
@@ -98,40 +86,19 @@ var WpGenerator = yeoman.Base.extend({
   },
 
   writing: function() {
-    var done = this.async();
+    this.fs.copy(this.templatePath('composer.json'),
+      this.destinationPath('composer.json'));
+  },
 
-    var steps = [
-      (cb) => {
-        this.log('Downloading WordPress...');
-        remote.extract('https://wordpress.org/latest.tar.gz', '.', cb)
-      },
-      (cb) => fs.rename('wordpress', 'wp', cb),
+  install: function() {
+    async.series([
+      (cb) => this.runInstall('composer', null, null, cb),
       (cb) => this._updateWpConfig(cb)
-    ];
-
-    if(this.prompts.features.installTimber) {
-      steps.push(
-        (cb) => {
-          this.log('Downloading Timber...');
-          remote.extract('https://downloads.wordpress.org/plugin/timber-library.zip',
-            'wp/wp-content/plugins', cb)
-        },
-        (cb) => {
-          this.log('Downloading Timber Strater Theme...');
-          remote.extract('https://github.com/timber/starter-theme/archive/master.tar.gz',
-            'wp/wp-content/themes', cb);
-        },
-        (cb) => fs.rename('wp/wp-content/themes/starter-theme-master',
-          'wp/wp-content/themes/x5-theme', cb)
-      );
-    }
-
-    async.series(steps, (err) => {
+    ], (err) => {
       if(err)
         throw err;
       this.log('Everything went well :)')
-      done();
-    });
+    })
   }
 });
 
