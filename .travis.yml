@@ -3,3 +3,14 @@ node_js:
   - v6
   - v5
   - v4
+addons:
+  apt:
+    packages:
+      - php5-cli
+before_install:
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php
+  - php -r "unlink('composer-setup.php');"
+  - mkdir /tmp/composerbin
+  - mv composer.phar /tmp/composerbin/composer
+  - PATH=$PATH:/tmp/composerbin
