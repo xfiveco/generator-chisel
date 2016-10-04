@@ -28,6 +28,7 @@ var stylesTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.cleanCss())
       .pipe(plugins.sourcemaps.write('./'))
       .pipe(plugins.rev())
+      .pipe(plugins.revReplace())
       .pipe(gulp.dest(config.dest.styles))
       .pipe(plugins.rev.manifest({
         path: config.dest.revManifest,
