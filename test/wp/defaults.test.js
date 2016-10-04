@@ -7,7 +7,7 @@ var assert = require('yeoman-assert');
 
 describe('Chisel Generator with WordPress (subgenerator)', function () {
   before(function (done) {
-    this.timeout(20000)
+    this.timeout(240000)
 
     helpers
       .run(path.join(__dirname, '../../generators/wp'))
