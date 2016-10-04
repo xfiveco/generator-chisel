@@ -106,7 +106,11 @@ var WpGenerator = yeoman.Base.extend({
 
   end: function() {
     var done = this.async();
-    this._updateWpConfig((err) => {
+    async.series([
+      (cb) => this._updateWpConfig(cb),
+      (cb) => fs.rename('wp/wp-content/themes/chisel-starter-theme',
+        'wp/wp-content/themes/x5-theme', cb)
+    ], (err) => {
       if(err)
         throw err;
       this.log('Everything went well :)')
