@@ -30,7 +30,11 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
       return stream
         .pipe(plugins.vinylSourceStream('bundle.js'))
         .pipe(plugins.vinylBuffer())
+        .pipe(plugins.sourcemaps.init({loadMaps: true}))
+        .pipe(plugins.uglify())
+        .pipe(plugins.sourcemaps.write('./'))
         .pipe(plugins.rev())
+        .pipe(plugins.revReplace())
         .pipe(gulp.dest(config.dest.scripts))
         .pipe(plugins.rev.manifest({
           path: config.dest.revManifest,
