@@ -34,6 +34,7 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
         .pipe(plugins.uglify())
         .pipe(plugins.sourcemaps.write('./'))
         .pipe(plugins.rev())
+        .pipe(plugins.revReplace())
         .pipe(gulp.dest(config.dest.scripts))
         .pipe(plugins.rev.manifest({
           path: config.dest.revManifest,
