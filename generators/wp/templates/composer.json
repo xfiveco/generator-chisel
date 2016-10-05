@@ -5,13 +5,9 @@
     "url": "https://wpackagist.org"
   }, {
     "type": "vcs",
-    "url": "https://github.com/xfiveco/chisel-starter-theme.git"
+    "url": "https://github.com/xfiveco/chisel-starter-theme",
+    "no-api": true
   }],
-  "config": {
-    "preferred-install": {
-      "xfiveco/chisel-starter-theme": "source"
-    }
-  },
   "extra": {
     "installer-paths": {
       "wp/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
