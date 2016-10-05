@@ -109,7 +109,12 @@ var WpGenerator = yeoman.Base.extend({
     async.series([
       (cb) => this._updateWpConfig(cb),
       (cb) => fs.rename('wp/wp-content/themes/chisel-starter-theme',
-        'wp/wp-content/themes/'+this.configuration.nameSlug, cb)
+        'wp/wp-content/themes/'+this.configuration.nameSlug, cb),
+      (cb) => {
+        this.spawnCommand('composer', ['--quiet', 'remove', 'xfiveco/chisel-starter-theme'])
+          .on('error', cb)
+          .on('exit', cb);
+      }
     ], (err) => {
       if(err)
         throw err;
