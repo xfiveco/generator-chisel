@@ -47,7 +47,7 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
   })
 
   it('should remove out theme from composer', function(done) {
-    assert.noFileContent('composer.json', 'xfiveco/chisel-starter-theme');
+    assert.noFileContent('composer.json', '"xfiveco/chisel-starter-theme": "*"');
     assert.noFileContent('composer.lock', 'xfiveco/chisel-starter-theme');
 
     done();
