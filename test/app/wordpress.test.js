@@ -21,6 +21,18 @@ describe('Chisel Generator with WordPress', function () {
       .on('end', done);
   });
 
+  it('should add WordPress directory to package.json', function(done) {
+    assert.fileContent('package.json', '"wordpress": "wp"');
+
+    done();
+  })
+
+  it('should add WP theme name to package.json', function(done) {
+    assert.fileContent('package.json', '"wordpressTheme": "test-project"');
+    
+    done();
+  })
+
   it('should add proxy to Browsersync config', function(done) {
     assert.fileContent('gulp/tasks/serve.js', 'proxy: name+\'.dev\',');
 
