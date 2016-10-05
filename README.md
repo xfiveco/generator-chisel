@@ -87,6 +87,18 @@ The file structure in generated project looks like this:
 
 On a typical project, you will work in `src` folder and check your work in `dist` folder so you don’t have to touch other files.
 
+### WordPress support
+When `WordPress support` is selected during project creation Chisel will download WordPress, Timber and our starter theme. WordPress will be downloaded into `wp` directory, Timber will be downloaded as WP Plugin into `wp/wp-content/plugins/timber-library` and our starter theme into `wp/wp-content/themes` with directory name matching project name.
+
+During instalation Chisel will show you sample Apache VirtualHost configuration for domain `PROJECT-NAME.dev`, you may use other server (like nginx) (TODO: browsersync).
+
+You can always see sample Apache configuration by typing `yo chisel:wp-config` command.
+
+For WordPress projects source directory for CSS, JS and assets is the same as in non-WP project, but twig template files are stored separately, because they are interpreted dynamically by WordPress and Timber, not build by `gulp` like in non-WP projects. They must be stored in `templates` directory inside theme directory.
+
+When project is build assets and compiled CSS and JS files are copied into dist directory inside theme. The starter theme is configured (TODO: it's not) to load them automatically on every page.
+
+
 ### Adding pages to the project
 Once you have basic project structure generated, you should add pages you will be working on. Chisel comes with a subgenerator for adding new pages to the project.
 
