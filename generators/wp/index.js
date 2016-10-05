@@ -90,13 +90,6 @@ var WpGenerator = yeoman.Base.extend({
       this.destinationPath('composer.json'));
   },
 
-  /**
-   * We need to run async _updateWpConfig after install unfortunately
-   * runInstall creates separated element at run loop so we can't use
-   * this.async(). Also runInstall calls its done() automatically after
-   * calling our callback so we are synchronously adding new element to
-   * run loop with config update.
-   */
   install: function() {
     this.runInstall('composer', null, null, (err) => {
       if(err)
