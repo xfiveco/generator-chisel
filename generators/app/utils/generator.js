@@ -31,9 +31,11 @@ var Generator = {
   },
 
   projectInfo: function () {
-    helpers.copy.call(this, 'index/project-index.html', 'index/project-index.html', this.prompts);
-    helpers.copy.call(this, 'index/css/main.css', 'index/css/main.css');
-    helpers.copy.call(this, 'index/img/*', 'index/img/');
+    if(!this.prompts.features.has_wp) {
+      helpers.copy.call(this, 'index/project-index.html', 'index/project-index.html', this.prompts);
+      helpers.copy.call(this, 'index/css/main.css', 'index/css/main.css');
+      helpers.copy.call(this, 'index/img/*', 'index/img/');
+    }
     helpers.copy.call(this, 'README.md', 'README.md', this.prompts);
   },
 
