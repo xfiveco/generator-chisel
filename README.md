@@ -70,7 +70,7 @@ The file structure in generated project looks like this:
     - **trumps** – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
   - **scripts**
     - `app.js` - main JavaScript application file where other modules are imported
-    - `greeting.js` - a sample JS module, delete or replace this one with your functionality 
+    - `greeting.js` - a sample JS module, delete or replace this one with your functionality
   - **templates** - Twig templates
     - `base.twig` - base layout which is extended in other templates
     - `template.twig` - a template from which the other pages are generated
@@ -150,5 +150,3 @@ A lot of Chisel functionality is copied from or inspired by [Limelight Generator
 
 ## License
 Chisel is licensed under [MIT License](LICENSE).
-
-
