@@ -88,6 +88,8 @@ The file structure in generated project looks like this:
 On a typical project, you will work in `src` folder and check your work in `dist` folder so you don’t have to touch other files.
 
 ### WordPress support
+[Composer](https://getcomposer.org/) is required for creation of WordPress projects.
+
 When `WordPress support` is selected during project creation Chisel will download WordPress, Timber and [our starter theme](https://github.com/xfiveco/chisel-starter-theme). WordPress will be downloaded into `wp` directory, Timber will be downloaded as WP plugin into `wp/wp-content/plugins/timber-library` and our starter theme into `wp/wp-content/themes` with directory name matching project name.
 
 During instalation Chisel will show you sample Apache VirtualHost configuration for domain `PROJECT-NAME.dev` You may use other server (like nginx), but if you want to use Browsersync for live reload your project must be available under `PROJECT-NAME.dev` domain.
