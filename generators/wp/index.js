@@ -1,7 +1,6 @@
 'use strict';
 
 var yeoman = require('yeoman-generator'),
-  remote = require('yeoman-remote'),
   fs = require('fs'),
   crypto = require('crypto'),
   async = require('async');
