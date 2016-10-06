@@ -92,9 +92,9 @@ On a typical project, you will work in `src` folder and check your work in `dist
 
 When `WordPress support` is selected during project creation Chisel will download WordPress, Timber and [our starter theme](https://github.com/xfiveco/chisel-starter-theme). WordPress will be downloaded into `wp` directory, Timber will be downloaded as WP plugin into `wp/wp-content/plugins/timber-library` and our starter theme into `wp/wp-content/themes` with directory name matching project name.
 
-During instalation Chisel will show you sample Apache VirtualHost configuration for domain `PROJECT-NAME.dev` You may use other server (like nginx), but if you want to use Browsersync for live reload your project must be available under `PROJECT-NAME.dev` domain.
+During instalation Chisel will show you sample Apache VirtualHost configuration (and save it to `dev-vhost.conf` file in project root directory) for domain `PROJECT-NAME.dev` You may use other server (like nginx), but if you want to use Browsersync for live reload your project must be available under `PROJECT-NAME.dev` domain.
 
-You can always see sample Apache configuration by typing `yo chisel:wp-config` command.
+You can always display and save sample Apache configuration by typing `yo chisel:wp-config` command. You may add `IncludeOptional /path/to/projects/*/dev-vhost.conf` in your Apache configuration to automatically load configuration for multiple projects.
 
 For WordPress projects source directory for CSS, JS and assets is the same as in non-WP project, but twig template files are stored separately, because they are interpreted dynamically by WordPress and Timber, not build by `gulp` like in non-WP projects. They must be stored in `templates` directory inside theme directory.
 
