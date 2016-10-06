@@ -94,7 +94,11 @@ When `WordPress support` is selected during project creation Chisel will downloa
 
 During instalation Chisel will show you sample Apache VirtualHost configuration (and save it to `dev-vhost.conf` file in project root directory) for domain `PROJECT-NAME.dev` You may use other server (like nginx), but if you want to use Browsersync for live reload your project must be available under `PROJECT-NAME.dev` domain.
 
-You can always display and save sample Apache configuration by typing `yo chisel:wp-config` command. You may add `IncludeOptional /path/to/projects/*/dev-vhost.conf` in your Apache configuration to automatically load configuration for multiple projects.
+You can always display and save sample Apache configuration by typing `yo chisel:wp-config` command. You may add
+```
+IncludeOptional /path/to/projects/*/dev-vhost.conf
+```
+in your Apache configuration to automatically load configuration for multiple projects.
 
 For WordPress projects source directory for CSS, JS and assets is the same as in non-WP project, but twig template files are stored separately, because they are interpreted dynamically by WordPress and Timber, not build by `gulp` like in non-WP projects. They must be stored in `templates` directory inside theme directory.
 
