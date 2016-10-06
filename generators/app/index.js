@@ -53,10 +53,8 @@ var Chisel = yeoman.Base.extend({
     installWordpress: function() {
       if(!this.prompts.features.has_wp || this.options['skip-install'])
         return;
-      var done = this.async();
-      yeoman().run(__dirname+'/../wp', () => {
-        yeoman().run(__dirname+'/../wp-config', done);
-      });
+      this.composeWith('chisel:wp');
+      this.composeWith('chisel:wp-config')
     },
     installNpm: function() {
       this.installDependencies({
