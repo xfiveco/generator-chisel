@@ -14,9 +14,13 @@
       "scripts": "src/scripts/**/*",
       "styles": "src/styles/**/*",
       "stylesMain": "src/styles/*.scss",
-      "templates": [
+      "templatesBuild": [
         "src/templates/**/*.{twig,html}",
         "!**/_*.{twig,html}"
+      ],
+      "templatesWatch": [
+        "src/templates/**/*.{twig,html}",
+        "src/data/**.json"
       ],
       "templatesPath": "src/templates/"
     },
@@ -40,6 +44,7 @@
     "gulp-clean-css": "^2.0.11",
     "gulp-css-globbing": "^0.1.8",
     "gulp-eslint": "^3.0.1",
+    "gulp-filter": "^4.0.0",
     "gulp-htmlhint": "0.3.1 ",
     "gulp-load-plugins": "^1.2.4",
     "gulp-newer": "^1.2.0",
