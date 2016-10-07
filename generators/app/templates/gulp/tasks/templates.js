@@ -1,12 +1,31 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 
 var templatesTask = function (gulp, plugins, config, helpers) {
+
+  function getTemplateInputData(file) {
+    try {
+      var data = JSON.parse(
+        fs.readFileSync(config.src.dataPath + path.basename(file.path) + '.json')
+      );
+    } catch(e) {
+      var errorString = e.toString();
+
+      // Mute errors related to missing input data
+      // eslint-disable-next-line no-magic-numbers
+      if(errorString.indexOf('no such file') == -1) {
+        console.error(e);
+      }
+    }
+    return data || {};
+  }
 
   function templates(manifest) {
     return gulp.src(config.src.templates)
       .pipe(plugins.plumber(helpers.onError))
+      .pipe(plugins.data(getTemplateInputData))
       .pipe(plugins.twigUpToDate({
         base: config.src.templatesPath,
         functions: [
