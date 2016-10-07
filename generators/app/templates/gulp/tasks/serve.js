@@ -5,7 +5,12 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
     <% if(features.has_wp) { %>
     var name = generator_config.nameSlug;
     var browserSyncConfig = {
-      proxy: name+'.dev',
+      proxy: {
+        target: name+'.dev',
+        reqHeaders: {
+          'x-chisel-proxy': '1'
+        }
+      },
       online: true
     }
     <% } else { %>
