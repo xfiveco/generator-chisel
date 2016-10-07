@@ -102,7 +102,7 @@ in your Apache configuration to automatically load configuration for multiple pr
 
 For WordPress projects source directory for CSS, JS and assets is the same as in non-WP project, but twig template files are stored separately, because they are interpreted dynamically by WordPress and Timber, not build by `gulp` like in non-WP projects. They must be stored in `templates` directory inside theme directory.
 
-When project is build assets and compiled CSS and JS files are copied into dist directory inside theme. The starter theme is configured (TODO: it's not) to load them automatically on every page.
+When project is build assets and compiled CSS and JS files are copied into dist directory inside theme. The starter theme is configured to load them automatically on every page. When site is visited directly by `.dev` domain revisioned files (with hash) will be loaded and non-revisioned when Browsersync proxy is used.
 
 
 ### Adding pages to the project
