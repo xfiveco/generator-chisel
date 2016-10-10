@@ -41,7 +41,6 @@ node_modules
 coverage
 src/bower_components
 dist
-wp/wp-content/uploads
 
 # Others
 npm-debug.log
