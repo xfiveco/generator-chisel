@@ -25,11 +25,14 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
   });
 
   it('should update wp-config', function(done) {
-    assert.fileContent('wp/wp-config.php', '$_SERVER[\'DB_HOST\']');
     assert.fileContent('wp/wp-config.php', 'test_1_');
-    assert.fileContent('wp/wp-config.php',
-      'define(\'DISALLOW_FILE_EDIT\', !!$_SERVER[\'DISABLE_EDIT\']);');
     assert.noFileContent('wp/wp-config.php', 'put your unique phrase here');
+
+    done();
+  })
+
+  it('should add .gitignore', function(done) {
+    assert.file('wp/.gitignore');
 
     done();
   })
