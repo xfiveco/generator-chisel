@@ -10,12 +10,9 @@ var templatesTask = function (gulp, plugins, config, helpers) {
       var data = JSON.parse(
         fs.readFileSync(config.src.dataPath + path.basename(file.path) + '.json')
       );
-    } catch(e) {
-      var errorString = e.toString();
-
-      // Mute errors related to missing input data
-      // eslint-disable-next-line no-magic-numbers
-      if(errorString.indexOf('no such file') == -1) {
+    } catch(error) {
+      // Mute errors related to missing input data & log all other
+      if(error.code === 'ENOENT') {
         console.error(e);
       }
     }
