@@ -8,7 +8,9 @@ var templatesTask = function (gulp, plugins, config, helpers) {
   function getTemplateInputData(file) {
     try {
       var data = JSON.parse(
-        path.join(config.src.dataPath, path.basename(file.path) + '.json')
+        fs.readFileSync(
+          path.join(config.src.dataPath, path.basename(file.path) + '.json')
+        )
       );
     } catch(error) {
       // Mute errors related to missing input data & log all other
