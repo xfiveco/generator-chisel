@@ -1,12 +1,30 @@
 'use strict';
 
 var fs = require('fs');
+var path = require('path');
 
 var templatesTask = function (gulp, plugins, config, helpers) {
+
+  function getTemplateInputData(file) {
+    try {
+      var data = JSON.parse(
+        fs.readFileSync(
+          path.join(config.src.dataPath, path.basename(file.path) + '.json')
+        )
+      );
+    } catch(error) {
+      // Mute errors related to missing input data & log all other
+      if(error.code === 'ENOENT') {
+        console.error(e);
+      }
+    }
+    return data || {};
+  }
 
   function templates(manifest) {
     return gulp.src(config.src.templates)
       .pipe(plugins.plumber(helpers.onError))
+      .pipe(plugins.data(getTemplateInputData))
       .pipe(plugins.twigUpToDate({
         base: config.src.templatesPath,
         functions: [
