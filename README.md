@@ -104,6 +104,11 @@ For WordPress projects source directory for CSS, JS and assets is the same as in
 
 When project is build assets and compiled CSS and JS files are copied into dist directory inside theme. The starter theme is configured to load them automatically on every page. When site is visited directly by `.dev` domain revisioned files (with hash) will be loaded and non-revisioned when Browsersync proxy is used.
 
+### Local wordpress configuration
+
+When project is generated with `WordPress support`, WordPress wp-config file is altered to provide support for local configuration. All settings except `Authentication Unique Keys and Salts.`, database charset and ABS_PATH can be set in `wp-config-local.php` file for purposes of local development. The file is added automatically to `.gitignore` and should not be commited and stored on the production server.
+
+If there is `wp-config-local.php` file available in main WordPress directory then the environment is recognized as local and configuration from this file is used. If it doesn't exist then settings from `wp-config.php` are used.
 
 ### Adding pages to the project
 Once you have basic project structure generated, you should add pages you will be working on. Chisel comes with a subgenerator for adding new pages to the project.

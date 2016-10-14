@@ -19,8 +19,18 @@
  */
 
 if ( file_exists( dirname( __FILE__ ) . '/wp-config-local.php' ) ) {
+
+	/**
+	 * Settings for local environment loaded if available from wp-config-local.php
+	 */
+
 	include dirname( __FILE__ ) . '/wp-config-local.php';
 } else {
+
+	/**
+	 * Settings for non-local environments, used when wp-config-local.php not available
+	 */
+
 // ** MySQL settings - You can get this info from your web host ** //
 	/** The name of the database for WordPress */
 	define( 'DB_NAME', $_SERVER['DB_NAME'] );
@@ -61,6 +71,10 @@ if ( file_exists( dirname( __FILE__ ) . '/wp-config-local.php' ) ) {
 	define( 'DB_COLLATE', '' );
 
 }
+
+/**
+ * Configuration for all available environments
+ */
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
