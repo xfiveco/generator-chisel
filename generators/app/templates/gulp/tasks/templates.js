@@ -12,10 +12,10 @@ var templatesTask = function (gulp, plugins, config, helpers) {
           path.join(config.src.dataPath, path.basename(file.path) + '.json')
         )
       );
-    } catch(error) {
+    } catch (error) {
       // Mute errors related to missing input data & log all other
-      if(error.code === 'ENOENT') {
-        console.error(e);
+      if (error.code === 'ENOENT') {
+        console.error(error);
       }
     }
     return data || {};
