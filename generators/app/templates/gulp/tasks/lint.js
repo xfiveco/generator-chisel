@@ -11,7 +11,6 @@ var lintTask = function (gulp, plugins, config) {
   gulp.task('lint-css', function() {
     return gulp.src(config.src.styles)
       .pipe(plugins.stylelint({
-        failAfterError: false,
         reporters: [
           {formatter: 'string', console: true}
         ]
