@@ -14,7 +14,7 @@ var templatesTask = function (gulp, plugins, config, helpers) {
       );
     } catch (error) {
       // Mute errors related to missing input data & log all other
-      if (error.code === 'ENOENT') {
+      if (error.code !== 'ENOENT') {
         console.error(error);
       }
     }
