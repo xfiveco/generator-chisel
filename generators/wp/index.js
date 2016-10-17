@@ -51,7 +51,7 @@ var WpGenerator = yeoman.Base.extend({
     var done = this.async();
     var files = {
       'wp-config.php': 'wp/wp-config.php',
-      '.gitignore': 'wp/.gitignore'
+      'gitignore': 'wp/.gitignore'
     }
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
