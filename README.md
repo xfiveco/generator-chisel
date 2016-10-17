@@ -18,8 +18,6 @@
 - HTML validation with [htmlhint](https://github.com/bezoerb/gulp-htmlhint)
 - optional ES2015 with [Babel](https://babeljs.io/)
 - optional jQuery
-
-### Planned features
 - optional WordPress setup
   - [Timber](http://upstatement.com/timber/) library installation
   - a base WordPress theme based on Timber with the same workflow as for front-end projects
@@ -72,7 +70,7 @@ The file structure in generated project looks like this:
     - **trumps** – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
   - **scripts**
     - `app.js` - main JavaScript application file where other modules are imported
-    - `greeting.js` - a sample JS module, delete or replace this one with your functionality 
+    - `greeting.js` - a sample JS module, delete or replace this one with your functionality
   - **templates** - Twig templates
     - `base.twig` - base layout which is extended in other templates
     - `template.twig` - a template from which the other pages are generated
@@ -88,6 +86,29 @@ The file structure in generated project looks like this:
 - `.stylintrc.yml` - [stylelint](http://stylelint.io/) configuration file to achieve consistent CSS coding style (you can update it to your preference)
 
 On a typical project, you will work in `src` folder and check your work in `dist` folder so you don’t have to touch other files.
+
+### WordPress support
+[Composer](https://getcomposer.org/) is required for creation of WordPress projects.
+
+When `WordPress support` is selected during project creation Chisel will download WordPress, Timber and [our starter theme](https://github.com/xfiveco/chisel-starter-theme). WordPress will be downloaded into `wp` directory, Timber will be downloaded as WP plugin into `wp/wp-content/plugins/timber-library` and our starter theme into `wp/wp-content/themes` with directory name matching project name.
+
+During instalation Chisel will show you sample Apache VirtualHost configuration (and save it to `dev-vhost.conf` file in project root directory) for domain `PROJECT-NAME.dev` You may use other server (like nginx), but if you want to use Browsersync for live reload your project must be available under `PROJECT-NAME.dev` domain.
+
+You can always display and save sample Apache configuration by typing `yo chisel:wp-config` command. You may add
+```
+IncludeOptional /path/to/projects/*/dev-vhost.conf
+```
+in your Apache configuration to automatically load configuration for multiple projects.
+
+For WordPress projects source directory for CSS, JS and assets is the same as in non-WP project, but twig template files are stored separately, because they are interpreted dynamically by WordPress and Timber, not build by `gulp` like in non-WP projects. They must be stored in `templates` directory inside theme directory.
+
+When project is build assets and compiled CSS and JS files are copied into dist directory inside theme. The starter theme is configured to load them automatically on every page. When site is visited directly by `.dev` domain revisioned files (with hash) will be loaded and non-revisioned when Browsersync proxy is used.
+
+### Local wordpress configuration
+
+When project is generated with `WordPress support`, WordPress wp-config file is altered to provide support for local configuration. All settings except `Authentication Unique Keys and Salts.`, database charset and ABS_PATH can be set in `wp-config-local.php` file for purposes of local development. The file is added automatically to `.gitignore` and should not be commited and stored on the production server.
+
+If there is `wp-config-local.php` file available in main WordPress directory then the environment is recognized as local and configuration from this file is used. If it doesn't exist then settings from `wp-config.php` are used.
 
 ### Adding pages to the project
 Once you have basic project structure generated, you should add pages you will be working on. Chisel comes with a subgenerator for adding new pages to the project.
@@ -140,5 +161,3 @@ A lot of Chisel functionality is copied from or inspired by [Limelight Generator
 
 ## License
 Chisel is licensed under [MIT License](LICENSE).
-
-

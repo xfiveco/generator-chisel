@@ -27,6 +27,10 @@ var Prompts = {
         name: 'ES2015 with Babel',
         value: 'has_babel',
         checked: false
+      }, {
+        name: 'WordPress support',
+        value: 'has_wp',
+        checked: false
       }]
     }
   ],

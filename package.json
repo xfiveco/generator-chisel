@@ -10,7 +10,9 @@
   },
   "files": [
     "generators/app",
-    "generators/page"
+    "generators/page",
+    "generators/wp",
+    "generators/wp-config"
   ],
   "main": "generators\\index.js",
   "keywords": [

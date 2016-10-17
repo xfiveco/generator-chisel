@@ -31,6 +31,11 @@ var PageChisel = yeoman.Base.extend({
       process.exit();
     }
 
+    if(this.configuration.features && this.configuration.features.has_wp) {
+      this.log('You can\'t add pages to WordPress projects.');
+      process.exit();
+    }
+
     this.pages = this.config.get('pages');
   },
 

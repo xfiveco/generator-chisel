@@ -1,0 +1,25 @@
+{
+  "name": "xfive/PROJECTNAME",
+  "repositories": [{
+    "type": "composer",
+    "url": "https://wpackagist.org"
+  }, {
+    "type": "vcs",
+    "url": "https://github.com/xfiveco/chisel-starter-theme",
+    "no-api": true
+  }],
+  "extra": {
+    "installer-paths": {
+      "wp/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wp/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "wordpress-install-dir": "wp"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "johnpbloch/wordpress": "*",
+    "wpackagist-plugin/timber-library": "*",
+    "xfiveco/chisel-starter-theme": "*"
+  }
+}
