@@ -66,7 +66,7 @@ var WpGenerator = yeoman.Base.extend({
     ], (err) => {
       if(err)
         throw err;
-      this.log('Everything went well :)')
+      this.log('Installation went well :)')
       done();
     })
   }

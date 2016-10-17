@@ -97,7 +97,7 @@ var WpConfigGenerator = yeoman.Base.extend({
     ], (err) => {
       if(err)
         throw err;
-      this.log('Everything went well :)')
+      this.log('Local config generated')
       done();
     });
   }
