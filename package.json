@@ -9,10 +9,8 @@
     "url": "https://www.xfive.co"
   },
   "files": [
-    "generators/app",
-    "generators/page",
-    "generators/wp",
-    "generators/wp-config"
+    "generators",
+    "helpers"
   ],
   "main": "generators\\index.js",
   "keywords": [
