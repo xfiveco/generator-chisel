@@ -24,7 +24,9 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
     gulp.watch(config.src.styles, ['styles-watch']);
     gulp.watch(config.src.templatesWatch, ['templates-watch']); // Build templates in front-end project
     gulp.watch(config.src.assets, ['assets-watch']);
-    gulp.watch('*.php').on('change', plugins.browserSync.reload); // PHP files in WP projects
+    <% if(features.has_wp) { %>
+    gulp.watch('**/*.{php,twig}').on('change', plugins.browserSync.reload);
+    <% } %>
   });
 };
 
