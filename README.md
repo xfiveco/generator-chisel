@@ -18,7 +18,7 @@
 - HTML validation with [htmlhint](https://github.com/bezoerb/gulp-htmlhint)
 - optional ES2015 with [Babel](https://babeljs.io/)
 - optional jQuery
-- optional WordPress setup (coming in 0.3 version)
+- optional WordPress setup (coming in 0.3 release)
   - [Timber](http://upstatement.com/timber/) library installation
   - a base WordPress theme based on Timber with the same workflow as for front-end projects
 
@@ -133,7 +133,7 @@ When `gulp build` is run, first the `dist` folder is cleaned and then build task
 3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `assetPath` function.
 
-### WordPress support (coming in 0.3 version)
+### WordPress support (coming in 0.3 release)
 [Composer](https://getcomposer.org/) is required for creation of WordPress projects.
 
 When `WordPress support` is selected during project creation Chisel will download WordPress, Timber and [our starter theme](https://github.com/xfiveco/chisel-starter-theme). WordPress will be downloaded into `wp` directory, Timber will be downloaded as WP plugin into `wp/wp-content/plugins/timber-library` and our starter theme into `wp/wp-content/themes` with directory name matching project name.
