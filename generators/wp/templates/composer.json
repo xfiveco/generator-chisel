@@ -4,35 +4,13 @@
     "type": "composer",
     "url": "https://wpackagist.org"
   }, {
+    "type": "composer",
+    "url": "https://raw.githubusercontent.com/xfiveco/composer-repository/repository"
+  }, {
     "type": "vcs",
     "url": "https://github.com/xfiveco/chisel-starter-theme",
     "no-api": true
-  }, {
-    "type": "package",
-    "package": {
-      "name": "wp-premium/gravityforms",
-      "version": "0-dev",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://github.com/wp-premium/gravityforms/archive/master.zip"
-      }
-    }
-  }, {
-    "type": "package",
-    "package": {
-      "name": "wp-premium/advanced-custom-fields-pro",
-      "version": "0-dev",
-      "type": "wordpress-plugin",
-      "dist": {
-        "type": "zip",
-        "url": "https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip"
-      }
-    }
   }],
-  "scripts": {
-    "pre-update-cmd": "node -e \"var fs = require('fs'), c = 'composer.json'; fs.writeFileSync(c, fs.readFileSync(c, 'utf8').replace(/\\d+-dev/g, () => Date.now()+'-dev'))\""
-  },
   "extra": {
     "installer-paths": {
       "wp/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
