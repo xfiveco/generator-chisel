@@ -1,25 +1,25 @@
 rules:
-  indent: ["error", 2]
-  no-cond-assign: "error"
-  no-empty: "error"
-  no-extra-semi: "error"
-  no-irregular-whitespace: "error"
-  no-unreachable: "error"
-  curly: "error"
-  no-eval: "error"
-  no-floating-decimal: "error"
-  no-magic-numbers: "error"
-  no-native-reassign: "error"
-  no-octal: "error"
-  no-redeclare: "error"
-  no-unused-vars: "error"
-  block-spacing: "error"
-  brace-style: "error"
-  comma-style: ["error", "last"]
-  consistent-this: ["error", "that"]
-  eol-last: "error"
-  no-spaced-func: "error"
-  no-trailing-spaces: "error"
+  indent: ["warn", 2]
+  no-cond-assign: "warn"
+  no-empty: "warn"
+  no-extra-semi: "warn"
+  no-irregular-whitespace: "warn"
+  no-unreachable: "warn"
+  curly: "warn"
+  no-eval: "warn"
+  no-floating-decimal: "warn"
+  no-global-assign: "warn"
+  no-magic-numbers: "warn"
+  no-octal: "warn"
+  no-redeclare: "warn"
+  no-unused-vars: "warn"
+  block-spacing: "warn"
+  brace-style: "warn"
+  comma-style: ["warn", "last"]
+  consistent-this: ["warn", "that"]
+  eol-last: "warn"
+  func-call-spacing: "warn"
+  no-trailing-spaces: "warn"
 
 env:
   commonjs: true
