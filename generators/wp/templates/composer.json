@@ -4,6 +4,9 @@
     "type": "composer",
     "url": "https://wpackagist.org"
   }, {
+    "type": "composer",
+    "url": "https://raw.githubusercontent.com/xfiveco/composer-repository/repository"
+  }, {
     "type": "vcs",
     "url": "https://github.com/xfiveco/chisel-starter-theme",
     "no-api": true
@@ -18,6 +21,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
+    "composer/installers" : "1.0.*",
     "johnpbloch/wordpress": "*",
     "wpackagist-plugin/timber-library": "*",
     "xfiveco/chisel-starter-theme": "*"
