@@ -55,7 +55,7 @@ var PageChisel = yeoman.Base.extend({
         required: false
       });
 
-      this.pages = _.union(this.newPages, this.pages);
+      this.pages = _.union(this.pages, this.newPages);
 
       if (_.isEmpty(this.pages)) {
         this.log('Page names list cannot be empty.');
