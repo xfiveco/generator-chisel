@@ -12,7 +12,8 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
     helpers
       .run(path.join(__dirname, '../../generators/wp'))
       .withOptions({
-        skipInstall: false
+        skipInstall: false,
+        skipPlugins: true
       })
       .withLocalConfig({config: {nameSlug: "test-1"}})
       .on('end', done);

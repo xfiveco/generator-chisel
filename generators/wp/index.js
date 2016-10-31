@@ -18,7 +18,9 @@ var WpGenerator = yeoman.Base.extend({
       this.log('You need to run this generator in a project directory.');
       process.exit();
     }
-    this.composeWith('chisel:wp-plugins')
+    if(!this.options['skip-plugins']) {
+      this.composeWith('chisel:wp-plugins');
+    }
   },
 
   _updateWpConfig: function(cb) {
