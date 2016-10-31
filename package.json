@@ -23,7 +23,7 @@
     "babel"
   ],
   "scripts": {
-    "test": "mocha test/**/*.test.js -b --reporter spec"
+    "test": "bash test/run-tests.sh"
   },
   "dependencies": {
     "async": "^2.0.1",
