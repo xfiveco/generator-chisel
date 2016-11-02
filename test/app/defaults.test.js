@@ -125,4 +125,11 @@ describe('Chisel Generator with default options', function () {
 
     done();
   });
+
+  it('should create index file without pages', function (done) {
+    assert.file('index.html');
+    assert.fileContent('index.html', 'Your pages will appear here.');
+
+    done();
+  });
 });
