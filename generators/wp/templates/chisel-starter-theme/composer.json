@@ -1,0 +1,7 @@
+{
+  "name": "xfiveco/chisel-starter-theme",
+  "type": "wordpress-theme",
+  "require": {
+    "johnpbloch/wordpress": "*"
+  }
+}
