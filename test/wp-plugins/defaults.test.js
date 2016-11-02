@@ -6,6 +6,7 @@ var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 var path = require('path');
 var fs = require('fs');
+var cp = require('child_process');
 
 describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function () {
   before(function (done) {
@@ -23,6 +24,13 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
         fs.writeFileSync(path.join(context.targetDirectory, 'composer.json'),
           fs.readFileSync(path.join(__dirname,
             '../../generators/wp/templates/composer.json')))
+       /*
+        * During normal use we first install wordpress, then plugins,
+        * here we don't have wordpress installed that would cause
+        * plugin installation to install worpress itself and wordpress
+        * could overwrite installed pluguns that's why we remove it.
+        */
+        cp.spawnSync('composer', ['--quiet', 'remove', 'johnpbloch/wordpress'])
       })
       .on('end', done);
   });
