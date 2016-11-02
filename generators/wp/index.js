@@ -4,7 +4,6 @@ var yeoman = require('yeoman-generator'),
   fs = require('fs'),
   crypto = require('crypto'),
   helpers = require('../../helpers'),
-  rimraf = require('rimraf'),
   async = require('async');
 
 var WpGenerator = yeoman.Base.extend({
@@ -39,12 +38,20 @@ var WpGenerator = yeoman.Base.extend({
     ], cb);
   },
 
+  _copyTheme: function() {
+    this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug));
+    this.fs.copy(this.templatePath('chisel-starter-theme/.gitignore'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore'));
+  },
+
   writing: function() {
     this.fs.copy(this.templatePath('composer.json'),
       this.destinationPath('composer.json'));
   },
 
   install: function() {
+    this._copyTheme();
     var done = this.async();
     var cb = (err) => {
       if(err)
@@ -64,15 +71,7 @@ var WpGenerator = yeoman.Base.extend({
     }
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
-      (cb) => this._updateWpConfig(cb),
-      (cb) => rimraf('wp/wp-content/themes/chisel-starter-theme/.git', cb),
-      (cb) => fs.rename('wp/wp-content/themes/chisel-starter-theme',
-        'wp/wp-content/themes/'+this.configuration.nameSlug, cb),
-      (cb) => {
-        this.spawnCommand('composer', ['--quiet', 'remove', 'xfiveco/chisel-starter-theme'])
-          .on('error', cb)
-          .on('exit', cb);
-      }
+      (cb) => this._updateWpConfig(cb)
     ], (err) => {
       if(err)
         throw err;
