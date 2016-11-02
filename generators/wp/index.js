@@ -4,6 +4,7 @@ var yeoman = require('yeoman-generator'),
   fs = require('fs'),
   crypto = require('crypto'),
   helpers = require('../../helpers'),
+  rimraf = require('rimraf'),
   async = require('async');
 
 var WpGenerator = yeoman.Base.extend({
@@ -64,6 +65,7 @@ var WpGenerator = yeoman.Base.extend({
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
       (cb) => this._updateWpConfig(cb),
+      (cb) => rimraf('wp/wp-content/themes/chisel-starter-theme/.git', cb),
       (cb) => fs.rename('wp/wp-content/themes/chisel-starter-theme',
         'wp/wp-content/themes/'+this.configuration.nameSlug, cb),
       (cb) => {
