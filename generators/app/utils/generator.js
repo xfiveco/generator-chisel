@@ -31,7 +31,7 @@ var Generator = {
   },
 
   projectInfo: function () {
-    if(!this.prompts.features.has_wp) {
+    if(this.prompts.projectType != 'wp-with-fe') {
       helpers.copy.call(this, 'index/project-index.html', 'index/project-index.html', this.prompts);
       helpers.copy.call(this, 'index/css/main.css', 'index/css/main.css');
       helpers.copy.call(this, 'index/img/*', 'index/img/');
@@ -40,7 +40,7 @@ var Generator = {
   },
 
   templates: function () {
-    if(this.prompts.features.has_wp)
+    if(this.prompts.projectType == 'wp-with-fe')
       return;
     helpers.copy.call(this, 'templates/twig/**/*', 'src/templates/', this.prompts);
   },

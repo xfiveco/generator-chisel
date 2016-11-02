@@ -25,7 +25,7 @@
       ],
       "templatesPath": "src/templates/"
     },
-    "dest": {<% if (features.has_wp) { %>
+    "dest": {<% if (projectType == 'wp-with-fe') { %>
       "wordpress": "wp",
       "wordpressTheme": "<%= nameSlug %>",<% } %>
       "assets": "dist/assets",

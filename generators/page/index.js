@@ -31,7 +31,7 @@ var PageChisel = yeoman.Base.extend({
       process.exit();
     }
 
-    if(this.configuration.features && this.configuration.features.has_wp) {
+    if(this.configuration.projectType == 'wp-with-fe') {
       this.log('You can\'t add pages to WordPress projects.');
       process.exit();
     }
