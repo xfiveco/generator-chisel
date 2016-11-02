@@ -16,7 +16,7 @@ describe('Chisel Generator with WordPress', function () {
       .withPrompts({
         name: 'Test Project',
         author: 'Test Author',
-        features: ['has_wp']
+        projectType: 'wp-with-fe'
       })
       .on('end', done);
   });
