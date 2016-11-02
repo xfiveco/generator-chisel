@@ -1,15 +1,17 @@
 'use strict';
 
+var path = require('path');
+
 var stylesTask = function (gulp, plugins, config, helpers) {
 
   gulp.task('styles-watch', function() {
-    return gulp.src(config.src.stylesMain)
+    return gulp.src(path.join(config.src.base, config.src.stylesMain))
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.plumber(helpers.onError))
       .pipe(plugins.sassGlob())
       .pipe(plugins.sass({ outputStyle: 'expanded', includePaths: ['node_modules'] }))
       .pipe(plugins.sourcemaps.write('./'))
-      .pipe(gulp.dest(config.dest.styles))
+      .pipe(gulp.dest(path.join(config.dest.base, config.dest.styles)))
       .pipe(plugins.browserSync.stream({ match: '**/*.css' }));
   });
 
@@ -19,7 +21,7 @@ var stylesTask = function (gulp, plugins, config, helpers) {
       require('autoprefixer')()
     ];
 
-    return gulp.src(config.src.stylesMain)
+    return gulp.src(path.join(config.src.base, config.src.stylesMain))
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.plumber(helpers.onError))
       .pipe(plugins.sassGlob())
@@ -29,9 +31,9 @@ var stylesTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.sourcemaps.write('./'))
       .pipe(plugins.rev())
       .pipe(plugins.revReplace())
-      .pipe(gulp.dest(config.dest.styles))
+      .pipe(gulp.dest(path.join(config.dest.base, config.dest.styles)))
       .pipe(plugins.rev.manifest({
-        path: config.dest.revManifest,
+        path: path.join(config.dest.base, config.dest.revManifest),
         base: config.dest.base,
         merge: true
       }))

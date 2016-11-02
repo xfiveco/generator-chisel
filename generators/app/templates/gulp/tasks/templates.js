@@ -9,7 +9,8 @@ var templatesTask = function (gulp, plugins, config, helpers) {
     try {
       var data = JSON.parse(
         fs.readFileSync(
-          path.join(config.src.dataPath, path.basename(file.path) + '.json')
+          path.join(config.src.base, config.src.dataPath,
+            path.basename(file.path) + '.json')
         )
       );
     } catch (error) {
@@ -31,7 +32,7 @@ var templatesTask = function (gulp, plugins, config, helpers) {
       .pipe(buildIncludedFilter)
       .pipe(plugins.data(getTemplateInputData))
       .pipe(plugins.twigUpToDate({
-        base: config.src.templatesPath,
+        base: path.join(config.src.base, config.src.templatesPath),
         functions: [
           {
             name: "assetPath",
@@ -55,7 +56,8 @@ var templatesTask = function (gulp, plugins, config, helpers) {
   });
 
   gulp.task('templates-build', function() {
-    var manifest = JSON.parse(fs.readFileSync(config.dest.revManifest, 'utf8'));
+    var manifest = JSON.parse(fs.readFileSync(
+      path.join(config.dest.base, config.dest.revManifest), 'utf8'));
     return templates(manifest);
   });
 };

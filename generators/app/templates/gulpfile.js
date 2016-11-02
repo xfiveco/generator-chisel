@@ -5,9 +5,7 @@ var plugins = require('gulp-load-plugins')({ pattern: '*' });
 var config  = require('./package.json').chisel;
 var generator_config = require('./.yo-rc.json')['generator-chisel'].config;
 var helpers = require('./gulp/helpers')(gulp, plugins, config);
-<% if (projectType == 'wp-with-fe') { %>
-config = require('./gulp/wpConfig')(config);
-<% } %>
+config = require('./gulp/prepareConfig')(config);
 /**
  * Batch tasks loader
  */
