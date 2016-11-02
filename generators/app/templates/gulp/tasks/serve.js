@@ -1,5 +1,7 @@
 'use strict';
 
+var path = require('path');
+
 var serveTask = function (gulp, plugins, config, helpers, generator_config) {
   gulp.task('serve', ['styles-watch', 'templates-watch', 'assets-watch'], function() {
     <% if(projectType == 'wp-with-fe') { %>
@@ -21,9 +23,9 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
     <% } %>
     plugins.browserSync.init(browserSyncConfig);
 
-    gulp.watch(config.src.styles, ['styles-watch']);
-    gulp.watch(config.src.templatesWatch, ['templates-watch']); // Build templates in front-end project
-    gulp.watch(config.src.assets, ['assets-watch']);
+    gulp.watch(path.join(config.src.base, config.src.styles), ['styles-watch']);
+    gulp.watch(config.src.templatesWatch, ['templates-watch']);
+    gulp.watch(path.join(config.src.base, config.src.assets), ['assets-watch']);
     <% if(projectType == 'wp-with-fe') { %>
     gulp.watch('**/*.{php,twig}').on('change', plugins.browserSync.reload);
     <% } %>

@@ -8,31 +8,31 @@
   },
   "chisel": {
     "src": {
-      "assets": "src/assets/**/*",
-      "app": "src/scripts/app.js",
+      "assets": "assets/**/*",
+      "app": "scripts/app.js",
       "base": "src",
-      "dataPath": "src/data/",
-      "scripts": "src/scripts/**/*",
-      "styles": "src/styles/**/*",
-      "stylesMain": "src/styles/*.scss",
+      "dataPath": "data/",
+      "scripts": "scripts/**/*",
+      "styles": "styles/**/*",
+      "stylesMain": "styles/*.scss",
       "templatesBuild": [
-        "src/templates/**/*.{twig,html}",
+        "templates/**/*.{twig,html}",
         "!**/_*.{twig,html}"
       ],
       "templatesWatch": [
-        "src/templates/**/*.{twig,html}",
-        "src/data/**.json"
+        "templates/**/*.{twig,html}",
+        "data/**.json"
       ],
-      "templatesPath": "src/templates/"
+      "templatesPath": "templates/"
     },
     "dest": {<% if (projectType == 'wp-with-fe') { %>
       "wordpress": "wp",
       "wordpressTheme": "<%= nameSlug %>",<% } %>
-      "assets": "dist/assets",
+      "assets": "assets",
       "base": "dist",
-      "revManifest": "dist/rev-manifest.json",
-      "scripts": "dist/scripts",
-      "styles": "dist/styles"
+      "revManifest": "rev-manifest.json",
+      "scripts": "scripts",
+      "styles": "styles"
     }
   },
   "devDependencies": {
