@@ -10,6 +10,7 @@ var options = {
     author: "JB",
     nameSlug: "test-1",
     nameCamel: "Test1",
+    projectType: "fe",
     features: {
         has_babel: true,
         has_jquery: true
