@@ -146,6 +146,8 @@ IncludeOptional /path/to/projects/*/dev-vhost.conf
 ```
 in your Apache configuration to automatically load configuration for multiple projects.
 
+Alternatively you can setup [wildcard virtual hosts](https://github.com/xfiveco/generator-chisel/wiki/WordPress-workflow) so you don't have to configure dev domain on each project.
+
 For WordPress projects source directory for CSS, JS and assets is the same as in non-WP project, but twig template files are stored separately, because they are interpreted dynamically by WordPress and Timber, not build by `gulp` like in non-WP projects. They must be stored in `templates` directory inside theme directory.
 
 When project is build assets and compiled CSS and JS files are copied into dist directory inside theme. The starter theme is configured to load them automatically on every page. When site is visited directly by `.dev` domain revisioned files (with hash) will be loaded and non-revisioned when Browsersync proxy is used.
@@ -155,6 +157,24 @@ When project is build assets and compiled CSS and JS files are copied into dist 
 When project is generated with `WordPress support`, WordPress wp-config file is altered to provide support for local configuration. All settings except `Authentication Unique Keys and Salts.`, database charset and ABS_PATH can be set in `wp-config-local.php` file for purposes of local development. The file is added automatically to `.gitignore` and should not be commited and stored on the production server.
 
 If there is `wp-config-local.php` file available in main WordPress directory then the environment is recognized as local and configuration from this file is used. If it doesn't exist then settings from `wp-config.php` are used.
+
+#### Adding pages to WordPress projects
+
+`yo chisel:page` command doesn't work on WP projects (yet). If you want to add a page to your WordPress projects, follow these steps:
+
+1. Create a page in WordPress admin, eg. Team
+2. Add a Twig template in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`, so in this case it would be `wp/wp-content/themes/[your-theme]/templates/page-team.twig`
+3. Your page is now accessible at `project-name.dev/{page-slug}`, eg. `project-name.dev/team/`.
+
+#### Developing front-end on WordPress projects
+
+Chisel allows easy front-end development prior to WordPress development. Suppose you have 3 pages to develop front-end for `Team`, `Team Member`, `Contact`.
+
+1. Add these pages in WordPress admin and create Twig templates for them as described in the previous section
+2. Now your pages are accessible under `project-name.dev/team/`, `project-name.dev/team-member/` and `project-name.dev/contact/`.
+3. Start adding HTML to relevant Twig templates. Where applicable try to use [Twig syntax](http://twig.sensiolabs.org/doc/templates.html)
+4. Create styles in `src/styles`.  
+5. Once you are done with front-end development a WordPress developer will add required functionality to the templates
 
 ## Credits
 A lot of Chisel functionality is copied from or inspired by [Limelight Generator](https://github.com/piotrkulpinski/generator-limelight). Thanks, Piotrek ;)
