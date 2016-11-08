@@ -6,40 +6,36 @@
   </head>
 {% endblock %}
 
-  <body class="{{body_class}}" data-template="base.twig">
-    <header class="header" >
-      {% block header %}
-        <div class="wrapper">
-          <h1 class="hdr-logo" role="banner">
-            <a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
-          </h1>
-          <nav id="nav-main" class="nav-main" role="navigation">
-            {% include "partials/menu.twig" with {'menu': menu.get_items} %}
-          </nav><!-- #nav -->
-        </div>
-      {% endblock %}
-    </header>
-
-    <section id="content" role="main" class="content-wrapper">
-      {% if title %}<h1>{{title}}</h1>{% endif %}
-      <div class="wrapper {{sidebar_class}}">
-        {% block content %}
-          Sorry, no content
-        {% endblock %}
-      </div>
-      {% if sidebar %}
-        <aside class="layout-sidebar">
-          {{sidebar}}
-        </aside>
-      {% endif %}
-    </section>
-
-    {% block footer %}
-      <footer id="footer">
-        {% include 'partials/footer.twig' %}
-      </footer>
-      <script src="{{ assetPath('scripts/bundle.js') }}" async></script>
-      {{ function('wp_footer') }}
+<body class="{{body_class}}" data-template="base.twig">
+  <header>
+    {% block header %}
+      <a href="{{site.url}}" rel="home">{{site.name}}</a>
+      <nav class="c-nav-main" role="navigation">
+        {% include "partials/menu.twig" with {'menu': menu.get_items} %}
+      </nav>
     {% endblock %}
-  </body>
+  </header>
+
+  <main>
+    {% if title %}<h1>{{title}}</h1>{% endif %}
+    {% block content %}
+      Sorry, no content
+    {% endblock %}
+    </div>
+  </main>
+
+  {% if sidebar %}
+    <aside>
+      {{sidebar}}
+    </aside>
+  {% endif %}
+
+  {% block footer %}
+    <footer>
+      {% include 'partials/footer.twig' %}
+    </footer>
+    <script src="{{ assetPath('scripts/bundle.js') }}" async></script>
+    {{ function('wp_footer') }}
+  {% endblock %}
+</body>
 </html>
