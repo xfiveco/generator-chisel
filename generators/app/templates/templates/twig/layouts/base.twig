@@ -17,17 +17,16 @@
   </header>
 
   <main>
-    {% if title %}<h1>{{title}}</h1>{% endif %}
     {% block content %}
       Sorry, no content
     {% endblock %}
   </main>
 
-  {% if sidebar %}
+  {% block sidebar %}
     <aside>
-      {{sidebar}}
+      {% include 'partials/sidebar.twig' %}
     </aside>
-  {% endif %}
+  {% endblock %}
 
   {% block footer %}
     <footer>
