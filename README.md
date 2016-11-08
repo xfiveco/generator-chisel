@@ -176,7 +176,7 @@ Chisel allows easy front-end development prior to WordPress development. Suppose
 4. Create styles in `src/styles`.  
 5. Once you are done with front-end development a WordPress developer will add required functionality to the templates
 
-### Moving `src` folder to the theme folder (available in 0.4 release)
+#### Moving `src` folder to the theme folder (available in 0.4 release)
 
 If you prefer having the `src` folder in your theme folder, you can move it there easily:
 
