@@ -10,9 +10,6 @@
   <header>
     {% block header %}
       <a href="{{site.url}}" rel="home">{{site.name}}</a>
-      <nav class="c-nav-main" role="navigation">
-        {% include "partials/menu.twig" with {'menu': menu.get_items} %}
-      </nav>
     {% endblock %}
   </header>
 
