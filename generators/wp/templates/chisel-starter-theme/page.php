@@ -14,8 +14,7 @@
  * /mytheme/page-mypage.php
  * (in which case you'll want to duplicate this file and save to the above path)
  *
- * @package  WordPress
- * @subpackage  X5
+ * @package <%= nameSlug %>
  */
 
 $context = Timber::get_context();

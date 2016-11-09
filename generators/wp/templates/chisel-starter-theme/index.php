@@ -6,8 +6,7 @@
  * It is used to display a page when nothing more specific matches a query.
  * E.g., it puts together the home page when no home.php file exists
  *
- * @package  WordPress
- * @subpackage  X5
+ * @package <%= nameSlug %>
  */
 
 if ( ! class_exists( 'Timber' ) ) {

@@ -2,8 +2,7 @@
 /**
  * The template for displaying Author Archive pages
  *
- * @package  WordPress
- * @subpackage  X5
+ * @package <%= nameSlug %>
  */
 global $wp_query;
 

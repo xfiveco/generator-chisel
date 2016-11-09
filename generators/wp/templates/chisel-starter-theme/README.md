@@ -1,4 +1,4 @@
-xfive.co starter theme for WordPress to work with chisel-generator and Timber WP plugin.
+<%= name %> theme for WordPress based on Timber library.
 
 All files directly under templates/ should extend some layout defined in layouts/ directory.
 

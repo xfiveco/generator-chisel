@@ -2,8 +2,7 @@
 /**
  * Search results page
  *
- * @package  WordPress
- * @subpackage  X5
+ * @package <%= nameSlug %>
  */
 
 $templates = array( 'search.twig', 'archive.twig', 'index.twig' );

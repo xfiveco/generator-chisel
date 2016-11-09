@@ -7,8 +7,7 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package  WordPress
- * @subpackage  X5
+ * @package <%= nameSlug %>
  */
 
 $templates = array( 'archive.twig', 'index.twig' );
