@@ -15,7 +15,7 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
         skipInstall: false,
         skipPlugins: true
       })
-      .withLocalConfig({config: {nameSlug: "test-1"}})
+      .withLocalConfig({config: {nameSlug: "test-1", name: "Test 1", author: "Test Author"}})
       .on('end', done);
   });
 
