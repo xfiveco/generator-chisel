@@ -62,7 +62,7 @@ describe('Chisel Generator with default options', function () {
   it('should generate templates', function (done) {
     assert.file([
       'src/templates/_template.twig',
-      'src/templates/_base.twig'
+      'src/templates/layouts/base.twig'
     ]);
 
     done();
