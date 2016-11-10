@@ -6,6 +6,30 @@
 
 ![Project index](docs/img/project-index.jpg)
 
+## Table of contents
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Features](#features)
+- [Getting started](#getting-started)
+  - [Node.js](#nodejs)
+  - [Yeoman, Gulp &amp; Chisel](#yeoman-gulp-amp-chisel)
+- [Usage](#usage)
+  - [Project generation](#project-generation)
+  - [Project structure](#project-structure)
+  - [Adding pages to the project](#adding-pages-to-the-project)
+  - [Development](#development)
+  - [WordPress support](#wordpress-support)
+    - [Local WordPress configuration](#local-wordpress-configuration)
+    - [Adding pages to WordPress projects](#adding-pages-to-wordpress-projects)
+    - [Developing front-end on WordPress projects](#developing-front-end-on-wordpress-projects)
+    - [Moving `src` folder to the theme folder (available in 0.4 release)](#moving-src-folder-to-the-theme-folder-available-in-04-release)
+- [Credits](#credits)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Features
 - [Gulp](http://gulpjs.com/) build system
 - [Browsersync](https://www.browsersync.io/)
