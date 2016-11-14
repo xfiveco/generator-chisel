@@ -87,6 +87,12 @@ Install [Yeoman](http://yeoman.io/), [Gulp](http://gulpjs.com/) and Chisel globa
 npm install -g yo gulp-cli generator-chisel
 ```
 
+If you want to update your existing Chisel installation to the latest version, run:
+
+```bash
+npm update -g generator-chisel
+```
+
 ### Apache, PHP and MySQL
 If you want to develop WordPress projects, you need to install Apache, PHP and MySQL. The easiest option is to use development environments like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org) but you can also customize your [development environment on Mac](https://mallinson.ca/osx-web-development/).
 
