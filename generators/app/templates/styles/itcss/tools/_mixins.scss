@@ -1,5 +1,14 @@
 // Mixins
 
+/* Clearfix */
+@mixin clearfix {
+  &:after {
+    clear: both;
+    content: "";
+    display: block;
+  }
+}
+
 /* 320px */
 @mixin bp-small {
   @media (min-width: $bp-small) {
