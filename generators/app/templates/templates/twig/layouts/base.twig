@@ -11,25 +11,21 @@
 </head>
 
 <body class="{{body_class}}">
-  <header>
+  <header class="o-wrapper">
     {% block header %}
       <a href="" rel="home"><%= name %></a>
     {% endblock %}
   </header>
 
-  <main>
+  <main class="o-wrapper">
     {% block content %}
       Sorry, no content
     {% endblock %}
   </main>
 
-  {% block sidebar %}
-    {% include 'components/sidebar.twig' %}
-  {% endblock %}
-
   {% block footer %}
     {% include 'components/footer.twig' %}
-    <script src="scripts/{{ assetPath('bundle.js') }}" async></script>
   {% endblock %}
+  <script src="scripts/{{ assetPath('bundle.js') }}" async></script>
 </body>
 </html>
