@@ -1,0 +1,40 @@
+///* ========================================================================
+//   #GLOBAL
+//   ======================================================================== */
+// The global settings file contains any project-wide variables; things that
+// need to be made available to the entire codebase.
+
+$global-radius: 3px !default;
+$global-transition: all 300ms ease-in-out !default;
+
+/* Fonts
+   ========================================================================== */
+
+$font-georgia: 'Georgia', serif;
+$font-times: 'Times', serif;
+$font-serif: $font-times;
+
+/* Breakpoints
+   ========================================================================== */
+
+$bp-small: 320px;
+$bp-medium: 768px;
+$bp-large: 1024px;
+$bp-full: 1600px;
+
+/* Colors
+   ========================================================================== */
+
+$color-white: #fff;
+$color-black: #000;
+$color-light-grey: #ccc;
+
+// Text
+$color-bg: $color-white;
+$color-text: $color-black;
+
+// Links
+$color-link: $color-text;
+
+// Borders
+$color-border: $color-light-grey;

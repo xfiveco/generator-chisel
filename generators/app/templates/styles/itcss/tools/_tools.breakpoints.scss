@@ -1,36 +1,25 @@
-// Mixins
+///* ========================================================================
+//   #BREAKPOINTS
+//   ======================================================================== */
 
-/* Clearfix */
-@mixin clearfix {
-  &:after {
-    clear: both;
-    content: "";
-    display: block;
-  }
-}
-
-/* 320px */
 @mixin bp-small {
   @media (min-width: $bp-small) {
     @content;
   }
 }
 
-/* 768px */
 @mixin bp-medium {
   @media (min-width: $bp-medium) {
     @content;
   }
 }
 
-/* 1024px */
 @mixin bp-large {
   @media (min-width: $bp-large) {
     @content;
   }
 }
 
-/* 1600px */
 @mixin bp-full {
   @media (min-width: $bp-full) {
     @content;
