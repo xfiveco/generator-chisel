@@ -75,6 +75,7 @@ describe('Chisel Generator with default options', function () {
       'src/styles/settings/_global.scss',
       'src/styles/tools/_mixins.scss',
       'src/styles/generic/_box-sizing.scss',
+      'src/styles/generic/_normalize.scss',
       'src/styles/generic/_reset.scss',
       'src/styles/generic/_shared.scss',
       'src/styles/elements/_headings.scss',
@@ -86,7 +87,6 @@ describe('Chisel Generator with default options', function () {
       'src/styles/settings/_global.scss',
       'src/styles/components/_footer.scss',
       'src/styles/components/_layout.scss',
-      'src/styles/trumps/_clearfix.scss',
       'src/styles/trumps/_utilities.scss'
     ]);
 
