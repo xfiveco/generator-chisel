@@ -1,15 +1,19 @@
-{% block html_head_container %}
-
-  {% include 'partials/html-header.twig' %}
+<!DOCTYPE html>
+<html class="no-js" lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ pageName }} - <%= name %></title>
+  <link rel="stylesheet" property="stylesheet" href="styles/{{ assetPath('main.css') }}" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.querySelector('html').classList.remove('no-js');</script>
   {% block head %}
   {% endblock %}
-  </head>
-{% endblock %}
+</head>
 
-<body class="{{body_class}}" data-template="base.twig">
+<body class="{{body_class}}">
   <header>
     {% block header %}
-      <a href="{{site.url}}" rel="home">{{site.name}}</a>
+      <a href="" rel="home"><%= name %></a>
     {% endblock %}
   </header>
 
@@ -20,15 +24,11 @@
   </main>
 
   {% block sidebar %}
-    <aside>
-      {% include 'partials/sidebar.twig' %}
-    </aside>
+    {% include 'components/sidebar.twig' %}
   {% endblock %}
 
   {% block footer %}
-    <footer>
-      {% include 'partials/footer.twig' %}
-    </footer>
+    {% include 'components/footer.twig' %}
     <script src="scripts/{{ assetPath('bundle.js') }}" async></script>
   {% endblock %}
 </body>
