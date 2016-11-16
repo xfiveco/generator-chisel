@@ -30,7 +30,7 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
         * plugin installation to install worpress itself and wordpress
         * could overwrite installed pluguns that's why we remove it.
         */
-        cp.spawnSync('composer', ['--quiet', 'remove', 'johnpbloch/wordpress'])
+        cp.execSync('composer --quiet remove johnpbloch/wordpress');
       })
       .on('end', done);
   });
