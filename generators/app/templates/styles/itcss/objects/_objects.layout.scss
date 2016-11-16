@@ -5,7 +5,11 @@
 /* Simple flexbox layout system */
 
 .o-layout {
-  display: flex;
+  display: block;
+
+  @include bp-medium {
+    display: flex;
+  }
 }
 
 .o-layout__item {
@@ -22,18 +26,24 @@
 
 .o-layout--2 {
   > .o-layout__item {
-    width: 49%;
+    @include bp-medium {
+      width: 49%;
+    }
   }
 }
 
 .o-layout--3 {
   > .o-layout__item {
-    width: 32%;
+    @include bp-medium {
+      width: 32%;
+    }
   }
 }
 
 .o-layout--4 {
   > .o-layout__item {
-    width: 24%;
+    @include bp-medium {
+      width: 24%;
+    }
   }
 }
