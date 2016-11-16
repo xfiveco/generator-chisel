@@ -34,6 +34,7 @@ $style-guide-color-border: #ccc;
 
 .c-style-guide__section-title {
   border-bottom: 1px solid $style-guide-color-border;
+  clear: both;
   color: $style-guide-color-medium;
   font-size: 1.25rem;
   font-weight: normal;
@@ -44,6 +45,7 @@ $style-guide-color-border: #ccc;
 
 .c-style-guide__section-subtitle {
   border-left: 6px solid $style-guide-color-border;
+  clear: both;
   color: $style-guide-color-light;
   font-size: 1.125rem;
   font-weight: normal;
