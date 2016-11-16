@@ -1,18 +1,24 @@
-<h1>Style guide</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, neque.</p>
+<div class="c-style-guide__intro">
+  <h1 class="c-style-guide__title">Style guide</h1>
+  <p class="c-style-guide__desc">Project's style guide shows styling of available elements, objects and components.</p>
+</div>
 
 <section class="c-style-guide__section">
-  <h2 class="c-style-guide__title">Elements</h2>
+  <h2 class="c-style-guide__section-title">Elements</h2>
   {% include "elements/headings.twig" %}
   {% include "elements/hr.twig" %}
+  {% include "elements/images.twig" %}
+  {% include "elements/links.twig" %}
+  {% include "elements/lists.twig" %}
+  {% include "elements/tables.twig" %}
 </section>
 
 <section class="c-style-guide__section">
-  <h2 class="c-style-guide__title">Objects</h2>
+  <h2 class="c-style-guide__section-title">Objects</h2>
   {% include "objects/media.twig" %}
 </section>
 
 <section class="c-style-guide__section">
-  <h2 class="c-style-guide__title">Components</h2>
+  <h2 class="c-style-guide__section-title">Components</h2>
   {% include "components/buttons.twig" %}
 </section>

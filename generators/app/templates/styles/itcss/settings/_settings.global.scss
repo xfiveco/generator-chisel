@@ -10,9 +10,7 @@ $global-transition: all 300ms ease-in-out !default;
 /* Fonts
    ========================================================================== */
 
-$font-georgia: 'Georgia', serif;
-$font-times: 'Times', serif;
-$font-serif: $font-times;
+$font-sans-serif: 'Helvetica', 'Arial', sans-serif;
 
 /* Breakpoints
    ========================================================================== */
@@ -27,14 +25,18 @@ $bp-full: 1600px;
 
 $color-white: #fff;
 $color-black: #000;
-$color-light-grey: #ccc;
+$color-very-light-grey: #ccc;
+$color-light-grey: #999;
+$color-medium-grey: #666;
+$color-dark-grey: #333;
 
 // Text
 $color-bg: $color-white;
 $color-text: $color-black;
 
 // Links
-$color-link: $color-text;
+$color-link: $color-medium-grey;
+$color-hover: $color-light-grey;
 
 // Borders
-$color-border: $color-light-grey;
+$color-border: $color-very-light-grey;
