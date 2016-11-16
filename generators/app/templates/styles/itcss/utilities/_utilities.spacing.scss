@@ -5,6 +5,10 @@
 
 $utility-spacing: 1rem;
 
+.u-margin {
+  margin: $utility-spacing;
+}
+
 .u-margin-top {
   margin-top: $utility-spacing;
 }
@@ -19,4 +23,24 @@ $utility-spacing: 1rem;
 
 .u-margin-left {
   margin-left: $utility-spacing;
+}
+
+.u-padding {
+  padding: $utility-spacing;
+}
+
+.u-padding-top {
+  padding-top: $utility-spacing;
+}
+
+.u-padding-right {
+  padding-right: $utility-spacing;
+}
+
+.u-padding-bottom {
+  padding-bottom: $utility-spacing;
+}
+
+.u-padding-left {
+  padding-left: $utility-spacing;
 }
