@@ -6,7 +6,8 @@ var yeoman = require('yeoman-generator'),
   helpers = require('../../helpers'),
   wpCli = require('../../helpers/wpCli'),
   async = require('async'),
-  cp = require('child_process');
+  cp = require('child_process'),
+  path = require('path');
 
 var WpGenerator = yeoman.Base.extend({
 
@@ -19,6 +20,12 @@ var WpGenerator = yeoman.Base.extend({
     if(!this.configuration) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
+    }
+    if(!this.options['skip-config']) {
+      this.composeWith('chisel:wp-config')
+    }
+    if(this.options['local-config']) {
+      this.composeWith(path.join(__dirname, '../wp-config'))
     }
     if(!this.options['skip-plugins']) {
       this.composeWith('chisel:wp-plugins');
@@ -135,6 +142,9 @@ var WpGenerator = yeoman.Base.extend({
   },
 
   _runWpCli: function(cb) {
+    if(this.options.skipWpCli) {
+      cb(); return;
+    }
     async.series([
       (cb) => this._dropCreateDatabase(cb),
       (cb) => wpCli(['core', 'install', {

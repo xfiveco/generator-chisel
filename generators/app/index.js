@@ -54,7 +54,6 @@ var Chisel = yeoman.Base.extend({
       if(this.prompts.projectType != 'wp-with-fe' || this.options['skip-install'])
         return;
       this.composeWith('chisel:wp');
-      this.composeWith('chisel:wp-config')
     },
     installNpm: function() {
       this.installDependencies({
