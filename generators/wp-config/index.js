@@ -18,20 +18,20 @@ var WpConfigGenerator = yeoman.Base.extend({
     var prompts = [
       {
         name: 'databaseHost',
-        message: 'Enter the database host',
-        default: '$_SERVER[\'DB_HOST\']'
+        message: 'Enter the database host:',
+        default: '127.0.0.1'
       }, {
         name: 'databaseName',
-        message: 'Enter the database name',
-        default: '$_SERVER[\'DB_NAME\']'
+        message: 'Enter the database name:',
+        default: this.configuration.nameSlug
       }, {
         name: 'databaseUser',
-        message: 'Enter the database user',
-        default: '$_SERVER[\'DB_USER\']'
+        message: 'Enter the database user:',
+        default: 'root'
       }, {
+        type: 'password',
         name: 'databasePassword',
-        message: 'Enter the database password',
-        default: '$_SERVER[\'DB_PASSWORD\']'
+        message: 'Enter the database password:',
       }
     ];
 
@@ -86,7 +86,7 @@ var WpConfigGenerator = yeoman.Base.extend({
     ], cb);
   },
 
-  end: function() {
+  install: function() {
     var done = this.async();
     var files = {
       'wp-config-local.php': 'wp/wp-config-local.php',

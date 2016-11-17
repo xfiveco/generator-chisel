@@ -154,8 +154,8 @@ Insert project name, author and select *WordPress with Front-end* project type. 
 
 Enter database details as follows:
 
-- *Database host*: `localhost`
-- *Database name*: the name of database you have created for the project
+- *Database host*: `127.0.0.1`
+- *Database name*: the name of database you have created for the project or you want generator to create for you
 - *Database user*: user who can access the database
 - *Database password*: password for the user
 
