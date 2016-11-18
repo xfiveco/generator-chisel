@@ -155,7 +155,7 @@ describe('Chisel Generator with default options', function () {
 
   it('should create index file without pages', function (done) {
     assert.file('index.html');
-    assert.fileContent('index.html', 'Your pages will appear here.');
+    assert.fileContent('index.html', 'To add more pages run');
 
     done();
   });
