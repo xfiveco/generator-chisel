@@ -155,7 +155,7 @@ var WpGenerator = yeoman.Base.extend({
         admin_email: this.prompts.adminEmail
       }], cb),
       (cb) => wpCli(['option', 'update', 'blog_public', '0'], cb),
-      (cb) => wpCli(['plugin', 'activate', 'timber-library'], cb),
+      (cb) => wpCli(['plugin', 'install', 'timber-library', {activate: true}], cb),
       (cb) => wpCli(['theme', 'activate', this.configuration.nameSlug], cb)
     ], cb);
   },
@@ -168,14 +168,7 @@ var WpGenerator = yeoman.Base.extend({
   install: function() {
     this._copyTheme();
     var done = this.async();
-    var cb = (err) => {
-      if(err)
-        throw err;
-      done();
-    };
-    this.spawnCommand('composer', ['install'])
-      .on('error', cb)
-      .on('exit', cb);
+    wpCli(['core', 'download'], helpers.throwIfError(done))
   },
 
   end: function() {

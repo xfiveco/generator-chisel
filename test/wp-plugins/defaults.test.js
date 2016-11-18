@@ -24,13 +24,6 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
         fs.writeFileSync(path.join(context.targetDirectory, 'composer.json'),
           fs.readFileSync(path.join(__dirname,
             '../../generators/wp/templates/composer.json')))
-       /*
-        * During normal use we first install wordpress, then plugins,
-        * here we don't have wordpress installed that would cause
-        * plugin installation to install worpress itself and wordpress
-        * could overwrite installed pluguns that's why we remove it.
-        */
-        cp.execSync('composer --quiet remove johnpbloch/wordpress');
       })
       .on('end', done);
   });

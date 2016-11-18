@@ -17,8 +17,6 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "composer/installers" : "1.0.*",
-    "johnpbloch/wordpress": "*",
-    "wpackagist-plugin/timber-library": "*"
+    
   }
 }

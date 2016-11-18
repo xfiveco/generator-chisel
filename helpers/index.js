@@ -10,6 +10,14 @@ var Helpers = {
         (body, cb) => fs.writeFile(newName, body, cb)
       ], cb);
     }, cb);
+  },
+  throwIfError: function(cb) {
+    return function(err) {
+      if(err) {
+        throw err;
+      }
+      cb();
+    }
   }
 };
 

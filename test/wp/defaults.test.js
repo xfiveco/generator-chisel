@@ -40,12 +40,6 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
     done();
   })
 
-  it('should download Timber', function(done) {
-    assert.file('wp/wp-content/plugins/timber-library/timber.php');
-
-    done();
-  });
-
   it('should download our theme', function(done) {
     assert.file('wp/wp-content/themes/test-1/index.php');
 
@@ -54,13 +48,6 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
 
   it('should remove .git from our theme', function(done) {
     assert.noFile('wp/wp-content/themes/test-1/.git');
-
-    done();
-  })
-
-  it('should remove out theme from composer', function(done) {
-    assert.noFileContent('composer.json', '"xfiveco/chisel-starter-theme": "*"');
-    assert.noFileContent('composer.lock', 'xfiveco/chisel-starter-theme');
 
     done();
   })

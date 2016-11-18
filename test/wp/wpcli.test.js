@@ -11,7 +11,7 @@ var wpCli = require('../../helpers/wpCli');
 
 describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', function () {
   this.timeout(10000)
-  
+
   before(function (done) {
     this.timeout(240000)
 
@@ -46,7 +46,7 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
     })
   });
 
-  it('should activate Timber', function(done) {
+  it('should install and activate Timber', function(done) {
     wpCli(['plugin', 'status', 'timber-library'], (err, stdio) => {
       assert(stdio[0].toString('utf8').indexOf('Active') != -1);
       done();
