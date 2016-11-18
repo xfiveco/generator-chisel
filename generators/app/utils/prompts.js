@@ -1,12 +1,14 @@
 'use strict';
 
 var _ = require('lodash');
+var path = require('path');
 
 var Prompts = {
   questions: [
     {
       name: 'name',
       message: 'Please enter the project name:',
+      default: _.startCase(path.basename(process.cwd())),
       validate: function (input) {
         return !!input;
       }
