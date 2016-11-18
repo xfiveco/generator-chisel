@@ -30,8 +30,8 @@ describe('Chisel Generator with default options', function () {
   it('should generate configuration files', function (done) {
     assert.file([
       '.editorconfig',
-      '.gitattributes',
       '.eslintrc.yml',
+      '.gitattributes',
       '.stylelintrc.yml',
       '.gitignore',
       'package.json',
@@ -61,8 +61,23 @@ describe('Chisel Generator with default options', function () {
 
   it('should generate templates', function (done) {
     assert.file([
+      'src/templates/components/btn.twig',
+      'src/templates/components/footer.twig',
+      'src/templates/elements/headings.twig',
+      'src/templates/elements/hr.twig',
+      'src/templates/elements/images.twig',
+      'src/templates/elements/links.twig',
+      'src/templates/elements/lists.twig',
+      'src/templates/elements/tables.twig',
+      'src/templates/layouts/base.twig',
+      'src/templates/objects/layout.twig',
+      'src/templates/objects/list-bare.twig',
+      'src/templates/objects/list-inline.twig',
+      'src/templates/objects/media.twig',
+      'src/templates/objects/table.twig',
+      'src/templates/utilities/align.twig',
       'src/templates/_template.twig',
-      'src/templates/layouts/base.twig'
+      'src/templates/style-guide.twig'
     ]);
 
     done();
