@@ -2,6 +2,7 @@
 
 var yeoman = require('yeoman-generator');
 var utils = require('./utils');
+var chalk = require('chalk');
 
 var Chisel = yeoman.Base.extend({
 
@@ -47,6 +48,8 @@ var Chisel = yeoman.Base.extend({
 
     // Gulp modules
     utils.generator.gulpfiles.call(this);
+
+    this.log(chalk.yellow('\nFRONT-END SETUP\n'))
   },
 
   install: {
@@ -56,6 +59,7 @@ var Chisel = yeoman.Base.extend({
       this.composeWith('chisel:wp');
     },
     installNpm: function() {
+      this.log(chalk.yellow('\nINSTALLATION\n'));
       this.installDependencies({
         npm: true,
         bower: false,

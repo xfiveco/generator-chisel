@@ -7,7 +7,8 @@ var yeoman = require('yeoman-generator'),
   wpCli = require('../../helpers/wpCli'),
   async = require('async'),
   cp = require('child_process'),
-  path = require('path');
+  path = require('path'),
+  chalk = require('chalk');
 
 var WpGenerator = yeoman.Base.extend({
 
@@ -71,6 +72,7 @@ var WpGenerator = yeoman.Base.extend({
     ];
 
     var done = this.async();
+    this.log(chalk.yellow('\nWORDPRESS SETUP\n'));
     this.prompt(prompts).then((answers) => {
       this.prompts = answers;
       done();
