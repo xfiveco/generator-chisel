@@ -109,7 +109,7 @@ var WpGenerator = yeoman.Base.extend({
       var stderr = stdio[1].toString('utf8');
       if(stderr.indexOf('Unknown database') != -1) {
         cb(null, false);
-      } else if(stdout.indexOf('Success: Database checked.') != -1) {
+      } else if(stdout.indexOf('Success') != -1) {
         cb(null, true);
       } else {
         cb(['Error when checking database', stdout, stderr]);

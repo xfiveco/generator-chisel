@@ -8,7 +8,7 @@ function getWpCliPath() {
 }
 
 function getDefaultArgs() {
-  return [getWpCliPath(), '--path=wp'];
+  return [getWpCliPath(), '--path=wp', '--color'];
 }
 
 function parseParams(params) {
