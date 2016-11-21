@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-  <meta charset="utf-8" />
-  <title>{{ pageName }} - <%= name %></title>
+  <meta charset="<% if (projectType == 'wp-with-fe') { %>{{site.charset}}<% } else { %>utf-8<% }%>" />
+  <title><% if (projectType == 'wp-with-fe') { %>
+    {% if wp_title %}
+      {{ wp_title }} - {{ site.name }}
+    {% else %}
+      {{ site.name }}
+    {% endif %}
+  <% } else { %>
+    {{ pageName }} - <%= name %>
+  <% } %></title>
   <link rel="stylesheet" property="stylesheet" href="styles/{{ assetPath('main.css') }}" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.querySelector('html').classList.remove('no-js');</script>
+<% if (projectType == 'wp-with-fe') { %><link rel="pingback" href="{{site.pingback_url}}" />
+  {{function('wp_head')}}<% } %>
   {% block head %}
   {% endblock %}
 </head>
