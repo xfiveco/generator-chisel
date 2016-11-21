@@ -29,7 +29,7 @@ var WpGenerator = yeoman.Base.extend({
       this.composeWith(path.join(__dirname, '../wp-config'))
     }
     if(!this.options['skip-plugins']) {
-      this.composeWith('chisel:wp-plugins');
+      this.composeWith(path.join(__dirname, '../wp-plugins'));
     }
   },
 
@@ -162,11 +162,6 @@ var WpGenerator = yeoman.Base.extend({
     ], cb);
   },
 
-  writing: function() {
-    this.fs.copy(this.templatePath('composer.json'),
-      this.destinationPath('composer.json'));
-  },
-
   install: function() {
     this._copyTheme();
     var done = this.async();
@@ -183,12 +178,7 @@ var WpGenerator = yeoman.Base.extend({
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
       (cb) => this._updateWpConfig(cb),
       (cb) => this._runWpCli(cb)
-    ], (err) => {
-      if(err)
-        throw err;
-      this.log('Installation went well :)')
-      done();
-    })
+    ], helpers.throwIfError(done));
   }
 });
 

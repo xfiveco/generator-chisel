@@ -1,6 +1,9 @@
 'use strict';
 var yeoman = require('yeoman-generator');
 var plugins = require('./plugins.json');
+var helpers = require('../../helpers');
+var wpCli = require('../../helpers/wpCli');
+var async = require('async');
 
 var WpPluginsGenerator = yeoman.Base.extend({
 
@@ -37,18 +40,11 @@ var WpPluginsGenerator = yeoman.Base.extend({
     });
   },
 
-  install: function() {
+  end: function() {
     if(!this.prompts.plugins.length)
       return;
     var done = this.async();
-    var cb = (err) => {
-      if(err)
-        throw err;
-      done();
-    };
-    this.spawnCommand('composer', ['require'].concat(this.prompts.plugins))
-      .on('error', cb)
-      .on('exit', cb);
+    wpCli(['plugin', 'install'].concat(this.prompts.plugins), helpers.throwIfError(done));
   }
 
 });

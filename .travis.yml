@@ -10,13 +10,6 @@ addons:
       - php5-mysql
 services:
   - mysql
-before_install:
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  - php composer-setup.php
-  - php -r "unlink('composer-setup.php');"
-  - mkdir /tmp/composerbin
-  - mv composer.phar /tmp/composerbin/composer
-  - PATH=$PATH:/tmp/composerbin
 matrix:
   include:
     - node_js: v6
