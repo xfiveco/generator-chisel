@@ -25,9 +25,7 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
       .run(path.join(__dirname, '../../generators/wp'))
       .withOptions({
         skipInstall: false,
-        skipPlugins: true,
-        skipConfig: true,
-        localConfig: true
+        skipPlugins: true
       })
       .withPrompts({
         databasePassword: new String(''),

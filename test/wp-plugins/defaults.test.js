@@ -38,9 +38,7 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
         helpers
           .run(path.join(__dirname, '../../generators/wp'), {tmpdir: false})
           .withOptions({
-            skipInstall: false,
-            skipConfig: true,
-            localConfig: true
+            skipInstall: false
           })
           .withPrompts({
             databasePassword: new String(''),

@@ -23,9 +23,6 @@ var WpGenerator = yeoman.Base.extend({
       process.exit();
     }
     if(!this.options['skip-config']) {
-      this.composeWith('chisel:wp-config')
-    }
-    if(this.options['local-config']) {
       this.composeWith(path.join(__dirname, '../wp-config'))
     }
     if(!this.options['skip-plugins']) {
