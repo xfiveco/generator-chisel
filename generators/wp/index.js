@@ -41,6 +41,10 @@ var WpGenerator = yeoman.Base.extend({
   _copyTheme: function() {
     this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug), this.configuration);
+
+    this.fs.copyTpl(this.templatePath(__dirname + '/../app/templates/templates/twig/**/*'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/'), this.configuration);
+
     this.fs.move(
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore')
