@@ -10,6 +10,8 @@ addons:
       - php5-mysql
 services:
   - mysql
+before_install:
+  - npm install -g yo
 matrix:
   include:
     - node_js: v6

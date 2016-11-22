@@ -35,6 +35,7 @@
     "yeoman-test": "^1.4.0"
   },
   "devDependencies": {
+    "cross-spawn": "^5.0.1",
     "mocha": "^2.5.3"
   },
   "repository": "git@github.com:xfiveco/generator-chisel.git",
