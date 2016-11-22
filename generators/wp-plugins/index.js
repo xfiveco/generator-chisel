@@ -44,7 +44,7 @@ var WpPluginsGenerator = yeoman.Base.extend({
     if(!this.prompts.plugins.length)
       return;
     var done = this.async();
-    wpCli(['plugin', 'install'].concat(this.prompts.plugins), helpers.throwIfError(done));
+    wpCli(['plugin', 'install', {activate: true}].concat(this.prompts.plugins), helpers.throwIfError(done));
   }
 
 });

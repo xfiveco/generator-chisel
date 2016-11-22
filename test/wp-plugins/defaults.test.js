@@ -8,8 +8,11 @@ var path = require('path');
 var fs = require('fs');
 var cp = require('child_process');
 var async = require('async');
+var wpCli = require('../../helpers/wpCli');
 
 describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function () {
+  this.timeout(10000)
+
   before(function (done) {
     this.timeout(240000)
 
@@ -53,21 +56,24 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
     ], done)
   });
 
-  it('should do download ACF', function(done) {
-    assert.file('wp/wp-content/plugins/advanced-custom-fields-pro/acf.php');
-
-    done();
+  it('should download and activate ACF', function(done) {
+    wpCli(['plugin', 'status', 'advanced-custom-fields-pro'], (err, stdio) => {
+      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
+      done();
+    })
   })
 
-  it('should do download Adminer', function(done) {
-    assert.file('wp/wp-content/plugins/adminer/adminer.php');
-
-    done();
+  it('should download and activate Adminer', function(done) {
+    wpCli(['plugin', 'status', 'adminer'], (err, stdio) => {
+      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
+      done();
+    })
   })
 
-  it('should do download WP Sync DB', function(done) {
-    assert.file('wp/wp-content/plugins/wp-sync-db/wp-sync-db.php');
-
-    done();
+  it('should download and activate WP Sync DB', function(done) {
+    wpCli(['plugin', 'status', 'wp-sync-db'], (err, stdio) => {
+      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
+      done();
+    })
   })
 });
