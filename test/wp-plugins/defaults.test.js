@@ -22,38 +22,25 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
       this.skip(); return;
     }
 
-    async.series([
-      function (callback) {
-        helpers
-          .run(path.join(__dirname, '../../generators/app'))
-          .withOptions({
-            'skip-install': true
-          })
-          .withPrompts({
-            name: 'Test Project Plugins',
-            author: 'Test Author',
-            projectType: 'wp-with-fe',
-            features: []
-          })
-          .on('end', callback);
-      },
-      function (callback) {
-        helpers
-          .run(path.join(__dirname, '../../generators/wp'), {tmpdir: false})
-          .withOptions({
-            skipInstall: false
-          })
-          .withPrompts({
-            databasePassword: new String(''),
-            adminPassword: 'pass',
-            adminEmail: 'user@example.com',
-            plugins: ['https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip',
-              'adminer',
-              'https://github.com/wp-sync-db/wp-sync-db/archive/master.zip']
-          })
-          .on('end', callback);
-      }
-    ], done)
+    helpers
+      .run(path.join(__dirname, '../../generators/app'))
+      .withOptions({
+        'skip-install': true,
+        'run-wp': true
+      })
+      .withPrompts({
+        name: 'Test Project Plugins',
+        author: 'Test Author',
+        projectType: 'wp-with-fe',
+        features: [],
+        databasePassword: new String(''),
+        adminPassword: 'pass',
+        adminEmail: 'user@example.com',
+        plugins: ['https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip',
+          'adminer',
+          'https://github.com/wp-sync-db/wp-sync-db/archive/master.zip']
+      })
+      .on('end', done);
   });
 
   it('should download and activate ACF', function(done) {
