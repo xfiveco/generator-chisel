@@ -76,11 +76,6 @@ var WpConfigGenerator = yeoman.Base.extend({
         serverName: name + '.dev',
         dbName: name
     });
-
-    this.log('');
-    this.log('Here is Apache vhost configuration you may use:');
-    this.log('');
-    this.log(this.fs.read(this.destinationPath('dev-vhost.conf')));
   },
 
   /**
