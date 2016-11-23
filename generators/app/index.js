@@ -49,8 +49,6 @@ var Chisel = yeoman.Base.extend({
 
     // Gulp modules
     utils.generator.gulpfiles.call(this);
-
-    this.log(chalk.yellow('\nFRONT-END SETUP\n'))
   },
 
   install: {
