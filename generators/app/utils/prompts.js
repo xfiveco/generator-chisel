@@ -32,7 +32,7 @@ var Prompts = {
     {
       type: 'checkbox',
       name: 'features',
-      message: 'Select additional features:',
+      message: 'Select additional front-end features:',
       choices: [{
         name: 'jQuery',
         value: 'has_jquery',

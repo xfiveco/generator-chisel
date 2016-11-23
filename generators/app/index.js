@@ -2,6 +2,8 @@
 
 var yeoman = require('yeoman-generator');
 var utils = require('./utils');
+var chalk = require('chalk');
+var path = require('path');
 
 var Chisel = yeoman.Base.extend({
 
@@ -53,10 +55,10 @@ var Chisel = yeoman.Base.extend({
     installWordpress: function() {
       if(this.prompts.projectType != 'wp-with-fe' || this.options['skip-install'])
         return;
-      this.composeWith('chisel:wp');
-      this.composeWith('chisel:wp-config')
+      this.composeWith(path.join(__dirname, '../wp'))
     },
     installNpm: function() {
+      this.log(chalk.yellow('\nINSTALLATION\n'));
       this.installDependencies({
         npm: true,
         bower: false,

@@ -2,6 +2,10 @@
 
 var yeoman = require('yeoman-generator');
 var _ = require('lodash');
+var wpCli = require('../../helpers/wpCli');
+var async = require('async');
+var path = require('path');
+var helpers = require('../../helpers');
 
 var PageChisel = yeoman.Base.extend({
   /**
@@ -28,11 +32,6 @@ var PageChisel = yeoman.Base.extend({
       this.configuration = this.config.get('config');
     } catch (ex) {
       this.log('You need to run this generator in a project directory.');
-      process.exit();
-    }
-
-    if(this.configuration.projectType == 'wp-with-fe') {
-      this.log('You can\'t add pages to WordPress projects.');
       process.exit();
     }
 
@@ -92,7 +91,7 @@ var PageChisel = yeoman.Base.extend({
    * Generates template files based on provided list or stored in config file
    * @public
    */
-  writing: {
+  _writing_fe: {
     /**
      * Generates template files based on provided list or stored in config file
      * @public
@@ -126,12 +125,63 @@ var PageChisel = yeoman.Base.extend({
 
   },
 
+  _wp_single: function(pageName, callback) {
+    var id = 0;
+    var slug = '';
+    async.waterfall([
+      (cb) => wpCli(['post', 'create', {
+        post_type: 'page',
+        post_title: pageName,
+        post_status: 'publish'
+      }], cb),
+      (stdio, cb) => {
+        var stdout = stdio[0].toString('utf8');
+        id = /Created post (\d+)\./.exec(stdout)[1];
+        cb(!id);
+      },
+      (cb) => wpCli(['post', 'get', String(id), {format: 'json'}], {hideStdio: true}, cb),
+      (stdio, cb) => {
+        var json = JSON.parse(stdio[0]);
+        slug = json.post_name;
+        cb(!slug);
+      },
+      (cb) => wpCli(['post', 'update', String(id), {post_status: 'draft'}], cb),
+      (stdio, cb) => {
+        var pack = JSON.parse(this.fs.read(this.destinationPath('package.json')));
+        var chisel = pack.chisel, dest = chisel.dest;
+        var templates = path.join(dest.wordpress, 'wp-content/themes',
+          dest.wordpressTheme, chisel.src.templatesPath);
+        this.fs.copyTpl(
+          this.destinationPath(path.join(templates, 'page.twig')),
+          this.destinationPath(path.join(templates, 'page-'+slug+'.twig')),
+          {pageName: pageName}
+        );
+        cb();
+      }
+    ], callback);
+  },
+
+  _writing_wp_with_fe: function(callback) {
+    async.eachSeries(this.newPages, this._wp_single.bind(this), callback);
+  },
+
+
+  writing: function() {
+    if(this.configuration.projectType == 'wp-with-fe') {
+      var done = this.async();
+      this._writing_wp_with_fe(helpers.throwIfError(done));
+    } else {
+      this._writing_fe.generatePages.call(this);
+      this._writing_fe.updateIndex.call(this);
+    }
+  },
+
   /**
    * Runs build helpers if they're not skipped by generator
    * @public
    */
   install: function () {
-    if (!this.options['skip-build']) {
+    if (!this.options['skip-build'] && this.configuration.projectType == 'fe') {
       this.spawnCommand('gulp', ['build']);
     }
 

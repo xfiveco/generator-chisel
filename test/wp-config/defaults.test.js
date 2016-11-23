@@ -14,6 +14,9 @@ describe('Chisel Generator with WordPress (wp-config subgenerator)', function ()
       .withOptions({
         skipInstall: false
       })
+      .withPrompts({
+        databasePassword: new String('')
+      })
       .withLocalConfig({config: {nameSlug: "test-1"}})
       .on('ready', () => {
         fs.mkdirSync(path.join(context.targetDirectory, 'wp'));
@@ -22,7 +25,7 @@ describe('Chisel Generator with WordPress (wp-config subgenerator)', function ()
   });
 
   it('should update wp-config-local', function(done) {
-    assert.fileContent('wp/wp-config-local.php', '$_SERVER[\'DB_HOST\']');
+    assert.fileContent('wp/wp-config-local.php', '127.0.0.1');
     assert.fileContent('wp/wp-config-local.php', 'test_1_');
 
     done();

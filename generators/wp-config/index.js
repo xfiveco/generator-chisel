@@ -2,7 +2,8 @@
 var yeoman = require('yeoman-generator'),
   fs = require('fs'),
   helpers = require('../../helpers'),
-  async = require('async');
+  async = require('async'),
+  mysql = require('mysql');
 
 var WpConfigGenerator = yeoman.Base.extend({
 
@@ -14,32 +15,57 @@ var WpConfigGenerator = yeoman.Base.extend({
     }
   },
 
-  prompting: function() {
+  _prompting: function(cb) {
     var prompts = [
       {
         name: 'databaseHost',
-        message: 'Enter the database host',
-        default: '$_SERVER[\'DB_HOST\']'
+        message: 'Enter the database host:',
+        default: '127.0.0.1'
       }, {
         name: 'databaseName',
-        message: 'Enter the database name',
-        default: '$_SERVER[\'DB_NAME\']'
+        message: 'Enter the database name:',
+        default: this.configuration.nameSlug
       }, {
         name: 'databaseUser',
-        message: 'Enter the database user',
-        default: '$_SERVER[\'DB_USER\']'
+        message: 'Enter the database user:',
+        default: 'root'
       }, {
+        type: 'password',
         name: 'databasePassword',
-        message: 'Enter the database password',
-        default: '$_SERVER[\'DB_PASSWORD\']'
+        message: 'Enter the database password:',
       }
     ];
 
-    var done = this.async();
     this.prompt(prompts).then((answers) => {
       this.prompts = answers;
-      done();
+      cb();
     });
+  },
+
+  prompting: function() {
+    var done = this.async();
+    async.doDuring(
+      (cb) => this._prompting(cb),
+      (cb) => {
+        // In tests we are passing String object instead of empty string
+        // because yeoman-test seems to ignore empty string
+        var connection = new mysql.createConnection({
+          host: this.prompts.databaseHost,
+          user: this.prompts.databaseUser,
+          password: this.prompts.databasePassword.toString()
+        });
+        connection.connect((err) => {
+          if(err) {
+            console.log('Error when testing database connetion:');
+            console.log(err.toString());
+          } else {
+            connection.destroy();
+          }
+          cb(null, err);
+        })
+      },
+      helpers.throwIfError(done)
+    );
   },
 
   writing: function() {
@@ -50,11 +76,6 @@ var WpConfigGenerator = yeoman.Base.extend({
         serverName: name + '.dev',
         dbName: name
     });
-
-    this.log('');
-    this.log('Here is Apache vhost configuration you may use:');
-    this.log('');
-    this.log(this.fs.read(this.destinationPath('dev-vhost.conf')));
   },
 
   /**
@@ -86,7 +107,7 @@ var WpConfigGenerator = yeoman.Base.extend({
     ], cb);
   },
 
-  end: function() {
+  install: function() {
     var done = this.async();
     var files = {
       'wp-config-local.php': 'wp/wp-config-local.php',

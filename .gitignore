@@ -50,3 +50,5 @@ npm-debug.log
 .ruby-version
 .rvmrc
 .vagrant
+
+helpers/wp-cli.phar
