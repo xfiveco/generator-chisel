@@ -2,7 +2,8 @@
 var yeoman = require('yeoman-generator'),
   fs = require('fs'),
   helpers = require('../../helpers'),
-  async = require('async');
+  async = require('async'),
+  mysql = require('mysql');
 
 var WpConfigGenerator = yeoman.Base.extend({
 
@@ -14,7 +15,7 @@ var WpConfigGenerator = yeoman.Base.extend({
     }
   },
 
-  prompting: function() {
+  _prompting: function(cb) {
     var prompts = [
       {
         name: 'databaseHost',
@@ -35,11 +36,36 @@ var WpConfigGenerator = yeoman.Base.extend({
       }
     ];
 
-    var done = this.async();
     this.prompt(prompts).then((answers) => {
       this.prompts = answers;
-      done();
+      cb();
     });
+  },
+
+  prompting: function() {
+    var done = this.async();
+    async.doDuring(
+      (cb) => this._prompting(cb),
+      (cb) => {
+        // In tests we are passing String object instead of empty string
+        // because yeoman-test seems to ignore empty string
+        var connection = new mysql.createConnection({
+          host: this.prompts.databaseHost,
+          user: this.prompts.databaseUser,
+          password: this.prompts.databasePassword.toString()
+        });
+        connection.connect((err) => {
+          if(err) {
+            console.log('Error when testing database connetion:');
+            console.log(err.toString());
+          } else {
+            connection.destroy();
+          }
+          cb(null, err);
+        })
+      },
+      helpers.throwIfError(done)
+    );
   },
 
   writing: function() {
