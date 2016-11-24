@@ -153,7 +153,6 @@ var WpGenerator = yeoman.Base.extend({
         admin_password: this.prompts.adminPassword,
         admin_email: this.prompts.adminEmail
       }], cb),
-      (cb) => wpCli(['option', 'update', 'blog_public', '0'], cb),
       (cb) => wpCli(['plugin', 'install', 'timber-library', {activate: true}], cb),
       (cb) => wpCli(['theme', 'activate', this.configuration.nameSlug], cb)
     ], cb);
