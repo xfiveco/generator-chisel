@@ -272,7 +272,7 @@ and this will start a task that will watch for changes in files and recompile th
 
 Additionally, development server will be started and BrowserSync scripts injected.
 
-During development `main.css` (unminified) and `bundle.js` are linked in HTML. This is achieved by custom Twig function `assetPath` which updates assets path depending on whether the watch or build tasks are running.
+During development `main.css` (unminified) and `bundle.js` are linked in HTML. This is achieved by custom Twig function `revisionedPath` which updates assets path depending on whether the watch or build tasks are running.
 
 To rebuild the whole project and create new revisions of styles and scripts using `gulp-rev`, use the gulp build task again
 
@@ -285,7 +285,7 @@ When `gulp build` is run, first the `dist` folder is cleaned and then build task
 1. `styles-build` builds prefixed and minified styles and creates a stylesheet revision by appending content hash to the filename. Then it creates `rev-manifest.json` with original and revisioned file names
 2. `lint` runs EsLint
 3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
-4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `assetPath` function.
+4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `revisionedPath` function.
 
 ### WordPress projects
 
