@@ -18,18 +18,15 @@
   - [Node.js](#nodejs)
   - [Yeoman, Gulp &amp; Chisel](#yeoman-gulp-amp-chisel)
   - [Apache, PHP and MySQL](#apache-php-and-mysql)
-  - [Composer](#composer)
   - [Wildcard virtual hosts and DNS (optional)](#wildcard-virtual-hosts-and-dns-optional)
 - [Project setup](#project-setup)
   - [Front-end projects](#front-end-projects-1)
     - [1. Create project directory](#1-create-project-directory)
     - [2. Run Chisel](#2-run-chisel)
   - [WordPress projects](#wordpress-projects-1)
-    - [1. Create database](#1-create-database)
-    - [2. Create project directory](#2-create-project-directory)
-    - [3. Run Chisel](#3-run-chisel)
+    - [1. Create project directory](#1-create-project-directory-1)
+    - [2. Run Chisel](#2-run-chisel-1)
     - [4. Set up virtual host (optional)](#4-set-up-virtual-host-optional)
-    - [5. Setup WordPress](#5-setup-wordpress)
 - [Project structure](#project-structure)
   - [Front-end projects](#front-end-projects-2)
   - [WordPress projects](#wordpress-projects-2)
@@ -69,7 +66,7 @@ Chisel allows to create 2 projects types - front-end and WordPress projects with
 ### WordPress projects
 
 WordPress projects include all features of front-end projects plus:
-- [Composer](https://getcomposer.org/) based WordPress and plugins installation
+- [WP-CLI](http://wp-cli.org/) based WordPress and plugins installation and pages generation
 - Automatic [Timber](http://upstatement.com/timber/) library installation to support Twig templates
 - Chisel starter theme with the same workflow as for front-end projects
 
@@ -96,19 +93,6 @@ npm update -g generator-chisel
 ### Apache, PHP and MySQL
 If you want to develop WordPress projects, you need to install Apache, PHP and MySQL. The easiest option is to use development environments like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org) but you can also customize your [development environment on Mac](https://mallinson.ca/osx-web-development/).
 
-### Composer
-You will also need [Composer](https://getcomposer.org/) for setting up Wordpress projects with Chisel.
-
-- [Installation - Linux / Unix / OSX](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
-- [Installation - Windows](https://getcomposer.org/doc/00-intro.md#installation-windows)
-
-
-Verify that your Composer installation is working properly:
-
-```bash
-composer -V
-```
-
 ### Wildcard virtual hosts and DNS (optional)
 This step is optional but highly recommend if you develop WordPress projects. It will ensure that each new local development domain will work out of box on your computer and you won’t have to edit `hosts` and `httpd-vhosts.conf` files every time. This is achieved by setting up wildcard virtual hosts and DNS.
 
@@ -130,34 +114,36 @@ Run Chisel from the project directory
 yo chisel
 ```
 
-Insert project name, author and select *Front-end only* project type. Select additional features if you need them and wait until installation is complete.
+Insert project name (you can use the default one based on the working directory name), author and select *Front-end only* project type. Select additional front-end features if you need them and wait until installation is complete.
 
 ### WordPress projects
-#### 1. Create database
-Start by creating a MySQL database for your WordPress project, you will use its name during the project setup with Chisel.
-
-#### 2. Create project directory
-Now create new project directory and change your working directory to it:
+#### 1. Create project directory
+Create new project directory and change your working directory to it:
 
 ```bash
 mkdir project-name && cd $_
 ```
 
-#### 3. Run Chisel
+#### 2. Run Chisel
 Run Chisel from the project directory
 
 ```bash
 yo chisel
 ```
 
-Insert project name, author and select *WordPress with Front-end* project type. Select additional features if you need them.
+Insert project name (you can use the default one based on the working directory name), author and select *WordPress with Front-end* project type. Select additional front-end features if you need them.
 
 Enter database details as follows:
 
-- *Database host*: `127.0.0.1`
-- *Database name*: the name of database you have created for the project or you want generator to create for you
-- *Database user*: user who can access the database
-- *Database password*: password for the user
+- *Enter title for the new site*: title of your WordPress website
+- *Enter URL*: the URL at which your WordPress project run, leave it to default value if you are using Wildcard virtual hosts
+- *Enter admin user*: WordPress admin user
+- *Enter admin password*: WordPress admin user
+- *Enter admin email*: 
+- *Enter the database host*: `127.0.0.1`
+- *Enter the database name*: the project database name
+- *Enter the database user*: user who can access the database
+- *Enter the database password*: password for the user
 
 Select optional plugins which should be installed from the list and wait until installation is complete.
 
@@ -177,12 +163,6 @@ IncludeOptional /path/to/projects/*/dev-vhost.conf
 ```
 
 in your Apache configuration to automatically load configuration for multiple projects.
-
-#### 5. Setup WordPress
-
-1. Go to `project-name.dev` and complete WordPress installation.
-2. Login to WordPress admin, go to *Plugins* and **activate Timber plugin**
-3. Go to *Appearance* and activate your project theme (the theme with the name of your project)
 
 ## Project structure
 Before starting actual development get familiar with the project structure generated by Chisel.
@@ -243,8 +223,7 @@ File structure in WordPress projects is almost identical to the front-end projec
   - **wp-admin**
   - **wp-includes**
   - `wp-config-local.php` - your local WordPress configuration file (see below)
-- `dev-vhost.conf` - automatically generated virtual host configuration
-- `composer.json` - Composer configuration file
+- `dev-vhost.conf` - automatically generated virtual host configuration (not needed if you use wildcard virtual hosts)
 
 #### Local WordPress configuration
 WordPress `wp-config.php` file is altered to provide support for local configuration. All settings except Authentication Unique Keys and Salts, database charset and ABS_PATH can be set in `wp-config-local.php` file for purposes of local development. The file is added automatically to `.gitignore` and should not be committed and stored on the production server.
@@ -311,11 +290,10 @@ When `gulp build` is run, first the `dist` folder is cleaned and then build task
 
 #### 1. Add pages
 
-`yo chisel:page` command doesn't work on WordPress projects (yet). If you want to add a page to your WordPress projects, follow these steps:
+You can use `yo chisel:page` command to add pages to your WordPress project same as you do in front-end projects.
 
-1. Create a page in WordPress admin, eg. Team
-2. Add a Twig template in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`, so in this case it would be `wp/wp-content/themes/[your-theme]/templates/page-team.twig`
-3. Your page is now accessible at `project-name.dev/{page-slug}`, eg. `project-name.dev/team/`.
+- Twig template is automatically created in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`
+- Page is accessible at `project-name.dev/{page-slug}`
 
 #### 2. Develop
 To re-compile SCSS and JavaScript files in real time you can use default task. Type:
@@ -344,12 +322,11 @@ During development you should occasionally build your styles and scripts to see 
 #### 3. Front-end first
 Chisel allows easy front-end development prior to WordPress development. Suppose you have 3 pages to develop front-end for `Team`, `Team Member`, `Contact`.
 
-1. Add these pages in WordPress admin and create Twig templates for them as described in the previous section
+1. Add these pages from the command line like described in the previous sections
 2. Now your pages are accessible under `project-name.dev/team/`, `project-name.dev/team-member/` and `project-name.dev/contact/`.
 3. Start adding HTML to relevant Twig templates. Where applicable try to use [Twig syntax](http://twig.sensiolabs.org/doc/templates.html)
 4. Create styles in `src/styles`.  
 5. Once you are done with front-end development a WordPress developer will add required functionality to the templates
-
 
 #### 4. Develop with Timber
 Refer to [Timber](http://upstatement.com/timber/) documentation if you are new to WordPress development with Timber.
