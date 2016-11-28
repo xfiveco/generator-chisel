@@ -66,9 +66,10 @@ Chisel allows to create 2 projects types - front-end and WordPress projects with
 ### WordPress projects
 
 WordPress projects include all features of front-end projects plus:
-- [WP-CLI](http://wp-cli.org/) based WordPress and plugins installation and pages generation
-- Automatic [Timber](http://upstatement.com/timber/) library installation to support Twig templates
+- automatic [WP-CLI](http://wp-cli.org/) based WordPress and plugins installation
+- automatic [Timber](http://upstatement.com/timber/) library installation to support Twig templates
 - Chisel starter theme with the same workflow as for front-end projects
+- WordPress pages generation from command line
 
 ## Installation
 
@@ -133,12 +134,12 @@ yo chisel
 
 Insert project name (you can use the default one based on the working directory name), author and select *WordPress with Front-end* project type. Select additional front-end features if you need them.
 
-Enter database details as follows:
+Setup your WordPress as follows:
 
 - *Enter title for the new site*: title of your WordPress website
-- *Enter URL*: the URL at which your WordPress project run, leave it to default value if you are using Wildcard virtual hosts
+- *Enter URL*: the URL at which your WordPress project run, leave it to the default value if you are using Wildcard virtual hosts
 - *Enter admin user*: WordPress admin user
-- *Enter admin password*: WordPress admin user
+- *Enter admin password*: WordPress admin user password
 - *Enter admin email*: 
 - *Enter the database host*: `127.0.0.1`
 - *Enter the database name*: the project database name
@@ -290,7 +291,7 @@ When `gulp build` is run, first the `dist` folder is cleaned and then build task
 
 #### 1. Add pages
 
-You can use `yo chisel:page` command to add pages to your WordPress project same as you do in front-end projects.
+You can use `yo chisel:page` command to add pages to your WordPress project in the same way as you do in front-end projects.
 
 - Twig template is automatically created in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`
 - Page is accessible at `project-name.dev/{page-slug}`
