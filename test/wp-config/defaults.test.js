@@ -11,7 +11,7 @@ describe('Chisel Generator with WordPress (wp-config subgenerator)', function ()
   before(function (done) {
     this.timeout(10000)
 
-    // We skip those tests when running locally becouse they
+    // We skip those tests when running locally because they
     // require database at 127.0.0.1 with root user and no password.
     if(!process.env.TRAVIS) {
       this.skip(); return;
