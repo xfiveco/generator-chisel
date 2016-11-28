@@ -145,8 +145,7 @@ var PageChisel = yeoman.Base.extend({
         slug = json.post_name;
         cb(!slug);
       },
-      (cb) => wpCli(['post', 'update', String(id), {post_status: 'publish'}], cb),
-      (stdio, cb) => {
+      (cb) => {
         var pack = JSON.parse(this.fs.read(this.destinationPath('package.json')));
         var chisel = pack.chisel, dest = chisel.dest;
         var templates = path.join(dest.wordpress, 'wp-content/themes',
