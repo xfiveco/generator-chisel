@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var templatesFunctions = require('../templatesFunctions');
 
 var templatesTask = function (gulp, plugins, config, helpers) {
 
@@ -33,18 +34,9 @@ var templatesTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.data(getTemplateInputData))
       .pipe(plugins.twigUpToDate({
         base: path.join(config.src.base, config.src.templatesPath),
-        functions: [
-          {
-            name: "assetPath",
-            func: function (path) {
-              if (manifest) {
-                return manifest[path];
-              } else {
-                return path;
-              }
-            }
-          }
-        ],
+        functions: templatesFunctions({
+          manifest: manifest
+        }),
         errorLogToConsole: true
       }))
       .pipe(plugins.prettify({ indent_size: 2, preserve_newlines: true }))
