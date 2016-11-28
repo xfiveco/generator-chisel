@@ -15,7 +15,8 @@ var Prompts = {
     },
     {
       name: 'author',
-      message: 'Please enter author name:'
+      message: 'Please enter author name:',
+      default: 'Xfive'
     },
     {
       type: 'list',
