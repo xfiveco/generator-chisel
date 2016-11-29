@@ -94,7 +94,7 @@ var WpConfigGenerator = yeoman.Base.extend({
     async.waterfall([
       (cb) => fs.readFile('wp/wp-config-local.php', 'utf8', cb),
       (config, cb) => {
-        var prefix = this.configuration.nameSlug.replace(/-/g, '_');
+        var prefix = helpers.makePrefix(this.configuration.nameSlug);
         config = config
           .replace('\'localhost\'', this._getDbSetting('databaseHost'))
           .replace('\'database_name_here\'', this._getDbSetting('databaseName'))

@@ -34,7 +34,7 @@ describe('Chisel Generator with WordPress (wp-config subgenerator)', function ()
 
   it('should update wp-config-local', function(done) {
     assert.fileContent('wp/wp-config-local.php', '127.0.0.1');
-    assert.fileContent('wp/wp-config-local.php', 'test_1_');
+    assert.fileContent('wp/wp-config-local.php', '7R4dz5cZ_');
 
     done();
   })

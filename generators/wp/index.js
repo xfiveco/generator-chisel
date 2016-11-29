@@ -80,7 +80,7 @@ var WpGenerator = yeoman.Base.extend({
     async.waterfall([
       (cb) => fs.readFile('wp/wp-config.php', 'utf8', cb),
       (config, cb) => {
-        var prefix = this.configuration.nameSlug.replace(/-/g, '_');
+        var prefix = helpers.makePrefix(this.configuration.nameSlug);
         config = config.replace('wp_', prefix + '_');
 
         config = config.replace(/put your unique phrase here/g,
