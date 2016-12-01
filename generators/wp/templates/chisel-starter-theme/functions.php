@@ -20,6 +20,7 @@ Timber::$dirname = array( 'templates' );
 
 class StarterSite extends TimberSite {
 	const DIST_PATH = 'dist/';
+	const ASSETS_PATH = 'dist/assets/';
 
 	private $manifestPath = 'dist/rev-manifest.json';
 	private $manifest = array();
@@ -94,12 +95,19 @@ class StarterSite extends TimberSite {
 		) );
 		$twig->addFunction( $revisionedPathFunction );
 
+		// Adds assetPath function to twig
+		$assetPathFunction = new Twig_SimpleFunction( 'assetPath', array(
+			$this,
+			'twig_asset_path'
+		) );
+		$twig->addFunction( $assetPathFunction );
+
 		return $twig;
 	}
 
 	/**
 	 * Returns the real path of the revisioned file.
-	 * When WP_ENV_DEV is not defined in the current environment then it returns
+	 * When CHISEL_DEV_ENV is defined it returns
 	 *  path based on the manifest file content.
 	 *
 	 * @param $asset
@@ -117,6 +125,17 @@ class StarterSite extends TimberSite {
 		} else {
 			return get_template_directory_uri() . '/' . self::DIST_PATH . trim( $asset, '/' );
 		}
+	}
+
+	/**
+	 * Returns the real path of the asset file.
+	 *
+	 * @param $asset
+	 *
+	 * @return string
+	 */
+	public function twig_asset_path( $asset ) {
+		return get_template_directory_uri() . '/' . self::ASSETS_PATH . trim( $asset, '/' );
 	}
 }
 

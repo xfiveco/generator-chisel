@@ -1,3 +1,5 @@
+var pathModule = require('path');
+
 module.exports = function(data) {
   data = data || {};
   var functions = [
@@ -12,6 +14,12 @@ module.exports = function(data) {
         } else {
           return path;
         }
+      }
+    },
+    {
+      name: 'assetPath',
+      func: function (path) {
+        return pathModule.join(data.config.dest.assets, path);
       }
     }
   ];

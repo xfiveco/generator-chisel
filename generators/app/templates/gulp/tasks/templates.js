@@ -35,6 +35,7 @@ var templatesTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.twigUpToDate({
         base: path.join(config.src.base, config.src.templatesPath),
         functions: templatesFunctions({
+          config: config,
           manifest: manifest
         }),
         errorLogToConsole: true
