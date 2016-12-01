@@ -4,13 +4,15 @@ module.exports = function(data) {
   data = data || {};
   var functions = [
     {
-      name: "revisionedPath",
-      func: function (path) {
+      name: 'revisionedPath',
+      func: function (fullPath) {
+        var path = pathModule.basename(fullPath);
         if (data.manifest) {
           if(!data.manifest[path]) {
             throw new Error('File '+path+' seems to not be revisioned');
           }
-          return data.manifest[path];
+          return pathModule.join(pathModule.dirname(fullPath),
+            data.manifest[path]);
         } else {
           return path;
         }
