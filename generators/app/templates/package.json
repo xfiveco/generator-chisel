@@ -16,12 +16,12 @@
       "styles": "styles/**/*",
       "stylesMain": "styles/*.scss",
       "templatesBuild": [
-        "templates/*.{twig,html}",
+        "src/templates/*.{twig,html}",
         "!**/_*.{twig,html}"
       ],
       "templatesWatch": [
-        "templates/**/*.{twig,html}",
-        "data/**.json"
+        "src/templates/**/*.{twig,html}",
+        "src/data/**.json"
       ],
       "templatesPath": "templates/"
     },
