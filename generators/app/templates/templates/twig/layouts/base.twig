@@ -29,7 +29,7 @@
     <footer>
       {% include 'partials/footer.twig' %}
     </footer>
-    <script src="scripts/{{ assetPath('bundle.js') }}" async></script>
+    <script src="{{ revisionedPath('scripts/bundle.js') }}" async></script>
   {% endblock %}
 </body>
 </html>
