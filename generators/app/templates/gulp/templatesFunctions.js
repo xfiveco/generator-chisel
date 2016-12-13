@@ -14,7 +14,7 @@ module.exports = function(data) {
           return pathModule.join(pathModule.dirname(fullPath),
             data.manifest[path]);
         } else {
-          return path;
+          return fullPath;
         }
       }
     },
