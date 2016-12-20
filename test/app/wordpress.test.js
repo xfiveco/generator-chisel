@@ -34,7 +34,8 @@ describe('Chisel Generator with WordPress', function () {
   })
 
   it('should add proxy to Browsersync config', function(done) {
-    assert.fileContent('gulp/tasks/serve.js', 'target: name+\'.dev\',');
+    assert.fileContent('gulp/tasks/serve.js',
+      'target: generator_config.proxyTarget || name+\'.dev\',');
 
     done();
   });

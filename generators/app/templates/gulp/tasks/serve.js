@@ -13,7 +13,7 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
     var name = generator_config.nameSlug;
     var browserSyncConfig = {
       proxy: {
-        target: name+'.dev',
+        target: generator_config.proxyTarget || name+'.dev',
         reqHeaders: {
           'x-chisel-proxy': '1'
         }
