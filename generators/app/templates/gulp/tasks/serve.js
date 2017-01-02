@@ -18,11 +18,13 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
           'x-chisel-proxy': '1'
         }
       },
+      ghostMode: false,
       online: true
     }
     <% } else { %>
     var browserSyncConfig = {
       server: './',
+      ghostMode: false,
       online: true
     }
     <% } %>
