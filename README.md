@@ -311,6 +311,10 @@ window.jQuery = window.$ = require('jquery');
 require('flexslider'); // Usually they bind to global jQuery object
 ```
 
+**Library not available through npm**
+
+Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always).
+
 ### WordPress projects
 
 #### 1. Add pages
