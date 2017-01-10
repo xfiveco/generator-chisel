@@ -296,20 +296,20 @@ One of the known issues we encounter while front-end development is usage of jQu
 
 The usual solution to that problem can be treated this way:
 
-1. Install `jquery` node-module if you haven't done it yet. This is needed because many jQuery plugins have a check if they run inside a module bundler and require `jquery` to be a node-module, but they tend to bind themselves to global `$` object either way.
-```
-npm install --save jquery
-```
+  1. Install `jquery` node-module if you haven't done it yet. This is needed because many jQuery plugins have a check if they run inside a module bundler and require `jquery` to be a node-module, but they tend to bind themselves to global `$` object either way.
+  ```
+  npm install --save jquery
+  ```
 
-2. Make jQuery global (for various reasons)
-```js
-window.jQuery = window.$ = require('jquery');
-```
+  1. Make jQuery global (for various reasons)
+  ```js
+  window.jQuery = window.$ = require('jquery');
+  ```
 
-3. Require plugin
-```js
-require('flexslider'); // Usually they bind to global jQuery object
-```
+  1. Require plugin
+  ```js
+  require('flexslider'); // Usually they bind to global jQuery object
+  ```
 
 **Library not available through npm**
 
