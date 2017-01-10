@@ -36,6 +36,7 @@
   - [Front-end projects](#front-end-projects-3)
     - [1. Add pages](#1-add-pages)
     - [2. Develop](#2-develop)
+    - [3. Caveats](#3-caveats)
   - [WordPress projects](#wordpress-projects-3)
     - [1. Add pages](#1-add-pages-1)
     - [2. Develop](#2-develop-1)
@@ -48,7 +49,7 @@
 
 ## Features
 
-Chisel allows to create 2 projects types - front-end and WordPress projects with front-end. 
+Chisel allows to create 2 projects types - front-end and WordPress projects with front-end.
 
 ### Front-end projects
 - [Gulp](http://gulpjs.com/) build system
@@ -140,7 +141,7 @@ Setup your WordPress as follows:
 - *Enter URL*: the URL at which your WordPress project run, leave it to the default value if you are using Wildcard virtual hosts
 - *Enter admin user*: WordPress admin user
 - *Enter admin password*: WordPress admin user password
-- *Enter admin email*: 
+- *Enter admin email*:
 - *Enter the database host*: `127.0.0.1`
 - *Enter the database name*: the project database name
 - *Enter the database user*: user who can access the database
@@ -149,7 +150,7 @@ Setup your WordPress as follows:
 Select optional plugins which should be installed from the list and wait until installation is complete.
 
 #### 4. Set up virtual host (optional)
-We recommend setting up [wildcard virtual hosts and DNS](https://github.com/xfiveco/generator-chisel/wiki/Wildcard-virtual-hosts-and-DNS) so your project domain works out of box. 
+We recommend setting up [wildcard virtual hosts and DNS](https://github.com/xfiveco/generator-chisel/wiki/Wildcard-virtual-hosts-and-DNS) so your project domain works out of box.
 
 If you haven’t set them up, you will have to add project domain to your `hosts` file
 
@@ -216,7 +217,7 @@ File structure in WordPress projects is almost identical to the front-end projec
   - **wp-content**
     - **themes**
       - **your-theme**
-        - **dist** - dist folder where CSS, JS and assets files are built 
+        - **dist** - dist folder where CSS, JS and assets files are built
         - **templates** - Twig templates
         - `index.php` - Chisel starter theme files
         - `functions.php`
@@ -268,7 +269,7 @@ When you have the basic setup done, you can start development. To re-compile Twi
 gulp
 ```
 
-and this will start a task that will watch for changes in files and recompile them as needed. 
+and this will start a task that will watch for changes in files and recompile them as needed.
 
 Additionally, development server will be started and BrowserSync scripts injected.
 
@@ -287,6 +288,33 @@ When `gulp build` is run, first the `dist` folder is cleaned and then build task
 3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `revisionedPath` function.
 
+#### 3. Caveats
+
+**Using jQuery plugins with Browserify**
+
+One of the known issues we encounter while front-end development is usage of jQuery plugins like `flexslider` alongside Browserify module bundler.
+
+The usual solution to that problem can be treated this way:
+
+1. Install `jquery` node-module if you haven't done it yet. This is needed because many jQuery plugins have a check if they run inside a module bundler and require `jquery` to be a node-module, but they tend to bind themselves to global `$` object either way.
+```
+npm install --save jquery
+```
+
+2. Make jQuery global (for various reasons)
+```js
+window.jQuery = window.$ = require('jquery');
+```
+
+3. Require plugin
+```js
+require('flexslider'); // Usually they bind to global jQuery object
+```
+
+**Library not available through npm**
+
+Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always).
+
 ### WordPress projects
 
 #### 1. Add pages
@@ -303,7 +331,7 @@ To re-compile SCSS and JavaScript files in real time you can use default task. T
 gulp
 ```
 
-and this will start a task that will watch for changes in files and recompile them as needed. 
+and this will start a task that will watch for changes in files and recompile them as needed.
 
 Additionally, development server will be started and BrowserSync scripts injected. BrowserSync proxies to your WordPress instance running at `project-name.dev`.
 
