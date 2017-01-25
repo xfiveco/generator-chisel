@@ -20,6 +20,7 @@ Timber::$dirname = array( 'templates' );
 
 class StarterSite extends TimberSite {
 	const DIST_PATH = 'dist/';
+	const ASSETS_PATH = 'dist/assets/';
 
 	private $manifestPath = 'dist/rev-manifest.json';
 	private $manifest = array();
@@ -87,6 +88,13 @@ class StarterSite extends TimberSite {
 	 * @return mixed
 	 */
 	public function add_to_twig( $twig ) {
+		// Adds revisionedPath function to twig
+		$revisionedPathFunction = new Twig_SimpleFunction( 'revisionedPath', array(
+			$this,
+			'twig_revisioned_path'
+		) );
+		$twig->addFunction( $revisionedPathFunction );
+
 		// Adds assetPath function to twig
 		$assetPathFunction = new Twig_SimpleFunction( 'assetPath', array(
 			$this,
@@ -98,22 +106,36 @@ class StarterSite extends TimberSite {
 	}
 
 	/**
-	 * Returns the real path of the asset.
-	 * When WP_ENV_DEV is not defined in the current environment then it returns
+	 * Returns the real path of the revisioned file.
+	 * When CHISEL_DEV_ENV is defined it returns
 	 *  path based on the manifest file content.
 	 *
 	 * @param $asset
 	 *
 	 * @return string
 	 */
-	public function twig_asset_path( $asset ) {
+	public function twig_revisioned_path( $asset ) {
 		$pathinfo = pathinfo( $asset );
 
-		if ( ! defined( 'CHISEL_DEV_ENV' ) && array_key_exists( $pathinfo['basename'], $this->manifest ) ) {
+		if ( ! defined( 'CHISEL_DEV_ENV' ) ) {
+			if( ! array_key_exists( $pathinfo['basename'], $this->manifest ) ) {
+				return 'FILE-NOT-REVISIONED';
+			}
 			return get_template_directory_uri() . '/' . self::DIST_PATH . $pathinfo['dirname'] . '/' . $this->manifest[ $pathinfo['basename'] ];
 		} else {
 			return get_template_directory_uri() . '/' . self::DIST_PATH . trim( $asset, '/' );
 		}
+	}
+
+	/**
+	 * Returns the real path of the asset file.
+	 *
+	 * @param $asset
+	 *
+	 * @return string
+	 */
+	public function twig_asset_path( $asset ) {
+		return get_template_directory_uri() . '/' . self::ASSETS_PATH . trim( $asset, '/' );
 	}
 }
 

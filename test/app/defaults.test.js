@@ -16,6 +16,7 @@ describe('Chisel Generator with default options', function () {
       .withPrompts({
         name: 'Test Project',
         author: 'Test Author',
+        projectType: 'fe',
         features: []
       })
       .on('end', done);
@@ -156,6 +157,12 @@ describe('Chisel Generator with default options', function () {
   it('should create index file without pages', function (done) {
     assert.file('index.html');
     assert.fileContent('index.html', 'To add more pages run');
+
+    done();
+  });
+
+  it('should add gulp-twig-up-to-date to package.json', function(done) {
+    assert.fileContent('package.json', '"gulp-twig-up-to-date"');
 
     done();
   });

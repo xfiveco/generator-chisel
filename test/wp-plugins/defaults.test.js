@@ -7,49 +7,60 @@ var assert = require('yeoman-assert');
 var path = require('path');
 var fs = require('fs');
 var cp = require('child_process');
+var async = require('async');
+var wpCli = require('../../helpers/wpCli');
 
 describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function () {
-  before(function (done) {
-    this.timeout(240000);
+  this.timeout(10000)
 
-    var context = helpers
-      .run(path.join(__dirname, '../../generators/wp-plugins'))
-      .withLocalConfig({config: {}})
-      .withPrompts({
-        plugins: ['xfiveco/advanced-custom-fields-pro',
-          'wpackagist-plugin/adminer',
-          'wp-sync-db/wp-sync-db']
+  before(function (done) {
+    this.timeout(240000)
+
+    // We skip those tests when running locally because they
+    // require database at 127.0.0.1 with root user and no password.
+    if(!process.env.TRAVIS) {
+      this.skip(); return;
+    }
+
+    helpers
+      .run(path.join(__dirname, '../../generators/app'))
+      .withOptions({
+        'skip-install': true,
+        'run-wp': true
       })
-      .on('ready', () => {
-        fs.writeFileSync(path.join(context.targetDirectory, 'composer.json'),
-          fs.readFileSync(path.join(__dirname,
-            '../../generators/wp/templates/composer.json')))
-       /*
-        * During normal use we first install wordpress, then plugins,
-        * here we don't have wordpress installed that would cause
-        * plugin installation to install worpress itself and wordpress
-        * could overwrite installed pluguns that's why we remove it.
-        */
-        cp.spawnSync('composer', ['--quiet', 'remove', 'johnpbloch/wordpress'])
+      .withPrompts({
+        name: 'Test Project Plugins',
+        author: 'Test Author',
+        projectType: 'wp-with-fe',
+        features: [],
+        databasePassword: new String(''),
+        adminPassword: 'pass',
+        adminEmail: 'user@example.com',
+        plugins: ['https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip',
+          'adminer',
+          'https://github.com/wp-sync-db/wp-sync-db/archive/master.zip']
       })
       .on('end', done);
   });
 
-  it('should do download ACF', function(done) {
-    assert.file('wp/wp-content/plugins/advanced-custom-fields-pro/acf.php');
-
-    done();
+  it('should download and activate ACF', function(done) {
+    wpCli(['plugin', 'status', 'advanced-custom-fields-pro'], (err, stdio) => {
+      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
+      done();
+    })
   })
 
-  it('should do download Adminer', function(done) {
-    assert.file('wp/wp-content/plugins/adminer/adminer.php');
-
-    done();
+  it('should download and activate Adminer', function(done) {
+    wpCli(['plugin', 'status', 'adminer'], (err, stdio) => {
+      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
+      done();
+    })
   })
 
-  it('should do download WP Sync DB', function(done) {
-    assert.file('wp/wp-content/plugins/wp-sync-db/wp-sync-db.php');
-
-    done();
+  it('should download and activate WP Sync DB', function(done) {
+    wpCli(['plugin', 'status', 'wp-sync-db'], (err, stdio) => {
+      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
+      done();
+    })
   })
 });

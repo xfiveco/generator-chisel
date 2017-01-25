@@ -13,7 +13,9 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
       .run(path.join(__dirname, '../../generators/wp'))
       .withOptions({
         skipInstall: false,
-        skipPlugins: true
+        skipPlugins: true,
+        skipWpCli: true,
+        skipConfig: true
       })
       .withLocalConfig({config: {nameSlug: "test-1", name: "Test 1", author: "Test Author"}})
       .on('end', done);
@@ -26,7 +28,7 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
   });
 
   it('should update wp-config', function(done) {
-    assert.fileContent('wp/wp-config.php', 'test_1_');
+    assert.fileContent('wp/wp-config.php', '7R4dz5cZ_');
     assert.noFileContent('wp/wp-config.php', 'put your unique phrase here');
 
     done();
@@ -38,12 +40,6 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
     done();
   })
 
-  it('should download Timber', function(done) {
-    assert.file('wp/wp-content/plugins/timber-library/timber.php');
-
-    done();
-  });
-
   it('should download our theme', function(done) {
     assert.file('wp/wp-content/themes/test-1/index.php');
 
@@ -52,13 +48,6 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
 
   it('should remove .git from our theme', function(done) {
     assert.noFile('wp/wp-content/themes/test-1/.git');
-
-    done();
-  })
-
-  it('should remove out theme from composer', function(done) {
-    assert.noFileContent('composer.json', '"xfiveco/chisel-starter-theme": "*"');
-    assert.noFileContent('composer.lock', 'xfiveco/chisel-starter-theme');
 
     done();
   })

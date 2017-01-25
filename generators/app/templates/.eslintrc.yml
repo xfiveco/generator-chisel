@@ -20,9 +20,11 @@ rules:
   eol-last: "warn"
   func-call-spacing: "warn"
   no-trailing-spaces: "warn"
+  no-undef: "error"
 
 env:
   commonjs: true
+  browser: true
 <% if (features.has_babel) {%>
 parserOptions:
   sourceType: "module"

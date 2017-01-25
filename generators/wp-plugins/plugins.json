@@ -1,7 +1,7 @@
 {
-  "xfiveco/advanced-custom-fields-pro": "Advanced Custom Fields Pro",
-  "xfiveco/gravityforms": "Gravity Forms",
-  "wpackagist-plugin/adminer": "Adminer",
-  "wp-sync-db/wp-sync-db": "WP Sync DB",
-  "wp-sync-db/wp-sync-db-media-files": "WP Sync DB Media File Addon"
+  "https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip": "Advanced Custom Fields Pro",
+  "https://github.com/wp-premium/gravityforms/archive/master.zip": "Gravity Forms",
+  "adminer": "Adminer",
+  "https://github.com/wp-sync-db/wp-sync-db/archive/master.zip": "WP Sync DB",
+  "https://github.com/wp-sync-db/wp-sync-db-media-files/archive/master.zip": "WP Sync DB Media File Addon"
 }
