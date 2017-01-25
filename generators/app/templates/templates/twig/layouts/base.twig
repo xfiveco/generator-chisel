@@ -11,7 +11,7 @@
   <% } else { %>
     {{ pageName }} - <%= name %>
   <% } %></title>
-  <link rel="stylesheet" property="stylesheet" href="styles/{{ assetPath('main.css') }}" type="text/css">
+  <link rel="stylesheet" property="stylesheet" href="styles/{{ revisionedPath('main.css') }}" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.querySelector('html').classList.remove('no-js');</script>
 <% if (projectType == 'wp-with-fe') { %><link rel="pingback" href="{{site.pingback_url}}" />
