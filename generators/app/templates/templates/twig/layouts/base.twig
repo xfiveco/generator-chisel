@@ -24,6 +24,8 @@
   {% block header %}
     {% include 'components/header.twig' %}
   {% endblock %}
+  <% if (projectType == 'wp-with-fe') { %>
+  {% include 'components/main-nav.twig' %}<% } %>
 
   <main class="o-wrapper">
     {% block content %}
