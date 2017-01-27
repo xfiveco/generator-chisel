@@ -5,7 +5,7 @@
     <section>
       <h1 class="c-post__title">{{post.title}} <span class="js-greeting"></span></h1>
       <p class="c-post__author">
-        <span>By</span><a href="{{post.author.path}}"> {{ post.author.name }} </a><span>&bull;</span> {{ post.post_date|date}}
+        <span>By</span> <a href="{{post.author.path}}">{{ post.author.name }}</a> <span>&bull;</span> {{ post.post_date|date}}
       </p>
       <div class="c-post__content">
         {{post.content}}
