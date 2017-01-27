@@ -11,7 +11,7 @@
   <% } else { %>
     {{ pageName }} - <%= name %>
   <% } %></title>
-  <link rel="stylesheet" property="stylesheet" href="styles/{{ revisionedPath('main.css') }}" type="text/css">
+  <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.querySelector('html').classList.remove('no-js');</script>
 <% if (projectType == 'wp-with-fe') { %><link rel="pingback" href="{{site.pingback_url}}" />
@@ -36,6 +36,6 @@
   {% block footer %}
     {% include 'components/footer.twig' %}
   {% endblock %}
-  <script src="scripts/{{ revisionedPath('bundle.js') }}" async></script>
+  <script src="{{ revisionedPath('scripts/bundle.js') }}" async></script>
 </body>
 </html>
