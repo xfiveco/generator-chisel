@@ -64,6 +64,7 @@ describe('Chisel Generator with default options', function () {
     assert.file([
       'src/templates/components/btn.twig',
       'src/templates/components/footer.twig',
+      'src/templates/components/header.twig',
       'src/templates/elements/headings.twig',
       'src/templates/elements/hr.twig',
       'src/templates/elements/images.twig',
@@ -110,6 +111,7 @@ describe('Chisel Generator with default options', function () {
       'src/styles/objects/_wrapper.scss',
       'src/styles/components/_btn.scss',
       'src/styles/components/_footer.scss',
+      'src/styles/components/_header.scss',
       'src/styles/components/_style-guide.scss',
       'src/styles/utilities/_align.scss',
       'src/styles/utilities/_clearfix.scss',

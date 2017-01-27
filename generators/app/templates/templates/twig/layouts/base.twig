@@ -21,11 +21,9 @@
 </head>
 
 <body class="{{body_class}}">
-  <header class="o-wrapper">
-    {% block header %}
-      <a href="" rel="home"><%= name %></a>
-    {% endblock %}
-  </header>
+  {% block header %}
+    {% include 'components/header.twig' %}
+  {% endblock %}
 
   <main class="o-wrapper">
     {% block content %}
