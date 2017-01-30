@@ -92,14 +92,23 @@ var WpGenerator = yeoman.Base.extend({
   },
 
   _copyTheme: function() {
+    // Copy Chisel starter theme
     this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug), this.configuration);
 
+    // Copy Twig templates from the main generator
     this.fs.copyTpl(this.templatePath(__dirname + '/../app/templates/templates/twig/**/*'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/'), this.configuration);
 
+    // Copy WP theme specific CSS components
     this.fs.copyTpl(this.templatePath('styles/itcss/**/*'),
       this.destinationPath('src/styles/'), this.configuration);
+
+    // Rename style guide so it works as WP page template
+    this.fs.move(
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/style-guide.twig'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/page-style-guide.twig')
+    );
 
     this.fs.move(
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
