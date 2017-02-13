@@ -15,6 +15,13 @@ var Chisel = yeoman.Base.extend({
 
     var done = this.async();
 
+    // Welcome user
+    this.log('');
+    this.log(chalk.yellow(' *********************************************') + '\n');
+    this.log(chalk.yellow('  Welcome to Chisel') + '\n');
+    this.log(chalk.white('  https://github.com/xfiveco/generator-chisel') + '\n');
+    this.log(chalk.yellow(' *********************************************') + '\n');
+
     this.prompt(utils.prompts.questions).then(function (answers) {
       utils.prompts.setAnswers.apply(this, [answers]);
       done();
