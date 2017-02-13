@@ -1,3 +1,5 @@
+dist: trusty
+sudo: false
 language: node_js
 node_js:
   - "7"
@@ -8,9 +10,8 @@ addons:
     packages:
       - php5-cli
       - php5-mysql
-services:
-  - mysql
 before_install:
+  - mysql -e 'SET PASSWORD FOR "root"@"localhost" = PASSWORD("");' -uroot
   - npm install -g yo
 matrix:
   include:

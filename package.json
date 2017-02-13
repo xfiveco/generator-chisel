@@ -37,7 +37,9 @@
   },
   "devDependencies": {
     "cross-spawn": "^5.0.1",
-    "mocha": "^2.5.3"
+    "json-stream": "^1.0.0",
+    "mocha": "^2.5.3",
+    "phantomjs-prebuilt": "^2.1.13"
   },
   "repository": "git@github.com:xfiveco/generator-chisel.git",
   "license": "MIT"
