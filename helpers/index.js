@@ -12,6 +12,7 @@ var Helpers = {
       ], cb);
     }, cb);
   },
+
   throwIfError: function(cb) {
     return function(err) {
       if(err) {
@@ -20,12 +21,14 @@ var Helpers = {
       cb();
     }
   },
+
   makePrefix: function(nameSlug) {
     return crypto.createHash('sha256')
       .update(nameSlug, 'utf8')
       .digest('base64')
       .replace(/[+/=]/g, '')
-      .substr(0, 8);
+      .substr(0, 8)
+      .toLowerCase();
   }
 };
 

@@ -28,7 +28,7 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
   });
 
   it('should update wp-config', function(done) {
-    assert.fileContent('wp/wp-config.php', '7R4dz5cZ_');
+    assert.fileContent('wp/wp-config.php', '7r4dz5cz_');
     assert.noFileContent('wp/wp-config.php', 'put your unique phrase here');
 
     done();
