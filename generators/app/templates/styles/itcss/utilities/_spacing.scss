@@ -1,0 +1,46 @@
+/* ==========================================================================
+   #SPACING
+   @todo generate more generic classes and sizes
+   ========================================================================== */
+
+$utility-spacing: 1em;
+
+.u-margin {
+  margin: $utility-spacing;
+}
+
+.u-margin-top {
+  margin-top: $utility-spacing;
+}
+
+.u-margin-right {
+  margin-right: $utility-spacing;
+}
+
+.u-margin-bottom {
+  margin-bottom: $utility-spacing;
+}
+
+.u-margin-left {
+  margin-left: $utility-spacing;
+}
+
+.u-padding {
+  padding: $utility-spacing;
+}
+
+.u-padding-top {
+  padding-top: $utility-spacing;
+}
+
+.u-padding-right {
+  padding-right: $utility-spacing;
+}
+
+.u-padding-bottom {
+  padding-bottom: $utility-spacing;
+}
+
+.u-padding-left {
+  padding-left: $utility-spacing;
+}

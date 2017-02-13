@@ -31,8 +31,8 @@ describe('Chisel Generator with default options', function () {
   it('should generate configuration files', function (done) {
     assert.file([
       '.editorconfig',
-      '.gitattributes',
       '.eslintrc.yml',
+      '.gitattributes',
       '.stylelintrc.yml',
       '.gitignore',
       'package.json',
@@ -62,8 +62,24 @@ describe('Chisel Generator with default options', function () {
 
   it('should generate templates', function (done) {
     assert.file([
+      'src/templates/components/btn.twig',
+      'src/templates/components/footer.twig',
+      'src/templates/components/header.twig',
+      'src/templates/elements/headings.twig',
+      'src/templates/elements/hr.twig',
+      'src/templates/elements/images.twig',
+      'src/templates/elements/links.twig',
+      'src/templates/elements/lists.twig',
+      'src/templates/elements/tables.twig',
+      'src/templates/layouts/base.twig',
+      'src/templates/objects/layout.twig',
+      'src/templates/objects/list-bare.twig',
+      'src/templates/objects/list-inline.twig',
+      'src/templates/objects/media.twig',
+      'src/templates/objects/table.twig',
+      'src/templates/utilities/align.twig',
       'src/templates/_template.twig',
-      'src/templates/layouts/base.twig'
+      'src/templates/style-guide.twig'
     ]);
 
     done();
@@ -72,23 +88,36 @@ describe('Chisel Generator with default options', function () {
   it('should generate stylesheets', function (done) {
     assert.file([
       'src/styles/main.scss',
-      'src/styles/settings/_colors.scss',
       'src/styles/settings/_global.scss',
-      'src/styles/tools/_mixins.scss',
+      'src/styles/tools/_breakpoints.scss',
+      'src/styles/tools/_clearfix.scss',
+      'src/styles/tools/_hidden.scss',
       'src/styles/generic/_box-sizing.scss',
       'src/styles/generic/_normalize.scss',
       'src/styles/generic/_reset.scss',
       'src/styles/generic/_shared.scss',
       'src/styles/elements/_headings.scss',
       'src/styles/elements/_hr.scss',
+      'src/styles/elements/_html.scss',
+      'src/styles/elements/_images.scss',
       'src/styles/elements/_links.scss',
       'src/styles/elements/_lists.scss',
-      'src/styles/elements/_page.scss',
+      'src/styles/elements/_tables.scss',
+      'src/styles/objects/_layout.scss',
       'src/styles/objects/_list-bare.scss',
-      'src/styles/settings/_global.scss',
+      'src/styles/objects/_list-inline.scss',
+      'src/styles/objects/_media.scss',
+      'src/styles/objects/_table.scss',
+      'src/styles/objects/_wrapper.scss',
+      'src/styles/components/_btn.scss',
       'src/styles/components/_footer.scss',
-      'src/styles/components/_layout.scss',
-      'src/styles/trumps/_utilities.scss'
+      'src/styles/components/_header.scss',
+      'src/styles/components/_style-guide.scss',
+      'src/styles/utilities/_align.scss',
+      'src/styles/utilities/_clearfix.scss',
+      'src/styles/utilities/_color.scss',
+      'src/styles/utilities/_hide.scss',
+      'src/styles/utilities/_spacing.scss'
     ]);
 
     done();
@@ -129,7 +158,7 @@ describe('Chisel Generator with default options', function () {
 
   it('should create index file without pages', function (done) {
     assert.file('index.html');
-    assert.fileContent('index.html', 'Your pages will appear here.');
+    assert.fileContent('index.html', 'To add more pages run');
 
     done();
   });

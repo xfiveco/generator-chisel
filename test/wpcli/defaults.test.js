@@ -35,7 +35,7 @@ describe('Chisel Generator with WordPress (wpcli subgenerator)', function () {
             adminPassword: 'pass',
             adminEmail: 'user@example.com'
           })
-          .withLocalConfig({config: {nameSlug: "test-cli", name: "Test Cli", author: "Test Author"}})
+          .withLocalConfig({config: {nameSlug: "test-cli", name: "Test Cli", author: "Test Author", projectType: 'wp-with-fe'}})
           .on('end', callback);
       },
       function (callback) {

@@ -65,6 +65,10 @@ p {
   width: 100%;
 }
 
+.c-section__note {
+  margin-top: 1em;
+}
+
 @media (min-width: 768px) {
   .c-section__content {
     width: 60%;

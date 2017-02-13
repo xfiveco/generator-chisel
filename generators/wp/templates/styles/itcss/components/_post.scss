@@ -1,0 +1,36 @@
+/* ==========================================================================
+   #POST
+   Includes styles for default WP images classes
+   ========================================================================== */
+
+.c-post {
+  @include clearfix();
+  margin-bottom: 2em;
+}
+
+.alignnone {
+  margin: 1em 1em 1em 0;
+}
+
+.aligncenter {
+  margin: 1em auto;
+}
+
+.alignright {
+  float: right;
+  margin: 1em 0 1em 1em;
+}
+
+.alignleft {
+  float: left;
+  margin: 1em 1em 1em 0;
+}
+
+.wp-caption {
+  text-align: center;
+}
+
+.wp-caption-text {
+  font-style: italic;
+  margin-top: 0.5em;
+}

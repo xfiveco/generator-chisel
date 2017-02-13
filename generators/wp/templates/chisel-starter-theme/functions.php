@@ -74,7 +74,7 @@ class StarterSite extends TimberSite {
 	 * @return mixed
 	 */
 	public function add_to_context( $context ) {
-		$context['menu'] = new TimberMenu();
+		$context['main_nav'] = new TimberMenu();
 		$context['post'] = new ChiselPost();
 
 		return $context;

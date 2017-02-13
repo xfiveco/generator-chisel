@@ -1,0 +1,7 @@
+<div class="c-comment {{comment.comment_type}}" id="blog-comment-{{comment.ID}}">
+  <h4 class="c-comment__author">{{comment.author.name}} says</h4>
+  {% if comment.approved != 1 %}
+    <p class="c-comment__moderation">Your comment is awaiting moderation.</p>
+  {% endif %}
+  <div class="c-comment__content">{{comment.comment_content|wpautop}}</div>
+</div>

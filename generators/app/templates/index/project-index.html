@@ -16,19 +16,23 @@
       <div class="c-section__content">
         <p class="c-intro">This project is powered by <a href="https://github.com/xfiveco/generator-chisel">Chisel</a>, a&nbsp;tool for setting up and developing front-end and WordPress projects.</p>
         <h2 class="c-heading">Pages</h2>
-        <%% if(locals.pages) { %>
-          <ul class="c-list">
+        <ul class="c-list">
+          <li>
+            <a href="dist/style-guide.html" class="c-page"><span class="c-page__link">Style Guide</span> <span class="c-page__name">style-guide.html</span></a>
+          </li>
+          <%% if (locals.pages) { %>
             <%% for (var i = 0; i < pages.length; i++) { %>
               <li>
                 <a href="dist/<%%= pages[i]['slug'] %>.html" class="c-page"><span class="c-page__link"><%%= pages[i]['name'] %></span> <span class="c-page__name"><%%= pages[i]['slug'] %>.html</span></a>
               </li>
             <%% } %>
-          </ul>
-        <%% } else { %>
-          <div>
-            Your pages will appear here. To add one run: 
-            <pre><code>yo chisel:page 'My Awesome Page'</code></pre>
-          </div>
+          <%% } %>
+        </ul>
+        <%% if (!locals.pages) { %>
+        <div class="c-section__note">
+          To add more pages run:
+          <pre><code>yo chisel:page 'My Awesome Page'</code></pre>
+        </div>
         <%% } %>
       </div>
       <div class="c-section__img">
