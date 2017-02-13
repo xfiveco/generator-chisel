@@ -102,7 +102,7 @@ var PageChisel = yeoman.Base.extend({
 
         // Write file if not exists
         if (!this.fs.exists(this.destinationPath('src/templates/' + fileName))) {
-          this.fs.copyTpl(this.templatePath('src/templates/_template.twig'), this.destinationPath('src/templates/' + fileName), {
+          this.fs.copyTpl(this.templatePath('src/templates/layouts/page.twig'), this.destinationPath('src/templates/' + fileName), {
             pageName: pageName
           });
         }

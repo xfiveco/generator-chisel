@@ -16,8 +16,7 @@
       "styles": "styles/**/*",
       "stylesMain": "styles/*.scss",
       "templatesBuild": [
-        "templates/*.{twig,html}",
-        "!**/_*.{twig,html}"
+        "templates/*.{twig,html}"
       ],
       "templatesWatch": [
         "templates/**/*.{twig,html}",

@@ -73,13 +73,13 @@ describe('Chisel Generator with default options', function () {
       'src/templates/elements/lists.twig',
       'src/templates/elements/tables.twig',
       'src/templates/layouts/base.twig',
+      'src/templates/layouts/page.twig',
       'src/templates/objects/layout.twig',
       'src/templates/objects/list-bare.twig',
       'src/templates/objects/list-inline.twig',
       'src/templates/objects/media.twig',
       'src/templates/objects/table.twig',
       'src/templates/utilities/align.twig',
-      'src/templates/_template.twig',
       'src/templates/style-guide.twig'
     ]);
 
