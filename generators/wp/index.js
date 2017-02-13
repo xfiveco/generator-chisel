@@ -65,6 +65,17 @@ var WpGenerator = yeoman.Base.extend({
           } catch(e) {}
           return undefined;
         }
+      }, {
+        type: 'list',
+        name: 'srcPlacement',
+        message: 'Where do you want to place the \'src\' folder:',
+        choices: [{
+          name: 'Project root folder',
+          value: 'root'
+        }, {
+          name: 'WordPress theme folder',
+          value: 'theme'
+        }]
       }
     ];
 
@@ -91,6 +102,26 @@ var WpGenerator = yeoman.Base.extend({
     ], cb);
   },
 
+  _moveSrcFolder: function() {
+    this.fs.copy(
+      this.destinationPath('src/**/*'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src/')
+    );
+    // this.fs.delete('src');
+  },
+
+  _updateSrcFolderConfig: function(cb) {
+    async.waterfall([
+      (cb) => fs.readFile('package.json', 'utf8', cb),
+      (config, cb) => {
+        config = config
+          .replace('"base": "src"', '"base": "wp/wp-content/themes/'+this.configuration.nameSlug+'/src"');
+
+        fs.writeFile('package.json', config, cb);
+      }
+    ], cb);
+  },
+
   _copyTheme: function() {
     // Copy Chisel starter theme
     this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
@@ -99,10 +130,6 @@ var WpGenerator = yeoman.Base.extend({
     // Copy Twig templates from the main generator
     this.fs.copyTpl(this.templatePath(__dirname + '/../app/templates/templates/twig/**/*'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/'), this.configuration);
-
-    // Copy WP theme specific CSS components
-    this.fs.copyTpl(this.templatePath('styles/itcss/**/*'),
-      this.destinationPath('src/styles/'), this.configuration);
 
     // Rename style guide so it works as WP page template
     this.fs.move(
@@ -114,6 +141,17 @@ var WpGenerator = yeoman.Base.extend({
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore')
     );
+  },
+
+  _copyThemeStyles: function() {
+    var destination;
+    if (this.prompts.srcPlacement === 'theme') {
+      destination = 'wp/wp-content/themes/'+this.configuration.nameSlug+'/src/styles/';
+    } else {
+      destination = 'src/styles/';
+    }
+    this.fs.copyTpl(this.templatePath('styles/itcss/**/*'),
+      this.destinationPath(destination), this.configuration);
   },
 
   _checkIfDatabaseExists: function(cb) {
@@ -176,6 +214,11 @@ var WpGenerator = yeoman.Base.extend({
 
   install: function() {
     this._copyTheme();
+    this._copyThemeStyles();
+    if (this.prompts.srcPlacement === 'theme') {
+      this._moveSrcFolder();
+      this._updateSrcFolderConfig();
+    }
     var done = this.async();
     wpCli(['core', 'download'], helpers.throwIfError(done))
   },
