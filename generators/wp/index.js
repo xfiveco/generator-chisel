@@ -2,6 +2,7 @@
 
 var Generator = require('yeoman-generator'),
   fs = require('fs'),
+  fse = require('fs-extra'),
   crypto = require('crypto'),
   helpers = require('../../helpers'),
   wpCli = require('../../helpers/wpCli'),
@@ -117,16 +118,18 @@ module.exports = class extends Generator {
     ], cb);
   }
 
-  _copySrcFolder() {
-    this.fs.copy(
-      this.destinationPath('src/**/*'),
+  _moveSrcFolder() {
+    fse.move(
+      this.destinationPath('src'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src/'),
-      { globOptions: { dot: true } }
+      function (err) {
+        if (err) {
+          return console.error(err);
+        } else {
+          console.log("The src folder moved to the theme folder.")
+        }
+      }
     );
-  }
-
-  _deleteSrcFolder() {
-    this.fs.delete(this.destinationPath('src'));
   }
 
   _copyTheme() {
@@ -222,9 +225,6 @@ module.exports = class extends Generator {
   install() {
     this._copyTheme();
     this._copyThemeStyles();
-    if (this.prompts.srcPlacement === 'theme') {
-      this._copySrcFolder();
-    }
     var done = this.async();
     wpCli(['core', 'download'], helpers.throwIfError(done))
   }
@@ -244,7 +244,7 @@ module.exports = class extends Generator {
     ], helpers.throwIfError(done));
 
     if (this.prompts.srcPlacement === 'theme') {
-      this._deleteSrcFolder();
+      this._moveSrcFolder();
     }
   }
 }
