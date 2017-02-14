@@ -108,7 +108,7 @@ module.exports = class extends Generator {
       if (err) {
         throw err;
       } else {
-        config = config.replace('"base": "src"', '"base": "wp/wp-content/themes/src"');
+        config = config.replace('"base": "src"', '"base": "wp/wp-content/themes/'+this.configuration.nameSlug+'/src"');
         fs.writeFile('package.json', config, (err) => {
           if (err) {
             throw err;
