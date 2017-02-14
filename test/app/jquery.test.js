@@ -30,7 +30,7 @@ describe('Chisel Generator with jQuery', function () {
   it('should create a jQuery example in a module', function (done) {
     assert.file('src/scripts/greeting.js');
     assert.fileContent('src/scripts/greeting.js', "var $ = require('jquery');");
-    assert.fileContent('src/scripts/greeting.js', "$('.js-greeting').text(name);");
+    assert.fileContent('src/scripts/greeting.js', "var element = $('.js-greeting');");
 
     done();
   });
