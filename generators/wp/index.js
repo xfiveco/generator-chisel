@@ -102,15 +102,10 @@ var WpGenerator = yeoman.Base.extend({
     ], cb);
   },
 
-  _moveSrcFolder: function() {
-    this.fs.copy(
-      this.destinationPath('src/**/*'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src/')
-    );
-    // this.fs.delete('src');
-  },
-
   _updateSrcFolderConfig: function(cb) {
+    if(this.prompts.srcPlacement === 'root') {
+      cb(); return;
+    }
     async.waterfall([
       (cb) => fs.readFile('package.json', 'utf8', cb),
       (config, cb) => {
@@ -120,6 +115,18 @@ var WpGenerator = yeoman.Base.extend({
         fs.writeFile('package.json', config, cb);
       }
     ], cb);
+  },
+
+  _copySrcFolder: function() {
+    this.fs.copy(
+      this.destinationPath('src/**/*'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src/'),
+      { globOptions: { dot: true } }
+    );
+  },
+
+  _deleteSrcFolder: function() {
+    this.fs.delete(this.destinationPath('src'));
   },
 
   _copyTheme: function() {
@@ -216,8 +223,7 @@ var WpGenerator = yeoman.Base.extend({
     this._copyTheme();
     this._copyThemeStyles();
     if (this.prompts.srcPlacement === 'theme') {
-      this._moveSrcFolder();
-      this._updateSrcFolderConfig();
+      this._copySrcFolder();
     }
     var done = this.async();
     wpCli(['core', 'download'], helpers.throwIfError(done))
@@ -233,8 +239,13 @@ var WpGenerator = yeoman.Base.extend({
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
       (cb) => this._updateWpConfig(cb),
+      (cb) => this._updateSrcFolderConfig(cb),
       (cb) => this._runWpCli(cb)
     ], helpers.throwIfError(done));
+
+    if (this.prompts.srcPlacement === 'theme') {
+      this._deleteSrcFolder();
+    }
   }
 });
 
