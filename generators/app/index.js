@@ -1,18 +1,17 @@
 'use strict';
 
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var utils = require('./utils');
 var chalk = require('chalk');
 var path = require('path');
 
-var Chisel = yeoman.Base.extend({
+module.exports = class extends Generator {
 
-  constructor: function () {
-    yeoman.Base.apply(this, arguments);
-  },
+  constructor(args, opts) {
+     super(args, opts);
+  }
 
-  prompting: function () {
-
+  prompting() {
     var done = this.async();
 
     // Welcome user
@@ -26,10 +25,9 @@ var Chisel = yeoman.Base.extend({
       utils.prompts.setAnswers.apply(this, [answers]);
       done();
     }.bind(this));
-  },
+  }
 
-  configuring: function () {
-
+  configuring() {
     // Yeoman config file
     utils.generator.config.call(this);
 
@@ -38,10 +36,9 @@ var Chisel = yeoman.Base.extend({
 
     // Application files
     utils.generator.appfiles.call(this);
-  },
+  }
 
-  writing: function () {
-
+  writing() {
     // Project index
     utils.generator.projectInfo.call(this);
 
@@ -56,24 +53,21 @@ var Chisel = yeoman.Base.extend({
 
     // Gulp modules
     utils.generator.gulpfiles.call(this);
-  },
-
-  install: {
-    installWordpress: function() {
-      if(this.prompts.projectType != 'wp-with-fe' ||
-          (this.options['skip-install'] && !this.options['run-wp']))
-        return;
-      this.composeWith(path.join(__dirname, '../wp'))
-    },
-    installNpm: function() {
-      this.log(chalk.yellow('\nINSTALLATION\n'));
-      this.installDependencies({
-        npm: true,
-        bower: false,
-        skipInstall: this.options['skip-install']
-      });
-    }
   }
-});
 
-module.exports = Chisel;
+  installWordpress() {
+    if(this.prompts.projectType != 'wp-with-fe' ||
+        (this.options['skip-install'] && !this.options['run-wp']))
+      return;
+    this.composeWith(require.resolve('../wp'))
+  }
+
+  installNpm() {
+    this.log(chalk.yellow('\nINSTALLATION\n'));
+    this.installDependencies({
+      npm: true,
+      bower: false,
+      skipInstall: this.options['skip-install']
+    });
+  }
+}

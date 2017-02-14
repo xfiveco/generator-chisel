@@ -1,19 +1,19 @@
 'use strict';
 
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var _ = require('lodash');
 var wpCli = require('../../helpers/wpCli');
 var async = require('async');
 var path = require('path');
 var helpers = require('../../helpers');
 
-var PageChisel = yeoman.Base.extend({
+module.exports = class extends Generator {
   /**
    * Extends base Yeoman constructor
    * @public
    */
-  constructor: function () {
-    yeoman.Base.apply(this, arguments);
+  constructor(args, opts) {
+    super(args, opts);
     this.sourceRoot(this.destinationRoot());
 
     this.option('skip-build', {
@@ -21,111 +21,76 @@ var PageChisel = yeoman.Base.extend({
       type: Boolean,
       defaults: false
     });
-  },
+
+    this.argument('newPages', {
+      desc: 'List of names',
+      type: Array,
+      required: false
+    });
+  }
 
   /**
    * Reads current generator config and list of pages
    * @public
    */
-  initializing: function () {
+  initializing() {
     try {
       this.configuration = this.config.get('config');
     } catch (ex) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
     }
-
     this.pages = this.config.get('pages');
-  },
+  }
 
   /**
-   * Gets generator arguments
+   * Gets new pages listed in arguments and checks if there're any pages to render
    * @public
    */
-  prompting: {
-    /**
-     * Gets new pages listed in arguments and checks if there're any pages to render
-     * @public
-     */
-    checkNames: function () {
-      this.argument('newPages', {
-        desc: 'List of names',
-        type: Array,
-        required: false
-      });
+  getPages() {
+    this.pages = _.union(this.pages, this.options.newPages);
 
-      this.pages = _.union(this.pages, this.newPages);
-
-      if (_.isEmpty(this.pages)) {
-        this.log('Page names list cannot be empty.');
-        process.exit();
-      }
-    },
-
-    /**
-     * Checks if there are any reserved names in pages array
-     * @public
-     */
-    checkReservedNames: function () {
-      var reservedNames = ['_template'];
-      var isReserved = function (page) {
-        return _.includes(reservedNames, _.kebabCase(page));
-      };
-
-      if (_.some(this.pages, isReserved, this)) {
-        this.log('You cannot use those reserved words: ' + reservedNames.join(', ') + '.');
-        process.exit();
-      }
+    if (_.isEmpty(this.pages)) {
+      this.log('Page names list cannot be empty.');
+      process.exit();
     }
-  },
 
-  /**
-   * Updated the generator config file with new pages
-   * @public
-   */
-  configuring: function () {
+    // Updated the generator config file with new pages
     this.config.set('pages', this.pages);
-  },
+  }
 
   /**
    * Generates template files based on provided list or stored in config file
    * @public
    */
-  _writing_fe: {
-    /**
-     * Generates template files based on provided list or stored in config file
-     * @public
-     */
-    generatePages: function () {
-      this.pages.forEach(function(pageName) {
-        var fileName = _.kebabCase(pageName) + '.twig';
+  generatePages() {
+    this.pages.forEach(function(pageName) {
+      var fileName = _.kebabCase(pageName) + '.twig';
 
-        // Write file if not exists
-        if (!this.fs.exists(this.destinationPath('src/templates/' + fileName))) {
-          this.fs.copyTpl(this.templatePath('src/templates/layouts/page.twig'), this.destinationPath('src/templates/' + fileName), {
-            pageName: pageName
-          });
-        }
-      }, this);
-    },
+      // Write file if not exists
+      if (!this.fs.exists(this.destinationPath('src/templates/' + fileName))) {
+        this.fs.copyTpl(this.templatePath('src/templates/layouts/page.twig'), this.destinationPath('src/templates/' + fileName), {
+          pageName: pageName
+        });
+      }
+    }, this);
+  }
 
-    /**
-     * Updates main project page listing with generated page list
-     * @public
-     */
-    updateIndex: function () {
-      var pagesObject = [];
+  /**
+   * Updates main project page listing with generated page list
+   * @public
+   */
+  updateIndex() {
+    var pagesObject = [];
 
-      this.pages.forEach(function(page) {
-        pagesObject.push({ name: page, slug: _.kebabCase(page) });
-      });
+    this.pages.forEach(function(page) {
+      pagesObject.push({ name: page, slug: _.kebabCase(page) });
+    });
 
-      this.fs.copyTpl(this.templatePath('index/project-index.html'), this.destinationPath('index.html'), { pages: pagesObject });
-    }
+    this.fs.copyTpl(this.templatePath('index/project-index.html'), this.destinationPath('index.html'), { pages: pagesObject });
+  }
 
-  },
-
-  _wp_single: function(pageName, callback) {
+  _wp_single(pageName, callback) {
     var id = 0;
     var slug = '';
     async.waterfall([
@@ -158,34 +123,31 @@ var PageChisel = yeoman.Base.extend({
         cb();
       }
     ], callback);
-  },
+  }
 
-  _writing_wp_with_fe: function(callback) {
+  _writing_wp_with_fe(callback) {
     async.eachSeries(this.newPages, this._wp_single.bind(this), callback);
-  },
+  }
 
-
-  writing: function() {
-    if(this.configuration.projectType == 'wp-with-fe') {
+  writing() {
+    if (this.configuration.projectType == 'wp-with-fe') {
       var done = this.async();
       this._writing_wp_with_fe(helpers.throwIfError(done));
     } else {
-      this._writing_fe.generatePages.call(this);
-      this._writing_fe.updateIndex.call(this);
+      this.generatePages.call(this);
+      this.updateIndex.call(this);
     }
-  },
+  }
 
   /**
    * Runs build helpers if they're not skipped by generator
    * @public
    */
-  install: function () {
+  install() {
     if (!this.options['skip-build'] && this.configuration.projectType == 'fe') {
       this.spawnCommand('gulp', ['build']);
     }
 
     this.log('All done!');
   }
-});
-
-module.exports = PageChisel;
+}

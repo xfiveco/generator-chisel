@@ -1,22 +1,23 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var wpCli = require('../../helpers/wpCli');
 
-var WpCliGenerator = yeoman.Base.extend({
+module.exports = class extends Generator {
 
-  initializing: function() {
+  constructor(args, opts) {
+     super(args, opts);
+  }
+
+  initializing() {
     this.configuration = this.config.get('config');
     if(!this.configuration) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
     }
-  },
+  }
 
-  end: function() {
+  end() {
     var done = this.async();
     wpCli(process.argv.slice(3), (code, stdio) => process.exit(code || 0));
   }
-
-});
-
-module.exports = WpCliGenerator;
+}

@@ -1,21 +1,25 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var plugins = require('./plugins.json');
 var helpers = require('../../helpers');
 var wpCli = require('../../helpers/wpCli');
 var async = require('async');
 
-var WpPluginsGenerator = yeoman.Base.extend({
+module.exports = class extends Generator {
 
-  initializing: function() {
+  constructor(args, opts) {
+     super(args, opts);
+  }
+
+  initializing() {
     this.configuration = this.config.get('config');
     if(!this.configuration) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
     }
-  },
+  }
 
-  prompting: function() {
+  prompting() {
     var prompts = [
       {
         type: 'checkbox',
@@ -38,15 +42,12 @@ var WpPluginsGenerator = yeoman.Base.extend({
       this.prompts = answers;
       done();
     });
-  },
+  }
 
-  end: function() {
+  end() {
     if(!this.prompts.plugins.length)
       return;
     var done = this.async();
     wpCli(['plugin', 'install', {activate: true}].concat(this.prompts.plugins), helpers.throwIfError(done));
   }
-
-});
-
-module.exports = WpPluginsGenerator;
+}

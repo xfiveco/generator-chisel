@@ -1,6 +1,6 @@
 'use strict';
 
-var yeoman = require('yeoman-generator'),
+var Generator = require('yeoman-generator'),
   fs = require('fs'),
   crypto = require('crypto'),
   helpers = require('../../helpers'),
@@ -10,27 +10,27 @@ var yeoman = require('yeoman-generator'),
   path = require('path'),
   chalk = require('chalk');
 
-var WpGenerator = yeoman.Base.extend({
+module.exports = class extends Generator {
 
-  constructor: function () {
-    yeoman.Base.apply(this, arguments);
-  },
+  constructor(args, opts) {
+     super(args, opts);
+  }
 
-  initializing: function() {
+  initializing () {
     this.configuration = this.config.get('config');
     if(!this.configuration) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
     }
     if(!this.options['skip-config']) {
-      this.composeWith(path.join(__dirname, '../wp-config'))
+      this.composeWith(require.resolve('../wp-config'))
     }
     if(!this.options['skip-plugins']) {
-      this.composeWith(path.join(__dirname, '../wp-plugins'));
+      this.composeWith(require.resolve('../wp-plugins'));
     }
-  },
+  }
 
-  prompting: function() {
+  prompting() {
     var prompts = [
       {
         name: 'title',
@@ -85,9 +85,9 @@ var WpGenerator = yeoman.Base.extend({
       this.prompts = answers;
       done();
     });
-  },
+  }
 
-  _updateWpConfig: function(cb) {
+  _updateWpConfig(cb) {
     async.waterfall([
       (cb) => fs.readFile('wp/wp-config.php', 'utf8', cb),
       (config, cb) => {
@@ -100,9 +100,9 @@ var WpGenerator = yeoman.Base.extend({
         fs.writeFile('wp/wp-config.php', config, cb);
       }
     ], cb);
-  },
+  }
 
-  _updateSrcFolderConfig: function(cb) {
+  _updateSrcFolderConfig(cb) {
     if(this.prompts.srcPlacement === 'root') {
       cb(); return;
     }
@@ -115,21 +115,21 @@ var WpGenerator = yeoman.Base.extend({
         fs.writeFile('package.json', config, cb);
       }
     ], cb);
-  },
+  }
 
-  _copySrcFolder: function() {
+  _copySrcFolder() {
     this.fs.copy(
       this.destinationPath('src/**/*'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src/'),
       { globOptions: { dot: true } }
     );
-  },
+  }
 
-  _deleteSrcFolder: function() {
+  _deleteSrcFolder() {
     this.fs.delete(this.destinationPath('src'));
-  },
+  }
 
-  _copyTheme: function() {
+  _copyTheme() {
     // Copy Chisel starter theme
     this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug), this.configuration);
@@ -148,9 +148,9 @@ var WpGenerator = yeoman.Base.extend({
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore')
     );
-  },
+  }
 
-  _copyThemeStyles: function() {
+  _copyThemeStyles() {
     var destination;
     if (this.prompts.srcPlacement === 'theme') {
       destination = 'wp/wp-content/themes/'+this.configuration.nameSlug+'/src/styles/';
@@ -159,9 +159,9 @@ var WpGenerator = yeoman.Base.extend({
     }
     this.fs.copyTpl(this.templatePath('styles/itcss/**/*'),
       this.destinationPath(destination), this.configuration);
-  },
+  }
 
-  _checkIfDatabaseExists: function(cb) {
+  _checkIfDatabaseExists(cb) {
     wpCli(['db', 'check'], {hideStdio: true}, (err, stdio) => {
       var stdout = stdio[0].toString('utf8');
       var stderr = stdio[1].toString('utf8');
@@ -173,9 +173,9 @@ var WpGenerator = yeoman.Base.extend({
         cb(['Error when checking database', stdout, stderr]);
       }
     });
-  },
+  }
 
-  _askIfContinueWithCurrentDb: function(cb) {
+  _askIfContinueWithCurrentDb(cb) {
     this.prompt([
       {
         type: 'confirm',
@@ -189,9 +189,9 @@ var WpGenerator = yeoman.Base.extend({
         cb('You decided to not continue');
       }
     });
-  },
+  }
 
-  _dropCreateDatabase: function(cb) {
+  _dropCreateDatabase(cb) {
     async.waterfall([
       (cb) => this._checkIfDatabaseExists(cb),
       (exists, cb) => (exists ? wpCli(['db', 'drop'], cb) : cb(null, [])),
@@ -199,9 +199,9 @@ var WpGenerator = yeoman.Base.extend({
       (exists, cb) =>
         (exists ? this._askIfContinueWithCurrentDb(cb) : wpCli(['db', 'create'], cb)),
     ], cb);
-  },
+  }
 
-  _runWpCli: function(cb) {
+  _runWpCli(cb) {
     if(this.options.skipWpCli) {
       cb(); return;
     }
@@ -217,9 +217,9 @@ var WpGenerator = yeoman.Base.extend({
       (cb) => wpCli(['plugin', 'install', 'timber-library', {activate: true}], cb),
       (cb) => wpCli(['theme', 'activate', this.configuration.nameSlug], cb)
     ], cb);
-  },
+  }
 
-  install: function() {
+  install() {
     this._copyTheme();
     this._copyThemeStyles();
     if (this.prompts.srcPlacement === 'theme') {
@@ -227,9 +227,9 @@ var WpGenerator = yeoman.Base.extend({
     }
     var done = this.async();
     wpCli(['core', 'download'], helpers.throwIfError(done))
-  },
+  }
 
-  end: function() {
+  end() {
     var done = this.async();
     var files = {
       'wp-config.php': 'wp/wp-config.php',
@@ -247,6 +247,4 @@ var WpGenerator = yeoman.Base.extend({
       this._deleteSrcFolder();
     }
   }
-});
-
-module.exports = WpGenerator;
+}

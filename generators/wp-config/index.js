@@ -1,21 +1,25 @@
 'use strict';
-var yeoman = require('yeoman-generator'),
+var Generator = require('yeoman-generator'),
   fs = require('fs'),
   helpers = require('../../helpers'),
   async = require('async'),
   mysql = require('mysql');
 
-var WpConfigGenerator = yeoman.Base.extend({
+module.exports = class extends Generator {
 
-  initializing: function() {
+  constructor(args, opts) {
+     super(args, opts);
+  }
+
+  initializing() {
     this.configuration = this.config.get('config');
     if(!this.configuration) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
     }
-  },
+  }
 
-  _prompting: function(cb) {
+  _prompting(cb) {
     var prompts = [
       {
         name: 'databaseHost',
@@ -40,9 +44,9 @@ var WpConfigGenerator = yeoman.Base.extend({
       this.prompts = answers;
       cb();
     });
-  },
+  }
 
-  prompting: function() {
+  prompting() {
     var done = this.async();
     async.doDuring(
       (cb) => this._prompting(cb),
@@ -66,9 +70,9 @@ var WpConfigGenerator = yeoman.Base.extend({
       },
       helpers.throwIfError(done)
     );
-  },
+  }
 
-  writing: function() {
+  writing() {
     var name = this.configuration.nameSlug;
     this.fs.copyTpl(this.templatePath('dev-vhost.conf'),
       this.destinationPath('dev-vhost.conf'), {
@@ -76,21 +80,21 @@ var WpConfigGenerator = yeoman.Base.extend({
         serverName: name + '.dev',
         dbName: name
     });
-  },
+  }
 
   /**
    * Wrap setting in quotes if needed.
    */
-  _getDbSetting: function (setting) {
+  _getDbSetting(setting) {
     var val = this.prompts[setting];
     if(val.startsWith('$_')) {
       return val;
     }
     // TODO That's not proper escaping
     return '\'' + this.prompts[setting] + '\'';
-  },
+  }
 
-  _updateWpConfig: function(cb) {
+  _updateWpConfig(cb) {
     async.waterfall([
       (cb) => fs.readFile('wp/wp-config-local.php', 'utf8', cb),
       (config, cb) => {
@@ -105,9 +109,9 @@ var WpConfigGenerator = yeoman.Base.extend({
         fs.writeFile('wp/wp-config-local.php', config, cb);
       }
     ], cb);
-  },
+  }
 
-  install: function() {
+  install() {
     var done = this.async();
     var files = {
       'wp-config-local.php': 'wp/wp-config-local.php',
@@ -122,7 +126,4 @@ var WpConfigGenerator = yeoman.Base.extend({
       done();
     });
   }
-
-});
-
-module.exports = WpConfigGenerator;
+}
