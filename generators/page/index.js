@@ -63,7 +63,7 @@ module.exports = class extends Generator {
    * Generates template files based on provided list or stored in config file
    * @public
    */
-  generatePages() {
+  _generatePages() {
     this.pages.forEach(function(pageName) {
       var fileName = _.kebabCase(pageName) + '.twig';
 
@@ -80,7 +80,7 @@ module.exports = class extends Generator {
    * Updates main project page listing with generated page list
    * @public
    */
-  updateIndex() {
+  _updateIndex() {
     var pagesObject = [];
 
     this.pages.forEach(function(page) {
@@ -126,7 +126,7 @@ module.exports = class extends Generator {
   }
 
   _writing_wp_with_fe(callback) {
-    async.eachSeries(this.newPages, this._wp_single.bind(this), callback);
+    async.eachSeries(this.options.newPages, this._wp_single.bind(this), callback);
   }
 
   writing() {
@@ -134,8 +134,8 @@ module.exports = class extends Generator {
       var done = this.async();
       this._writing_wp_with_fe(helpers.throwIfError(done));
     } else {
-      this.generatePages.call(this);
-      this.updateIndex.call(this);
+      this._generatePages.call(this);
+      this._updateIndex.call(this);
     }
   }
 
