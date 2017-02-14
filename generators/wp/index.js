@@ -103,19 +103,21 @@ module.exports = class extends Generator {
     ], cb);
   }
 
-  _updateSrcFolderConfig(cb) {
-    if(this.prompts.srcPlacement === 'root') {
-      cb(); return;
-    }
-    async.waterfall([
-      (cb) => fs.readFile('package.json', 'utf8', cb),
-      (config, cb) => {
-        config = config
-          .replace('"base": "src"', '"base": "wp/wp-content/themes/'+this.configuration.nameSlug+'/src"');
-
-        fs.writeFile('package.json', config, cb);
+  _updateSrcFolderConfig() {
+    fs.readFile('package.json', 'utf8', (err, config) => {
+      if (err) {
+        throw err;
+      } else {
+        config = config.replace('"base": "src"', '"base": "wp/wp-content/themes/src"');
+        fs.writeFile('package.json', config, (err) => {
+          if (err) {
+            throw err;
+          } else {
+            console.log('Updated the src path.');
+          }
+        });
       }
-    ], cb);
+    });
   }
 
   _moveSrcFolder() {
@@ -239,12 +241,12 @@ module.exports = class extends Generator {
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
       (cb) => this._updateWpConfig(cb),
-      (cb) => this._updateSrcFolderConfig(cb),
       (cb) => this._runWpCli(cb)
     ], helpers.throwIfError(done));
 
     if (this.prompts.srcPlacement === 'theme') {
       this._moveSrcFolder();
+      this._updateSrcFolderConfig();
     }
   }
 }
