@@ -139,6 +139,10 @@ module.exports = class extends Generator {
     this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug), this.configuration);
 
+    // Copy screenshot
+    this.fs.copy(this.templatePath('images/screenshot.png'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/screenshot.png'));
+
     // Copy Twig templates from the main generator
     this.fs.copyTpl(this.templatePath(__dirname + '/../app/templates/templates/twig/**/*'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/'), this.configuration);
