@@ -35,7 +35,8 @@
 
   {% block footer %}
     {% include 'components/footer.twig' %}
-  {% endblock %}
+  {% endblock %}<% if (projectType == 'wp-with-fe') { %>
+  {{ function('wp_footer') }}<% } %>
   <script src="{{ revisionedPath('scripts/bundle.js') }}" async></script>
 </body>
 </html>
