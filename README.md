@@ -142,6 +142,7 @@ Setup your WordPress as follows:
 - *Enter admin user*: WordPress admin user
 - *Enter admin password*: WordPress admin user password
 - *Enter admin email*:
+- *Where do you want to place the 'src' folder*: position of the src folder with styles, scripts and assets - either the root folder or theme folder
 - *Enter the database host*: `127.0.0.1`
 - *Enter the database name*: the project database name
 - *Enter the database user*: user who can access the database
@@ -234,7 +235,7 @@ If there is `wp-config-local.php` file available in main WordPress directory the
 
 #### Moving src folder to theme folder
 
-If you prefer having the `src` folder in your theme folder, you can move it there easily:
+If you prefer having the `src` folder in your theme folder, choose this option when setting up the project. If you haven't and would like to move it manually, follow these steps:
 
 1. Move the `src` folder to the theme folder - `wp/wp-content/themes/your-theme`
 2. Change `chisel.src.base` property on line 13 in `package.json` to `wp/wp-content/themes/your-theme/src`
