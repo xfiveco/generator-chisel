@@ -42,7 +42,6 @@
     - [2. Develop](#2-develop-1)
     - [3. Front-end first](#3-front-end-first)
     - [4. Develop with Timber](#4-develop-with-timber)
-- [Credits](#credits)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
