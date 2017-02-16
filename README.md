@@ -186,13 +186,13 @@ The file structure in front-end projects looks like this:
     - **elements** – styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so you can redefine them here.
     - **objects** – class-based selectors which define undecorated design patterns, for example media object known from OOCSS
     - **components** – specific UI components. This is where majority of your work takes place and our UI components are often composed of Objects and Components
-    - **trumps** – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+    - **utilities** – utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
   - **scripts**
     - `app.js` - main JavaScript application file where other modules are imported
     - `greeting.js` - a sample JS module, delete or replace this one with your functionality
   - **templates** - Twig templates
     - `layouts/base.twig` - base layout which is extended in other templates
-    - `_template.twig` - a template from which the other pages are generated
+    - `layouts/page.twig` - a template from which the other pages are generated
     - `*.twig` - separate twig page templates
 - **index** - images and styles for the project index
 - `index.html` - project index with project pages listed
@@ -360,9 +360,6 @@ Chisel allows easy front-end development prior to WordPress development. Suppose
 
 #### 4. Develop with Timber
 Refer to [Timber](http://upstatement.com/timber/) documentation if you are new to WordPress development with Timber.
-
-## Credits
-A lot of Chisel functionality is copied from or inspired by [Limelight Generator](https://github.com/piotrkulpinski/generator-limelight). Thanks, Piotrek ;)
 
 ## License
 Chisel is licensed under [MIT License](LICENSE).
