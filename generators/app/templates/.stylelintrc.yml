@@ -16,9 +16,8 @@ rules:
   declaration-block-no-shorthand-property-overrides: true
   declaration-block-semicolon-newline-after: always-multi-line
   declaration-block-trailing-semicolon: always
-  declaration-colon-space-after: always
+  declaration-colon-space-after: always-single-line
   declaration-colon-space-before: never
-  declaration-empty-line-before: never
   font-family-name-quotes: always-where-recommended
   function-comma-space-after: always
   function-name-case: lower
@@ -30,7 +29,7 @@ rules:
     - true
     - severity: error
   max-empty-lines: 2
-  max-nesting-depth: 2
+  max-nesting-depth: 3
   no-duplicate-selectors: true
   no-eol-whitespace: true
   no-extra-semicolons: true
