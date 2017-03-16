@@ -60,7 +60,7 @@ module.exports = class extends Generator {
         });
         connection.connect((err) => {
           if(err) {
-            console.log('Error when testing database connetion:');
+            console.log('Error when testing database connection:');
             console.log(err.toString());
           } else {
             connection.destroy();
