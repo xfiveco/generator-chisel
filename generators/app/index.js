@@ -18,7 +18,7 @@ module.exports = class extends Generator {
     this.log('');
     this.log(chalk.yellow(' *********************************************') + '\n');
     this.log(chalk.yellow('  Welcome to Chisel') + '\n');
-    this.log(chalk.white('  https://github.com/xfiveco/generator-chisel') + '\n');
+    this.log(chalk.reset('  https://github.com/xfiveco/generator-chisel') + '\n');
     this.log(chalk.yellow(' *********************************************') + '\n');
 
     this.prompt(utils.prompts.questions).then(function (answers) {
