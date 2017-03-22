@@ -120,12 +120,14 @@ yo chisel
 
 Insert project name (you can use the default one based on the working directory name), author and select *Front-end only* project type. Select additional front-end features if you need them and wait until installation is complete.
 
+*Note: To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
+
 #### Setting up an existing project
 If you are joining development of an existing front-end project which was already set up with Chisel, you don't have to set it up again. Follow these steps:
 
 1. Clone repository
-2. Run `npm install` and `gulp build`
-3. Run `gulp`
+2. Run `npm install` or `yarn`
+3. Run `gulp build` and `gulp`
 
 ### WordPress projects
 #### 1. Create project directory
@@ -143,6 +145,8 @@ yo chisel
 ```
 
 Insert project name (you can use the default one based on the working directory name), author and select *WordPress with Front-end* project type. Select additional front-end features if you need them.
+
+*Note: To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
 
 Setup your WordPress as follows:
 
@@ -182,7 +186,7 @@ If you are joining development of an existing WordPress project which was alread
 1. Clone the repository
 2. Create database
 3. Run `yo chisel:wp-config`, it will create _wp-config-local.php_ and generate _dev-vhost.conf_ (if you need it)
-4. Run `npm install` and `gulp build`
+4. Run `npm install` or `yarn` and `gulp build`
 5. Import DB dump or enable _Migrate DB_ plugin and use it to import database and files
 
 ## Project structure
@@ -373,7 +377,7 @@ Chisel allows easy front-end development prior to WordPress development. Suppose
 1. Add these pages from the command line like described in the previous sections
 2. Now your pages are accessible under `project-name.dev/team/`, `project-name.dev/team-member/` and `project-name.dev/contact/`.
 3. Start adding HTML to relevant Twig templates. Where applicable try to use [Twig syntax](http://twig.sensiolabs.org/doc/templates.html)
-4. Create styles in `src/styles`.  
+4. Create styles in `src/styles`.
 5. Once you are done with front-end development a WordPress developer will add required functionality to the templates
 
 #### 4. Develop with Timber
