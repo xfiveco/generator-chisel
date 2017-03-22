@@ -120,7 +120,7 @@ yo chisel
 
 Insert project name (you can use the default one based on the working directory name), author and select *Front-end only* project type. Select additional front-end features if you need them and wait until installation is complete.
 
-*Note: To speedup installation process we recommend using (Yarn)[https://yarnpkg.com/en/]. Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
+*Note: To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
 
 #### Setting up an existing project
 If you are joining development of an existing front-end project which was already set up with Chisel, you don't have to set it up again. Follow these steps:
@@ -146,7 +146,7 @@ yo chisel
 
 Insert project name (you can use the default one based on the working directory name), author and select *WordPress with Front-end* project type. Select additional front-end features if you need them.
 
-*Note: To speedup installation process we recommend using (Yarn)[https://yarnpkg.com/en/]. Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
+*Note: To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
 
 Setup your WordPress as follows:
 
