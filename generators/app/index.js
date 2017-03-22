@@ -1,9 +1,10 @@
 'use strict';
 
-var Generator = require('yeoman-generator');
-var utils = require('./utils');
-var chalk = require('chalk');
-var path = require('path');
+const Generator = require('yeoman-generator');
+const utils = require('./utils');
+const chalk = require('chalk');
+const path = require('path');
+const commandExists = require('command-exists').sync;
 
 module.exports = class extends Generator {
 
@@ -12,7 +13,7 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    var done = this.async();
+    const done = this.async();
 
     // Welcome user
     this.log('');
@@ -63,9 +64,11 @@ module.exports = class extends Generator {
   }
 
   installNpm() {
+    const isYarn = commandExists('yarn');
     this.log(chalk.yellow('\nINSTALLATION\n'));
     this.installDependencies({
-      npm: true,
+      yarn: isYarn,
+      npm: !isYarn,
       bower: false,
       skipInstall: this.options['skip-install']
     });
