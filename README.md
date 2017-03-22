@@ -360,5 +360,9 @@ Chisel allows easy front-end development prior to WordPress development. Suppose
 #### 4. Develop with Timber
 Refer to [Timber](http://upstatement.com/timber/) documentation if you are new to WordPress development with Timber.
 
+## Tutorials
+- [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
+- [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/)
+
 ## License
 Chisel is licensed under [MIT License](LICENSE).
