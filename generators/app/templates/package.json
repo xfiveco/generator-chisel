@@ -4,7 +4,8 @@
   "author": "<%= author %>",
   "description": "<%= nameSlug %>",
   "scripts": {
-    "build": "gulp build"
+    "build": "gulp build",
+    "lint": "gulp lint-js && gulp lint-css"
   },
   "chisel": {
     "src": {
@@ -62,6 +63,7 @@
     "gulp-stylelint": "^3.7.0",<% if (projectType == 'fe') { %>
     "gulp-twig-up-to-date": "^0.6.1",<% } %>
     "gulp-uglify": "^2.0.0",
+    "pre-commit": "^1.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
@@ -69,5 +71,8 @@
   "dependencies": {
     "normalize-scss": "^5.0.4"<% if (features.has_jquery) { %>,
     "jquery": "^3.1.1"<% } %>
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
