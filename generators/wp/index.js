@@ -123,7 +123,7 @@ module.exports = class extends Generator {
   _moveSrcFolder() {
     fse.move(
       this.destinationPath('src'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src/'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src'),
       function (err) {
         if (err) {
           return console.error(err);
@@ -160,14 +160,8 @@ module.exports = class extends Generator {
   }
 
   _copyThemeStyles() {
-    var destination;
-    if (this.prompts.srcPlacement === 'theme') {
-      destination = 'wp/wp-content/themes/'+this.configuration.nameSlug+'/src/styles/';
-    } else {
-      destination = 'src/styles/';
-    }
     this.fs.copyTpl(this.templatePath('styles/itcss/**/*'),
-      this.destinationPath(destination), this.configuration);
+      this.destinationPath('src/styles/'), this.configuration);
   }
 
   _checkIfDatabaseExists(cb) {
