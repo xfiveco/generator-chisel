@@ -37,7 +37,6 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
         adminPassword: 'pass',
         adminEmail: 'user@example.com',
         plugins: ['https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip',
-          'adminer',
           'https://github.com/wp-sync-db/wp-sync-db/archive/master.zip']
       })
       .on('end', done);
