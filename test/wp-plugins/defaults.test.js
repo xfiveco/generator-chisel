@@ -50,13 +50,6 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
     })
   })
 
-  it('should download and activate Adminer', function(done) {
-    wpCli(['plugin', 'status', 'adminer'], (err, stdio) => {
-      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
-      done();
-    })
-  })
-
   it('should download and activate WP Sync DB', function(done) {
     wpCli(['plugin', 'status', 'wp-sync-db'], (err, stdio) => {
       assert(stdio[0].toString('utf8').indexOf('Active') != -1);
