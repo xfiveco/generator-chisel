@@ -32,6 +32,7 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 .idea
+.vscode
 
 # Folders to ignore
 temp
@@ -40,7 +41,7 @@ tmp
 node_modules
 coverage
 src/bower_components
-dist
+/dist
 
 # Others
 npm-debug.log
