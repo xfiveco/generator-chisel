@@ -16,7 +16,7 @@
   - [WordPress projects](#wordpress-projects)
 - [Installation](#installation)
   - [Node.js](#nodejs)
-  - [Yeoman, Gulp &amp; Chisel](#yeoman-gulp-amp-chisel)
+  - [Yeoman, Chisel](#yeoman-chisel)
   - [Apache, PHP and MySQL](#apache-php-and-mysql)
   - [Wildcard virtual hosts and DNS (optional)](#wildcard-virtual-hosts-and-dns-optional)
 - [Project setup](#project-setup)
@@ -81,11 +81,11 @@ The following software needs to be installed if you want to setup and develop pr
 ### Node.js
 Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package manager. Version 4.5+ is required.
 
-### Yeoman, Gulp &amp; Chisel
-Install [Yeoman](http://yeoman.io/), [Gulp](http://gulpjs.com/) and Chisel globally.
+### Yeoman, Chisel
+Install [Yeoman](http://yeoman.io/) and Chisel globally.
 
 ```bash
-npm install -g yo gulp-cli generator-chisel
+npm install -g yo generator-chisel
 ```
 
 If you want to update your existing Chisel installation to the latest version, run:
@@ -127,7 +127,7 @@ If you are joining development of an existing front-end project which was alread
 
 1. Clone repository
 2. Run `npm install` or `yarn`
-3. Run `gulp build` and `gulp`
+3. Run `npm run build` and `npm run dev`
 
 ### WordPress projects
 #### 1. Create project directory
@@ -186,7 +186,7 @@ If you are joining development of an existing WordPress project which was alread
 1. Clone the repository
 2. Create database
 3. Run `yo chisel:wp-config`, it will create _wp-config-local.php_ and generate _dev-vhost.conf_ (if you need it)
-4. Run `npm install` or `yarn` and `gulp build`
+4. Run `npm install` or `yarn` and `npm run build`
 5. Import DB dump or enable _Migrate DB_ plugin and use it to import database and files
 
 ## Project structure
@@ -289,7 +289,7 @@ yo chisel:page "Home" "About Us" "Contact Us" "News"
 When you have the basic setup done, you can start development. To re-compile Twig, SCSS and JavaScript files in real time you can use default task. Type
 
 ```bash
-gulp
+npm run dev
 ```
 
 and this will start a task that will watch for changes in files and recompile them as needed.
@@ -298,13 +298,13 @@ Additionally, development server will be started and BrowserSync scripts injecte
 
 During development `main.css` (unminified) and `bundle.js` are linked in HTML. This is achieved by custom Twig function `revisionedPath` which updates assets path depending on whether the watch or build tasks are running.
 
-To rebuild the whole project and create new revisions of styles and scripts using `gulp-rev`, use the gulp build task again
+To rebuild the whole project and create new revisions of styles and scripts using `gulp-rev`, use the build task again
 
 ```bash
-gulp build
+npm run build
 ```
 
-When `gulp build` is run, first the `dist` folder is cleaned and then build tasks are run in particular order:
+When `npm run build` is run, first the `dist` folder is cleaned and then build tasks are run in particular order:
 
 1. `styles-build` builds prefixed and minified styles and creates a stylesheet revision by appending content hash to the filename. Then it creates `rev-manifest.json` with original and revisioned file names
 2. `lint` runs EsLint
@@ -351,7 +351,7 @@ You can use `yo chisel:page` command to add pages to your WordPress project in t
 To re-compile SCSS and JavaScript files in real time you can use default task. Type:
 
 ```bash
-gulp
+npm run dev
 ```
 
 and this will start a task that will watch for changes in files and recompile them as needed.
@@ -363,10 +363,10 @@ Depending on where you are looking at your project, different version of styles 
 - `localhost:3000` - unminified and non-prefixed CSS
 - `project-name.dev` - revisioned CSS and JS files (minified and prefixed)
 
-To create new revisions of styles and scripts using [gulp-rev](https://github.com/sindresorhus/gulp-rev), use the gulp build task:
+To create new revisions of styles and scripts using [gulp-rev](https://github.com/sindresorhus/gulp-rev), use the build task:
 
 ``` bash
-gulp build
+npm run build
 ```
 
 During development you should occasionally build your styles and scripts to see how the site works with minified and prefixed CSS.
