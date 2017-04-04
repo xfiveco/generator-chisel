@@ -102,6 +102,13 @@ class StarterSite extends TimberSite {
 		) );
 		$twig->addFunction( $assetPathFunction );
 
+		// Adds className function to twig
+		$classNameFunction = new Twig_SimpleFunction( 'className', array(
+			$this,
+			'twig_class_name'
+		) );
+		$twig->addFunction( $classNameFunction );
+
 		return $twig;
 	}
 
@@ -136,6 +143,28 @@ class StarterSite extends TimberSite {
 	 */
 	public function twig_asset_path( $asset ) {
 		return get_template_directory_uri() . '/' . self::ASSETS_PATH . trim( $asset, '/' );
+	}
+
+	/**
+	 * Builds class string based on name and modifiers
+	 *
+	 * @param  string	$name		base class name
+	 * @param  string[]	$modifiers	class name modifiers
+	 *
+	 * @return string				built class
+	 */
+	public function twig_class_name($name = '') {
+		if(!is_string($name) || empty($name)) {
+			return '';
+		}
+		$modifiers = array_slice(func_get_args(), 1);
+		$classes = array($name);
+		foreach($modifiers as $modifier) {
+			if(is_string($modifier) && !empty($modifier)) {
+				$classes[] = $name . '--' . $modifier;
+			}
+		}
+		return implode(' ', $classes);
 	}
 }
 
