@@ -5,7 +5,10 @@
   "description": "<%= nameSlug %>",
   "scripts": {
     "build": "gulp build",
-    "lint": "gulp lint-js && gulp lint-css"
+    "dev": "gulp",
+    "lint": "gulp lint-js && gulp lint-css",
+    "start": "gulp",
+    "watch": "gulp"
   },
   "chisel": {
     "src": {
@@ -45,6 +48,7 @@
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.0.4",
+    "gulp-cli": "^1.2.2",
     "gulp-data": "^1.2.1",
     "gulp-eslint": "^3.0.1",
     "gulp-filter": "^5.0.0",
