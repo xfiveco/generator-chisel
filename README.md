@@ -383,6 +383,27 @@ Chisel allows easy front-end development prior to WordPress development. Suppose
 #### 4. Develop with Timber
 Refer to [Timber](http://upstatement.com/timber/) documentation if you are new to WordPress development with Timber.
 
+_Tip:_ If you want to avoid writing long classes with multiple modifiers by hand, you can use `className` function:
+
+Example usage:
+
+```php
+<article class="{{
+  className(
+    'c-some-post',
+    'red',
+    'type-' ~ post.type,
+    (post.thumbnail ? 'has-thumbnail')
+  )
+}}"></article>
+```
+
+It will generate (assuming post of type `post` and no thumbnail):
+
+```html
+<article class="c-some-post c-some-post--red c-some-post--type-post"></article>
+```
+
 ## Tutorials
 - [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
 - [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/)
