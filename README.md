@@ -386,6 +386,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 ## Tutorials
 - [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
 - [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/)
+- [Easy-to-use Code Blocks in WordPress](https://www.xfive.co/blog/easy-use-code-blocks-wordpress/)
 
 ## License
 Chisel is licensed under [MIT License](LICENSE).
