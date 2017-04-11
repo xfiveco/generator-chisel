@@ -21,6 +21,7 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
       ghostMode: false,
       online: true
     }
+    var themePHPFiles = [path.join(config.dest.wordpress, 'wp-content/themes/', config.dest.wordpressTheme, '**/*.php')];
     <% } else { %>
     var browserSyncConfig = {
       server: './',
@@ -36,7 +37,7 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
     <% } %>
     gulp.watch(path.join(config.src.base, config.src.assets), ['assets-watch']);
     <% if(projectType == 'wp-with-fe') { %>
-    gulp.watch('**/*.{php,twig}').on('change', plugins.browserSync.reload);
+    gulp.watch(config.src.templatesWatch.concat(themePHPFiles)).on('change', plugins.browserSync.reload);
     <% } %>
   });
 };
