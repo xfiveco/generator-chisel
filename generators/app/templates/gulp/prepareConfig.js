@@ -19,17 +19,15 @@ function prepareWpConfig(config) {
 }
 
 function prepareConfig(config) {
-  
-  
+
   <% if (projectType == 'wp-with-fe') { %>
   config = prepareWpConfig(config);
   <% } else { %>
-  var src = config.src;
-  src.templatesWatch[0] = path.join(src.base, src.templatesWatch[0]);
-  src.templatesWatch[1] = path.join(src.base, src.templatesWatch[1]);
+  config.src.templatesWatch[0] = path.join(config.src.base, config.src.templatesWatch[0]);
+  config.src.templatesWatch[1] = path.join(config.src.base, config.src.templatesWatch[1]);
   <% } %>
   
-  src.templatesBuild[0] = path.join(src.base, src.templatesBuild[0]);
+  config.src.templatesBuild[0] = path.join(config.src.base, config.src.templatesBuild[0]);
   return config;
 }
 
