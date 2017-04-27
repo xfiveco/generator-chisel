@@ -14,7 +14,7 @@ describe('Chisel Generator with default options', function () {
         'skip-install': true
       })
       .withPrompts({
-        name: 'Test Project',
+        name: 'Test Project1',
         author: 'Test Author',
         projectType: 'fe',
         features: []
@@ -144,15 +144,15 @@ describe('Chisel Generator with default options', function () {
   });
 
   it('should generate proper app name in every file', function (done) {
-    assert.fileContent('package.json', '"name": "test-project"');
-    assert.fileContent('index/project-index.html', 'Project Index - Test Project');
+    assert.fileContent('package.json', '"name": "test-project1"');
+    assert.fileContent('index/project-index.html', 'Project Index - Test Project1');
 
     done();
   });
 
   it('should create valid Yeoman configuration file', function (done) {
     assert.file('.yo-rc.json');
-    assert.fileContent('.yo-rc.json', '"name": "Test Project"');
+    assert.fileContent('.yo-rc.json', '"name": "Test Project1"');
     assert.fileContent('.yo-rc.json', '"author": "Test Author"');
 
     done();
