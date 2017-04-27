@@ -26,6 +26,10 @@ module.exports = class extends Generator {
         message: 'Enter the database host:',
         default: '127.0.0.1'
       }, {
+        name: 'databasePort',
+        message: 'Enter the database port:',
+        default: '3306'
+      }, {
         name: 'databaseName',
         message: 'Enter the database name:',
         default: this.configuration.nameSlug
@@ -55,6 +59,7 @@ module.exports = class extends Generator {
         // because yeoman-test seems to ignore empty string
         var connection = new mysql.createConnection({
           host: this.prompts.databaseHost,
+          port: this.prompts.databasePort,
           user: this.prompts.databaseUser,
           password: this.prompts.databasePassword.toString()
         });
