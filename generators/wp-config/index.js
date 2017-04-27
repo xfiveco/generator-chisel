@@ -46,6 +46,7 @@ module.exports = class extends Generator {
 
     this.prompt(prompts).then((answers) => {
       this.prompts = answers;
+      this.prompts['databaseHostPort'] = answers['databaseHost'] + ':' + answers['databasePort'];
       cb();
     });
   }
@@ -105,7 +106,7 @@ module.exports = class extends Generator {
       (config, cb) => {
         var prefix = helpers.makePrefix(this.configuration.nameSlug);
         config = config
-          .replace('\'localhost\'', this._getDbSetting('databaseHost'))
+          .replace('\'localhost\'', this._getDbSetting('databaseHostPort'))
           .replace('\'database_name_here\'', this._getDbSetting('databaseName'))
           .replace('\'username_here\'', this._getDbSetting('databaseUser'))
           .replace('\'password_here\'', this._getDbSetting('databasePassword'))
