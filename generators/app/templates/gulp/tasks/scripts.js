@@ -12,6 +12,11 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
       <% } %>
     };
 
+    if(watch) {
+      props.cache = {};
+      props.packageCache = {};
+    }
+
     var bundler = watch ? plugins.watchify(plugins.browserify(props)) : plugins.browserify(props);
 
     function rebundle() {
