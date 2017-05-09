@@ -12,6 +12,11 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
       <% } %>
     };
 
+    if(watch) {
+      props.cache = {};
+      props.packageCache = {};
+    }
+
     var bundler = watch ? plugins.watchify(plugins.browserify(props)) : plugins.browserify(props);
 
     function rebundle() {
@@ -22,9 +27,6 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
           .on('error', helpers.onError)
           .pipe(plugins.vinylSourceStream('bundle.js'))
           .pipe(plugins.vinylBuffer())
-          .pipe(plugins.sourcemaps.init({loadMaps: true}))
-          .pipe(plugins.uglify())
-          .pipe(plugins.sourcemaps.write('./'))
           .pipe(gulp.dest(path.join(config.dest.base, config.dest.scripts)))
           .pipe(plugins.browserSync.stream());
       }
