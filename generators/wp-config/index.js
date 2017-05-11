@@ -26,6 +26,16 @@ module.exports = class extends Generator {
         message: 'Enter the database host:',
         default: '127.0.0.1'
       }, {
+        name: 'databasePort',
+        message: 'Enter the database port:',
+        default: 3306,
+        validate: function (input) {
+          if (isNaN(input)) {
+            return 'Please, enter number';
+          }
+          return true;
+        }
+      }, {
         name: 'databaseName',
         message: 'Enter the database name:',
         default: this.configuration.nameSlug
@@ -42,6 +52,7 @@ module.exports = class extends Generator {
 
     this.prompt(prompts).then((answers) => {
       this.prompts = answers;
+      this.prompts['databaseHostPort'] = answers['databaseHost'] + ':' + answers['databasePort'];
       cb();
     });
   }
@@ -55,6 +66,7 @@ module.exports = class extends Generator {
         // because yeoman-test seems to ignore empty string
         var connection = new mysql.createConnection({
           host: this.prompts.databaseHost,
+          port: this.prompts.databasePort,
           user: this.prompts.databaseUser,
           password: this.prompts.databasePassword.toString()
         });
@@ -100,7 +112,7 @@ module.exports = class extends Generator {
       (config, cb) => {
         var prefix = helpers.makePrefix(this.configuration.nameSlug);
         config = config
-          .replace('\'localhost\'', this._getDbSetting('databaseHost'))
+          .replace('\'localhost\'', this._getDbSetting('databaseHostPort'))
           .replace('\'database_name_here\'', this._getDbSetting('databaseName'))
           .replace('\'username_here\'', this._getDbSetting('databaseUser'))
           .replace('\'password_here\'', this._getDbSetting('databasePassword'))
