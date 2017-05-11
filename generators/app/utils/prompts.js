@@ -8,7 +8,10 @@ var Prompts = {
     {
       name: 'name',
       message: 'Please enter the project name:',
-      default: _.startCase(path.basename(process.cwd())),
+      default: () => path.basename(process.cwd())
+                    .split(/-/g)
+                    .map(word => `${word.substring(0,1).toUpperCase()}${word.substring(1)}`)
+                    .join(' '),
       validate: function (input) {
         return !!input;
       }
