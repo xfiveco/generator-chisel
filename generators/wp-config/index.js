@@ -28,7 +28,13 @@ module.exports = class extends Generator {
       }, {
         name: 'databasePort',
         message: 'Enter the database port:',
-        default: '3306'
+        default: 3306,
+        validate: function (input) {
+          if (isNaN(input)) {
+            return 'Please, enter number';
+          }
+          return true;
+        }
       }, {
         name: 'databaseName',
         message: 'Enter the database name:',
