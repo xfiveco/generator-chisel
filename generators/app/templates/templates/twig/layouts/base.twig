@@ -37,6 +37,9 @@
     {% include 'components/footer.twig' %}
   {% endblock %}<% if (projectType == 'wp-with-fe') { %>
   {{ function('wp_footer') }}<% } %>
-  <script src="{{ revisionedPath('scripts/bundle.js') }}" async></script>
+  {% if hasVendor() %}
+    <script src="{{ revisionedPath('scripts/vendor.js') }}" defer></script>
+  {% endif %}
+  <script src="{{ revisionedPath('scripts/bundle.js') }}" defer></script>
 </body>
 </html>

@@ -29,7 +29,8 @@ describe('Chisel Generator with ES2015 and Babel', function () {
 
   it('should add Babelify transform to the Gulp scripts task', function (done) {
     assert.file('gulp/tasks/scripts.js');
-    assert.fileContent('gulp/tasks/scripts.js', "transform: ['babelify']");
+    assert.fileContent('gulp/tasks/scripts.js', "transform: [");
+    assert.fileContent('gulp/tasks/scripts.js', "'babelify',");
 
     done();
   });

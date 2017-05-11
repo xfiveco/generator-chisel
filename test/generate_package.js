@@ -14,7 +14,8 @@ var options = {
   features: {
     has_babel: true,
     has_jquery: true
-  }
+  },
+  has_jquery_vendor_config: false,
 }
 
 var file = fs.readFileSync('../generators/app/templates/package.json', 'utf8');

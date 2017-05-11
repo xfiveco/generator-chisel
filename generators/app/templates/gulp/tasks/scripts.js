@@ -7,9 +7,12 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
     var props = {
       entries: path.join(config.src.base, config.src.app),
       debug: true,
-      <% if(features.has_babel) { %>
-      transform: ['babelify']
-      <% } %>
+      transform: [
+        <% if(features.has_babel) { %>
+        'babelify',
+        <% } %>
+        ['browserify-shim', { global: true }],
+      ]
     };
 
     if(watch) {

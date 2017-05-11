@@ -74,6 +74,21 @@ var Prompts = {
         value: 'has_jquery',
         checked: false
       }]
+    },
+    {
+      when: function (answers) {
+        if ( !Array.isArray(answers.features) ) {
+          return;
+        }
+
+        return answers.features.some(function (answer) {
+          return answer === 'has_jquery';
+        });
+      },
+      type: 'confirm',
+      name: 'has_jquery_vendor_config',
+      message: 'Would you like to configure browserify-shim for jQuery plugins?',
+      default: true
     }
   ],
 
@@ -92,6 +107,8 @@ var Prompts = {
     for (var i in answers.features) {
       this.prompts.features[answers.features[i]] = true;
     }
+
+    this.prompts.has_jquery_vendor_config = answers.has_jquery_vendor_config;
   }
 };
 

@@ -34,8 +34,7 @@ var stylesTask = function (gulp, plugins, config, helpers) {
       .pipe(gulp.dest(path.join(config.dest.base, config.dest.styles)))
       .pipe(plugins.rev.manifest({
         path: path.join(config.dest.base, config.dest.revManifest),
-        base: config.dest.base,
-        merge: true
+        base: config.dest.base
       }))
       .pipe(gulp.dest(config.dest.base))
       .pipe(plugins.browserSync.stream());

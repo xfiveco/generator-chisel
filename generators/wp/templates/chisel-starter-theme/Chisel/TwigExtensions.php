@@ -87,6 +87,15 @@ class TwigExtensions {
 			)
 		);
 
+		$this->registerFunction(
+			$twig,
+			'hasVendor',
+			array(
+				$this,
+				'hasVendor',
+			)
+		);
+
 		return $twig;
 	}
 
@@ -213,6 +222,27 @@ class TwigExtensions {
 	 */
 	public function chiselPost( $fields = null ) {
 		return new Post( $fields );
+	}
+
+	/**
+	 * Verifies existence of the vendor.js file
+	 *
+	 * @return bool
+	 */
+	public function hasVendor () {
+		if( defined( 'CHISEL_DEV_ENV' ) ) {
+			return file_exists(
+				sprintf(
+					'%s/%s%s',
+					get_template_directory(),
+					Settings::DIST_PATH,
+					'scripts/vendor.js'
+				)
+			);
+		} else {
+			$manifest = $this->getManifest();
+			return array_key_exists( 'vendor.js', $manifest );
+		}
 	}
 
 	/**
