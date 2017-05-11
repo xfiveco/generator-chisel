@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var path = require('path');
+var slug = require('limax');
 
 var Prompts = {
   questions: [
@@ -55,7 +56,7 @@ var Prompts = {
     this.prompts.name = answers.name;
     this.prompts.author = answers.author;
     this.prompts.projectType = answers.projectType;
-    this.prompts.nameSlug = _.kebabCase(answers.name);
+    this.prompts.nameSlug = slug(answers.name);
     this.prompts.nameCamel = _.capitalize(_.camelCase(answers.name));
     this.prompts.features = {};
 
