@@ -48,10 +48,12 @@ var Generator = {
   },
 
   stylesheets: function () {
+    helpers.copy.call(this, 'styles/vendor/.keep', 'src/styles/vendor/.keep');
     helpers.copy.call(this, 'styles/itcss/**/*', 'src/styles/', this.prompts);
   },
 
   javascripts: function () {
+    helpers.copy.call(this, 'scripts/vendor/.keep', 'src/scripts/vendor/.keep');
     helpers.copy.call(this, 'scripts/browserify/**/*', 'src/scripts/', this.prompts);
   }
 };
