@@ -39,12 +39,12 @@ var Prompts = {
       name: 'features',
       message: 'Select additional front-end features:',
       choices: [{
+        name: 'ES6 with Babel',
+        value: 'has_babel',
+        checked: true
+      }, {
         name: 'jQuery',
         value: 'has_jquery',
-        checked: false
-      }, {
-        name: 'ES2015 with Babel',
-        value: 'has_babel',
         checked: false
       }]
     }
