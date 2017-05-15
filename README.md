@@ -23,12 +23,12 @@
   - [Front-end projects](#front-end-projects-1)
     - [1. Create project directory](#1-create-project-directory)
     - [2. Run Chisel](#2-run-chisel)
-    - [Setting up an existing project](#setting-up-an-existing-project)
+    - [3. Setting up an existing project](#3-setting-up-an-existing-project)
   - [WordPress projects](#wordpress-projects-1)
     - [1. Create project directory](#1-create-project-directory-1)
     - [2. Run Chisel](#2-run-chisel-1)
     - [3. Set up virtual host (optional)](#3-set-up-virtual-host-optional)
-    - [Setting up an existing project](#setting-up-an-existing-project-1)
+    - [4. Setting up an existing project](#4-setting-up-an-existing-project)
 - [Project structure](#project-structure)
   - [Front-end projects](#front-end-projects-2)
   - [WordPress projects](#wordpress-projects-2)
@@ -122,7 +122,7 @@ Insert project name (you can use the default one based on the working directory 
 
 *Note: To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
 
-#### Setting up an existing project
+#### 3. Setting up an existing project
 If you are joining development of an existing front-end project which was already set up with Chisel, you don't have to set it up again. Follow these steps:
 
 1. Clone repository
@@ -157,6 +157,7 @@ Setup your WordPress as follows:
 - *Enter admin email*:
 - *Where do you want to place the 'src' folder*: position of the src folder with styles, scripts and assets - either the root folder or theme folder
 - *Enter the database host*: `127.0.0.1`
+- *Enter the database port*: `3306`
 - *Enter the database name*: the project database name
 - *Enter the database user*: user who can access the database
 - *Enter the database password*: password for the user
@@ -180,7 +181,7 @@ IncludeOptional /path/to/projects/*/dev-vhost.conf
 
 in your Apache configuration to automatically load configuration for multiple projects.
 
-#### Setting up an existing project
+#### 4. Setting up an existing project
 If you are joining development of an existing WordPress project which was already set up with Chisel, you don't have to set it up again. Follow these steps:
 
 1. Clone the repository
