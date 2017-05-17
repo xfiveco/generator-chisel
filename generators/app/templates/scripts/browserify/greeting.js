@@ -5,9 +5,7 @@ export const greeting = name => {
   if (element) {
     element.innerHTML = name;
   }
-};
-<% } else { %>
-'use strict';
+};<% } else { %>'use strict';
 <% if (features.has_jquery) { %>
 var $ = require('jquery');
 
@@ -17,7 +15,8 @@ var greeting = function (name) {
   if (element.length) {
     element.text(name);
   }
-};<% } else { %>
+};
+<% } else { %>
 var greeting = function (name) {
   var element = document.querySelector('.js-greeting');
 
