@@ -1,11 +1,13 @@
 <% if (features.has_babel) { %>
-export const greeting = name => {
+const greeting = name => {
   const element = document.querySelector('.js-greeting');
 
   if (element) {
     element.innerHTML = name;
   }
-};<% } else { %>'use strict';
+};
+
+export default greeting;<% } else { %>'use strict';
 <% if (features.has_jquery) { %>
 var $ = require('jquery');
 
