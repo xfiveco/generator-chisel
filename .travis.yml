@@ -19,6 +19,7 @@ before_install:
   - wget -P /tmp https://github.com/wp-premium/gravityforms/archive/master.zip
   - wget -P /tmp https://github.com/wp-sync-db/wp-sync-db/archive/master.zip
   - wget -P /tmp https://github.com/wp-sync-db/wp-sync-db-media-files/archive/master.zip
+  - wget -P /tmp https://github.com/hoppinger/advanced-custom-fields-wpcli/archive/master.zip
 matrix:
   include:
     - node_js: "6"
