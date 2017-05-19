@@ -8,7 +8,7 @@ var scriptsTask = function (gulp, plugins, config, helpers) {
       entries: path.join(config.src.base, config.src.app),
       debug: true,
       <% if(features.has_babel) { %>
-      transform: [["babelify", { "presets": ["es2015"] }]]
+      transform: ['babelify']
       <% } %>
     };
 
