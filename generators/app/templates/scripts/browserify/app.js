@@ -2,7 +2,8 @@
   Project: <%= name %>
   Author: <%= author %>
  */
-
-var greet = require('./greeting.js')
+<% if (features.has_babel) { %>
+import greet from './greeting';<% } else { %>
+var greet = require('./greeting.js');<% } %>
 
 greet('World');
