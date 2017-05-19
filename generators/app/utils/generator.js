@@ -28,6 +28,10 @@ var Generator = {
   gulpfiles: function () {
     helpers.copy.call(this, 'gulpfile.js', 'gulpfile.js', this.prompts);
     helpers.copy.call(this, 'gulp/**/*', 'gulp/', this.prompts);
+
+    if (this.prompts.features.has_babel) {
+      helpers.copy.call(this, '.babelrc', '.babelrc');
+    }
   },
 
   projectInfo: function () {
