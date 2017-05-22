@@ -3,6 +3,8 @@ var fs = require('fs');
 var async = require('async');
 var crypto = require('crypto');
 
+const PREFIX_LENGTH = 8;
+
 var Helpers = {
   copyFiles: function(sourceRoot, files, cb) {
     async.eachOfSeries(files, (newName, oldName, cb) => {
@@ -27,7 +29,7 @@ var Helpers = {
       .update(nameSlug, 'utf8')
       .digest('base64')
       .replace(/[+/=]/g, '')
-      .substr(0, 8)
+      .substr(0, PREFIX_LENGTH)
       .toLowerCase();
   }
 };

@@ -1,20 +1,23 @@
 'use strict';
 
-var Generator = require('yeoman-generator'),
-  fs = require('fs'),
-  fse = require('fs-extra'),
-  crypto = require('crypto'),
-  helpers = require('../../helpers'),
-  wpCli = require('../../helpers/wpCli'),
-  async = require('async'),
-  cp = require('child_process'),
-  path = require('path'),
-  chalk = require('chalk');
+const Generator = require('yeoman-generator');
+const fs = require('fs');
+const fse = require('fs-extra');
+const crypto = require('crypto');
+const helpers = require('../../helpers');
+const wpCli = require('../../helpers/wpCli');
+const async = require('async');
+const cp = require('child_process');
+const chalk = require('chalk');
+
+const WP_CONFIG_UNIQUE_STRING_BYTES = 30;
+const STDOUT = 0;
+const STDERR = 1;
 
 module.exports = class extends Generator {
 
   constructor(args, opts) {
-     super(args, opts);
+    super(args, opts);
   }
 
   initializing () {
@@ -96,7 +99,7 @@ module.exports = class extends Generator {
         config = config.replace('wp_', prefix + '_');
 
         config = config.replace(/put your unique phrase here/g,
-          () => crypto.randomBytes(30).toString('base64'))
+          () => crypto.randomBytes(WP_CONFIG_UNIQUE_STRING_BYTES).toString('base64'))
 
         fs.writeFile('wp/wp-config.php', config, cb);
       }
@@ -166,8 +169,8 @@ module.exports = class extends Generator {
 
   _checkIfDatabaseExists(cb) {
     wpCli(['db', 'check'], {hideStdio: true}, (err, stdio) => {
-      var stdout = stdio[0].toString('utf8');
-      var stderr = stdio[1].toString('utf8');
+      var stdout = stdio[STDOUT].toString('utf8');
+      var stderr = stdio[STDERR].toString('utf8');
       if(stderr.indexOf('Unknown database') != -1) {
         cb(null, false);
       } else if(stdout.indexOf('Success') != -1) {

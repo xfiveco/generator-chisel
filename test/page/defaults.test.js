@@ -2,7 +2,6 @@
 
 var path = require('path');
 var async = require('async');
-var yeoman = require('yeoman-generator');
 var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 

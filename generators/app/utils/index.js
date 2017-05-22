@@ -1,7 +1,7 @@
 'use strict';
 
 var Utils = {
-	prompts: require('./prompts'),
+  prompts: require('./prompts'),
   generator: require('./generator')
 };
 

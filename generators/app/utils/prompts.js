@@ -4,15 +4,19 @@ var _ = require('lodash');
 var path = require('path');
 var slug = require('limax');
 
+const FIRST_LETTER = 0;
+const SECOND_LETTER = 1;
+const ONE_CHARACTER = 1;
+
 var Prompts = {
   questions: [
     {
       name: 'name',
       message: 'Please enter the project name:',
       default: () => path.basename(process.cwd())
-                    .split(/-/g)
-                    .map(word => `${word.substring(0,1).toUpperCase()}${word.substring(1)}`)
-                    .join(' '),
+        .split(/-/g)
+        .map(word => `${word.substring(FIRST_LETTER, ONE_CHARACTER).toUpperCase()}${word.substring(SECOND_LETTER)}`)
+        .join(' '),
       validate: function (input) {
         return !!input;
       }

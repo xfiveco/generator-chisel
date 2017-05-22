@@ -8,7 +8,7 @@ var Generator = require('yeoman-generator'),
 module.exports = class extends Generator {
 
   constructor(args, opts) {
-     super(args, opts);
+    super(args, opts);
   }
 
   initializing() {
@@ -91,7 +91,8 @@ module.exports = class extends Generator {
         documentRoot: process.cwd()+'/wp',
         serverName: name + '.dev',
         dbName: name
-    });
+      }
+    );
   }
 
   /**
@@ -132,8 +133,9 @@ module.exports = class extends Generator {
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
       (cb) => this._updateWpConfig(cb),
     ], (err) => {
-      if(err)
+      if(err) {
         throw err;
+      }
       this.log('Local config generated')
       done();
     });

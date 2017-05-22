@@ -7,6 +7,9 @@ var async = require('async');
 var path = require('path');
 var helpers = require('../../helpers');
 
+const STDOUT = 0;
+const REGEX_FIRST_GROUP = 1;
+
 module.exports = class extends Generator {
   /**
    * Extends base Yeoman constructor
@@ -100,13 +103,13 @@ module.exports = class extends Generator {
         post_status: 'publish'
       }], cb),
       (stdio, cb) => {
-        var stdout = stdio[0].toString('utf8');
-        id = /Created post (\d+)\./.exec(stdout)[1];
+        var stdout = stdio[STDOUT].toString('utf8');
+        id = /Created post (\d+)\./.exec(stdout)[REGEX_FIRST_GROUP];
         cb(!id);
       },
       (cb) => wpCli(['post', 'get', String(id), {format: 'json'}], {hideStdio: true}, cb),
       (stdio, cb) => {
-        var json = JSON.parse(stdio[0]);
+        var json = JSON.parse(stdio[STDOUT]);
         slug = json.post_name;
         cb(!slug);
       },

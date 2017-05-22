@@ -2,6 +2,7 @@
 
 var cp = require('child_process');
 var path = require('path');
+const EXIT_CODE_SUCCESS = 0;
 
 function getWpCliPath() {
   return path.join(__dirname, 'wp-cli.phar');
@@ -47,6 +48,6 @@ module.exports = function runCommand(args, opts, cb) {
     (data) => (stderr.push(data) && !opts.hideStdio && process.stderr.write(data)));
 
   proc.on('close', (code) =>
-    cb((code === 0 ? null : code), [Buffer.concat(stdout), Buffer.concat(stderr)]));
+    cb((code === EXIT_CODE_SUCCESS ? null : code), [Buffer.concat(stdout), Buffer.concat(stderr)]));
 
 }

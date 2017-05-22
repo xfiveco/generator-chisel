@@ -2,10 +2,13 @@
 var Generator = require('yeoman-generator');
 var wpCli = require('../../helpers/wpCli');
 
+const EXIT_CODE_SUCCESS = 0;
+const FIRST_NOT_IGNORED_ARGUMENT_INDEX = 3;
+
 module.exports = class extends Generator {
 
   constructor(args, opts) {
-     super(args, opts);
+    super(args, opts);
   }
 
   initializing() {
@@ -17,7 +20,10 @@ module.exports = class extends Generator {
   }
 
   end() {
-    var done = this.async();
-    wpCli(process.argv.slice(3), (code, stdio) => process.exit(code || 0));
+    // pass arguments except node, yo and generator name
+    wpCli(
+      process.argv.slice(FIRST_NOT_IGNORED_ARGUMENT_INDEX),
+      (code) => process.exit(code || EXIT_CODE_SUCCESS)
+    );
   }
 }
