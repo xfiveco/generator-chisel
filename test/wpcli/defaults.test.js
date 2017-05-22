@@ -1,20 +1,21 @@
 'use strict';
 
 var path = require('path');
-var yeoman = require('yeoman-generator');
 var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
-var path = require('path');
-var fs = require('fs');
 var async = require('async');
 var wpCli = require('../../helpers/wpCli');
 var spawn = require('cross-spawn');
 
+const TEN_SECONDS = 10000;
+const FOUR_MINUTES = 240000;
+const STDOUT = 0;
+
 describe('Chisel Generator with WordPress (wpcli subgenerator)', function () {
-  this.timeout(10000)
+  this.timeout(TEN_SECONDS)
 
   before(function (done) {
-    this.timeout(240000)
+    this.timeout(FOUR_MINUTES)
 
     // We skip those tests when running locally because they
     // require database at 127.0.0.1 with root user and no password.
@@ -40,17 +41,16 @@ describe('Chisel Generator with WordPress (wpcli subgenerator)', function () {
       },
       function (callback) {
         spawn('yo', [path.join(__dirname, '../../generators/wpcli'),
-            'plugin', 'install', 'rest-api', '--activate'], {stdio: 'inherit'})
+          'plugin', 'install', 'rest-api', '--activate'], {stdio: 'inherit'})
           .on('exit', callback)
           .on('error', callback);
       }
     ], done)
-
   });
 
   it('should install and activate Rest API', function(done) {
     wpCli(['plugin', 'status', 'rest-api'], (err, stdio) => {
-      assert(stdio[0].toString('utf8').indexOf('Active') != -1);
+      assert(stdio[STDOUT].toString('utf8').indexOf('Active') != -1);
       done();
     })
   });

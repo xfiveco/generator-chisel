@@ -3,13 +3,12 @@
 const Generator = require('yeoman-generator');
 const utils = require('./utils');
 const chalk = require('chalk');
-const path = require('path');
 const commandExists = require('command-exists').sync;
 
 module.exports = class extends Generator {
 
   constructor(args, opts) {
-     super(args, opts);
+    super(args, opts);
   }
 
   prompting() {
@@ -58,8 +57,9 @@ module.exports = class extends Generator {
 
   installWordpress() {
     if(this.prompts.projectType != 'wp-with-fe' ||
-        (this.options['skip-install'] && !this.options['run-wp']))
+        (this.options['skip-install'] && !this.options['run-wp'])) {
       return;
+    }
     this.composeWith(require.resolve('../wp'))
   }
 

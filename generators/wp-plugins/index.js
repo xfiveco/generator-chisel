@@ -3,12 +3,13 @@ var Generator = require('yeoman-generator');
 var plugins = require('./plugins.json');
 var helpers = require('../../helpers');
 var wpCli = require('../../helpers/wpCli');
-var async = require('async');
+
+const FIRST_ANSWER_INDEX = 0;
 
 module.exports = class extends Generator {
 
   constructor(args, opts) {
-     super(args, opts);
+    super(args, opts);
   }
 
   initializing() {
@@ -28,7 +29,7 @@ module.exports = class extends Generator {
       }
     ];
 
-    var choices = prompts[0].choices = [];
+    var choices = prompts[FIRST_ANSWER_INDEX].choices = [];
 
     Object.keys(plugins).forEach((id) => {
       choices.push({
@@ -45,8 +46,9 @@ module.exports = class extends Generator {
   }
 
   end() {
-    if(!this.prompts.plugins.length)
+    if(!this.prompts.plugins.length) {
       return;
+    }
     var done = this.async();
     wpCli(['plugin', 'install', {activate: true}].concat(this.prompts.plugins), helpers.throwIfError(done));
   }

@@ -46,8 +46,9 @@ var Generator = {
   },
 
   templates: function () {
-    if(this.prompts.projectType == 'wp-with-fe')
+    if(this.prompts.projectType == 'wp-with-fe') {
       return;
+    }
     helpers.copy.call(this, 'templates/twig/**/*', 'src/templates/', this.prompts);
   },
 

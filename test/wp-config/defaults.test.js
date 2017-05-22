@@ -1,15 +1,15 @@
 'use strict';
 
 var path = require('path');
-var yeoman = require('yeoman-generator');
 var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
-var path = require('path');
 var fs = require('fs');
+
+const TEN_SECONDS = 10000;
 
 describe('Chisel Generator with WordPress (wp-config subgenerator)', function () {
   before(function (done) {
-    this.timeout(10000)
+    this.timeout(TEN_SECONDS)
 
     // We skip those tests when running locally because they
     // require database at 127.0.0.1 with root user and no password.
