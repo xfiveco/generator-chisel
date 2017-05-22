@@ -14,7 +14,7 @@ describe('Chisel Generator with default options', function () {
         'skip-install': true
       })
       .withPrompts({
-        name: 'Hello2 Wąęśźorld 2 :D',
+        name: 'Hello2 Wąęśźorld_2 :D',
         author: 'Test Author',
         projectType: 'fe',
         features: []
@@ -146,14 +146,14 @@ describe('Chisel Generator with default options', function () {
 
   it('should generate proper app name in every file', function (done) {
     assert.fileContent('package.json', '"name": "hello2-waeszorld-2-d"');
-    assert.fileContent('index/project-index.html', 'Project Index - Hello2 Wąęśźorld 2 :D');
+    assert.fileContent('index/project-index.html', 'Project Index - Hello2 Wąęśźorld_2 :D');
 
     done();
   });
 
   it('should create valid Yeoman configuration file', function (done) {
     assert.file('.yo-rc.json');
-    assert.fileContent('.yo-rc.json', '"name": "Hello2 Wąęśźorld 2 :D"');
+    assert.fileContent('.yo-rc.json', '"name": "Hello2 Wąęśźorld_2 :D"');
     assert.fileContent('.yo-rc.json', '"author": "Test Author"');
 
     done();

@@ -2,7 +2,11 @@
 
 var _ = require('lodash');
 var path = require('path');
-var slug = require('limax');
+var limax = require('limax');
+
+function slug(str) {
+  return limax(str).replace(/[^a-z0-9-]/g, '-');
+}
 
 var Prompts = {
   questions: [
