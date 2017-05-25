@@ -295,7 +295,17 @@ npm run dev
 
 and this will start a task that will watch for changes in files and recompile them as needed.
 
-Additionally, development server will be started and BrowserSync scripts injected.
+Additionally, development server will be started and Browsersync scripts injected. If you'd like change Browsersync configuration, you can do so in `gulp/tasks/serve.js`, for example here we've changed notifications and browser opening:
+
+```js
+    var browserSyncConfig = {
+      server: './',
+      ghostMode: false,
+      online: true,
+      notify: false, // Don't show any notifications in the browser.
+      open: false // Stop the browser from automatically opening
+    }
+```
 
 During development `main.css` (unminified) and `bundle.js` are linked in HTML. This is achieved by custom Twig function `revisionedPath` which updates assets path depending on whether the watch or build tasks are running.
 
@@ -357,7 +367,7 @@ npm run dev
 
 and this will start a task that will watch for changes in files and recompile them as needed.
 
-Additionally, development server will be started and BrowserSync scripts injected. BrowserSync proxies to your WordPress instance running at `project-name.dev`.
+Additionally, development server will be started and Browsersync scripts injected. Browsersync proxies to your WordPress instance running at `project-name.dev`.
 
 Depending on where you are looking at your project, different version of styles and scripts are used:
 
