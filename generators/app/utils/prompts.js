@@ -65,7 +65,7 @@ var Prompts = {
     this.prompts.author = answers.author;
     this.prompts.projectType = answers.projectType;
     this.prompts.nameSlug = slug(answers.name);
-    this.prompts.nameCamel = _.capitalize(_.camelCase(answers.name));
+    this.prompts.nameCamel = _.upperFirst(_.camelCase(answers.name));
     this.prompts.features = {};
 
     for (var i in answers.features) {
