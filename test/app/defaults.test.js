@@ -153,6 +153,8 @@ describe('Chisel Generator with default options', function () {
   it('should create valid Yeoman configuration file', function (done) {
     assert.file('.yo-rc.json');
     assert.fileContent('.yo-rc.json', '"name": "Hello2 Wąęśźorld_2 :D"');
+    assert.fileContent('.yo-rc.json', '"nameSlug": "hello2-waeszorld-2-d"');
+    assert.fileContent('.yo-rc.json', '"nameCamel": "Hello2Waeszorld2D"');
     assert.fileContent('.yo-rc.json', '"author": "Test Author"');
 
     done();
