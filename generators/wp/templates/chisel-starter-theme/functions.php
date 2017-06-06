@@ -75,7 +75,7 @@ class StarterSite extends TimberSite {
 	 */
 	public function add_to_context( $context ) {
 		$context['main_nav'] = new TimberMenu();
-		$context['post'] = new ChiselPost();
+		$context['post']     = new ChiselPost();
 
 		return $context;
 	}
@@ -91,21 +91,21 @@ class StarterSite extends TimberSite {
 		// Adds revisionedPath function to twig
 		$revisionedPathFunction = new Twig_SimpleFunction( 'revisionedPath', array(
 			$this,
-			'twig_revisioned_path'
+			'twig_revisioned_path',
 		) );
 		$twig->addFunction( $revisionedPathFunction );
 
 		// Adds assetPath function to twig
 		$assetPathFunction = new Twig_SimpleFunction( 'assetPath', array(
 			$this,
-			'twig_asset_path'
+			'twig_asset_path',
 		) );
 		$twig->addFunction( $assetPathFunction );
 
 		// Adds className function to twig
 		$classNameFunction = new Twig_SimpleFunction( 'className', array(
 			$this,
-			'twig_class_name'
+			'twig_class_name',
 		) );
 		$twig->addFunction( $classNameFunction );
 
@@ -125,9 +125,10 @@ class StarterSite extends TimberSite {
 		$pathinfo = pathinfo( $asset );
 
 		if ( ! defined( 'CHISEL_DEV_ENV' ) ) {
-			if( ! array_key_exists( $pathinfo['basename'], $this->manifest ) ) {
+			if ( ! array_key_exists( $pathinfo['basename'], $this->manifest ) ) {
 				return 'FILE-NOT-REVISIONED';
 			}
+
 			return get_template_directory_uri() . '/' . self::DIST_PATH . $pathinfo['dirname'] . '/' . $this->manifest[ $pathinfo['basename'] ];
 		} else {
 			return get_template_directory_uri() . '/' . self::DIST_PATH . trim( $asset, '/' );
@@ -148,23 +149,24 @@ class StarterSite extends TimberSite {
 	/**
 	 * Builds class string based on name and modifiers
 	 *
-	 * @param  string	$name		base class name
-	 * @param  string[]	$modifiers	class name modifiers
+	 * @param  string $name base class name
+	 * @param  string[] $modifiers,... class name modifiers
 	 *
-	 * @return string				built class
+	 * @return string                built class
 	 */
-	public function twig_class_name($name = '') {
-		if(!is_string($name) || empty($name)) {
+	public function twig_class_name( $name = '', $modifiers = null ) {
+		if ( ! is_string( $name ) || empty( $name ) ) {
 			return '';
 		}
-		$modifiers = array_slice(func_get_args(), 1);
-		$classes = array($name);
-		foreach($modifiers as $modifier) {
-			if(is_string($modifier) && !empty($modifier)) {
+		$modifiers = array_slice( func_get_args(), 1 );
+		$classes   = array( $name );
+		foreach ( $modifiers as $modifier ) {
+			if ( is_string( $modifier ) && ! empty( $modifier ) ) {
 				$classes[] = $name . '--' . $modifier;
 			}
 		}
-		return implode(' ', $classes);
+
+		return implode( ' ', $classes );
 	}
 }
 
