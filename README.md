@@ -97,6 +97,8 @@ npm update -g generator-chisel
 ### Apache, PHP and MySQL
 If you want to develop WordPress projects, you need to install Apache, PHP and MySQL. The easiest option is to use development environments like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org) but you can also customize your [development environment on Mac](https://mallinson.ca/osx-web-development/).
 
+Chisel is using [WP-CLI](http://wp-cli.org/) for most WP-related operations. WP-CLI is using `mysql` and `mysqlcheck` binaries, so you need to have `mysql` and `mysqlcheck` binaries in your `$PATH`.
+
 ### Wildcard virtual hosts and DNS (optional)
 This step is optional but highly recommend if you develop WordPress projects. It will ensure that each new local development domain will work out of box on your computer and you won’t have to edit `hosts` and `httpd-vhosts.conf` files every time. This is achieved by setting up wildcard virtual hosts and DNS.
 
