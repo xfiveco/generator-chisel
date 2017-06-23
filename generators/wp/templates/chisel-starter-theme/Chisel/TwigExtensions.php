@@ -11,6 +11,11 @@ namespace Chisel;
 class TwigExtensions {
 	private static $manifest = array();
 
+	/**
+	 * Get parsed manifest file content
+	 *
+	 * @return array
+	 */
 	public function getManifest() {
 		if ( empty( self::$manifest ) ) {
 			self::initManifest();
@@ -166,7 +171,7 @@ class TwigExtensions {
 	}
 
 	/**
-	 * Use this function to register new Twig function
+	 * Use this method to register new Twig function
 	 *
 	 * @param \Twig_Environment $twig
 	 * @param $name
@@ -178,7 +183,7 @@ class TwigExtensions {
 	}
 
 	/**
-	 * Use this function to register new Twig filter
+	 * Use this method to register new Twig filter
 	 *
 	 * @param \Twig_Environment $twig
 	 * @param $name

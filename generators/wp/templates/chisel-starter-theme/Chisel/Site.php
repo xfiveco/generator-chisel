@@ -37,9 +37,9 @@ class Site extends \Timber\Site {
 	/**
 	 * You can add custom global data to twig context
 	 *
-	 * @param $context
+	 * @param array $context
 	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public function addToContext( $context ) {
 		$context['main_nav'] = new \Timber\Menu();
