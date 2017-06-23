@@ -3,8 +3,11 @@ var Generator = require('yeoman-generator');
 var plugins = require('./plugins.json');
 var helpers = require('../../helpers');
 var wpCli = require('../../helpers/wpCli');
+var fs = require('fs');
+var async = require('async');
 
 const FIRST_ANSWER_INDEX = 0;
+const ACFCLI_URL = 'https://github.com/hoppinger/advanced-custom-fields-wpcli/archive/master.zip';
 
 module.exports = class extends Generator {
 
@@ -50,6 +53,19 @@ module.exports = class extends Generator {
       return;
     }
     var done = this.async();
-    wpCli(['plugin', 'install', {activate: true}].concat(this.prompts.plugins), helpers.throwIfError(done));
+    async.series([
+      (cb) => wpCli(['plugin', 'install', {activate: true}].concat(this.prompts.plugins), cb),
+      (cb) => {
+        if(this.prompts.plugins.indexOf(ACFCLI_URL) == -1) {
+          cb();
+          return;
+        }
+        fs.writeFileSync(
+          this.destinationPath('wp/wp-content/plugins/acf-wp-cli-configuration.php'),
+          fs.readFileSync(this.templatePath('acf-wp-cli-configuration.php'))
+        );
+        wpCli(['plugin', 'activate', 'acf-wp-cli-configuration'], cb);
+      },
+    ], helpers.throwIfError(done))
   }
 }
