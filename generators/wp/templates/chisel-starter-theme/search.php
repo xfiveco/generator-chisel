@@ -2,7 +2,7 @@
 /**
  * Search results page
  *
- * @package wp
+ * @package <%= nameSlug %>
  */
 
 $templates = array( 'search.twig', 'archive.twig', 'index.twig' );

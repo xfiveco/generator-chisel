@@ -13,6 +13,7 @@ define( 'CHISEL_NAMESPACE', 'Chisel\\' );
 define( 'MANIFEST_PATH', 'dist/rev-manifest.json' );
 define( 'DIST_PATH', 'dist/' );
 define( 'ASSETS_PATH', 'dist/assets/' );
+define( 'TEMPLATES_DIR', 'templates' );
 
 if ( isset( $_SERVER['HTTP_X_CHISEL_PROXY'] ) ) {
 	define( 'CHISEL_DEV_ENV', true );

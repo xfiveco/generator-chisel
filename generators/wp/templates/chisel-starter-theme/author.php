@@ -2,7 +2,7 @@
 /**
  * The template for displaying Author Archive pages
  *
- * @package wp
+ * @package <%= nameSlug %>
  */
 global $wp_query;
 

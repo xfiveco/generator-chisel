@@ -1,4 +1,4 @@
-wp theme for WordPress based on Timber library.
+<%= nameSlug %> theme for WordPress based on Timber library.
 
 All files directly under templates/ should extend some layout defined in layouts/ directory.
 
