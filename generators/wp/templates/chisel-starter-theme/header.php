@@ -7,5 +7,5 @@
  * WooCommerce) you can delete this file and footer.php
  */
 
-$GLOBALS['timberContext'] = Timber::get_context();
+$GLOBALS['timberContext'] = \Timber\Timber::get_context();
 ob_start();

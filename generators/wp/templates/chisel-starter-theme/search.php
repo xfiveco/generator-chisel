@@ -2,13 +2,13 @@
 /**
  * Search results page
  *
- * @package <%= nameSlug %>
+ * @package wp
  */
 
 $templates = array( 'search.twig', 'archive.twig', 'index.twig' );
-$context = Timber::get_context();
+$context = \Timber\Timber::get_context();
 
 $context['title'] = 'Search results for '. get_search_query();
-$context['posts'] = Timber::get_posts();
+$context['posts'] = \Timber\Timber::get_posts();
 
-Timber::render( $templates, $context );
+\Timber\Timber::render( $templates, $context );

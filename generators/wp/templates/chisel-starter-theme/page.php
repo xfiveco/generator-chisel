@@ -14,8 +14,8 @@
  * /mytheme/page-mypage.php
  * (in which case you'll want to duplicate this file and save to the above path)
  *
- * @package <%= nameSlug %>
+ * @package wp
  */
 
-$context = Timber::get_context();
-Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
+$context = \Timber\Timber::get_context();
+\Timber\Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
