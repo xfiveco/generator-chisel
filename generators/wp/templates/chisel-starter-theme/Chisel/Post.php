@@ -33,9 +33,7 @@ class Post extends \Timber\Post {
 	 */
 	private function prepareFakePost( $fields ) {
 		if ( isset( $fields['_fields'] ) ) {
-			foreach ( $fields['_fields'] as $field => $value ) {
-				$this->fakeFields[ $field ] = $value;
-			}
+			$this->fakeFields = $fields['_fields'];
 			unset ( $fields['_fields'] );
 		}
 
