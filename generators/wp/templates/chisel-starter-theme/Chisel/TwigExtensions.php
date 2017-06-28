@@ -16,7 +16,7 @@ class TwigExtensions {
 	 *
 	 * @return array
 	 */
-	public function getManifest() {
+	public static function getManifest() {
 		if ( empty( self::$manifest ) ) {
 			self::initManifest();
 		}
