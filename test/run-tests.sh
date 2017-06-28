@@ -6,7 +6,9 @@ if [ "$TEST_VERSIONS" == "" ]; then
   eslint .
   mocha test/**/*.test.js -b --reporter spec
 elif [ "$TEST_VERSIONS" == "generator" ]; then
-  npm install  --quitet -g nsp npm-check > /dev/null
+  rm -rf node_modules
+  npm install --quiet > /dev/null
+  npm install --quiet -g nsp npm-check > /dev/null
   npm shrinkwrap --dev
   nsp check
   npm-check -s
