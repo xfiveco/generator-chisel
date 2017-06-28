@@ -73,6 +73,15 @@ class TwigExtensions {
 			)
 		);
 
+		self::registerFunction(
+			$twig,
+			'ChiselPost',
+			array(
+				'\Chisel\TwigExtensions',
+				'chiselPost',
+			)
+		);
+
 		return $twig;
 	}
 
@@ -168,6 +177,21 @@ class TwigExtensions {
 		}
 
 		return implode( ' ', $classes );
+	}
+
+	/**
+	 * Creates post with passed properties or loads default post when properties are missing
+	 *
+	 * @param array|null $fields
+	 *
+	 * @return Post
+	 */
+	public function chiselPost( $fields = null ) {
+		if ( ! is_array( $fields ) ) {
+			return new Post( $fields );
+		}
+
+		return new Post( $fields );
 	}
 
 	/**
