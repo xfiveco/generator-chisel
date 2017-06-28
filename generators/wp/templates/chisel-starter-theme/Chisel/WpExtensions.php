@@ -9,7 +9,7 @@ namespace Chisel;
  * Use this class to extend Wordpress (register post types, taxonomies, etc.)
  */
 class WpExtensions {
-	public function extend() {
+	public static function extend() {
 		self::registerPostTypes();
 		self::registerTaxonomies();
 	}

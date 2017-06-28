@@ -31,7 +31,7 @@ class TwigExtensions {
 	 *
 	 * @return \Twig_Environment $twig
 	 */
-	public function extend( $twig ) {
+	public static function extend( $twig ) {
 		$twig = self::registerTwigFilters( $twig );
 		$twig = self::registerTwigFunctions( $twig );
 
@@ -186,11 +186,7 @@ class TwigExtensions {
 	 *
 	 * @return Post
 	 */
-	public function chiselPost( $fields = null ) {
-		if ( ! is_array( $fields ) ) {
-			return new Post( $fields );
-		}
-
+	public static function chiselPost( $fields = null ) {
 		return new Post( $fields );
 	}
 

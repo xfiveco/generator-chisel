@@ -41,7 +41,7 @@ class Site extends \Timber\Site {
 	 *
 	 * @return array
 	 */
-	public function addToContext( $context ) {
+	public static function addToContext( $context ) {
 		$context['main_nav'] = new \Timber\Menu();
 		$context['post']     = new \Chisel\Post();
 

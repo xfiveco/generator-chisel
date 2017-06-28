@@ -67,7 +67,7 @@ class Post extends \Timber\Post {
 	 *
 	 * @return string|array
 	 */
-	public function overrideTimberPostClass( $post_class ) {
+	public static function overrideTimberPostClass( $post_class ) {
 		return '\Chisel\Post';
 	}
 }
