@@ -398,7 +398,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 
 ##### Chisel built-in extensions for Timber
 
-* `ChiselPost`: you can use this function if you want to create a post class inside Twig file. As an argument you can pass post id, post object, or an array consisting of field values for the post. When creating fake post by passing an array of fields as an argument you can use `_fields` key to set post meta values loaded via `get_field` method to simulate in example ACF values:
+* `ChiselPost`: you can use this function if you want to create a post class inside Twig file. As an argument you can pass post id, post object, or an array consisting of field values for the post. When creating fake post by passing an array of fields as an argument you can use `_fields` key to set post meta values loaded via `get_field` method to simulate for example ACF values:
 
   Example usage:
   
