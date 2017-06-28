@@ -416,7 +416,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   
   ```html
   <div>
-    <h1>{{ post.post_title }}</h1>
+    <h1>{{ post.title }}</h1>
     <p>{{ post.content }}</p>
     <p>{{ post.get_field('special_acf_field') }}</p>
   </div>
