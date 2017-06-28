@@ -396,26 +396,52 @@ Chisel allows easy front-end development prior to WordPress development. Suppose
 #### 4. Develop with Timber
 Refer to [Timber](http://upstatement.com/timber/) documentation if you are new to WordPress development with Timber.
 
-_Tip:_ If you want to avoid writing long classes with multiple modifiers by hand, you can use `className` function:
+##### Chisel built-in extensions for Timber
 
-Example usage:
+* `ChiselPost`: you can use this function if you want to create a post class inside Twig file. As an argument you can pass post id, post object, or an array consisting of field values for the post. When creating fake post by passing an array of fields as an argument you can use `_fields` key to set post meta values loaded via `get_field` method to simulate in example ACF values:
 
-```php
-<article class="{{
-  className(
-    'c-some-post',
-    'red',
-    'type-' ~ post.type,
-    (post.thumbnail ? 'has-thumbnail')
-  )
-}}"></article>
-```
+  Example usage:
+  
+  ```php
+  {% set post = ChiselPost({
+    'post_title': 'Fake post title',
+    'post_content': 'Fake post content',
+    '_fields': {
+      'special_acf_field': 'field value'
+    }
+  }) %}
+  ```
+  
+  This will create a `\Chisel\Post` object that you can use like any other post loaded from the database:
+  
+  ```html
+  <div>
+    <h1>{{ post.post_title }}</h1>
+    <p>{{ post.content }}</p>
+    <p>{{ post.get_field('special_acf_field') }}</p>
+  </div>
+  ```
 
-It will generate (assuming post of type `post` and no thumbnail):
+* `className`: you can use this function if you want to avoid writing long classes with multiple modifiers by hand:
 
-```html
-<article class="c-some-post c-some-post--red c-some-post--type-post"></article>
-```
+  Example usage:
+  
+  ```php
+  <article class="{{
+    className(
+      'c-some-post',
+      'red',
+      'type-' ~ post.type,
+      (post.thumbnail ? 'has-thumbnail')
+    )
+  }}"></article>
+  ```
+  
+  It will generate (assuming post of type `post` and no thumbnail):
+
+  ```html
+  <article class="c-some-post c-some-post--red c-some-post--type-post"></article>
+  ```
 
 ## Tutorials
 - [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
