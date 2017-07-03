@@ -443,6 +443,20 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   <article class="c-some-post c-some-post--red c-some-post--type-post"></article>
   ```
 
+##### Good practices
+
+* Try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
+  
+  Good:
+  ```html
+  {{ post.get_field('field_name') }}
+  ```
+  
+  Bad:
+  ```html
+  {{ post.field_name }}
+  ```
+
 ## Tutorials
 - [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
 - [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/)
