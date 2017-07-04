@@ -9,7 +9,6 @@ rules:
   block-opening-brace-space-before: always
   color-hex-case: lower
   color-no-invalid-hex: true
-  comment-empty-line-before: always
   comment-no-empty: true
   comment-whitespace-inside: always
   declaration-block-no-duplicate-properties: true
