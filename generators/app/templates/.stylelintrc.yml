@@ -19,9 +19,9 @@ rules:
   declaration-colon-space-after: always-single-line
   declaration-colon-space-before: never
   font-family-name-quotes: always-where-recommended
-  function-comma-space-after: always
+  function-comma-space-after: always-single-line
   function-name-case: lower
-  function-parentheses-space-inside: never
+  function-parentheses-space-inside: never-single-line
   function-url-quotes: always
   function-whitespace-after: always
   indentation: 2
@@ -84,7 +84,7 @@ rules:
     - lower
     - ignoreKeywords: BlinkMacSystemFont
     - severity: error
-  value-list-comma-space-after: always
+  value-list-comma-space-after: always-single-line
   value-list-comma-space-before: never
 
 defaultSeverity: warning
