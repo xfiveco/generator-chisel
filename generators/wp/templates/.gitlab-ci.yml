@@ -1,0 +1,75 @@
+image: jakub300/chisel-pantheon-magic:latest
+
+stages:
+  - Chisel
+
+before_script:
+  - git remote remove pantheon || (exit 0)
+  - git remote remove base || (exit 0)
+  - git remote add pantheon $PANTHEON_GIT_URL
+  - git remote add base $BASE_GIT_URL
+  - mkdir -p ./.git/info
+  - echo -e '* -text' > .git/info/attributes
+
+variables:
+  CHISEL_BASE_REMOTE_BRANCH: $CI_COMMIT_REF_NAME
+  CHISEL_PANTHEON_REMOTE_BRANCH: $CI_COMMIT_REF_NAME
+  CHISEL_DEPLOY_COMMIT: $CI_COMMIT_SHA
+  NPM_CONFIG_CACHE: $CI_PROJECT_DIR/.npm-cache
+  YARN_CACHE_FOLDER: $CI_PROJECT_DIR/.yarn-cache
+  CHISEL_CI_BUILD_DETAILS: |
+    GitLab Project URL: $CI_PROJECT_URL
+    GitLab Job URL: $CI_PROJECT_URL/-/jobs/$CI_JOB_ID
+    GitLab Pipeline Source: $CI_PIPELINE_SOURCE
+    GitLab User: $GITLAB_USER_EMAIL / $GITLAB_USER_NAME
+    GitLab Pipeline ID: $CI_PIPELINE_ID
+    GitLab Job ID: $CI_JOB_ID
+
+cache:
+  key: $CI_JOB_STAGE-$CI_COMMIT_REF_NAME
+  paths:
+    - .yarn-cache
+    - .npm-cache
+    - node_modules
+
+Deploy Dev:
+  stage: Chisel
+  script:
+    - chisel-pantheon-magic
+  environment:
+    name: pantheon-dev
+    url: https://dev-$CHISEL_PANTHEON_SITE_NAME.pantheonsite.io
+  only:
+    - master
+
+Deploy Multidev:
+  stage: Chisel
+  script:
+    - terminus auth:login --machine-token=$TERMINUS_TOKEN
+    - chisel-pantheon-multidev-create
+    - chisel-pantheon-magic
+  environment:
+    name: pantheon-multidev/$CI_COMMIT_REF_NAME
+    url: https://$CI_COMMIT_REF_NAME-$CHISEL_PANTHEON_SITE_NAME.pantheonsite.io
+    on_stop: Destroy Multidev
+  only:
+    - branches
+  except:
+    - master
+
+Destroy Multidev:
+  stage: Chisel
+  before_script: []
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - terminus auth:login --machine-token=$TERMINUS_TOKEN
+    - chisel-pantheon-multidev-destroy
+  when: manual
+  environment:
+    name: pantheon-multidev/$CI_COMMIT_REF_NAME
+    action: stop
+  only:
+    - branches
+  except:
+    - master

@@ -1,0 +1,8 @@
+api_version: 1
+
+workflows:
+  sync_code:
+    after:
+      - type: webphp
+        description: Chisel Pushback
+        script: private/scripts/chisel/pushback.php

@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var async = require('async');
 var crypto = require('crypto');
+var mkdirp = require('mkdirp');
 
 const PREFIX_LENGTH = 8;
 
@@ -9,7 +10,8 @@ var Helpers = {
   copyFiles: function(sourceRoot, files, cb) {
     async.eachOfSeries(files, (newName, oldName, cb) => {
       async.waterfall([
-        (cb) => fs.readFile(path.join(sourceRoot, oldName), cb),
+        (cb) => mkdirp(path.dirname(newName), cb),
+        (createdDir, cb) => fs.readFile(path.join(sourceRoot, oldName), cb),
         (body, cb) => fs.writeFile(newName, body, cb)
       ], cb);
     }, cb);

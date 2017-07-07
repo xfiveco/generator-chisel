@@ -32,7 +32,7 @@
       "vendorConfig": "scripts/vendor.json"
     },
     "dest": {<% if (projectType == 'wp-with-fe') { %>
-      "wordpress": "wp",
+      "wordpress": "<%= wpDir %>",
       "wordpressTheme": "<%= nameSlug %>",<% } %>
       "assets": "assets",
       "base": "dist",

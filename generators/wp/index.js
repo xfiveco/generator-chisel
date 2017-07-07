@@ -9,10 +9,25 @@ const wpCli = require('../../helpers/wpCli');
 const async = require('async');
 const cp = require('child_process');
 const chalk = require('chalk');
+const ghGot = require('gh-got');
 
 const WP_CONFIG_UNIQUE_STRING_BYTES = 30;
 const STDOUT = 0;
 const STDERR = 1;
+
+
+const PANTHEON_UPSTREAM_API_URL = 'https://api.github.com/repos/jakub300/chisel-pantheon-upstream/git/refs/heads/master';
+const PANTHEON_UPSTREAM_WARNING = `
+For Pantheon integration to work well your project must be build on top of our Pantheon upstream.
+It looks like this project directory is either not a git repository or it is not based on the updstream.
+
+You can reset your master to Chisel upstream using those commands (THIS WILL REMOVE EVRYTHING ON MASTER):
+git init # if repository doesn't exist
+git fetch -uf https://github.com/jakub300/chisel-pantheon-upstream.git master:master
+git checkout -f master
+
+After doing that please restart Chisel. You can also ignore this warning if you know what are doing.
+`;
 
 module.exports = class extends Generator {
 
@@ -22,6 +37,7 @@ module.exports = class extends Generator {
 
   initializing () {
     this.configuration = this.config.get('config');
+    this.wpDir = this.configuration.wpDir || 'wp';
     if(!this.configuration) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
@@ -37,9 +53,92 @@ module.exports = class extends Generator {
   prompting() {
     var prompts = [
       {
+        type: 'confirm',
+        name: 'pantheon',
+        message: 'Will that site be hosted on Pantheon?',
+        default: () => this.wpDir == 'web',
+      },
+      {
+        name: 'pantheonValidated',
+        type: 'list',
+        message: 'What would you like to do now?',
+        choices: [
+          {
+            name: 'Ignore & continue',
+            value: 'ignore',
+          },
+          {
+            name: 'Exit',
+            value: 'exit',
+          }
+        ],
+        when: function(answers) {
+          if (!answers.pantheon) {
+            return false;
+          }
+          const done = this.async();
+          var gitCommit = '';
+          var verified = false;
+
+          function finish() {
+            if (verified) {
+              console.log('We sucessfully verified that your repository is based on Chisel Pantheon Upstream');
+              done(null, false);
+            } else {
+              console.log(PANTHEON_UPSTREAM_WARNING);
+              done(null, true);
+            }
+          }
+
+          try {
+            gitCommit = cp
+              .execSync('git rev-parse HEAD', { timeout: 2000 })
+              .toString('utf8').trim();
+          } catch (e) {
+          } finally {
+            if (!gitCommit) {
+              return finish();
+            }
+
+            ghGot(PANTHEON_UPSTREAM_API_URL, {
+              timeout: 10000,
+            }).then(res => {
+              verified = res.body && res.body.object && res.body.object.sha && res.body.object.sha == gitCommit;
+              finish();
+            }, e => {
+              console.log(e);
+              console.log('We failed to get commit id from GitHub for verification.');
+              finish();
+            });
+          }
+        },
+      },
+      {
+        name: 'pantheonCI',
+        type: 'list',
+        message: 'Which CI would you like to use for deployment to pantheon?',
+        choices: [
+          {
+            name: 'None',
+            value: 'none',
+          },
+          {
+            name: 'GitLab CI',
+            value: 'gitlab',
+          }
+        ],
+        default: 'none',
+        when: (answers) => {
+          if(answers.pantheonValidated == 'exit') {
+            process.exit(1);
+          }
+          return answers.pantheon;
+        },
+      },
+      {
         name: 'title',
         message: 'Enter title for the new site:',
-        default: this.configuration.name
+        default: this.configuration.name,
       }, {
         name: 'url',
         message: 'Enter URL:',
@@ -98,13 +197,16 @@ module.exports = class extends Generator {
     this.log(chalk.yellow('\nWORDPRESS SETUP\n'));
     this.prompt(prompts).then((answers) => {
       this.prompts = answers;
+      if(this.prompts.pantheon) {
+        this.wpDir = 'web';
+      }
       done();
     });
   }
 
   _updateWpConfig(cb) {
     async.waterfall([
-      (cb) => fs.readFile('wp/wp-config.php', 'utf8', cb),
+      (cb) => fs.readFile(this.wpDir+'/wp-config.php', 'utf8', cb),
       (config, cb) => {
         var prefix = helpers.makePrefix(this.configuration.nameSlug);
         config = config.replace('wp_', prefix + '_');
@@ -112,7 +214,7 @@ module.exports = class extends Generator {
         config = config.replace(/put your unique phrase here/g,
           () => crypto.randomBytes(WP_CONFIG_UNIQUE_STRING_BYTES).toString('base64'))
 
-        fs.writeFile('wp/wp-config.php', config, cb);
+        fs.writeFile(this.wpDir+'/wp-config.php', config, cb);
       }
     ], cb);
   }
@@ -122,7 +224,7 @@ module.exports = class extends Generator {
       if (err) {
         throw err;
       } else {
-        config = config.replace('"base": "src"', '"base": "wp/wp-content/themes/'+this.configuration.nameSlug+'/src"');
+        config = config.replace('"base": "src"', '"base": "'+this.wpDir+'/wp-content/themes/'+this.configuration.nameSlug+'/src"');
         fs.writeFile('package.json', config, (err) => {
           if (err) {
             throw err;
@@ -137,7 +239,7 @@ module.exports = class extends Generator {
   _moveSrcFolder() {
     fse.move(
       this.destinationPath('src'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src'),
+      this.destinationPath(this.wpDir+'/wp-content/themes/'+this.configuration.nameSlug+'/src'),
       function (err) {
         if (err) {
           return console.error(err);
@@ -151,15 +253,15 @@ module.exports = class extends Generator {
   _copyTheme() {
     // Copy Chisel starter theme
     this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug), this.configuration);
+      this.destinationPath(this.wpDir+'/wp-content/themes/'+this.configuration.nameSlug), this.configuration);
 
     // Copy screenshot
     this.fs.copy(this.templatePath('images/screenshot.png'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/screenshot.png'));
+      this.destinationPath(this.wpDir+'/wp-content/themes/'+this.configuration.nameSlug+'/screenshot.png'));
 
     this.fs.move(
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore')
+      this.destinationPath(this.wpDir+'/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
+      this.destinationPath(this.wpDir+'/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore')
     );
   }
 
@@ -229,17 +331,35 @@ module.exports = class extends Generator {
   install() {
     this._copyTheme();
     this._copyThemeStyles();
-    var done = this.async();
-    wpCli(['core', 'download'], helpers.throwIfError(done))
+    if(!this.prompts.pantheon) {
+      var done = this.async();
+      wpCli(['core', 'download'], helpers.throwIfError(done));
+    }
   }
 
   end() {
     var done = this.async();
     var files = {
-      'wp-config.php': 'wp/wp-config.php',
-      'gitignore': 'wp/.gitignore',
-      '.htaccess': 'wp/.htaccess'
+      '.htaccess': this.wpDir+'/.htaccess'
     }
+    if(!this.prompts.pantheon) {
+      Object.assign(files, {
+        'wp-config.php': this.wpDir+'/wp-config.php',
+        'gitignore': this.wpDir+'/.gitignore',
+      })
+    } else {
+      Object.assign(files, {
+        'pantheon.yml': 'pantheon.yml',
+        'pushback.php': this.wpDir+'/private/scripts/chisel/pushback.php',
+      })
+    }
+
+    if(this.prompts.pantheonCI == 'gitlab') {
+      Object.assign(files, {
+        '.gitlab-ci.yml': '.gitlab-ci.yml',
+      })
+    }
+
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),
       (cb) => this._updateWpConfig(cb),
