@@ -14,7 +14,7 @@ class Site extends \Timber\Site {
 	 */
 	public function __construct() {
 		// set default twig templates directory
-		\Timber\Timber::$dirname = TEMPLATES_DIR;
+		\Timber\Timber::$dirname = Settings::TEMPLATES_DIR;
 
 		$this->chiselInit();
 
@@ -25,12 +25,7 @@ class Site extends \Timber\Site {
 	 * Initiate chisel configuration.
 	 */
 	public function chiselInit() {
-		add_theme_support( 'post-formats' );
-		add_theme_support( 'post-thumbnails' );
-		add_theme_support( 'menus' );
 		add_filter( 'timber_context', array( $this, 'addToContext' ) );
-		add_filter( 'get_twig', array( '\Chisel\TwigExtensions', 'extend' ) );
-		add_action( 'init', array( '\Chisel\WpExtensions', 'extend' ) );
 		add_filter( 'Timber\PostClassMap', array( '\Chisel\Post', 'overrideTimberPostClass' ) );
 	}
 

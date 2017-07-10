@@ -11,17 +11,21 @@ namespace Chisel;
 class TwigExtensions {
 	private static $manifest = array();
 
+	public function __construct() {
+		add_filter( 'get_twig', array( $this, 'extend' ) );
+	}
+
 	/**
 	 * Get parsed manifest file content
 	 *
 	 * @return array
 	 */
-	public static function getManifest() {
-		if ( empty( self::$manifest ) ) {
-			self::initManifest();
+	public function getManifest() {
+		if ( empty( $this->manifest ) ) {
+			$this->initManifest();
 		}
 
-		return self::$manifest;
+		return $this->manifest;
 	}
 
 	/**
@@ -31,9 +35,9 @@ class TwigExtensions {
 	 *
 	 * @return \Twig_Environment $twig
 	 */
-	public static function extend( $twig ) {
-		$twig = self::registerTwigFilters( $twig );
-		$twig = self::registerTwigFunctions( $twig );
+	public function extend( $twig ) {
+		$twig = $this->registerTwigFilters( $twig );
+		$twig = $this->registerTwigFunctions( $twig );
 
 		return $twig;
 	}
@@ -45,39 +49,39 @@ class TwigExtensions {
 	 *
 	 * @return \Twig_Environment $twig
 	 */
-	private static function registerTwigFunctions( $twig ) {
-		self::registerFunction(
+	protected function registerTwigFunctions( $twig ) {
+		$this->registerFunction(
 			$twig,
 			'revisionedPath',
 			array(
-				'\Chisel\TwigExtensions',
+				$this,
 				'revisionedPath',
 			)
 		);
 
-		self::registerFunction(
+		$this->registerFunction(
 			$twig,
 			'assetPath',
 			array(
-				'\Chisel\TwigExtensions',
+				$this,
 				'assetPath',
 			)
 		);
 
-		self::registerFunction(
+		$this->registerFunction(
 			$twig,
 			'className',
 			array(
-				'\Chisel\TwigExtensions',
+				$this,
 				'className',
 			)
 		);
 
-		self::registerFunction(
+		$this->registerFunction(
 			$twig,
 			'ChiselPost',
 			array(
-				'\Chisel\TwigExtensions',
+				$this,
 				'chiselPost',
 			)
 		);
@@ -92,8 +96,8 @@ class TwigExtensions {
 	 *
 	 * @return \Twig_Environment $twig
 	 */
-	private static function registerTwigFilters( $twig ) {
-//		self::registerTwigFilter(
+	protected function registerTwigFilters( $twig ) {
+//		$this->registerTwigFilter(
 //			$twig,
 //			'filterName',
 //			array(
@@ -114,11 +118,11 @@ class TwigExtensions {
 	 *
 	 * @return string
 	 */
-	public static function revisionedPath( $asset ) {
+	public function revisionedPath( $asset ) {
 		$pathinfo = pathinfo( $asset );
 
 		if ( ! defined( 'CHISEL_DEV_ENV' ) ) {
-			$manifest = self::getManifest();
+			$manifest = $this->getManifest();
 			if ( ! array_key_exists( $pathinfo['basename'], $manifest ) ) {
 				return 'FILE-NOT-REVISIONED';
 			}
@@ -126,7 +130,7 @@ class TwigExtensions {
 			return sprintf(
 				'%s/%s%s/%s',
 				get_template_directory_uri(),
-				DIST_PATH,
+				Settings::DIST_PATH,
 				$pathinfo['dirname'],
 				$manifest[ $pathinfo['basename'] ]
 			);
@@ -134,7 +138,7 @@ class TwigExtensions {
 			return sprintf(
 				'%s/%s%s',
 				get_template_directory_uri(),
-				DIST_PATH,
+				Settings::DIST_PATH,
 				trim( $asset, '/' )
 			);
 		}
@@ -147,11 +151,11 @@ class TwigExtensions {
 	 *
 	 * @return string
 	 */
-	public static function assetPath( $asset ) {
+	public function assetPath( $asset ) {
 		return sprintf(
 			'%s/%s%s',
 			get_template_directory_uri(),
-			ASSETS_PATH,
+			Settings::ASSETS_PATH,
 			trim( $asset, '/' )
 		);
 	}
@@ -164,7 +168,7 @@ class TwigExtensions {
 	 *
 	 * @return string                built class
 	 */
-	public static function className( $name = '', $modifiers = null ) {
+	public function className( $name = '', $modifiers = null ) {
 		if ( ! is_string( $name ) || empty( $name ) ) {
 			return '';
 		}
@@ -186,7 +190,7 @@ class TwigExtensions {
 	 *
 	 * @return Post
 	 */
-	public static function chiselPost( $fields = null ) {
+	public function chiselPost( $fields = null ) {
 		return new Post( $fields );
 	}
 
@@ -197,7 +201,7 @@ class TwigExtensions {
 	 * @param $name
 	 * @param $callback
 	 */
-	private static function registerFunction( $twig, $name, $callback ) {
+	private function registerFunction( $twig, $name, $callback ) {
 		$classNameFunction = new \Twig_SimpleFunction( $name, $callback );
 		$twig->addFunction( $classNameFunction );
 	}
@@ -209,7 +213,7 @@ class TwigExtensions {
 	 * @param $name
 	 * @param $callback
 	 */
-	private static function registerFilter( $twig, $name, $callback ) {
+	private function registerFilter( $twig, $name, $callback ) {
 		$classNameFilter = new \Twig_SimpleFilter( $name, $callback );
 		$twig->addFilter( $classNameFilter );
 	}
@@ -217,10 +221,10 @@ class TwigExtensions {
 	/**
 	 * Loads data from manifest file.
 	 */
-	public static function initManifest() {
-		if ( file_exists( get_template_directory() . '/' . MANIFEST_PATH ) ) {
-			self::$manifest = json_decode(
-				file_get_contents( get_template_directory() . '/' . MANIFEST_PATH ),
+	public function initManifest() {
+		if ( file_exists( get_template_directory() . '/' . Settings::MANIFEST_PATH ) ) {
+			$this->manifest = json_decode(
+				file_get_contents( get_template_directory() . '/' . Settings::MANIFEST_PATH ),
 				true
 			);
 		}

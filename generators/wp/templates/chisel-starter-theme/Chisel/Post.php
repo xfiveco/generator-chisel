@@ -31,7 +31,7 @@ class Post extends \Timber\Post {
 	 *
 	 * @param array $fields
 	 */
-	private function prepareFakePost( $fields ) {
+	protected function prepareFakePost( $fields ) {
 		if ( isset( $fields['_fields'] ) ) {
 			$this->fakeFields = $fields['_fields'];
 			unset ( $fields['_fields'] );
