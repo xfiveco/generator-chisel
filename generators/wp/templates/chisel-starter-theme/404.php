@@ -5,5 +5,5 @@
  * @package <%= nameSlug %>
  */
 
-$context = Timber::get_context();
-Timber::render( '404.twig', $context );
+$context = \Timber\Timber::get_context();
+\Timber\Timber::render( '404.twig', $context );
