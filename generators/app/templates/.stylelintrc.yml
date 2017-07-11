@@ -60,8 +60,8 @@ rules:
   selector-list-comma-space-before: never
   selector-max-compound-selectors: 3
   selector-max-empty-lines: 0
-  selector-no-id:
-    - true
+  selector-max-id:
+    - 0
     - severity: error
   selector-no-qualifying-type:
     - true
