@@ -20,6 +20,9 @@ class Post extends \Timber\Post {
 	 */
 	public function __construct( $fields = null ) {
 		if ( is_array( $fields ) ) {
+			if ( isset( $fields['ID'] ) ) {
+				parent::__construct( $fields['ID'] );
+			}
 			$this->prepareFakePost( $fields );
 		} else {
 			parent::__construct( $fields );
