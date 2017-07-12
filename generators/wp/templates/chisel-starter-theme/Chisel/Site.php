@@ -39,6 +39,9 @@ class Site extends \Timber\Site {
 	 * @return array
 	 */
 	public static function addToContext( $context ) {
+		global $post;
+		$post = Timber::get_post();
+
 		$context['main_nav'] = new \Timber\Menu();
 		$context['post']     = Timber::get_post();
 
