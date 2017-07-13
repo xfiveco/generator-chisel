@@ -42,6 +42,6 @@ class WpExtensions {
 	 * Use this method to register custom image sizes
 	 */
 	public function addImagesSizes() {
-		// add_image_size('hero', 3000, 9999);
+		// add_image_size( 'hero', 3000, 9999 );
 	}
 }
