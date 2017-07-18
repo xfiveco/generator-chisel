@@ -101,6 +101,11 @@ define('NONCE_SALT',       'put your unique phrase here');
 
 /* That's all, stop editing! Happy blogging. */
 
+/** Hide PHP errors */
+if ( !WP_DEBUG ) {
+	ini_set( 'display_errors', 0 );
+}
+
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . '/');
