@@ -47,7 +47,17 @@ module.exports = class extends Generator {
       }, {
         name: 'adminUser',
         message: 'Enter admin user:',
-        default: 'admin'
+        default: () => {
+          try {
+            var fullName = cp.execSync('git config user.name', {
+              timeout: 2000
+            });
+            var nameParts = fullName.toString('utf8').trim().split(" ");
+            var name = nameParts[0].toLowerCase() + Math.floor(1000 + Math.random() * 9000);;
+            return name;
+          } catch(e) {}
+          return undefined;
+        }
       }, {
         name: 'adminPassword',
         message: 'Enter admin password:',
