@@ -12,6 +12,7 @@ class Security {
 	public function __construct() {
 		remove_action( 'wp_head', 'wp_generator' );
 		add_filter( 'the_generator', '__return_null' );
+		add_filter( 'xmlrpc_enabled', '__return_false' );
 		add_filter( 'script_loader_src', array( $this, 'removeSrcVersion' ) );
 		add_filter( 'style_loader_src', array( $this, 'removeSrcVersion' ) );
 	}
