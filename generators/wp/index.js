@@ -92,7 +92,8 @@ module.exports = class extends Generator {
   }
 
   updateProxyTarget() {
-    this.config.set("proxyTarget", this.prompts.url);
+    this.configuration["proxyTarget"] = this.prompts.url;
+    this.config.set("config", this.configuration);
   }
 
   _updateWpConfig(cb) {
