@@ -91,6 +91,10 @@ module.exports = class extends Generator {
     });
   }
 
+  _updateProxyTarget(cb) {
+    Generator.config.set("proxyTarget", this.prompts.url);
+  }
+
   _updateWpConfig(cb) {
     async.waterfall([
       (cb) => fs.readFile('wp/wp-config.php', 'utf8', cb),
