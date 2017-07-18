@@ -9,7 +9,7 @@ namespace Chisel;
  * Use this class to extend Twig
  */
 class TwigExtensions {
-	private static $manifest = array();
+	private $manifest = array();
 
 	public function __construct() {
 		add_filter( 'get_twig', array( $this, 'extend' ) );
