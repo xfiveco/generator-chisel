@@ -7,6 +7,10 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.php [L]
+
+  # Block listing authors
+  RewriteCond %{QUERY_STRING} author=\d
+  RewriteRule ^ /? [L,R=301]
 </IfModule>
 
 # END WordPress
