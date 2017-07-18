@@ -71,6 +71,8 @@ if ( file_exists( dirname( __FILE__ ) . '/wp-config-local.php' ) ) {
 	/** The Database Collate type. Don't change this if in doubt. */
 	define( 'DB_COLLATE', '' );
 
+	/** Disable the Plugin and Theme Editor */
+	define( 'DISALLOW_FILE_EDIT', true );
 }
 
 /**
@@ -113,6 +115,3 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once( ABSPATH . 'wp-settings.php' );
-
-/** Disable the Plugin and Theme Editor */
-define( 'DISALLOW_FILE_EDIT', true );
