@@ -10,3 +10,8 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+<FilesMatch "wp-config.*\.php|\.htaccess|readme\.html">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
