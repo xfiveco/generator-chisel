@@ -53,7 +53,8 @@ module.exports = class extends Generator {
               timeout: 2000
             });
             var nameParts = fullName.toString('utf8').trim().split(" ");
-            var name = nameParts[0].toLowerCase() + Math.floor(1000 + Math.random() * 9000);;
+            // eslint-disable-next-line no-magic-numbers
+            var name = nameParts[0].toLowerCase() + Math.floor(1000 + Math.random() * 9000);
             return name;
           } catch(e) {}
           return undefined;
