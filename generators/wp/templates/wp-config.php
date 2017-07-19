@@ -25,13 +25,15 @@ if ( file_exists( dirname( __FILE__ ) . '/wp-config-local.php' ) ) {
 	 */
 
 	include dirname( __FILE__ ) . '/wp-config-local.php';
+
 } else {
 
 	/**
 	 * Settings for non-local environments, used when wp-config-local.php not available
 	 */
 
-// ** MySQL settings - You can get this info from your web host ** //
+	/** MySQL settings - You can get this info from your web host */
+
 	/** The name of the database for WordPress */
 	define( 'DB_NAME', $_SERVER['DB_NAME'] );
 
@@ -43,7 +45,6 @@ if ( file_exists( dirname( __FILE__ ) . '/wp-config-local.php' ) ) {
 
 	/** MySQL hostname */
 	define( 'DB_HOST', $_SERVER['DB_HOST'] );
-
 
 	/**
 	 * WordPress Database Table prefix.
@@ -70,6 +71,8 @@ if ( file_exists( dirname( __FILE__ ) . '/wp-config-local.php' ) ) {
 	/** The Database Collate type. Don't change this if in doubt. */
 	define( 'DB_COLLATE', '' );
 
+	/** Disable the Plugin and Theme Editor */
+	define( 'DISALLOW_FILE_EDIT', true );
 }
 
 /**
@@ -77,7 +80,7 @@ if ( file_exists( dirname( __FILE__ ) . '/wp-config-local.php' ) ) {
  */
 
 /** Database Charset to use in creating database tables. */
-define('DB_CHARSET', 'utf8');
+define( 'DB_CHARSET', 'utf8' );
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -101,9 +104,14 @@ define('NONCE_SALT',       'put your unique phrase here');
 
 /* That's all, stop editing! Happy blogging. */
 
+/** Hide PHP errors */
+if ( !WP_DEBUG ) {
+	ini_set( 'display_errors', 0 );
+}
+
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__FILE__) . '/');
+	define( 'ABSPATH', dirname(__FILE__) . '/' );
 
 /** Sets up WordPress vars and included files. */
-require_once(ABSPATH . 'wp-settings.php');
+require_once( ABSPATH . 'wp-settings.php' );
