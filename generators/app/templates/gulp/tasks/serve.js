@@ -10,10 +10,9 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
   <% } %>
   gulp.task('serve', startTasks, function() {
     <% if(projectType == 'wp-with-fe') { %>
-    var name = generator_config.nameSlug;
     var browserSyncConfig = {
       proxy: {
-        target: generator_config.proxyTarget || name+'.dev',
+        target: generator_config.proxyTarget,
         reqHeaders: {
           'x-chisel-proxy': '1'
         }
