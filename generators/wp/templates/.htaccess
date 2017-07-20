@@ -7,13 +7,14 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
 
+<IfModule mod_rewrite.c>
   # Block listing authors
   RewriteCond %{QUERY_STRING} author=\d
   RewriteRule ^ /? [L,R=301]
 </IfModule>
-
-# END WordPress
 
 <FilesMatch "wp-config.*\.php|\.htaccess|readme\.html">
   Order allow,deny
