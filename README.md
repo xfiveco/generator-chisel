@@ -220,14 +220,20 @@ The file structure in front-end projects looks like this:
     - `layouts/page.twig` - a template from which the other pages are generated
     - `*.twig` - separate twig page templates
 - **index** - images and styles for the project index
-- `index.html` - project index with project pages listed
-- `package.json` - npm packages dependencies
-- `.yo-rc.json` - Yeoman generator configuration file
+- `.babelrc` - Babel configuration file
 - `.editorconfig` - [EditorConfig](http://editorconfig.org/) configuration file to achieve consistent coding style
+- `.eslintignore` - [ESLint](http://eslint.org/) ignore file
+- `.eslintrc.yml` - [ESLint](http://eslint.org/) configuration file to achieve consistent JavaScript coding style (you can update it to your preference)
 - `.gitattributes` - [Git](http://git-scm.com/) configuration file to force Unix line ending in text files
 - `.gitignore` - default Git ignore files and folders
-- `.eslintrc.yml` - [ESLint](http://eslint.org/) configuration file to achieve consistent JavaScript coding style (you can update it to your preference)
+- `.htmlhintrc` - [HTMLHint](https://github.com/yaniswang/HTMLHint) configuration file
+`.stylelintignore` - [stylelint](http://stylelint.io/) ignore file
 - `.stylintrc.yml` - [stylelint](http://stylelint.io/) configuration file to achieve consistent CSS coding style (you can update it to your preference)
+- `.yo-rc.json` - Yeoman generator configuration file
+- `index.html` - project index with project pages listed
+- `gulpfile.js` - Gulp configuration file
+- `package.json` - project metadata and dependencies
+- `README.md` - project readme, you can use it for the project documentation
 
 On a typical project, you will work in `src` folder and check your work in `dist` folder so you don’t have to touch other files.
 
