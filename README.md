@@ -231,7 +231,7 @@ The file structure in front-end projects looks like this:
 - `.gitattributes` - [Git](http://git-scm.com/) configuration file to force Unix line ending in text files
 - `.gitignore` - default Git ignore files and folders
 - `.htmlhintrc` - [HTMLHint](https://github.com/yaniswang/HTMLHint) configuration file
-`.stylelintignore` - [stylelint](http://stylelint.io/) ignore file
+- `.stylelintignore` - [stylelint](http://stylelint.io/) ignore file
 - `.stylintrc.yml` - [stylelint](http://stylelint.io/) configuration file to achieve consistent CSS coding style (you can update it to your preference)
 - `.yo-rc.json` - Yeoman generator configuration file
 - `index.html` - project index with project pages listed
@@ -413,7 +413,7 @@ Classes you usually don't have to touch:
 
 - `\Chisel\Site` - this class extends `\Timber\Site` class and is used to setup whole site
 - `\Chisel\Post` - this class extends `\Timber\Post` class
-- `\Chisel\TwigExtensions` - this is used to extend Twig
+- `\Chisel\TwigExtensions` - this class is used to extend Twig
 
 If you want to add new custom class, you can copy and adjust one of the existing classes. Then load your class in `functions.php`
 
@@ -482,37 +482,37 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 
 #### Security
 
-In addition to default security setting you can also:
+In addition to default security settings you can also:
 
-**Protect WP includes**
+* Protect WP includes
 
-Add `.htaccess` to the `wp-includes` folder with the following content:
+  Add `.htaccess` to the `wp-includes` folder with the following content:
 
-```
-<FilesMatch "\.(?i:php)$">
-  Order allow,deny
-  Deny from all
-</FilesMatch>
-<Files wp-tinymce.php>
-  Allow from all
-</Files>
-<Files ms-files.php>
-  Allow from all
-</Files>
-```
+  ```
+  <FilesMatch "\.(?i:php)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+  <Files wp-tinymce.php>
+    Allow from all
+  </Files>
+  <Files ms-files.php>
+    Allow from all
+  </Files>
+  ```
 
-**Protect uploads**
+* Protect uploads folder
 
-Add `.htaccess` to the `wp-content/uploads` folder with the following content:
+  Add `.htaccess` to the `wp-content/uploads` folder with the following content:
 
-```
-<FilesMatch "\.(?i:php)$">
-  Order allow,deny
-  Deny from all
-</FilesMatch>
-```
+  ```
+  <FilesMatch "\.(?i:php)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+  ```
 
-Note: this can break some plugins
+  Note: this can break some plugins
 
 ## Tutorials
 - [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
