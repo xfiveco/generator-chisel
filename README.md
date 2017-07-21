@@ -2,7 +2,7 @@
 
 > Chisel is a [Yeoman](http://yeoman.io) generator for setting up and developing front-end and WordPress projects.
 
-[![NPM](https://nodei.co/npm/generator-chisel.png?downloads=true)](https://nodei.co/npm/generator-chisel/)
+[![NPM](https://nodei.co/npm/generator-chisel.png)](https://nodei.co/npm/generator-chisel/)
 
 ![Project index](docs/img/project-index.jpg)
 
