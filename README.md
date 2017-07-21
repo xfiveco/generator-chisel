@@ -154,7 +154,7 @@ Setup your WordPress as follows:
 
 - *Enter title for the new site*: title of your WordPress website
 - *Enter URL*: the URL at which your WordPress project runs, currently Chisel only works with the default value
-- *Enter admin user*: WordPress admin user
+- *Enter admin user*: WordPress admin user, a different name than `admin` is suggested to increase security
 - *Enter admin password*: WordPress admin user password
 - *Enter admin email*:
 - *Where do you want to place the 'src' folder*: position of the src folder with styles, scripts and assets - either the root folder or theme folder
