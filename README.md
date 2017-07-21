@@ -250,6 +250,7 @@ File structure in WordPress projects is almost identical to the front-end projec
     - **themes**
       - **your-theme**
         - **dist** - dist folder where CSS, JS and assets files are built
+        - **Chisel** - various classes used to extend or add new functionality to your theme
         - **templates** - Twig templates
         - `index.php` - Chisel starter theme files
         - `functions.php`
