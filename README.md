@@ -293,7 +293,7 @@ You can also create multiple pages at once by separating page names with space:
 yo chisel:page "Home" "About Us" "Contact Us" "News"
 ```
 
-### Development
+### Development tasks
 When you have the basic setup done, you can start development. To re-compile Twig, SCSS and JavaScript files in real time you can use default task. Type
 
 ```bash
@@ -365,7 +365,7 @@ You can use `yo chisel:page` command to add pages to your WordPress project in t
 - Twig template is automatically created in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`
 - Page is accessible at `project-name.dev/{page-slug}`
 
-### Development
+### Development tasks
 To re-compile SCSS and JavaScript files in real time you can use default task. Type:
 
 ```bash
@@ -387,19 +387,35 @@ To create new revisions of styles and scripts using [gulp-rev](https://github.co
 npm run build
 ```
 
-### Front-end first
+### Creating front-end
 Chisel allows easy front-end development prior to WordPress development. Suppose you have 3 pages to develop front-end for `Team`, `Team Member`, `Contact`.
 
 1. Add these pages from the command line like described in the previous sections
 2. Now your pages are accessible under `project-name.dev/team/`, `project-name.dev/team-member/` and `project-name.dev/contact/`.
 3. Start adding HTML to relevant Twig templates. Where applicable try to use [Twig syntax](http://twig.sensiolabs.org/doc/templates.html)
 4. Create styles in `src/styles`.
-5. Once you are done with front-end development a WordPress developer will add required functionality to the templates
+5. Once you are done with front-end development a WordPress developer will add required functionality
 
-### Development with Timber
+### Developing theme functionality
+
+Inside the theme there is `Chisel` folder with various classes which extend WordPress or add theme functionality. It's recommended to follow the existing structure and update these classes or add new classes here instead of adding functionality directly to `functions.php`.
+
+Classes you can work with:
+
+- `\Chisel\WpExtensions` - use this class to extend Wordpress (register post types, taxonomies, etc.)
+- `\Chisel\Security` - default security settings for Chisel, you can change or extend security settings here.
+
+Classes you usually don't have to touch:
+
+- `\Chisel\Site` - this class extends `\Timber\Site` class and is used to setup whole site
+- `\Chisel\Post` - this class extends `\Timber\Post` class
+- `\Chisel\TwigExtensions` - this is used to extend Twig
+
+If you want to add new custom class, you can copy and adjust one of the existing classes. Then load your class in `functions.php`
+
 Refer to [Timber](http://upstatement.com/timber/) documentation if you are new to WordPress development with Timber.
 
-#### Chisel built-in extensions for Timber
+#### Built-in extensions for Timber
 
 * `ChiselPost`: you can use this function if you want to create a post class inside Twig file. As an argument you can pass post id, post object, or an array consisting of field values for the post. When creating fake post by passing an array of fields as an argument you can use `_fields` key to set post meta values loaded via `get_field` method to simulate for example ACF values. You can also load existing post that will have fake fields by passing post's id with `ID` key:
 
@@ -459,6 +475,40 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   ```html
   {{ post.field_name }}
   ```
+
+#### Security
+
+In addition to default security setting you can also:
+
+**Protect WP includes**
+
+Add `.htaccess` to the `wp-includes` folder with the following content:
+
+```
+<FilesMatch "\.(?i:php)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+<Files wp-tinymce.php>
+  Allow from all
+</Files>
+<Files ms-files.php>
+  Allow from all
+</Files>
+```
+
+**Protect uploads**
+
+Add `.htaccess` to the `wp-content/uploads` folder with the following content:
+
+```
+<FilesMatch "\.(?i:php)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+```
+
+Note: this can break some plugins
 
 ## Tutorials
 - [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
