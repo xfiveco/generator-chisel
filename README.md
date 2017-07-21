@@ -272,11 +272,9 @@ If you prefer having the `src` folder in your theme folder, choose this option w
 1. Move the `src` folder to the theme folder - `wp/wp-content/themes/your-theme`
 2. Change `chisel.src.base` property on line 13 in `package.json` to `wp/wp-content/themes/your-theme/src`
 
-## Project development
+## Front-end development
 
-### Front-end projects
-
-#### 1. Add pages
+### Adding pages
 Once your project is setup, you need to add pages you will be working on to it. From the command line type:
 
 ```bash
@@ -295,7 +293,7 @@ You can also create multiple pages at once by separating page names with space:
 yo chisel:page "Home" "About Us" "Contact Us" "News"
 ```
 
-#### 2. Develop
+### Development
 When you have the basic setup done, you can start development. To re-compile Twig, SCSS and JavaScript files in real time you can use default task. Type
 
 ```bash
@@ -331,9 +329,9 @@ When `npm run build` is run, first the `dist` folder is cleaned and then build t
 3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `revisionedPath` function.
 
-#### 3. Caveats
+### Caveats
 
-**Using jQuery plugins with Browserify**
+#### Using jQuery plugins with Browserify
 
 One of the known issues we encounter while front-end development is usage of jQuery plugins like `flexslider` alongside Browserify module bundler.
 
@@ -354,20 +352,20 @@ The usual solution to that problem can be treated this way:
   require('flexslider'); // Usually they bind to global jQuery object
   ```
 
-**Library not available through npm**
+#### Library not available through npm
 
 Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always).
 
-### WordPress projects
+## WordPress development
 
-#### 1. Add pages
+### Adding pages
 
 You can use `yo chisel:page` command to add pages to your WordPress project in the same way as you do in front-end projects.
 
 - Twig template is automatically created in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`
 - Page is accessible at `project-name.dev/{page-slug}`
 
-#### 2. Develop
+### Development
 To re-compile SCSS and JavaScript files in real time you can use default task. Type:
 
 ```bash
@@ -389,7 +387,7 @@ To create new revisions of styles and scripts using [gulp-rev](https://github.co
 npm run build
 ```
 
-#### 3. Front-end first
+### Front-end first
 Chisel allows easy front-end development prior to WordPress development. Suppose you have 3 pages to develop front-end for `Team`, `Team Member`, `Contact`.
 
 1. Add these pages from the command line like described in the previous sections
@@ -398,10 +396,10 @@ Chisel allows easy front-end development prior to WordPress development. Suppose
 4. Create styles in `src/styles`.
 5. Once you are done with front-end development a WordPress developer will add required functionality to the templates
 
-#### 4. Develop with Timber
+### Development with Timber
 Refer to [Timber](http://upstatement.com/timber/) documentation if you are new to WordPress development with Timber.
 
-##### Chisel built-in extensions for Timber
+#### Chisel built-in extensions for Timber
 
 * `ChiselPost`: you can use this function if you want to create a post class inside Twig file. As an argument you can pass post id, post object, or an array consisting of field values for the post. When creating fake post by passing an array of fields as an argument you can use `_fields` key to set post meta values loaded via `get_field` method to simulate for example ACF values. You can also load existing post that will have fake fields by passing post's id with `ID` key:
 
@@ -448,7 +446,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   <article class="c-some-post c-some-post--red c-some-post--type-post"></article>
   ```
 
-##### Good practices
+#### Good practices
 
 * Try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
   
