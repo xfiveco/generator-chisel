@@ -326,7 +326,7 @@ npm run build
 
 When `npm run build` is run, first the `dist` folder is cleaned and then build tasks are run in particular order:
 
-1. `styles-build` builds prefixed and minified styles and creates a stylesheet revision by appending content hash to the filename. Then it creates `rev-manifest.json` with original and revisioned file names
+1. `styles-build` builds minified styles and creates a stylesheet revision by appending content hash to the filename. Then it creates `rev-manifest.json` with original and revisioned file names
 2. `lint` runs EsLint
 3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `revisionedPath` function.
@@ -380,16 +380,14 @@ Additionally, development server will be started and Browsersync scripts injecte
 
 Depending on where you are looking at your project, different version of styles and scripts are used:
 
-- `localhost:3000` - unminified and non-prefixed CSS
-- `project-name.dev` - revisioned CSS and JS files (minified and prefixed)
+- `localhost:3000` - unminified CSS
+- `project-name.dev` - revisioned and minified CSS and JS files
 
 To create new revisions of styles and scripts using [gulp-rev](https://github.com/sindresorhus/gulp-rev), use the build task:
 
 ``` bash
 npm run build
 ```
-
-During development you should occasionally build your styles and scripts to see how the site works with minified and prefixed CSS.
 
 #### 3. Front-end first
 Chisel allows easy front-end development prior to WordPress development. Suppose you have 3 pages to develop front-end for `Team`, `Team Member`, `Contact`.
