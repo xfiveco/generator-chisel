@@ -64,7 +64,7 @@
     "gulp-sass-glob": "^1.0.8",
     "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.6.0",
-    "gulp-stylelint": "^4.0.0",<% if (projectType == 'fe') { %>
+    "gulp-stylelint": "^3.9.0",<% if (projectType == 'fe') { %>
     "gulp-twig-up-to-date": "^0.6.1",<% } %>
     "gulp-uglify": "^2.0.0",
     "pre-commit": "^1.2.2",
