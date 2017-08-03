@@ -6,7 +6,7 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
   <% if(projectType == 'wp-with-fe') { %>
   var startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];
   <% } else { %>
-  var startTasks = ['styles-watch', 'templates-watch', 'assets-watch', 'vendor-watch'];
+  var startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];
   gulp.task('vendor-rebuild-template', ['vendor-watch'], function () {
     gulp.start('templates-watch');
   });
@@ -25,6 +25,8 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
       online: true
     }
     <% } else { %>
+    gulp.start('templates-watch');
+
     var browserSyncConfig = {
       server: './',
       ghostMode: false,
