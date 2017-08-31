@@ -1,11 +1,10 @@
 'use strict';
 
 var path = require('path');
-var yeoman = require('yeoman-generator');
 var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 
-describe('Chisel Generator with default options (except styling set to full with style guide)', function () {
+describe('Chisel Generator with default options (except styling set to minimal)', function () {
   before(function (done) {
 
     helpers
@@ -17,7 +16,7 @@ describe('Chisel Generator with default options (except styling set to full with
         name: 'Hello2 Wąęśźorld_2 :D',
         author: 'Test Author',
         projectType: 'fe',
-        styling: 'full_styleguide',
+        styling: 'minimal',
         features: []
       })
       .on('end', done);
@@ -27,25 +26,12 @@ describe('Chisel Generator with default options (except styling set to full with
 
   it('should generate templates', function (done) {
     assert.file([
-      'src/templates/components/btn.twig',
       'src/templates/components/footer.twig',
       'src/templates/components/header.twig',
-      'src/templates/elements/blockquote.twig',
-      'src/templates/elements/headings.twig',
-      'src/templates/elements/hr.twig',
-      'src/templates/elements/images.twig',
-      'src/templates/elements/links.twig',
-      'src/templates/elements/lists.twig',
-      'src/templates/elements/tables.twig',
       'src/templates/layouts/base.twig',
       'src/templates/layouts/page.twig',
-      'src/templates/objects/layout.twig',
-      'src/templates/objects/list-bare.twig',
-      'src/templates/objects/list-inline.twig',
-      'src/templates/objects/media.twig',
-      'src/templates/objects/table.twig',
-      'src/templates/utilities/align.twig',
-      'src/templates/style-guide.twig'
+      'src/templates/objects/.keep',
+      'src/templates/utilities/.keep',
     ]);
 
     done();
@@ -70,22 +56,17 @@ describe('Chisel Generator with default options (except styling set to full with
       'src/styles/elements/_links.scss',
       'src/styles/elements/_lists.scss',
       'src/styles/elements/_tables.scss',
-      'src/styles/objects/_layout.scss',
-      'src/styles/objects/_list-bare.scss',
-      'src/styles/objects/_list-inline.scss',
-      'src/styles/objects/_media.scss',
-      'src/styles/objects/_table.scss',
       'src/styles/objects/_wrapper.scss',
-      'src/styles/components/_btn.scss',
       'src/styles/components/_footer.scss',
       'src/styles/components/_header.scss',
-      'src/styles/components/_style-guide.scss',
-      'src/styles/utilities/_align.scss',
-      'src/styles/utilities/_clearfix.scss',
-      'src/styles/utilities/_color.scss',
       'src/styles/utilities/_hide.scss',
-      'src/styles/utilities/_spacing.scss'
     ]);
+
+    done();
+  });
+
+  it('should not have link to Style Guide in index', function (done) {
+    assert.noFileContent('index.html', '<a href="dist/style-guide.html"');
 
     done();
   });

@@ -45,20 +45,20 @@ var Prompts = {
     {
       type: 'list',
       name: 'styling',
-      message: 'How much styling should be included?',
+      message: 'How much ITCSS styling should be included?',
       choices: [
         {
-          name: 'Minimal',
-          value: 'minimal',
+          name: 'Full (with style guide)',
+          value: 'full_styleguide',
         },
         {
           name: 'Full',
           value: 'full',
         },
         {
-          name: 'Full (and style guide)',
-          value: 'full_styleguide'
-        }
+          name: 'Minimal',
+          value: 'minimal',
+        },
       ]
     },
     {

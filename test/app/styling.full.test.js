@@ -76,4 +76,10 @@ describe('Chisel Generator with default options (except styling set to full)', f
     done();
   });
 
+  it('should not have link to Style Guide in index', function (done) {
+    assert.noFileContent('index.html', '<a href="dist/style-guide.html"');
+
+    done();
+  });
+
 });
