@@ -82,6 +82,7 @@ rules:
   unit-no-unknown: true
   value-keyword-case:
     - lower
+    - ignoreKeywords: BlinkMacSystemFont
     - severity: error
   value-list-comma-space-after: always
   value-list-comma-space-before: never
