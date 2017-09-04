@@ -11,11 +11,11 @@ namespace Chisel;
 class Performance {
 
 	private $scriptsToAsync = array( 'wp-embed.min.js' );
-	// private $scriptsToDefer = array( 'script1.js', 'script2.js' );
+	private $scriptsToDefer = array( );
 
 	public function __construct() {
-		add_filter( 'script_loader_tag', array( $this, 'asyncScripts' ) );
-		// add_filter( 'script_loader_tag', array( $this, 'deferScripts' ) );
+		add_filter( 'script_loader_tag', array( $this, 'asyncScript' ) );
+		add_filter( 'script_loader_tag', array( $this, 'deferScript' ) );
 	}
 
 	/**
@@ -23,7 +23,7 @@ class Performance {
 	 * @param  string $tag Script tag
 	 * @return string      Script tag
 	 */
-	public function asyncScripts( $tag ) {
+	public function asyncScript( $tag ) {
 		if ( is_admin() ) {
 			return $tag;
 		}
@@ -42,7 +42,7 @@ class Performance {
 	 * @param  string $tag Script tag
 	 * @return string      Script tag
 	 */
-	public function deferScripts( $tag ) {
+	public function deferScript( $tag ) {
 		if ( is_admin() ) {
 			return $tag;
 		}
