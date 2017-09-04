@@ -17,9 +17,11 @@
         <p class="c-intro">This project is powered by <a href="https://github.com/xfiveco/generator-chisel">Chisel</a>, a&nbsp;tool for setting up and developing front-end and WordPress projects.</p>
         <h2 class="c-heading">Pages</h2>
         <ul class="c-list">
-          <li>
-            <a href="dist/style-guide.html" class="c-page"><span class="c-page__link">Style Guide</span> <span class="c-page__name">style-guide.html</span></a>
-          </li>
+          <% if (hasStyleGuide) { %>
+            <li>
+              <a href="dist/style-guide.html" class="c-page"><span class="c-page__link">Style Guide</span> <span class="c-page__name">style-guide.html</span></a>
+            </li>
+          <% } %>
           <%% if (locals.pages) { %>
             <%% for (var i = 0; i < pages.length; i++) { %>
               <li>

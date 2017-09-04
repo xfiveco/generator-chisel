@@ -43,6 +43,25 @@ var Prompts = {
       }]
     },
     {
+      type: 'list',
+      name: 'styling',
+      message: 'How much ITCSS styling should be included?',
+      choices: [
+        {
+          name: 'Full (with style guide)',
+          value: 'full_styleguide',
+        },
+        {
+          name: 'Full',
+          value: 'full',
+        },
+        {
+          name: 'Minimal',
+          value: 'minimal',
+        },
+      ]
+    },
+    {
       type: 'checkbox',
       name: 'features',
       message: 'Select additional front-end features:',
@@ -66,6 +85,8 @@ var Prompts = {
     this.prompts.projectType = answers.projectType;
     this.prompts.nameSlug = slug(answers.name);
     this.prompts.nameCamel = _.upperFirst(_.camelCase(answers.name));
+    this.prompts.hasFullStyling = answers.styling == 'full' || answers.styling == 'full_styleguide';
+    this.prompts.hasStyleGuide = answers.styling == 'full_styleguide';
     this.prompts.features = {};
 
     for (var i in answers.features) {

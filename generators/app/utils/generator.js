@@ -46,15 +46,36 @@ var Generator = {
   },
 
   templates: function () {
+    var base = 'src/templates/';
     if(this.prompts.projectType == 'wp-with-fe') {
-      return;
+      base = 'wp/wp-content/themes/'+this.prompts.nameSlug+'/templates/';
     }
-    helpers.copy.call(this, 'templates/twig/**/*', 'src/templates/', this.prompts);
+
+    if(this.prompts.hasStyleGuide) {
+      helpers.copy.call(this, 'templates/twig/**/*', base, this.prompts);
+    } else {
+      helpers.copy.call(this, 'templates/twig/layouts/*', base + 'layouts/', this.prompts);
+      helpers.copy.call(this, 'templates/twig/components/{footer,header}.twig', base + 'components/', this.prompts);
+      this.fs.write(this.destinationPath(base + 'objects/.keep'), '')
+      this.fs.write(this.destinationPath(base + 'utilities/.keep'), '')
+    }
   },
 
   stylesheets: function () {
     helpers.copy.call(this, 'styles/vendor/.keep', 'src/styles/vendor/.keep');
-    helpers.copy.call(this, 'styles/itcss/**/*', 'src/styles/', this.prompts);
+    if(this.prompts.hasFullStyling) {
+      helpers.copy.call(this, 'styles/itcss/**/*', 'src/styles/', this.prompts);
+
+      if(!this.prompts.hasStyleGuide) {
+        this.fs.delete(this.destinationPath('src/styles/components/_style-guide.scss'))
+      }
+    } else {
+      helpers.copy.call(this, 'styles/itcss/*', 'src/styles/', this.prompts);
+      helpers.copy.call(this, 'styles/itcss/components/_{footer,header}.scss', 'src/styles/components/', this.prompts);
+      helpers.copy.call(this, 'styles/itcss/{elements,generic,settings,tools}/*', 'src/styles/*', this.prompts);
+      helpers.copy.call(this, 'styles/itcss/objects/_wrapper.scss', 'src/styles/objects/_wrapper.scss', this.prompts);
+      helpers.copy.call(this, 'styles/itcss/utilities/_hide.scss', 'src/styles/utilities/_hide.scss', this.prompts);
+    }
   },
 
   javascripts: function () {
