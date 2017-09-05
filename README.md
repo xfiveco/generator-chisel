@@ -359,18 +359,14 @@ The usual solution to that problem can be treated this way:
 
 #### Using jQuery and its plugins _outside of Browserify bundle_
 
-From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with Browserify. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_. Just please make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure browserify-shim for jQuery plugins_. Example:
+From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with Browserify. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_. Make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure browserify-shim for jQuery plugins_. Example:
 
 ```
-? Please enter the project name: Chisel Test
-? Please enter author name: Xfive
-? Please select project type: Front-end only
-? How much ITCSS styling should be included? Full (with style guide)
-? Select additional front-end features: ES6 with Babel, jQuery <-- select jQuery here
-? Would you like to configure browserify-shim for jQuery plugins? Yes <-- press "Y" here
+? Select additional front-end features: ES6 with Babel, jQuery
+? Would you like to configure browserify-shim for jQuery plugins? Yes
 ```
 
-This setup will allow you to place plugins inside special `/src/scripts/vendor` directory. Please mind they won't be picked up automatically! You need to add the plugin name in the `/src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
+This setup will allow you to place plugins inside special `/src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `/src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
 
 ```
 [
@@ -392,7 +388,7 @@ So, to recap:
 
 You can try following steps:
 
-1. Please make sure jQuery is installed. In case it isn't go ahead with `yarn add jquery` or `npm install jquery` depending on which tool you use.
+1. Check if jQuery is installed. In case it isn't go ahead with `yarn add jquery` or `npm install jquery` depending on which tool you use.
 2. Open up `package.json` in the root directory and make sure following entry is present:
   ```
     "browserify-shim": {
@@ -407,7 +403,7 @@ You can try following steps:
   ```
 4. Done!
 
-Just please note it will work _only with the recent Chisel version_!
+Note it will work _only with the recent Chisel version_!
 
 ##### Notes
 
