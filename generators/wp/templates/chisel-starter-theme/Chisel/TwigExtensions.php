@@ -123,7 +123,7 @@ class TwigExtensions {
 //			'testName',
 //			array(
 //				'\Chisel\TwigExtensions',
-//				'filter_callback'
+//				'test_callback'
 //			)
 //		);
 
