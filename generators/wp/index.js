@@ -157,14 +157,6 @@ module.exports = class extends Generator {
     this.fs.copy(this.templatePath('images/screenshot.png'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/screenshot.png'));
 
-    // Rename style guide so it works as WP page template
-    if(this.configuration.hasStyleGuide) {
-      this.fs.move(
-        this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/style-guide.twig'),
-        this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/templates/page-style-guide.twig')
-      );
-    }
-
     this.fs.move(
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
       this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore')
