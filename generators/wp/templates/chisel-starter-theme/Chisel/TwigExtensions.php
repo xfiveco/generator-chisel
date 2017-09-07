@@ -38,6 +38,7 @@ class TwigExtensions {
 	public function extend( $twig ) {
 		$twig = $this->registerTwigFilters( $twig );
 		$twig = $this->registerTwigFunctions( $twig );
+		$twig = $this->registerTwigTests( $twig );
 
 		return $twig;
 	}
@@ -90,19 +91,39 @@ class TwigExtensions {
 	}
 
 	/**
-	 * You can add your own filters to twig here
+	 * You can add your own filters to Twig here
 	 *
 	 * @param \Twig_Environment $twig
 	 *
 	 * @return \Twig_Environment $twig
 	 */
 	protected function registerTwigFilters( $twig ) {
-//		$this->registerTwigFilter(
+//		$this->registerFilter(
 //			$twig,
 //			'filterName',
 //			array(
 //				'\Chisel\TwigExtensions',
 //				'filter_callback'
+//			)
+//		);
+
+		return $twig;
+	}
+
+	/**
+	 * You can add your own tests to Twig here
+	 *
+	 * @param \Twig_Environment $twig
+	 *
+	 * @return \Twig_Environment $twig
+	 */
+	protected function registerTwigTests( $twig ) {
+//		$this->registerTest(
+//			$twig,
+//			'testName',
+//			array(
+//				'\Chisel\TwigExtensions',
+//				'test_callback'
 //			)
 //		);
 
@@ -216,6 +237,18 @@ class TwigExtensions {
 	private function registerFilter( $twig, $name, $callback ) {
 		$classNameFilter = new \Twig_SimpleFilter( $name, $callback );
 		$twig->addFilter( $classNameFilter );
+	}
+
+	/**
+	 * Use this method to register new Twig test
+	 *
+	 * @param \Twig_Environment $twig
+	 * @param $name
+	 * @param $callback
+	 */
+	private function registerTest( $twig, $name, $callback ) {
+		$classNameTest = new \Twig_SimpleTest( $name, $callback );
+		$twig->addTest( $classNameTest );
 	}
 
 	/**
