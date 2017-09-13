@@ -79,8 +79,8 @@ function addTests() {
     done();
   });
 
-  it('should add gulp-twig-up-to-date to package.json', function(done) {
-    assert.fileContent('package.json', '"gulp-twig-up-to-date"');
+  it('should add gulp-twig to package.json', function(done) {
+    assert.fileContent('package.json', '"gulp-twig"');
 
     done();
   });
