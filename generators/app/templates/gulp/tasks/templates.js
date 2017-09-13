@@ -32,7 +32,7 @@ var templatesTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.plumber(helpers.onError))
       .pipe(buildIncludedFilter)
       .pipe(plugins.data(getTemplateInputData))
-      .pipe(plugins.twigUpToDate({
+      .pipe(plugins.twig({
         base: path.join(config.src.base, config.src.templatesPath),
         functions: templatesFunctions({
           config: config,
