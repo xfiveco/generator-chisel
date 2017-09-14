@@ -366,7 +366,7 @@ From time to time you may stumble upon legacy jQuery plugin or one which just do
 ? Would you like to configure browserify-shim for jQuery plugins? Yes
 ```
 
-This setup will allow you to place plugins inside special `/src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `/src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
+This setup will allow you to place plugins inside special `src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
 
 ```
 [
@@ -380,11 +380,11 @@ So, to recap:
 
 1. Make sure to select jQuery during setup.
 2. Make sure you agreed to "Would you like to configure browserify-shim for jQuery plugins?".
-3. Place the plugin script inside `/src/scripts/vendor.json`.
-4. Add its name inside `/src/scripts/vendor.json`.
+3. Place the plugin script inside `src/scripts/vendor.json`.
+4. Add its name inside `src/scripts/vendor.json`.
 5. Enjoy. ;)
 
-##### What to do in case I need to update my current project?
+#### What to do in case I need to update my current project?
 
 You can try following steps:
 
@@ -403,19 +403,17 @@ You can try following steps:
   ```
 4. Done!
 
-Note it will work _only with the recent Chisel version_!
-
 ##### Notes
 
-* It's enough to add _full file name_ inside _vendor.json_. There's no need to add full path to it if the script has been placed inside `/src/scripts/vendor.json`.
-* Removing `"/node_modules/jquery/dist/jquery.js"` path will get rid of jQuery.
-* It's possible to refer plugins installed via NPM or Yarn using appropriate path – just like in the jQuery example: `"/node_modules/[plugin name]/[plugin-file.js]"`
-* When writing code it's possible to `import $ from jQuery` and **use plugins from the vendor** directory.
-* This setup will create additional JS file called `vendor.js`. It'll be placed in `/dist/scripts` just like the bundle file.
+* It's enough to add _full file name_ inside _vendor.json_. There's no need to add full path to it if the script has been placed inside `src/scripts/`.
+* Removing `"node_modules/jquery/dist/jquery.js"` path will get rid of jQuery.
+* It's possible to refer plugins installed via NPM or Yarn using appropriate path – just like in the jQuery example: `"node_modules/[plugin name]/[plugin-file.js]"`
+* When writing code it's possible to `import $ from jQuery` or `var $ = require('jquery')` and **use plugins from the vendor** directory.
+* This setup will create additional JS file called `vendor.js`. It'll be placed in `dist/scripts` just like the bundle file.
 
 #### Library not available through npm
 
-Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always) or try [vendor plugins setup](#using-jquery-and-its-plugins-outside-of-browserify-bundle).
+Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always). You can also try [vendor plugins setup](#using-jquery-and-its-plugins-outside-of-browserify-bundle).
 
 ## WordPress development
 
