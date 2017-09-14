@@ -359,32 +359,18 @@ The usual solution to that problem can be treated this way:
 
 #### Using jQuery and its plugins _outside of Browserify bundle_
 
-From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with Browserify. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_. Make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure browserify-shim for jQuery plugins_. Example:
+From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with Browserify. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_.
+
+##### New project setup
+
+ Make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure browserify-shim for jQuery plugins_. Example:
 
 ```
 ? Select additional front-end features: ES6 with Babel, jQuery
 ? Would you like to configure browserify-shim for jQuery plugins? Yes
 ```
 
-This setup will allow you to place plugins inside special `src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
-
-```
-[
-  "/node_modules/jquery/dist/jquery.js",
-  "select2.full.min.js"
-]
-
-```
-
-So, to recap:
-
-1. Make sure to select jQuery during setup.
-2. Make sure you agreed to "Would you like to configure browserify-shim for jQuery plugins?".
-3. Place the plugin script inside `src/scripts/vendor.json`.
-4. Add its name inside `src/scripts/vendor.json`.
-5. Enjoy. ;)
-
-#### What to do in case I need to update my current project?
+##### Existing project setup
 
 You can try following steps:
 
@@ -403,11 +389,30 @@ You can try following steps:
   ```
 4. Done!
 
+##### How to use
+
+This setup will allow you to place plugins inside special `src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
+
+```
+[
+  "/node_modules/jquery/dist/jquery.js",
+  "select2.full.min.js"
+]
+
+```
+
+So, to recap:
+
+1. Make sure to you've got jQuery installed.
+2. Place the plugin script inside `src/scripts/vendor.json`.
+3. Add its name inside `src/scripts/vendor.json`.
+4. Enjoy. ;)
+
 ##### Notes
 
 * It's enough to add _full file name_ inside _vendor.json_. There's no need to add full path to it if the script has been placed inside `src/scripts/`.
-* Removing `"node_modules/jquery/dist/jquery.js"` path will get rid of jQuery.
-* It's possible to refer plugins installed via NPM or Yarn using appropriate path – just like in the jQuery example: `"node_modules/[plugin name]/[plugin-file.js]"`
+* Removing `"/node_modules/jquery/dist/jquery.js"` path will get rid of jQuery.
+* It's possible to refer plugins installed via NPM or Yarn using appropriate path – just like in the jQuery example: `"/node_modules/[plugin name]/[plugin-file.js]"`
 * When writing code it's possible to `import $ from jQuery` or `var $ = require('jquery')` and **use plugins from the vendor** directory.
 * This setup will create additional JS file called `vendor.js`. It'll be placed in `dist/scripts` just like the bundle file.
 
