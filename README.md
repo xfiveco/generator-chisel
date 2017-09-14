@@ -39,6 +39,11 @@
   - [Development tasks](#development-tasks)
   - [Caveats](#caveats)
     - [Using jQuery plugins with Browserify](#using-jquery-plugins-with-browserify)
+    - [Using jQuery and its plugins _outside of Browserify bundle_](#using-jquery-and-its-plugins-_outside-of-browserify-bundle_)
+      - [New project setup](#new-project-setup)
+      - [Existing project setup](#existing-project-setup)
+      - [How to use](#how-to-use)
+      - [Notes](#notes)
     - [Library not available through npm](#library-not-available-through-npm)
 - [WordPress development](#wordpress-development)
   - [Adding pages](#adding-pages-1)
@@ -356,9 +361,68 @@ The usual solution to that problem can be treated this way:
   require('flexslider'); // Usually they bind to global jQuery object
   ```
 
+#### Using jQuery and its plugins _outside of Browserify bundle_
+
+From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with Browserify. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_.
+
+##### New project setup
+
+ Make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure browserify-shim for jQuery plugins_. Example:
+
+```
+? Select additional front-end features: ES6 with Babel, jQuery
+? Would you like to configure browserify-shim for jQuery plugins? Yes
+```
+
+##### Existing project setup
+
+You can try following steps:
+
+1. Check if jQuery is installed. In case it isn't go ahead with `yarn add jquery` or `npm install jquery` depending on which tool you use.
+2. Open up `package.json` in the root directory and make sure following entry is present:
+  ```
+    "browserify-shim": {
+      "jquery": "global:jQuery"
+    },
+  ```
+3. Make sure that path to jQuery is present in `vendor.json`:
+  ```
+  [
+    "/node_modules/jquery/dist/jquery.js"
+  ]
+  ```
+4. Done!
+
+##### How to use
+
+This setup will allow you to place plugins inside special `src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
+
+```
+[
+  "/node_modules/jquery/dist/jquery.js",
+  "select2.full.min.js"
+]
+
+```
+
+So, to recap:
+
+1. Make sure to you've got jQuery installed.
+2. Place the plugin script inside `src/scripts/vendor.json`.
+3. Add its name inside `src/scripts/vendor.json`.
+4. Enjoy. ;)
+
+##### Notes
+
+* It's enough to add _full file name_ inside _vendor.json_. There's no need to add full path to it if the script has been placed inside `src/scripts/`.
+* Removing `"/node_modules/jquery/dist/jquery.js"` path will get rid of jQuery.
+* It's possible to refer plugins installed via NPM or Yarn using appropriate path – just like in the jQuery example: `"/node_modules/[plugin name]/[plugin-file.js]"`
+* When writing code it's possible to `import $ from jQuery` or `var $ = require('jquery')` and **use plugins from the vendor** directory.
+* This setup will create additional JS file called `vendor.js`. It'll be placed in `dist/scripts` just like the bundle file.
+
 #### Library not available through npm
 
-Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always).
+Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always). You can also try [vendor plugins setup](#using-jquery-and-its-plugins-outside-of-browserify-bundle).
 
 ## WordPress development
 

@@ -1,4 +1,14 @@
-<% if (features.has_babel) { %>
+<% if (features.has_babel && has_jquery_vendor_config) { %>import $ from 'jquery';
+
+const greeting = name => {
+  const element = $('.js-greeting');
+
+  if (element.length) {
+    element.text(name);
+  }
+};
+
+export default greeting;<% } else if (features.has_babel) { %>
 const greeting = name => {
   const element = document.querySelector('.js-greeting');
 

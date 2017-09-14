@@ -7,9 +7,9 @@ var buildTask = function (gulp, plugins, config) {
   });
 
   <% if(projectType == 'wp-with-fe') { %>
-  gulp.task('build', plugins.sequence('clean', 'styles-build', 'lint-js', 'scripts-build'))
+  gulp.task('build', plugins.sequence('clean', 'styles-build', 'lint-js', 'scripts-build', 'vendor-build'))
   <% } else { %>
-  gulp.task('build', plugins.sequence('clean', 'styles-build', 'lint-js', 'scripts-build', 'templates-build', 'validate-html'))
+  gulp.task('build', plugins.sequence('clean', 'styles-build', 'lint-js', 'scripts-build', 'vendor-build', 'templates-build', 'validate-html'))
   <% } %>
 };
 
