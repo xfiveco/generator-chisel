@@ -14,6 +14,10 @@
   <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.querySelector('html').classList.remove('no-js');</script>
+  {% if hasVendor() %}
+    <script src="{{ revisionedPath('scripts/vendor.js') }}" defer></script>
+  {% endif %}
+  <script src="{{ revisionedPath('scripts/bundle.js') }}" defer></script>
 <% if (projectType == 'wp-with-fe') { %><link rel="pingback" href="{{site.pingback_url}}" />
   {{function('wp_head')}}<% } %>
   {% block head %}
@@ -37,9 +41,5 @@
     {% include 'components/footer.twig' %}
   {% endblock %}<% if (projectType == 'wp-with-fe') { %>
   {{ function('wp_footer') }}<% } %>
-  {% if hasVendor() %}
-    <script src="{{ revisionedPath('scripts/vendor.js') }}" defer></script>
-  {% endif %}
-  <script src="{{ revisionedPath('scripts/bundle.js') }}" defer></script>
 </body>
 </html>
