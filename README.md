@@ -472,9 +472,7 @@ Classes you can work with:
 
 - `\Chisel\WpExtensions` - use this class to extend Wordpress (register post types, taxonomies, etc.)
 - `\Chisel\Security` - default security settings for Chisel, you can change or extend security settings here.
-
-Classes you usually don't have to touch:
-
+- `\Chisel\Performance` - class for optimizing performance, allows to setup which JS scripts should be deferred or asynced
 - `\Chisel\Site` - this class extends `\Timber\Site` class and is used to setup whole site
 - `\Chisel\Post` - this class extends `\Timber\Post` class
 - `\Chisel\TwigExtensions` - this class is used to extend Twig
