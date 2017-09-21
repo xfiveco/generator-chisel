@@ -530,7 +530,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 
 #### Good practices
 
-* Try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
+* When using ACF try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
   
   Good:
   ```html
@@ -541,6 +541,8 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   ```html
   {{ post.field_name }}
   ```
+
+Read more on the topic in [ACF Cookbook](https://timber.github.io/docs/guides/acf-cookbook/)
 
 #### Security
 
