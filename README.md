@@ -39,7 +39,7 @@
   - [Development tasks](#development-tasks)
   - [Caveats](#caveats)
     - [Using jQuery plugins with Browserify](#using-jquery-plugins-with-browserify)
-    - [Using jQuery and its plugins _outside of Browserify bundle_](#using-jquery-and-its-plugins-_outside-of-browserify-bundle_)
+    - [Using jQuery and its plugins outside of Browserify bundle](#using-jquery-and-its-plugins-outside-of-browserify-bundle)
       - [New project setup](#new-project-setup)
       - [Existing project setup](#existing-project-setup)
       - [How to use](#how-to-use)
@@ -361,7 +361,7 @@ The usual solution to that problem can be treated this way:
   require('flexslider'); // Usually they bind to global jQuery object
   ```
 
-#### Using jQuery and its plugins _outside of Browserify bundle_
+#### Using jQuery and its plugins outside of Browserify bundle
 
 From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with Browserify. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_.
 
