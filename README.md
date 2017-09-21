@@ -68,11 +68,11 @@ Chisel allows to create 2 projects types - front-end and WordPress projects with
 - [Twig](http://twig.sensiolabs.org/) templating engine
 - SCSS with [ITCSS architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)
 - [Browserify](http://browserify.org/) with Watchify
+- ES6 with [Babel](https://babeljs.io/)
 - [gulp-rev](https://github.com/sindresorhus/gulp-rev) support
 - [stylelint](http://stylelint.io/)
 - [ESLint](http://eslint.org/)
 - HTML validation with [htmlhint](https://github.com/bezoerb/gulp-htmlhint)
-- optional ES2015 with [Babel](https://babeljs.io/)
 - optional jQuery
 
 ### WordPress projects
@@ -251,7 +251,7 @@ File structure in WordPress projects is almost identical to the front-end projec
 
 - **~~dist~~** - dist folder is moved to the theme folder (see below)
 - **src**
-  - **~~templates~~**  - templates are stored in the templates directory inside the theme directory because they are interpreted dynamically by WordPress and Timber, not build by Gulp like in non-WP projects
+  - **~~templates~~**  - templates are stored in the templates directory inside the theme directory because they are interpreted dynamically by WordPress and Timber, not built by Gulp like in non-WP projects
 - **~~index~~** - project index files are not used
 - ~~index.html~~ - project index is not used
 - **wp** - WordPress installation
@@ -410,7 +410,7 @@ So, to recap:
 1. Make sure to you've got jQuery installed.
 2. Place the plugin script inside `src/scripts/vendor.json`.
 3. Add its name inside `src/scripts/vendor.json`.
-4. Enjoy. ;)
+4. Enjoy ;)
 
 ##### Notes
 
@@ -472,9 +472,7 @@ Classes you can work with:
 
 - `\Chisel\WpExtensions` - use this class to extend Wordpress (register post types, taxonomies, etc.)
 - `\Chisel\Security` - default security settings for Chisel, you can change or extend security settings here.
-
-Classes you usually don't have to touch:
-
+- `\Chisel\Performance` - class for optimizing performance, allows to setup which JS scripts should be deferred or asynced
 - `\Chisel\Site` - this class extends `\Timber\Site` class and is used to setup whole site
 - `\Chisel\Post` - this class extends `\Timber\Post` class
 - `\Chisel\TwigExtensions` - this class is used to extend Twig
@@ -532,7 +530,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 
 #### Good practices
 
-* Try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
+* When using ACF try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
   
   Good:
   ```html
@@ -543,6 +541,8 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   ```html
   {{ post.field_name }}
   ```
+
+Read more on the topic in [ACF Cookbook](https://timber.github.io/docs/guides/acf-cookbook/)
 
 #### Security
 
