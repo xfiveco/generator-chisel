@@ -27,7 +27,13 @@ var stylesTask = function (gulp, plugins, config, helpers) {
       .pipe(plugins.sassGlob())
       .pipe(plugins.sass({ outputStyle: 'expanded', includePaths: ['node_modules'] }))
       .pipe(plugins.postcss(postcssPlugins))
-      .pipe(plugins.cleanCss())
+      .pipe(plugins.mirror(
+        plugins.cleanCss(),
+        plugins.multipipe(
+          helpers.removeSourceMap(),
+          plugins.rename({suffix: '.full'})
+        )
+      ))
       .pipe(plugins.sourcemaps.write('./'))
       .pipe(plugins.rev())
       .pipe(plugins.revReplace())

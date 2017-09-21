@@ -103,7 +103,13 @@ var bundleVendorTask = function (gulp, plugins, config, helpers) {
       .pipe(monitorFileList(fileList))
       .pipe(plugins.sourcemaps.init())
       .pipe(plugins.concat('vendor.js'))
-      .pipe(plugins.uglify())
+      .pipe(plugins.mirror(
+        plugins.uglify(),
+        plugins.multipipe(
+          helpers.removeSourceMap(),
+          plugins.rename({suffix: '.full'})
+        )
+      ))
       .pipe(plugins.sourcemaps.write('./'))
       .pipe(plugins.rev())
       .pipe(plugins.revReplace())
