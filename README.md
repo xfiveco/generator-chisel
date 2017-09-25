@@ -408,7 +408,7 @@ This setup will allow you to place plugins inside special `src/scripts/vendor` d
 So, to recap:
 
 1. Make sure to you've got jQuery installed.
-2. Place the plugin script inside `src/scripts/vendor.json`.
+2. Place the plugin script inside `src/scripts/vendor`.
 3. Add its name inside `src/scripts/vendor.json`.
 4. Enjoy ;)
 
