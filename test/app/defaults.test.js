@@ -13,7 +13,7 @@ describe('Chisel Generator with default options', function () {
         'skip-install': true
       })
       .withPrompts({
-        name: 'Hello2 Wąęśźorld_2 :D',
+        name: 'Hello2d Wąęśźorld_2 :D',
         author: 'Test Author',
         projectType: 'fe',
         styling: 'full_styleguide',
