@@ -5,7 +5,7 @@ var path = require('path');
 var limax = require('limax');
 
 function slug(str) {
-  return limax(str).replace(/[^a-z0-9-]/g, '-');
+  return limax(str, {separateNumbers: false}).replace(/[^a-z0-9-]/g, '-');
 }
 
 const FIRST_LETTER = 0;
