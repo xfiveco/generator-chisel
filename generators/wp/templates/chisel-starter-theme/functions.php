@@ -23,6 +23,7 @@ spl_autoload_register( function ( $class ) {
 if ( \Chisel\Helpers::isTimberActivated() ) {
 	new \Chisel\Security();
 	new \Chisel\Performance();
+	new \Chisel\Media();
 	new \Chisel\TwigExtensions();
 	new \Chisel\WpExtensions();
 	new \Chisel\Site();
