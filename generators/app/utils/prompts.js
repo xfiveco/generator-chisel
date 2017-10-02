@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var path = require('path');
 var limax = require('limax');
+const cp = require('child_process');
 
 function slug(str) {
   return limax(str, {separateNumbers: false}).replace(/[^a-z0-9-]/g, '-');
@@ -28,7 +29,16 @@ var Prompts = {
     {
       name: 'author',
       message: 'Please enter author name:',
-      default: 'Xfive'
+      default: () => {
+        try {
+          var fullName = cp.execSync('git config user.name', {
+            timeout: 2000
+          });
+          var name = fullName.toString('utf8').trim();
+          return name;
+        } catch(e) {}
+        return undefined;
+      }
     },
     {
       type: 'list',
