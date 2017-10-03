@@ -11,7 +11,7 @@ namespace Chisel;
 class Media {
 
 	public function __construct() {
-		// $this->addImageSizes();
+		$this->addImagesSizes();
 		// add_action( 'after_setup_theme', array( $this, 'defaultMediaSetting' ) );
 		// add_filter( 'image_size_names_choose', array( $this, 'customImageSizes' ) );
 		add_action( 'jpeg_quality', array( $this, 'customJpegQuality') );
@@ -19,11 +19,11 @@ class Media {
 	}
 
 	/**
-	 * Add various image sizes
+	 * Use this method to register custom image sizes
 	 */
-	public function addImageSizes() {
-		add_image_size( 'small', 225, 9999 );
-		add_image_size( '800w', 800, 9999 );
+	public function addImagesSizes() {
+		// add_image_size( 'small', 225, 9999 );
+		// add_image_size( 'hero', 1600, 9999 );
 	}
 
 	/**
