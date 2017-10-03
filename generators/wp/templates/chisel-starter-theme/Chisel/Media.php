@@ -14,7 +14,6 @@ class Media {
 		// $this->addImageSizes();
 		// add_action( 'after_setup_theme', array( $this, 'defaultMediaSetting' ) );
 		// add_filter( 'image_size_names_choose', array( $this, 'customImageSizes' ) );
-		add_action( 'upload_mimes', array( $this, 'customMimeTypes') );
 		add_action( 'jpeg_quality', array( $this, 'customJpegQuality') );
 		add_filter( 'embed_oembed_html', array( $this, 'customOembedFilter' ), 10, 4);
 	}
@@ -45,16 +44,6 @@ class Media {
 		update_option( 'image_default_align', 'center' );
 		update_option( 'image_default_link_type', 'none' );
 		update_option( 'image_default_size', 'full' );
-	}
-
-	/**
-	 * Allowing additional image types
-	 * @param  array $mimes mime types
-	 * @return array        extended mime types
-	 */
-	function customMimeTypes( $mimes ) {
-		$mimes['svg'] = 'image/svg+xml';
-		return $mimes;
 	}
 
 	/**
