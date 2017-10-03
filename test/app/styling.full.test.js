@@ -45,6 +45,7 @@ describe('Chisel Generator with default options (except styling set to full)', f
       'src/styles/tools/_clearfix.scss',
       'src/styles/tools/_hidden.scss',
       'src/styles/generic/_box-sizing.scss',
+      'src/styles/generic/_font-face.scss',
       'src/styles/generic/_normalize.scss',
       'src/styles/generic/_reset.scss',
       'src/styles/generic/_shared.scss',
