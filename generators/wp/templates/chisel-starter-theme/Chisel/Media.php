@@ -15,7 +15,7 @@ class Media {
 		// add_action( 'after_setup_theme', array( $this, 'defaultMediaSetting' ) );
 		// add_filter( 'image_size_names_choose', array( $this, 'customImageSizes' ) );
 		add_action( 'jpeg_quality', array( $this, 'customJpegQuality') );
-		add_filter( 'embed_oembed_html', array( $this, 'customOembedFilter' ), 10, 4);
+		add_filter( 'oembed_dataparse', array( $this, 'customOembedFilter' ), 10, 4);
 	}
 
 	/**
@@ -55,9 +55,12 @@ class Media {
 	}
 
 	/**
-	 * Custom container for content videos
+	 * Custom container for embed content
 	 */
-	function customOembedFilter( $html, $url, $attr, $post_ID ) {
-		return '<div class="c-video">' . $html . '</div>';
+	function customOembedFilter( $html, $data, $url ) {
+		if ( ! is_object( $data ) || empty( $data->type ) ) {
+			return $html;
+		}
+		return '<div class="c-embed c-embed--' . strtolower($data->type) . '">' . $html . '</div>';
 	}
 }
