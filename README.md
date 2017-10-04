@@ -338,14 +338,6 @@ When `npm run build` is run, first the `dist` folder is cleaned and then build t
 3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `revisionedPath` function.
 
-`assetPath`: this function returns the real path of the asset file from the `dist/assets` folder.
-
-Example usage:
-
-```twig
-  <img src="{{ assetPath('images/logo.svg') }}" alt="Site Name">
-```
-
 ### Caveats
 
 #### Using jQuery plugins with Browserify
@@ -541,7 +533,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   Example usage:
 
   ```twig
-    <img src="{{ assetPath('images/logo.svg') }}" alt="Site Name">
+    <img src="{{ assetPath('images/logo.svg') }}" alt="{{ site.name }}">
   ```
 
 #### Good practices
