@@ -528,6 +528,14 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
   <article class="c-some-post c-some-post--red c-some-post--type-post"></article>
   ```
 
+* `assetPath`: this function returns the real path of the asset file from the `dist/assets` folder.
+
+  Example usage:
+
+  ```twig
+    <img src="{{ assetPath('images/logo.svg') }}" alt="{{ site.name }}">
+  ```
+
 #### Good practices
 
 * When using ACF try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
