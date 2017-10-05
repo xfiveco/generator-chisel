@@ -56,6 +56,11 @@ class Media {
 
 	/**
 	 * Custom container for embed content
+	 *
+	 * oembed_dataparse filter runs when the data is gathered from the oembed provider.
+	 * If you make changes to this filter, already embedded data won't change.
+	 * You need to embed them again or use embed_oembed_html filter which is less performant
+	 * and doesn't provide $data object
 	 */
 	function customOembedFilter( $html, $data, $url ) {
 		if ( ! is_object( $data ) || empty( $data->type ) ) {
