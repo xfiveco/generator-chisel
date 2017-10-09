@@ -17,7 +17,7 @@
         {% if post.comment_count == 0 %}
           <p>No comments yet.</p>
         {% else %}
-          {% for cmt in post.get_comments() %}
+          {% for cmt in post.comments %}
             {% include "components/comment.twig" with {comment:cmt} %}
           {% endfor %}
         {% endif %}
