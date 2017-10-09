@@ -43,7 +43,7 @@ module.exports = class extends Generator {
       }, {
         name: 'url',
         message: 'Enter URL:',
-        default: 'http://'+this.configuration.nameSlug+'.dev/'
+        default: 'http://'+this.configuration.nameSlug+'.test/'
       }, {
         name: 'adminUser',
         message: 'Enter admin user:',
