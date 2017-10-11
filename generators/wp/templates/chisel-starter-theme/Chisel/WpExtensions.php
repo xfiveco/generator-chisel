@@ -10,7 +10,7 @@ namespace Chisel;
  */
 class WpExtensions {
 	public function __construct() {
-		$this->extend()
+		$this->extend();
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
