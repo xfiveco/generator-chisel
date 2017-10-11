@@ -10,19 +10,19 @@ namespace Chisel;
  */
 class WpExtensions {
 	public function __construct() {
-		add_action( 'init', array( $this, 'extend' ) );
+		$this->extend()
+		add_action( 'init', array( $this, 'init' ) );
 	}
 
-	public function extend() {
-		$this->themeSupport();
-		$this->registerPostTypes();
-		$this->registerTaxonomies();
-	}
-
-	public function themeSupport() {
+	private function extend() {
 		add_theme_support( 'post-formats' );
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
+	}
+
+	public function init() {
+		$this->registerPostTypes();
+		$this->registerTaxonomies();
 	}
 
 	/**
