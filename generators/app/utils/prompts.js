@@ -113,6 +113,7 @@ var Prompts = {
     this.prompts.hasFullStyling = answers.styling == 'full' || answers.styling == 'full_styleguide';
     this.prompts.hasStyleGuide = answers.styling == 'full_styleguide';
     this.prompts.features = {};
+    this.prompts.chiselVersion = require('../../../package.json').version;
 
     for (var i in answers.features) {
       this.prompts.features[answers.features[i]] = true;
