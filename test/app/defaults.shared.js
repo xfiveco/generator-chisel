@@ -68,6 +68,7 @@ function addTests() {
     assert.file('.yo-rc.json');
     assert.fileContent('.yo-rc.json', '"name": "Hello2d Wąęśźorld_2 :D"');
     assert.fileContent('.yo-rc.json', '"author": "Test Author"');
+    assert.fileContent('.yo-rc.json', /"chiselVersion": "(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?"/)
 
     done();
   });
