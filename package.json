@@ -35,6 +35,7 @@
     "limax": "^1.5.0",
     "lodash": "^4.17.4",
     "mysql": "^2.13.0",
+    "update-notifier": "^2.3.0",
     "yeoman-generator": "^2.0.0"
   },
   "devDependencies": {
