@@ -10,11 +10,11 @@ namespace Chisel;
  */
 class WpExtensions {
 	public function __construct() {
-		$this->extend();
+		$this->themeSupport();
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
-	private function extend() {
+	private function themeSupport() {
 		add_theme_support( 'post-formats' );
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
