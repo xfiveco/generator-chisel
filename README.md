@@ -181,7 +181,7 @@ We recommend setting up [wildcard virtual hosts and DNS](https://github.com/xfiv
 If you haven’t set them up, you will have to add project domain to your `hosts` file
 
 ```
-127.0.0.1 project-name.dev
+127.0.0.1 project-name.test
 ```
 
 Then use automatically generated `dev-vhost.conf` and add it to the Apache `httpd-vhosts.conf` file or add
@@ -431,7 +431,7 @@ Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-alw
 You can use `yo chisel:page` command to add pages to your WordPress project in the same way as you do in front-end projects.
 
 - Twig template is automatically created in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`
-- Page is accessible at `project-name.dev/{page-slug}`
+- Page is accessible at `project-name.test/{page-slug}`
 
 ### Development tasks
 To re-compile SCSS and JavaScript files in real time you can use default task. Type:
@@ -442,12 +442,12 @@ npm run dev
 
 and this will start a task that will watch for changes in files and recompile them as needed.
 
-Additionally, development server will be started and Browsersync scripts injected. Browsersync proxies to your WordPress instance running at `project-name.dev`.
+Additionally, development server will be started and Browsersync scripts injected. Browsersync proxies to your WordPress instance running at `project-name.test`.
 
 Depending on where you are looking at your project, different version of styles and scripts are used:
 
 - `localhost:3000` - unminified CSS
-- `project-name.dev` - revisioned and minified CSS and JS files
+- `project-name.test` - revisioned and minified CSS and JS files
 
 To create new revisions of styles and scripts using [gulp-rev](https://github.com/sindresorhus/gulp-rev), use the build task:
 
@@ -459,7 +459,7 @@ npm run build
 Chisel allows easy front-end development prior to WordPress development. Suppose you have 3 pages to develop front-end for `Team`, `Team Member`, `Contact`.
 
 1. Add these pages from the command line like described in the previous sections
-2. Now your pages are accessible under `project-name.dev/team/`, `project-name.dev/team-member/` and `project-name.dev/contact/`.
+2. Now your pages are accessible under `project-name.test/team/`, `project-name.test/team-member/` and `project-name.test/contact/`.
 3. Start adding HTML to relevant Twig templates. Where applicable try to use [Twig syntax](http://twig.sensiolabs.org/doc/templates.html)
 4. Create styles in `src/styles`.
 5. Once you are done with front-end development a WordPress developer will add required functionality

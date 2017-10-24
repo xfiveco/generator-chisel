@@ -89,7 +89,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(this.templatePath('dev-vhost.conf'),
       this.destinationPath('dev-vhost.conf'), {
         documentRoot: process.cwd()+'/wp',
-        serverName: name + '.dev',
+        serverName: name + '.test',
         dbName: name
       }
     );
