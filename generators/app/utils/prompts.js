@@ -4,6 +4,9 @@ var _ = require('lodash');
 var path = require('path');
 var limax = require('limax');
 const cp = require('child_process');
+const updateNotifier = require('update-notifier');
+const packageJson = require('../../../package.json');
+let hasUpdate = false;
 
 function slug(str) {
   return limax(str, {separateNumbers: false}).replace(/[^a-z0-9-]/g, '-');
@@ -12,9 +15,43 @@ function slug(str) {
 const FIRST_LETTER = 0;
 const SECOND_LETTER = 1;
 const ONE_CHARACTER = 1;
+const CHISEL_VERSION_CHECK_TIMEOUT = 5000;
 
 var Prompts = {
   questions: [
+    {
+      type: 'confirm',
+      name: 'ignoreOutdatedChisel',
+      message: 'Are you sure you want to continue?',
+      default: false,
+      when: function() {
+        const done = this.async();
+        let calledDone = false;
+        const notifier = updateNotifier({
+          pkg: packageJson,
+          callback: (err, update) => {
+            if(calledDone) {
+              return;
+            }
+            calledDone = true;
+            if(update && update.type && update.type != 'latest') {
+              notifier.update = update;
+              hasUpdate = true;
+              notifier.notify({defer: false, isGlobal: true});
+              return done(null, true);
+            }
+            done(null, false);
+          },
+        })
+        setTimeout(function() {
+          if(calledDone) {
+            return;
+          }
+          calledDone = true;
+          done(null, false);
+        }, CHISEL_VERSION_CHECK_TIMEOUT);
+      }
+    },
     {
       name: 'name',
       message: 'Please enter the project name:',
@@ -24,6 +61,12 @@ var Prompts = {
         .join(' '),
       validate: function (input) {
         return !!input;
+      },
+      when: function(answers) {
+        if(hasUpdate && !answers.ignoreOutdatedChisel) {
+          process.exit(1);
+        }
+        return true;
       }
     },
     {
@@ -113,6 +156,7 @@ var Prompts = {
     this.prompts.hasFullStyling = answers.styling == 'full' || answers.styling == 'full_styleguide';
     this.prompts.hasStyleGuide = answers.styling == 'full_styleguide';
     this.prompts.features = {};
+    this.prompts.chiselVersion = packageJson.version;
 
     for (var i in answers.features) {
       this.prompts.features[answers.features[i]] = true;
