@@ -1,6 +1,9 @@
 # Changelog
 
 ## v0.9.0 (25/10/2017)
+- [**enhancement**] When running Chisel check if it is up to date [#298](https://github.com/xfiveco/generator-chisel/issues/298)
+- [**enhancement**] Update link in the readme in generated project to link to specific version [#297](https://github.com/xfiveco/generator-chisel/issues/297)
+- [**enhancement**] Save Chisel version used to generate project in .yo-rc.json [#296](https://github.com/xfiveco/generator-chisel/issues/296)
 - [**documentation**] Update wiki pages to reflect change from .dev to .test [#293](https://github.com/xfiveco/generator-chisel/issues/293)
 - [**enhancement**] Fix wp_title in base.twig [#284](https://github.com/xfiveco/generator-chisel/issues/284)
 - [**enhancement**] Review Chisel/WpExtensions.php [#281](https://github.com/xfiveco/generator-chisel/issues/281)
