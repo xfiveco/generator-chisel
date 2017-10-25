@@ -145,7 +145,7 @@ Notable changes and features:
 
 ## v0.2.0 (24/08/2016)
 - new project index design
-- excluding private (_prefixed) templates from rendering to HTML, see #32 
+- excluding private (prefixed with \_) templates from rendering to HTML, see #32
 
 ---
 
