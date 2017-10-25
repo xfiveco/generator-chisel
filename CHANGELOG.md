@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.9.0 (25/10/2017)
+- [**closed**] Update wiki pages to reflect change from .dev to .test [#293](https://github.com/xfiveco/generator-chisel/issues/293)
+- [**closed**] Use proper path when extending nested templates [#291](https://github.com/xfiveco/generator-chisel/issues/291)
+- [**closed**] Fix wp_title in base.twig [#284](https://github.com/xfiveco/generator-chisel/issues/284)
+- [**closed**] Review Chisel/WpExtensions.php [#281](https://github.com/xfiveco/generator-chisel/issues/281)
+- [**enhancement**] Change author's name suggestion to the user name [#268](https://github.com/xfiveco/generator-chisel/issues/268)
+- [**enhancement**] Add Media class to Chisel namespace in WP for various media adjustments [#265](https://github.com/xfiveco/generator-chisel/issues/265)
+- [**closed**] Switch to yeoman-generator 2.0 [#262](https://github.com/xfiveco/generator-chisel/issues/262)
+- [**question**] Change .dev to .test [#261](https://github.com/xfiveco/generator-chisel/issues/261)
+- [**enhancement**][**wp**] Remove get_ from twigs wherever possible [#257](https://github.com/xfiveco/generator-chisel/issues/257)
+- [**enhancement**] Add doctoc as devDependency and add script to generate TOC in README.md [#256](https://github.com/xfiveco/generator-chisel/issues/256)
+- [**documentation**] assetPath is not documented [#242](https://github.com/xfiveco/generator-chisel/issues/242)
+- [**enhancement**] Provide functionality for web fonts loading [#233](https://github.com/xfiveco/generator-chisel/issues/233)
+- [**documentation**] Create guide for using plugins which don't have npm version [#173](https://github.com/xfiveco/generator-chisel/issues/173)
+
+---
+
 ## v0.8.0 (21/09/2017)
 - Adding option to select how much ITCSS styling should be included (#182)
 - Adding JavaScript vendor concatenation (#185)
