@@ -1,3 +1,36 @@
+<% if (features.has_babel) { %>
 {
   "extends": "chisel"
 }
+<% } else { %>
+{
+  "rules": {
+    "indent": [ "warn", 2 ],
+    "no-cond-assign": "warn",
+    "no-empty": "warn",
+    "no-extra-semi": "warn",
+    "no-irregular-whitespace": "warn",
+    "no-unreachable": "warn",
+    "curly": "warn",
+    "no-eval": "warn",
+    "no-floating-decimal": "warn",
+    "no-global-assign": "warn",
+    "no-magic-numbers": "warn",
+    "no-octal": "warn",
+    "no-redeclare": "warn",
+    "no-unused-vars": "warn",
+    "block-spacing": "warn",
+    "brace-style": "warn",
+    "comma-style": [ "warn", "last" ],
+    "consistent-this": [ "warn", "that" ],
+    "eol-last": "warn",
+    "func-call-spacing": "warn",
+    "no-trailing-spaces": "warn",
+    "no-undef": "error"
+  },
+  "env": {
+    "commonjs": true,
+    "browser": true
+  }
+}
+<% } %>
