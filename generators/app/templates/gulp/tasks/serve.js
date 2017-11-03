@@ -37,6 +37,7 @@ var serveTask = function (gulp, plugins, config, helpers, generator_config) {
 
     gulp.watch(path.join(config.src.base, config.src.styles), ['styles-watch']);
     <% if(projectType == 'fe') { %>
+    // TODO: rebuild templates when webpack manifest changes
     gulp.watch(config.src.templatesWatch, ['templates-watch']);
     gulp.watch(path.join(config.src.base, config.src.vendorConfig), ['vendor-rebuild-template']);
     <% } %>

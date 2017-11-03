@@ -4,6 +4,13 @@ var chalk = require('chalk');
 
 module.exports = function(data) {
   data = data || {};
+
+  const webpackManifestPath = path.join(
+    data.config.dest.base,
+    data.config.dest.scripts,
+    'manifest' + (!data.manifest ? '-dev' : '') + '.json'
+  );
+
   var functions = [
     {
       name: 'revisionedPath',
@@ -54,6 +61,24 @@ module.exports = function(data) {
 
         return !!data.manifest['vendor.js'];
       }
+    },
+    {
+      name: 'getScriptsPath',
+      func: function() {
+        return 'dist/';
+      },
+    },
+    {
+      name: 'hasWebpackManifest',
+      func: function() {
+        return fs.existsSync(webpackManifestPath);
+      },
+    },
+    {
+      name: 'getWebpackManifest',
+      func: function() {
+        return fs.readFileSync(webpackManifestPath, 'utf8');
+      },
     },
   ];
 

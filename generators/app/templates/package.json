@@ -17,6 +17,7 @@
       "base": "src",
       "dataPath": "data/",
       "scripts": "scripts/**/*",
+      "scriptsMain": "scripts/*.js",
       "styles": "styles/**/*",
       "stylesMain": "styles/*.scss",
       "templatesBuild": [
@@ -42,11 +43,12 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",<% if (features.has_babel) { %>
-    "babel-preset-es2015": "^6.24.1",
-    "babelify": "^7.3.0",<% } %>
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-es2015": "^6.24.1",<% } %>
     "browser-sync": "^2.18.12",
-    "browserify": "^14.4.0",
-    "browserify-shim": "^3.8.14",
+    "chunk-manifest-webpack-plugin": "^1.1.2",
     "del": "^3.0.0",<% if (features.has_babel) { %>
     "eslint-config-chisel": "^1.0.0",<% } %>
     "glob": "^7.1.2",
@@ -55,6 +57,7 @@
     "gulp-cli": "^1.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-data": "^1.2.1",
+    "gulp-debug": "^3.1.0",
     "gulp-eslint": "^4.0.0",
     "gulp-filter": "^5.0.0",
     "gulp-htmlhint": "^0.3.1",
@@ -78,17 +81,13 @@
     "pre-commit": "^1.2.2",
     "prettier": "1.8.2",
     "through2": "^2.0.3",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0"
+    "vinyl-named": "^1.1.0",
+    "webpack-stream": "^4.0.0"
   },
   "dependencies": {<% if (features.has_jquery) { %>
     "jquery": "^3.2.1",<% } %>
     "normalize-scss": "^7.0.0"
   },
-  "browserify-shim": {<% if (has_jquery_vendor_config) { %>
-    "jquery": "global:jQuery"
-  <% } %>},
   "pre-commit": [
     "lint"
   ]

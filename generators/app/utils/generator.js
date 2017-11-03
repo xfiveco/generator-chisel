@@ -23,6 +23,7 @@ var Generator = {
 
   appfiles: function () {
     helpers.copy.call(this, 'package.json', 'package.json', this.prompts);
+    helpers.copy.call(this, 'webpack.chisel.config.js', 'webpack.chisel.config.js', this.prompts);
   },
 
   gulpfiles: function () {
