@@ -20,17 +20,16 @@ describe('Chisel Generator with ES2015 and Babel', function () {
       .on('end', done);
   });
 
-  it('should add Babel ES2015 preset and Babelify as dependencies to package.json', function (done) {
+  it('should add Babel ES2015 preset and babel-loader as dependencies to package.json', function (done) {
     assert.fileContent('package.json', '"babel-preset-es2015":');
-    assert.fileContent('package.json', '"babelify":');
+    assert.fileContent('package.json', '"babel-loader":');
 
     done();
   });
 
-  it('should add Babelify transform to the Gulp scripts task', function (done) {
-    assert.file('gulp/tasks/scripts.js');
-    assert.fileContent('gulp/tasks/scripts.js', "transform: [");
-    assert.fileContent('gulp/tasks/scripts.js', "'babelify',");
+  it('should add babel-loader to webpack config', function (done) {
+    assert.file('webpack.chisel.config.js');
+    assert.fileContent('webpack.chisel.config.js', "loader: 'babel-loader'");
 
     done();
   });

@@ -28,9 +28,9 @@ describe('Chisel Generator with jQuery in vendor bundle and Babel', function () 
   });
 
   it('should create a jQuery example in a module', function (done) {
-    assert.file('src/scripts/greeting.js');
-    assert.fileContent('src/scripts/greeting.js', "import $ from 'jquery';");
-    assert.fileContent('src/scripts/greeting.js', "const element = $('.js-greeting');");
+    assert.file('src/scripts/modules/greeting.js');
+    assert.fileContent('src/scripts/modules/greeting.js', "import $ from 'jquery';");
+    assert.fileContent('src/scripts/modules/greeting.js', "const element = $('.js-greeting');");
 
     done();
   });
@@ -50,8 +50,8 @@ describe('Chisel Generator with jQuery in vendor bundle and Babel', function () 
     done();
   })
 
-  it('should not add jQuery to browserify-shim', function(done) {
-    assert.fileContent('package.json', '"jquery": "global:jQuery"');
+  it('should add jQuery to externals in webpack config', function(done) {
+    assert.fileContent('webpack.chisel.config.js', "jquery: 'window.jQuery',");
 
     done();
   })

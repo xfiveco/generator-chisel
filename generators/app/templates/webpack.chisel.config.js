@@ -16,9 +16,9 @@ const config = {
     filename: '[id].bundle.js',
     chunkFilename: '[id].chunk.js',
   },
-  externals: {
-    // jquery: 'window.jQuery',
-  },
+  externals: {<% if (has_jquery_vendor_config) { %>
+    jquery: 'window.jQuery',
+  <% } %>},
   devtool: 'inline-source-map',
   stats: 'normal',
   watch: IS_DEVELOPMENT,
