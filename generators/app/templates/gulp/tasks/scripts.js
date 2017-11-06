@@ -3,33 +3,38 @@
 const path = require('path');
 const _ = require('lodash');
 const webpack = require('webpack');
-const browserSync = require('browser-sync');
 
 let webpackConfig;
 
-function webpackDone(isDev) {
-  // Based on https://github.com/webpack/webpack-cli/blob/1eb340f4f32bb5303de9355d51e0bcf712755c0b/bin/webpack.js
-  return (err, stats) => {
-    if (err) {
-      console.error(err.stack || err);
-      if (err.details) {
-        console.error(err.details);
+var scriptsTask = function(gulp, plugins, config, helpers) {
+  function webpackDone(isDev) {
+    // Based on https://github.com/webpack/webpack-cli/blob/1eb340f4f32bb5303de9355d51e0bcf712755c0b/bin/webpack.js
+    return (err, stats) => {
+      if (err) {
+        console.error(err.stack || err);
+        if (err.details) {
+          console.error(err.details);
+        }
+        process.exit(1); // eslint-disable-line
       }
-      process.exit(1); // eslint-disable-line
-    }
-    let statsConfig = webpackConfig.stats || 'normal';
-    if (typeof statsConfig == 'string') {
-      statsConfig = stats.constructor.presetToOptions(statsConfig);
-      Object.assign(statsConfig, { colors: true });
-    }
-    console.log(stats.toString(statsConfig));
-    if(isDev) {
-      browserSync.reload();
+      let statsConfig = webpackConfig.stats || 'normal';
+      if (typeof statsConfig == 'string') {
+        statsConfig = stats.constructor.presetToOptions(statsConfig);
+        Object.assign(statsConfig, { colors: true });
+      }
+      const statsString = stats.toString(statsConfig);
+      console.log(statsString);
+      if(isDev) {<% if(projectType == 'fe') { %>
+        if(statsString.includes('manifest-dev.json')) {
+          gulp.start('templates-watch');
+        } else {
+          plugins.browserSync.reload();
+        }<% } else { %>
+        plugins.browserSync.reload();<% } %>
+      }
     }
   }
-}
 
-var scriptsTask = function(gulp, plugins, config, helpers) {
   gulp.task('scripts-load-config', function() {
     return require('../../webpack.chisel.config.js')().then(config => {
       webpackConfig = config;
