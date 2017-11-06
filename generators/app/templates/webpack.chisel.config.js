@@ -1,7 +1,7 @@
 // This is webpack configuration,
 // TODO: extend comment
 
-const webpack = require('webpack-stream').webpack;
+const webpack = require('webpack');
 const path = require('path');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const NameAllModulesPlugin = require('./gulp/NameAllModulesPlugin');

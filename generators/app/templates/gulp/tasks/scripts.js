@@ -2,6 +2,7 @@
 
 const path = require('path');
 const _ = require('lodash');
+const webpack = require('webpack');
 
 const RELOAD_DELAY_MS = 100;
 
@@ -37,7 +38,7 @@ var scriptsTask = function(gulp, plugins, config, helpers) {
     gulp
       .src(path.join(config.src.base, config.src.scriptsMain))
       .pipe(plugins.vinylNamed())
-      .pipe(plugins.webpackStream(webpackConfig, null, webpackDone))
+      .pipe(plugins.webpackStream(webpackConfig, webpack, webpackDone))
       .pipe(gulp.dest(scriptsDest))
 
     gulp
@@ -49,7 +50,7 @@ var scriptsTask = function(gulp, plugins, config, helpers) {
     return gulp
       .src(path.join(config.src.base, config.src.scriptsMain))
       .pipe(plugins.vinylNamed())
-      .pipe(plugins.webpackStream(webpackConfig, null, webpackDone))
+      .pipe(plugins.webpackStream(webpackConfig, webpack, webpackDone))
       .pipe(helpers.stealWebpackManifest())
       .pipe(plugins.sourcemaps.init({ loadMaps: true }))
       .pipe(

@@ -65,7 +65,7 @@ module.exports = function(data) {
     {
       name: 'getScriptsPath',
       func: function() {
-        return 'dist/';
+        return 'scripts/';
       },
     },
     {

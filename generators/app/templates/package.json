@@ -82,6 +82,7 @@
     "prettier": "1.8.2",
     "through2": "^2.0.3",
     "vinyl-named": "^1.1.0",
+    "webpack": "^3.8.1",
     "webpack-stream": "^4.0.0"
   },
   "dependencies": {<% if (features.has_jquery) { %>

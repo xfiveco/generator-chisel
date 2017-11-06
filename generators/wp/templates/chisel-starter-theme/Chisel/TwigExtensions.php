@@ -96,6 +96,33 @@ class TwigExtensions {
 			)
 		);
 
+		$this->registerFunction(
+			$twig,
+			'getScriptsPath',
+			array(
+				$this,
+				'getScriptsPath',
+			)
+		);
+
+		$this->registerFunction(
+			$twig,
+			'hasWebpackManifest',
+			array(
+				$this,
+				'hasWebpackManifest',
+			)
+		);
+
+		$this->registerFunction(
+			$twig,
+			'getWebpackManifest',
+			array(
+				$this,
+				'getWebpackManifest',
+			)
+		);
+
 		return $twig;
 	}
 
@@ -243,6 +270,52 @@ class TwigExtensions {
 			$manifest = $this->getManifest();
 			return array_key_exists( 'vendor.js', $manifest );
 		}
+	}
+
+	/**
+	 * Returns the real path of the scripts directory.
+	 *
+	 * @return string
+	 */
+	public function getScriptsPath() {
+		return sprintf(
+			'%s/%s',
+			get_template_directory_uri(),
+			Settings::SCRIPTS_PATH
+		);
+	}
+
+	/**
+	 * Verifies existence of webpack manifest file.
+	 *
+	 * @return bool
+	 */
+	public function hasWebpackManifest() {
+		return file_exists(
+			sprintf(
+				'%s/%s',
+				get_template_directory(),
+				Settings::getWebpackManifestPath()
+			)
+		);
+	}
+
+	/**
+	 * Returns the contents of the webpack manifest file.
+	 *
+	 * @return string
+	 */
+	public function getWebpackManifest() {
+		if( $this->hasWebpackManifest() ) {
+			return file_get_contents(
+				sprintf(
+					'%s/%s',
+					get_template_directory(),
+					Settings::getWebpackManifestPath()
+				)
+			);
+		}
+		return '';
 	}
 
 	/**
