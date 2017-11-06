@@ -1,5 +1,5 @@
-// This is webpack configuration,
-// TODO: extend comment
+// This webpack configuration is meant to be used by Chisel build scripts.
+// It should not be used with Webpack CLI.
 
 const webpack = require('webpack');
 const path = require('path');
