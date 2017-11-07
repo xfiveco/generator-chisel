@@ -79,7 +79,7 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",<% if (features.has_babel) { %>
     "eslint-config-chisel": "^1.0.0",<% } %>
-    "prettier": "^1.7.4",
+    "prettier": "1.7.4",
     "watchify": "^3.7.0"
   },
   "dependencies": {<% if (features.has_jquery) { %>
