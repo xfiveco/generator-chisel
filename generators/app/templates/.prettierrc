@@ -1,4 +1,4 @@
 {
   "singleQuote": true,
-  "trailingComma": "es5"
+  "trailingComma": <% if (features.has_babel) { %>"all"<% } else { %>"es5"<% } %>
 }
