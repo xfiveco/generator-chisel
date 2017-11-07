@@ -8,8 +8,7 @@ const greeting = name => {
   }
 };
 
-export default greeting;<% } else if (features.has_babel) { %>
-const greeting = name => {
+export default greeting;<% } else if (features.has_babel) { %>const greeting = name => {
   const element = document.querySelector('.js-greeting');
 
   if (element) {
