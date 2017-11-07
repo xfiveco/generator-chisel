@@ -47,7 +47,8 @@
     "browser-sync": "^2.18.12",
     "browserify": "^14.4.0",
     "browserify-shim": "^3.8.14",
-    "del": "^3.0.0",
+    "del": "^3.0.0",<% if (features.has_babel) { %>
+    "eslint-config-chisel": "^1.0.0",<% } %>
     "glob": "^7.1.2",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.7.0",
@@ -75,11 +76,10 @@
     "gulp-uglify": "^2.0.0",
     "multipipe": "^1.0.2",
     "pre-commit": "^1.2.2",
+    "prettier": "1.7.4",
     "through2": "^2.0.3",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",<% if (features.has_babel) { %>
-    "eslint-config-chisel": "^1.0.0",<% } %>
-    "prettier": "1.7.4",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
   "dependencies": {<% if (features.has_jquery) { %>
