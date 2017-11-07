@@ -48,4 +48,10 @@ describe('Chisel Generator with ES2015 and Babel', function () {
 
     done();
   });
+
+  it('should ES6 commas for Prettier', function (done) {
+    assert.fileContent('.prettierrc', '"trailingComma": "all"');
+
+    done();
+  });
 });
