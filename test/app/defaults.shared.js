@@ -10,7 +10,8 @@ function addTests() {
   it('should generate configuration files', function (done) {
     assert.file([
       '.editorconfig',
-      '.eslintrc.yml',
+      '.eslintrc',
+      '.prettierrc',
       '.gitattributes',
       '.stylelintrc.yml',
       '.gitignore',
@@ -82,6 +83,25 @@ function addTests() {
 
   it('should add gulp-twig to package.json', function(done) {
     assert.fileContent('package.json', '"gulp-twig"');
+
+    done();
+  });
+
+  it('should add Eslint custom rules', function (done) {
+    assert.fileContent('.eslintrc', '"rules": {');
+    assert.fileContent('.eslintrc', '"no-floating-decimal": "warn"');
+    assert.fileContent('.eslintrc', '"no-undef": "error"');
+    assert.fileContent('.eslintrc', '"commonjs": true');
+
+    done();
+  });
+
+  it('should install Prettier and config for it', function (done) {
+    assert.fileContent('package.json', '"prettier":');
+    assert.fileContent('.prettierrc', '{');
+    assert.fileContent('.prettierrc', '"singleQuote": true,');
+    assert.fileContent('.prettierrc', '"trailingComma": "es5"');
+    assert.fileContent('.prettierrc', '}');
 
     done();
   });
