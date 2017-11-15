@@ -37,6 +37,7 @@
 - [Front-end development](#front-end-development)
   - [Adding pages](#adding-pages)
   - [Development tasks](#development-tasks)
+  - [Automated JS code formatting with Prettier](#automated-js-code-formatting-with-prettier)
   - [Caveats](#caveats)
     - [Using jQuery plugins with Browserify](#using-jquery-plugins-with-browserify)
     - [Using jQuery and its plugins outside of Browserify bundle](#using-jquery-and-its-plugins-outside-of-browserify-bundle)
