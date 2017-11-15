@@ -1,9 +1,6 @@
-<% if (features.has_babel) { %>
-{
+<% if (features.has_babel) { %>{
   "extends": "chisel"
-}
-<% } else { %>
-{
+}<% } else { %>{
   "rules": {
     "indent": [ "warn", 2 ],
     "no-cond-assign": "warn",
@@ -32,5 +29,4 @@
     "commonjs": true,
     "browser": true
   }
-}
-<% } %>
+}<% } %>
