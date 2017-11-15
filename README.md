@@ -39,8 +39,8 @@
   - [Development tasks](#development-tasks)
   - [Automated JS code formatting with Prettier](#automated-js-code-formatting-with-prettier)
   - [Caveats](#caveats)
-    - [Using jQuery plugins with Browserify](#using-jquery-plugins-with-browserify)
-    - [Using jQuery and its plugins outside of Browserify bundle](#using-jquery-and-its-plugins-outside-of-browserify-bundle)
+    - [Using jQuery plugins with webpack](#using-jquery-plugins-with-webpack)
+    - [Using jQuery and its plugins outside of webpack bundle](#using-jquery-and-its-plugins-outside-of-webpack-bundle)
       - [New project setup](#new-project-setup)
       - [Existing project setup](#existing-project-setup)
       - [How to use](#how-to-use)
@@ -68,10 +68,11 @@ Chisel allows to create 2 projects types - front-end and WordPress projects with
 - [Browsersync](https://www.browsersync.io/)
 - [Twig](http://twig.sensiolabs.org/) templating engine
 - SCSS with [ITCSS architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)
-- [Browserify](http://browserify.org/) with Watchify
+- [webpack](https://webpack.js.org/)
 - ES6 with [Babel](https://babeljs.io/)
 - [gulp-rev](https://github.com/sindresorhus/gulp-rev) support
 - [stylelint](http://stylelint.io/)
+- [Prettier](https://prettier.io/)
 - [ESLint](http://eslint.org/) with [config tailored for Chisel](https://github.com/xfiveco/eslint-config-chisel) and [Prettier](https://prettier.io/) synced together for consistent and hassle free code formatting
 - HTML validation with [htmlhint](https://github.com/bezoerb/gulp-htmlhint)
 - optional jQuery
@@ -324,7 +325,7 @@ Additionally, development server will be started and Browsersync scripts injecte
     }
 ```
 
-During development `main.css` (unminified) and `bundle.js` are linked in HTML. This is achieved by custom Twig function `revisionedPath` which updates assets path depending on whether the watch or build tasks are running.
+During development `main.css` (unminified) and `appp.bundle.js` are linked in HTML. This is achieved by custom Twig function `revisionedPath` which updates assets path depending on whether the watch or build tasks are running.
 
 To rebuild the whole project and create new revisions of styles and scripts using `gulp-rev`, use the build task again
 
@@ -336,7 +337,7 @@ When `npm run build` is run, first the `dist` folder is cleaned and then build t
 
 1. `styles-build` builds minified styles and creates a stylesheet revision by appending content hash to the filename. Then it creates `rev-manifest.json` with original and revisioned file names
 2. `lint` runs EsLint
-3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
+3. `scripts-build` runs webpack and creates `app.bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `revisionedPath` function.
 
 ### Automated JS code formatting with Prettier
@@ -345,9 +346,9 @@ Prettier comes preinstalled with Chisel however it's synced with Eslint **only i
 
 ### Caveats
 
-#### Using jQuery plugins with Browserify
+#### Using jQuery plugins with webpack
 
-One of the known issues we encounter while front-end development is usage of jQuery plugins like `flexslider` alongside Browserify module bundler.
+One of the known issues we encounter while front-end development is usage of jQuery plugins like `flexslider` alongside webpack module bundler.
 
 The usual solution to that problem can be treated this way:
 
@@ -366,32 +367,32 @@ The usual solution to that problem can be treated this way:
   require('flexslider'); // Usually they bind to global jQuery object
   ```
 
-#### Using jQuery and its plugins outside of Browserify bundle
+#### Using jQuery and its plugins outside of webpack bundle
 
-From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with Browserify. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_.
+From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with webpack. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_.
 
 ##### New project setup
 
- Make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure browserify-shim for jQuery plugins_. Example:
+ Make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure vendor bundle for jQuery plugins_. Example:
 
 ```
 ? Select additional front-end features: ES6 with Babel, jQuery
-? Would you like to configure browserify-shim for jQuery plugins? Yes
+? Would you like to configure vendor bundle for jQuery plugins? Yes
 ```
 
 ##### Existing project setup
 
 You can try following steps:
 
-1. Check if jQuery is installed. In case it isn't go ahead with `yarn add jquery` or `npm install jquery` depending on which tool you use.
-2. Open up `package.json` in the root directory and make sure following entry is present:
-  ```
-    "browserify-shim": {
-      "jquery": "global:jQuery"
+1. Check if jQuery is installed. In case it isn't go ahead with `yarn add jquery` or `npm install jquery --save` depending on which tool you use.
+2. Open up `webpack.chisel.config.js` in the root directory and make sure following entry is present:
+  ```javascript
+    externals: {
+      jquery: 'window.jQuery',
     },
   ```
 3. Make sure that path to jQuery is present in `vendor.json`:
-  ```
+  ```json
   [
     "/node_modules/jquery/dist/jquery.js"
   ]
@@ -427,7 +428,7 @@ So, to recap:
 
 #### Library not available through npm
 
-Use [`browserify-shim`](https://github.com/thlorenz/browserify-shim#you-will-always). You can also try [vendor plugins setup](#using-jquery-and-its-plugins-outside-of-browserify-bundle).
+Use [`externals` option in webpack configuration](https://webpack.js.org/configuration/externals/). You can also try [vendor plugins setup](#using-jquery-and-its-plugins-outside-of-webpack-bundle).
 
 ## WordPress development
 
