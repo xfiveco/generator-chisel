@@ -37,6 +37,7 @@
 - [Front-end development](#front-end-development)
   - [Adding pages](#adding-pages)
   - [Development tasks](#development-tasks)
+  - [Automated JS code formatting with Prettier](#automated-js-code-formatting-with-prettier)
   - [Caveats](#caveats)
     - [Using jQuery plugins with Browserify](#using-jquery-plugins-with-browserify)
     - [Using jQuery and its plugins outside of Browserify bundle](#using-jquery-and-its-plugins-outside-of-browserify-bundle)
@@ -71,7 +72,7 @@ Chisel allows to create 2 projects types - front-end and WordPress projects with
 - ES6 with [Babel](https://babeljs.io/)
 - [gulp-rev](https://github.com/sindresorhus/gulp-rev) support
 - [stylelint](http://stylelint.io/)
-- [ESLint](http://eslint.org/)
+- [ESLint](http://eslint.org/) with [config tailored for Chisel](https://github.com/xfiveco/eslint-config-chisel) and [Prettier](https://prettier.io/) synced together for consistent and hassle free code formatting
 - HTML validation with [htmlhint](https://github.com/bezoerb/gulp-htmlhint)
 - optional jQuery
 
@@ -337,6 +338,10 @@ When `npm run build` is run, first the `dist` folder is cleaned and then build t
 2. `lint` runs EsLint
 3. `scripts-build` runs Browserify bundler and creates `bundle.js` revision by appending content hash to the filename. Then it updates existing `rev-manifest.json` with the original and revisioned filename.
 4. Finally, `templates-build` reads the newly created `rev-manifest.json` and builds HTML files from Twig templates, while linking revisioned files using the `revisionedPath` function.
+
+### Automated JS code formatting with Prettier
+
+Prettier comes preinstalled with Chisel however it's synced with Eslint **only if ES6 with Babel has been selected**. It's one of the reasons why choosing ES6 will result in the best coding experience. One of the easiest ways to use Prettier is to install a plugin for your favourite editor. See "Editor Integration" section on [Prettier's homepage](https://prettier.io). 
 
 ### Caveats
 

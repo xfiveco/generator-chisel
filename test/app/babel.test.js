@@ -41,4 +41,17 @@ describe('Chisel Generator with ES2015 and Babel', function () {
 
     done();
   });
+
+  it('should use eslint-chisel-config', function (done) {
+    assert.fileContent('.eslintrc', '"extends": "chisel"');
+    assert.fileContent('package.json', '"eslint-config-chisel":');
+
+    done();
+  });
+
+  it('should ES6 commas for Prettier', function (done) {
+    assert.fileContent('.prettierrc', '"trailingComma": "all"');
+
+    done();
+  });
 });
