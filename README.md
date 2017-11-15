@@ -325,7 +325,7 @@ Additionally, development server will be started and Browsersync scripts injecte
     }
 ```
 
-During development `main.css` (unminified) and `appp.bundle.js` are linked in HTML. This is achieved by custom Twig function `revisionedPath` which updates assets path depending on whether the watch or build tasks are running.
+During development `main.css` (unminified) and `app.bundle.js` are linked in HTML. This is achieved by custom Twig function `revisionedPath` which updates assets path depending on whether the watch or build tasks are running.
 
 To rebuild the whole project and create new revisions of styles and scripts using `gulp-rev`, use the build task again
 
