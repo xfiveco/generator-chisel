@@ -90,6 +90,9 @@
     "jquery": "^3.2.1",<% } %>
     "normalize-scss": "^7.0.0"
   },
+  "engines": {
+    "node": ">=6"
+  },
   "pre-commit": [
     "lint"
   ]
