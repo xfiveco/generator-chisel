@@ -89,7 +89,7 @@ var Generator = {
 
   javascripts: function () {
     helpers.copy.call(this, 'scripts/vendor/.keep', 'src/scripts/vendor/.keep');
-    helpers.copy.call(this, 'scripts/browserify/**/*', 'src/scripts/', this.prompts);
+    helpers.copy.call(this, 'scripts/webpack/**/*', 'src/scripts/', this.prompts);
     helpers.copy.call(this, 'scripts/vendor.json', 'src/scripts/vendor.json', this.prompts);
   }
 };
