@@ -1,5 +1,25 @@
 <% if (features.has_babel) { %>{
-  "extends": "chisel"
+  "extends": "chisel",
+  "overrides": [
+    {
+      "files": [
+        "gulpfile.js",
+        "gulp/**/*.js",
+        "webpack.chisel.config.js"
+      ],
+      "parserOptions": {
+        "sourceType": "script"
+      },
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ]
+      }
+    }
+  ]
 }<% } else { %>{
   "rules": {
     "indent": [ "warn", 2 ],
@@ -28,5 +48,18 @@
   "env": {
     "commonjs": true,
     "browser": true
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "gulpfile.js",
+        "gulp/**/*.js",
+        "webpack.chisel.config.js"
+      ],
+      "env": {
+        "es6": true,
+        "node": true
+      }
+    }
+  ]
 }<% } %>

@@ -1,12 +1,12 @@
 'use strict';
 
 const path = require('path');
-const _ = require('lodash');
 const webpack = require('webpack');
+const webpackConfigGenerator = require('../../webpack.chisel.config.js');
 
 let webpackConfig;
 
-var scriptsTask = function(gulp, plugins, config, helpers) {
+const scriptsTask = function scriptsTask(gulp, plugins, config, helpers) {
   function webpackDone(isDev) {
     // Based on https://github.com/webpack/webpack-cli/blob/1eb340f4f32bb5303de9355d51e0bcf712755c0b/bin/webpack.js
     return (err, stats) => {
@@ -18,30 +18,30 @@ var scriptsTask = function(gulp, plugins, config, helpers) {
         process.exit(1); // eslint-disable-line
       }
       let statsConfig = webpackConfig.stats || 'normal';
-      if (typeof statsConfig == 'string') {
+      if (typeof statsConfig === 'string') {
         statsConfig = stats.constructor.presetToOptions(statsConfig);
         Object.assign(statsConfig, { colors: true });
       }
       const statsString = stats.toString(statsConfig);
       console.log(statsString);
-      if(isDev) {<% if(projectType == 'fe') { %>
-        if(statsString.includes('manifest-dev.json')) {
+      if (isDev) {<% if(projectType == 'fe') { %>
+        if (statsString.includes('manifest-dev.json')) {
           gulp.start('templates-watch');
         } else {
           plugins.browserSync.reload();
         }<% } else { %>
         plugins.browserSync.reload();<% } %>
       }
-    }
+    };
   }
 
-  gulp.task('scripts-load-config', function() {
-    return require('../../webpack.chisel.config.js')().then(config => {
-      webpackConfig = config;
-    });
-  });
+  gulp.task('scripts-load-config', () =>
+    webpackConfigGenerator().then(loadedConfig => {
+      webpackConfig = loadedConfig;
+    })
+  );
 
-  gulp.task('scripts-watch', ['scripts-load-config'], function() {
+  gulp.task('scripts-watch', ['scripts-load-config'], () => {
     gulp
       .src(path.join(config.src.base, config.src.scriptsMain))
       .pipe(plugins.vinylNamed())
@@ -49,8 +49,8 @@ var scriptsTask = function(gulp, plugins, config, helpers) {
       .pipe(gulp.dest(path.join(config.dest.base, config.dest.scripts)))
   });
 
-  gulp.task('scripts-build', ['scripts-load-config'], function() {
-    return gulp
+  gulp.task('scripts-build', ['scripts-load-config'], () =>
+    gulp
       .src(path.join(config.src.base, config.src.scriptsMain))
       .pipe(plugins.vinylNamed())
       .pipe(plugins.webpackStream(webpackConfig, webpack, webpackDone(false)))
@@ -77,8 +77,8 @@ var scriptsTask = function(gulp, plugins, config, helpers) {
           merge: true,
         })
       )
-      .pipe(gulp.dest(config.dest.base));
-  });
+      .pipe(gulp.dest(config.dest.base))
+  );
 };
 
 module.exports = scriptsTask;
