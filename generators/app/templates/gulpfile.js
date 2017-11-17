@@ -21,4 +21,8 @@ plugins.glob.sync('gulp/tasks/*').forEach(function (path) {
   require(path)(gulp, plugins, config, helpers, generator_config);
 });
 
-gulp.task('default', ['serve', 'watchify']);
+gulp.task('default', ['serve', 'scripts-watch']);
+
+gulp.once('task_start', task => {
+  process.env.NODE_ENV = task.task == 'build' ? 'production' : 'development';
+});

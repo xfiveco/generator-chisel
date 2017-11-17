@@ -19,7 +19,7 @@
     "wordpress",
     "scss",
     "itcss",
-    "browserify",
+    "webpack",
     "babel"
   ],
   "scripts": {

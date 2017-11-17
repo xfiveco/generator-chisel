@@ -1,4 +1,16 @@
 {
   "singleQuote": true,
-  "trailingComma": <% if (features.has_babel) { %>"all"<% } else { %>"es5"<% } %>
+  "trailingComma": <% if (features.has_babel) { %>"all"<% } else { %>"es5"<% } %><% if (features.has_babel) { %>,
+  "overrides": [
+    {
+      "files": [
+        "gulpfile.js",
+        "gulp/**/*.js",
+        "webpack.chisel.config.js"
+      ],
+      "options": {
+        "trailingComma": "es5"
+      }
+    }
+  ]<% } %>
 }

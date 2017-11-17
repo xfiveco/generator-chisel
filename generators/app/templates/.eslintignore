@@ -1,5 +1,6 @@
 node_modules
 vendor
 *.json
-gulpfile.js
-gulp
+/gulpfile.js
+/gulp/**/*.js
+!/gulp/tasks/scripts.js

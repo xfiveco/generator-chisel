@@ -9,7 +9,16 @@
   {% if hasVendor() %}
     <script src="{{ revisionedPath('scripts/vendor.js') }}" defer></script>
   {% endif %}
-  <script src="{{ revisionedPath('scripts/bundle.js') }}" defer></script>
+  {% if hasWebpackManifest() %}
+    <script>
+      (function() {
+        var p = '{{ getScriptsPath() }}';
+        var wm = window.webpackManifest = {{ getWebpackManifest() }};
+        Object.keys(wm).forEach(function(n){wm[n]=p+wm[n]});
+      })();
+    </script>
+  {% endif %}
+  <script src="{{ revisionedPath('scripts/app.bundle.js') }}" defer></script>
 <% if (projectType == 'wp-with-fe') { %><link rel="pingback" href="{{site.pingback_url}}" />
   {{function('wp_head')}}<% } %>
   {% block head %}

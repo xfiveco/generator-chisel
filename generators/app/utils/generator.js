@@ -23,6 +23,7 @@ var Generator = {
 
   appfiles: function () {
     helpers.copy.call(this, 'package.json', 'package.json', this.prompts);
+    helpers.copy.call(this, 'webpack.chisel.config.js', 'webpack.chisel.config.js', this.prompts);
   },
 
   gulpfiles: function () {
@@ -88,7 +89,7 @@ var Generator = {
 
   javascripts: function () {
     helpers.copy.call(this, 'scripts/vendor/.keep', 'src/scripts/vendor/.keep');
-    helpers.copy.call(this, 'scripts/browserify/**/*', 'src/scripts/', this.prompts);
+    helpers.copy.call(this, 'scripts/webpack/**/*', 'src/scripts/', this.prompts);
     helpers.copy.call(this, 'scripts/vendor.json', 'src/scripts/vendor.json', this.prompts);
   }
 };

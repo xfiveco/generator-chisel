@@ -18,7 +18,8 @@ function addTests() {
       'package.json',
       'index/project-index.html',
       'index/css/main.css',
-      'README.md'
+      'README.md',
+      'webpack.chisel.config.js'
     ]);
 
     done();
@@ -43,7 +44,7 @@ function addTests() {
   it('should generate scripts', function (done) {
     assert.file([
       'src/scripts/app.js',
-      'src/scripts/greeting.js'
+      'src/scripts/modules/greeting.js'
     ]);
 
     done();

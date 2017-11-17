@@ -140,7 +140,7 @@ var Prompts = {
       },
       type: 'confirm',
       name: 'has_jquery_vendor_config',
-      message: 'Would you like to configure browserify-shim for jQuery plugins?',
+      message: 'Would you like to configure vendor bundle for jQuery plugins?',
       default: true
     }
   ],
