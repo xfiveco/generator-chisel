@@ -1,86 +1,85 @@
-var path = require('path');
-var fs = require('fs');
-var chalk = require('chalk');
+const path = require('path');
+const fs = require('fs');
 
-module.exports = function(data) {
-  data = data || {};
-
+module.exports = function templateFunctions(data = {}) {
   const webpackManifestPath = path.join(
     data.config.dest.base,
     data.config.dest.scripts,
-    'manifest' + (!data.manifest ? '-dev' : '') + '.json'
+    `manifest${!data.manifest ? '-dev' : ''}.json`
   );
 
-  var functions = [
+  return [
     {
       name: 'revisionedPath',
-      func: function (fullPath) {
-        var pathToFile = path.basename(fullPath);
+      func(fullPath) {
+        const pathToFile = path.basename(fullPath);
         if (data.manifest) {
-          if(!data.manifest[pathToFile]) {
-            throw new Error('File '+pathToFile+' seems to not be revisioned');
+          if (!data.manifest[pathToFile]) {
+            throw new Error(`File ${pathToFile} seems to not be revisioned`);
           }
-          return path.join(path.dirname(fullPath),
-            data.manifest[pathToFile]);
-        } else {
-          return fullPath;
+          return path.join(path.dirname(fullPath), data.manifest[pathToFile]);
         }
-      }
+
+        return fullPath;
+      },
     },
     {
       name: 'assetPath',
-      func: function (assetPath) {
+      func(assetPath) {
         return path.join(data.config.dest.assets, assetPath);
-      }
+      },
     },
     {
       name: 'className',
-      func: function () {
-        var args = Array.prototype.slice.call(arguments);
-        var name = args.shift();
-        if(typeof name != 'string' || name == '') {
+      func(...args) {
+        const name = args.shift();
+        if (typeof name !== 'string' || name === '') {
           return '';
         }
-        var classes = [name];
-        var el;
-        for(var i = 0; i < args.length; i++) {
+        const classes = [name];
+        let el;
+        for (let i = 0; i < args.length; i += 1) {
           el = args[i];
-          if(el && typeof el == 'string') {
-            classes.push(name + '--' + el);
+          if (el && typeof el === 'string') {
+            classes.push(`${name}--${el}`);
           }
         }
         return classes.join(' ');
-      }
+      },
     },
     {
       name: 'hasVendor',
-      func: function () {
+      func() {
         if (!data.manifest) {
-          return fs.existsSync( path.join(data.config.dest.base, data.config.dest.scripts, 'vendor.js') );
+          return fs.existsSync(
+            path.join(
+              data.config.dest.base,
+              data.config.dest.scripts,
+              'vendor.js'
+            )
+          );
         }
 
         return !!data.manifest['vendor.js'];
-      }
+      },
     },
     {
       name: 'getScriptsPath',
-      func: function() {
+      func() {
         return 'scripts/';
       },
     },
     {
       name: 'hasWebpackManifest',
-      func: function() {
+      func() {
         return fs.existsSync(webpackManifestPath);
       },
     },
     {
       name: 'getWebpackManifest',
-      func: function() {
+      func() {
         return fs.readFileSync(webpackManifestPath, 'utf8');
       },
     },
   ];
-
-  return functions;
-}
+};
