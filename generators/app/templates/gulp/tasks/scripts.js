@@ -46,7 +46,7 @@ const scriptsTask = function scriptsTask(gulp, plugins, config, helpers) {
       .src(path.join(config.src.base, config.src.scriptsMain))
       .pipe(plugins.vinylNamed())
       .pipe(plugins.webpackStream(webpackConfig, webpack, webpackDone(true)))
-      .pipe(gulp.dest(path.join(config.dest.base, config.dest.scripts)))
+      .pipe(gulp.dest(path.join(config.dest.base, config.dest.scripts)));
   });
 
   gulp.task('scripts-build', ['scripts-load-config'], () =>
