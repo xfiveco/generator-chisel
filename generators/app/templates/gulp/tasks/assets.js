@@ -3,7 +3,7 @@
 const path = require('path');
 
 module.exports = function assetsTask(gulp, plugins, config) {
-  const { dest, src } = config.dest;
+  const { dest, src } = config;
 
   gulp.task('assets-clean', () =>
     plugins.del([path.join(dest.base, dest.assets)])
