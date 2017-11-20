@@ -16,7 +16,8 @@
           {
             "devDependencies": true
           }
-        ]
+        ],
+        "no-console": "off"
       },
       "env": {
         "node": true

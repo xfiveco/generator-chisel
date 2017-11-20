@@ -36,7 +36,7 @@ function serveTask(gulp, plugins, config, helpers, generatorConfig) {<% if(proje
     gulp.watch(path.join(config.src.base, config.src.styles), ['styles-watch']);<% if(projectType == 'fe') { %>
     gulp.watch(config.src.templatesWatch, ['templates-watch']);
     gulp.watch(path.join(config.src.base, config.src.vendorConfig), [
-      'vendor-rebuild-template'
+      'vendor-rebuild-template',
     ]);<% } %>
     gulp.watch(path.join(config.src.base, config.src.assets), ['assets-watch']);<% if(projectType == 'wp-with-fe') { %>
     gulp

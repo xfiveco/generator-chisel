@@ -53,7 +53,7 @@ function templatesTask(gulp, plugins, config, helpers) {
   gulp.task('templates-watch', () => templates());
 
   gulp.task('templates-build', () => {
-    var manifest = JSON.parse(
+    const manifest = JSON.parse(
       fs.readFileSync(
         path.join(config.dest.base, config.dest.revManifest),
         'utf8'
