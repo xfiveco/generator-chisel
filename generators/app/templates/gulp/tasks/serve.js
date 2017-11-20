@@ -2,8 +2,13 @@
 
 const path = require('path');
 
-// eslint-disable-next-line no-unused-vars
-module.exports = function serveTask(gulp, plugins, config, helpers, generatorConfig) {<% if(projectType == 'wp-with-fe') { %>
+module.exports = function serveTask(
+  gulp,
+  plugins,
+  config,
+  helpers,
+  generatorConfig // eslint-disable-line no-unused-vars
+) {<% if(projectType == 'wp-with-fe') { %>
   const startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];<% } else { %>
   const startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];
 
@@ -48,4 +53,4 @@ module.exports = function serveTask(gulp, plugins, config, helpers, generatorCon
       });
     });<% } %>
   });
-}
+};

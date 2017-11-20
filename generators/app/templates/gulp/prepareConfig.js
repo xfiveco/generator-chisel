@@ -35,4 +35,4 @@ module.exports = function prepareConfig(config) {
   templatesBuild[0] = path.join(base, templatesBuild[0]);
 
   return config;
-}
+};

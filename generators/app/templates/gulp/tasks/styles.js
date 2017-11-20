@@ -61,4 +61,4 @@ module.exports = function stylesTask(gulp, plugins, config, helpers) {
       .pipe(gulp.dest(config.dest.base))
       .pipe(plugins.browserSync.stream())
   );
-}
+};

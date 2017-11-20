@@ -61,4 +61,4 @@ module.exports = function templatesTask(gulp, plugins, config, helpers) {
     );
     return templates(manifest);
   });
-}
+};

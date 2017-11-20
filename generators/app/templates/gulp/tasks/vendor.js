@@ -135,4 +135,4 @@ module.exports = function bundleVendorTask(gulp, plugins, config, helpers) {
       )
       .pipe(gulp.dest(config.dest.base));
   });
-}
+};
