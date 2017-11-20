@@ -1,29 +1,30 @@
 'use strict';
 
-var path = require('path');
+const path = require('path');
 
-var lintTask = function (gulp, plugins, config) {
-  gulp.task('lint-js', function() {
-    return gulp.src(path.join(config.src.base, config.src.scripts))
+module.exports = function lintTask(gulp, plugins, config) {
+  const { src, dest } = config;
+
+  gulp.task('lint-js', () =>
+    gulp
+      .src(path.join(src.base, src.scripts))
       .pipe(plugins.eslint())
       .pipe(plugins.eslint.format())
-      .pipe(plugins.eslint.failAfterError());
-  });
+      .pipe(plugins.eslint.failAfterError())
+  );
 
-  gulp.task('lint-css', function() {
-    return gulp.src(path.join(config.src.base, config.src.styles))
-      .pipe(plugins.stylelint({
-        reporters: [
-          {formatter: 'string', console: true}
-        ]
-      }));
-  });
+  gulp.task('lint-css', () =>
+    gulp.src(path.join(src.base, src.styles)).pipe(
+      plugins.stylelint({
+        reporters: [{ formatter: 'string', console: true }],
+      })
+    )
+  );
 
-  gulp.task('validate-html', function() {
-    return gulp.src(config.dest.base + '/**/*.html')
+  gulp.task('validate-html', () =>
+    gulp
+      .src(`${dest.base}/**/*.html`)
       .pipe(plugins.htmlhint('.htmlhintrc'))
       .pipe(plugins.htmlhint.reporter())
-  });
+  );
 };
-
-module.exports = lintTask;
