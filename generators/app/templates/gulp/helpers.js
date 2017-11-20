@@ -5,7 +5,7 @@ const path = require('path');
 
 let webpackManifestFile;
 
-function helpers() {
+module.exports = function helpers() {
   return {
     onError(error) {
       console.error(error.message);
@@ -65,5 +65,3 @@ function helpers() {
     },
   };
 }
-
-module.exports = helpers;

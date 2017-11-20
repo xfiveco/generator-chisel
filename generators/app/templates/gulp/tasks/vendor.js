@@ -35,7 +35,7 @@ function monitorFileList(fileList) {
   );
 }
 
-function bundleVendorTask(gulp, plugins, config, helpers) {
+module.exports = function bundleVendorTask(gulp, plugins, config, helpers) {
   const fileListPath = path.join(config.src.base, config.src.vendorConfig);
   function resolveFileList(fileList) {
     const resolvedFileList = fileList.slice();
@@ -136,5 +136,3 @@ function bundleVendorTask(gulp, plugins, config, helpers) {
       .pipe(gulp.dest(config.dest.base));
   });
 }
-
-module.exports = bundleVendorTask;

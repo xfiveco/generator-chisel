@@ -3,7 +3,7 @@
 const path = require('path');
 
 // eslint-disable-next-line no-unused-vars
-function serveTask(gulp, plugins, config, helpers, generatorConfig) {<% if(projectType == 'wp-with-fe') { %>
+module.exports = function serveTask(gulp, plugins, config, helpers, generatorConfig) {<% if(projectType == 'wp-with-fe') { %>
   const startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];<% } else { %>
   const startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];
 
@@ -49,5 +49,3 @@ function serveTask(gulp, plugins, config, helpers, generatorConfig) {<% if(proje
     });<% } %>
   });
 }
-
-module.exports = serveTask;

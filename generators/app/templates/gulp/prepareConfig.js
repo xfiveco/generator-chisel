@@ -26,7 +26,7 @@ function prepareWpConfig(config) {
   return config;
 }
 <% } %>
-function prepareConfig(config) {
+module.exports = function prepareConfig(config) {
   const { <% if (projectType != 'wp-with-fe') { %>templatesWatch, <% } %>templatesBuild, base } = config.src;
 <% if (projectType == 'wp-with-fe') { %>
   Object.assign(config, prepareWpConfig(config));<% } else { %>
@@ -36,5 +36,3 @@ function prepareConfig(config) {
 
   return config;
 }
-
-module.exports = prepareConfig;

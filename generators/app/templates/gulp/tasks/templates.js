@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const templatesFunctions = require('../templatesFunctions');
 
-function templatesTask(gulp, plugins, config, helpers) {
+module.exports = function templatesTask(gulp, plugins, config, helpers) {
   function getTemplateInputData(file) {
     let data;
     try {
@@ -62,5 +62,3 @@ function templatesTask(gulp, plugins, config, helpers) {
     return templates(manifest);
   });
 }
-
-module.exports = templatesTask;

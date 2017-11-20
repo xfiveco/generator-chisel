@@ -2,7 +2,7 @@
 
 const path = require('path');
 
-function stylesTask(gulp, plugins, config, helpers) {
+module.exports = function stylesTask(gulp, plugins, config, helpers) {
   // eslint-disable-next-line global-require
   const postcssPlugins = [require('autoprefixer')()];
 
@@ -62,5 +62,3 @@ function stylesTask(gulp, plugins, config, helpers) {
       .pipe(plugins.browserSync.stream())
   );
 }
-
-module.exports = stylesTask;
