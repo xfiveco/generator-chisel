@@ -7,9 +7,6 @@
         "gulp/**/*.js",
         "webpack.chisel.config.js"
       ],
-      "parserOptions": {
-        "sourceType": "script"
-      },
       "rules": {
         "import/no-extraneous-dependencies": [
           "error",
@@ -17,6 +14,9 @@
             "devDependencies": true
           }
         ]
+      },
+      "env": {
+        "node": true
       }
     }
   ]
