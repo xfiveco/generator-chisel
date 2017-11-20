@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 <% if (projectType == 'wp-with-fe') { %>
 // WordPress destination paths should be inside WP template
