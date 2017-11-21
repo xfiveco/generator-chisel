@@ -37,9 +37,9 @@ function createConfig(cb) {
           return chunk.name;
         }
         return `${chunk
-          .mapModules(m => {
-            const file = path.relative(m.context, m.request);
-            return `${path.basename(file, path.extname(file))}-${m.id}`;
+          .mapModules(module => {
+            const file = path.relative(module.context, module.request);
+            return `${path.basename(file, path.extname(file))}-${module.id}`;
           })
           .join('_')}.c`;
       }),
