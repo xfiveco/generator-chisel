@@ -5,16 +5,14 @@ const path = require('path');
 const templatesFunctions = require('../templatesFunctions');
 
 module.exports = function templatesTask(gulp, plugins, config, helpers) {
+  const { src, dest } = config;
+
   function getTemplateInputData(file) {
     let data;
     try {
       data = JSON.parse(
         fs.readFileSync(
-          path.join(
-            config.src.base,
-            config.src.dataPath,
-            `${path.basename(file.path)}.json`
-          )
+          path.join(src.base, src.dataPath, `${path.basename(file.path)}.json`)
         )
       );
     } catch (error) {
@@ -27,18 +25,18 @@ module.exports = function templatesTask(gulp, plugins, config, helpers) {
   }
 
   function templates(manifest) {
-    const buildIncludedGlobs = config.src.templatesBuild || '';
+    const buildIncludedGlobs = src.templatesBuild || '';
     const buildIncludedFilter = plugins.filter(buildIncludedGlobs);
 
     return gulp
-      .src(config.src.templatesWatch)
+      .src(src.templatesWatch)
       .on('end', plugins.browserSync.reload)
       .pipe(plugins.plumber(helpers.onError))
       .pipe(buildIncludedFilter)
       .pipe(plugins.data(getTemplateInputData))
       .pipe(
         plugins.twig({
-          base: path.join(config.src.base, config.src.templatesPath),
+          base: path.join(src.base, src.templatesPath),
           functions: templatesFunctions({
             config,
             manifest,
@@ -47,17 +45,14 @@ module.exports = function templatesTask(gulp, plugins, config, helpers) {
         })
       )
       .pipe(plugins.prettify({ indent_size: 2, preserve_newlines: true }))
-      .pipe(gulp.dest(config.dest.base));
+      .pipe(gulp.dest(dest.base));
   }
 
   gulp.task('templates-watch', () => templates());
 
   gulp.task('templates-build', () => {
     const manifest = JSON.parse(
-      fs.readFileSync(
-        path.join(config.dest.base, config.dest.revManifest),
-        'utf8'
-      )
+      fs.readFileSync(path.join(dest.base, dest.revManifest), 'utf8')
     );
     return templates(manifest);
   });
