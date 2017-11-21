@@ -8,7 +8,8 @@ module.exports = function serveTask(
   config,
   helpers,
   generatorConfig // eslint-disable-line no-unused-vars
-) {<% if(projectType == 'wp-with-fe') { %>
+) {
+  const { base, styles, vendorConfig, assets, templatesWatch } = config.src;<% if(projectType == 'wp-with-fe') { %>
   const startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];<% } else { %>
   const startTasks = ['styles-watch', 'assets-watch', 'vendor-watch'];
 
@@ -38,16 +39,12 @@ module.exports = function serveTask(
 
     plugins.browserSync.init(browserSyncConfig);
 
-    gulp.watch(path.join(config.src.base, config.src.styles), ['styles-watch']);<% if(projectType == 'fe') { %>
-    gulp.watch(config.src.templatesWatch, ['templates-watch']);
-    gulp.watch(path.join(config.src.base, config.src.vendorConfig), [
-      'vendor-rebuild-template',
-    ]);<% } %>
-    gulp.watch(path.join(config.src.base, config.src.assets), ['assets-watch']);<% if(projectType == 'wp-with-fe') { %>
-    gulp
-      .watch(config.src.templatesWatch)
-      .on('change', plugins.browserSync.reload);
-    gulp.watch(path.join(config.src.base, config.src.vendorConfig), () => {
+    gulp.watch(path.join(base, styles), ['styles-watch']);<% if(projectType == 'fe') { %>
+    gulp.watch(templatesWatch, ['templates-watch']);
+    gulp.watch(path.join(base, vendorConfig), ['vendor-rebuild-template']);<% } %>
+    gulp.watch(path.join(base, assets), ['assets-watch']);<% if(projectType == 'wp-with-fe') { %>
+    gulp.watch(templatesWatch).on('change', plugins.browserSync.reload);
+    gulp.watch(path.join(base, vendorConfig), () => {
       gulp.start('vendor-watch', () => {
         plugins.browserSync.reload();
       });
