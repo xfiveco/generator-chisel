@@ -1,7 +1,3 @@
-if(!process.env['TEST_VERSIONS'] || process.env['TEST_VERSIONS'] != 'generated_project') {
-  process.exit();
-}
-
 var fs = require('fs');
 var ejs = require('ejs');
 
