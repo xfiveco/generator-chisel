@@ -73,7 +73,7 @@ describe('Browsersync and gulp tests on WordPress project', function () {
       function(callback) {
         gulp.start();
         gulp.once('ready', () => {
-          puppeteer.launch({ headless: false })
+          puppeteer.launch()
             .then(br => {
               browser = br;
               return browser.newPage();
