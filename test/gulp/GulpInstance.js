@@ -11,7 +11,7 @@ function GulpInstance() {
 util.inherits(GulpInstance, ProcessInstance);
 
 GulpInstance.prototype.start = function() {
-  var gulpProcess = this._start('gulp', [], {stdio: ['ignore', 'pipe', 'inherit']})
+  var gulpProcess = this._start('yarn', ['dev'], {stdio: ['ignore', 'pipe', 'inherit']})
 
   var buffer = new Buffer([]);
   var gulpListener = (data) => {
