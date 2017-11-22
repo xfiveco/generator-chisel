@@ -6,14 +6,23 @@ exports.waitFor = page => {
 
 exports.monitor = page => {
   let previousMessage = '';
+  let isWaitingForClose = false;
+
   function wait() {
     page
       .waitForSelector('#__bs_notify__')
       .then(() => {
         wait();
-        page
-          .waitForSelector('#__bs_notify__', { hidden: true })
-          .then(() => previousMessage = '')
+        if(!isWaitingForClose) {
+          isWaitingForClose = true;
+          page
+            .waitForSelector('#__bs_notify__', { hidden: true })
+            .then(() => {
+              previousMessage = '';
+              isWaitingForClose = false;
+            })
+            .catch(() => {});
+        }
         return page.$('#__bs_notify__');
       })
       .then(el => el.getProperty('textContent'))
