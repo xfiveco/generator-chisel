@@ -36,7 +36,7 @@ describe('Gulp build on Chisel Generator (WordPress)', function () {
       function (callback) {
         prepare.linkOrInstallModules();
         fs.writeFileSync('src/assets/test.txt', 'abcd-tessst');
-        cp.execSync('gulp build');
+        cp.execSync('yarn build');
         callback();
       }
     ], done);
