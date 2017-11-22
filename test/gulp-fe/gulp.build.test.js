@@ -9,9 +9,9 @@ const prepare = require('../gulp/environment.js');
 const FOUR_MINUTES = 240000;
 
 describe('Gulp build on Chisel Generator with default options', function () {
-  before(function (done) {
-    this.timeout(FOUR_MINUTES);
+  this.timeout(FOUR_MINUTES);
 
+  before(function (done) {
     helpers
       .run(path.join(__dirname, '../../generators/app'))
       .withOptions({

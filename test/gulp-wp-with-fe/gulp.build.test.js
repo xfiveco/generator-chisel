@@ -10,8 +10,14 @@ const prepare = require('../gulp/environment.js');
 const FOUR_MINUTES = 240000;
 
 describe('Gulp build on Chisel Generator (WordPress)', function () {
+  this.timeout(FOUR_MINUTES);
+
   before(function (done) {
-    this.timeout(FOUR_MINUTES);
+    // We skip those tests when running locally because they
+    // require database at 127.0.0.1 with root user and no password.
+    if(!process.env.TRAVIS) {
+      this.skip(); return;
+    }
 
     async.series([
       function (callback) {

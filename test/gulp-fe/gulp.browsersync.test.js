@@ -20,8 +20,6 @@ describe('Gulp build on Chisel Generator with default options (BrowserSync tests
   this.timeout(FOUR_MINUTES);
 
   before(function (done) {
-    this.timeout(FOUR_MINUTES);
-
     async.series([
       function(callback) {
         helpers
