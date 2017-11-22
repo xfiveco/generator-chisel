@@ -6,7 +6,7 @@ const webpackConfigGenerator = require('../../webpack.chisel.config.js');
 
 let webpackConfig;
 
-const scriptsTask = function scriptsTask(gulp, plugins, config, helpers) {
+module.exports = function scriptsTask(gulp, plugins, config, helpers) {
   function webpackDone(isDev) {
     // Based on https://github.com/webpack/webpack-cli/blob/1eb340f4f32bb5303de9355d51e0bcf712755c0b/bin/webpack.js
     return (err, stats) => {
@@ -46,7 +46,7 @@ const scriptsTask = function scriptsTask(gulp, plugins, config, helpers) {
       .src(path.join(config.src.base, config.src.scriptsMain))
       .pipe(plugins.vinylNamed())
       .pipe(plugins.webpackStream(webpackConfig, webpack, webpackDone(true)))
-      .pipe(gulp.dest(path.join(config.dest.base, config.dest.scripts)))
+      .pipe(gulp.dest(path.join(config.dest.base, config.dest.scripts)));
   });
 
   gulp.task('scripts-build', ['scripts-load-config'], () =>
@@ -80,5 +80,3 @@ const scriptsTask = function scriptsTask(gulp, plugins, config, helpers) {
       .pipe(gulp.dest(config.dest.base))
   );
 };
-
-module.exports = scriptsTask;

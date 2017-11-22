@@ -1,6 +1,4 @@
 node_modules
 vendor
+dist
 *.json
-/gulpfile.js
-/gulp/**/*.js
-!/gulp/tasks/scripts.js
