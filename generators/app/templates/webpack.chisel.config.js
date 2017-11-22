@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const NameAllModulesPlugin = require('./gulp/NameAllModulesPlugin');
+const MildCompile = require('./gulp/MildCompile');
 
 function createConfig(cb) {
   const isDevelopment = process.env.NODE_ENV === 'development';
@@ -30,6 +31,7 @@ function createConfig(cb) {
     },
     node: false,
     plugins: [
+      new MildCompile(),
       new webpack.HashedModuleIdsPlugin(),
       new webpack.NamedModulesPlugin(),
       new webpack.NamedChunksPlugin(chunk => {
