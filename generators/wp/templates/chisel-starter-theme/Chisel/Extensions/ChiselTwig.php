@@ -1,31 +1,17 @@
 <?php
 
-namespace Chisel;
+namespace Chisel\Extensions;
 
 /**
- * Class TwigExtensions
- * @package Chisel
- *
- * Use this class to extend Twig
+ * Class Chisel
+ * Chisel specific twig extensions. This class should not be changed during development.
+ * @package Chisel\Extensions
  */
-class TwigExtensions {
+class ChiselTwig extends Twig {
 	private $manifest = array();
 
-	public function __construct() {
-		add_filter( 'get_twig', array( $this, 'extend' ) );
-	}
-
-	/**
-	 * Get parsed manifest file content
-	 *
-	 * @return array
-	 */
-	public function getManifest() {
-		if ( empty( $this->manifest ) ) {
-			$this->initManifest();
-		}
-
-		return $this->manifest;
+	public function extend() {
+		add_filter( 'get_twig', array( $this, 'extendTwig' ) );
 	}
 
 	/**
@@ -35,22 +21,7 @@ class TwigExtensions {
 	 *
 	 * @return \Twig_Environment $twig
 	 */
-	public function extend( $twig ) {
-		$twig = $this->registerTwigFilters( $twig );
-		$twig = $this->registerTwigFunctions( $twig );
-		$twig = $this->registerTwigTests( $twig );
-
-		return $twig;
-	}
-
-	/**
-	 * You can add you own functions to twig here
-	 *
-	 * @param \Twig_Environment $twig
-	 *
-	 * @return \Twig_Environment $twig
-	 */
-	protected function registerTwigFunctions( $twig ) {
+	public function extendTwig( $twig ) {
 		$this->registerFunction(
 			$twig,
 			'revisionedPath'
@@ -116,43 +87,16 @@ class TwigExtensions {
 	}
 
 	/**
-	 * You can add your own filters to Twig here
+	 * Get parsed manifest file content
 	 *
-	 * @param \Twig_Environment $twig
-	 *
-	 * @return \Twig_Environment $twig
+	 * @return array
 	 */
-	protected function registerTwigFilters( $twig ) {
-//		$this->registerFilter(
-//			$twig,
-//			'filterName',
-//			array(
-//				'\Chisel\TwigExtensions',
-//				'filter_callback'
-//			)
-//		);
+	public function getManifest() {
+		if ( empty( $this->manifest ) ) {
+			$this->initManifest();
+		}
 
-		return $twig;
-	}
-
-	/**
-	 * You can add your own tests to Twig here
-	 *
-	 * @param \Twig_Environment $twig
-	 *
-	 * @return \Twig_Environment $twig
-	 */
-	protected function registerTwigTests( $twig ) {
-//		$this->registerTest(
-//			$twig,
-//			'testName',
-//			array(
-//				'\Chisel\TwigExtensions',
-//				'test_callback'
-//			)
-//		);
-
-		return $twig;
+		return $this->manifest;
 	}
 
 	/**
@@ -176,7 +120,7 @@ class TwigExtensions {
 			return sprintf(
 				'%s/%s%s/%s',
 				get_template_directory_uri(),
-				Settings::DIST_PATH,
+				\Chisel\Settings::DIST_PATH,
 				$pathinfo['dirname'],
 				$manifest[ $pathinfo['basename'] ]
 			);
@@ -184,7 +128,7 @@ class TwigExtensions {
 			return sprintf(
 				'%s/%s%s',
 				get_template_directory_uri(),
-				Settings::DIST_PATH,
+				\Chisel\Settings::DIST_PATH,
 				trim( $asset, '/' )
 			);
 		}
@@ -201,7 +145,7 @@ class TwigExtensions {
 		return sprintf(
 			'%s/%s%s',
 			get_template_directory_uri(),
-			Settings::ASSETS_PATH,
+			\Chisel\Settings::ASSETS_PATH,
 			trim( $asset, '/' )
 		);
 	}
@@ -234,10 +178,10 @@ class TwigExtensions {
 	 *
 	 * @param array|null $fields
 	 *
-	 * @return Post
+	 * @return \Chisel\Post
 	 */
 	public function chiselPost( $fields = null ) {
-		return new Post( $fields );
+		return new \Chisel\Post( $fields );
 	}
 
 	/**
@@ -251,7 +195,7 @@ class TwigExtensions {
 				sprintf(
 					'%s/%s%s',
 					get_template_directory(),
-					Settings::DIST_PATH,
+					\Chisel\Settings::DIST_PATH,
 					'scripts/vendor.js'
 				)
 			);
@@ -271,7 +215,7 @@ class TwigExtensions {
 		return sprintf(
 			'%s/%s',
 			get_template_directory_uri(),
-			Settings::SCRIPTS_PATH
+			\Chisel\Settings::SCRIPTS_PATH
 		);
 	}
 
@@ -285,7 +229,7 @@ class TwigExtensions {
 			sprintf(
 				'%s/%s',
 				get_template_directory(),
-				Settings::getWebpackManifestPath()
+				\Chisel\Settings::getWebpackManifestPath()
 			)
 		);
 	}
@@ -301,7 +245,7 @@ class TwigExtensions {
 				sprintf(
 					'%s/%s',
 					get_template_directory(),
-					Settings::getWebpackManifestPath()
+					\Chisel\Settings::getWebpackManifestPath()
 				)
 			);
 		}
@@ -350,10 +294,10 @@ class TwigExtensions {
 	/**
 	 * Loads data from manifest file.
 	 */
-	public function initManifest() {
-		if ( file_exists( get_template_directory() . '/' . Settings::MANIFEST_PATH ) ) {
+	private function initManifest() {
+		if ( file_exists( get_template_directory() . '/' . \Chisel\Settings::MANIFEST_PATH ) ) {
 			$this->manifest = json_decode(
-				file_get_contents( get_template_directory() . '/' . Settings::MANIFEST_PATH ),
+				file_get_contents( get_template_directory() . '/' . \Chisel\Settings::MANIFEST_PATH ),
 				true
 			);
 		}
