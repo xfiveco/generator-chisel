@@ -53,29 +53,17 @@ class TwigExtensions {
 	protected function registerTwigFunctions( $twig ) {
 		$this->registerFunction(
 			$twig,
-			'revisionedPath',
-			array(
-				$this,
-				'revisionedPath',
-			)
+			'revisionedPath'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'assetPath',
-			array(
-				$this,
-				'assetPath',
-			)
+			'assetPath'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'className',
-			array(
-				$this,
-				'className',
-			)
+			'className'
 		);
 
 		$this->registerFunction(
@@ -89,11 +77,12 @@ class TwigExtensions {
 
 		$this->registerFunction(
 			$twig,
-			'hasVendor',
-			array(
-				$this,
-				'hasVendor',
-			)
+			'hasVendor'
+		);
+
+		$this->registerFunction(
+			$twig,
+			'rgba'
 		);
 
 		$this->registerFunction(
@@ -256,8 +245,8 @@ class TwigExtensions {
 	 *
 	 * @return bool
 	 */
-	public function hasVendor () {
-		if( defined( 'CHISEL_DEV_ENV' ) ) {
+	public function hasVendor() {
+		if ( defined( 'CHISEL_DEV_ENV' ) ) {
 			return file_exists(
 				sprintf(
 					'%s/%s%s',
@@ -268,6 +257,7 @@ class TwigExtensions {
 			);
 		} else {
 			$manifest = $this->getManifest();
+
 			return array_key_exists( 'vendor.js', $manifest );
 		}
 	}
@@ -325,7 +315,10 @@ class TwigExtensions {
 	 * @param $name
 	 * @param $callback
 	 */
-	private function registerFunction( $twig, $name, $callback ) {
+	private function registerFunction( $twig, $name, $callback = null ) {
+		if ( ! $callback ) {
+			$callback = array( $this, $name );
+		}
 		$classNameFunction = new \Twig_SimpleFunction( $name, $callback );
 		$twig->addFunction( $classNameFunction );
 	}
