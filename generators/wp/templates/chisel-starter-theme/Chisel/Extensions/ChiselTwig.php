@@ -53,34 +53,17 @@ class ChiselTwig extends Twig {
 
 		$this->registerFunction(
 			$twig,
-			'rgba'
+			'getScriptsPath'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'getScriptsPath',
-			array(
-				$this,
-				'getScriptsPath',
-			)
+			'hasWebpackManifest'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'hasWebpackManifest',
-			array(
-				$this,
-				'hasWebpackManifest',
-			)
-		);
-
-		$this->registerFunction(
-			$twig,
-			'getWebpackManifest',
-			array(
-				$this,
-				'getWebpackManifest',
-			)
+			'getWebpackManifest'
 		);
 
 		return $twig;
