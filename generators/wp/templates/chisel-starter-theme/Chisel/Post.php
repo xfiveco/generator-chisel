@@ -64,11 +64,9 @@ class Post extends \Timber\Post {
 	 * Returns Post class name. You can also return an array('post_type' => 'post_type_class_name')
 	 *  to use different classes for individual post types.
 	 *
-	 * @param $post_class
-	 *
 	 * @return string|array
 	 */
-	public static function overrideTimberPostClass( $post_class ) {
+	public static function overrideTimberPostClass() {
 		return '\Chisel\Post';
 	}
 }
