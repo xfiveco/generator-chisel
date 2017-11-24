@@ -6,7 +6,8 @@ module.exports = {
     "can't replicate",
     "chisel ignore",
     "invalid",
-    "duplicate"
+    "duplicate",
+    "question"
   ],
   "template": {
     "issue": "- [{{text}}]({{url}}) {{name}}"
