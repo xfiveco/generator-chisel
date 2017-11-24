@@ -223,7 +223,7 @@ class ChiselTwig extends Twig {
 	 * @return string
 	 */
 	public function getWebpackManifest() {
-		if( $this->hasWebpackManifest() ) {
+		if ( $this->hasWebpackManifest() ) {
 			return file_get_contents(
 				sprintf(
 					'%s/%s',
@@ -232,6 +232,7 @@ class ChiselTwig extends Twig {
 				)
 			);
 		}
+
 		return '';
 	}
 

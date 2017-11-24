@@ -25,7 +25,7 @@ class Settings {
 	 * @return string
 	 */
 	public static function getWebpackManifestPath() {
-		if( defined( 'CHISEL_DEV_ENV' ) ) {
+		if ( defined( 'CHISEL_DEV_ENV' ) ) {
 			return self::WEBPACK_MANIFEST_DEV_PATH;
 		} else {
 			return self::WEBPACK_MANIFEST_PATH;
