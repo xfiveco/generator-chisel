@@ -17,5 +17,7 @@
  * @package <%= nameSlug %>
  */
 
+global $post;
+
 $context = \Timber\Timber::get_context();
 \Timber\Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );

@@ -16,7 +16,7 @@ class Post extends \Timber\Post {
 	 * Post constructor.
 	 * Overrides parent to allow creation of fake posts.
 	 *
-	 * @param array|int|WP_Post|\Timber\Post|null $fields
+	 * @param array|int|\WP_Post|\Timber\Post|null $fields
 	 */
 	public function __construct( $fields = null ) {
 		if ( is_array( $fields ) ) {
