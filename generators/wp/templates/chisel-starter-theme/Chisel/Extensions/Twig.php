@@ -35,6 +35,14 @@ class Twig implements ChiselExtension {
 	 * @return \Twig_Environment $twig
 	 */
 	protected function registerTwigFunctions( $twig ) {
+//		$this->registerFilter(
+//			$twig,
+//			'functionName',
+//			array(
+//				'\Chisel\Extensions\Twig',
+//				'function_callback'
+//			)
+//		);
 
 		return $twig;
 	}

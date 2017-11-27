@@ -53,34 +53,17 @@ class ChiselTwig extends Twig {
 
 		$this->registerFunction(
 			$twig,
-			'rgba'
+			'getScriptsPath'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'getScriptsPath',
-			array(
-				$this,
-				'getScriptsPath',
-			)
+			'hasWebpackManifest'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'hasWebpackManifest',
-			array(
-				$this,
-				'hasWebpackManifest',
-			)
-		);
-
-		$this->registerFunction(
-			$twig,
-			'getWebpackManifest',
-			array(
-				$this,
-				'getWebpackManifest',
-			)
+			'getWebpackManifest'
 		);
 
 		return $twig;
@@ -250,45 +233,6 @@ class ChiselTwig extends Twig {
 			);
 		}
 		return '';
-	}
-
-	/**
-	 * Use this method to register new Twig function
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerFunction( $twig, $name, $callback = null ) {
-		if ( ! $callback ) {
-			$callback = array( $this, $name );
-		}
-		$classNameFunction = new \Twig_SimpleFunction( $name, $callback );
-		$twig->addFunction( $classNameFunction );
-	}
-
-	/**
-	 * Use this method to register new Twig filter
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerFilter( $twig, $name, $callback ) {
-		$classNameFilter = new \Twig_SimpleFilter( $name, $callback );
-		$twig->addFilter( $classNameFilter );
-	}
-
-	/**
-	 * Use this method to register new Twig test
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerTest( $twig, $name, $callback ) {
-		$classNameTest = new \Twig_SimpleTest( $name, $callback );
-		$twig->addTest( $classNameTest );
 	}
 
 	/**

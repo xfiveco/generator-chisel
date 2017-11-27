@@ -17,7 +17,7 @@ class Settings {
 	const SCRIPTS_PATH = 'dist/scripts/';
 	const TEMPLATES_DIR = 'templates';
 
-	private $extensions = array( 'Chisel', 'Twig', 'Theme', 'DataType' );
+	private $extensions = array( 'ChiselTwig', 'Twig', 'Theme', 'DataType' );
 
 	/**
 	 * Get relative path of webpack manifest based on environment
