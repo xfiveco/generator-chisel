@@ -2,12 +2,7 @@
 
 namespace Chisel\Extensions;
 
-/**
- * Class Chisel
- * Chisel specific twig extensions. This class should not be changed during development.
- * @package Chisel\Extensions
- */
-class ChiselTwig extends Twig {
+class Chisel extends Twig {
 	private $manifest = array();
 
 	public function extend() {
@@ -15,13 +10,26 @@ class ChiselTwig extends Twig {
 	}
 
 	/**
-	 * Extends Twig, registers filters and functions.
+	 * Get parsed manifest file content
+	 *
+	 * @return array
+	 */
+	public function getManifest() {
+		if ( empty( $this->manifest ) ) {
+			$this->initManifest();
+		}
+
+		return $this->manifest;
+	}
+
+	/**
+	 * You can add you own functions to twig here
 	 *
 	 * @param \Twig_Environment $twig
 	 *
 	 * @return \Twig_Environment $twig
 	 */
-	public function extendTwig( $twig ) {
+	protected function registerTwigFunctions( $twig ) {
 		$this->registerFunction(
 			$twig,
 			'revisionedPath'
@@ -56,47 +64,7 @@ class ChiselTwig extends Twig {
 			'rgba'
 		);
 
-		$this->registerFunction(
-			$twig,
-			'getScriptsPath',
-			array(
-				$this,
-				'getScriptsPath',
-			)
-		);
-
-		$this->registerFunction(
-			$twig,
-			'hasWebpackManifest',
-			array(
-				$this,
-				'hasWebpackManifest',
-			)
-		);
-
-		$this->registerFunction(
-			$twig,
-			'getWebpackManifest',
-			array(
-				$this,
-				'getWebpackManifest',
-			)
-		);
-
 		return $twig;
-	}
-
-	/**
-	 * Get parsed manifest file content
-	 *
-	 * @return array
-	 */
-	public function getManifest() {
-		if ( empty( $this->manifest ) ) {
-			$this->initManifest();
-		}
-
-		return $this->manifest;
 	}
 
 	/**
@@ -206,89 +174,10 @@ class ChiselTwig extends Twig {
 		}
 	}
 
-	/**
-	 * Returns the real path of the scripts directory.
-	 *
-	 * @return string
-	 */
-	public function getScriptsPath() {
-		return sprintf(
-			'%s/%s',
-			get_template_directory_uri(),
-			\Chisel\Settings::SCRIPTS_PATH
-		);
-	}
+	public function rgba( $hex, $alpha ) {
+		list( $r, $g, $b ) = sscanf( $hex, '#%02x%02x%02x' );
 
-	/**
-	 * Verifies existence of webpack manifest file.
-	 *
-	 * @return bool
-	 */
-	public function hasWebpackManifest() {
-		return file_exists(
-			sprintf(
-				'%s/%s',
-				get_template_directory(),
-				\Chisel\Settings::getWebpackManifestPath()
-			)
-		);
-	}
-
-	/**
-	 * Returns the contents of the webpack manifest file.
-	 *
-	 * @return string
-	 */
-	public function getWebpackManifest() {
-		if( $this->hasWebpackManifest() ) {
-			return file_get_contents(
-				sprintf(
-					'%s/%s',
-					get_template_directory(),
-					\Chisel\Settings::getWebpackManifestPath()
-				)
-			);
-		}
-		return '';
-	}
-
-	/**
-	 * Use this method to register new Twig function
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerFunction( $twig, $name, $callback = null ) {
-		if ( ! $callback ) {
-			$callback = array( $this, $name );
-		}
-		$classNameFunction = new \Twig_SimpleFunction( $name, $callback );
-		$twig->addFunction( $classNameFunction );
-	}
-
-	/**
-	 * Use this method to register new Twig filter
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerFilter( $twig, $name, $callback ) {
-		$classNameFilter = new \Twig_SimpleFilter( $name, $callback );
-		$twig->addFilter( $classNameFilter );
-	}
-
-	/**
-	 * Use this method to register new Twig test
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerTest( $twig, $name, $callback ) {
-		$classNameTest = new \Twig_SimpleTest( $name, $callback );
-		$twig->addTest( $classNameTest );
+		return sprintf( 'rgba(%d, %d, %d, %.2f)', $r, $g, $b, $alpha );
 	}
 
 	/**
