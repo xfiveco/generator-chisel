@@ -40,19 +40,19 @@ The branch will be deleted straight after the pull request.
 
 ## Pull Requests
 
-A PR has to close at least one issue and preferably only one. The less amount of work is in one PR, the easier is to review it.
+A PR has to close one issue. The less amount of work is in one PR, the easier is to review it.
 
-The body of the PR should start with a [message that closes the related issues](https://help.github.com/articles/closing-issues-via-commit-messages/) and the actual description in a new lines.
+Keeping the scope of each PR to one general feature or fix will allow you to use unstructured commit messages when committing each little change and then squash them into a single commit with a structured message (referencing the PR number) once they have been reviewed and accepted.
+
+The body of the PR should start with a [message that closes the related issues](https://help.github.com/articles/closing-issues-via-commit-messages/) and the actual description in new lines.
 
 The commit history in a PR should not contain `Merge` commits and should be rebased on top of `master`.
-
-It's easier to review the PR, if you rebase your commits so that every commit represents a sub-piece of the development and can be independently reviewed or a clear list of the features on that branch.
 
 e.g.
 ```
 Closes #123
 
-Here any further informations needed to the reviewer, e.g. run yarn before reviewing.
+Write any further information needed to the reviewer, e.g. run yarn before reviewing.
 ```
 
 ### Checks
