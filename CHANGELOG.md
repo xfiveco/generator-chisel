@@ -1,5 +1,29 @@
 # Changelog
 
+## v0.10.0 (29/11/2017)
+
+#### Enhancements:
+
+- [#313](https://github.com/xfiveco/generator-chisel/issues/313) Replace browserify with webpack
+- [#304](https://github.com/xfiveco/generator-chisel/issues/304) Update Gulp files to support eslint-config-chisel (assume support for Node >= 6)
+- [#303](https://github.com/xfiveco/generator-chisel/issues/303) Use our ESLint configuration and Prettier
+- [#300](https://github.com/xfiveco/generator-chisel/issues/300) Add gren configuration file
+- [#298](https://github.com/xfiveco/generator-chisel/issues/298) When running Chisel check if it is up to date
+- [#297](https://github.com/xfiveco/generator-chisel/issues/297) Update link in the readme in generated project to link to specific version
+- [#296](https://github.com/xfiveco/generator-chisel/issues/296) Save Chisel version used to generate project in .yo-rc.json
+- [#282](https://github.com/xfiveco/generator-chisel/issues/282) Allow to create multiple JS bundles
+- [#191](https://github.com/xfiveco/generator-chisel/issues/191) Remove support for Node 4
+
+#### Fixes:
+
+- [#320](https://github.com/xfiveco/generator-chisel/issues/320) Fix PHP linting errors
+
+#### Documentation:
+
+- [#292](https://github.com/xfiveco/generator-chisel/issues/292) Add contributing guidelines
+
+---
+
 ## v0.9.0 (25/10/2017)
 - [**enhancement**] When running Chisel check if it is up to date [#298](https://github.com/xfiveco/generator-chisel/issues/298)
 - [**enhancement**] Update link in the readme in generated project to link to specific version [#297](https://github.com/xfiveco/generator-chisel/issues/297)
