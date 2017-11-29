@@ -1,31 +1,17 @@
 <?php
 
-namespace Chisel;
+namespace Chisel\Extensions;
 
 /**
- * Class TwigExtensions
- * @package Chisel
- *
- * Use this class to extend Twig
+ * Class Chisel
+ * Chisel specific twig extensions. This class should not be changed during development.
+ * @package Chisel\Extensions
  */
-class TwigExtensions {
+class ChiselTwig extends Twig {
 	private $manifest = array();
 
-	public function __construct() {
-		add_filter( 'get_twig', array( $this, 'extend' ) );
-	}
-
-	/**
-	 * Get parsed manifest file content
-	 *
-	 * @return array
-	 */
-	public function getManifest() {
-		if ( empty( $this->manifest ) ) {
-			$this->initManifest();
-		}
-
-		return $this->manifest;
+	public function extend() {
+		add_filter( 'get_twig', array( $this, 'extendTwig' ) );
 	}
 
 	/**
@@ -35,47 +21,20 @@ class TwigExtensions {
 	 *
 	 * @return \Twig_Environment $twig
 	 */
-	public function extend( $twig ) {
-		$twig = $this->registerTwigFilters( $twig );
-		$twig = $this->registerTwigFunctions( $twig );
-		$twig = $this->registerTwigTests( $twig );
-
-		return $twig;
-	}
-
-	/**
-	 * You can add you own functions to twig here
-	 *
-	 * @param \Twig_Environment $twig
-	 *
-	 * @return \Twig_Environment $twig
-	 */
-	protected function registerTwigFunctions( $twig ) {
+	public function extendTwig( $twig ) {
 		$this->registerFunction(
 			$twig,
-			'revisionedPath',
-			array(
-				$this,
-				'revisionedPath',
-			)
+			'revisionedPath'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'assetPath',
-			array(
-				$this,
-				'assetPath',
-			)
+			'assetPath'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'className',
-			array(
-				$this,
-				'className',
-			)
+			'className'
 		);
 
 		$this->registerFunction(
@@ -89,81 +48,38 @@ class TwigExtensions {
 
 		$this->registerFunction(
 			$twig,
-			'hasVendor',
-			array(
-				$this,
-				'hasVendor',
-			)
+			'hasVendor'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'getScriptsPath',
-			array(
-				$this,
-				'getScriptsPath',
-			)
+			'getScriptsPath'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'hasWebpackManifest',
-			array(
-				$this,
-				'hasWebpackManifest',
-			)
+			'hasWebpackManifest'
 		);
 
 		$this->registerFunction(
 			$twig,
-			'getWebpackManifest',
-			array(
-				$this,
-				'getWebpackManifest',
-			)
+			'getWebpackManifest'
 		);
 
 		return $twig;
 	}
 
 	/**
-	 * You can add your own filters to Twig here
+	 * Get parsed manifest file content
 	 *
-	 * @param \Twig_Environment $twig
-	 *
-	 * @return \Twig_Environment $twig
+	 * @return array
 	 */
-	protected function registerTwigFilters( $twig ) {
-//		$this->registerFilter(
-//			$twig,
-//			'filterName',
-//			array(
-//				'\Chisel\TwigExtensions',
-//				'filter_callback'
-//			)
-//		);
+	public function getManifest() {
+		if ( empty( $this->manifest ) ) {
+			$this->initManifest();
+		}
 
-		return $twig;
-	}
-
-	/**
-	 * You can add your own tests to Twig here
-	 *
-	 * @param \Twig_Environment $twig
-	 *
-	 * @return \Twig_Environment $twig
-	 */
-	protected function registerTwigTests( $twig ) {
-//		$this->registerTest(
-//			$twig,
-//			'testName',
-//			array(
-//				'\Chisel\TwigExtensions',
-//				'test_callback'
-//			)
-//		);
-
-		return $twig;
+		return $this->manifest;
 	}
 
 	/**
@@ -187,7 +103,7 @@ class TwigExtensions {
 			return sprintf(
 				'%s/%s%s/%s',
 				get_template_directory_uri(),
-				Settings::DIST_PATH,
+				\Chisel\Settings::DIST_PATH,
 				$pathinfo['dirname'],
 				$manifest[ $pathinfo['basename'] ]
 			);
@@ -195,7 +111,7 @@ class TwigExtensions {
 			return sprintf(
 				'%s/%s%s',
 				get_template_directory_uri(),
-				Settings::DIST_PATH,
+				\Chisel\Settings::DIST_PATH,
 				trim( $asset, '/' )
 			);
 		}
@@ -212,7 +128,7 @@ class TwigExtensions {
 		return sprintf(
 			'%s/%s%s',
 			get_template_directory_uri(),
-			Settings::ASSETS_PATH,
+			\Chisel\Settings::ASSETS_PATH,
 			trim( $asset, '/' )
 		);
 	}
@@ -245,10 +161,10 @@ class TwigExtensions {
 	 *
 	 * @param array|null $fields
 	 *
-	 * @return Post
+	 * @return \Chisel\Post
 	 */
 	public function chiselPost( $fields = null ) {
-		return new Post( $fields );
+		return new \Chisel\Post( $fields );
 	}
 
 	/**
@@ -256,18 +172,19 @@ class TwigExtensions {
 	 *
 	 * @return bool
 	 */
-	public function hasVendor () {
-		if( defined( 'CHISEL_DEV_ENV' ) ) {
+	public function hasVendor() {
+		if ( defined( 'CHISEL_DEV_ENV' ) ) {
 			return file_exists(
 				sprintf(
 					'%s/%s%s',
 					get_template_directory(),
-					Settings::DIST_PATH,
+					\Chisel\Settings::DIST_PATH,
 					'scripts/vendor.js'
 				)
 			);
 		} else {
 			$manifest = $this->getManifest();
+
 			return array_key_exists( 'vendor.js', $manifest );
 		}
 	}
@@ -281,7 +198,7 @@ class TwigExtensions {
 		return sprintf(
 			'%s/%s',
 			get_template_directory_uri(),
-			Settings::SCRIPTS_PATH
+			\Chisel\Settings::SCRIPTS_PATH
 		);
 	}
 
@@ -295,7 +212,7 @@ class TwigExtensions {
 			sprintf(
 				'%s/%s',
 				get_template_directory(),
-				Settings::getWebpackManifestPath()
+				\Chisel\Settings::getWebpackManifestPath()
 			)
 		);
 	}
@@ -311,7 +228,7 @@ class TwigExtensions {
 				sprintf(
 					'%s/%s',
 					get_template_directory(),
-					Settings::getWebpackManifestPath()
+					\Chisel\Settings::getWebpackManifestPath()
 				)
 			);
 		}
@@ -319,48 +236,12 @@ class TwigExtensions {
 	}
 
 	/**
-	 * Use this method to register new Twig function
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerFunction( $twig, $name, $callback ) {
-		$classNameFunction = new \Twig_SimpleFunction( $name, $callback );
-		$twig->addFunction( $classNameFunction );
-	}
-
-	/**
-	 * Use this method to register new Twig filter
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerFilter( $twig, $name, $callback ) {
-		$classNameFilter = new \Twig_SimpleFilter( $name, $callback );
-		$twig->addFilter( $classNameFilter );
-	}
-
-	/**
-	 * Use this method to register new Twig test
-	 *
-	 * @param \Twig_Environment $twig
-	 * @param $name
-	 * @param $callback
-	 */
-	private function registerTest( $twig, $name, $callback ) {
-		$classNameTest = new \Twig_SimpleTest( $name, $callback );
-		$twig->addTest( $classNameTest );
-	}
-
-	/**
 	 * Loads data from manifest file.
 	 */
-	public function initManifest() {
-		if ( file_exists( get_template_directory() . '/' . Settings::MANIFEST_PATH ) ) {
+	private function initManifest() {
+		if ( file_exists( get_template_directory() . '/' . \Chisel\Settings::MANIFEST_PATH ) ) {
 			$this->manifest = json_decode(
-				file_get_contents( get_template_directory() . '/' . Settings::MANIFEST_PATH ),
+				file_get_contents( get_template_directory() . '/' . \Chisel\Settings::MANIFEST_PATH ),
 				true
 			);
 		}

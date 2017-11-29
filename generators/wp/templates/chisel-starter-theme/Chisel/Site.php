@@ -16,7 +16,7 @@ class Site extends \Timber\Site {
 	 */
 	public function __construct() {
 		// set default twig templates directory
-		\Timber\Timber::$dirname = Settings::TEMPLATES_DIR;
+		Timber::$dirname = Settings::TEMPLATES_DIR;
 
 		$this->chiselInit();
 

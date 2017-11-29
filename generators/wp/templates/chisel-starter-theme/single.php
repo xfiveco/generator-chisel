@@ -7,6 +7,8 @@
  * @package <%= nameSlug %>
  */
 
+global $post;
+
 $context = \Timber\Timber::get_context();
 
 if ( post_password_required( $post->ID ) ) {
