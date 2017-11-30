@@ -79,7 +79,9 @@ describe('Browsersync and gulp tests on WordPress project', function () {
       function(callback) {
         gulp.start();
         gulp.once('ready', () => {
-          puppeteer.launch()
+          puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          })
             .then(br => {
               browser = br;
               return browser.newPage();

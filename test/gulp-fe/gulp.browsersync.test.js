@@ -53,7 +53,9 @@ describe('Gulp build on Chisel Generator with default options (BrowserSync tests
       function(callback) {
         gulp.start();
         gulp.once('ready', () => {
-          puppeteer.launch()
+          puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          })
             .then(br => {
               browser = br;
               return browser.newPage();
