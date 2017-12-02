@@ -82,6 +82,7 @@ Chisel allows to create 2 projects types - front-end and WordPress projects with
 WordPress projects include all features of front-end projects plus:
 - automatic [WP-CLI](http://wp-cli.org/) based WordPress and plugins installation
 - automatic [Timber](http://upstatement.com/timber/) library installation to support Twig templates
+- automatic [Disable Emojis](https://wordpress.org/plugins/disable-emojis/) plugin installation for better performance
 - Chisel starter theme with the same workflow as for front-end projects
 - WordPress pages generation from command line
 
