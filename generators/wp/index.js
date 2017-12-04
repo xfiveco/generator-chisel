@@ -221,8 +221,7 @@ module.exports = class extends Generator {
         admin_password: this.prompts.adminPassword,
         admin_email: this.prompts.adminEmail
       }], cb),
-      (cb) => wpCli(['plugin', 'install', 'timber-library', {activate: true}], cb),
-      (cb) => wpCli(['plugin', 'install', 'disable-emojis', {activate: true}], cb),
+      (cb) => wpCli(['plugin', 'install', 'timber-library', 'disable-emojis', {activate: true}], cb),
       (cb) => wpCli(['theme', 'activate', this.configuration.nameSlug], cb)
     ], cb);
   }

@@ -58,8 +58,8 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
     })
   });
 
-  it('should install and activate Timber', function(done) {
-    wpCli(['plugin', 'status', 'timber-library'], (err, stdio) => {
+  it('should install and activate Disable Emojis Plugin', function(done) {
+    wpCli(['plugin', 'status', 'disable-emojis'], (err, stdio) => {
       assert(stdio[STDOUT].toString('utf8').indexOf('Active') != -1);
     done();
   })
