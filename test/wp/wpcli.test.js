@@ -57,4 +57,11 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
       done();
     })
   });
+
+  it('should install and activate Disable Emojis Plugin', function(done) {
+    wpCli(['plugin', 'status', 'disable-emojis'], (err, stdio) => {
+      assert(stdio[STDOUT].toString('utf8').indexOf('Active') != -1);
+      done();
+    })
+  });
 });
