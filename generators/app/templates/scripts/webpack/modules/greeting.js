@@ -13,5 +13,5 @@ const greeting = name => {
     element.innerHTML = name;
   }
 };
-<% }
+<% } %>
 export default greeting;
