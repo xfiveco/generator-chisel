@@ -30,7 +30,7 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
       .withPrompts({
         name: 'Test Project Plugins',
         author: 'Test Author',
-        projectType: 'wp-with-fe'
+        projectType: 'wp-with-fe',
         databasePassword: new String(''),
         adminPassword: 'pass',
         adminEmail: 'user@example.com',
