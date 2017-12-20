@@ -21,8 +21,7 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
       .withLocalConfig({
         config: {
           nameSlug: "test-1",
-          name: "Test 1",
-          features: [],
+          name: "Test 1"
           has_jquery_vendor_config: false,
           author: "Test Author",
           projectType: 'wp-with-fe',

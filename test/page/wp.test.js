@@ -32,8 +32,7 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
             .withPrompts({
               name: 'Test Project',
               author: 'Test Author',
-              projectType: 'wp-with-fe',
-              features: [],
+              projectType: 'wp-with-fe'
               databasePassword: new String(''),
               adminPassword: 'pass',
               adminEmail: 'user@example.com',
