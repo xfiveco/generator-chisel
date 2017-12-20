@@ -477,12 +477,14 @@ Inside the theme there is `Chisel` folder with various classes which extend Word
 
 Classes you can work with:
 
-- `\Chisel\WpExtensions` - use this class to extend Wordpress (register post types, taxonomies, etc.)
-- `\Chisel\Security` - default security settings for Chisel, you can change or extend security settings here.
-- `\Chisel\Performance` - class for optimizing performance, allows to setup which JS scripts should be deferred or asynced
-- `\Chisel\Site` - this class extends `\Timber\Site` class and is used to setup whole site
+- `\Chisel\Media` - default media settings for Chisel, you can change or extend media settings here
 - `\Chisel\Post` - this class extends `\Timber\Post` class
-- `\Chisel\TwigExtensions` - this class is used to extend Twig
+- `\Chisel\Performance` - class for optimizing performance, allows to setup which JS scripts should be deferred or asynced
+- `\Chisel\Site` - this class extends `\Timber\Site` class and is used to setup whole site related configuration
+- `\Chisel\Security` - default security settings for Chisel, you can change or extend security settings here
+- `\Chisel\Extensions\DataType` - use this class to register custom post types and taxonomies
+- `\Chisel\Extensions\Twig` - use this class to extend Twig functionality
+- `\Chisel\Extensions\Theme` - use this class to extend theme functionality
 
 If you want to add new custom class, you can copy and adjust one of the existing classes. Then load your class in `functions.php`
 
