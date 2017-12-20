@@ -9,8 +9,8 @@ namespace Chisel\Extensions;
  */
 class DataType implements ChiselExtension {
 	public function extend() {
-		$this->registerPostTypes();
-		$this->registerTaxonomies();
+		add_action( 'init', array( $this, 'registerPostTypes' ) );
+		add_action( 'init', array( $this, 'registerTaxonomies' ) );
 	}
 
 	/**
