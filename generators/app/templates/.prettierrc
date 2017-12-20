@@ -1,6 +1,6 @@
 {
   "singleQuote": true,
-  "trailingComma": <% if (features.has_babel) { %>"all"<% } else { %>"es5"<% } %><% if (features.has_babel) { %>,
+  "trailingComma": "all",
   "overrides": [
     {
       "files": [
@@ -12,5 +12,5 @@
         "trailingComma": "es5"
       }
     }
-  ]<% } %>
+  ]
 }
