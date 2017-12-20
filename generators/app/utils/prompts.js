@@ -88,11 +88,11 @@ var Prompts = {
       name: 'projectType',
       message: 'Please select project type:',
       choices: [{
-        name: 'Front-end only',
-        value: 'fe'
-      }, {
-        name: 'WordPress with Front-end',
+        name: 'WordPress Website',
         value: 'wp-with-fe'
+      }, {
+        name: 'Front-end Templates',
+        value: 'fe'
       }]
     },
     {
