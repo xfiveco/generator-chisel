@@ -141,13 +141,8 @@ var Prompts = {
     this.prompts.nameCamel = _.upperFirst(_.camelCase(answers.name));
     this.prompts.hasFullStyling = answers.styling == 'full' || answers.styling == 'full_styleguide';
     this.prompts.hasStyleGuide = answers.styling == 'full_styleguide';
-    this.prompts.features = {};
     this.prompts.chiselVersion = packageJson.version;
-
-    for (var i in answers.features) {
-      this.prompts.features[answers.features[i]] = true;
-    }
-
+    this.prompts.has_jquery = answers.has_jquery;
     this.prompts.has_jquery_vendor_config = answers.has_jquery_vendor_config;
   }
 };
