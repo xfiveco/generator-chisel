@@ -115,28 +115,14 @@ var Prompts = {
       ]
     },
     {
-      type: 'checkbox',
-      name: 'features',
-      message: 'Select additional front-end features:',
-      choices: [{
-        name: 'ES6 with Babel',
-        value: 'has_babel',
-        checked: true
-      }, {
-        name: 'jQuery',
-        value: 'has_jquery',
-        checked: false
-      }]
+      type: 'confirm',
+      name: 'has_jquery',
+      message: 'Include jQuery?',
+      default: false
     },
     {
       when: function (answers) {
-        if ( !Array.isArray(answers.features) ) {
-          return;
-        }
-
-        return answers.features.some(function (answer) {
-          return answer === 'has_jquery';
-        });
+        return answers.has_jquery;
       },
       type: 'confirm',
       name: 'has_jquery_vendor_config',
