@@ -87,7 +87,7 @@
     "webpack": "^3.8.1",
     "webpack-stream": "^4.0.0"
   },
-  "dependencies": {<% if (features.has_jquery) { %>
+  "dependencies": {<% if (has_jquery) { %>
     "jquery": "^3.2.1",<% } %>
     "normalize-scss": "^7.0.0"
   },

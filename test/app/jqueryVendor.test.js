@@ -15,7 +15,7 @@ describe('Chisel Generator with jQuery in vendor bundle', function () {
       .withPrompts({
         name: 'Test Project',
         author: 'Test Author',
-        features: ['has_jquery'],
+        has_jquery: true,
         has_jquery_vendor_config: true
       })
       .on('end', done);

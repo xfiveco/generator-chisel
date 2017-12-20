@@ -15,7 +15,7 @@ describe('Chisel Generator with jQuery', function () {
       .withPrompts({
         name: 'Test Project',
         author: 'Test Author',
-        features: ['has_jquery'],
+        has_jquery: true,
         has_jquery_vendor_config: false
       })
       .on('end', done);
