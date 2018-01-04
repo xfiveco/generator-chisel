@@ -31,7 +31,6 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
         name: 'Test Project Plugins',
         author: 'Test Author',
         projectType: 'wp-with-fe',
-        features: [],
         databasePassword: new String(''),
         adminPassword: 'pass',
         adminEmail: 'user@example.com',

@@ -33,7 +33,6 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
               name: 'Test Project',
               author: 'Test Author',
               projectType: 'wp-with-fe',
-              features: [],
               databasePassword: new String(''),
               adminPassword: 'pass',
               adminEmail: 'user@example.com',

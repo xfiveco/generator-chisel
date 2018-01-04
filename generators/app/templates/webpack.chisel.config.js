@@ -23,11 +23,11 @@ function createConfig(cb) {
     devtool: 'inline-source-map',
     stats: { colors: true, modules: false },
     watch: isDevelopment,
-    module: {<% if (features.has_babel) { %>
+    module: {
       rules: [
         { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       ],
-    <% } %>},
+    },
     node: false,
     plugins: [
       new webpack.HashedModuleIdsPlugin(),

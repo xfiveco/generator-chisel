@@ -26,7 +26,6 @@ describe('Chisel Generator with WordPress (subgenerator, src inside theme)', fun
         name: 'Test Project SRC in WP',
         author: 'Test Author',
         projectType: 'wp-with-fe',
-        features: [],
         databasePassword: new String(''),
         adminPassword: 'pass',
         adminEmail: 'user@example.com',

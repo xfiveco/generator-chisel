@@ -88,15 +88,6 @@ function addTests() {
     done();
   });
 
-  it('should add Eslint custom rules', function (done) {
-    assert.fileContent('.eslintrc', '"rules": {');
-    assert.fileContent('.eslintrc', '"no-floating-decimal": "warn"');
-    assert.fileContent('.eslintrc', '"no-undef": "error"');
-    assert.fileContent('.eslintrc', '"commonjs": true');
-
-    done();
-  });
-
   it('should install Prettier and config for it', function (done) {
     assert.fileContent('package.json', '"prettier":');
     assert.fileContent('.prettierrc', '{');

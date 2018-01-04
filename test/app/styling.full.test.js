@@ -16,8 +16,7 @@ describe('Chisel Generator with default options (except styling set to full)', f
         name: 'Hello2d Wąęśźorld_2 :D',
         author: 'Test Author',
         projectType: 'fe',
-        styling: 'full',
-        features: []
+        styling: 'full'
       })
       .on('end', done);
   });

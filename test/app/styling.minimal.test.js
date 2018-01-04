@@ -16,8 +16,7 @@ describe('Chisel Generator with default options (except styling set to minimal)'
         name: 'Hello2d Wąęśźorld_2 :D',
         author: 'Test Author',
         projectType: 'fe',
-        styling: 'minimal',
-        features: []
+        styling: 'minimal'
       })
       .on('end', done);
   });

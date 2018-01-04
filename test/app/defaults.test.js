@@ -16,8 +16,7 @@ describe('Chisel Generator with default options', function () {
         name: 'Hello2d Wąęśźorld_2 :D',
         author: 'Test Author',
         projectType: 'fe',
-        styling: 'full_styleguide',
-        features: []
+        styling: 'full_styleguide'
       })
       .on('end', done);
   });
