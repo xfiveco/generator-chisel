@@ -69,19 +69,7 @@ var Generator = {
 
   stylesheets: function () {
     helpers.copy.call(this, 'styles/vendor/.keep', 'src/styles/vendor/.keep');
-    if(this.prompts.hasFullStyling) {
-      helpers.copy.call(this, 'styles/itcss/**/*', 'src/styles/', this.prompts);
-
-      if(!this.prompts.hasStyleGuide) {
-        this.fs.delete(this.destinationPath('src/styles/components/_style-guide.scss'))
-      }
-    } else {
-      helpers.copy.call(this, 'styles/itcss/*', 'src/styles/', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/components/_{footer,header}.scss', 'src/styles/components/', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/{elements,generic,settings,tools}/*', 'src/styles/*', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/objects/_wrapper.scss', 'src/styles/objects/_wrapper.scss', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/utilities/_hide.scss', 'src/styles/utilities/_hide.scss', this.prompts);
-    }
+    helpers.copy.call(this, 'styles/itcss/**/*', 'src/styles/', this.prompts);
   },
 
   javascripts: function () {
