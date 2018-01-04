@@ -48,23 +48,7 @@ var Generator = {
     if(this.prompts.projectType == 'wp-with-fe') {
       base = 'wp/wp-content/themes/'+this.prompts.nameSlug+'/templates/';
     }
-
-    if(this.prompts.hasStyleGuide) {
-      helpers.copy.call(this, 'templates/twig/**/*', base, this.prompts);
-
-      if(this.prompts.projectType == 'wp-with-fe') {
-        // Rename style guide so it works as WP page template
-        this.fs.move(
-          this.destinationPath(base + 'style-guide.twig'),
-          this.destinationPath(base + 'page-style-guide.twig')
-        );
-      }
-    } else {
-      helpers.copy.call(this, 'templates/twig/layouts/*', base + 'layouts/', this.prompts);
-      helpers.copy.call(this, 'templates/twig/components/{footer,header}.twig', base + 'components/', this.prompts);
-      this.fs.write(this.destinationPath(base + 'objects/.keep'), '')
-      this.fs.write(this.destinationPath(base + 'utilities/.keep'), '')
-    }
+    helpers.copy.call(this, 'templates/twig/**/*', base, this.prompts);
   },
 
   stylesheets: function () {
