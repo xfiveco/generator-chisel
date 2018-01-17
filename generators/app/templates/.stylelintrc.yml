@@ -23,7 +23,9 @@ rules:
   function-parentheses-space-inside: never-single-line
   function-url-quotes: always
   function-whitespace-after: always
-  indentation: 2
+  indentation:
+    - 2
+    - ignore: inside-parens
   length-zero-no-unit:
     - true
     - severity: error
@@ -51,7 +53,7 @@ rules:
   selector-attribute-brackets-space-inside: never
   selector-attribute-operator-space-after: never
   selector-attribute-operator-space-before: never
-  selector-attribute-quotes: never
+  selector-attribute-quotes: always
   selector-class-pattern: ^(?:(?:a|o|c|u|t|s|is|has|_|js|qa)-)?[a-zA-Z0-9]+(?:-[a-zA-Z0-9\\@]+)*(?:__[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:--[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*)?(?:\\[.+\\])?$
   selector-combinator-space-after: always
   selector-combinator-space-before: always
