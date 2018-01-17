@@ -9,22 +9,15 @@ module.exports = function assetsTask(gulp, plugins, config) {
     plugins.del([path.join(dest.base, dest.assets)])
   );
 
-  gulp.task('assets-build', ['assets-clean'], () =>
-    gulp
+  function assets() {
+    return gulp
       .src([path.join(src.base, src.assets), '!**/.keep'], {
         base: src.base,
       })
       .pipe(gulp.dest(dest.base))
-      .on('end', plugins.browserSync.reload)
-  );
+      .on('end', plugins.browserSync.reload);
+  }
 
-  gulp.task('assets-watch', () =>
-    gulp
-      .src([path.join(src.base, src.assets), '!**/.keep'], {
-        base: src.base,
-      })
-      .pipe(plugins.newer(dest.base))
-      .pipe(gulp.dest(dest.base))
-      .on('end', plugins.browserSync.reload)
-  );
+  gulp.task('assets-build', ['assets-clean'], () => assets());
+  gulp.task('assets-watch', ['assets-clean'], () => assets());
 };
