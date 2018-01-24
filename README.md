@@ -1,6 +1,6 @@
 # Chisel [![Build Status](https://travis-ci.org/xfiveco/generator-chisel.svg?branch=master)](https://travis-ci.org/xfiveco/generator-chisel) [![NPM version](https://badge.fury.io/js/generator-chisel.svg)](https://badge.fury.io/js/generator-chisel) [![NPM dependiencies](https://david-dm.org/xfiveco/generator-chisel.svg)](https://david-dm.org/xfiveco/generator-chisel)
 
-> Chisel is a [Yeoman](http://yeoman.io) generator for setting up and developing front-end and WordPress projects.
+> Chisel is a [Yeoman](http://yeoman.io) generator for setting up and developing WordPress project and front-end projects.
 
 [![NPM](https://nodei.co/npm/generator-chisel.png)](https://nodei.co/npm/generator-chisel/)
 
@@ -36,6 +36,7 @@
     - [Moving src folder to theme folder](#moving-src-folder-to-theme-folder)
 - [Front-end development](#front-end-development)
   - [Adding pages](#adding-pages)
+  - [Removing pages](#removing-pages)
   - [Development tasks](#development-tasks)
   - [Automated JS code formatting with Prettier](#automated-js-code-formatting-with-prettier)
   - [Caveats](#caveats)
@@ -61,7 +62,7 @@
 
 ## Features
 
-Chisel allows to create 2 projects types - front-end and WordPress projects with front-end.
+Chisel allows to create 2 projects types - WordPress projects and projects.
 
 ### Front-end projects
 - [Gulp](http://gulpjs.com/) build system
@@ -91,7 +92,7 @@ WordPress projects include all features of front-end projects plus:
 The following software needs to be installed if you want to setup and develop projects with Chisel. These installations need to be done just once so you can skip this section if you have the software already installed.
 
 ### Node.js
-Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package manager. Version 4.5+ is required.
+Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package manager. Version 6+ is required.
 
 ### Yeoman, Chisel
 Install [Yeoman](http://yeoman.io/) and Chisel globally.
@@ -132,7 +133,7 @@ Run Chisel from the project directory
 yo chisel
 ```
 
-Insert project name (you can use the default one based on the working directory name), author and select *Front-end only* project type. Select additional front-end features if you need them and wait until installation is complete.
+Insert project name (you can use the default one based on the working directory name), author and select *Front-end Templates* project type. Select whether you want to use jQuery and wait until installation is complete.
 
 *Note: To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
 
@@ -158,7 +159,7 @@ Run Chisel from the project directory
 yo chisel
 ```
 
-Insert project name (you can use the default one based on the working directory name), author and select *WordPress with Front-end* project type. Select additional front-end features if you need them.
+Insert project name (you can use the default one based on the working directory name), author and select *WordPress Website* project type. Select additional front-end features if you need them.
 
 *Note: To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install*
 
@@ -305,6 +306,9 @@ You can also create multiple pages at once by separating page names with space:
 yo chisel:page "Home" "About Us" "Contact Us" "News"
 ```
 
+### Removing pages
+You can remove pages by deleting them from `.yo-rc.json` and running `yo chisel:page` (without any page name) to regenerate the project index.
+
 ### Development tasks
 When you have the basic setup done, you can start development. To re-compile Twig, SCSS and JavaScript files in real time you can use default task. Type
 
@@ -343,7 +347,7 @@ When `npm run build` is run, first the `dist` folder is cleaned and then build t
 
 ### Automated JS code formatting with Prettier
 
-Prettier comes preinstalled with Chisel however it's synced with Eslint **only if ES6 with Babel has been selected**. It's one of the reasons why choosing ES6 will result in the best coding experience. One of the easiest ways to use Prettier is to install a plugin for your favourite editor. See "Editor Integration" section on [Prettier's homepage](https://prettier.io). 
+Prettier comes preinstalled with Chisel and it's synced with Eslint. One of the easiest ways to use Prettier is to install a plugin for your favourite editor. See "Editor Integration" section on [Prettier's homepage](https://prettier.io).
 
 ### Caveats
 
@@ -374,10 +378,10 @@ From time to time you may stumble upon legacy jQuery plugin or one which just do
 
 ##### New project setup
 
- Make sure to *choose jQuery* when asked about _additional front-end features_ and then agree to _configure vendor bundle for jQuery plugins_. Example:
+ Make sure to *Include jQuery* and then agree to _configure vendor bundle for jQuery plugins_. Example:
 
 ```
-? Select additional front-end features: ES6 with Babel, jQuery
+? Include jQuery? Yes
 ? Would you like to configure vendor bundle for jQuery plugins? Yes
 ```
 
@@ -495,7 +499,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 * `ChiselPost`: you can use this function if you want to create a post class inside Twig file. As an argument you can pass post id, post object, or an array consisting of field values for the post. When creating fake post by passing an array of fields as an argument you can use `_fields` key to set post meta values loaded via `get_field` method to simulate for example ACF values. You can also load existing post that will have fake fields by passing post's id with `ID` key:
 
   Example usage:
-  
+
   ```php
   {% set post = ChiselPost({
     'post_title': 'Fake post title',
@@ -505,9 +509,9 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
     }
   }) %}
   ```
-  
+
   This will create a `\Chisel\Post` object that you can use like any other post loaded from the database:
-  
+
   ```html
   <div>
     <h1>{{ post.title }}</h1>
@@ -519,7 +523,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 * `className`: you can use this function if you want to avoid writing long classes with multiple modifiers by hand:
 
   Example usage:
-  
+
   ```php
   <article class="{{
     className(
@@ -530,7 +534,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
     )
   }}"></article>
   ```
-  
+
   It will generate (assuming post of type `post` and no thumbnail):
 
   ```html
@@ -548,12 +552,12 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 #### Good practices
 
 * When using ACF try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
-  
+
   Good:
   ```html
   {{ post.get_field('field_name') }}
   ```
-  
+
   Bad:
   ```html
   {{ post.field_name }}
@@ -596,6 +600,7 @@ In addition to default security settings you can also:
   Note: this can break some plugins
 
 ## Tutorials
+- [Chisel Recipes](https://github.com/xfiveco/chisel-recipes) - collection of solutions and tips for developing Chisel projects
 - [Craft perfect websites with Chisel](https://www.xfive.co/blog/craft-perfect-websites-chisel/)
 - [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/)
 - [Easy-to-use Code Blocks in WordPress](https://www.xfive.co/blog/easy-use-code-blocks-wordpress/)
