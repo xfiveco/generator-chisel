@@ -15,8 +15,7 @@ describe('Chisel Generator with default options', function () {
       .withPrompts({
         name: 'Hello2d Wąęśźorld_2 :D',
         author: 'Test Author',
-        projectType: 'fe',
-        styling: 'full_styleguide'
+        projectType: 'fe'
       })
       .on('end', done);
   });
@@ -25,25 +24,10 @@ describe('Chisel Generator with default options', function () {
 
   it('should generate templates', function (done) {
     assert.file([
-      'src/templates/components/btn.twig',
       'src/templates/components/footer.twig',
       'src/templates/components/header.twig',
-      'src/templates/elements/blockquote.twig',
-      'src/templates/elements/headings.twig',
-      'src/templates/elements/hr.twig',
-      'src/templates/elements/images.twig',
-      'src/templates/elements/links.twig',
-      'src/templates/elements/lists.twig',
-      'src/templates/elements/tables.twig',
       'src/templates/layouts/base.twig',
-      'src/templates/layouts/page.twig',
-      'src/templates/objects/layout.twig',
-      'src/templates/objects/list-bare.twig',
-      'src/templates/objects/list-inline.twig',
-      'src/templates/objects/media.twig',
-      'src/templates/objects/table.twig',
-      'src/templates/utilities/align.twig',
-      'src/templates/style-guide.twig'
+      'src/templates/layouts/page.twig'
     ]);
 
     done();
@@ -78,19 +62,10 @@ describe('Chisel Generator with default options', function () {
       'src/styles/components/_btn.scss',
       'src/styles/components/_footer.scss',
       'src/styles/components/_header.scss',
-      'src/styles/components/_style-guide.scss',
       'src/styles/utilities/_align.scss',
       'src/styles/utilities/_clearfix.scss',
-      'src/styles/utilities/_color.scss',
-      'src/styles/utilities/_hide.scss',
-      'src/styles/utilities/_spacing.scss'
+      'src/styles/utilities/_hide.scss'
     ]);
-
-    done();
-  });
-
-  it('should have link to Style Guide in index', function (done) {
-    assert.fileContent('index.html', '<a href="dist/style-guide.html"');
 
     done();
   });

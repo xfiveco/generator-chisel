@@ -48,40 +48,12 @@ var Generator = {
     if(this.prompts.projectType == 'wp-with-fe') {
       base = 'wp/wp-content/themes/'+this.prompts.nameSlug+'/templates/';
     }
-
-    if(this.prompts.hasStyleGuide) {
-      helpers.copy.call(this, 'templates/twig/**/*', base, this.prompts);
-
-      if(this.prompts.projectType == 'wp-with-fe') {
-        // Rename style guide so it works as WP page template
-        this.fs.move(
-          this.destinationPath(base + 'style-guide.twig'),
-          this.destinationPath(base + 'page-style-guide.twig')
-        );
-      }
-    } else {
-      helpers.copy.call(this, 'templates/twig/layouts/*', base + 'layouts/', this.prompts);
-      helpers.copy.call(this, 'templates/twig/components/{footer,header}.twig', base + 'components/', this.prompts);
-      this.fs.write(this.destinationPath(base + 'objects/.keep'), '')
-      this.fs.write(this.destinationPath(base + 'utilities/.keep'), '')
-    }
+    helpers.copy.call(this, 'templates/twig/**/*', base, this.prompts);
   },
 
   stylesheets: function () {
     helpers.copy.call(this, 'styles/vendor/.keep', 'src/styles/vendor/.keep');
-    if(this.prompts.hasFullStyling) {
-      helpers.copy.call(this, 'styles/itcss/**/*', 'src/styles/', this.prompts);
-
-      if(!this.prompts.hasStyleGuide) {
-        this.fs.delete(this.destinationPath('src/styles/components/_style-guide.scss'))
-      }
-    } else {
-      helpers.copy.call(this, 'styles/itcss/*', 'src/styles/', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/components/_{footer,header}.scss', 'src/styles/components/', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/{elements,generic,settings,tools}/*', 'src/styles/*', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/objects/_wrapper.scss', 'src/styles/objects/_wrapper.scss', this.prompts);
-      helpers.copy.call(this, 'styles/itcss/utilities/_hide.scss', 'src/styles/utilities/_hide.scss', this.prompts);
-    }
+    helpers.copy.call(this, 'styles/itcss/**/*', 'src/styles/', this.prompts);
   },
 
   javascripts: function () {
