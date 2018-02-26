@@ -6,13 +6,13 @@ html {
 
 @media (min-width: 768px) {
   html {
-    font-size: 1.125em;
+    font-size: 1.25em;
   }
 }
 
 @media (min-width: 1024px) {
   html {
-    font-size: 1.25em;
+    font-size: 1.5em;
   }
 }
 
@@ -21,7 +21,7 @@ body {
   background-image: repeating-linear-gradient(180deg, transparent, transparent 40px, #eae3d7 40px, #eae3d7 41px),
                     repeating-linear-gradient(90deg, transparent, transparent 40px, #eae3d7 40px, #eae3d7 41px);
   color: #1b3729;
-  font-family: 'Lora', serif;
+  font-family: 'Crimson Text', serif;
   padding: 1em;
 }
 
@@ -40,55 +40,15 @@ p {
 /* Layouts */
 .c-wrapper {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 860px;
 }
 
 .c-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 1em;
-}
-
-@media (min-width: 768px) {
-  .c-section {
-    flex-direction: row;
-    margin-top: 3em;
-  }
-}
-
-.c-section--first {
   margin-top: 2em;
-}
-
-.c-section__content {
-  width: 100%;
 }
 
 .c-section__note {
   margin-top: 1em;
-}
-
-@media (min-width: 768px) {
-  .c-section__content {
-    width: 60%;
-  }
-}
-
-.c-section__img {
-  display: none;
-  padding-top: 0;
-  width: 35%;
-}
-
-@media (min-width: 768px) {
-  .c-section__img {
-    display: block;
-  }
-}
-
-.c-section__img img {
-  max-width: 100%;
 }
 
 /* Header */
@@ -100,25 +60,24 @@ p {
   border-bottom: 7px solid #1b3729;
   display: inline-block;
   font-size: 1.25rem;
-  font-weight: normal;
+  font-weight: 600;
   margin: 0;
   padding-bottom: 0.25em;
 }
 
 .c-intro {
-  color: #4d4d4d;
   font-size: 1.25rem;
   margin: 0 1em 1em 0;
-  line-height: 1.8;
+  line-height: 1.5;
+  font-weight: 600;
 }
 
 /* Headings */
 .c-heading {
   border-bottom: 5px solid #ecbb42;
   display: inline-block;
-  font-weight: normal;
-  margin: 0 0 1em 0;
-  padding-bottom: 0.25em;
+  font-weight: 600;
+  margin: 0 0 0.5em 0;
 }
 
 /* Lists */
