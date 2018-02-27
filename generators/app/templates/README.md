@@ -1,4 +1,4 @@
 # <%= name %>
 
-<%= name %> is a project created with Chisel. Please check out Chisel documentation at [https://github.com/xfiveco/generator-chisel/tree/v<%= chiselVersion %>](https://github.com/xfiveco/generator-chisel/tree/v<%= chiselVersion %>).
+<%= name %> is a project created with Chisel. Please check out Chisel documentation at [https://www.getchisel.co/docs/](www.getchisel.co/docs/).
 
