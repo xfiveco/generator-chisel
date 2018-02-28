@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.12.0 (28/02/2018)
+
+#### Enhancements:
+
+- [#347](https://github.com/xfiveco/generator-chisel/issues/347) Simplify project index on the front-end templates projects
+- [#278](https://github.com/xfiveco/generator-chisel/issues/278) Set browser caching for static resources
+- [#60](https://github.com/xfiveco/generator-chisel/issues/60) Create Chisel website and documentation
+
+---
+
 ## v0.11.0 (24/01/2018)
 
 #### Enhancements:
