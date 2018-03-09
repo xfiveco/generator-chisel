@@ -2,6 +2,7 @@
 
 var cp = require('child_process');
 var path = require('path');
+var fs = require('fs');
 const EXIT_CODE_SUCCESS = 0;
 
 function getWpCliPath() {
@@ -9,7 +10,8 @@ function getWpCliPath() {
 }
 
 function getDefaultArgs() {
-  return [getWpCliPath(), '--path=wp', '--color'];
+  const path = fs.existsSync('web') ? 'web' : 'wp';
+  return [getWpCliPath(), '--path='+path, '--color'];
 }
 
 function parseParams(params) {

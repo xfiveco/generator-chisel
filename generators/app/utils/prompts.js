@@ -5,6 +5,8 @@ var path = require('path');
 var limax = require('limax');
 const cp = require('child_process');
 const updateNotifier = require('update-notifier');
+const fs = require('fs');
+
 const packageJson = require('../../../package.json');
 let hasUpdate = false;
 
@@ -123,6 +125,10 @@ var Prompts = {
     this.prompts.chiselVersion = packageJson.version;
     this.prompts.has_jquery = answers.has_jquery;
     this.prompts.has_jquery_vendor_config = answers.has_jquery_vendor_config;
+
+    if(this.prompts.projectType == 'wp-with-fe') {
+      this.prompts.wpDir = fs.existsSync('web') ? 'web' : 'wp';
+    }
   }
 };
 

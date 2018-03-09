@@ -25,15 +25,17 @@
   "scripts": {
     "test": "bash test/run-tests.sh",
     "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\"",
-    "toc": "doctoc README.md --github"
+    "toc": "doctoc README.md Pantheon.md --github"
   },
   "dependencies": {
     "async": "^2.5.0",
     "chalk": "^2.0.1",
     "command-exists": "^1.2.2",
     "fs-extra": "^4.0.0",
+    "gh-got": "^6.0.0",
     "limax": "^1.5.0",
     "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
     "mysql": "^2.13.0",
     "update-notifier": "^2.3.0",
     "yeoman-generator": "^2.0.0"

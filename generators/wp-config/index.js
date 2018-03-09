@@ -13,6 +13,7 @@ module.exports = class extends Generator {
 
   initializing() {
     this.configuration = this.config.get('config');
+    this.wpDir = this.configuration.wpDir || 'wp';
     if(!this.configuration) {
       this.log('You need to run this generator in a project directory.');
       process.exit();
@@ -88,7 +89,7 @@ module.exports = class extends Generator {
     var name = this.configuration.nameSlug;
     this.fs.copyTpl(this.templatePath('dev-vhost.conf'),
       this.destinationPath('dev-vhost.conf'), {
-        documentRoot: process.cwd()+'/wp',
+        documentRoot: process.cwd()+'/'+this.wpDir,
         serverName: name + '.test',
         dbName: name
       }
@@ -109,7 +110,7 @@ module.exports = class extends Generator {
 
   _updateWpConfig(cb) {
     async.waterfall([
-      (cb) => fs.readFile('wp/wp-config-local.php', 'utf8', cb),
+      (cb) => fs.readFile(this.wpDir+'/wp-config-local.php', 'utf8', cb),
       (config, cb) => {
         var prefix = helpers.makePrefix(this.configuration.nameSlug);
         config = config
@@ -119,7 +120,7 @@ module.exports = class extends Generator {
           .replace('\'password_here\'', this._getDbSetting('databasePassword'))
           .replace('wp_', prefix + '_');
 
-        fs.writeFile('wp/wp-config-local.php', config, cb);
+        fs.writeFile(this.wpDir+'/wp-config-local.php', config, cb);
       }
     ], cb);
   }
@@ -127,7 +128,7 @@ module.exports = class extends Generator {
   install() {
     var done = this.async();
     var files = {
-      'wp-config-local.php': 'wp/wp-config-local.php',
+      'wp-config-local.php': this.wpDir+'/wp-config-local.php',
     }
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),

@@ -45,7 +45,7 @@ var Generator = {
   templates: function () {
     var base = 'src/templates/';
     if(this.prompts.projectType == 'wp-with-fe') {
-      base = 'wp/wp-content/themes/'+this.prompts.nameSlug+'/templates/';
+      base = this.prompts.wpDir+'/wp-content/themes/'+this.prompts.nameSlug+'/templates/';
     }
     helpers.copy.call(this, 'templates/twig/**/*', base, this.prompts);
   },

@@ -51,3 +51,14 @@ npm-debug.log
 .vagrant
 dev-vhost.conf
 .yo-rc-local.json
+
+# Avoid accidental modification of pantheon.upstream.yml in sites
+# created for Pantheon
+pantheon.upstream.yml
+
+# Ignore Yarn/npm caches that may be used in CI
+/.yarn-cache
+/.npm-cache
+
+# Pantheon pushback configuration added by CI
+/web/private/scripts/chisel/pushback-config.json
