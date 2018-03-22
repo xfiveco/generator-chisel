@@ -38,8 +38,8 @@ temp
 tmp
 .tmp
 node_modules
-src/bower_components
-dist
+src/bower_components<% if (projectType == 'fe') { %>
+dist%>
 
 # Others
 npm-debug.log
