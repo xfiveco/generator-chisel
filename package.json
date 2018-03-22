@@ -39,11 +39,10 @@
     "yeoman-generator": "^2.0.3"
   },
   "devDependencies": {
-    "cross-spawn": "^5.0.1",
-    "doctoc": "^1.3.0",
-    "eslint": "^3.19.0",
-    "mocha": "^3.2.0",
-    "yeoman-assert": "^3.0.0",
+    "cross-spawn": "^6.0.5",
+    "eslint": "^4.19.0",
+    "mocha": "^5.0.4",
+    "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
   },
   "engines": {
