@@ -33,7 +33,7 @@
     },
     "dest": {<% if (projectType == 'wp-with-fe') { %>
       "wordpress": "wp",
-      "wordpressTheme": "<%= nameSlug %>",<% } %>
+      "wordpressTheme": "<%= nameSlug %>-chisel",<% } %>
       "assets": "assets",
       "base": "dist",
       "revManifest": "rev-manifest.json",
