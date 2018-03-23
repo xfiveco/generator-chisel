@@ -52,13 +52,13 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
   })
 
   it('should download our theme', function(done) {
-    assert.file('wp/wp-content/themes/test-1/index.php');
+    assert.file('wp/wp-content/themes/test-1-chisel/index.php');
 
     done();
   })
 
   it('should remove .git from our theme', function(done) {
-    assert.noFile('wp/wp-content/themes/test-1/.git');
+    assert.noFile('wp/wp-content/themes/test-1-chisel/.git');
 
     done();
   })
