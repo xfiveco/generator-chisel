@@ -32,6 +32,8 @@ module.exports = class extends Generator {
     if(!this.options['skip-plugins']) {
       this.composeWith(require.resolve('../wp-plugins'));
     }
+
+    this.configuration.themeFolder = this.configuration.nameSlug + '-chisel';
   }
 
   prompting() {
@@ -122,7 +124,7 @@ module.exports = class extends Generator {
       if (err) {
         throw err;
       } else {
-        config = config.replace('"base": "src"', '"base": "wp/wp-content/themes/'+this.configuration.nameSlug+'/src"');
+        config = config.replace('"base": "src"', '"base": "wp/wp-content/themes/'+this.configuration.themeFolder+'/src"');
         fs.writeFile('package.json', config, (err) => {
           if (err) {
             throw err;
@@ -137,7 +139,7 @@ module.exports = class extends Generator {
   _moveSrcFolder() {
     fse.move(
       this.destinationPath('src'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/src'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.themeFolder+'/src'),
       function (err) {
         if (err) {
           return console.error(err);
@@ -151,15 +153,15 @@ module.exports = class extends Generator {
   _copyTheme() {
     // Copy Chisel starter theme
     this.fs.copyTpl(this.templatePath('chisel-starter-theme'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug), this.configuration);
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.themeFolder), this.configuration);
 
     // Copy screenshot
     this.fs.copy(this.templatePath('images/screenshot.png'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/screenshot.png'));
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.themeFolder+'/screenshot.png'));
 
     this.fs.move(
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/gitignore'),
-      this.destinationPath('wp/wp-content/themes/'+this.configuration.nameSlug+'/.gitignore')
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.themeFolder+'/gitignore'),
+      this.destinationPath('wp/wp-content/themes/'+this.configuration.themeFolder+'/.gitignore')
     );
   }
 
@@ -222,7 +224,7 @@ module.exports = class extends Generator {
         admin_email: this.prompts.adminEmail
       }], cb),
       (cb) => wpCli(['plugin', 'install', 'timber-library', 'disable-emojis', {activate: true}], cb),
-      (cb) => wpCli(['theme', 'activate', this.configuration.nameSlug], cb)
+      (cb) => wpCli(['theme', 'activate', this.configuration.themeFolder], cb)
     ], cb);
   }
 
