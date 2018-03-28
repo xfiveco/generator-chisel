@@ -13,7 +13,6 @@
 *.iso
 *.rar
 *.tar
-*.zip
 *~
 
 # OS or Editor folders
