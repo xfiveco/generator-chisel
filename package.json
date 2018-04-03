@@ -24,26 +24,24 @@
   ],
   "scripts": {
     "test": "bash test/run-tests.sh",
-    "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\"",
-    "toc": "doctoc README.md --github"
+    "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\""
   },
   "dependencies": {
-    "async": "^2.5.0",
-    "chalk": "^2.0.1",
+    "async": "^2.6.0",
+    "chalk": "^2.3.2",
     "command-exists": "^1.2.2",
     "fs-extra": "^4.0.0",
-    "limax": "^1.5.0",
-    "lodash": "^4.17.4",
-    "mysql": "^2.13.0",
+    "limax": "^1.6.0",
+    "lodash": "^4.17.5",
+    "mysql": "^2.15.0",
     "update-notifier": "^2.3.0",
-    "yeoman-generator": "^2.0.0"
+    "yeoman-generator": "^2.0.3"
   },
   "devDependencies": {
-    "cross-spawn": "^5.0.1",
-    "doctoc": "^1.3.0",
-    "eslint": "^3.19.0",
-    "mocha": "^3.2.0",
-    "yeoman-assert": "^3.0.0",
+    "cross-spawn": "^6.0.5",
+    "eslint": "^4.19.0",
+    "mocha": "^5.0.4",
+    "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
   },
   "engines": {
