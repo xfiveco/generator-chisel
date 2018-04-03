@@ -24,8 +24,7 @@
   ],
   "scripts": {
     "test": "bash test/run-tests.sh",
-    "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\"",
-    "toc": "doctoc README.md --github"
+    "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\""
   },
   "dependencies": {
     "async": "^2.6.0",
