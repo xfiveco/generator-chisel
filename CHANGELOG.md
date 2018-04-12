@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.13.0 (12/04/2018)
+
+#### Enhancements:
+
+- [#360](https://github.com/xfiveco/generator-chisel/issues/360) Improve font rendering
+- [#354](https://github.com/xfiveco/generator-chisel/issues/354) Update packages in generator
+- [#353](https://github.com/xfiveco/generator-chisel/issues/353) Update packages version in generated projects
+- [#351](https://github.com/xfiveco/generator-chisel/issues/351) Add Prettier config to generator
+- [#329](https://github.com/xfiveco/generator-chisel/issues/329) Add suffix '-chisel' to the theme folder name to prevent collision with other themes
+
+#### Fixes:
+
+- [#350](https://github.com/xfiveco/generator-chisel/issues/350) Set more specific paths for dist and vendor folders  in .gitignore
+
+---
+
 ## v0.12.0 (28/02/2018)
 
 #### Enhancements:
