@@ -2,7 +2,10 @@
 
 const gulp = require('gulp');
 const _ = require('lodash');
-const plugins = require('gulp-load-plugins')({ pattern: '*' });
+const plugins = require('gulp-load-plugins')({
+  pattern: '*',
+  rename: { 'stylelint': 'stylelintLib', 'eslint': 'eslintLib' },
+});
 let config = require('./package.json').chisel;
 const generatorConfig = require('./.yo-rc.json')['generator-chisel'].config;
 const helpers = require('./gulp/helpers')(gulp, plugins, config);
