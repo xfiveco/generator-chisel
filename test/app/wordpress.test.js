@@ -27,7 +27,7 @@ describe('Chisel Generator with WordPress', function () {
   })
 
   it('should add WP theme name to package.json', function(done) {
-    assert.fileContent('package.json', '"wordpressTheme": "test-project"');
+    assert.fileContent('package.json', '"wordpressTheme": "test-project-chisel"');
 
     done();
   })

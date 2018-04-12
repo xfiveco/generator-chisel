@@ -42,7 +42,7 @@ describe('Chisel Generator with WordPress (subgenerator, src inside theme)', fun
   })
 
   it('should move base src into theme directory', function(done) {
-    var base = 'wp/wp-content/themes/test-project-src-in-wp/src';
+    var base = 'wp/wp-content/themes/test-project-src-in-wp-chisel/src';
     assert.file([
       base,
       base+'/assets/images/.keep',
@@ -56,7 +56,7 @@ describe('Chisel Generator with WordPress (subgenerator, src inside theme)', fun
   })
 
   it('should move WP-specific styles into theme directory', function(done) {
-    var base = 'wp/wp-content/themes/test-project-src-in-wp/src';
+    var base = 'wp/wp-content/themes/test-project-src-in-wp-chisel/src';
     assert.file([
       base+'/styles/components/_comment.scss',
       base+'/styles/components/_post.scss'

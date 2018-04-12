@@ -52,7 +52,7 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
   });
 
   it('should activate Theme', function(done) {
-    wpCli(['theme', 'status', 'test-1'], (err, stdio) => {
+    wpCli(['theme', 'status', 'test-1-chisel'], (err, stdio) => {
       assert(stdio[STDOUT].toString('utf8').indexOf('Active') != -1);
       done();
     })

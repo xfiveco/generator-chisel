@@ -57,8 +57,8 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
 
     it('should generate Twig templates', function (done) {
       assert.file([
-        'wp/wp-content/themes/test-project/templates/page-home.twig',
-        'wp/wp-content/themes/test-project/templates/page-test.twig'
+        'wp/wp-content/themes/test-project-chisel/templates/page-home.twig',
+        'wp/wp-content/themes/test-project-chisel/templates/page-test.twig'
       ]);
 
       done();
