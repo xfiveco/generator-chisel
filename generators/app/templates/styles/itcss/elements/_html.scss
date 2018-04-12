@@ -21,6 +21,9 @@ html {
   min-height: 100%; /* [3] */
   overflow-y: scroll; /* [2] */
   padding: 1rem;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 
   @include bp-medium {
     font-size: 0.875em; /* 14px */
