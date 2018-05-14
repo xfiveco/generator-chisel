@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.13.1 (14/05/2018)
+
+#### Fixes:
+
+- [#366](https://github.com/xfiveco/generator-chisel/issues/366) Fix "unhandled 'error' event" when generating project
+
+---
+
 ## v0.13.0 (12/04/2018)
 
 #### Enhancements:
