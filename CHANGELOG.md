@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.13.2 (31/05/2018)
+
+#### Fixes:
+
+- [#369](https://github.com/xfiveco/generator-chisel/issues/369) Update insecure command-exists depedency
+
+---
+
 ## v0.13.1 (14/05/2018)
 
 #### Fixes:
