@@ -2,8 +2,9 @@
 
 const path = require('path');
 
-module.exports = function lintTask(gulp, plugins, config) {
+module.exports = function lintTask(gulp, plugins, config, helpers) {
   const { src, dest } = config;
+  const ignorer = helpers.prepareStylelintIgnorer();
 
   gulp.task('lint-js', () =>
     gulp
@@ -14,11 +15,14 @@ module.exports = function lintTask(gulp, plugins, config) {
   );
 
   gulp.task('lint-css', () =>
-    gulp.src(path.join(src.base, src.styles)).pipe(
-      plugins.stylelint({
-        reporters: [{ formatter: 'string', console: true }],
-      })
-    )
+    gulp
+      .src(path.join(src.base, src.styles))
+      .pipe(helpers.skipIgnoredFiles(ignorer))
+      .pipe(
+        plugins.stylelint({
+          reporters: [{ formatter: 'string', console: true }],
+        })
+      )
   );
 
   gulp.task('validate-html', () =>

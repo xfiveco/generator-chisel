@@ -76,13 +76,15 @@
     "gulp-sass-glob": "^1.0.8",
     "gulp-sequence": "^1.0.0",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-stylelint": "^3.9.0",<% if (projectType == 'fe') { %>
+    "gulp-stylelint": "^7.0.0",<% if (projectType == 'fe') { %>
     "gulp-twig": "^v1.2.0",<% } %>
     "gulp-uglify": "^3.0.0",
+    "ignore": "^3.3.8",
     "lodash": "^4.17.5",
     "multipipe": "^2.0.3",
     "pre-commit": "^1.2.2",
     "prettier": "1.11.1",
+    "stylelint": "^9.2.1",
     "through2": "^2.0.3",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.11.0",

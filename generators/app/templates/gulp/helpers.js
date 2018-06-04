@@ -2,6 +2,11 @@
 
 const through = require('through2');
 const path = require('path');
+const fs = require('fs');
+const ignore = require('ignore');
+
+const IGNORE_FILENAME = '.stylelintignore';
+const FILE_NOT_FOUND_ERROR_CODE = 'ENOENT';
 
 let webpackManifestFile;
 
@@ -62,6 +67,28 @@ module.exports = function helpers() {
           callback();
         }
       );
+    },
+    prepareStylelintIgnorer() {
+      // Based on https://github.com/stylelint/stylelint/blob/234372e8c8bb5f9c35952728fd18f01f5fba8890/lib/standalone.js#L49-L61
+      const absoluteIgnoreFilePath = path.resolve(
+        process.cwd(),
+        IGNORE_FILENAME
+      );
+      let ignoreText = '';
+      try {
+        ignoreText = fs.readFileSync(absoluteIgnoreFilePath, 'utf8');
+      } catch (readError) {
+        if (readError.code !== FILE_NOT_FOUND_ERROR_CODE) throw readError;
+      }
+      return ignore().add(ignoreText);
+    },
+    skipIgnoredFiles(ignorer) {
+      return through.obj(function stealWebpackManifest(file, enc, callback) {
+        if (!ignorer.ignores(path.relative(process.cwd(), file.path))) {
+          this.push(file);
+        }
+        callback();
+      });
     },
   };
 };
