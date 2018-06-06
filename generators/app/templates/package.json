@@ -5,8 +5,10 @@
   "description": "<%= nameSlug %>",
   "scripts": {
     "build": "gulp build",
+    "build-report": "gulp build && gulp report",
     "dev": "gulp",
     "lint": "gulp lint-js && gulp lint-css",
+    "report": "gulp report",
     "start": "gulp",
     "watch": "gulp"
   },
@@ -82,8 +84,10 @@
     "ignore": "^3.3.8",
     "lodash": "^4.17.5",
     "multipipe": "^2.0.3",
+    "opn": "^5.3.0",
     "pre-commit": "^1.2.2",
     "prettier": "1.11.1",
+    "source-map-explorer": "^1.6.0",
     "stylelint": "^9.2.1",
     "through2": "^2.0.3",
     "vinyl-named": "^1.1.0",
