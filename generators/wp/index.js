@@ -232,7 +232,7 @@ module.exports = class extends Generator {
     this._copyTheme();
     this._copyThemeStyles();
     var done = this.async();
-    wpCli(['core', 'download'], helpers.throwIfError(done))
+    wpCli(['core', 'download', '--skip-content'], helpers.throwIfError(done))
   }
 
   end() {
