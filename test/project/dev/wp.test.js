@@ -3,7 +3,6 @@
 const path = require('path');
 const async = require('async');
 const helpers = require('yeoman-test');
-const cp = require('child_process');
 const fs = require('fs');
 const puppeteer = require('puppeteer');
 const browsersyncHelpers = require('../helpers/browsersync.js');
@@ -14,6 +13,7 @@ const gulp = new GulpInstance();
 const phpServer = new PhpServerInstance();
 
 const FOUR_MINUTES = 240000;
+const WAIT_FOR_DEV_SERVER_TIME = 2000;
 
 let browser = null;
 let page = null;
@@ -74,7 +74,7 @@ describe('Project > Dev > WP', function () {
       },
       function(callback) {
         phpServer.start();
-        setTimeout(callback, 2000);
+        setTimeout(callback, WAIT_FOR_DEV_SERVER_TIME);
       },
       function(callback) {
         gulp.start();
