@@ -33,7 +33,7 @@ exports.monitor = page => {
         }
         previousMessage = str;
         process.nextTick(() => page.emit('bsNotify', str));
-        if(str == 'Connected to BrowserSync') {
+        if(str == 'Browsersync: connected') {
           process.nextTick(() => page.emit('bsConnected'));
         }
       })

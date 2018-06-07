@@ -48,6 +48,6 @@ describe('Gulp build on Chisel Generator (WordPress)', function () {
     ], done);
   });
 
-  require('../gulp/gulp.build.shared.js')('wp/wp-content/themes/test-gulp-wp-build/dist');
+  require('../gulp/gulp.build.shared.js')('wp/wp-content/themes/test-gulp-wp-build-chisel/dist');
 
 });

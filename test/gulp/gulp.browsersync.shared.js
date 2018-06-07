@@ -10,7 +10,7 @@ function addTests(page, srcDir, distDir) {
   it('should reload on modified script', function (done) {
     var fileName = srcDir+'/scripts/modules/greeting.js';
     var file = fs.readFileSync(fileName, 'utf8');
-    file = file.replace('= name', '= "xfive tests js"');
+    file = file.replace('= name;', '= "xfive tests js";');
     fs.writeFileSync(fileName, file);
 
     page.once('chiselNavigated', () => {
@@ -24,12 +24,17 @@ function addTests(page, srcDir, distDir) {
     var file = fs.readFileSync(fileName, 'utf8');
     file += 'h1 {color: red;}'
     fs.writeFileSync(fileName, file);
-    page.once('bsNotify', msg => {
-      assert.fileContent(distDir+'/styles/main.css', 'color: red;');
-      assert.fileContent(distDir+'/styles/main.css.map', 'h1 {color: red;}');
-      assert.equal(msg, 'Injected: main.css');
-      done();
-    });
+
+    function requestHandler(req) {
+      if(req.url().includes('main.css?browsersync')) {
+        page.removeListener('requestfinished', requestHandler);
+        assert.fileContent(distDir+'/styles/main.css', 'color: red;');
+        assert.fileContent(distDir+'/styles/main.css.map', 'h1 {color: red;}');
+        done();
+      }
+    }
+
+    page.on('requestfinished', requestHandler);
   });
 }
 

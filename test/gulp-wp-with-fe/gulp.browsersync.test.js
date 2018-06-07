@@ -99,7 +99,7 @@ describe('Browsersync and gulp tests on WordPress project', function () {
   });
 
   it('should reload on modified page', function (done) {
-    var fileName = 'wp/wp-content/themes/test-browsersync-wp/templates/page-testing-page.twig';
+    var fileName = 'wp/wp-content/themes/test-browsersync-wp-chisel/templates/page-testing-page.twig';
     var file = fs.readFileSync(fileName, 'utf8');
     file = file.replace('id="post-', 'id="testing-post-');
     fs.writeFileSync(fileName, file);
@@ -112,10 +112,15 @@ describe('Browsersync and gulp tests on WordPress project', function () {
   require('../gulp/gulp.browsersync.shared.js')(
     () => page,
     'src',
-    'wp/wp-content/themes/test-browsersync-wp/dist'
+    'wp/wp-content/themes/test-browsersync-wp-chisel/dist'
   );
 
   after(function(done) {
+    if(!process.env.TRAVIS) {
+      done();
+      return;
+    }
+
     gulp.stop();
     browser.close();
     phpServer.stop();
