@@ -11,7 +11,7 @@ describe('Chisel Generator with default options', function () {
     async.series([
       function (callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/app'))
+          .run(path.join(__dirname, '../../../generators/app'))
           .withOptions({
             'skip-install': true
           })
@@ -22,7 +22,7 @@ describe('Chisel Generator with default options', function () {
       },
       function (callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/page'), { tmpdir: false })
+          .run(path.join(__dirname, '../../../generators/page'), { tmpdir: false })
           .withArguments(['Home', 'Test'])
           .withOptions({
             'skip-build': true
@@ -38,7 +38,7 @@ describe('Chisel Generator with default options', function () {
 
   describe('Page subgenerator', function () {
     it('can be imported without blowing up', function (done) {
-      assert(require('../../generators/page') !== undefined);
+      assert(require('../../../generators/page') !== undefined);
 
       done();
     });

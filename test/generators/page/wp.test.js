@@ -24,7 +24,7 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
       async.series([
         function (callback) {
           helpers
-            .run(path.join(__dirname, '../../generators/app'))
+            .run(path.join(__dirname, '../../../generators/app'))
             .withOptions({
               'skip-install': true,
               'run-wp': true
@@ -42,7 +42,7 @@ describe('Chisel Generator with WordPress (subgenerator, WP-CLI integration)', f
         },
         function(callback) {
           helpers
-            .run(path.join(__dirname, '../../generators/page'), { tmpdir: false })
+            .run(path.join(__dirname, '../../../generators/page'), { tmpdir: false })
             .withArguments(['Home', 'Test'])
             .withOptions({
               'skip-build': true

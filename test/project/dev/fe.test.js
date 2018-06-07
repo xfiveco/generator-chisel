@@ -6,9 +6,9 @@ const assert = require('yeoman-assert');
 const fs = require('fs');
 const async = require('async');
 const puppeteer = require('puppeteer');
-const browsersyncHelpers = require('../gulp/browsersyncHelpers.js');
-const prepare = require('../gulp/environment.js');
-const GulpInstance = require('../gulp/GulpInstance');
+const browsersyncHelpers = require('../helpers/browsersync.js');
+const prepare = require('../helpers/environment.js');
+const GulpInstance = require('../helpers/GulpInstance');
 const gulp = new GulpInstance();
 
 const FOUR_MINUTES = 240000;
@@ -16,14 +16,14 @@ const FOUR_MINUTES = 240000;
 let browser = null;
 let page = null;
 
-describe('Gulp build on Chisel Generator with default options (BrowserSync tests)', function () {
+describe('Project > Dev > FE', function () {
   this.timeout(FOUR_MINUTES);
 
   before(function (done) {
     async.series([
       function(callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/app'))
+          .run(path.join(__dirname, '../../../generators/app'))
           .withOptions({
             'skip-install': true
           })
@@ -40,7 +40,7 @@ describe('Gulp build on Chisel Generator with default options (BrowserSync tests
       },
       function(callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/page'), { tmpdir: false })
+          .run(path.join(__dirname, '../../../generators/page'), { tmpdir: false })
           .withArguments(['Page1'])
           .withOptions({
             'skip-build': true
@@ -84,7 +84,7 @@ describe('Gulp build on Chisel Generator with default options (BrowserSync tests
     })
   });
 
-  require('../gulp/gulp.browsersync.shared.js')(() => page, 'src', 'dist');
+  require('./_shared.js')(() => page, 'src', 'dist');
 
   after(function(done) {
     gulp.stop();

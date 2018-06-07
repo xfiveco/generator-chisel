@@ -1,6 +1,6 @@
 const assert = require('yeoman-assert');
 const fs = require('fs');
-const browsersyncHelpers = require('../gulp/browsersyncHelpers.js');
+const browsersyncHelpers = require('../helpers/browsersync.js');
 
 function addTests(page, srcDir, distDir) {
   before(() => {

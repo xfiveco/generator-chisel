@@ -5,11 +5,11 @@ const async = require('async');
 const helpers = require('yeoman-test');
 const cp = require('child_process');
 const fs = require('fs');
-const prepare = require('../gulp/environment.js');
+const prepare = require('../helpers/environment.js');
 
 const FOUR_MINUTES = 240000;
 
-describe('Gulp build on Chisel Generator (WordPress)', function () {
+describe('Project > Build > WP', function () {
   this.timeout(FOUR_MINUTES);
 
   before(function (done) {
@@ -22,7 +22,7 @@ describe('Gulp build on Chisel Generator (WordPress)', function () {
     async.series([
       function (callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/app'))
+          .run(path.join(__dirname, '../../../generators/app'))
           .withOptions({
             'skip-install': true,
             'run-wp': true
@@ -48,6 +48,6 @@ describe('Gulp build on Chisel Generator (WordPress)', function () {
     ], done);
   });
 
-  require('../gulp/gulp.build.shared.js')('wp/wp-content/themes/test-gulp-wp-build-chisel/dist');
+  require('./_shared.js')('wp/wp-content/themes/test-gulp-wp-build-chisel/dist');
 
 });

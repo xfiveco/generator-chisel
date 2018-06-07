@@ -17,7 +17,7 @@ describe('Chisel Generator with WordPress (subgenerator, src inside theme)', fun
     }
 
     helpers
-      .run(path.join(__dirname, '../../generators/app'))
+      .run(path.join(__dirname, '../../../generators/app'))
       .withOptions({
         'skip-install': true,
         'run-wp': true

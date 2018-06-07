@@ -6,10 +6,10 @@ const helpers = require('yeoman-test');
 const cp = require('child_process');
 const fs = require('fs');
 const puppeteer = require('puppeteer');
-const browsersyncHelpers = require('../gulp/browsersyncHelpers.js');
-const prepare = require('../gulp/environment.js');
-const GulpInstance = require('../gulp/GulpInstance');
-const PhpServerInstance = require('../gulp/PhpServerInstance');
+const browsersyncHelpers = require('../helpers/browsersync.js');
+const prepare = require('../helpers/environment.js');
+const GulpInstance = require('../helpers/GulpInstance');
+const PhpServerInstance = require('../helpers/PhpServerInstance');
 const gulp = new GulpInstance();
 const phpServer = new PhpServerInstance();
 
@@ -18,7 +18,7 @@ const FOUR_MINUTES = 240000;
 let browser = null;
 let page = null;
 
-describe('Browsersync and gulp tests on WordPress project', function () {
+describe('Project > Dev > WP', function () {
   this.timeout(FOUR_MINUTES);
 
   before(function (done) {
@@ -31,7 +31,7 @@ describe('Browsersync and gulp tests on WordPress project', function () {
     async.series([
       function (callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/app'))
+          .run(path.join(__dirname, '../../../generators/app'))
           .withOptions({
             'skip-install': true,
             'run-wp': true
@@ -51,7 +51,7 @@ describe('Browsersync and gulp tests on WordPress project', function () {
       },
       function(callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/page'), { tmpdir: false })
+          .run(path.join(__dirname, '../../../generators/page'), { tmpdir: false })
           .withArguments(['Testing Page'])
           .withOptions({
             'skip-build': true
@@ -109,7 +109,7 @@ describe('Browsersync and gulp tests on WordPress project', function () {
     });
   });
 
-  require('../gulp/gulp.browsersync.shared.js')(
+  require('./_shared.js')(
     () => page,
     'src',
     'wp/wp-content/themes/test-browsersync-wp-chisel/dist'

@@ -18,7 +18,7 @@ describe('Chisel Generator with WordPress (wp-config subgenerator)', function ()
     }
 
     var context = helpers
-      .run(path.join(__dirname, '../../generators/wp-config'))
+      .run(path.join(__dirname, '../../../generators/wp-config'))
       .withOptions({
         skipInstall: false
       })

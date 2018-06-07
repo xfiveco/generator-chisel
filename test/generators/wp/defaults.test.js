@@ -11,7 +11,7 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
     this.timeout(FOUR_MINUTES)
 
     helpers
-      .run(path.join(__dirname, '../../generators/wp'))
+      .run(path.join(__dirname, '../../../generators/wp'))
       .withOptions({
         skipInstall: false,
         skipPlugins: true,

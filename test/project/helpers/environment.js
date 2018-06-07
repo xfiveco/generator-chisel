@@ -9,7 +9,7 @@ function prepare() {
     return;
   }
   const oldCwd = process.cwd();
-  const initialCwd = path.join(__dirname, '..');
+  const initialCwd = path.join(__dirname, '../..');
   process.chdir(initialCwd);
   cp.execSync('mkdir -p generated_project');
   cp.execSync('node generate_package.js');
