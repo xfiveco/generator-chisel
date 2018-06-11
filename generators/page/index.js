@@ -37,12 +37,11 @@ module.exports = class extends Generator {
    * @public
    */
   initializing() {
-    try {
-      this.configuration = this.config.get('config');
-    } catch (ex) {
+    if(!this.config.existed) {
       this.log('You need to run this generator in a project directory.');
-      process.exit();
+      process.exit(1);
     }
+    this.configuration = this.config.get('config');
     this.pages = this.config.get('pages');
   }
 

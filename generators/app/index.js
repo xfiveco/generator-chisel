@@ -11,6 +11,22 @@ module.exports = class extends Generator {
     super(args, opts);
   }
 
+  initializing() {
+    if (this.config.existed) {
+      this.log('A Chisel project already exists in this folder.');
+      this.log(
+        'If you are trying to setup an existing project, check out the' +
+          ' documentation at https://www.getchisel.co/docs/setup/'
+      );
+      this.log(
+        'If the process of generating project was interrupted and you would' +
+          ' like to continue, we recommend cleaning up the directory and' +
+          ' starting again.'
+      );
+      process.exit(1);
+    }
+  }
+
   prompting() {
     const done = this.async();
 
