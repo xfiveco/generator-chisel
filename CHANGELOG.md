@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.14.0 (29/06/2018)
+
+#### Enhancements:
+
+- [#374](https://github.com/xfiveco/generator-chisel/issues/374) Update stylelint
+- [#373](https://github.com/xfiveco/generator-chisel/issues/373) Remove default WordPress themes and plugins
+- [#372](https://github.com/xfiveco/generator-chisel/issues/372) Prevent running yo chisel on an existing project
+
+---
+
 ## v0.13.2 (31/05/2018)
 
 #### Fixes:
@@ -283,8 +293,3 @@ Notable changes and features:
 - Adding project and author info to app.js
 - Adding page name to newly created pages
 - New tests
-
----
-
-## v0.1.0 (26/07/2016)
-Initial release
