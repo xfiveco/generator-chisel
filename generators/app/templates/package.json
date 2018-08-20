@@ -8,7 +8,6 @@
     "build-report": "gulp build && gulp report",
     "dev": "gulp",
     "lint": "gulp lint-js && gulp lint-css",
-    "report": "gulp report",
     "start": "gulp",
     "watch": "gulp"
   },
