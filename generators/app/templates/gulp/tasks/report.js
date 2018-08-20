@@ -128,15 +128,13 @@ function startServer({ destBase }) {
         <td>Notes</td></tr></thead><tbody>`
       );
 
-      const links = [];
-
-      Object.keys(files)
+      const links = Object.keys(files)
         .sort()
-        .forEach(link => {
+        .map(link => {
           const file = files[link];
           const escapedLink = escapeHTML(link);
-          links.push(
-            `<tr>
+          return `
+            <tr>
               <td>${
                 file.hasSourceMap
                   ? `<a href="${escapedLink}.html">${escapedLink}</a>`
@@ -145,8 +143,8 @@ function startServer({ destBase }) {
               <td>${formatSize(file.size)}</td>
               <td>${formatSize(file.sizeGzipped)}</td>
               <td>${escapeHTML(file.notes.join(', '))}</td>
-            </tr>`
-          );
+            </tr>
+          `;
         });
 
       res.write(links.join(''));
