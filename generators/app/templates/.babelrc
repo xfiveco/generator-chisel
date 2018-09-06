@@ -1,4 +1,4 @@
 {
-  "presets": ["es2015"],
-  "plugins": ["syntax-dynamic-import"]
+  "presets": ["@babel/preset-env"],
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
