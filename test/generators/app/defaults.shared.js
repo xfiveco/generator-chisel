@@ -2,7 +2,7 @@ var assert = require('yeoman-assert');
 
 function addTests() {
   it('can be imported without blowing up', function (done) {
-    assert(require('../../generators/app') !== undefined);
+    assert(require('../../../generators/app') !== undefined);
 
     done();
   });

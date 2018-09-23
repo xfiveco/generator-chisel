@@ -4,7 +4,7 @@ set -e
 
 if [ "$TEST_VERSIONS" == "" ]; then
   eslint .
-  mocha test/**/*.test.js -b --reporter spec
+  mocha test/{generators,project}/**/*.test.js -b --reporter spec
 elif [ "$TEST_VERSIONS" == "generator" ]; then
   rm -rf node_modules
   npm install --quiet > /dev/null

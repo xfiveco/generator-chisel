@@ -3,7 +3,7 @@
 var path = require('path');
 var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
-var wpCli = require('../../helpers/wpCli');
+var wpCli = require('../../../helpers/wpCli');
 
 const TEN_SECONDS = 10000;
 const FOUR_MINUTES = 240000;
@@ -22,7 +22,7 @@ describe('Chisel Generator with WordPress (wp-plugins subgenerator)', function (
     }
 
     helpers
-      .run(path.join(__dirname, '../../generators/app'))
+      .run(path.join(__dirname, '../../../generators/app'))
       .withOptions({
         'skip-install': true,
         'run-wp': true

@@ -4,7 +4,7 @@ var path = require('path');
 var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 var async = require('async');
-var wpCli = require('../../helpers/wpCli');
+var wpCli = require('../../../helpers/wpCli');
 var spawn = require('cross-spawn');
 
 const TEN_SECONDS = 10000;
@@ -26,7 +26,7 @@ describe('Chisel Generator with WordPress (wpcli subgenerator)', function () {
     async.series([
       function(callback) {
         helpers
-          .run(path.join(__dirname, '../../generators/wp'))
+          .run(path.join(__dirname, '../../../generators/wp'))
           .withOptions({
             skipInstall: false,
             skipPlugins: true
@@ -40,7 +40,7 @@ describe('Chisel Generator with WordPress (wpcli subgenerator)', function () {
           .on('end', callback);
       },
       function (callback) {
-        spawn('yo', [path.join(__dirname, '../../generators/wpcli'),
+        spawn('yo', [path.join(__dirname, '../../../generators/wpcli'),
           'plugin', 'install', 'rest-api', '--activate'], {stdio: 'inherit'})
           .on('exit', callback)
           .on('error', callback);

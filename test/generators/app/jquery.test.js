@@ -8,7 +8,7 @@ describe('Chisel Generator with jQuery', function () {
   before(function (done) {
 
     helpers
-      .run(path.join(__dirname, '../../generators/app'))
+      .run(path.join(__dirname, '../../../generators/app'))
       .withOptions({
         'skip-install': true
       })

@@ -1,0 +1,36 @@
+'use strict';
+
+const path = require('path');
+const helpers = require('yeoman-test');
+const cp = require('child_process');
+const fs = require('fs');
+const prepare = require('../helpers/environment.js');
+
+const FOUR_MINUTES = 240000;
+
+describe('Project > Build > FE', function () {
+  this.timeout(FOUR_MINUTES);
+
+  before(function (done) {
+    helpers
+      .run(path.join(__dirname, '../../../generators/app'))
+      .withOptions({
+        'skip-install': true
+      })
+      .withPrompts({
+        name: 'Test Project',
+        author: 'Test Author',
+        features: [],
+        projectType: 'fe'
+      })
+      .on('end', () => {
+        prepare.linkOrInstallModules();
+        fs.writeFileSync('src/assets/test.txt', 'abcd-tessst');
+        cp.execSync('yarn build');
+        done();
+      });
+  });
+
+  require('./_shared.js')('dist');
+
+});
