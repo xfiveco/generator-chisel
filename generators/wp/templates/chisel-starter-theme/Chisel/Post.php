@@ -10,6 +10,16 @@ namespace Chisel;
  */
 class Post extends \Timber\Post {
 
+	/**
+	 * @var string $ImageClass the name of the class to handle images by default
+	 */
+	public $ImageClass = 'Chisel\Image';
+
+	/**
+	 * @var string $PostClass the name of the class to handle posts by default
+	 */
+	public $PostClass = 'Chisel\Post';
+
 	protected $fakeFields = false;
 
 	/**
