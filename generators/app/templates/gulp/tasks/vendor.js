@@ -115,7 +115,7 @@ module.exports = function bundleVendorTask(gulp, plugins, config, helpers) {
       .pipe(plugins.concat('vendor.js'))
       .pipe(
         plugins.mirror(
-          plugins.uglify(),
+          plugins.uglifyEs.default(),
           plugins.multipipe(
             helpers.removeSourceMap(),
             plugins.rename({ suffix: '.full' })

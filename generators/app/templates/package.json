@@ -53,7 +53,7 @@
     "chunk-manifest-webpack-plugin": "^1.1.2",
     "del": "^3.0.0",
     "eslint": "^5.8.0",
-    "eslint-config-chisel": "https://github.com/xfiveco/eslint-config-chisel.git",
+    "eslint-config-chisel": "^2.0.0",
     "glob": "^7.1.2",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.3",
@@ -79,7 +79,7 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-stylelint": "^7.0.0",<% if (projectType == 'fe') { %>
     "gulp-twig": "^v1.2.0",<% } %>
-    "gulp-uglify": "^3.0.0",
+    "gulp-uglify-es": "^1.0.4",
     "ignore": "^3.3.8",
     "lodash": "^4.17.5",
     "multipipe": "^2.0.3",
