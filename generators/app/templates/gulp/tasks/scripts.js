@@ -58,7 +58,7 @@ module.exports = function scriptsTask(gulp, plugins, config, helpers) {
       .pipe(plugins.sourcemaps.init({ loadMaps: true }))
       .pipe(
         plugins.mirror(
-          plugins.uglify(),
+          plugins.uglifyEs.default(),
           plugins.multipipe(
             helpers.removeSourceMap(),
             plugins.rename({ suffix: '.full' })

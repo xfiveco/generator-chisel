@@ -9,6 +9,8 @@ function addTests() {
 
   it('should generate configuration files', function (done) {
     assert.file([
+      '.babelrc',
+      '.browserslistrc',
       '.editorconfig',
       '.eslintrc',
       '.prettierrc',
