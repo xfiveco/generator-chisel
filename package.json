@@ -2,7 +2,7 @@
   "name": "generator-chisel",
   "version": "0.14.0",
   "description": "A Yeoman generator for scaffolding front-end and WordPress projects",
-  "homepage": "",
+  "homepage": "https://www.getchisel.co/",
   "author": {
     "name": "Xfive",
     "email": "hello@xfive.co",
