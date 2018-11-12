@@ -35,7 +35,7 @@
     "lodash": "^4.17.11",
     "mysql": "^2.16.0",
     "update-notifier": "^2.5.0",
-    "yeoman-generator": "2.0.4"
+    "yeoman-generator": "^3.1.1"
   },
   "devDependencies": {
     "cross-spawn": "^6.0.5",
