@@ -30,7 +30,7 @@
     "async": "^2.6.1",
     "chalk": "^2.4.1",
     "command-exists": "^1.2.8",
-    "fs-extra": "^4.0.0",
+    "fs-extra": "^7.0.1",
     "limax": "^1.7.0",
     "lodash": "^4.17.11",
     "mysql": "^2.16.0",
