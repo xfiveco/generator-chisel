@@ -39,10 +39,10 @@
   },
   "devDependencies": {
     "cross-spawn": "^6.0.5",
-    "eslint": "^4.19.0",
-    "mocha": "^5.0.4",
-    "yeoman-assert": "^3.1.0",
-    "yeoman-test": "^1.7.0"
+    "eslint": "^5.9.0",
+    "mocha": "^5.2.0",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^1.9.1"
   },
   "engines": {
     "node": ">=6"
