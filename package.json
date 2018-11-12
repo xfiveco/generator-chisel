@@ -27,14 +27,14 @@
     "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\""
   },
   "dependencies": {
-    "async": "^2.6.0",
-    "chalk": "^2.3.2",
-    "command-exists": "^1.2.6",
+    "async": "^2.6.1",
+    "chalk": "^2.4.1",
+    "command-exists": "^1.2.8",
     "fs-extra": "^4.0.0",
-    "limax": "^1.6.0",
-    "lodash": "^4.17.5",
-    "mysql": "^2.15.0",
-    "update-notifier": "^2.3.0",
+    "limax": "^1.7.0",
+    "lodash": "^4.17.11",
+    "mysql": "^2.16.0",
+    "update-notifier": "^2.5.0",
     "yeoman-generator": "2.0.4"
   },
   "devDependencies": {
