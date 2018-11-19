@@ -16,11 +16,14 @@ $font-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
 /* Breakpoints
    ========================================================================== */
 
-$bp-small: 480px;
-$bp-medium: 768px;
-$bp-large: 1024px;
-$bp-xlarge: 1280px;
-$bp-full: 1600px;
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  large: 1024px,
+  xlarge: 1280px,
+  full: 1600px,
+);
+
 
 /* Colors
    ========================================================================== */
