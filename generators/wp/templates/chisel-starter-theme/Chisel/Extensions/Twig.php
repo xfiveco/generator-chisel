@@ -9,7 +9,7 @@ namespace Chisel\Extensions;
  */
 class Twig implements ChiselExtension {
 	public function extend() {
-		add_filter( 'get_twig', array( $this, 'extendTwig' ) );
+		add_filter( 'timber/loader/twig', array( $this, 'extendTwig' ) );
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Twig implements ChiselExtension {
 	 * @return \Twig_Environment $twig
 	 */
 	protected function registerTwigFunctions( $twig ) {
-//		$this->registerFilter(
+//		$this->registerFunction(
 //			$twig,
 //			'functionName',
 //			array(

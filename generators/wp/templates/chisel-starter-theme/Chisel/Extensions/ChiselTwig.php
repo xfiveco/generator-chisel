@@ -11,7 +11,7 @@ class ChiselTwig extends Twig {
 	private $manifest = array();
 
 	public function extend() {
-		add_filter( 'get_twig', array( $this, 'extendTwig' ) );
+		add_filter( 'timber/loader/twig', array( $this, 'extendTwig' ) );
 	}
 
 	/**
@@ -43,6 +43,24 @@ class ChiselTwig extends Twig {
 			array(
 				$this,
 				'chiselPost',
+			)
+		);
+
+		$this->registerFunction(
+			$twig,
+			'ChiselImage',
+			array(
+				$this,
+				'chiselImage',
+			)
+		);
+
+		$this->registerFunction(
+			$twig,
+			'Image',
+			array(
+				$this,
+				'chiselImage',
 			)
 		);
 
@@ -165,6 +183,24 @@ class ChiselTwig extends Twig {
 	 */
 	public function chiselPost( $fields = null ) {
 		return new \Chisel\Post( $fields );
+	}
+
+	/**
+	 * Encapsulates image with specified class class (works also for arrays)
+	 *
+	 * @param array|null $pid
+	 * @param string $ImageClass
+	 *
+	 * @return array|\Chisel\Image
+	 */
+	public function chiselImage( $pid, $ImageClass = '\Chisel\Image' ) {
+		if ( is_array($pid) && !\Timber\Helper::is_array_assoc($pid) ) {
+			foreach ( $pid as &$p ) {
+				$p = new $ImageClass($p);
+			}
+			return $pid;
+		}
+		return new $ImageClass($pid);
 	}
 
 	/**
