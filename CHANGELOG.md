@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.15.0 (28/11/2018)
+
+#### Enhancements:
+
+- [#402](https://github.com/xfiveco/generator-chisel/issues/402) Add \Chisel\Image class with srcset property support
+- [#396](https://github.com/xfiveco/generator-chisel/issues/396) Update babel to v7 and eslint to v5
+- [#391](https://github.com/xfiveco/generator-chisel/issues/391) Extend breakpoints mixins
+- [#389](https://github.com/xfiveco/generator-chisel/issues/389) Add preserveAspectRatio attribute to ignored attributes
+- [#325](https://github.com/xfiveco/generator-chisel/issues/325) Add report about bundle sizes
+- [#260](https://github.com/xfiveco/generator-chisel/issues/260) Switch to babel-preset-env
+
+#### Documentation:
+
+- [#394](https://github.com/xfiveco/generator-chisel/issues/394) Add Solution to Common Gravity Forms Related issues
+
+---
+
 ## v0.14.0 (29/06/2018)
 
 #### Enhancements:
@@ -285,11 +302,3 @@ Notable changes and features:
 - updated EsLint configuration
 - dist folder added to git ignored by default
 - removed .bowerrc as Bower is not used for now
-
----
-
-## v0.1.1 (27/07/2016)
-- Adding project name and author to main.scss
-- Adding project and author info to app.js
-- Adding page name to newly created pages
-- New tests
