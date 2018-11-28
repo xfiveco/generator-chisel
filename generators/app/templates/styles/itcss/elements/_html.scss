@@ -25,15 +25,15 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 
-  @include bp-medium {
+  @include bp(medium) {
     font-size: 0.875em; /* 14px */
   }
 
-  @include bp-large {
+  @include bp(large) {
     font-size: 0.9375em; /* 15px */
   }
 
-  @include bp-full {
+  @include bp(full) {
     font-size: 1em; /* 16px */
   }
 }

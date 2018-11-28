@@ -7,7 +7,7 @@
 .o-layout {
   display: block;
 
-  @include bp-medium {
+  @include bp(medium) {
     display: flex;
   }
 }
@@ -26,7 +26,7 @@
 
 .o-layout--2 {
   > .o-layout__item {
-    @include bp-medium {
+    @include bp(medium) {
       width: 49%;
     }
   }
@@ -34,7 +34,7 @@
 
 .o-layout--3 {
   > .o-layout__item {
-    @include bp-medium {
+    @include bp(medium) {
       width: 32%;
     }
   }
@@ -42,7 +42,7 @@
 
 .o-layout--4 {
   > .o-layout__item {
-    @include bp-medium {
+    @include bp(medium) {
       width: 24%;
     }
   }
