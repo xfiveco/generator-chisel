@@ -40,8 +40,14 @@ module.exports = function templateFunctions(data = {}) {
         }
         const classes = [name];
         let el;
-        for (let i = 0; i < args.length; i += 1) {
-          el = args[i];
+        let modifiers;
+        if(args[0] instanceof Array) {
+          modifiers = args[0];
+        } else {
+          modifiers = args;
+        }
+        for (let i = 0; i < modifiers.length; i += 1) {
+          el = modifiers[i];
           if (el && typeof el === 'string') {
             classes.push(`${name}--${el}`);
           }

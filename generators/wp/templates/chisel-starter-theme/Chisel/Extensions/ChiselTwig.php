@@ -145,7 +145,9 @@ class ChiselTwig extends Twig {
 		if ( ! is_string( $name ) || empty( $name ) ) {
 			return '';
 		}
-		$modifiers = array_slice( func_get_args(), 1 );
+		if ( ! is_array( $modifiers ) ) {
+			$modifiers = array_slice( func_get_args(), 1 );
+		}
 		$classes   = array( $name );
 		foreach ( $modifiers as $modifier ) {
 			if ( is_string( $modifier ) && ! empty( $modifier ) ) {
