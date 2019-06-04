@@ -127,10 +127,11 @@ class ChiselTwig extends Twig {
 			);
 		} else {
 			return sprintf(
-				'%s/%s%s',
+				'%s/%s%s%s',
 				get_template_directory_uri(),
 				\Chisel\Settings::DIST_PATH,
-				trim( $asset, '/' )
+				trim( $asset, '/' ),
+				'?' . time()
 			);
 		}
 	}
