@@ -15,17 +15,6 @@ class Image extends \Timber\Image {
 	public $PostClass = 'Chisel\Post';
 
 	/**
-	 * @inheritDoc
-	 */
-	public function srcset($size = "full") {
-		if (!$this->is_image()) {
-			return '';
-		}
-
-		return wp_get_attachment_image_srcset($this->ID);
-	}
-
-	/**
 	 * Checks whether attachment is an image. Duplicate from \Timber\Image due to @internal flag.
 	 *
 	 * @internal
