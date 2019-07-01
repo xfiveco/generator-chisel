@@ -52,7 +52,7 @@
     "chalk": "^2.3.2",
     "chunk-manifest-webpack-plugin": "^1.1.2",
     "del": "^3.0.0",
-    "eslint": "^5.8.0",
+    "eslint": "^5.16.0",
     "eslint-config-chisel": "^2.0.0",
     "glob": "^7.1.2",
     "gulp": "^3.9.1",
