@@ -45,7 +45,7 @@
     "yeoman-test": "^2.0.0"
   },
   "engines": {
-    "node": ">=8"
+    "node": "^8.10.0 || ^10.13.0"
   },
   "repository": "git@github.com:xfiveco/generator-chisel.git",
   "license": "MIT"
