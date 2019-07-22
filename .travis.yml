@@ -3,7 +3,6 @@ node_js:
   - "10"
   - "9"
   - "8"
-  - "6"
 addons:
   apt:
     packages:
@@ -19,9 +18,9 @@ before_install:
   - wget -P /tmp https://github.com/wp-sync-db/wp-sync-db-media-files/archive/master.zip
 matrix:
   include:
-    - node_js: "6"
+    - node_js: "8"
       env: TEST_VERSIONS=generator
-    - node_js: "6"
+    - node_js: "8"
       env: TEST_VERSIONS=generated_project
   allow_failures:
     - env: TEST_VERSIONS=generator

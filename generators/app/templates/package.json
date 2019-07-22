@@ -98,7 +98,7 @@
     "normalize-scss": "^7.0.1"
   },
   "engines": {
-    "node": ">=6 <7 || >=8"
+    "node": ">=8"
   },
   "pre-commit": [
     "lint"
