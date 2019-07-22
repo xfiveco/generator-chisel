@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.16.0 (22/07/2019)
+
+#### Enhancements:
+
+- [#431](https://github.com/xfiveco/generator-chisel/issues/431) Update generator dependencies
+- [#428](https://github.com/xfiveco/generator-chisel/issues/428) Drop Node 6 support
+- [#423](https://github.com/xfiveco/generator-chisel/issues/423) Remove unnecessary srcset function in Image class
+- [#413](https://github.com/xfiveco/generator-chisel/issues/413) Replace querySelector with documentElement
+- [#412](https://github.com/xfiveco/generator-chisel/issues/412) Allow preserveAspectRatio attribute in htmlhint
+- [#410](https://github.com/xfiveco/generator-chisel/issues/410) Add Classic Editor to the list of plugins available for installation
+
+#### Fixes:
+
+- [#427](https://github.com/xfiveco/generator-chisel/issues/427) In SCSS comments above rules are showing warning
+- [#411](https://github.com/xfiveco/generator-chisel/issues/411) Fix srcset definition error
+- [#409](https://github.com/xfiveco/generator-chisel/issues/409) Prevent caching dev versions of static files
+
+#### Documentation:
+
+- [#408](https://github.com/xfiveco/generator-chisel/issues/408) Add note about Twig coding standards
+
+---
+
 ## v0.15.0 (28/11/2018)
 
 #### Enhancements:
@@ -295,10 +318,3 @@ Notable changes and features:
 ## v0.1.3 (08/08/2016)
 - Fixes #23 – properly handle assets adding
 - Fixes #24 – support ES6 modules syntax in ESLint
-
----
-
-## v0.1.2 (28/07/2016)
-- updated EsLint configuration
-- dist folder added to git ignored by default
-- removed .bowerrc as Bower is not used for now
