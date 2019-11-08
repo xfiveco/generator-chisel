@@ -26,6 +26,9 @@
 </head>
 
 <body class="{{body_class}}">
+  <% if (projectType == 'wp-with-fe') { %>
+  {{ function('wp_body_open') }}<% } %>
+
   {% block header %}
     {% include 'components/header.twig' %}
   {% endblock %}
