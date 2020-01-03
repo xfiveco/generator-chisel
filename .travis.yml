@@ -5,8 +5,8 @@ node_js:
 addons:
   apt:
     packages:
-      - php5-cli
-      - php5-mysql
+      - php7.0-cli
+      - php7.0-mysql
 services:
   - mysql
 before_install:

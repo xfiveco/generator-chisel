@@ -240,7 +240,8 @@ module.exports = class extends Generator {
     var files = {
       'wp-config.php': 'wp/wp-config.php',
       'gitignore': 'wp/.gitignore',
-      '.htaccess': 'wp/.htaccess'
+      '.htaccess': 'wp/.htaccess',
+      'wp-cli.yml': 'wp-cli.yml'
     }
     async.series([
       (cb) => helpers.copyFiles(this.sourceRoot(), files, cb),

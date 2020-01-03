@@ -51,6 +51,12 @@ describe('Chisel Generator with WordPress (subgenerator)', function () {
     done();
   })
 
+  it('should add wp-cli.yml', function(done) {
+    assert.file('wp-cli.yml');
+
+    done();
+  })
+
   it('should download our theme', function(done) {
     assert.file('wp/wp-content/themes/test-1-chisel/index.php');
 
