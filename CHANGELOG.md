@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.16.1 (03/01/2020)
+
+#### Enhancements:
+
+- [#457](https://github.com/xfiveco/generator-chisel/issues/457) Update wp-cli
+- [#420](https://github.com/xfiveco/generator-chisel/issues/420) Add wp-cli.yml support
+
+---
+
 ## v0.16.0 (22/07/2019)
 
 #### Enhancements:
@@ -312,9 +321,3 @@ Notable changes and features:
 
 ## v0.1.4 (08/08/2016)
 - listing page sub generator in `package.json`
-
----
-
-## v0.1.3 (08/08/2016)
-- Fixes #23 – properly handle assets adding
-- Fixes #24 – support ES6 modules syntax in ESLint
