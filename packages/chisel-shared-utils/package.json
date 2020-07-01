@@ -1,6 +1,6 @@
 {
   "name": "chisel-shared-utils",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "TODO",
   "main": "index.js",
   "repository": {
@@ -31,7 +31,5 @@
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "lodash": "^4.17.15"
-  },
-  "peerDependencies": {},
-  "devDependencies": {}
+  }
 }

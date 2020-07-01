@@ -1,6 +1,6 @@
 {
   "name": "chisel-scripts",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "TODO",
   "bin": {
     "chisel-scripts": "bin/chisel-scripts.js"
@@ -30,7 +30,7 @@
     "@babel/core": "^7.10.2",
     "babel-loader": "^8.1.0",
     "case-sensitive-paths-webpack-plugin": "^2.3.0",
-    "chisel-shared-utils": "*",
+    "chisel-shared-utils": "^1.0.0-alpha.0",
     "cli-highlight": "^2.1.4",
     "cliui": "^6.0.0",
     "commander": "^5.1.0",

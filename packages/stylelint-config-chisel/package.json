@@ -1,6 +1,6 @@
 {
   "name": "stylelint-config-chisel",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.0",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -28,6 +28,5 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-prettier": "^1.1.2",
     "stylelint-scss": "^3.17.2"
-  },
-  "devDependencies": {}
+  }
 }

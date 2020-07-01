@@ -1,6 +1,6 @@
 {
   "name": "generator-chisel",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "A generator for scaffolding front-end and WordPress projects",
   "bin": {
     "chisel": "bin/chisel.js"
@@ -32,7 +32,7 @@
     "node": "^10.13.0 || ^12"
   },
   "dependencies": {
-    "chisel-shared-utils": "*",
+    "chisel-shared-utils": "^1.0.0-alpha.0",
     "commander": "^5.1.0",
     "execa": "^4.0.2",
     "fs-extra": "^9.0.1",
@@ -42,6 +42,5 @@
     "speakingurl": "^14.0.1",
     "tinyqueue": "^2.0.3",
     "update-notifier": "^4.1.0"
-  },
-  "devDependencies": {}
+  }
 }

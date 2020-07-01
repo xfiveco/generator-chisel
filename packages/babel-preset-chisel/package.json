@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-chisel",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "TODO",
   "main": "index.js",
   "repository": {
@@ -39,6 +39,5 @@
     "core-js": {
       "optional": true
     }
-  },
-  "devDependencies": {}
+  }
 }
