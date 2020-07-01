@@ -1,0 +1,43 @@
+{
+  "name": "chisel-plugin-code-style",
+  "version": "0.0.0",
+  "description": "TODO",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xfiveco/generator-chisel.git",
+    "directory": "packages/chisel-plugin-code-style"
+  },
+  "author": {
+    "name": "Xfive",
+    "email": "hello@xfive.co",
+    "url": "https://www.xfive.co"
+  },
+  "homepage": "https://www.getchisel.co/",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/xfiveco/generator-chisel/issues"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "eslint": "6.8.0",
+    "eslint-config-chisel": "*",
+    "eslint-import-resolver-webpack": "^0.12.1",
+    "eslint-plugin-import": "^2.22.0",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "stylelint": "^13.6.0",
+    "stylelint-config-chisel": "*",
+    "webpack": "^4.43.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {}
+}

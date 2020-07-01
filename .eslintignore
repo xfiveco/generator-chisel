@@ -1,3 +1,4 @@
+!.eslintrc.js
 node_modules
-generators/app/templates
-test/generated_project
+/packages/generator-chisel/lib/commands/create/creators/*/template
+/test-projects

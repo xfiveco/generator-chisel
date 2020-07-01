@@ -1,0 +1,44 @@
+{
+  "name": "chisel-plugin-wordpress",
+  "version": "0.0.0",
+  "description": "TODO",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xfiveco/generator-chisel.git",
+    "directory": "packages/chisel-wordpress"
+  },
+  "author": {
+    "name": "Xfive",
+    "email": "hello@xfive.co",
+    "url": "https://www.xfive.co"
+  },
+  "homepage": "https://www.getchisel.co/",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "prepare": "node ./fetch-wp-cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/xfiveco/generator-chisel/issues"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "browser-sync": "^2.26.7",
+    "chisel-shared-utils": "*",
+    "copy-webpack-plugin": "^6.0.1",
+    "execa": "^4.0.2",
+    "fs-extra": "^9.0.1",
+    "inquirer": "^7.1.0",
+    "lodash": "^4.17.15",
+    "webpack": "^4.43.0",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-manifest-plugin": "3.0.0-rc.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {}
+}

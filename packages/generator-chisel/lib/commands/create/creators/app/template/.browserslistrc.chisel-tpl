@@ -1,0 +1,19 @@
+<%=
+  [
+    app.browsers.includes('ie11') && 'ie 11',
+    app.browsers.includes('edge18') && 'edge 18',
+    ...(app.browsers.includes('modern')
+      ? [
+          'last 3 Android versions',
+          'last 3 ChromeAndroid versions',
+          'last 3 Chrome versions',
+          'last 3 Firefox versions',
+          'last 3 Safari versions',
+          'last 3 iOS versions',
+          'last 3 Edge versions',
+        ]
+      : []),
+  ]
+    .filter(Boolean)
+    .join('\n')
+%>

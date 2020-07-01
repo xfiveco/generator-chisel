@@ -1,0 +1,42 @@
+<!DOCTYPE html><% const isWP = app.projectType === 'wp-with-fe' %>
+<html class="no-js" lang="<%= isWP ? '{{ site.language }}' : 'en' %>" prefix="og: http://ogp.me/ns#" data-webpack-public-path="{{ getDistPath() }}">
+<head>
+  <meta charset="<% if (isWP) { %>{{ site.charset }}<% } else { %>utf-8<% }%>" /><% if (app.projectType == 'fe') { %>
+  <title>{{ pageName }} - <%= app.name %></title><% } %>
+  <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.remove('no-js');</script>
+  {% if isDev() %}
+    <script src="{{ revisionedPath('styles/main.js') }}" defer></script>
+  {% endif %}
+  <script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
+<% if (isWP) { %>  <link rel="pingback" href="{{ site.pingback_url }}" />
+
+  {{ function('wp_head') }}
+<% } %>
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body class="{{ body_class }}">
+<% if (isWP) { %>  {{ function('wp_body_open') }}
+<% } %>
+  {% block header %}
+    {% include 'components/header.twig' %}
+  {% endblock %}
+  <% if (isWP) { %>
+  {% include 'components/main-nav.twig' %}<% } %>
+
+  <main class="o-wrapper">
+    {% block content %}
+      Sorry, no content
+    {% endblock %}
+  </main>
+
+  {% block footer %}
+    {% include 'components/footer.twig' %}
+  {% endblock %}
+<% if (isWP) { %>
+  {{ function('wp_footer') }}<% } %>
+</body>
+</html>

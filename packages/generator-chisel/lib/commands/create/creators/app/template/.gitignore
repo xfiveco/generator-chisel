@@ -13,7 +13,6 @@
 *.iso
 *.rar
 *.tar
-*.zip
 *~
 
 # OS or Editor folders
@@ -32,16 +31,12 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 .idea
-.vscode
 
 # Folders to ignore
 temp
 tmp
 .tmp
 node_modules
-coverage
-src/bower_components
-/dist
 
 # Others
 npm-debug.log
@@ -53,4 +48,5 @@ npm-debug.log
 .vagrant
 
 # Chisel
-/test-projects
+/dev-vhost.conf
+/chisel.config.local.js

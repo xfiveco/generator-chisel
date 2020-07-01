@@ -1,0 +1,42 @@
+<% /* This file will be later formatted and sorted */ %>
+<% /* Don't worry too much how it looks here */ %>
+<% /* TOOD: precommit */ %>
+{
+  "name": "<%= app.nameSlug %>",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "<%= app.author %>",
+  "description": "<%= app.name %>",
+  "scripts": {
+    "dev": "chisel-scripts dev",
+    "watch": "chisel-scripts dev",
+    "build": "chisel-scripts lint && chisel-scripts build",
+    "build-report": "TODO",
+    <%= app.projectType == 'wp-with-fe' && `"wp": "chisel-scripts wp",` %>
+    "lint": "chisel-scripts lint"
+  },
+  "devDependencies": {
+    <%= app.projectType == 'wp-with-fe' && `"chisel-plugin-wordpress": "*",` %>
+    "babel-preset-chisel": "*",
+    "postcss-normalize": "^9.0.0",
+    "autoprefixer": "^9.8.0",
+    <% /* required by postcss-normalize for some reason  */ %>
+    "browserslist": "^4.12.0",
+    "chisel-plugin-code-style": "*",
+    "chisel-scripts": "*"
+  },
+  "dependencies": {
+  },
+  "engines": {
+    "node": "^10.13.0  || ^12"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,scss}": "chisel-scripts lint"
+  }
+}

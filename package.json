@@ -1,52 +1,21 @@
 {
-  "name": "generator-chisel",
-  "version": "0.16.1",
-  "description": "A Yeoman generator for scaffolding front-end and WordPress projects",
-  "homepage": "https://www.getchisel.co/",
-  "author": {
-    "name": "Xfive",
-    "email": "hello@xfive.co",
-    "url": "https://www.xfive.co"
-  },
-  "files": [
-    "generators",
-    "helpers"
-  ],
-  "main": "generators\\index.js",
-  "keywords": [
-    "yeoman-generator",
-    "twig",
-    "wordpress",
-    "scss",
-    "itcss",
-    "webpack",
-    "babel"
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "test-projects/*"
   ],
   "scripts": {
-    "test": "bash test/run-tests.sh",
-    "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\""
-  },
-  "dependencies": {
-    "async": "^2.6.3",
-    "chalk": "^2.4.2",
-    "command-exists": "^1.2.8",
-    "fs-extra": "^8.1.0",
-    "limax": "^1.7.0",
-    "lodash": "^4.17.15",
-    "mysql": "^2.17.1",
-    "update-notifier": "^3.0.1",
-    "yeoman-generator": "^4.0.1"
+    "lint": "eslint --no-eslintrc -c .eslintrc.js **/*.js",
+    "version": "node scripts/index-versions.js",
+    "prepare-links": "node scripts/prepare-links.js"
   },
   "devDependencies": {
-    "cross-spawn": "^6.0.5",
-    "eslint": "^6.1.0",
-    "mocha": "^6.2.0",
-    "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^2.0.0"
-  },
-  "engines": {
-    "node": "^8.10.0 || ^10.13.0"
-  },
-  "repository": "git@github.com:xfiveco/generator-chisel.git",
-  "license": "MIT"
+    "eslint": "^7.2.0",
+    "eslint-config-chisel": "*",
+    "execa": "^4.0.2",
+    "globby": "^11.0.1",
+    "lerna": "^3.22.0",
+    "prettier": "^2.0.5"
+  }
 }
