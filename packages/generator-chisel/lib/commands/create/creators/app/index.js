@@ -135,12 +135,14 @@ module.exports = async (api) => {
 
   api.schedule(api.PRIORITIES.FORMAT, async () => {
     console.log('Formatting code...');
-    await runLocalCurrent(['lint'], { silent: true });
+    await runLocalCurrent(['chisel-scripts', 'lint'], { silent: true });
   });
 
   api.schedule(api.PRIORITIES.BUILD, async () => {
     console.log('Linting and building...');
-    await runLocalCurrent(['build'], { execaOpts: { stdio: 'inherit' } });
+    await runLocalCurrent(['chisel-scripts', 'build'], {
+      execaOpts: { stdio: 'inherit' },
+    });
   });
 
   // api.schedule(api.PRIORITIES.END_MESSAGE, async () => {
