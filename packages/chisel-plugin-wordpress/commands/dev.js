@@ -48,6 +48,7 @@ module.exports = (api, options) => {
         ghostMode: false,
         online: true,
         middleware: [devMiddleware, hotMiddleware],
+        port: parseInt(process.env.PORT, 10) || 3000,
       };
 
       await new Promise((resolve) => {
