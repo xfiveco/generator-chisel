@@ -7,8 +7,11 @@ module.exports = (api, options) => {
       ),
     async () => {
       const { runLocal, copy } = require('chisel-shared-utils');
-      const runLocalCurrent = (args, opts) =>
-        runLocal(args, { ...opts, cwd: api.resolve() });
+      const wp = (args, opts) =>
+        runLocal(['chisel-scripts', 'wp', ...args], {
+          ...opts,
+          cwd: api.resolve(),
+        });
       const inquirer = require('inquirer');
       const path = require('path');
 
@@ -60,7 +63,7 @@ module.exports = (api, options) => {
           },
         });
 
-        const res = await runLocalCurrent(['wp', 'db', 'query', 'SELECT 1'], {
+        const res = await wp(['db', 'query', 'SELECT 1'], {
           reject: false,
           silent: true,
         });
@@ -70,7 +73,7 @@ module.exports = (api, options) => {
             res.stderr.includes('ERROR 1049') ||
             res.stderr.includes('Unknown database')
           ) {
-            await runLocalCurrent(['wp', 'db', 'create']);
+            await wp(['db', 'create']);
           } else {
             console.log(res.stdout);
             console.log(res.stderr);
@@ -88,8 +91,8 @@ module.exports = (api, options) => {
           ]);
 
           if (!useExisting) {
-            await runLocalCurrent(['wp', 'db', 'drop', '--yes']);
-            await runLocalCurrent(['wp', 'db', 'create']);
+            await wp(['db', 'drop', '--yes']);
+            await wp(['db', 'create']);
           }
         }
       };

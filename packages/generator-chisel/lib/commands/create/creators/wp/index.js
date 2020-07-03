@@ -1,4 +1,4 @@
-const { execa, chalk, runLocal } = require('chisel-shared-utils');
+const { execa, runLocal } = require('chisel-shared-utils');
 const crypto = require('crypto');
 const fs = require('fs-extra');
 
