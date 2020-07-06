@@ -34,6 +34,7 @@ module.exports = function sortPackage(pkg) {
     'build',
     'build-report',
     'lint',
+    'add-page',
     'wp',
   ]);
   pkg = sortObject(pkg, [

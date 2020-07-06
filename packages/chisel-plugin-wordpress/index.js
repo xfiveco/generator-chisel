@@ -47,7 +47,7 @@ module.exports = (api, options) => {
       ]);
   });
 
-  ['dev', 'wp', 'wp-config'].forEach((command) => {
+  ['dev', 'wp', 'wp-config', 'add-page'].forEach((command) => {
     require(`./commands/${command}`)(api, options);
   });
 };

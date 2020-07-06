@@ -17,6 +17,7 @@ module.exports = {
   creatorData,
   <%= !isWP ? '' : `
   wp,
+
   output: {
     base: \`\${wp.directoryName}/wp-content/themes/\${wp.themeName}/dist\`
   },` %>

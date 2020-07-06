@@ -4,6 +4,7 @@ module.exports = {
     scripts: 'scripts',
     styles: 'styles',
     assets: 'assets',
+    templates: 'templates',
   },
 
   output: {
