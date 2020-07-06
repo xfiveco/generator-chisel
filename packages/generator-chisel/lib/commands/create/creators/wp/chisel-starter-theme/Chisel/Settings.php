@@ -9,11 +9,11 @@ namespace Chisel;
  * Use this class to store configuration constants
  */
 class Settings {
-	const MANIFEST_PATH = 'dist/manifest.json';
+	const MANIFEST_PATH     = 'dist/manifest.json';
 	const MANIFEST_DEV_PATH = 'dist/manifest-dev.json';
-	const DIST_PATH = 'dist/';
-	const ASSETS_PATH = 'assets/';
-	const TEMPLATES_DIR = 'templates';
+	const DIST_PATH         = 'dist/';
+	const ASSETS_PATH       = 'assets/';
+	const TEMPLATES_DIR     = 'templates';
 
 	private $extensions = array( 'ChiselTwig', 'Twig', 'Theme', 'DataType' );
 

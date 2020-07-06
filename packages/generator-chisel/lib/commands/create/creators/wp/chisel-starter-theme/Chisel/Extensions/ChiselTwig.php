@@ -218,11 +218,15 @@ class ChiselTwig extends Twig {
 	 * Loads data from manifest file.
 	 */
 	private function initManifest() {
-		$manifestPath = defined( 'CHISEL_DEV_ENV' ) ? \Chisel\Settings::MANIFEST_DEV_PATH : \Chisel\Settings::MANIFEST_PATH;
+		$manifest_path = defined( 'CHISEL_DEV_ENV' )
+			? \Chisel\Settings::MANIFEST_DEV_PATH
+			: \Chisel\Settings::MANIFEST_PATH;
 
-		if ( file_exists( get_template_directory() . '/' . $manifestPath ) ) {
+		if ( file_exists( get_template_directory() . '/' . $manifest_path ) ) {
 			$this->manifest = json_decode(
-				file_get_contents( get_template_directory() . '/' . $manifestPath ),
+				file_get_contents(
+					get_template_directory() . '/' . $manifest_path
+				),
 				true
 			);
 		}
