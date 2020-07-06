@@ -40,6 +40,7 @@ module.exports = function sortPackage(pkg) {
     'name',
     'version',
     'private',
+    'license',
     'description',
     'author',
     'scripts',
