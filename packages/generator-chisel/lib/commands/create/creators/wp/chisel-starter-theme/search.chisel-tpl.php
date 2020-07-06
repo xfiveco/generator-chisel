@@ -2,7 +2,7 @@
 /**
  * Search results page
  *
- * @package <%= nameSlug %>
+ * @package <%= app.nameSlug %>
  */
 
 $templates = array( 'search.twig', 'archive.twig', 'index.twig' );

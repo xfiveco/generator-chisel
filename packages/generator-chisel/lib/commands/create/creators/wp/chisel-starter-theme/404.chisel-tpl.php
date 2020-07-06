@@ -2,7 +2,7 @@
 /**
  * The template for displaying 404 pages (Not Found)
  *
- * @package <%= nameSlug %>
+ * @package <%= app.nameSlug %>
  */
 
 $context = \Timber\Timber::get_context();

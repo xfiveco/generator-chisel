@@ -6,7 +6,7 @@
  * It is used to display a page when nothing more specific matches a query.
  * E.g., it puts together the home page when no home.php file exists
  *
- * @package <%= nameSlug %>
+ * @package <%= app.nameSlug %>
  */
 
 if ( ! \Chisel\Helpers::isTimberActivated() ) {

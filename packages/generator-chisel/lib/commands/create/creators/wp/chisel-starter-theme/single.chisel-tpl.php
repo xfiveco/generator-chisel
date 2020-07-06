@@ -4,7 +4,7 @@
  *
  * Methods for TimberHelper can be found in the /lib sub-directory
  *
- * @package <%= nameSlug %>
+ * @package <%= app.nameSlug %>
  */
 
 global $post;

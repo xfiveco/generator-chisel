@@ -7,7 +7,7 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package <%= nameSlug %>
+ * @package <%= app.nameSlug %>
  */
 
 $templates = array( 'archive.twig', 'index.twig' );
