@@ -1,4 +1,6 @@
 module.exports = (api, options) => {
+  const { wordPress: hooks } = api.hooks;
+
   api.registerCommand(
     'dev',
     (command) => command.description('start development server'),
@@ -31,12 +33,26 @@ module.exports = (api, options) => {
 
       const { directoryName, themeName } = options.wp;
 
-      const devMiddleware = webpackDevMiddleware(compiler, {
+      const devMiddlewareOptions = {
         publicPath: `/wp-content/themes/${themeName}/dist`,
         stats: 'errors-warnings',
-      });
+      };
 
-      const hotMiddleware = webpackHotMiddleware(compiler, { log: false });
+      await hooks.devMiddlewareOptions.promise(devMiddlewareOptions);
+
+      const devMiddleware = webpackDevMiddleware(
+        compiler,
+        devMiddlewareOptions,
+      );
+
+      const hotMiddlewareOptions = { log: false };
+
+      await hooks.hotMiddlewareOptions.promise(hotMiddlewareOptions);
+
+      const hotMiddleware = webpackHotMiddleware(
+        compiler,
+        hotMiddlewareOptions,
+      );
 
       const browserSyncConfig = {
         proxy: {
@@ -57,6 +73,8 @@ module.exports = (api, options) => {
           resolve,
         );
       });
+
+      await hooks.browserSyncConfig.promise(browserSyncConfig);
 
       bs.init(browserSyncConfig);
 

@@ -1,4 +1,12 @@
 module.exports = (api, options) => {
+  const { AsyncSeriesHook } = api.tapable;
+
+  api.registerHooks('wordPress', {
+    devMiddlewareOptions: new AsyncSeriesHook(['options']),
+    hotMiddlewareOptions: new AsyncSeriesHook(['options']),
+    browserSyncConfig: new AsyncSeriesHook(['config']),
+  });
+
   api.chainWebpack((webpackConfig) => {
     const path = require('path');
     const isProd = process.env.NODE_ENV === 'production';
