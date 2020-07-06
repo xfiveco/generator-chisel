@@ -11,9 +11,11 @@ module.exports = (api, options) => {
       const slash = (str) => str.replace(/\\/g, '/');
 
       const cwd = api.resolve();
+      let isUsingDefaultPaths = false;
 
       if (files.length === 0) {
         files = ['**/*.{js,scss}'];
+        isUsingDefaultPaths = true;
       }
 
       const wpDir = (options.wp || {}).directoryName;
@@ -78,9 +80,17 @@ module.exports = (api, options) => {
 
         const engine = new CLIEngine(config);
 
-        const jsFileNotIgnored = jsFiles.filter(
-          (file) => !engine.isPathIgnored(file),
-        );
+        const jsFileNotIgnored = jsFiles.filter((file) => {
+          try {
+            return !engine.isPathIgnored(file);
+          } catch (e) {
+            if (isUsingDefaultPaths) {
+              return false;
+            }
+
+            throw e;
+          }
+        });
 
         // https://github.com/vuejs/vue-cli/blob/a41cac220a5bc5e5305807f5249178cbcbf642f4/packages/%40vue/cli-plugin-eslint/lint.js#L72
         const processCwd = process.cwd;
