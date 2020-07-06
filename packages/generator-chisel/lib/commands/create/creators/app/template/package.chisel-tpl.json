@@ -12,7 +12,7 @@
     "dev": "chisel-scripts dev",
     "watch": "chisel-scripts dev",
     "build": "chisel-scripts lint && chisel-scripts build",
-    "build-report": "TODO",
+    "build-report": "chisel-scripts build --report",
     <%= app.projectType == 'wp-with-fe' && `"wp": "chisel-scripts wp",` %>
     <%= app.projectType == 'wp-with-fe' && `"add-page": "chisel-scripts add-page",` %>
     "lint": "chisel-scripts lint"
