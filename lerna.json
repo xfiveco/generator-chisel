@@ -3,5 +3,15 @@
   "useWorkspaces": true,
   "version": "independent",
   "packages": ["packages/*"],
-  "granularPathspec": false
+  "granularPathspec": false,
+  "ignoreChanges": [
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/*.md",
+    "**/.gitignore"
+  ],
+  "changelog": {
+    "repo": "xfiveco/generator-chisel",
+    "cacheDir": ".changelog"
+  }
 }

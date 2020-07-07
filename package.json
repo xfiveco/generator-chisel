@@ -13,11 +13,14 @@
     "lerna-publish": "lerna publish from-git --pre-dist-tag next"
   },
   "devDependencies": {
+    "conventional-changelog": "^3.1.21",
     "eslint": "^7.2.0",
-    "eslint-config-chisel": "*",
     "execa": "^4.0.2",
+    "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "lerna": "^3.22.0",
-    "prettier": "^2.0.5"
+    "lerna-changelog": "^1.0.1",
+    "prettier": "^2.0.5",
+    "stream-to-promise": "^3.0.0"
   }
 }
