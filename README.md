@@ -4,6 +4,8 @@
 
 Chisel is a development framework for creating easy to maintain and fast WordPress websites and front-end templates.
 
+**New version: We are currently working on a complete rewrite of Chisel with Webpack. Check out [how to install and test the new version](https://github.com/xfiveco/generator-chisel/issues/465).**
+
 ## Learn more
 - [Introduction](https://www.getchisel.co/)
 - [Documentation](https://www.getchisel.co/docs/)
