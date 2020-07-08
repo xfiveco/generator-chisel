@@ -57,15 +57,6 @@ class ChiselTwig extends Twig {
 
 		$this->registerFunction(
 			$twig,
-			'Image',
-			array(
-				$this,
-				'chiselImage',
-			)
-		);
-
-		$this->registerFunction(
-			$twig,
 			'hasVendor'
 		);
 
