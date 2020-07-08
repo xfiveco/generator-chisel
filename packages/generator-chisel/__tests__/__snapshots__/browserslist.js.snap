@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.browserslist generation should generate all 1`] = `
+"ie 11
+edge 18
+last 3 Android versions
+last 3 ChromeAndroid versions
+last 3 Chrome versions
+last 3 Firefox versions
+last 3 Safari versions
+last 3 iOS versions
+last 3 Edge versions
+"
+`;
+
+exports[`.browserslist generation should generate empty 1`] = `
+"
+"
+`;
+
+exports[`.browserslist generation should generate modern & edge 1`] = `
+"edge 18
+last 3 Android versions
+last 3 ChromeAndroid versions
+last 3 Chrome versions
+last 3 Firefox versions
+last 3 Safari versions
+last 3 iOS versions
+last 3 Edge versions
+"
+`;
+
+exports[`.browserslist generation should generate modern only 1`] = `
+"last 3 Android versions
+last 3 ChromeAndroid versions
+last 3 Chrome versions
+last 3 Firefox versions
+last 3 Safari versions
+last 3 iOS versions
+last 3 Edge versions
+"
+`;

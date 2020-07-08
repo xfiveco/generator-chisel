@@ -35,4 +35,18 @@ module.exports = {
       },
     ],
   },
+
+  overrides: [
+    {
+      files: ['./scripts/testSetup.js', '**/__tests__/**/*.js'],
+
+      env: {
+        jest: true,
+      },
+
+      rules: {
+        // 'node/no-extraneous-require': 'off',
+      },
+    },
+  ],
 };

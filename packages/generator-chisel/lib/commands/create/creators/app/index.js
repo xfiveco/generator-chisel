@@ -112,6 +112,8 @@ module.exports = async (api) => {
   });
 
   api.schedule(api.PRIORITIES.INSTALL_DEPENDENCIES, async () => {
+    if (api.creator.cmd.skipDependenciesInstall) return;
+
     await installDependencies({ cwd: api.resolve() });
 
     if (api.creator.cmd.link) {
@@ -134,11 +136,15 @@ module.exports = async (api) => {
   });
 
   api.schedule(api.PRIORITIES.FORMAT, async () => {
+    if (api.creator.cmd.skipFormatAndBuild) return;
+
     console.log('Formatting code...');
     await runLocalCurrent(['chisel-scripts', 'lint'], { silent: true });
   });
 
   api.schedule(api.PRIORITIES.BUILD, async () => {
+    if (api.creator.cmd.skipFormatAndBuild) return;
+
     console.log('Linting and building...');
     await runLocalCurrent(['chisel-scripts', 'build'], {
       execaOpts: { stdio: 'inherit' },

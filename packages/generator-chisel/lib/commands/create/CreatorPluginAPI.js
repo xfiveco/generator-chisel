@@ -39,6 +39,8 @@ module.exports = class CreatorPluginAPI {
       this.creator.data,
     );
 
+    // console.log(answers, { answers: JSON.stringify(answers) });
+
     merge(this.creator.data, answers);
 
     return this.creator.data[this.id];
@@ -46,7 +48,9 @@ module.exports = class CreatorPluginAPI {
 
   // eslint-disable-next-line class-methods-use-this
   async promptLocal(questions) {
-    return inquirer.prompt(questions);
+    const answers = await inquirer.prompt(questions);
+    // console.log({ answers: JSON.stringify(answers) });
+    return answers;
   }
 
   // @param from is relative to creator directory

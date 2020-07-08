@@ -144,6 +144,8 @@ module.exports = (api) => {
   });
 
   api.schedule(api.PRIORITIES.WP_INSTALL_PLUGINS, async () => {
+    if (api.creator.cmd.skipWpCommands) return;
+
     await wp([
       'plugin',
       'install',
@@ -154,6 +156,8 @@ module.exports = (api) => {
   });
 
   api.schedule(api.PRIORITIES.WP_THEME_ACTIVATE, async () => {
+    if (api.creator.cmd.skipWpCommands) return;
+
     const { themeName } = require(api.resolve('chisel.config.js')).wp;
     await wp(['theme', 'activate', themeName]);
   });
