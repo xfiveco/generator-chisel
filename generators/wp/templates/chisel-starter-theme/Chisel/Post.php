@@ -59,15 +59,19 @@ class Post extends \Timber\Post {
 	 * Overrides get_field function to use fake meta when provided.
 	 *
 	 * @param $field_name
+	 * @param $default_value mixed Default value if field is empty
 	 *
 	 * @return mixed
 	 */
-	public function get_field( $field_name ) {
+	public function get_field( $field_name, $default_value = null ) {
+		$value = null;
 		if ( $this->fakeFields && isset( $this->fakeFields[ $field_name ] ) ) {
-			return $this->fakeFields[ $field_name ];
+			$value = $this->fakeFields[ $field_name ];
+		} else {
+			$value = $this->_get_field( $field_name );
 		}
 
-		return parent::get_field( $field_name );
+		return $value ? $value : $default_value;
 	}
 
 	/**
@@ -78,5 +82,30 @@ class Post extends \Timber\Post {
 	 */
 	public static function overrideTimberPostClass() {
 		return '\Chisel\Post';
+	}
+
+	/**
+	 * @param string $field_name
+	 *
+	 * @return mixed
+	 */
+	private function _get_field( $field_name ) {
+		if ( $rd = $this->get_revised_data_from_method( 'get_field', $field_name ) ) {
+			return $rd;
+		}
+		$value = apply_filters( 'timber_post_get_meta_field_pre', null, $this->ID, $field_name, $this );
+		if ( $value === null ) {
+			$value = get_post_meta( $this->ID, $field_name );
+			if ( is_array( $value ) && count( $value ) == 1 ) {
+				$value = $value[0];
+			}
+			if ( is_array( $value ) && count( $value ) == 0 ) {
+				$value = null;
+			}
+		}
+		$value = apply_filters( 'timber_post_get_meta_field', $value, $this->ID, $field_name, $this );
+		$value = $this->convert( $value, get_class( $this ) );
+
+		return $value;
 	}
 }
