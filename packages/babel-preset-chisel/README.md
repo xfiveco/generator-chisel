@@ -1,11 +1,11 @@
-# `babel-preset-chisel`
+# babel-preset-chisel
 
-> TODO: description
+Default babel preset used in Chisel projects. Based on [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env.html). Check index.js to see what it includes and available options.
 
-## Usage
+## babel-preset-chisel/react
 
-```
-const babelPresetChisel = require('babel-preset-chisel');
+Includes [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react.html) and [react-hot-loader](https://github.com/gaearon/react-hot-loader) babel plugin during development.
 
-// TODO: DEMONSTRATE API
-```
+## babel-preset-chisel/preact
+
+Includes [@babel/plugin-transform-react-jsx](https://babeljs.io/docs/en/babel-plugin-transform-react-jsx/) preconfigured for use with preact.

@@ -1,15 +1,20 @@
-yarn# `chisel-plugin-code-style`
+# chisel-plugin-code-style
 
-> TODO: description
+Code style (eslint, stylelint) plugin for Chisel.
 
-## Usage
+## Injected Commands
 
-```
-const chiselPluginCodeStyle = require('chisel-plugin-code-style');
+- **`chisel-scripts lint`**
 
-// TODO: DEMONSTRATE API
-```
+  ```text
+  Usage: chisel-scripts lint [options] [files...]
 
-## Notes
+  lint and fix source files
 
-- `eslint-plugin-import` and `webpack` are in dependencies only to avoid unmet peer dependency warnings
+  Options:
+    --no-fix    do not fix errors or warnings
+  ```
+
+## Configuration
+
+Standard `eslint` or `stylelint` configuration.

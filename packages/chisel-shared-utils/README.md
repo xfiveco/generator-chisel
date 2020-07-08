@@ -1,11 +1,3 @@
-# `chisel-scripts-shared-utils`
+# chisel-scripts-shared-utils
 
-> TODO: description
-
-## Usage
-
-```
-const chiselScriptsSharedUtils = require('chisel-scripts-shared-utils');
-
-// TODO: DEMONSTRATE API
-```
+Shared utilities used by many Chisel packages.

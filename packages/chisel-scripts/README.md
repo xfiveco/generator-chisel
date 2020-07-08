@@ -1,11 +1,26 @@
-# `chisel-scripts`
+# chisel-scripts
 
-> TODO: description
+Main package containing scripts and configuration used by Chisel projects.
 
-## Usage
+## Injected commands
 
-```
-const chiselScripts = require('chisel-scripts');
+- **`chisel-scripts build`**
 
-// TODO: DEMONSTRATE API
-```
+  ```text
+  Usage: chisel-scripts build [options]
+
+  build for production
+
+  Options:
+    --no-clean  do not remove the dist directory before building the project
+    --watch     watch for changes
+    --report    generate report to help analyze bundles content
+  ```
+
+- **`chisel-scripts inspect`**
+
+  ```text
+  Usage: chisel-scripts inspect [options]
+
+  inspect internal webpack config
+  ```

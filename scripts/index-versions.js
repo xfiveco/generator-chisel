@@ -36,6 +36,9 @@ fs.writeFileSync(
   packagesVersionsString,
 );
 
+// Copy readme so it's included in generator-chisel package
+fs.copySync('./README.md', './packages/generator-chisel/README.md');
+
 Object.entries(oldVersions).map(async ([name, version]) => {
   if (packagesVersions[name] === version) return;
 
