@@ -42,9 +42,8 @@ module.exports = async (api) => {
             value: 'wp-with-fe',
           },
           {
-            name: 'Front-end Templates (not supported)',
+            name: 'Static Website',
             value: 'fe',
-            disabled: true,
           },
         ],
       },
@@ -83,6 +82,8 @@ module.exports = async (api) => {
 
     if (projectType === 'wp-with-fe') {
       await api.creator.loadCreator('wp');
+    } else if (projectType === 'fe') {
+      await api.creator.loadCreator('fe');
     }
   });
 

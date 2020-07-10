@@ -24,6 +24,7 @@ const createProgram = () => {
     .option('--skip-wp-install')
     .option('--skip-wp-commands')
     .option('--skip-wp-plugins')
+    .option('--skip-fe-add-index')
     .option('--skip-format-and-build')
     .option(
       '--link',

@@ -31,6 +31,7 @@ module.exports = class PluginAPI {
     }
 
     const command = this.service.program.command(name);
+    this.service.programCommands[command.name()] = command;
 
     command.action(fn);
 

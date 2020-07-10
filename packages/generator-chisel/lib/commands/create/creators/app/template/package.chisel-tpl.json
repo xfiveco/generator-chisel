@@ -12,12 +12,13 @@
     "watch": "chisel-scripts dev",
     "build": "chisel-scripts lint && chisel-scripts build",
     "build-report": "chisel-scripts build --report",
-    <%= app.projectType == 'wp-with-fe' && `"wp": "chisel-scripts wp",` %>
-    <%= app.projectType == 'wp-with-fe' && `"add-page": "chisel-scripts add-page",` %>
+    <%= app.projectType == 'wp-with-fe' ? `"wp": "chisel-scripts wp",` : '' %>
+    "add-page": "chisel-scripts add-page",
     "lint": "chisel-scripts lint"
   },
   "devDependencies": {
-    <%= app.projectType == 'wp-with-fe' && `"chisel-plugin-wordpress": "*",` %>
+    <%= app.projectType == 'wp-with-fe' ? `"chisel-plugin-wordpress": "*",` : '' %>
+    <%= app.projectType == 'fe' ? `"chisel-plugin-static-frontend": "*",` : '' %>
     "babel-preset-chisel": "*",
     "postcss-normalize": "^9.0.0",
     "autoprefixer": "^9.8.0",

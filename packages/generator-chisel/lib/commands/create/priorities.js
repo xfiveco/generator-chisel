@@ -25,6 +25,7 @@ module.exports = {
 
   COPY_SECOND: 2000,
 
+  FE_ADD_INDEX: 2600,
   FORMAT: 2500,
 
   BUILD: 3000,

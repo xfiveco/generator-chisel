@@ -14,6 +14,7 @@ module.exports = {
     'no-await-in-loop': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
+    'no-underscore-dangle': 'off',
 
     // Airbnb except for of
     'no-restricted-syntax': [

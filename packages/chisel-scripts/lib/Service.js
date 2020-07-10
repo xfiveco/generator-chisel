@@ -39,6 +39,7 @@ module.exports = class Service {
     this.hooks = this.hooksBase;
 
     this.program = new Command('chisel-scripts');
+    this.programCommands = {};
     this.context = context || process.env.CHISEL_CONTEXT || process.cwd();
     this.plugins = this.loadPlugins();
   }

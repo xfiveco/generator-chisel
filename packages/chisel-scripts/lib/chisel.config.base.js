@@ -5,6 +5,8 @@ module.exports = {
     styles: 'styles',
     assets: 'assets',
     templates: 'templates',
+    content: '../content',
+    public: '../public',
   },
 
   output: {
@@ -12,6 +14,13 @@ module.exports = {
     scripts: 'scripts',
     styles: 'styles',
     assets: 'assets',
+  },
+
+  staticFrontend: {
+    serveDist: false,
+    skipHtmlExtension: false,
+    buildFormat: 'prettify', // pretty, minify, as-is/undefined
+    htmlHint: true,
   },
 
   plugins: [],

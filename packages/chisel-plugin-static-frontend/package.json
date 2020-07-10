@@ -1,0 +1,46 @@
+{
+  "name": "chisel-plugin-static-frontend",
+  "version": "0.0.0",
+  "description": "TODO",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xfiveco/generator-chisel.git",
+    "directory": "packages/chisel-plugin-static-frontend"
+  },
+  "author": {
+    "name": "Xfive",
+    "email": "hello@xfive.co",
+    "url": "https://www.xfive.co"
+  },
+  "homepage": "https://www.getchisel.co/",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/xfiveco/generator-chisel/issues"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "chisel-shared-utils": "^1.0.0-alpha.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
+    "hexo-front-matter": "^1.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "htmlhint": "^0.14.1",
+    "js-beautify": "^1.11.0",
+    "loader-utils": "^2.0.0",
+    "lodash": "^4.17.19",
+    "marked": "^1.1.0",
+    "nedb-promises": "^4.0.3",
+    "prettier": "^2.0.5",
+    "speakingurl": "^14.0.1",
+    "twig": "^1.15.1",
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
