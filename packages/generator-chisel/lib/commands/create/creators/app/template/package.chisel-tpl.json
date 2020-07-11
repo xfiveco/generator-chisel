@@ -1,6 +1,5 @@
 <% /* This file will be later formatted and sorted */ %>
 <% /* Don't worry too much how it looks here */ %>
-<% /* TOOD: precommit */ %>
 {
   "name": "<%= app.nameSlug %>",
   "version": "0.0.0",

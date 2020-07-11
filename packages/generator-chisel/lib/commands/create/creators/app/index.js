@@ -145,7 +145,7 @@ module.exports = async (api) => {
   api.schedule(api.PRIORITIES.BUILD, async () => {
     if (api.creator.cmd.skipFormatAndBuild) return;
 
-    console.log('Linting and building...');
+    console.log('Building...');
     await runLocalCurrent(['chisel-scripts', 'build'], {
       execaOpts: { stdio: 'inherit' },
     });
