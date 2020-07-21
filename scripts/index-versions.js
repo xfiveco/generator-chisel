@@ -106,3 +106,9 @@ if (packagesVersions['generator-chisel'] !== oldVersions['generator-chisel']) {
     );
   })();
 }
+
+process.on('unhandledRejection', (reason) => {
+  console.log('Unhandled Rejection');
+  console.log(reason);
+  process.exit(1);
+});

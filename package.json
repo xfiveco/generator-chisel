@@ -9,7 +9,7 @@
     "lint": "eslint --no-eslintrc -c .eslintrc.js **/*.js",
     "version": "node scripts/index-versions.js",
     "prepare-links": "node scripts/prepare-links.js",
-    "lerna-version": "lerna version",
+    "lerna-version": "lerna version --no-private",
     "lerna-publish": "lerna publish from-git --pre-dist-tag next",
     "test": "jest"
   },
