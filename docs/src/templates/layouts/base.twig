@@ -1,36 +1,57 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" prefix="og: http://ogp.me/ns#" data-webpack-public-path="{{ getDistPath() }}">
-<head>
-  <meta charset="utf-8" />
-  <title>{{ pageName }} - Getchisel</title>
-  <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>document.documentElement.classList.remove('no-js');</script>
-  {% if isDev() %}
-    <script src="{{ revisionedPath('styles/main.js') }}" defer></script>
-  {% endif %}
-  <script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ pageName }} - Getchisel</title>
+    <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.classList.remove('no-js');</script>
+    {% if isDev() %}
+      <script src="{{ revisionedPath('styles/main.js') }}" defer></script>
+    {% endif %}
+    <script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
 
-  {% block head %}
-  {% endblock %}
-</head>
+    <!-- <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-9575836-23', 'auto');
+      ga('send', 'pageview');
+    </script> -->
 
-<body class="{{ body_class }}">
+    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-italic.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-600.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-600italic.woff2') }}" as="font" type="font/woff2" crossorigin>
 
-  {% block header %}
-    {% include 'components/header.twig' %}
-  {% endblock %}
-  
-
-  <main class="o-wrapper">
-    {% block content %}
-      Sorry, no content
+    {% block head %}
     {% endblock %}
-  </main>
+  </head>
 
-  {% block footer %}
-    {% include 'components/footer.twig' %}
-  {% endblock %}
+  <body class="{{ body_class }}">
 
-</body>
+    {% block header %}
+      {% include 'components/header.twig' %}
+    {% endblock %}
+
+    {% include 'components/main-nav.twig' %}
+
+
+    <main class="o-wrapper">
+      {% block content %}
+        Sorry, no content
+      {% endblock %}
+    </main>
+
+    {% block ad %}
+      {% include 'components/ad.twig' %}
+    {% endblock %}
+
+
+    {% block footer %}
+      {% include 'components/footer.twig' %}
+    {% endblock %}
+
+  </body>
 </html>

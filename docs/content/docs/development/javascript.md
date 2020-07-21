@@ -1,5 +1,6 @@
 ---
 title: JavaScript
+excerpt: Chisel supports writing modern JavaScript with ES6
 order: 160
 ---
 
@@ -16,6 +17,6 @@ Chisel supports multiple entry points so you can create another files in the `sc
 JavaScript bundles created when running `npm run build` are minified and file names are revisioned. That means that a content hash is append to the filename so it looks like this `app-93d2daf7a3.bundle.js`. This way you can set up content caching in the far future.
 
 ## Code formatting and linting
-Check out [Code Quality](/docs/development/code-quality/).
+Check out [Code Quality](/docs/development/code-quality).
 
 

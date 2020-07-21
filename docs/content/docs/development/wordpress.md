@@ -1,5 +1,6 @@
 ---
 title: WordPress
+excerpt: Chisel supports easy and fast theme development with <a href="https://www.upstatement.com/timber/">Timber</a>. Chisel's starter theme helps you organize project functionality in a logical, maintainable way.
 order: 140
 ---
 
@@ -54,10 +55,10 @@ Example usage:
 
 ```php
 {% set post = ChiselPost({
-  &#039;post_title&#039;: &#039;Fake post title&#039;,
-  &#039;post_content&#039;: &#039;Fake post content&#039;,
-  &#039;_fields&#039;: {
-    &#039;special_acf_field&#039;: &#039;field value&#039;
+  'post_title': 'Fake post title',
+  'post_content': 'Fake post content',
+  '_fields': {
+    'special_acf_field': 'field value'
   }
 }) %}
 ```
@@ -65,11 +66,11 @@ Example usage:
 This will create a `\Chisel\Post` object that you can use like any other post loaded from the database:
 
 ```html
-&lt;div&gt;
-  &lt;h1&gt;{{ post.title }}&lt;/h1&gt;
-  &lt;p&gt;{{ post.content }}&lt;/p&gt;
-  &lt;p&gt;{{ post.get_field(&#039;special_acf_field&#039;) }}&lt;/p&gt;
-&lt;/div&gt;
+<div>
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.content }}</p>
+  <p>{{ post.get_field('special_acf_field') }}</p>
+</div>
 ```
 
 ### `className`
@@ -91,7 +92,7 @@ Example usage:
 It will generate (assuming post of type `post` and no thumbnail):
 
 ```html
-&lt;article class=&quot;c-some-post c-some-post--red c-some-post--type-post&quot;&gt;&lt;/article&gt;
+<article class="c-some-post c-some-post--red c-some-post--type-post"></article>
 ```
 
 `assetPath`: this function returns the real path of the asset file from the `dist/assets` folder.
@@ -99,7 +100,7 @@ It will generate (assuming post of type `post` and no thumbnail):
 Example usage:
 
 ```twig
-&lt;img src=&quot;{{ assetPath(&#039;images/logo.svg&#039;) }}&quot; alt=&quot;{{ site.name }}&quot;&gt;
+<img src="{{ assetPath('images/logo.svg') }}" alt="{{ site.name }}">
 ```
 
 ## Good practices
@@ -108,7 +109,7 @@ When using ACF try to always use `get_field` method of `Chisel\Post` instead of 
 
 #### Good:
 ```html
-{{ post.get_field(&#039;field_name&#039;) }}
+{{ post.get_field('field_name') }}
 ```
 
 #### Bad:
@@ -126,16 +127,16 @@ In addition to default security settings you can also:
 Add `.htaccess` to the `wp-includes` folder with the following content:
 
 ```bash
-&lt;FilesMatch &quot;\.(?i:php)$&quot;&gt;
+<FilesMatch "\.(?i:php)$">
   Order allow,deny
   Deny from all
-&lt;/FilesMatch&gt;
-&lt;Files wp-tinymce.php&gt;
+</FilesMatch>
+<Files wp-tinymce.php>
   Allow from all
-&lt;/Files&gt;
-&lt;Files ms-files.php&gt;
+</Files>
+<Files ms-files.php>
   Allow from all
-&lt;/Files&gt;
+</Files>
 ```
 
 #### Protect uploads folder
@@ -143,10 +144,14 @@ Add `.htaccess` to the `wp-includes` folder with the following content:
 Add `.htaccess` to the `wp-content/uploads` folder with the following content:
 
 ```bash
-&lt;FilesMatch &quot;\.(?i:php)$&quot;&gt;
+<FilesMatch "\.(?i:php)$">
   Order allow,deny
   Deny from all
-&lt;/FilesMatch&gt;
+</FilesMatch>
 ```
 
 Note: this can break some plugins
+
+## Common issues
+### Gravity Forms JavaScript issues
+If you encounter Gravity Forms JavaScript issues which might be related to Chisel using a `defer` tag, check out [this workaround](https://bjornjohansen.no/load-gravity-forms-js-in-footer).

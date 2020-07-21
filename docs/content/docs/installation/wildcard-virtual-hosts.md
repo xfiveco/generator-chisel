@@ -1,5 +1,6 @@
 ---
 title: Wildcard virtual hosts
+excerpt: This step is optional but highly recommended if you develop WordPress projects
 order: 30
 ---
 
@@ -19,11 +20,11 @@ This is for `*.test` domain wildcarding
 
 ```bash
 brew install dnsmasq
-cd $(brew --prefix); mkdir etc; echo &#039;address=/.test/127.0.0.1&#039; &gt; etc/dnsmasq.conf
+cd $(brew --prefix); mkdir etc; echo 'address=/.test/127.0.0.1' > etc/dnsmasq.conf
 sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons
 sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 sudo mkdir /etc/resolver
-sudo bash -c &#039;echo &quot;nameserver 127.0.0.1&quot; &gt; /etc/resolver/test&#039;
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/test'
 ```
 
 ### 2. Edit `/etc/apache2/httpd.conf` 
@@ -39,18 +40,18 @@ Add VirtualHost config
 Reminder – we are assuming your username is `developer` and your store projects inside `~/Projects` directory
 
 ```bash
-&lt;VirtualHost *:80&gt;
+<VirtualHost *:80>
   ServerAlias localhost *.test
   VirtualDocumentRoot /Users/developer/Projects/%1/wp # Chisel stores WP inside wp folder in the root of your project
   UseCanonicalName Off
-  &lt;Directory &quot;/Users/developer/Projects&quot;&gt;
+  <Directory "/Users/developer/Projects">
     Options FollowSymLinks
     AllowOverride All
     Order allow,deny
     Allow from all
     Require all granted
-  &lt;/Directory&gt;
-&lt;/VirtualHost&gt;
+  </Directory>
+</VirtualHost>
 ```
 
 ### 4. Restart Apache
@@ -60,7 +61,7 @@ sudo apachectl restart
 
 ## Linux
 
-Follow the article here: http://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns
+Follow the article here: [http://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns](http://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns)
 
 ## Windows
 
@@ -88,23 +89,23 @@ LoadModule vhost_alias_module modules/mod_vhost_alias.so
 If you are using [XAMP](https://www.apachefriends.org/) it would be located in `c:\xampp\apache\conf\extra`. Add VirtualHost config:
 
 ```bash
-&lt;Directory &quot;C:/xampp/xampp/htdocs/&quot;&gt;
+<Directory "C:/xampp/xampp/htdocs/">
      Options Indexes FollowSymLinks Includes ExecCGI
      AllowOverride All
      Order allow,deny
      Allow from all 
- &lt;/Directory&gt;
+ </Directory>
 
-&lt;VirtualHost *:80&gt;
+<VirtualHost *:80>
     ServerName localhost
     ServerAlias localhost
     DocumentRoot c:/xampp/htdocs/
-&lt;/VirtualHost&gt;
+</VirtualHost>
 
-&lt;VirtualHost *:80&gt;
+<VirtualHost *:80>
     ServerAlias *.test
-    VirtualDocumentRoot c:/xampp/htdocs/%-1/%-2+/wp #notice wp at the end, that&#039;s because Chisel serves WP from a subfolder
-&lt;/VirtualHost&gt;
+    VirtualDocumentRoot c:/xampp/htdocs/%-1/%-2+/wp #notice wp at the end, that's because Chisel serves WP from a subfolder
+</VirtualHost>
 ```
 
 ### 4. Restart Apache

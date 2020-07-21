@@ -1,5 +1,6 @@
 ---
 title: ITCSS
+excerpt: ITCSS stands for Inverted Triangle CSS and it helps you make project CSS scalable and maintainable.
 order: 150
 ---
 

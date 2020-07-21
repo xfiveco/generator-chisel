@@ -1,13 +1,15 @@
 ---
 title: Front-end Templates Setup
+excerpt: How to setup front-end templates with Chisel
 order: 60
 ---
 
 ## 1. Create project directory
-Create a new project directory and change your working directory to it. You can use the following command on the command line:
+Create a new project directory and change your working directory to it. You can use the following commands on the command line:
 
 ```bash
-mkdir project-name &amp;&amp; cd $_
+mkdir project-name
+cd project-name
 ```
 
 ## 2. Run Chisel

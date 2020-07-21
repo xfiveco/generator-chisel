@@ -3,6 +3,6 @@
   Author: Xfive
  */
 
-import greet from './modules/greeting';
-
-greet('World');
+import 'prismjs';
+import 'prismjs/components/prism-php';
+import 'prismjs/components/prism-twig';

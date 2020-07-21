@@ -1,5 +1,6 @@
 ---
 title: Development
+excerpt: Learn the best development practices witch Chisel to produce quality and maintainable code.
 order: 100
 ---
 

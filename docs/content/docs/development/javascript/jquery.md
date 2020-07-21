@@ -1,5 +1,6 @@
 ---
 title: jQuery
+excerpt: <a href="https://css-tricks.com/now-ever-might-not-need-jquery/">You might not need jQuery</a>. But if you do, check out some specifics when working with jQuery in Chisel.
 order: 170
 ---
 
@@ -19,12 +20,12 @@ npm install --save jquery
 ### 2) Make jQuery global (for various reasons)
 
 ```js
-window.jQuery = window.$ = require(&#039;jquery&#039;);
+window.jQuery = window.$ = require('jquery');
 ```
 
 ### 3) Require plugin
 ```js
-require(&#039;flexslider&#039;); // Usually they bind to global jQuery object
+require('flexslider'); // Usually they bind to global jQuery object
 ```
 
 ## Using jQuery and its plugins outside of webpack bundle
@@ -51,7 +52,7 @@ In case it isn't go ahead with `yarn add jquery` or `npm install jquery --save` 
 Open up `webpack.chisel.config.js` in the root directory and make sure following entry is present:
 ```js
 externals: {
-  jquery: &#039;window.jQuery&#039;,
+  jquery: 'window.jQuery',
 },
 ```
 
@@ -59,7 +60,7 @@ externals: {
 Make sure that path to jQuery is present in `vendor.json`:
 ```json
 [
-  &quot;/node_modules/jquery/dist/jquery.js&quot;
+  "/node_modules/jquery/dist/jquery.js"
 ]
 ```
 
@@ -68,8 +69,8 @@ This setup will allow you to place plugins inside special `src/scripts/vendor` d
 
 ```bash
 [
-  &quot;/node_modules/jquery/dist/jquery.js&quot;,
-  &quot;select2.full.min.js&quot;
+  "/node_modules/jquery/dist/jquery.js",
+  "select2.full.min.js"
 ]
 ```
 

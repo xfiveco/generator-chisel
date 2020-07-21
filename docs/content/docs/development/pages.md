@@ -1,5 +1,6 @@
 ---
 title: Pages
+excerpt: Once your project is setup, you need to add pages, you will be working on, to it.
 order: 120
 ---
 
@@ -7,19 +8,19 @@ order: 120
 From the command line type:
 
 ```bash
-yo chisel:page &quot;Page Name&quot;
+yo chisel:page "Page Name"
 ```
 
 for example
 
 ```bash
-yo chisel:page &quot;Home&quot;
+yo chisel:page "Home"
 ```
 
 You can also create multiple pages at once by separating page names with space:
 
 ```bash
-yo chisel:page &quot;Home&quot; &quot;About Us&quot; &quot;Contact Us&quot; &quot;News&quot;
+yo chisel:page "Home" "About Us" "Contact Us" "News"
 ```
 
 ### WordPress Website
@@ -27,6 +28,7 @@ When you add a page on WordPress project:
 
 - Twig template is automatically created in `wp/wp-content/themes/[your-theme]/templates/page-{page-slug}.twig`
 - Page is accessible at `project-name.test/{page-slug}`
+- If you haven't before, flush the rewrite rules *Settings -> Permalinks -> Save changes*
 
 ### Front-end templates
 When you add a page on front-end templates project, the project index is regenerated and the page is added to it.

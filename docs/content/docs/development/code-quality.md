@@ -1,5 +1,6 @@
 ---
 title: Code Quality
+excerpt: Chisel uses various tools to increase quality of your code
 order: 180
 ---
 
