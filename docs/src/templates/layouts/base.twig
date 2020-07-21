@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" prefix="og: http://ogp.me/ns#" data-webpack-public-path="{{ getDistPath() }}">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ pageName }} - Getchisel</title>
+  <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.remove('no-js');</script>
+  {% if isDev() %}
+    <script src="{{ revisionedPath('styles/main.js') }}" defer></script>
+  {% endif %}
+  <script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
+
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body class="{{ body_class }}">
+
+  {% block header %}
+    {% include 'components/header.twig' %}
+  {% endblock %}
+  
+
+  <main class="o-wrapper">
+    {% block content %}
+      Sorry, no content
+    {% endblock %}
+  </main>
+
+  {% block footer %}
+    {% include 'components/footer.twig' %}
+  {% endblock %}
+
+</body>
+</html>
