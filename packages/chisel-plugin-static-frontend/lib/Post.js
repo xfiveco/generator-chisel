@@ -57,17 +57,21 @@ module.exports = (api, options) =>
     }
 
     link(post) {
-      if (post) {
-        return posix.join(
-          posix.relative(
-            posix.dirname(post.link()),
-            posix.dirname(this.link()),
-          ),
-          posix.basename(this.link()),
-        );
+      const p = post
+        ? posix.join(
+            posix.relative(
+              posix.dirname(post.link()),
+              posix.dirname(this.link()),
+            ),
+            posix.basename(this.link()),
+          )
+        : posix.join('/', this._id);
+
+      if (!options.staticFrontend.skipHtmlExtension) {
+        return `${p}.html`;
       }
-      const ext = options.staticFrontend.skipHtmlExtension ? '' : '.html';
-      return posix.join('/', `${this._id}${ext}`);
+
+      return p.replace(/\/index$/, '/');
     }
 
     toJSON() {

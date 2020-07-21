@@ -143,6 +143,13 @@ module.exports = async function chiselTwigLoader(loaderContent) {
     });
   }
 
+  if (typeof options.staticFrontend.functions === 'object') {
+    const context = { context: twigContext, functions: { ...functions } };
+    Object.entries(options.staticFrontend.functions).forEach(([name, func]) => {
+      functions[name] = (...args) => func(context, ...args);
+    });
+  }
+
   const Twig = twigFactory();
 
   Twig.extend((TwigCore) => {
