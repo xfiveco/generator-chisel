@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.9 (2020-07-21)
+
+- Ignore dist in generated projects ([f9c76a0](https://github.com/xfiveco/generator-chisel/commit/f9c76a0))
+
 ## 1.0.0-alpha.8 (2020-07-21)
 
 - Add Changelogs ([25d6245](https://github.com/xfiveco/generator-chisel/commit/25d6245))

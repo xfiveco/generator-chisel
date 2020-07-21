@@ -6,6 +6,6 @@ module.exports = {
   'chisel-scripts': '1.0.0-alpha.4',
   'chisel-shared-utils': '1.0.0-alpha.0',
   'eslint-config-chisel': '3.0.0-alpha.0',
-  'generator-chisel': '1.0.0-alpha.8',
+  'generator-chisel': '1.0.0-alpha.9',
   'stylelint-config-chisel': '1.0.0-alpha.0',
 };
