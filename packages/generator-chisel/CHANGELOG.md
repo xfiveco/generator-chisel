@@ -2,6 +2,14 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.8 (2020-07-21)
+
+- Add Changelogs ([25d6245](https://github.com/xfiveco/generator-chisel/commit/25d6245))
+- Add Readmes ([35fd430](https://github.com/xfiveco/generator-chisel/commit/35fd430))
+- Add some tests and travis config ([7b89252](https://github.com/xfiveco/generator-chisel/commit/7b89252))
+- Add Static Frontend ([0c6db7a](https://github.com/xfiveco/generator-chisel/commit/0c6db7a))
+- Update incorrect log & comment ([f7037a3](https://github.com/xfiveco/generator-chisel/commit/f7037a3))
+
 ## 1.0.0-alpha.7 (2020-07-06)
 
 - Add hooks to modify webpack options and few other things ([9ec1f07](https://github.com/xfiveco/generator-chisel/commit/9ec1f07))
