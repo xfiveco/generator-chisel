@@ -2,48 +2,42 @@
    #LAYOUT
    ========================================================================== */
 
-/* Simple flexbox layout system */
-
 .o-layout {
-  display: block;
-
-  @include bp(medium) {
-    display: flex;
-  }
-}
-
-.o-layout__item {
-  flex: 1;
-}
-
-.o-layout--guttered {
+  display: flex;
   justify-content: space-between;
+  flex-direction: column-reverse;
 
-  > .o-layout__item {
-    flex: none;
+  @include bp-medium {
+    flex-direction: row;
   }
 }
 
-.o-layout--2 {
-  > .o-layout__item {
-    @include bp(medium) {
-      width: 49%;
-    }
+.o-layout__sidebar,
+.o-layout__gap {
+  width: 100%;
+  margin: 0 auto;
+
+  @include bp-medium {
+    width: calc((40% - 3rem) / 2);
   }
 }
 
-.o-layout--3 {
-  > .o-layout__item {
-    @include bp(medium) {
-      width: 32%;
-    }
+.o-layout__gap {
+  visibility: hidden;
+}
+
+.o-layout__sidebar {
+  @include bp-full {
+    left: -40px;
+    position: relative;
   }
 }
 
-.o-layout--4 {
-  > .o-layout__item {
-    @include bp(medium) {
-      width: 24%;
-    }
+.o-layout__content {
+  width: 100%;
+  margin: 0 auto;
+
+  @include bp-medium {
+    width: 60%;
   }
 }

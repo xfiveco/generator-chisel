@@ -1,0 +1,54 @@
+/* stylelint-disable scss/at-extend-no-missing-placeholder */
+
+:root {
+  --sp: 1rem;
+  --sp-small: 0.25rem;
+  --sp-large: 2rem;
+  --sp-xlarge: 3rem;
+}
+
+.u-sp-all {
+  margin: var(--sp);
+}
+
+.u-sp-top {
+  margin-top: var(--sp);
+}
+
+.u-sp-bottom {
+  margin-bottom: var(--sp);
+}
+
+.u-sp-left {
+  margin-left: var(--sp);
+}
+
+.u-sp-right {
+  margin-right: var(--sp);
+}
+
+.u-sp-vertical {
+  @extend .u-sp-top;
+  @extend .u-sp-bottom;
+}
+
+.u-sp-horizontal {
+  @extend .u-sp-left;
+  @extend .u-sp-right;
+}
+
+.u-sp--normal {
+  --sp: 1rem;
+}
+
+.u-sp--small {
+  --sp: var(--sp-small);
+}
+
+.u-sp--large {
+  --sp: var(--sp-large);
+}
+
+.u-sp--xlarge {
+  --sp: var(--sp-xlarge);
+}

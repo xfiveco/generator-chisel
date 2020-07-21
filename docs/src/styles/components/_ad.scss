@@ -1,0 +1,78 @@
+.c-ad {
+  background: $color-text-bg-dark;
+  box-shadow: $global-box-shadow;
+  color: $color-text-light;
+  line-height: 1.375;
+  padding: 3em 2em;
+  position: relative;
+  text-align: center;
+
+  @include bp-medium {
+    padding: 2em 3em;
+  }
+
+  @include bp-large {
+    padding: 2em 4em;
+  }
+}
+
+.c-ad__title {
+  color: $color-text-light;
+  font-size: rem(36);
+  font-style: italic;
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
+.c-ad__subtitle {
+  color: $color-text-light-emp;
+  font-size: rem(24);
+  font-style: italic;
+  font-weight: normal;
+  margin: 0;
+}
+
+.c-ad__link {
+  color: $color-text-light;
+  border: 1px solid $color-border-medium;
+  display: inline-block;
+  font-style: italic;
+  line-height: 1;
+  margin-top: 0.5rem;
+  padding: 0.75em 1em;
+  text-decoration: none;
+
+  &:hover {
+    border-color: $color-hover;
+  }
+}
+
+.c-ad__dot {
+  background: $color-fill;
+  border-radius: 100%;
+  border: 1px solid rgba(51, 51, 51, 0.7);
+  box-shadow: 0, 1px, 0 rgba(153, 153, 153, 0.4);
+  display: block;
+  height: rem(18);
+  left: 1em;
+  position: absolute;
+  top: 1em;
+  width: rem(18);
+}
+
+.c-ad__dot--tr {
+  left: auto;
+  right: 1em;
+}
+
+.c-ad__dot--bl {
+  top: auto;
+  bottom: 1em;
+}
+
+.c-ad__dot--br {
+  top: auto;
+  left: auto;
+  bottom: 1em;
+  right: 1em;
+}

@@ -8,26 +8,36 @@
  * http://csswizardry.com/2016/02/managing-typography-on-large-apps/).
  */
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $color-text-emp;
+}
+
 h1 {
-  font-size: 2.25rem;
+  font-size: rem(30);
 }
 
 h2 {
-  font-size: 1.75rem;
+  font-size: rem(24);
+
+  code {
+    font-size: rem(22);
+  }
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: rem(22);
 }
 
 h4 {
-  font-size: 1.25rem;
+  font-size: rem(20);
 }
 
-h5 {
-  font-size: 1.125rem;
-}
-
+h5,
 h6 {
-  font-size: 1rem;
+  font-size: rem(18);
 }

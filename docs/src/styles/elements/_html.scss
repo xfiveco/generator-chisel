@@ -13,27 +13,38 @@
  */
 
 html {
-  background: $color-bg;
+  background: $color-text-bg;
+  background-image: repeating-linear-gradient(
+      180deg,
+      transparent,
+      transparent 40px,
+      $color-grid 40px,
+      $color-grid 41px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      $color-grid 40px,
+      $color-grid 41px
+    );
   color: $color-text;
-  font-family: $font-sans-serif;
-  font-size: 0.8125rem; /* [1] */ /* 13px */
-  line-height: 1.5; /* [1] */
+  font-family: $font-serif;
+  font-size: 1rem; /* [1] */ /* 16px */
+  line-height: 1.667; /* [1] */
   min-height: 100%; /* [3] */
   overflow-y: scroll; /* [2] */
-  padding: 1rem;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  padding: 0 1em;
 
-  @include bp(medium) {
-    font-size: 0.875em; /* 14px */
+  @include bp-medium {
+    font-size: 1.125em; /* 16px */
   }
 
-  @include bp(large) {
-    font-size: 0.9375em; /* 15px */
+  @include bp-large {
+    font-size: 1.25em; /* 20px */
   }
 
-  @include bp(full) {
-    font-size: 1em; /* 16px */
+  @include bp-full {
+    font-size: 1.375em; /* 22px */
   }
 }

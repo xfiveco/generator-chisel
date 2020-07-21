@@ -22,7 +22,7 @@
 .u-hidden\@small {
   display: none;
 
-  @include bp(medium) {
+  @include bp-medium {
     display: block;
   }
 }

@@ -6,23 +6,23 @@
 
 $global-radius: 3px !default;
 $global-transition: all 300ms ease-in-out !default;
+$global-box-shadow: 6px 4px 4px rgba(0, 0, 0, 0.06);
 
 /* Fonts
    ========================================================================== */
 
-$font-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
-  'Roboto', 'Helvetica Neue', 'Arial', sans-serif !default;
+$font-serif: 'Crimson Text', serif;
+$browser-context: 22; // Settings for em and rem functions
 
 /* Breakpoints
    ========================================================================== */
 
-$breakpoints: (
-  small: 480px,
-  medium: 768px,
-  large: 1024px,
-  xlarge: 1280px,
-  full: 1600px,
-);
+$bp-small: 480px;
+$bp-medium: 768px;
+$bp-large: 1024px;
+$bp-xlarge: 1280px;
+$bp-xxlarge: 1440px;
+$bp-full: 1600px;
 
 /* Colors
    ========================================================================== */
@@ -30,21 +30,38 @@ $breakpoints: (
 // Colors shouldn't be used directly but reassigned
 $color-white: #fff;
 $color-black: #000;
+$color-very-light-beige: #e5e5e5;
+$color-light-beige: #f2e9da;
+$color-dark-beige: #eae3d7;
 $color-very-light-grey: #ccc;
 $color-light-grey: #999;
-$color-medium-grey: #666;
+$color-medium-grey: #4d4d4d;
 $color-dark-grey: #333;
+$color-dark-green: #1b3729;
+$color-dark-yellow: #b08b31;
+$color-light-yellow: #ecbb42;
 
 // Text
-$color-bg: $color-white;
-$color-text: $color-black;
+$color-text-bg: $color-light-beige;
+$color-text-bg-dark: $color-dark-grey;
+$color-text: $color-dark-grey;
+$color-text-lighter: $color-medium-grey;
+$color-text-emp: $color-dark-green;
+$color-text-light: $color-light-beige;
+$color-text-light-emp: $color-light-yellow;
 
 // Links
-$color-link: $color-medium-grey;
-$color-hover: $color-light-grey;
+$color-link: $color-dark-yellow;
+$color-hover: $color-light-yellow;
 
 // Borders
-$color-border: $color-very-light-grey;
+$color-border-light: $color-very-light-beige;
+$color-border: $color-light-grey;
+$color-border-medium: $color-medium-grey;
+$color-border-dark: $color-dark-grey;
+$color-grid: $color-dark-beige;
+$color-sep: $color-dark-yellow;
+$color-border-title: $color-light-yellow;
 
 // Fills
-$color-fill: $color-very-light-grey;
+$color-fill: $color-dark-beige;

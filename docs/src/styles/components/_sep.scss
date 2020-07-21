@@ -1,0 +1,46 @@
+// Separator
+
+.c-sep {
+  height: 1px;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+
+  &::after {
+    background-image: linear-gradient(
+      to right,
+      $color-sep 0%,
+      $color-sep 29%,
+      rgba(0, 0, 0, 0) 29%
+    );
+    background-size: 7px 100%;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.c-sep--solid {
+  &::after {
+    background-image: none;
+    background-color: $color-border-medium;
+  }
+}
+
+.c-sep--small {
+  max-width: 300px;
+}
+
+.c-sep--dark {
+  &::after {
+    background-image: linear-gradient(
+      to right,
+      $color-border 0%,
+      $color-border 29%,
+      rgba(0, 0, 0, 0) 29%
+    );
+  }
+}

@@ -1,0 +1,64 @@
+.c-block {
+  display: flex;
+  margin: 0 1em;
+
+  @include bp-full {
+    margin: 0;
+  }
+}
+
+.c-block__image {
+  display: none;
+  padding-top: 6em;
+  text-align: center;
+
+  @include bp-medium {
+    display: block;
+    width: 50%;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+
+    @include bp-large {
+      width: auto;
+    }
+  }
+}
+
+.c-block__content {
+  width: 100%;
+
+  @include bp-medium {
+    width: 50%;
+  }
+
+  .c-block--reversed & {
+    order: 2;
+  }
+}
+
+.c-block__letter {
+  border: 1px solid $color-border;
+  display: inline-block;
+  font-size: rem(48);
+  line-height: 1;
+  margin-right: 0.5em;
+  padding: 0.15em 0.4em;
+  position: relative;
+  top: 0.25em;
+
+  @include bp-full {
+    margin-left: -0.65em;
+  }
+}
+
+.c-block__excerpt {
+  color: $color-text-emp;
+  font-size: rem(30);
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0.25em 0 0.5em 0;
+}

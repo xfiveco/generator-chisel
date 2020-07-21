@@ -3,8 +3,19 @@
    ========================================================================== */
 
 .c-footer {
-  border-top: 1px solid $color-border;
-  font-size: 0.875rem;
+  color: $color-text-lighter;
+  font-size: rem(18);
   margin-top: 2em;
   padding-top: 1em;
+  text-align: center;
+}
+
+.c-footer__link {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+    text-decoration: underline;
+  }
 }

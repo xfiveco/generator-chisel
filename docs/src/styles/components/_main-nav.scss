@@ -1,0 +1,48 @@
+/* ==========================================================================
+   #MAIN NAV
+   ========================================================================== */
+
+.c-main-nav {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto 2em auto;
+}
+
+.c-main-nav__item {
+  font-size: rem(24);
+  font-weight: 600;
+  line-height: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.c-main-nav__link {
+  display: block;
+  text-decoration: none;
+}
+
+.current-menu-item .c-main-nav__link {
+  color: $color-text-lighter;
+}
+
+.c-main-nav__iframe--large {
+  display: none;
+  height: 30px;
+  width: 160px;
+  border: 0;
+
+  @include bp-large {
+    display: block;
+  }
+}
+
+.c-main-nav__iframe--normal {
+  height: 20px;
+  width: 90px;
+  border: 0;
+
+  @include bp-large {
+    display: none;
+  }
+}
