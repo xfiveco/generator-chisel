@@ -1,10 +1,11 @@
 ---
 title: WordPress
 excerpt: Chisel supports easy and fast theme development with <a href="https://www.upstatement.com/timber/">Timber</a>. Chisel's starter theme helps you organize project functionality in a logical, maintainable way.
-order: 140
+order: 1400
 ---
 
 ## Creating theme front-end
+
 Chisel allows easy front-end development prior to WordPress development. Suppose you have 3 pages to develop front-end for `Team`, `Team Member`, `Contact`.
 
 1. Add these pages from the command line like described in the previous sections
@@ -20,26 +21,35 @@ Inside the theme there is `Chisel` folder with various classes which extend Word
 Classes you can work with:
 
 ### `\Chisel\Media.php`
+
 Default media settings for Chisel, you can change or extend media settings here.
 
-### `\Chisel\Post.php` 
+### `\Chisel\Post.php`
+
 This class extends `\Timber\Post` class
 
-### `\Chisel\Performance.php` 
+### `\Chisel\Performance.php`
+
 Class for optimizing performance, allows to setup which JS scripts should be deferred or asynced
+
 ### `\Chisel\Site.php`
+
 This class extends `\Timber\Site` class and is used to setup whole site related configuration
 
 ### `\Chisel\Security.php`
+
 Default security settings for Chisel, you can change or extend security settings here
 
-### `\Chisel\Extensions\DataType.php` 
+### `\Chisel\Extensions\DataType.php`
+
 Use this class to register custom post types and taxonomies
 
 ### `\Chisel\Extensions\Twig.php`
+
 Use this class to extend Twig functionality
 
 ### `\Chisel\Extensions\Theme.php`
+
 Use this class to extend theme functionality
 
 If you want to add new custom class, you can copy and adjust one of the existing classes. Then load your class in `functions.php`
@@ -49,6 +59,7 @@ Refer to [Timber](http://upstatement.com/timber/) documentation if you are new t
 ## Built-in extensions for Timber
 
 ### `ChiselPost`
+
 You can use this function if you want to create a post class inside Twig file. As an argument you can pass post id, post object, or an array consisting of field values for the post. When creating fake post by passing an array of fields as an argument you can use `_fields` key to set post meta values loaded via `get_field` method to simulate for example ACF values. You can also load existing post that will have fake fields by passing post's id with `ID` key:
 
 Example usage:
@@ -74,6 +85,7 @@ This will create a `\Chisel\Post` object that you can use like any other post lo
 ```
 
 ### `className`
+
 You can use this function if you want to avoid writing long classes with multiple modifiers by hand:
 
 Example usage:
@@ -104,15 +116,19 @@ Example usage:
 ```
 
 ## Good practices
+
 ### Use `get_field`
+
 When using ACF try to always use `get_field` method of `Chisel\Post` instead of direct call to the field:
 
 #### Good:
+
 ```html
 {{ post.get_field('field_name') }}
 ```
 
 #### Bad:
+
 ```html
 {{ post.field_name }}
 ```
@@ -120,6 +136,7 @@ When using ACF try to always use `get_field` method of `Chisel\Post` instead of 
 Read more on the topic in [ACF Cookbook](https://timber.github.io/docs/guides/acf-cookbook/)
 
 ### Security
+
 In addition to default security settings you can also:
 
 #### Protect WP includes
@@ -153,5 +170,7 @@ Add `.htaccess` to the `wp-content/uploads` folder with the following content:
 Note: this can break some plugins
 
 ## Common issues
+
 ### Gravity Forms JavaScript issues
+
 If you encounter Gravity Forms JavaScript issues which might be related to Chisel using a `defer` tag, check out [this workaround](https://bjornjohansen.no/load-gravity-forms-js-in-footer).

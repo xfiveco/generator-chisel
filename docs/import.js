@@ -26,10 +26,11 @@ posts.forEach((post) => {
     `---
 title: ${post.title.rendered}
 excerpt: ${post.excerpt.rendered}
-order: ${post.menu_order}
+order: ${post.menu_order}0
 ---
 
 ${content}
 `,
   );
+  execSync(`yarn prettier --write '${fileToWrite}'`);
 });
