@@ -8,7 +8,9 @@ const fs = require('fs');
 const postsRaw = execSync(
   "curl 'http://getchisel.test/wp-json/wp/v2/pages?per_page=50'",
 );
-const posts = JSON.parse(postsRaw).filter((post) => post.link.includes('docs'));
+const posts = JSON.parse(postsRaw).filter(
+  (post) => post.template !== 'template-home.php',
+);
 
 posts.forEach((post) => {
   const link = new URL(post.link);

@@ -13,4 +13,8 @@ module.exports = {
     chiselConfig.react && ['babel-preset-chisel/react', { hot: true }],
     // ['babel-preset-chisel/preact'],
   ].filter(Boolean),
+
+  plugins: [
+    ['prismjs', { languages: ['js', 'bash', 'json', 'html', 'twig', 'php'] }],
+  ],
 };

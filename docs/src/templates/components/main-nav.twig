@@ -1,7 +1,7 @@
 {% set main_nav = [
   { title: 'Home', link: '/' },
   getPosts({ id: 'docs' })[0],
-  { title: 'Tutorials', link: 'https://www.getchisel.co/tutorials/' }
+  getPosts({ id: 'tutorials' })[0],
 ] %}
 
 {% if main_nav %}
@@ -9,7 +9,7 @@
     <div class="c-sep u-sp-bottom u-sp--large"></div>
     <ul class="c-main-nav">
       {% for item in main_nav %}
-        <li class="c-main-nav__item">
+        <li class="c-main-nav__item {{ item.link == post.link ? 'current-menu-item' : '' }}">
           <a href="{{ item.link }}" class="c-main-nav__link">{{ item.title }}</a>
         </li>
       {% endfor %}

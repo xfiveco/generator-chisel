@@ -22,10 +22,10 @@
 
       {% if post.parent %}
           <ul class="c-page-nav">
-            {% if post.prev.next != '' and post.prev.title != 'Home' %}
+            {% if post.prev.title != 'Documentation' and post.prev.title != 'Home' %}
               <li class="c-page-nav__item c-page-nav__item--prev">Previous: <a href="{{post.prev.link}}">{{post.prev.title}}</a></li>
             {% endif %}
-            {% if post.next.title != '' %}
+            {% if post.next %}
               <li class="c-page-nav__item c-page-nav__item--next">Next: <a href="{{post.next.link}}">{{post.next.title}}</a></li>
             {% endif %}
           </ul>

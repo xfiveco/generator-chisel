@@ -14,6 +14,7 @@
     "add-page": "chisel-scripts add-page"
   },
   "dependencies": {
+    "babel-plugin-prismjs": "^2.0.1",
     "prismjs": "^1.20.0"
   },
   "devDependencies": {
@@ -21,7 +22,7 @@
     "babel-preset-chisel": "^1.0.0-alpha.0",
     "browserslist": "^4.12.0",
     "chisel-plugin-code-style": "^1.0.0-alpha.1",
-    "chisel-plugin-static-frontend": "^1.0.0-alpha.1",
+    "chisel-plugin-static-frontend": "^1.0.0-alpha.2",
     "chisel-scripts": "^1.0.0-alpha.4",
     "postcss-normalize": "^9.0.0"
   },

@@ -1607,6 +1607,11 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
+babel-plugin-prismjs@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-prismjs/-/babel-plugin-prismjs-2.0.1.tgz#b56095f423926662259de8f5ee50a7afbcf0fd92"
+  integrity sha512-GqQGa3xX3Z2ft97oDbGvEFoxD8nKqb3ZVszrOc5H7icnEUA56BIjVYm86hfZZA82uuHLwTIfCXbEKzKG1BzKzg==
+
 babel-preset-chisel@^1.0.0-alpha.0:
   version "1.0.0-alpha.0"
   resolved "https://registry.yarnpkg.com/babel-preset-chisel/-/babel-preset-chisel-1.0.0-alpha.0.tgz#2aad1d70028d55a9723466c5112fb3c6d62c1762"
@@ -2118,10 +2123,10 @@ chisel-plugin-code-style@^1.0.0-alpha.1:
     stylelint-config-chisel "^1.0.0-alpha.0"
     webpack "^4.43.0"
 
-chisel-plugin-static-frontend@^1.0.0-alpha.1:
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/chisel-plugin-static-frontend/-/chisel-plugin-static-frontend-1.0.0-alpha.1.tgz#026c8303b18cbaf2292ff11f2b09abe92a6c9212"
-  integrity sha512-XmDTcJ+YkvDgEr8tm4RZjSnuQShU1DuLvgzH0dLpGQQbhg04mh55jdizjRasmeO2K/BCv9I1/1f2JJzJ3enDxA==
+chisel-plugin-static-frontend@^1.0.0-alpha.2:
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/chisel-plugin-static-frontend/-/chisel-plugin-static-frontend-1.0.0-alpha.2.tgz#e6558bb180866bb0c4ac7fd0e41dcaa82757034c"
+  integrity sha512-GeJyi9A7otnhwwhodFwVDM2tgQa+sFAC0hU6qIwM6w/PvkHqvApCORuszfZO4aOLMnHzh1ei4VKbnH03r99bQw==
   dependencies:
     chisel-shared-utils "^1.0.0-alpha.0"
     copy-webpack-plugin "^6.0.3"
