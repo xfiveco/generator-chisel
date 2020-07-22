@@ -109,11 +109,13 @@ module.exports = (api, options) => {
     };
 
     if (contentPathExists) {
-      const postGenerator = require('./Post');
-      const Post = postGenerator(api, options);
+      const postCreator = require('./Post');
+      const getPostsCreator = require('./get-posts');
       const Datastore = require('nedb-promises');
       const db = Datastore.create();
       loaderOptions.db = db;
+      loaderOptions.getPostsCreator = getPostsCreator(loaderOptions);
+      const Post = postCreator(loaderOptions);
 
       for (const file of templatesFiles) {
         const ext = path.extname(file);

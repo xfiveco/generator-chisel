@@ -5,7 +5,7 @@ const { omit } = require('lodash');
 
 const rawLoader = require.resolve('./content-raw-loader.js');
 
-module.exports = (api, options) =>
+module.exports = ({ options, getPostsCreator }) =>
   class Post {
     constructor(post) {
       this._id = post.id;
@@ -72,6 +72,22 @@ module.exports = (api, options) =>
       }
 
       return p.replace(/\/index$/, '/');
+    }
+
+    async adjacent(sort = { id: 1 }, query = {}) {
+      // cache?
+      const posts = await getPostsCreator()(query, sort);
+      const currentIndex = posts.indexOf(this);
+      if (currentIndex === -1) return null;
+      return posts[currentIndex + 1] || null;
+    }
+
+    async next(field = 'data.order') {
+      return this.adjacent({ [field]: 1, id: 1 });
+    }
+
+    async prev(field = 'data.order') {
+      return this.adjacent({ [field]: -1, id: -1 });
     }
 
     toJSON() {
