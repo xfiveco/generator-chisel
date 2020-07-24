@@ -97,6 +97,10 @@ module.exports = async (api) => {
     const modifyDependencies = (deps) => {
       Object.keys(deps).forEach((dep) => {
         if (!packagesVersions[dep]) return;
+        if (process.env.CHISEL_TEST) {
+          deps[dep] = `file:../../packages/${dep}`;
+          return;
+        }
         deps[dep] = `^${packagesVersions[dep]}`;
       });
     };
@@ -114,6 +118,14 @@ module.exports = async (api) => {
 
   api.schedule(api.PRIORITIES.INSTALL_DEPENDENCIES, async () => {
     if (api.creator.cmd.skipDependenciesInstall) return;
+
+    if (process.env.CHISEL_TEST && !process.env.CI) {
+      require('fs').symlinkSync(
+        process.env.CHISEL_TEST_NODE_MODULES,
+        api.resolve('node_modules'),
+        'junction',
+      );
+    }
 
     await installDependencies({ cwd: api.resolve() });
 

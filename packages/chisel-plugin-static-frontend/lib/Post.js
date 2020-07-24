@@ -130,7 +130,16 @@ module.exports = ({ options, getPostsCreator }) =>
       if (this._type === 'md') {
         const parsedContent = hexoFrontMatter.parse(content);
         this._title = parsedContent.title || '';
-        this._data = omit(parsedContent, ['title', '_content']);
+        const data = omit(parsedContent, ['title', '_content']);
+        Object.entries(data).forEach(([key, item]) => {
+          // revert https://github.com/hexojs/hexo-front-matter/blob/ccbdff36d151a56932418cdc6d0329d866032a1b/lib/front_matter.js#L59
+          if (item instanceof Date) {
+            data[key] = new Date(
+              item.getTime() - item.getTimezoneOffset() * 60 * 1000,
+            );
+          }
+        });
+        this._data = data;
         this._contentRaw = parsedContent._content || '';
         this._content = marked(parsedContent._content) || '';
       } else if (this._type === 'json') {

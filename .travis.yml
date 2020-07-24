@@ -13,5 +13,7 @@ cache:
 #       - php7.2-mysql
 # services:
 #   - mysql
-before_install:
-  - rm .jest-projects/package.json
+
+before_script:
+  - yarn prepare-links
+  - cd packages/chisel-plugin-wordpress; yarn prepare; cd -;

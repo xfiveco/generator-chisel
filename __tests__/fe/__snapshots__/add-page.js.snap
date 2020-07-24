@@ -1,0 +1,1277 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FE add-page Adds pages in default setup 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\" rel=\\"stylesheet\\">
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+    <script type=\\"text/x-chisel-pages-template\\">
+      <ul class=\\"c-list\\">
+        <!-- CHISEL-PAGES -->
+      </ul>
+    </script>
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">This project is powered by <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development framework for creating easy to maintain and fast front-end templates.</p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre> or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+          <!-- CHISEL-PAGES-LIST -->
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p><strong>Chisel supports modern web development workflows and helps developers to create a code base which is easy to maintain.</strong></p>
+          <p>For detailed information how Chisel works, please check out <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.</p>
+          <p>If you are just looking for your deliverable files, they are located inside the <code>dist</code> folder. No files found outside of that folder should usually be uploaded to your server (e.g. this file).</p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page Adds pages in default setup 2`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page Adds pages in default setup 3`] = `
+Array [
+  "dist/page1.html",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "src/templates/page1.twig",
+]
+`;
+
+exports[`FE add-page Adds pages in default setup 4`] = `
+"{% extends \\"layouts/base.twig\\" %}
+{% set pageName = 'Page 1' %}
+
+{% block content %}
+  <h1>Hello <span class=\\"js-greeting\\"></span></h1>
+{% endblock %}
+
+
+"
+`;
+
+exports[`FE add-page Adds pages in default setup 5`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/some-other-page.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Some Other Page</span>
+                <span class=\\"c-page__name\\">some-other-page.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/second-page.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Second Page</span>
+                <span class=\\"c-page__name\\">second-page.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/third-page.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Third Page</span>
+                <span class=\\"c-page__name\\">third-page.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page Adds pages in default setup 6`] = `
+Array [
+  "dist/page1.html",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/second-page.html",
+  "dist/some-other-page.html",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "dist/third-page.html",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "src/templates/page1.twig",
+  "src/templates/second-page.twig",
+  "src/templates/some-other-page.twig",
+  "src/templates/third-page.twig",
+]
+`;
+
+exports[`FE add-page Adds pages in default setup 7`] = `
+Array [
+  Array [],
+  Array [
+    "[92m[1mPage Page 1 created![22m[39m",
+  ],
+  Array [
+    "[1mFile:[22m --PROJECT-PATH--/src/templates/page1.twig",
+  ],
+  Array [],
+  Array [],
+  Array [
+    "[92m[1mPage Some Other Page created![22m[39m",
+  ],
+  Array [
+    "[1mFile:[22m --PROJECT-PATH--/src/templates/some-other-page.twig",
+  ],
+  Array [],
+  Array [
+    "[92m[1mPage Second Page created![22m[39m",
+  ],
+  Array [
+    "[1mFile:[22m --PROJECT-PATH--/src/templates/second-page.twig",
+  ],
+  Array [],
+  Array [
+    "[92m[1mPage Third Page created![22m[39m",
+  ],
+  Array [
+    "[1mFile:[22m --PROJECT-PATH--/src/templates/third-page.twig",
+  ],
+  Array [],
+]
+`;
+
+exports[`FE add-page Adds pages with the same name 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/page1-1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1-1.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page Adds pages with the same name 2`] = `
+Array [
+  "dist/page1-1.html",
+  "dist/page1.html",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "src/templates/page1-1.twig",
+  "src/templates/page1.twig",
+]
+`;
+
+exports[`FE add-page Doesn't build with --no-build 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page-no-build.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page No Build</span>
+                <span class=\\"c-page__name\\">page-no-build.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page Doesn't build with --no-build 2`] = `
+Array [
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "src/templates/page-no-build.twig",
+]
+`;
+
+exports[`FE add-page Fails when adding nested page in default setup 1`] = `"Nested pages are supported only when using content directory"`;
+
+exports[`FE add-page Fails when adding nested page in default setup 2`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\" rel=\\"stylesheet\\">
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+    <script type=\\"text/x-chisel-pages-template\\">
+      <ul class=\\"c-list\\">
+        <!-- CHISEL-PAGES -->
+      </ul>
+    </script>
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">This project is powered by <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development framework for creating easy to maintain and fast front-end templates.</p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre> or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+          <!-- CHISEL-PAGES-LIST -->
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p><strong>Chisel supports modern web development workflows and helps developers to create a code base which is easy to maintain.</strong></p>
+          <p>For detailed information how Chisel works, please check out <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.</p>
+          <p>If you are just looking for your deliverable files, they are located inside the <code>dist</code> folder. No files found outside of that folder should usually be uploaded to your server (e.g. this file).</p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page Fails when adding nested page in default setup 3`] = `
+Array [
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/fine.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+]
+`;
+
+exports[`FE add-page Fails when no page is passed 1`] = `"Process.exit: 1"`;
+
+exports[`FE add-page Fails when no page is passed 2`] = `
+Array [
+  Array [
+    "error: missing required argument 'page'",
+  ],
+]
+`;
+
+exports[`FE add-page Fails when no page is passed 3`] = `
+Array [
+  Array [
+    1,
+  ],
+]
+`;
+
+exports[`FE add-page Fails when no page is passed 4`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    <link href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\" rel=\\"stylesheet\\">
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+    <script type=\\"text/x-chisel-pages-template\\">
+      <ul class=\\"c-list\\">
+        <!-- CHISEL-PAGES -->
+      </ul>
+    </script>
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">This project is powered by <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development framework for creating easy to maintain and fast front-end templates.</p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre> or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+          <!-- CHISEL-PAGES-LIST -->
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p><strong>Chisel supports modern web development workflows and helps developers to create a code base which is easy to maintain.</strong></p>
+          <p>For detailed information how Chisel works, please check out <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.</p>
+          <p>If you are just looking for your deliverable files, they are located inside the <code>dist</code> folder. No files found outside of that folder should usually be uploaded to your server (e.g. this file).</p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page Fails when no page is passed 5`] = `
+Array [
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+]
+`;
+
+exports[`FE add-page When using content add pages there and supports nested pages 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page When using content add pages there and supports nested pages 2`] = `
+Array [
+  "content/hello.twig",
+  "content/page1.twig",
+  "dist/hello.html",
+  "dist/page1.html",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+]
+`;
+
+exports[`FE add-page When using content add pages there and supports nested pages 3`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/fine.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">fine</span>
+                <span class=\\"c-page__name\\">fine.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/nested/interesting-page.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Interesting Page</span>
+                <span class=\\"c-page__name\\">interesting-page.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/deeply/nested/some-other-page.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Some Other Page</span>
+                <span class=\\"c-page__name\\">some-other-page.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page When using content add pages there and supports nested pages 4`] = `
+Array [
+  "content/deeply/nested/some-other-page.twig",
+  "content/fine.twig",
+  "content/hello.twig",
+  "content/nested/interesting-page.twig",
+  "content/page1.twig",
+  "dist/deeply/nested/some-other-page.html",
+  "dist/fine.html",
+  "dist/hello.html",
+  "dist/nested/interesting-page.html",
+  "dist/page1.html",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+]
+`;
+
+exports[`FE add-page When using content and markdown adds pages and builds them 1`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page When using content and markdown adds pages and builds them 2`] = `
+Array [
+  "content/hello.twig",
+  "content/page1.md",
+  "dist/hello.html",
+  "dist/page1.html",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "src/templates/post.twig",
+]
+`;
+
+exports[`FE add-page When using content and markdown adds pages and builds them 3`] = `
+"<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <title>Project Index - FrontEnd</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link
+      href=\\"https://fonts.googleapis.com/css?family=Lora:400,700\\"
+      rel=\\"stylesheet\\"
+    />
+    <!-- prettier-ignore -->
+    <style>
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:\\"\\";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+    </style>
+
+    <script type=\\"text/x-chisel-page-template\\">
+      <li>
+        <a href=\\"dist/<%= page.path %>\\" class=\\"c-page\\">
+          <span class=\\"c-page__link\\"><%= page.name %></span>
+          <span class=\\"c-page__name\\"><%= page.slug %>.html</span>
+        </a>
+      </li>
+    </script>
+  </head>
+  <body>
+    <div class=\\"c-wrapper\\">
+      <h1 class=\\"c-page-title\\">FrontEnd</h1>
+      <h2 class=\\"c-page-subtitle\\">Project index</h2>
+
+      <div class=\\"c-section c-section--first\\">
+        <div class=\\"c-section__content\\">
+          <p class=\\"c-intro\\">
+            This project is powered by
+            <a href=\\"https://www.getchisel.co/\\">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
+          <h2 class=\\"c-heading\\">Pages</h2>
+          <div class=\\"c-section__note\\">
+            To add more pages run:
+            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+          </div>
+
+          <ul class=\\"c-list\\">
+            <li>
+              <a href=\\"dist/page1.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Page 1</span>
+                <span class=\\"c-page__name\\">page1.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/fine.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">fine</span>
+                <span class=\\"c-page__name\\">fine.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/nested/interesting-page.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Interesting Page</span>
+                <span class=\\"c-page__name\\">interesting-page.html</span>
+              </a>
+            </li>
+
+            <li>
+              <a href=\\"dist/deeply/nested/some-other-page.html\\" class=\\"c-page\\">
+                <span class=\\"c-page__link\\">Some Other Page</span>
+                <span class=\\"c-page__name\\">some-other-page.html</span>
+              </a>
+            </li>
+
+            <!-- CHISEL-PAGES -->
+          </ul>
+        </div>
+      </div>
+      <!-- /c-section -->
+
+      <section class=\\"c-section\\">
+        <div class=\\"c-section__content\\">
+          <h2 class=\\"c-heading\\">Documentation</h2>
+          <p>
+            <strong
+              >Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong
+            >
+          </p>
+          <p>
+            For detailed information how Chisel works, please check out
+            <a href=\\"https://www.getchisel.co/\\">www.getchisel.co</a>.
+          </p>
+          <p>
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
+        </div>
+      </section>
+      <!-- /c-section -->
+    </div>
+    <!-- /c-wrapper -->
+  </body>
+</html>
+"
+`;
+
+exports[`FE add-page When using content and markdown adds pages and builds them 4`] = `
+Array [
+  "content/deeply/nested/some-other-page.md",
+  "content/fine.md",
+  "content/hello.twig",
+  "content/nested/interesting-page.md",
+  "content/page1.md",
+  "dist/deeply/nested/some-other-page.html",
+  "dist/fine.html",
+  "dist/hello.html",
+  "dist/nested/interesting-page.html",
+  "dist/page1.html",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "src/templates/post.twig",
+]
+`;
+
+exports[`FE add-page When using content and markdown adds pages and builds them 5`] = `
+"<!DOCTYPE html>
+<html class=\\"no-js\\" lang=\\"en\\" prefix=\\"og: http://ogp.me/ns#\\" data-webpack-public-path=\\"./\\">
+
+<head>
+  <meta charset=\\"utf-8\\" />
+  <title>Page 1 - FrontEnd</title>
+  <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"styles/main.--HASH--.css\\" type=\\"text/css\\">
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+  <script>
+    document.documentElement.classList.remove('no-js');
+  </script>
+  <script src=\\"scripts/app.98db252c.js\\" defer></script>
+</head>
+
+<body class=\\"\\">
+  <header class=\\"o-wrapper c-header\\">
+    <a href=\\"/\\" rel=\\"home\\">FrontEnd</a>
+  </header>
+  <main class=\\"o-wrapper\\">
+    <h1>Hello Page 1</h1>
+    <div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id nulla bibendum, volutpat metus eu, pretium mi. In lobortis lobortis rutrum. Nulla eu sem nec enim tincidunt fringilla. Nunc mollis sed metus eget aliquet. In venenatis pharetra cursus. Nunc ultrices laoreet diam, at dictum risus viverra nec. Donec egestas, arcu a hendrerit ornare, nunc augue malesuada eros, nec dignissim nulla massa a enim. Phasellus porta venenatis felis, vitae congue libero pellentesque at. Sed neque sapien, faucibus vel pharetra eu, aliquet eget ipsum. Nulla vel ante enim. Sed arcu ligula, rutrum at mauris molestie, vehicula blandit sapien. Vestibulum tempor dignissim gravida.</p>
+    </div>
+  </main>
+  <footer class=\\"o-wrapper c-footer\\">
+    <p>Copyright &copy; 2020 FrontEnd</p>
+  </footer>
+</body>
+
+</html>"
+`;
+
+exports[`FE add-page When using content and markdown adds pages and builds them 6`] = `
+"<!DOCTYPE html>
+<html class=\\"no-js\\" lang=\\"en\\" prefix=\\"og: http://ogp.me/ns#\\" data-webpack-public-path=\\"../../\\">
+
+<head>
+  <meta charset=\\"utf-8\\" />
+  <title>Some Other Page - FrontEnd</title>
+  <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"../../styles/main.--HASH--.css\\" type=\\"text/css\\">
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+  <script>
+    document.documentElement.classList.remove('no-js');
+  </script>
+  <script src=\\"../../scripts/app.98db252c.js\\" defer></script>
+</head>
+
+<body class=\\"\\">
+  <header class=\\"o-wrapper c-header\\">
+    <a href=\\"/\\" rel=\\"home\\">FrontEnd</a>
+  </header>
+  <main class=\\"o-wrapper\\">
+    <h1>Hello Some Other Page</h1>
+    <div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id nulla bibendum, volutpat metus eu, pretium mi. In lobortis lobortis rutrum. Nulla eu sem nec enim tincidunt fringilla. Nunc mollis sed metus eget aliquet. In venenatis pharetra cursus. Nunc ultrices laoreet diam, at dictum risus viverra nec. Donec egestas, arcu a hendrerit ornare, nunc augue malesuada eros, nec dignissim nulla massa a enim. Phasellus porta venenatis felis, vitae congue libero pellentesque at. Sed neque sapien, faucibus vel pharetra eu, aliquet eget ipsum. Nulla vel ante enim. Sed arcu ligula, rutrum at mauris molestie, vehicula blandit sapien. Vestibulum tempor dignissim gravida.</p>
+    </div>
+  </main>
+  <footer class=\\"o-wrapper c-footer\\">
+    <p>Copyright &copy; 2020 FrontEnd</p>
+  </footer>
+</body>
+
+</html>"
+`;

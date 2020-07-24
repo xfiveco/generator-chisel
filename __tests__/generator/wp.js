@@ -1,24 +1,16 @@
 const globby = require('globby');
-const path = require('path');
-const chisel = require('../bin/chisel');
 
-const binPath = path.resolve(__dirname, '../bin/chisel.js');
-
-global.chiselTestHelpers.tmpCurrentDirectory();
-
-const defaultAnswers = (name) => (data) => [
+const defaultAnswers = [
   null,
-  () => ({
-    ...data,
+  {
     app: {
-      name,
+      name: 'Chisel Test WP',
       author: 'Xfive Tester',
       projectType: 'wp-with-fe',
-      browsers: ['modern', 'edge'],
+      browsers: ['modern'],
     },
-  }),
-  () => ({
-    ...data,
+  },
+  {
     wp: {
       title: 'Chisel Test',
       url: 'http://chisel-test.test/',
@@ -26,28 +18,25 @@ const defaultAnswers = (name) => (data) => [
       adminPassword: 'a',
       adminEmail: 'jakub.bogucki+chisel-test@xfive.co',
     },
-  }),
-  () => ({ ...data, wpPlugins: { plugins: [] } }),
+  },
+  { wpPlugins: { plugins: [] } },
 ];
 
-describe('WordPress', () => {
+describe('Generator WordPress', () => {
   test('Generates all expected files', async () => {
-    global.chiselTestHelpers.mockPromptAnswers(
-      defaultAnswers('Chisel Test Basic'),
+    await global.chiselTestHelpers.generateProjectWithAnswers(
+      [
+        'create',
+        '--skip-dependencies-install',
+        '--skip-wp-download',
+        '--skip-wp-config',
+        '--skip-wp-install',
+        '--skip-wp-plugins',
+        '--skip-wp-commands',
+        '--skip-format-and-build',
+      ],
+      defaultAnswers,
     );
-
-    await chisel([
-      process.argv[0],
-      binPath,
-      'create',
-      '--skip-dependencies-install',
-      '--skip-wp-download',
-      '--skip-wp-config',
-      '--skip-wp-install',
-      '--skip-wp-plugins',
-      '--skip-wp-commands',
-      '--skip-format-and-build',
-    ]);
 
     const files = (await globby('./', { dot: true })).sort();
 
@@ -55,20 +44,17 @@ describe('WordPress', () => {
   });
 
   test('Generates all expected files and downloads WP', async () => {
-    global.chiselTestHelpers.mockPromptAnswers(
-      defaultAnswers('Chisel Test WP'),
+    await global.chiselTestHelpers.generateProjectWithAnswers(
+      [
+        'create',
+        '--skip-wp-config',
+        '--skip-wp-install',
+        '--skip-wp-plugins',
+        '--skip-wp-commands',
+        '--skip-format-and-build',
+      ],
+      defaultAnswers,
     );
-
-    await chisel([
-      process.argv[0],
-      binPath,
-      'create',
-      '--skip-wp-config',
-      '--skip-wp-install',
-      '--skip-wp-plugins',
-      '--skip-wp-commands',
-      '--skip-format-and-build',
-    ]);
 
     const files = await globby(['./', '!node_modules'], { dot: true });
 

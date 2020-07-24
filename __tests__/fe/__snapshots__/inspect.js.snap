@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FE Inspect Generate and inspect FE Project 1`] = `
+Array [
+  Array [
+    "{
+  [36mmode[39m: [31m'development'[39m,
+  [36mdevtool[39m: [31m'cheap-module-eval-source-map'[39m,
+  [36mcontext[39m: [31m--PROJECT-PATH--'[39m,
+  [36moutput[39m: {
+    [36mpath[39m: [31m--PROJECT-PATH--/dist'[39m,
+    [36mfilename[39m: [31m'[name].js'[39m,
+    [36mchunkFilename[39m: [31m'scripts/[id].js'[39m
+  },
+  [36mresolve[39m: {
+    [36malias[39m: {
+      [31m--PROJECT-PATH--/src'[39m,
+      [31m--PROJECT-PATH--/src'[39m,
+      [31m--PROJECT-PATH--/src/scripts'[39m,
+      [31m--PROJECT-PATH--/src/scripts'[39m,
+      [36massets[39m: [31m--PROJECT-PATH--/src/assets'[39m,
+      [31m--PROJECT-PATH--/src/assets'[39m
+    },
+    [36mmodules[39m: [
+      [31m'node_modules'[39m,
+      [31m--PROJECT-PATH--/node_modules'[39m
+    ]
+  },
+  [36mresolveLoader[39m: {
+    [36mmodules[39m: [
+      [31m'node_modules'[39m,
+      [31m--PROJECT-PATH--/node_modules'[39m
+    ]
+  },
+  [36mmodule[39m: {
+    [36mrules[39m: [
+      [32m/* config.module.rule('assets') */[39m
+      {
+        [36minclude[39m: [
+          [31m--PROJECT-PATH--/src/assets'[39m
+        ],
+        [36moneOf[39m: [
+          [32m/* config.module.rule('assets').oneOf('inline') */[39m
+          {
+            [36mresourceQuery[39m: [31m/inline/[39m,
+            [36muse[39m: [
+              [32m/* config.module.rule('assets').oneOf('inline').use('url') */[39m
+              {
+                [36mloader[39m: [31m'url-loader'[39m,
+                [36moptions[39m: {
+                  [36mgenerator[39m: [33m[34mfunction[39m[33m () [39m{ [32m/* omitted long function */[39m }
+                }
+              }
+            ]
+          },
+          [32m/* config.module.rule('assets').oneOf('external') */[39m
+          {
+            [36muse[39m: [
+              [32m/* config.module.rule('assets').oneOf('external').use('file-loader') */[39m
+              {
+                [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/file-loader/dist/cjs.js'[39m,
+                [36moptions[39m: {
+                  [36mname[39m: [33m[34mfunction[39m[33m () [39m{ [32m/* omitted long function */[39m }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      [32m/* config.module.rule('js') */[39m
+      {
+        [36mtest[39m: [31m//.m?jsx?$/[39m,
+        [36mexclude[39m: [
+          [31m/node_modules/[39m
+        ],
+        [36muse[39m: [
+          [32m/* config.module.rule('js').use('babel-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/babel-loader/lib/index.js'[39m
+          }
+        ]
+      },
+      [32m/* config.module.rule('css') */[39m
+      {
+        [36mtest[39m: [31m//.css$/[39m,
+        [36mexclude[39m: [
+          [31m--PROJECT-PATH--/src/assets'[39m
+        ],
+        [36muse[39m: [
+          [32m/* config.module.rule('css').use('extract-css-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/mini-css-extract-plugin/dist/loader.js'[39m,
+            [36moptions[39m: {
+              [36mhmr[39m: [34mtrue[39m,
+              [36mpublicPath[39m: [31m'..'[39m
+            }
+          },
+          [32m/* config.module.rule('css').use('css-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/css-loader/dist/cjs.js'[39m,
+            [36moptions[39m: {
+              [36msourceMap[39m: [34mtrue[39m,
+              [31m'import'[39m: [34mfalse[39m
+            }
+          },
+          [32m/* config.module.rule('css').use('postcss-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/postcss-loader/src/index.js'[39m,
+            [36moptions[39m: {
+              [36msourceMap[39m: [34mtrue[39m
+            }
+          }
+        ]
+      },
+      [32m/* config.module.rule('scss') */[39m
+      {
+        [36mtest[39m: [31m//.scss$/[39m,
+        [36mexclude[39m: [
+          [31m--PROJECT-PATH--/src/assets'[39m
+        ],
+        [36muse[39m: [
+          [32m/* config.module.rule('scss').use('extract-css-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/mini-css-extract-plugin/dist/loader.js'[39m,
+            [36moptions[39m: {
+              [36mhmr[39m: [34mtrue[39m,
+              [36mpublicPath[39m: [31m'..'[39m
+            }
+          },
+          [32m/* config.module.rule('scss').use('css-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/css-loader/dist/cjs.js'[39m,
+            [36moptions[39m: {
+              [36msourceMap[39m: [34mtrue[39m,
+              [31m'import'[39m: [34mfalse[39m
+            }
+          },
+          [32m/* config.module.rule('scss').use('postcss-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/postcss-loader/src/index.js'[39m,
+            [36moptions[39m: {
+              [36msourceMap[39m: [34mtrue[39m
+            }
+          },
+          [32m/* config.module.rule('scss').use('sass-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/sass-loader/dist/cjs.js'[39m,
+            [36moptions[39m: {
+              [36msourceMap[39m: [34mtrue[39m,
+              [36msassOptions[39m: {
+                [36mindentedSyntax[39m: [34mfalse[39m,
+                [36mincludePaths[39m: [
+                  [31m--PROJECT-PATH--/node_modules'[39m
+                ],
+                [36moutputStyle[39m: [31m'expanded'[39m,
+                [36mimporter[39m: [33m[34mfunction[39m[33m () [39m{ [32m/* omitted long function */[39m }
+              }
+            }
+          }
+        ]
+      },
+      [32m/* config.module.rule('twig') */[39m
+      {
+        [36mtest[39m: [31m//.twig$/[39m,
+        [36minclude[39m: [
+          [31m--PROJECT-PATH--/src/templates'[39m,
+          [31m--PROJECT-PATH--/content'[39m
+        ],
+        [36muse[39m: [
+          [32m/* config.module.rule('twig').use('chisel-twig-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/packages/chisel-plugin-static-frontend/lib/twig-loader.js'[39m,
+            [36moptions[39m: {
+              [36moptions[39m: [31m'are hidden'[39m
+            }
+          }
+        ]
+      },
+      [32m/* config.module.rule('content') */[39m
+      {
+        [36mtest[39m: [31m//.(?:md|json)$/[39m,
+        [36mtype[39m: [31m'javascript/auto'[39m,
+        [36minclude[39m: [
+          [31m--PROJECT-PATH--/content'[39m
+        ],
+        [36muse[39m: [
+          [32m/* config.module.rule('content').use('chisel-twig-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/packages/chisel-plugin-static-frontend/lib/twig-loader.js'[39m,
+            [36moptions[39m: {
+              [36moptions[39m: [31m'are hidden'[39m
+            }
+          },
+          [32m/* config.module.rule('content').use('chisel-content-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/packages/chisel-plugin-static-frontend/lib/content-loader.js'[39m,
+            [36moptions[39m: {
+              [36moptions[39m: [31m'are hidden'[39m
+            }
+          }
+        ]
+      }
+    ]
+  },
+  [36moptimization[39m: {
+    [36mminimizer[39m: [
+      [32m/* config.optimization.minimizer('js') */[39m
+      [34mnew[39m ([36mrequire[39m([31m--PROJECTS-PATH--/node_modules/terser-webpack-plugin/dist/cjs.js'[39m))(),
+      [32m/* config.optimization.minimizer('css') */[39m
+      [34mnew[39m ([36mrequire[39m([31m--PROJECTS-PATH--/packages/chisel-scripts/lib/webpack-plugins/OptimizeCssnanoPlugin.js'[39m))(
+        {
+          [36msourceMap[39m: [34mtrue[39m
+        }
+      )
+    ]
+  },
+  [36mplugins[39m: [
+    [32m/* config.plugin('case-sensitive-paths') */[39m
+    [34mnew[39m CaseSensitivePathsPlugin(),
+    [32m/* config.plugin('chisel-dynamic-public-path') */[39m
+    [34mnew[39m DynamicPublicPath(),
+    [32m/* config.plugin('webpackbar') */[39m
+    [34mnew[39m WebpackBarPlugin(),
+    [32m/* config.plugin('extract-css') */[39m
+    [34mnew[39m MiniCssExtractPlugin(
+      {
+        [36mfilename[39m: [31m'[name].css'[39m
+      }
+    ),
+    [32m/* config.plugin('inject-revisioned') */[39m
+    [34mnew[39m InjectRevisioned(),
+    [32m/* config.plugin('copy') */[39m
+    [34mnew[39m CopyPlugin(
+      {
+        [36mpatterns[39m: [
+          {
+            [36mfrom[39m: [31m--PROJECT-PATH--/public'[39m,
+            [36mto[39m: [31m--PROJECT-PATH--/dist'[39m,
+            [36mtoType[39m: [31m'dir'[39m,
+            [36mglobOptions[39m: {
+              [36mignore[39m: [
+                [31m'**/.DS_Store'[39m,
+                [31m'**/.keep'[39m
+              ]
+            },
+            [36mnoErrorOnMissing[39m: [34mtrue[39m
+          }
+        ]
+      }
+    ),
+    [32m/* config.plugin('htmlhint') */[39m
+    [34mnew[39m HtmlHintPlugin(
+      {
+        [36mhtmlHintConfig[39m: {
+          [31m'attr-lowercase'[39m: [
+            [31m'viewBox'[39m,
+            [31m'preserveAspectRatio'[39m
+          ]
+        },
+        [36mdistPath[39m: [31m--PROJECT-PATH--/dist'[39m
+      }
+    )
+  ],
+  [36mentry[39m: {
+    [31m'scripts/app'[39m: [
+      [31m'./src/scripts/app.js'[39m
+    ],
+    [31m'styles/main'[39m: [
+      [31m'./src/styles/main.scss'[39m
+    ]
+  },
+  [36mnode[39m: [34mfalse[39m
+}",
+  ],
+]
+`;

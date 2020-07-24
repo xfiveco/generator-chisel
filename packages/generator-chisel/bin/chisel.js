@@ -4,7 +4,7 @@ const { Command } = require('commander');
 
 const handlePromise = (promise) =>
   promise.catch((err) => {
-    if (!process.env.CHISEL_TEST) {
+    if (typeof jest === 'undefined') {
       console.error(err);
       process.exit(1);
     }
@@ -40,7 +40,7 @@ const createProgram = () => {
 };
 
 (async () => {
-  if (process.env.CHISEL_TEST) {
+  if (typeof jest !== 'undefined') {
     module.exports = (argv) => createProgram().parseAsync(argv);
     return;
   }

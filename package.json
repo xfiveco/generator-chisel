@@ -19,9 +19,16 @@
     "setupFiles": [
       "<rootDir>/scripts/testSetup.js"
     ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/scripts/testSetupAfterEnv.js"
+    ],
     "watchPathIgnorePatterns": [
       "<rootDir>/test-projects",
       "<rootDir>/.jest-projects"
+    ],
+    "testPathIgnorePatterns": [
+      "helpers",
+      "/node_modules/"
     ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
