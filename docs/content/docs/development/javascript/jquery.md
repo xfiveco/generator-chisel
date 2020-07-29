@@ -32,69 +32,56 @@ require('flexslider'); // Usually they bind to global jQuery object
 
 ## Using jQuery and its plugins outside of webpack bundle
 
+<!-- ```bash
+wget https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js
+wget https://cdn.jsdelivr.net/npm/select2@4/dist/js/select2.full.min.js
+``` -->
+
 From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with webpack. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_.
-
-### New project setup
-
-Make sure to _Include jQuery_ and then agree to _configure vendor bundle for jQuery plugins_.
-
-```bash
-? Include jQuery? Yes
-? Would you like to configure vendor bundle for jQuery plugins? Yes
-```
 
 ### Existing project setup
 
 You can try following steps:
 
-#### 1) Check if jQuery is installed
+#### 1) Place jquery in assets directory and load it in the template
 
-In case it isn't go ahead with `yarn add jquery` or `npm install jquery --save` depending on which tool you use.
+Download and place jQuery (for example [`jquery.min.js`](https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js)) in the assets directory, then load it in the `layouts/base.twig` before `app.js`:
+
+```twig
+<script src="{{ assetPath('jquery/jquery.min.js') }}" defer></script>
+<script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
+```
+
+Note: in the above example we additionally created `jquery` directory in `assets` directory.
 
 #### 2) Exclude jQuery from webpack
 
-Open up `webpack.chisel.config.js` in the root directory and make sure following entry is present:
+Open up `chisel.config.js` in the root directory and add following function to exported object:
 
 ```js
-externals: {
-  jquery: 'window.jQuery',
+configureWebpack(config) {
+  config.externals.push({ jquery: 'window.jQuery' });
 },
 ```
 
-#### 3) Add path to jQuery
-
-Make sure that path to jQuery is present in `vendor.json`:
-
-```json
-["/node_modules/jquery/dist/jquery.js"]
-```
+This ensures that when jQuery is imported from one of your JS files, or linraries imported by your JS files it references global jQuery we're loading in the template instead of loading second copy of jQuery.
 
 ### How to use it
 
 This setup will allow you to place plugins inside special `src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
 
-```bash
-[
-  "/node_modules/jquery/dist/jquery.js",
-  "select2.full.min.js"
-]
+When you need to use jQuery plugin that's not compatible with JS bundling tools you can place them in the assets directory and load them between jQuery and your JS.
+
+```twig
+<script src="{{ assetPath('jquery/jquery.min.js') }}" defer></script>
+<script src="{{ assetPath('jquery/select2.full.min.js') }}" defer></script>
+<script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
 ```
-
-So, to recap:
-
-1. Make sure to you've got jQuery installed.
-2. Place the plugin script inside `src/scripts/vendor`.
-3. Add its name inside `src/scripts/vendor.json`.
-4. Enjoy ;)
 
 ### Notes
 
-- It's enough to add _full file name_ inside _vendor.json_. There's no need to add full path to it if the script has been placed inside `src/scripts/`.
-- Removing `"/node_modules/jquery/dist/jquery.js"` path will get rid of jQuery.
-- It's possible to refer plugins installed via NPM or Yarn using appropriate path – just like in the jQuery example: `"/node_modules/[plugin name]/[plugin-file.js]"`
-- When writing code it's possible to `import $ from jQuery` or `var $ = require('jquery')` and **use plugins from the vendor** directory.
-- This setup will create additional JS file called `vendor.js`. It'll be placed in `dist/scripts` just like the bundle file.
+When writing code it's possible to `import $ from 'jquery'` or `var $ = require('jquery')` and **use plugins from the assets** directory.
 
 ## Library not available through npm
 
-Use [`externals` option in webpack configuration](https://webpack.js.org/configuration/externals/). You can also try vendor plugins setup as decribed above.
+Place it in assets directory and load in base layout like demonstrated above.

@@ -15,6 +15,11 @@ module.exports = {
   ].filter(Boolean),
 
   plugins: [
-    ['prismjs', { languages: ['js', 'bash', 'json', 'html', 'twig', 'php'] }],
+    [
+      'prismjs',
+      {
+        languages: ['js', 'bash', 'json', 'html', 'twig', 'php', 'apacheconf'],
+      },
+    ],
   ],
 };

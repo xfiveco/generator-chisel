@@ -13,7 +13,7 @@
 
     <article id="post-{{post.ID}}" class="c-post o-layout__content">
       <section>
-        <h1 class="c-title">{{post.title}}</h1>
+        <h1 class="c-title">{{post.title}}{{ isDev() ? (' (' ~ post.data.order ~ ')') : '' }}</h1>
         <p class="c-intro">{{post.data.excerpt}}</p>
         <div class="c-post__entry">
           {{post.content}}

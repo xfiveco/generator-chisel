@@ -9,19 +9,19 @@ order: 1200
 From the command line type:
 
 ```bash
-yo chisel:page "Page Name"
+npm run add-page "Page Name"
 ```
 
 for example
 
 ```bash
-yo chisel:page "Home"
+npm run add-page "Home"
 ```
 
 You can also create multiple pages at once by separating page names with space:
 
 ```bash
-yo chisel:page "Home" "About Us" "Contact Us" "News"
+npm run add-page "Home" "About Us" "Contact Us" "News"
 ```
 
 ### WordPress Website
@@ -32,10 +32,10 @@ When you add a page on WordPress project:
 - Page is accessible at `project-name.test/{page-slug}`
 - If you haven't before, flush the rewrite rules _Settings -> Permalinks -> Save changes_
 
-### Front-end templates
+### Static Website
 
-When you add a page on front-end templates project, the project index is regenerated and the page is added to it.
+In Static project in creates Twig template in `src/templates` directory or it creates Twig templates or markdown files in `content` directory if it is used. The project index is regenerated (if it's used) and the page is added to it.
 
 ## Removing pages
 
-On the front-end templates project you can remove pages by deleting them from `.yo-rc.json` and running `yo chisel:page` (without any page name) to regenerate the project index.
+To remove the page remove its template or content file, and remove it from WP Admin or project index if necessary.

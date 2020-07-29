@@ -40,6 +40,10 @@ pre[class*='language-'] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+
+  .language-text-md {
+    white-space: pre-line;
+  }
 }
 
 pre[class*='language-']::-moz-selection,

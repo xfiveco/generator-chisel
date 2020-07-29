@@ -8,13 +8,13 @@ order: 1900
 
 JavaScript bundle is minified and deferred.
 
-The file name is revisioned. A content hash is appended to the filename (eg. `app-93d2daf7a3.bundle.js`) so you can set up content caching in the far future.
+The file name is revisioned. A content hash is appended to the filename (eg. `app.7ea16125.js`) so you can set up content caching in the far future.
 
 ## CSS
 
 CSS styles are concatenated to one file and minified.
 
-The file name is revisioned. A content hash is appended to the filename (eg. `main-93d2daf7a3.css`) so you can set up content caching in the far future.
+The file name is revisioned. A content hash is appended to the filename (eg. `main.6a889b04.css`) so you can set up content caching in the far future.
 
 ## WordPress
 
