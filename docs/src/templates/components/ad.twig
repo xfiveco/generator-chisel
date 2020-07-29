@@ -1,0 +1,25 @@
+{% set xfive_ad = {
+  title: 'Craftsmanship and Work Ethics of Old Masters',
+  subtitle: 'Xfive - Delivering digital products since 2005',
+  description: '
+  <p>For more than a decade we’ve been helping creatives bring their visions to life in the digital world.</p>
+  <p>Xfive is a partner for design and web agencies looking to expand their capacity in web application development where care is the foundation of everything we do.</p>
+  ',
+  link: { url: 'https://www.xfive.co/', target: '_blank', title: 'Work with us' }
+} %}
+
+<div class="o-wrapper o-wrapper--small u-sp-top u-sp--xlarge">
+  <div class="c-sep c-sep--small u-sp-top u-sp-bottom u-sp--xlarge"></div>
+  <div class="c-ad">
+    <h2 class="c-ad__title">{{ xfive_ad.title }}</h2>
+    <h3 class="c-ad__subtitle">{{ xfive_ad.subtitle }}</h3>
+    <div class="c-sep c-sep--solid c-sep--small u-sp-top u-sp-bottom u-sp--normal"></div>
+    {{ xfive_ad.description }}
+    {% set link = xfive_ad.link %}
+    <a class="c-ad__link" href="{{ link.url }}" target="{{ link.target }}">{{ link.title }}</a>
+    <span class="c-ad__dot"></span>
+    <span class="c-ad__dot c-ad__dot--tr"></span>
+    <span class="c-ad__dot c-ad__dot--bl"></span>
+    <span class="c-ad__dot c-ad__dot--br"></span>
+  </div>
+</div>

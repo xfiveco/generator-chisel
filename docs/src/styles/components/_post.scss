@@ -1,0 +1,64 @@
+/* ==========================================================================
+   #POST
+   Includes styles for default WP images classes
+   ========================================================================== */
+
+.c-post__entry {
+  h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    margin-bottom: 0.25rem;
+  }
+
+  ul {
+    margin-left: 2.5rem;
+  }
+
+  ol {
+    margin-left: 2rem;
+  }
+
+  ul > li {
+    list-style-type: none;
+  }
+
+  ul > li::before {
+    color: $color-border;
+    content: '\2013';
+    position: absolute;
+    margin-left: -1.25rem;
+  }
+}
+
+.alignnone {
+  margin: 1em 1em 1em 0;
+}
+
+.aligncenter {
+  margin: 1em auto;
+}
+
+.alignright {
+  float: right;
+  margin: 1em 0 1em 1em;
+}
+
+.alignleft {
+  float: left;
+  margin: 1em 1em 1em 0;
+}
+
+.wp-caption {
+  text-align: center;
+}
+
+.wp-caption-text {
+  font-style: italic;
+  margin-top: 0.5em;
+}

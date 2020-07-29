@@ -1,0 +1,43 @@
+/* ==========================================================================
+   #HEADINGS
+   ========================================================================== */
+
+/**
+ * Simple default styles for headings 1 through 6. Anything more opinionated
+ * than simple font-size changes should likely be applied via classes (see:
+ * http://csswizardry.com/2016/02/managing-typography-on-large-apps/).
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $color-text-emp;
+}
+
+h1 {
+  font-size: rem(30);
+}
+
+h2 {
+  font-size: rem(24);
+
+  code {
+    font-size: rem(22);
+  }
+}
+
+h3 {
+  font-size: rem(22);
+}
+
+h4 {
+  font-size: rem(20);
+}
+
+h5,
+h6 {
+  font-size: rem(18);
+}

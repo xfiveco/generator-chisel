@@ -1,0 +1,54 @@
+/* ==========================================================================
+   #MEDIA
+   ========================================================================== */
+
+/**
+ * Place any image- and text-like content side-by-side, as per:
+ * http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code
+ */
+
+.o-media {
+  @include clearfix();
+
+  display: block;
+}
+
+.o-media__img {
+  float: left;
+  margin-right: 1rem;
+
+  > img {
+    display: block;
+  }
+}
+
+.o-media__body {
+  display: block;
+  overflow: hidden;
+
+  &,
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Reversed media objects
+   ========================================================================== */
+
+.o-media--reverse {
+  > .o-media__img {
+    float: right;
+    margin-left: 1rem;
+    margin-right: 0;
+  }
+}
+
+/* Gutterless media objects
+   ========================================================================== */
+
+.o-media--flush {
+  > .o-media__img {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

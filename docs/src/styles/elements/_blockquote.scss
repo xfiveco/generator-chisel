@@ -1,0 +1,20 @@
+/* ==========================================================================
+   #BLOCKQUOTES
+   ========================================================================== */
+
+blockquote {
+  quotes: '“' '”' '‘' '’';
+  font-style: italic;
+
+  p:first-child {
+    &::before {
+      content: open-quote;
+    }
+  }
+
+  p:last-child {
+    &::after {
+      content: close-quote;
+    }
+  }
+}

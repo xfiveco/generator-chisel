@@ -1,0 +1,18 @@
+{% if loop.first == false %}
+<div class="c-sep c-sep--small"></div>
+{% endif %}
+<div class="c-block c-block--{{ block_item.layout }} u-sp-bottom u-sp-top u-sp--xlarge">
+  <div class="c-block__content">
+    <span class="c-block__letter">{{ letters[loop.index0] }}</span>
+    <h2 class="c-title">{{ block_item.title }}</h2>
+    <p class="c-block__excerpt">{{ block_item.excerpt }}</p>
+    <div class="c-post">
+      <div class="c-post__entry">
+        {{ block_item.description }}
+      </div>
+    </div>
+  </div>
+  <div class="c-block__image">
+    <img src="{{ block_item.image }}" alt="">
+  </div>
+</div>

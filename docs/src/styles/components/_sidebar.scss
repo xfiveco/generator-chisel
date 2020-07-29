@@ -1,0 +1,31 @@
+.c-sidebar {
+  ul {
+    margin: 0;
+    font-size: rem(20);
+    line-height: 1.5;
+    list-style: none;
+  }
+
+  li {
+    margin-bottom: 0.75em;
+
+    ul {
+      margin: 0.75em 0 0 1em;
+    }
+  }
+
+  a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* stylelint-disable */
+  .current_page_item > a {
+    color: $color-text-lighter;
+  }
+  /* stylelint-enable */
+}
+
+.c-sidebar__title {
+  display: inline-block;
+}

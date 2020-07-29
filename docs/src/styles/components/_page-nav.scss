@@ -1,0 +1,20 @@
+.c-page-nav {
+  @include clearfix();
+
+  font-size: rem(22);
+  font-weight: bold;
+  margin: 2rem 0;
+  list-style: none;
+
+  @include bp-xlarge {
+    margin: 2rem 0 0 0;
+  }
+}
+
+.c-page-nav__item--prev {
+  float: left;
+}
+
+.c-page-nav__item--next {
+  float: right;
+}

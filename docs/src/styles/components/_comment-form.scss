@@ -1,0 +1,21 @@
+/* ==========================================================================
+   #COMMENT FORM
+   Here we are using default HTML structure and classes,
+   to create custom ones use comment_form_defaults filter
+   ========================================================================== */
+
+.c-comment-form {
+  margin-top: 2em;
+
+  label {
+    display: block;
+  }
+
+  textarea {
+    max-width: 100%;
+  }
+}
+
+.comment-reply-title {
+  margin-bottom: 0.25em;
+}

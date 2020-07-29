@@ -1,0 +1,27 @@
+/* ==========================================================================
+   #HEADER
+   ========================================================================== */
+
+.c-header {
+  line-height: 1;
+  text-align: center;
+}
+
+.c-header__title {
+  color: $color-text-emp;
+  display: block;
+  font-size: rem(48);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+.c-header__description {
+  display: block;
+  font-size: rem(30);
+  font-weight: 600;
+  margin-top: 1em;
+}
