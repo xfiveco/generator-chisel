@@ -29,7 +29,9 @@ function setParentForChildren(posts) {
 function setChildren(map) {
   const keysWithoutSelf = Object.keys(mapExcept(map, map['']));
   if (map['']) {
-    map['']._setChildren(keysWithoutSelf.map((key) => map[key]['']));
+    map['']._setChildren(
+      keysWithoutSelf.map((key) => map[key]['']).filter(Boolean),
+    );
   }
   keysWithoutSelf.forEach((key) => setChildren(map[key]));
 }
