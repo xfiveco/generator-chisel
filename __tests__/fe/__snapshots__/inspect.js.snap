@@ -269,7 +269,8 @@ Array [
       [31m'./src/styles/main.scss'[39m
     ]
   },
-  [36mnode[39m: [34mfalse[39m
+  [36mnode[39m: [34mfalse[39m,
+  [36mexternals[39m: []
 }",
   ],
 ]
