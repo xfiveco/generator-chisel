@@ -10,7 +10,6 @@ module.exports = ({ options, getPostsCreator }) =>
     constructor(post) {
       this._id = post.id;
       this._type = post.type;
-      this._title = post.title || '';
       this._data = post.data || {};
       this._contentRaw = post.contentRaw || '';
       this._content = '';
@@ -33,7 +32,7 @@ module.exports = ({ options, getPostsCreator }) =>
     }
 
     title() {
-      return this._title;
+      return this._data.title || '';
     }
 
     parent() {
@@ -129,8 +128,7 @@ module.exports = ({ options, getPostsCreator }) =>
 
       if (this._type === 'md') {
         const parsedContent = hexoFrontMatter.parse(content);
-        this._title = parsedContent.title || '';
-        const data = omit(parsedContent, ['title', '_content']);
+        const data = omit(parsedContent, ['_content']);
         Object.entries(data).forEach(([key, item]) => {
           // revert https://github.com/hexojs/hexo-front-matter/blob/ccbdff36d151a56932418cdc6d0329d866032a1b/lib/front_matter.js#L59
           if (item instanceof Date) {
@@ -144,8 +142,7 @@ module.exports = ({ options, getPostsCreator }) =>
         this._content = marked(parsedContent._content) || '';
       } else if (this._type === 'json') {
         const parsedContent = JSON.parse(content);
-        this._title = parsedContent.title || '';
-        this._data = omit(parsedContent, ['title']);
+        this._data = parsedContent;
       }
     }
 
