@@ -19,7 +19,37 @@ module.exports = (api, options) => {
         webpackConfig.optimization.minimize(false);
       }
     } else {
-      webpackConfig.mode('development').devtool('cheap-module-eval-source-map');
+      // webpackConfig.mode('development').devtool('cheap-module-eval-source-map');
+      webpackConfig.mode('development').devtool(false);
+
+      // Use separate source maps for styles due to
+      // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/529
+
+      const devToolShared = {
+        module: true,
+        columns: false,
+        noSources: false,
+      };
+
+      // * is mini-css-extract-plugin
+
+      webpackConfig
+        .plugin('devtool-default')
+        .use(require('webpack/lib/EvalSourceMapDevToolPlugin'), [
+          {
+            ...devToolShared,
+            test: /(?!(?:^\*|\.s?css)$)/,
+          },
+        ]);
+
+      webpackConfig
+        .plugin('devtool-styles')
+        .use(require('webpack/lib/SourceMapDevToolPlugin'), [
+          {
+            ...devToolShared,
+            test: /(?=(?:^\*|\.s?css)$)/,
+          },
+        ]);
     }
 
     const baseDir = api.resolve(options.source.base);
