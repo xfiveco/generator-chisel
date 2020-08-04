@@ -2,6 +2,15 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.10 (2020-08-04)
+
+- Add frontend generator and commands tests ([c32fa26](https://github.com/xfiveco/generator-chisel/commit/c32fa26))
+- Change minimum node version per earlier tests with travis ([b809708](https://github.com/xfiveco/generator-chisel/commit/b809708))
+- Improve config template ([a4cff31](https://github.com/xfiveco/generator-chisel/commit/a4cff31))
+- Improve default ignore files ([44ce712](https://github.com/xfiveco/generator-chisel/commit/44ce712))
+- Publish ([6a85f99](https://github.com/xfiveco/generator-chisel/commit/6a85f99))
+- Publish ([f770d3c](https://github.com/xfiveco/generator-chisel/commit/f770d3c))
+
 ## 1.0.0-alpha.9 (2020-07-21)
 
 - Ignore dist in generated projects ([f9c76a0](https://github.com/xfiveco/generator-chisel/commit/f9c76a0))

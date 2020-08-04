@@ -1,6 +1,6 @@
 {
   "name": "chisel-scripts",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "TODO",
   "bin": {
     "chisel-scripts": "bin/chisel-scripts.js"
