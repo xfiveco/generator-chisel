@@ -5,7 +5,7 @@ Array [
   Array [
     "{
   [36mmode[39m: [31m'development'[39m,
-  [36mdevtool[39m: [31m'cheap-module-eval-source-map'[39m,
+  [36mdevtool[39m: [34mfalse[39m,
   [36mcontext[39m: [31m--PROJECT-PATH--'[39m,
   [36moutput[39m: {
     [36mpath[39m: [31m--PROJECT-PATH--/dist'[39m,
@@ -71,7 +71,8 @@ Array [
       {
         [36mtest[39m: [31m//.m?jsx?$/[39m,
         [36mexclude[39m: [
-          [31m/node_modules/[39m
+          [33m[34mfunction[39m[33m () [39m{ [32m/* omitted long function */[39m },
+          [31m--PROJECT-PATH--/src/assets'[39m
         ],
         [36muse[39m: [
           [32m/* config.module.rule('js').use('babel-loader') */[39m
@@ -215,6 +216,24 @@ Array [
     ]
   },
   [36mplugins[39m: [
+    [32m/* config.plugin('devtool-default') */[39m
+    [34mnew[39m EvalSourceMapDevToolPlugin(
+      {
+        [36mmodule[39m: [34mtrue[39m,
+        [36mcolumns[39m: [34mfalse[39m,
+        [36mnoSources[39m: [34mfalse[39m,
+        [36mtest[39m: [31m/(?!(?:^/*|/.s?css)$)/[39m
+      }
+    ),
+    [32m/* config.plugin('devtool-styles') */[39m
+    [34mnew[39m SourceMapDevToolPlugin(
+      {
+        [36mmodule[39m: [34mtrue[39m,
+        [36mcolumns[39m: [34mfalse[39m,
+        [36mnoSources[39m: [34mfalse[39m,
+        [36mtest[39m: [31m/(?=(?:^/*|/.s?css)$)/[39m
+      }
+    ),
     [32m/* config.plugin('case-sensitive-paths') */[39m
     [34mnew[39m CaseSensitivePathsPlugin(),
     [32m/* config.plugin('chisel-dynamic-public-path') */[39m
