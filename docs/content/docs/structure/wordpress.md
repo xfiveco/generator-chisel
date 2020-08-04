@@ -18,12 +18,29 @@ order: 800
 
 ### Moving `src` folder to the theme folder
 
-TODO: review, updates to ignore files
-
 It's possible to have the `src` folder in your theme folder, follow these steps:
 
 1. Move the `src` folder to the theme folder - `wp/wp-content/themes/your-theme-chisel`.
 1. In `chisel.config.js` set `source.base` to `wp/wp-content/themes/your-theme-chisel/src`, see [Configuration](/docs/development/configuration) for more details.
+1. You need to update ignore files (`.eslintignore`, `.prettierignore`, `.stylelintignore`). First remove slash from `/src/assets` so it works with assets in the theme, then to not ignore new `src` directory we need to recursively exclude our directory. In those files replace
+
+   ```text
+   /wp
+
+   ```
+
+   with
+
+   ```text
+   /wp/*
+   !/wp/wp-content
+   /wp/wp-content/*
+   !/wp/wp-content/themes/
+   /wp/wp-content/themes/*
+   !/wp/wp-content/themes/[your-theme]-chisel
+   /wp/wp-content/themes/[your-theme]-chisel/*
+   !/wp/wp-content/themes/[your-theme]-chisel/src
+   ```
 
 ## `wp`
 

@@ -48,6 +48,12 @@ Before enabling you should:
 
 List of Chisel plugins to be loaded. This is array that may contain strings that are passed to `require()` so module names or paths to JS files (please use `require.resolve` to ensure path is properly resolved) or functions that are treated as plugins.
 
+### `transpileDependencies`
+
+`Array<string | RegExp> = []`
+
+By default `babel-loader` ignores all files inside `node_modules`. If you want to explicitly transpile a dependency with Babel, you can list it in this option.
+
 ### `configureWebpack`
 
 `object | function`
