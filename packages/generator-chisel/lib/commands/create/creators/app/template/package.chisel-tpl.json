@@ -30,7 +30,7 @@
   "dependencies": {
   },
   "engines": {
-    "node": "^10.13.0  || ^12"
+    "node": "^10.14.2  || ^12"
   },
   "husky": {
     "hooks": {
