@@ -202,7 +202,14 @@ module.exports = class Service {
     let config = chainableConfig.toConfig();
     const original = config;
 
-    config.node = false;
+    if (typeof config.node === 'undefined') {
+      config.node = false;
+    }
+
+    if (!Array.isArray(config.externals)) {
+      config.externals =
+        typeof config.externals === 'undefined' ? [] : [config.externals];
+    }
 
     // apply raw config fns
     this.webpackRawConfigFns.forEach((fn) => {

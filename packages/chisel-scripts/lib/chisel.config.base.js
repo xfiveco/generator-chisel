@@ -16,10 +16,14 @@ module.exports = {
     assets: 'assets',
   },
 
+  wp: {
+    directoryName: 'wp',
+  },
+
   staticFrontend: {
     serveDist: false,
     skipHtmlExtension: false,
-    buildFormat: 'prettify', // pretty, minify, as-is/undefined
+    buildFormat: 'prettify', // prettify, minify, as-is/undefined
     htmlHint: true,
   },
 

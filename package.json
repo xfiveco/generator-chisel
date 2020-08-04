@@ -12,6 +12,7 @@
     "prepare-links": "node scripts/prepare-links.js",
     "lerna-version": "lerna version --no-private",
     "lerna-publish": "lerna publish from-git --pre-dist-tag next",
+    "test-local": "jest -w 1",
     "test": "jest"
   },
   "jest": {
