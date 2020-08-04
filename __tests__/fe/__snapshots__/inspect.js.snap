@@ -153,10 +153,13 @@ Array [
                 [36mincludePaths[39m: [
                   [31m--PROJECT-PATH--/node_modules'[39m
                 ],
-                [36moutputStyle[39m: [31m'expanded'[39m,
-                [36mimporter[39m: [33m[34mfunction[39m[33m () [39m{ [32m/* omitted long function */[39m }
+                [36moutputStyle[39m: [31m'expanded'[39m
               }
             }
+          },
+          [32m/* config.module.rule('scss').use('sass-glob-loader') */[39m
+          {
+            [36mloader[39m: [31m--PROJECTS-PATH--/packages/chisel-scripts/lib/webpack-loaders/sass-glob-loader.js'[39m
           }
         ]
       },

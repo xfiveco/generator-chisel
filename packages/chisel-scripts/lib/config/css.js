@@ -1,6 +1,5 @@
 module.exports = (api, options) => {
   api.chainWebpack((webpackConfig) => {
-    const globby = require('globby');
     const path = require('path');
 
     const isProd = process.env.NODE_ENV === 'production';
@@ -11,21 +10,7 @@ module.exports = (api, options) => {
       sassOptions: {
         indentedSyntax: false,
         includePaths: [api.resolve('node_modules')], // TODO: don't use?
-        outputStyle: 'expanded', //  TODO: test postcss and add minifier
-        importer(url, prev, done) {
-          (async () => {
-            if (globby.hasMagic(url)) {
-              const files = (
-                await globby(url, { cwd: path.dirname(prev) })
-              ).sort();
-              done({
-                contents: files.map((file) => `@import '${file}';`).join('\n'),
-              });
-            } else {
-              done(null);
-            }
-          })();
-        },
+        outputStyle: 'expanded',
       },
     };
 
@@ -49,6 +34,9 @@ module.exports = (api, options) => {
     const assetsDir = api.resolve(
       path.join(options.source.base, options.source.assets),
     );
+
+    // Note: thread loader cannot be used right now
+    // https://github.com/webpack-contrib/thread-loader/issues/79
 
     const createCssLoader = (rule, test) => {
       // prettier-ignore
@@ -78,6 +66,9 @@ module.exports = (api, options) => {
         .loader(require.resolve('sass-loader'))
         .options(sassLoaderOptions)
         .end()
+      .use('sass-glob-loader')
+        .loader(require.resolve('../webpack-loaders/sass-glob-loader.js'))
+        .end();
 
     webpackConfig
       .plugin('extract-css')
