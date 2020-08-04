@@ -72,7 +72,7 @@ exports[`Generator Static Generate and build FE Project 2`] = `
 "/* eslint-disable no-param-reassign */
 
 const creatorData = {
-  chiselVersion: '1.0.0-alpha.9',
+  chiselVersion: '--VERSION--',
   app: {
     name: 'FrontEnd',
     author: 'Xfive Tester',
@@ -170,7 +170,7 @@ exports[`Generator Static Generates all expected files and config 2`] = `
 "/* eslint-disable no-param-reassign */
 
 const creatorData = {
-  chiselVersion: \\"1.0.0-alpha.9\\",
+  chiselVersion: \\"--VERSION--\\",
   app: {
     name: \\"FrontEnd\\",
     author: \\"Xfive Tester\\",
@@ -267,7 +267,7 @@ exports[`Generator Static Generates all expected files and config with serveDist
 "/* eslint-disable no-param-reassign */
 
 const creatorData = {
-  chiselVersion: \\"1.0.0-alpha.9\\",
+  chiselVersion: \\"--VERSION--\\",
   app: {
     name: \\"FrontEnd\\",
     author: \\"Xfive Tester\\",
@@ -365,7 +365,7 @@ exports[`Generator Static Generates all expected files and config with skipHtmlE
 "/* eslint-disable no-param-reassign */
 
 const creatorData = {
-  chiselVersion: \\"1.0.0-alpha.9\\",
+  chiselVersion: \\"--VERSION--\\",
   app: {
     name: \\"FrontEnd\\",
     author: \\"Xfive Tester\\",
