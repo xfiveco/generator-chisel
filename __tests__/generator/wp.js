@@ -20,6 +20,13 @@ const defaultAnswers = [
     },
   },
   { wpPlugins: { plugins: [] } },
+  {
+    databaseHost: '127.0.0.1',
+    databasePort: '3306',
+    databaseName: `chisel-test-wp-dbrand${Date.now()}`,
+    databaseUser: 'root',
+    databasePassword: '',
+  },
 ];
 
 describe('Generator WordPress', () => {
@@ -56,36 +63,28 @@ describe('Generator WordPress', () => {
       defaultAnswers,
     );
 
-    const files = await globby(['./', '!node_modules'], { dot: true });
+    await global.chiselTestHelpers.expectFilesToMatchSnapshot(
+      ['./', '!node_modules', '!yarn.lock'],
+      ['wp/wp-admin/', 'wp/wp-includes/'],
+    );
+  });
 
-    const wpAdminCount = files.filter((file) => file.startsWith('wp/wp-admin/'))
-      .length;
-    const wpIncludesCount = files.filter((file) =>
-      file.startsWith('wp/wp-includes/'),
-    ).length;
-    const wpPluginsCount = files.filter((file) =>
-      file.startsWith('wp/wp-content/plugins/'),
-    ).length;
+  test('Generates all expected files, downloads, configures and installs WP', async () => {
+    await jest.resetModules();
+    await global.chiselTestHelpers.generateProjectWithAnswers(
+      ['create'],
+      defaultAnswers,
+      { interceptWpConfig: true, mockRandomBytes: true },
+    );
 
-    const count = (n) => (n > 100 ? '100+ files' : n);
+    await global.chiselTestHelpers.expectFilesToMatchSnapshot(
+      ['./', '!node_modules', '!yarn.lock'],
+      ['wp/wp-admin/', 'wp/wp-includes/', 'wp/wp-content/plugins/'],
+    );
 
-    const filesFiltered = [
-      ...files.filter(
-        (file) =>
-          !(
-            file.startsWith('wp/wp-admin/') ||
-            file.startsWith('wp/wp-includes/') ||
-            file.startsWith('wp/wp-content/plugins/') ||
-            file === 'yarn.lock'
-          ),
-      ),
-      `wp/wp-admin/${count(wpAdminCount)}`,
-      `wp/wp-includes/${count(wpIncludesCount)}`,
-      `wp/wp-content/plugins/${count(wpPluginsCount)}`,
-    ].sort();
-
-    // console.log(files);
-
-    expect(filesFiltered).toMatchSnapshot();
+    await global.chiselTestHelpers.fileMatchesSnapshot('./dev-vhost.conf');
+    await global.chiselTestHelpers.fileMatchesSnapshot(
+      './wp/wp-config-local.php',
+    );
   });
 });

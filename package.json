@@ -50,6 +50,7 @@
     "lerna": "^3.22.0",
     "lerna-changelog": "^1.0.1",
     "prettier": "^2.0.5",
+    "random-js": "^2.1.0",
     "stream-to-promise": "^3.0.0"
   }
 }

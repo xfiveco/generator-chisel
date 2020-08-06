@@ -34,25 +34,71 @@ global.chiselTestHelpers = {
     };
   },
 
-  async generateProjectWithAnswers(params, answers) {
-    const chisel = require('../packages/generator-chisel/bin/chisel');
+  async generateProjectWithAnswers(
+    params,
+    answers,
+    { interceptWpConfig = false, mockRandomBytes = false } = {},
+  ) {
     const binPath = path.resolve(
       __dirname,
       '../packages/generator-chisel/bin/chisel',
     );
 
-    let unmockAnswers;
+    let unMockAnswers;
     if (answers) {
-      unmockAnswers = global.chiselTestHelpers.mockPromptAnswers((data) =>
+      unMockAnswers = global.chiselTestHelpers.mockPromptAnswers((data) =>
         answers.map((ans) => () => merge({}, data, ans)),
       );
     }
 
+    let unMockRun;
+    if (interceptWpConfig) {
+      const sharedUtils = require('chisel-shared-utils');
+      const original = sharedUtils.run;
+
+      const { isEqual } = require('lodash');
+      sharedUtils.runLocal = jest.fn((...args) => {
+        if (isEqual(args[0], ['chisel-scripts', 'wp-config'])) {
+          return global.chiselTestHelpers.runChiselScript(['wp-config']);
+        }
+
+        return original(...args);
+      });
+
+      unMockRun = () => {
+        sharedUtils.runLocal = original;
+      };
+    }
+
+    let unMockRandomBytes;
+    if (mockRandomBytes) {
+      const crypto = require('crypto');
+      const original = crypto.randomBytes;
+
+      let randomCallNumber = 0;
+
+      crypto.randomBytes = jest.fn((bytes) => {
+        randomCallNumber += 1;
+        const { MersenneTwister19937 } = require('random-js');
+        const mt = MersenneTwister19937.seedWithArray([
+          20200807,
+          randomCallNumber,
+        ]);
+
+        return Buffer.from([...Array(bytes)].map(() => mt.next() % 256));
+      });
+
+      unMockRandomBytes = () => {
+        crypto.randomBytes = original;
+      };
+    }
+
+    const chisel = require('../packages/generator-chisel/bin/chisel');
     await chisel([process.argv[0], binPath, ...params]);
 
-    if (unmockAnswers) {
-      unmockAnswers();
-    }
+    if (unMockAnswers) unMockAnswers();
+    if (unMockRun) unMockRun();
+    if (unMockRandomBytes) unMockRandomBytes();
   },
 
   async runChiselScript(args) {
@@ -73,13 +119,33 @@ global.chiselTestHelpers = {
 
   async expectFilesToMatchSnapshot(
     filesPaths = ['./', '!node_modules', '!yarn.lock'],
+    groupsPrefixes = [],
   ) {
     // bug: hash of the css is depends on path of
-    const files = (await globby(filesPaths, { dot: true }))
+    let files = (await globby(filesPaths, { dot: true }))
       .sort()
       .map((val) =>
         val.replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/, '--HASH--'),
       );
+
+    const groupsPrefixesCounts = groupsPrefixes.map(
+      (prefix) => files.filter((file) => file.startsWith(prefix)).length,
+    );
+
+    files = files.filter(
+      (file) => !groupsPrefixes.some((prefix) => file.startsWith(prefix)),
+    );
+
+    groupsPrefixes.forEach((prefix, index) => {
+      const count = groupsPrefixesCounts[index];
+      if (count === 0) return;
+
+      const countStr = count > 100 ? '100+ files' : count;
+
+      files.push(`${prefix}${countStr}`);
+    });
+
+    files = files.sort();
 
     expect(files).toMatchSnapshot();
   },
@@ -106,7 +172,11 @@ global.chiselTestHelpers = {
     expect(
       fs
         .readFileSync(file, 'utf8')
-        .replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/g, '--HASH--'),
+        .replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/g, '--HASH--')
+        .replace(/dbrand\d+/g, '--DB-RAND--')
+        .split(process.cwd())
+        .join('--PROJECT-PATH--')
+        .replace(/(?<=--PROJECT-PATH--)\\/g, '/'),
     ).toMatchSnapshot();
   },
 };

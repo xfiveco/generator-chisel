@@ -11,8 +11,8 @@ cache:
 #     packages:
 #       - php7.2-cli
 #       - php7.2-mysql
-# services:
-#   - mysql
+services:
+  - mysql
 
 before_script:
   - yarn prepare-links
