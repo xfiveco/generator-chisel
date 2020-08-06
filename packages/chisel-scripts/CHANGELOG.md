@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.6 (2020-08-06)
+
+- Update CSS bundling: use custom loader instead of importer, make fibers optional ([829dc26](https://github.com/xfiveco/generator-chisel/commit/829dc26))
+
 ## 1.0.0-alpha.5 (2020-08-04)
 
 - Add frontend generator and commands tests ([c32fa26](https://github.com/xfiveco/generator-chisel/commit/c32fa26))
