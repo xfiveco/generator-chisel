@@ -17,3 +17,7 @@ cache:
 before_script:
   - yarn prepare-links
   - cd packages/chisel-plugin-wordpress; yarn prepare; cd -;
+
+after_script:
+  - npm install -g codecov
+  - codecov

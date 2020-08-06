@@ -12,7 +12,7 @@
     "lerna-version": "lerna version --no-private",
     "lerna-publish": "lerna publish from-git --pre-dist-tag next",
     "test-local": "jest -w 1",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "jest": {
     "testEnvironment": "node",
