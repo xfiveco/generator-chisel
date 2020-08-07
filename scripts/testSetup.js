@@ -114,7 +114,7 @@ global.chiselTestHelpers = {
       }
     }
 
-    await require('chisel-scripts/bin/chisel-scripts')(args);
+    return require('chisel-scripts/bin/chisel-scripts')(args);
   },
 
   async expectFilesToMatchSnapshot(
@@ -178,5 +178,107 @@ global.chiselTestHelpers = {
         .join('--PROJECT-PATH--')
         .replace(/(?<=--PROJECT-PATH--)\\/g, '/'),
     ).toMatchSnapshot();
+  },
+
+  setupPhpServer() {
+    const execa = require('execa');
+
+    global.phpServer = {
+      async start(port = 8080, dir = '.') {
+        if (global.phpServerProcess) {
+          await global.phpServer.stop();
+        }
+
+        global.phpServerProcess = execa(
+          'php',
+          ['-S', `127.0.0.1:${port}`, '-t', dir],
+          {
+            execaOpts: { stdio: 'inherit' },
+          },
+        );
+      },
+
+      async stop() {
+        const proc = global.phpServerProcess;
+        if (proc) {
+          global.phpServerProcess = undefined;
+          proc.kill('SIGTERM', {
+            forceKillAfterTimeout: 2000,
+          });
+
+          return proc.catch(() => {});
+        }
+
+        throw new Error('Process is already stopped');
+      },
+    };
+
+    afterEach(async () => {
+      if (global.phpServerProcess) {
+        // global.phpServerProcess.
+        await global.phpServer.stop();
+        global.phpServerProcess = undefined;
+      }
+    });
+  },
+
+  browserSync: {
+    monitor(page) {
+      let previousMessage = '';
+      let isWaitingForClose = false;
+
+      function wait() {
+        page
+          .waitForSelector('#__bs_notify__')
+          .then(() => {
+            wait();
+            if (!isWaitingForClose) {
+              isWaitingForClose = true;
+              page
+                .waitForSelector('#__bs_notify__', { hidden: true })
+                .then(() => {
+                  previousMessage = '';
+                  isWaitingForClose = false;
+                })
+                .catch(() => {});
+            }
+            return page.$('#__bs_notify__');
+          })
+          .then((el) => el.getProperty('textContent'))
+          .then((val) => val.jsonValue())
+          .then((str) => {
+            if (previousMessage === str) {
+              return;
+            }
+            console.log({ bsMessgae: str });
+            previousMessage = str;
+            process.nextTick(() => page.emit('bsNotify', str));
+            if (str === 'Browsersync: connected') {
+              process.nextTick(() => page.emit('bsConnected'));
+            }
+          })
+          .catch(() => {});
+      }
+      wait();
+
+      page.on('framenavigated', () => {
+        console.log('chiselNavigated');
+        process.nextTick(() => page.emit('chiselNavigated'));
+      });
+    },
+  },
+
+  oncePromise(resource, ev) {
+    return new Promise((resolve) => {
+      resource.once(ev, (...args) => {
+        if (args.length === 0) {
+          resolve();
+        } else if (args.length === 1) {
+          resolve(args[0]);
+        } else {
+          resolve(args);
+        }
+      });
+    });
   },
 };
