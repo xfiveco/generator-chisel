@@ -14,7 +14,7 @@ afterEach(async () => {
   const currentPwd = process.cwd();
   process.chdir(initialDir);
   if (currentPwd.includes('.jest-projects')) {
-    console.log('REMOVE SYNC', new Date().toISOString());
+    // console.log('REMOVE SYNC', new Date().toISOString());
     // await fs.remove(currentPwd);
     await fs.remove(currentPwd);
   }

@@ -4,35 +4,7 @@
 /* global page */
 
 const fs = require('fs-extra');
-
-const defaultAnswers = [
-  null,
-  {
-    app: {
-      name: 'Chisel Test WP',
-      author: 'Xfive Tester',
-      projectType: 'wp-with-fe',
-      browsers: ['modern'],
-    },
-  },
-  {
-    wp: {
-      title: 'Chisel Test',
-      url: 'http://localhost:8080/',
-      adminUser: 'admin',
-      adminPassword: 'a',
-      adminEmail: 'jakub.bogucki+chisel-test@xfive.co',
-    },
-  },
-  { wpPlugins: { plugins: [] } },
-  {
-    databaseHost: '127.0.0.1',
-    databasePort: '3306',
-    databaseName: `chisel-test-wp-dbrand${Date.now()}`,
-    databaseUser: 'root',
-    databasePassword: '',
-  },
-];
+const { answers } = require('./helpers');
 
 global.chiselTestHelpers.setupPhpServer();
 
@@ -40,15 +12,13 @@ describe.supportsPuppeteer('WP dev', () => {
   test('Starts dev server and reloads on changes', async () => {
     await global.chiselTestHelpers.generateProjectWithAnswers(
       ['create'],
-      defaultAnswers,
+      answers(),
       { interceptWpConfig: true, mockRandomBytes: true },
     );
 
     global.phpServer.start(8080, 'wp');
 
     const stop = await global.chiselTestHelpers.runChiselScript(['dev']);
-
-    console.log('GOTO');
 
     await page.goto('http://localhost:3000');
     global.chiselTestHelpers.browserSync.monitor(page);
@@ -70,8 +40,6 @@ describe.supportsPuppeteer('WP dev', () => {
 
     await stop();
 
-    console.log('STOPPED', new Date().toISOString());
-
-    // TODO: better stop
+    // TODO: assets, js, (s)css, react?
   });
 });
