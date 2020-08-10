@@ -16,7 +16,7 @@ describe('FE Build', () => {
     const consoleMock = jest.spyOn(console, 'log');
     await global.chiselTestHelpers.runChiselScript(['build']);
 
-    global.chiselTestHelpers.fixHashesInConsoleMock(consoleMock);
+    global.chiselTestHelpers.normalizeConsoleMockCalls(consoleMock);
     expect(consoleMock.mock.calls).toMatchSnapshot();
     consoleMock.mockClear();
 
@@ -61,7 +61,7 @@ describe('FE Build', () => {
 
     await global.chiselTestHelpers.runChiselScript(['build']);
 
-    global.chiselTestHelpers.fixHashesInConsoleMock(consoleMock);
+    global.chiselTestHelpers.normalizeConsoleMockCalls(consoleMock);
     expect(consoleMock.mock.calls).toMatchSnapshot();
     consoleMock.mockClear();
 

@@ -150,13 +150,18 @@ global.chiselTestHelpers = {
     expect(files).toMatchSnapshot();
   },
 
-  fixHashesInConsoleMock(consoleMock) {
-    if (consoleMock.mock.calls[1] && consoleMock.mock.calls[1][0]) {
-      consoleMock.mock.calls[1][0] = consoleMock.mock.calls[1][0].replace(
-        /(?<=styles\/main\.)[a-z0-9]+(?=\.)/g,
-        '--HASH--',
-      );
+  normalizeConsoleMockCalls(consoleMock) {
+    consoleMock.mock.calls.forEach((call) => {
+      if (typeof call[0] === 'string') {
+        call[0] = call[0]
+          .replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/g, '--HASH--')
+          .split(process.cwd())
+          .join('--PROJECT-PATH--')
+          .replace(/\\+/g, '/');
+      }
+    });
 
+    if (consoleMock.mock.calls[1] && consoleMock.mock.calls[1][0]) {
       // in Ci in Node 12 there is difference in gzip compression
       // ex. https://travis-ci.org/github/xfiveco/generator-chisel/jobs/712710842
       if (parseInt(process.versions.node.split('.')[0], 10) >= '12') {
