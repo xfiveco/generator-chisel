@@ -22,6 +22,7 @@ describe('FE Content', () => {
     fs.outputFileSync(
       './content/class-name.twig',
       `
+        <!DOCTYPE html>
         <ul>
           <li>{{ className({}) }}</li>
           <li>{{ className('') }}</li>
@@ -34,6 +35,7 @@ describe('FE Content', () => {
     fs.outputFileSync(
       './content/get-posts.twig',
       /* HTML */ `
+        <!DOCTYPE html>
         {% set posts = getPosts({ parent: { '$exists': false } }) %}
         <ul>
           {% for p in posts %}

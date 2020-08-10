@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FE Content Twig functions work 1`] = `
-"<ul>
+"<!DOCTYPE html>
+<ul>
   <li></li>
   <li></li>
   <li>c-hello</li>
@@ -10,7 +11,8 @@ exports[`FE Content Twig functions work 1`] = `
 `;
 
 exports[`FE Content Twig functions work 2`] = `
-"<ul>
+"<!DOCTYPE html>
+<ul>
   <li> class-name - 0 <br /> ( - get-posts) </li>
   <li> get-posts - 0 <br /> (class-name - json-page) </li>
   <li> json-page - 0 <br /> (get-posts - nested) </li>

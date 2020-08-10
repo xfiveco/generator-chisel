@@ -14,12 +14,16 @@ class HtmlHintPlugin {
 
     compiler.hooks.compilation.tap('HtmlHintPlugin', (compilation) => {
       const { htmlHintConfig, distPath } = this.options;
+      const normalizedConfig = {
+        ...HTMLHint.defaultRuleset,
+        ...htmlHintConfig,
+      };
 
       HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tap(
         'HtmlHintPlugin',
         (data) => {
           const { outputName, html } = data;
-          const messages = HTMLHint.verify(html, htmlHintConfig);
+          const messages = HTMLHint.verify(html, normalizedConfig);
 
           const cached = problemsCache[outputName];
 

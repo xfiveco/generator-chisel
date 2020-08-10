@@ -1,6 +1,7 @@
 const { defaultAnswers } = require('../helpers');
 
 const postPageSimple = (extra = '') => `
+<!DOCTYPE html>
 <h1>Hello {{ post.title }}</h1>
 <div>{{ post.content }}</div>
 ${extra}
