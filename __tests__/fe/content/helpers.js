@@ -16,6 +16,9 @@ ${extra}
 ${content}
 `.substr(1);
 
+const json = (obj) => JSON.stringify(obj);
+
 module.exports.defaultAnswers = defaultAnswers;
 module.exports.postPageSimple = postPageSimple;
 module.exports.md = md;
+module.exports.json = json;
