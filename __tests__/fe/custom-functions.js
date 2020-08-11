@@ -23,7 +23,7 @@ describe('FE Custom Functions', () => {
     fs.outputFileSync(
       './chisel.config.js',
       fs.readFileSync('./chisel.config.js', 'utf8').replace(
-        /};\n$/,
+        /(?=};\n$)/,
         `
           staticFrontend: {
             functions: {
@@ -41,8 +41,7 @@ describe('FE Custom Functions', () => {
               },
             },
           },
-
-          };\n`,
+        `,
       ),
     );
 
