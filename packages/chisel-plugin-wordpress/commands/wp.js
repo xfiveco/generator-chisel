@@ -1,7 +1,11 @@
 module.exports = (api) => {
   api.registerCommand(
     'wp',
-    (command) => command.description('run WP-CLI command').allowUnknownOption(),
+    (command) =>
+      command
+        .description('run WP-CLI command')
+        .allowUnknownOption()
+        .helpOption('--chisel-help'),
     async () => {
       const execa = require('execa');
       const path = require('path');
