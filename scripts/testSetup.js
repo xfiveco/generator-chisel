@@ -201,9 +201,7 @@ global.chiselTestHelpers = {
         global.phpServerProcess = execa(
           'php',
           ['-S', `127.0.0.1:${port}`, '-t', dir],
-          {
-            execaOpts: { stdio: 'inherit' },
-          },
+          { stdio: 'inherit' },
         );
       },
 
@@ -235,12 +233,16 @@ global.chiselTestHelpers = {
     monitor(page) {
       let previousMessage = '';
       let isWaitingForClose = false;
+      let stopWaiting = false;
 
       function wait() {
         page
           .waitForSelector('#__bs_notify__')
-          .then(() => {
+          .finally(() => {
+            if (stopWaiting) return;
             wait();
+          })
+          .then(() => {
             if (!isWaitingForClose) {
               isWaitingForClose = true;
               page
@@ -273,6 +275,10 @@ global.chiselTestHelpers = {
       page.on('framenavigated', () => {
         console.log('chiselNavigated');
         process.nextTick(() => page.emit('chiselNavigated'));
+      });
+
+      page.on('close', () => {
+        stopWaiting = true;
       });
     },
   },

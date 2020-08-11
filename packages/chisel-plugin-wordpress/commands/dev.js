@@ -117,8 +117,11 @@ module.exports = (api, options) => {
         },
       );
 
-      watcher.on('ready', () => {
-        watchReady = true;
+      await new Promise((resolve) => {
+        watcher.on('ready', () => {
+          watchReady = true;
+          resolve();
+        });
       });
 
       return () => {
