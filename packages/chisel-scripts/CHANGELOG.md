@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.7 (2020-09-21)
+
+- Add WP dev server test with puppeteer ([dbc0f1d](https://github.com/xfiveco/generator-chisel/commit/dbc0f1d))
+
 ## 1.0.0-alpha.6 (2020-08-06)
 
 - Update CSS bundling: use custom loader instead of importer, make fibers optional ([829dc26](https://github.com/xfiveco/generator-chisel/commit/829dc26))

@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.11 (2020-09-21)
+
+- Change gitignore file name to ensure they're include in npm package ([f09752e](https://github.com/xfiveco/generator-chisel/commit/f09752e))
+- Publish ([f804f33](https://github.com/xfiveco/generator-chisel/commit/f804f33))
+
 ## 1.0.0-alpha.10 (2020-08-04)
 
 - Add frontend generator and commands tests ([c32fa26](https://github.com/xfiveco/generator-chisel/commit/c32fa26))

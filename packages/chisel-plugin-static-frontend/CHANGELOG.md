@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.4 (2020-09-21)
+
+- Update HTMLHint: add default config and add HTMLHtnt tests ([cf3db2c](https://github.com/xfiveco/generator-chisel/commit/cf3db2c))
+- Update Post: fix links with extension on nested pages ([e55fc29](https://github.com/xfiveco/generator-chisel/commit/e55fc29))
+
 ## 1.0.0-alpha.3 (2020-08-04)
 
 - Add frontend generator and commands tests ([c32fa26](https://github.com/xfiveco/generator-chisel/commit/c32fa26))
