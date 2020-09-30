@@ -15,13 +15,17 @@ Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package m
 Install Chisel globally. In your [command line](https://webdesign.tutsplus.com/articles/the-command-line-for-web-design-introduction--cms-23493) type:
 
 ```bash
-npm install -g generator-chisel
+yarn global add generator-chisel@next
+# or
+npm -g install generator-chisel@next
 ```
 
 If you want to update your existing Chisel installation to the latest version, also run:
 
 ```bash
-npm install -g generator-chisel
+yarn global add generator-chisel@next
+# or
+npm -g install generator-chisel@next
 ```
 
 ## Apache, PHP and MySQL
