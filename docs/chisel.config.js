@@ -1,10 +1,10 @@
 const creatorData = {
-  chiselVersion: '1.0.0-alpha.8',
+  chiselVersion: '1.0.0-alpha.11',
   app: {
     name: 'Getchisel',
     author: 'Xfive',
     projectType: 'fe',
-    browsers: ['modern', 'edge18', 'ie11'],
+    browsers: ['modern'],
     nameSlug: 'getchisel',
     hasJQuery: false,
   },
@@ -76,20 +76,4 @@ module.exports = {
   // react: true,
 
   plugins: ['chisel-plugin-code-style', 'chisel-plugin-static-frontend'],
-
-  // https://cli.vuejs.org/config/#configurewebpack
-  // configureWebpack(config) {},
-  // chainWebpack(config) {},
-
-  // Hooks can be used to change internal behavior, for example:
-  // documentation TBD :(
-  // hooks: {
-  //   wordPress: {
-  //     browserSyncConfig(config) {
-  //       // disable opening of browser window when dev server starts
-  //       // eslint-disable-next-line no-param-reassign
-  //       config.open = false;
-  //     },
-  //   },
-  // },
 };

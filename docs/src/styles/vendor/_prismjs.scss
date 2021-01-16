@@ -22,11 +22,11 @@
 
 code[class*='language-'],
 pre[class*='language-'] {
-  color: $color-text-emp;
+  // color: $color-text-emp;
   background: none;
   text-shadow: 0 1px white;
   font-family: Consolas, Menlo, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-size: rem(20);
+  // font-size: rem(20);
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -78,9 +78,9 @@ pre[class*='language-'] {
 
 :not(pre) > code[class*='language-'],
 pre[class*='language-'] {
-  box-shadow: $global-box-shadow;
-  background: $color-fill;
-  border: 1px solid $color-border-light;
+  // box-shadow: $global-box-shadow;
+  // background: $color-fill;
+  // border: 1px solid $color-border-light;
 }
 
 /* Inline code */

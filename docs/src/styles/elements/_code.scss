@@ -1,8 +1,8 @@
 :not(pre) > code {
-  background: $color-fill;
-  color: $color-text-emp;
+  // background: $color-fill;
+  // color: $color-text-emp;
   font-family: Consolas, Menlo, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-size: rem(20);
+  // font-size: rem(20);
   padding: 0.1em 0.3em;
 
   &::selection {
