@@ -1,6 +1,6 @@
 {
   "name": "chisel-plugin-static-frontend",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.4",
   "description": "TODO",
   "main": "lib/index.js",
   "repository": {

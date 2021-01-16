@@ -172,7 +172,6 @@ Array [
   "wp/wp-comments-post.php",
   "wp/wp-config-sample.php",
   "wp/wp-config.php",
-  "wp/wp-content/plugins/0",
   "wp/wp-content/themes/chisel-test-wp-chisel/.gitignore",
   "wp/wp-content/themes/chisel-test-wp-chisel/404.php",
   "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Extensions/ChiselExtension.php",
@@ -225,4 +224,204 @@ Array [
   "wp/wp-trackback.php",
   "wp/xmlrpc.php",
 ]
+`;
+
+exports[`Generator WordPress Generates all expected files, downloads, configures and installs WP 1`] = `
+Array [
+  ".browserslistrc",
+  ".editorconfig",
+  ".eslintignore",
+  ".eslintrc.js",
+  ".gitattributes",
+  ".gitignore",
+  ".prettierignore",
+  ".stylelintignore",
+  "README.md",
+  "babel.config.js",
+  "chisel.config.js",
+  "dev-vhost.conf",
+  "package.json",
+  "postcss.config.js",
+  "prettier.config.js",
+  "src/assets/fonts/.keep",
+  "src/assets/images/.keep",
+  "src/scripts/app.js",
+  "src/scripts/modules/greeting.js",
+  "src/styles/components/_btn.scss",
+  "src/styles/components/_comment-form.scss",
+  "src/styles/components/_comment.scss",
+  "src/styles/components/_footer.scss",
+  "src/styles/components/_header.scss",
+  "src/styles/components/_main-nav.scss",
+  "src/styles/components/_post.scss",
+  "src/styles/elements/_blockquote.scss",
+  "src/styles/elements/_headings.scss",
+  "src/styles/elements/_hr.scss",
+  "src/styles/elements/_html.scss",
+  "src/styles/elements/_images.scss",
+  "src/styles/elements/_links.scss",
+  "src/styles/elements/_lists.scss",
+  "src/styles/elements/_tables.scss",
+  "src/styles/generic/_box-sizing.scss",
+  "src/styles/generic/_font-face.scss",
+  "src/styles/generic/_normalize.scss",
+  "src/styles/generic/_reset.scss",
+  "src/styles/generic/_shared.scss",
+  "src/styles/main.scss",
+  "src/styles/objects/_layout.scss",
+  "src/styles/objects/_list-bare.scss",
+  "src/styles/objects/_list-inline.scss",
+  "src/styles/objects/_media.scss",
+  "src/styles/objects/_table.scss",
+  "src/styles/objects/_wrapper.scss",
+  "src/styles/settings/_global.scss",
+  "src/styles/tools/_breakpoints.scss",
+  "src/styles/tools/_clearfix.scss",
+  "src/styles/tools/_hidden.scss",
+  "src/styles/utilities/_align.scss",
+  "src/styles/utilities/_clearfix.scss",
+  "src/styles/utilities/_hide.scss",
+  "src/styles/vendor/.keep",
+  "stylelint.config.js",
+  "wp-cli.yml",
+  "wp/.gitignore",
+  "wp/.htaccess",
+  "wp/index.php",
+  "wp/license.txt",
+  "wp/readme.html",
+  "wp/wp-activate.php",
+  "wp/wp-admin/100+ files",
+  "wp/wp-blog-header.php",
+  "wp/wp-comments-post.php",
+  "wp/wp-config-local.php",
+  "wp/wp-config-sample.php",
+  "wp/wp-config.php",
+  "wp/wp-content/plugins/100+ files",
+  "wp/wp-content/themes/chisel-test-wp-chisel/.gitignore",
+  "wp/wp-content/themes/chisel-test-wp-chisel/404.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Extensions/ChiselExtension.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Extensions/ChiselTwig.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Extensions/DataType.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Extensions/Theme.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Extensions/Twig.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Helpers.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Image.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Media.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Performance.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Post.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Security.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Settings.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/Chisel/Site.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/README.md",
+  "wp/wp-content/themes/chisel-test-wp-chisel/archive.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/author.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/assets/fonts/.keep.31d6cfe0",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/assets/images/.keep.31d6cfe0",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/manifest.json",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/scripts/app.7cec40e0.full.js",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/scripts/app.7cec40e0.js",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/scripts/app.7cec40e0.js.map",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/styles/main.--HASH--.css",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/styles/main.--HASH--.css.map",
+  "wp/wp-content/themes/chisel-test-wp-chisel/dist/styles/main.--HASH--.full.css",
+  "wp/wp-content/themes/chisel-test-wp-chisel/footer.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/functions.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/header.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/index.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/page.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/screenshot.png",
+  "wp/wp-content/themes/chisel-test-wp-chisel/search.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/single.php",
+  "wp/wp-content/themes/chisel-test-wp-chisel/style.css",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/404.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/author.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/components/comment.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/components/footer.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/components/header.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/components/main-nav.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/components/tease-post.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/components/tease.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/index.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/layouts/base.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/layouts/page.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/page-plugin.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/page.twig",
+  "wp/wp-content/themes/chisel-test-wp-chisel/templates/single.twig",
+  "wp/wp-cron.php",
+  "wp/wp-includes/100+ files",
+  "wp/wp-links-opml.php",
+  "wp/wp-load.php",
+  "wp/wp-login.php",
+  "wp/wp-mail.php",
+  "wp/wp-settings.php",
+  "wp/wp-signup.php",
+  "wp/wp-trackback.php",
+  "wp/xmlrpc.php",
+]
+`;
+
+exports[`Generator WordPress Generates all expected files, downloads, configures and installs WP 2`] = `
+"<VirtualHost *:80>
+    DocumentRoot \\"--PROJECT-PATH--/wp\\"
+    ServerName chisel-test.test
+    <Directory \\"--PROJECT-PATH--/wp\\">
+      AllowOverride All
+      Require all granted
+    </Directory>
+</VirtualHost>
+"
+`;
+
+exports[`Generator WordPress Generates all expected files, downloads, configures and installs WP 3`] = `
+"<?php
+/**
+ * The base configuration for WordPress local installation
+ *
+ * This file contains the following configurations:
+ *
+ * * MySQL settings
+ * * Database table prefix
+ * * External settings when needed
+ *
+ */
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'chisel-test-wp---DB-RAND--' );
+
+/** MySQL database username */
+define( 'DB_USER', 'root' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', '' );
+
+/** MySQL hostname */
+define( 'DB_HOST', '127.0.0.1:3306' );
+
+
+/**
+ * WordPress Database Table prefix.
+ *
+ * You can have multiple installations in one database if you give each
+ * a unique prefix. Only numbers, letters, and underscores please!
+ */
+$table_prefix = 'syw5pxhj_';
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ *
+ * For information on other constants that can be used for debugging,
+ * visit the Codex.
+ *
+ * @link https://codex.wordpress.org/Debugging_in_WordPress
+ */
+define( 'WP_DEBUG', false );
+
+/** The Database Collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );
+"
 `;

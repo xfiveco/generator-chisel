@@ -2,6 +2,21 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.7 (2020-09-21)
+
+- Add WP dev server test with puppeteer ([dbc0f1d](https://github.com/xfiveco/generator-chisel/commit/dbc0f1d))
+
+## 1.0.0-alpha.6 (2020-08-06)
+
+- Update CSS bundling: use custom loader instead of importer, make fibers optional ([829dc26](https://github.com/xfiveco/generator-chisel/commit/829dc26))
+
+## 1.0.0-alpha.5 (2020-08-04)
+
+- Add frontend generator and commands tests ([c32fa26](https://github.com/xfiveco/generator-chisel/commit/c32fa26))
+- Fix source maps for styles during development ([8ba6e78](https://github.com/xfiveco/generator-chisel/commit/8ba6e78))
+- Improve base config, final config generation ([61ce1d5](https://github.com/xfiveco/generator-chisel/commit/61ce1d5))
+- Update babel loader config: support transpileDependencies, exclude assets ([c5e21bd](https://github.com/xfiveco/generator-chisel/commit/c5e21bd))
+
 ## 1.0.0-alpha.4 (2020-07-21)
 
 - Add Changelogs ([25d6245](https://github.com/xfiveco/generator-chisel/commit/25d6245))

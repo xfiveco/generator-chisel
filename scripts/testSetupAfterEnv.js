@@ -14,8 +14,13 @@ afterEach(async () => {
   const currentPwd = process.cwd();
   process.chdir(initialDir);
   if (currentPwd.includes('.jest-projects')) {
-    // console.log('REMOVE SYNC');
+    // console.log('REMOVE SYNC', new Date().toISOString());
     // await fs.remove(currentPwd);
     await fs.remove(currentPwd);
   }
 });
+
+const supportsPuppeteer = process.version !== 'v10.14.2';
+describe.supportsPuppeteer = supportsPuppeteer ? describe : describe.skip;
+test.supportsPuppeteer = supportsPuppeteer ? test : test.skip;
+it.supportsPuppeteer = supportsPuppeteer ? it : it.skip;

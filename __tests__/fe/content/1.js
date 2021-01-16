@@ -1,7 +1,5 @@
 const fs = require('fs-extra');
-const { defaultAnswers, md, postPageSimple } = require('./helpers');
-
-const json = (obj) => JSON.stringify(obj);
+const { defaultAnswers, md, json, postPageSimple } = require('./helpers');
 
 describe('FE Content', () => {
   test('Nested pages, alt templates, extra data', async () => {

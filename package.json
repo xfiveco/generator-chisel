@@ -13,16 +13,19 @@
     "lerna-version": "lerna version --no-private",
     "lerna-publish": "lerna publish from-git --pre-dist-tag next",
     "test-local": "jest -w 1",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "jest": {
     "testEnvironment": "node",
     "testTimeout": 240000,
+    "globalSetup": "<rootDir>/scripts/testGlobalSetup.js",
+    "globalTeardown": "<rootDir>/scripts/testGlobalTeardown.js",
     "setupFiles": [
       "<rootDir>/scripts/testSetup.js"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/scripts/testSetupAfterEnv.js"
+      "<rootDir>/scripts/testSetupAfterEnv.js",
+      "expect-puppeteer"
     ],
     "watchPathIgnorePatterns": [
       "<rootDir>/test-projects",
@@ -45,12 +48,20 @@
     "conventional-changelog": "^3.1.21",
     "eslint": "^7.2.0",
     "execa": "^4.0.2",
+    "expect-puppeteer": "^4.4.0",
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "jest": "^26.1.0",
+    "jest-environment-puppeteer": "^4.4.0",
     "lerna": "^3.22.0",
     "lerna-changelog": "^1.0.1",
+    "node-eval": "^2.0.0",
     "prettier": "^2.0.5",
-    "stream-to-promise": "^3.0.0"
+    "random-js": "^2.1.0",
+    "stream-to-promise": "^3.0.0",
+    "supertest": "^4.0.2"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^5.2.1"
   }
 }

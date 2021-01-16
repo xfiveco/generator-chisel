@@ -182,7 +182,17 @@ module.exports = class Service {
 
     const commanderArgs = [...(name ? [name] : []), ...args];
 
-    return this.program.parseAsync(commanderArgs, { from: 'user' });
+    await this.program.parseAsync(commanderArgs, { from: 'user' });
+    if (this.program._actionResults) {
+      const results = await Promise.all(this.program._actionResults);
+      if (results.length === 1) {
+        return results[0];
+      }
+
+      return results;
+    }
+
+    return undefined;
   }
 
   async resolveChainableWebpackConfig() {

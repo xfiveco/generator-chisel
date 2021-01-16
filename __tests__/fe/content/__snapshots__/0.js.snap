@@ -13,7 +13,8 @@ Array [
 `;
 
 exports[`FE Content Simple 2`] = `
-"<h1>Hello Hello</h1>
+"<!DOCTYPE html>
+<h1>Hello Hello</h1>
 <div>
   <p>Some Content</p>
 </div>"

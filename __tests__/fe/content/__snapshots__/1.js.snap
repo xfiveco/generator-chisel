@@ -17,28 +17,33 @@ Array [
 `;
 
 exports[`FE Content Nested pages, alt templates, extra data 2`] = `
-"<h1>Hello Hello Page</h1>
+"<!DOCTYPE html>
+<h1>Hello Hello Page</h1>
 <div></div>"
 `;
 
 exports[`FE Content Nested pages, alt templates, extra data 3`] = `
-"<h1>Hello Hello More</h1>
+"<!DOCTYPE html>
+<h1>Hello Hello More</h1>
 <div></div> Written on 2020-04-27T12:30:12.000Z by Jakub in ."
 `;
 
 exports[`FE Content Nested pages, alt templates, extra data 4`] = `
-"<h1>Hello Hello Alt</h1>
+"<!DOCTYPE html>
+<h1>Hello Hello Alt</h1>
 <div>
   <p>This author writes things</p>
 </div> Alternative template with post by Lubos"
 `;
 
 exports[`FE Content Nested pages, alt templates, extra data 5`] = `
-"<h1>Hello </h1>
+"<!DOCTYPE html>
+<h1>Hello </h1>
 <div></div>"
 `;
 
 exports[`FE Content Nested pages, alt templates, extra data 6`] = `
-"<h1>Hello JSON Title</h1>
+"<!DOCTYPE html>
+<h1>Hello JSON Title</h1>
 <div></div> Alternative template with post by Jason"
 `;

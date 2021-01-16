@@ -2,6 +2,14 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.5 (2020-09-21)
+
+- Add Changelogs ([25d6245](https://github.com/xfiveco/generator-chisel/commit/25d6245))
+- Add Readmes ([35fd430](https://github.com/xfiveco/generator-chisel/commit/35fd430))
+- Add WP dev server test with puppeteer ([dbc0f1d](https://github.com/xfiveco/generator-chisel/commit/dbc0f1d))
+- Update WP: improve dev server startup, add more tests ([803f8fe](https://github.com/xfiveco/generator-chisel/commit/803f8fe))
+- WP: change default help option for wp command, add tests ([2205722](https://github.com/xfiveco/generator-chisel/commit/2205722))
+
 ## 1.0.0-alpha.4 (2020-07-06)
 
 - Add hooks to modify webpack options and few other things ([9ec1f07](https://github.com/xfiveco/generator-chisel/commit/9ec1f07))

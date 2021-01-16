@@ -66,7 +66,7 @@ module.exports = ({ options, getPostsCreator }) =>
           )
         : posix.join('/', this._id);
 
-      if (!options.staticFrontend.skipHtmlExtension) {
+      if (!options.staticFrontend.skipHtmlExtension && !p.endsWith('.html')) {
         return `${p}.html`;
       }
 

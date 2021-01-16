@@ -1,6 +1,6 @@
 {
   "name": "chisel-scripts",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.7",
   "description": "TODO",
   "bin": {
     "chisel-scripts": "bin/chisel-scripts.js"
@@ -36,7 +36,6 @@
     "commander": "^5.1.0",
     "css-loader": "^3.5.3",
     "cssnano": "^4.1.10",
-    "fibers": "^5.0.0",
     "file-loader": "^6.0.0",
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
@@ -60,5 +59,8 @@
     "webpack-fix-style-only-entries": "^0.5.0",
     "webpack-merge": "^4.2.2",
     "webpackbar": "^4.0.0"
+  },
+  "optionalDependencies": {
+    "fibers": "^5.0.0"
   }
 }

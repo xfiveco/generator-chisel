@@ -19,6 +19,8 @@ const defaultAnswers = (additionalFeatures = []) => [
   },
 ];
 
+const CONFIG_VERSION_REGEX = /(?<=chiselVersion: ['"])\d+\.\d+\.\d+(?:-[\w.-]+)?(?=['"])/g;
+
 describe('Generator Static', () => {
   test('Generates all expected files and config', async () => {
     global.chiselTestHelpers.mockPromptAnswers(defaultAnswers());
@@ -32,9 +34,11 @@ describe('Generator Static', () => {
 
     expect(files).toMatchSnapshot();
     expect(
-      prettier.format(fs.readFileSync('./chisel.config.js', 'utf8'), {
-        parser: 'babel',
-      }),
+      prettier
+        .format(fs.readFileSync('./chisel.config.js', 'utf8'), {
+          parser: 'babel',
+        })
+        .replace(CONFIG_VERSION_REGEX, '--VERSION--'),
     ).toMatchSnapshot();
   });
 
@@ -53,9 +57,11 @@ describe('Generator Static', () => {
 
     expect(files).toMatchSnapshot();
     expect(
-      prettier.format(fs.readFileSync('./chisel.config.js', 'utf8'), {
-        parser: 'babel',
-      }),
+      prettier
+        .format(fs.readFileSync('./chisel.config.js', 'utf8'), {
+          parser: 'babel',
+        })
+        .replace(CONFIG_VERSION_REGEX, '--VERSION--'),
     ).toMatchSnapshot();
   });
 
@@ -69,9 +75,11 @@ describe('Generator Static', () => {
 
     expect(files).toMatchSnapshot();
     expect(
-      prettier.format(fs.readFileSync('./chisel.config.js', 'utf8'), {
-        parser: 'babel',
-      }),
+      prettier
+        .format(fs.readFileSync('./chisel.config.js', 'utf8'), {
+          parser: 'babel',
+        })
+        .replace(CONFIG_VERSION_REGEX, '--VERSION--'),
     ).toMatchSnapshot();
   });
 
@@ -91,6 +99,10 @@ describe('Generator Static', () => {
       );
 
     expect(files).toMatchSnapshot();
-    expect(fs.readFileSync('./chisel.config.js', 'utf8')).toMatchSnapshot();
+    expect(
+      fs
+        .readFileSync('./chisel.config.js', 'utf8')
+        .replace(CONFIG_VERSION_REGEX, '--VERSION--'),
+    ).toMatchSnapshot();
   });
 });

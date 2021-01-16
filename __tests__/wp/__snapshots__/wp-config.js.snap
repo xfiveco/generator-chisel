@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WP wp-config command Test generating with wrong port first 1`] = `
+Array [
+  Array [
+    "",
+  ],
+  Array [
+    "ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (--ERROR-DETAILS-)",
+  ],
+  Array [
+    "",
+  ],
+  Array [
+    "Trying again...",
+  ],
+  Array [
+    "",
+  ],
+]
+`;

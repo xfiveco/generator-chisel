@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FE HTMLHint HTMLHint errors are logged and fail build  1`] = `"Problems found when checking with HTML Hint"`;
+
+exports[`FE HTMLHint HTMLHint errors are logged and fail build  2`] = `
+Array [
+  Array [],
+  Array [
+    "[1m--PROJECT-PATH--/dist/page-1.html:[22m
+[37mL2 |[90m<div notOkAttribute>Hello</div>[39m
+[37m        ^ [33mThe attribute name of [ notOkAttribute ] must be in lowercase. (attr-lowercase)[39m
+
+[1m--PROJECT-PATH--/dist/page-3.html:[22m
+[37mL1 |[90m<div>[39m
+[37m    ^ [33mDoctype must be declared first. (doctype-first)[39m
+[37mL4 |[90m    <li id=\\"li1\\">Line item 2</li>[39m
+[37m           ^ [33mThe id value [ li1 ] must be unique. (id-unique)[39m",
+  ],
+  Array [],
+]
+`;

@@ -11,9 +11,13 @@ cache:
 #     packages:
 #       - php7.2-cli
 #       - php7.2-mysql
-# services:
-#   - mysql
+services:
+  - mysql
 
 before_script:
   - yarn prepare-links
   - cd packages/chisel-plugin-wordpress; yarn prepare; cd -;
+
+after_script:
+  - npm install -g codecov
+  - codecov

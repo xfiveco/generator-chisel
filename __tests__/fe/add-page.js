@@ -36,14 +36,7 @@ describe('FE add-page', () => {
 
     await indexAndFilesMatchesSnapshot();
 
-    consoleMock.mock.calls.forEach((call) => {
-      if (typeof call[0] === 'string') {
-        call[0] = call[0]
-          .split(process.cwd())
-          .join('--PROJECT-PATH--')
-          .replace(/\\+/g, '/');
-      }
-    });
+    global.chiselTestHelpers.normalizeConsoleMockCalls(consoleMock);
     expect(consoleMock.mock.calls).toMatchSnapshot();
   });
 

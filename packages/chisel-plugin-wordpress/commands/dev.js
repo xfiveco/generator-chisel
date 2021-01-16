@@ -76,7 +76,9 @@ module.exports = (api, options) => {
 
       await hooks.browserSyncConfig.promise(browserSyncConfig);
 
-      bs.init(browserSyncConfig);
+      await new Promise((resolve) => {
+        bs.init(browserSyncConfig, resolve);
+      });
 
       const devManifestPath = api.resolve(
         options.output.base,
@@ -115,9 +117,22 @@ module.exports = (api, options) => {
         },
       );
 
-      watcher.on('ready', () => {
-        watchReady = true;
+      await new Promise((resolve) => {
+        watcher.on('ready', () => {
+          watchReady = true;
+          resolve();
+        });
       });
+
+      return () => {
+        bs.exit(); // no callback supported
+        return Promise.all([
+          new Promise((resolve) => {
+            devMiddleware.close(resolve);
+          }),
+          watcher.close(),
+        ]);
+      };
     },
   );
 };
