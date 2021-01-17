@@ -1,0 +1,18 @@
+/* ==========================================================================
+   #PAGE
+   ========================================================================== */
+
+html {
+  background: $color-bg;
+  color: $color-text;
+  font-family: $font-sans-serif;
+  font-size: 0.625rem;
+  line-height: 1.5; /* [1] */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-size: 1.8rem;
+}

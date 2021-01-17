@@ -22,11 +22,12 @@
 
 code[class*='language-'],
 pre[class*='language-'] {
-  // color: $color-text-emp;
-  background: none;
-  text-shadow: 0 1px white;
-  font-family: Consolas, Menlo, 'Andale Mono', 'Ubuntu Mono', monospace;
-  // font-size: rem(20);
+  color: $color-titan-white;
+  background: $color-rhino;
+  border-radius: 1rem;
+  font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+    monospace;
+  font-size: 1.4rem;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -46,20 +47,11 @@ pre[class*='language-'] {
   }
 }
 
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection {
-  text-shadow: none;
-  background: #fce29f;
-}
-
 pre[class*='language-']::selection,
 pre[class*='language-'] ::selection,
 code[class*='language-']::selection,
 code[class*='language-'] ::selection {
-  text-shadow: none;
-  background: #fce29f;
+  background: $color-primary;
 }
 
 @media print {
@@ -71,8 +63,8 @@ code[class*='language-'] ::selection {
 
 /* Code blocks */
 pre[class*='language-'] {
-  padding: 1rem;
-  margin: 0 0 2rem 0;
+  padding: 3rem 2rem;
+  margin: 0 0 2.5rem 0;
   overflow: auto;
 }
 

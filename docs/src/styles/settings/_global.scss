@@ -10,18 +10,18 @@ $global-transition: all 300ms ease-in-out !default;
 /* Fonts
    ========================================================================== */
 
-$font-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
-  'Roboto', 'Helvetica Neue', 'Arial', sans-serif !default;
+$font-sans-serif: 'Quicksand', -apple-system, system-ui, BlinkMacSystemFont,
+  'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif !default;
 
 /* Breakpoints
    ========================================================================== */
 
 $breakpoints: (
-  small: 480px,
-  medium: 768px,
-  large: 1024px,
-  xlarge: 1280px,
-  full: 1600px,
+  small: 480 / 16 * 1rem,
+  medium: 768 / 16 * 1rem,
+  large: 1024 / 16 * 1rem,
+  xlarge: 1280 / 16 * 1rem,
+  full: 1600 / 16 * 1rem,
 );
 
 /* Colors
@@ -35,6 +35,11 @@ $color-light-grey: #999;
 $color-medium-grey: #666;
 $color-dark-grey: #333;
 
+$color-primary: #2a1468;
+$color-secondary: #ff6d54;
+$color-rhino: #2d2b57;
+$color-titan-white: #e3dfff;
+
 // Text
 $color-bg: $color-white;
 $color-text: $color-black;
@@ -45,6 +50,3 @@ $color-hover: $color-light-grey;
 
 // Borders
 $color-border: $color-very-light-grey;
-
-// Fills
-$color-fill: $color-very-light-grey;
