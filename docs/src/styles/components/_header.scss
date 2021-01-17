@@ -3,7 +3,81 @@
    ========================================================================== */
 
 .c-header {
-  border-bottom: 1px solid $color-border;
-  margin-bottom: 2em;
-  padding-bottom: 1em;
+  background-color: $color-very-light-grey;
+}
+
+.c-header__inner {
+  padding: 2rem 0;
+  min-height: 11rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.c-header__left {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include bp('medium') {
+    justify-content: initial;
+    flex-direction: row;
+    width: auto;
+  }
+}
+
+.c-header__logo {
+  padding-bottom: 1rem;
+  font-size: 0.7em;
+
+  @include bp('medium') {
+    padding-bottom: 0;
+    padding-right: 8rem;
+    font-size: 1em;
+  }
+}
+
+.c-header__nav {
+  display: flex;
+  list-style: none;
+  margin: 0 -1.5rem;
+
+  @include bp('medium') {
+    margin: 0 -2.5rem;
+  }
+}
+
+.c-header__nav-item {
+  margin: 0;
+
+  @include bp('medium') {
+    padding: 0 1.5rem;
+  }
+
+  &--current {
+    color: $color-secondary;
+  }
+}
+
+.c-header__nav-link {
+  text-decoration: none;
+  font-weight: 500;
+  padding: 1rem;
+}
+
+.c-header__right {
+  display: flex;
+  align-items: center;
+
+  @include bp-down('medium') {
+    display: none;
+  }
+}
+
+.c-header__right-iframe {
+  height: 30px;
+  width: 130px;
+  border: 0;
 }

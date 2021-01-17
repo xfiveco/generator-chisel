@@ -1,6 +1,41 @@
-<header class="o-wrapper c-header u-sp-top u-sp--large">
-  <h1>
-    <a href="/" rel="home" class="c-header__title">Chisel</a>
-    <span class="c-header__description">A WordPress Development Framework</span>
-  </h1>
+{% set main_nav = [
+  { title: 'Docs', link: '/docs' },
+  getPosts({ id: 'tutorials' })[0],
+] %}
+
+
+<header class="c-header">
+  <div class="o-container">
+    <div class="c-header__inner">
+      <div class="c-header__left">
+        <div class="c-header__logo">
+          {% include 'components/logo.twig' %}
+        </div>
+        <ul class="c-header__nav">
+          {% for item in main_nav %}
+            <li class="{{ className('c-header__nav-item', (post.link starts with item.link ? 'current')) }}">
+              <a href="{{ item.link }}" class="c-header__nav-link">{{ item.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="c-header__right">
+        <iframe src="https://ghbtns.com/github-btn.html?user=xfiveco&amp;repo=generator-chisel&amp;type=star&amp;count=true&amp;size=large" class="c-header__right-iframe"></iframe>
+      </div>
+    </div>
+  </div>
 </header>
+
+{# {% if main_nav %}
+  <nav class="o-wrapper o-wrapper--small u-sp-top u-sp--large">
+    <div class="c-sep u-sp-bottom u-sp--large"></div>
+    <ul class="c-main-nav">
+        <li class="c-main-nav__item">
+          <iframe src="https://ghbtns.com/github-btn.html?user=xfiveco&amp;repo=generator-chisel&amp;type=star&amp;count=true" class="c-main-nav__iframe--normal"></iframe>
+          <iframe src="https://ghbtns.com/github-btn.html?user=xfiveco&amp;repo=generator-chisel&amp;type=star&amp;count=true&amp;size=large" class="c-main-nav__iframe--large"></iframe>
+        </li>
+    </ul>
+    <div class="c-sep u-sp-top u-sp--large u-sp-bottom"></div>
+  </nav>
+{% endif %} #}
