@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.12 (2021-01-23)
+
+- Support Node 14 ([c7da9a6](https://github.com/xfiveco/generator-chisel/commit/c7da9a6))
+
 ## 1.0.0-alpha.11 (2020-09-21)
 
 - Change gitignore file name to ensure they're include in npm package ([f09752e](https://github.com/xfiveco/generator-chisel/commit/f09752e))
