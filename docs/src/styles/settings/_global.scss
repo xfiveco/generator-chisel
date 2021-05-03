@@ -24,6 +24,23 @@ $breakpoints: (
   full: 1600 / 16 * 1rem,
 );
 
+/* Spacing
+   ========================================================================== */
+
+$spacing: (
+  auto: auto,
+  0: 0,
+  2: 2rem,
+  4: 4rem,
+  6: 6rem,
+  8: 8rem,
+  10: 8rem,
+  12: 12rem,
+  14: 14rem,
+  16: 16rem,
+  18: 18rem,
+);
+
 /* Colors
    ========================================================================== */
 
@@ -39,13 +56,14 @@ $color-primary: #2a1468;
 $color-secondary: #ff6d54;
 $color-rhino: #2d2b57;
 $color-titan-white: #e3dfff;
+$color-bright-sun: #fed049;
 
 // Text
 $color-bg: $color-white;
-$color-text: $color-black;
+$color-text: $color-primary;
 
 // Links
-$color-link: $color-medium-grey;
+$color-link: $color-primary;
 $color-hover: $color-light-grey;
 
 // Borders
