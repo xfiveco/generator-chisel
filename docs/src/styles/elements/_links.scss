@@ -11,5 +11,9 @@ a {
 
   &:hover {
     color: $color-hover;
+
+    strong {
+      color: $color-bright-sun;
+    }
   }
 }
