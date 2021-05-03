@@ -1,0 +1,66 @@
+{% block content %}
+  {% set sectionTitle = "Why <strong>Chisel</strong>" %}
+  {% set blocks = [
+    {
+      layout: 'default',
+      title: 'Simplicity and power of Timber and Twig',
+      excerpt: 'Chisel is a WordPress development framework for creating easy to maintain and fast websites',
+      description: '
+        <p>Use Chisel to build WordPress websites based on a popular <a href="http://upstatement.com/timber/"><strong>Timber</strong></a> library. Or build a static website using the same <a href="http://upstatement.com/timber/"><strong>Twig template engine</strong></a> and store the content in markdown files.</p>
+      ',
+      image: {
+        src: assetPath('images/twig.svg'),
+        alt: "Twig",
+        width: 324,
+        height: 360
+      }
+    },
+    {
+      layout: 'reversed',
+      title: 'Scalable and maintainable CSS with ITCSS',
+      description: '
+        <p><a href="http://upstatement.com/timber/"><strong>ITCSS</strong></a> stands for Inverted Triangle CSS - it’s a CSS architecture created by a renowned CSS author, <a href="http://upstatement.com/timber/"><strong>Harry Roberts</strong></a>. CSS in Chisel’s projects is organized according to ITCSS and helps you to keep your project styles scalable and maintainable. </p>
+      ',
+      image: {
+        src: assetPath('images/itcss.svg'),
+        alt: "ITCSS",
+        width: 401,
+        height: 347
+      }
+    },
+    {
+      layout: 'default',
+      title: 'Modern development workflow',
+      description: '
+        <p>JS/SCSS bundling with hot reload, JS/SCSS linting, hashed and revisioned static assets, React support and many others... Chisel comes with a lot of features which help you to develop your project faster and with higher quality.</p>
+      ',
+      image: {
+        src: assetPath('images/terminal.svg'),
+        alt: "Chisel Create",
+        width: 295,
+        height: 338
+      }
+    },
+  ] %}
+  {% set ctaLink = 'If you like Chisel, give it a star on <a href="https://github.com/xfiveco/generator-chisel">GitHub!</a>' %}
+
+  <section class="c-why-chisel margin-top-6 margin-top-medium-8 margin-top-large-14">
+    <div class="c-why-chisel__container o-container">
+      <h2 class="c-why-chisel__title">{{ sectionTitle }}</h2>
+        <ul class="c-why-chisel__features margin-top-6 margin-top-large-12">
+          {% for block_item in blocks %}
+            <li class="c-why-chisel__feature-item">
+              {% include 'components/block.twig' %}
+            </li>
+          {% endfor %}
+        </ul>
+      <div class="c-why-chisel__cta margin-top-12 margin-top-large-16">
+        {% include 'components/star-icon.twig' %}
+        <p class="c-why-chisel__cta-text">
+          {{ ctaLink }}
+        </p>
+        {% include 'components/star-icon.twig' %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
