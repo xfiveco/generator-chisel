@@ -22,29 +22,54 @@
   font: inherit; /* [3] */
   text-align: center; /* [4] */
   margin: 0; /* [4] */
+  text-decoration: none; /* [4] */
   cursor: pointer; /* [5] */
-  padding: 0.5rem 1rem;
   transition: $global-transition;
   border-radius: $global-radius;
+  line-height: 1.375;
+  font-size: 1.6rem;
+  padding: 1.4rem;
+
+  @include bp('small') {
+    padding: 1.4rem 3.1rem;
+  }
 }
 
 /* Style variants
    ========================================================================== */
 
 .c-btn--primary {
-  background-color: $color-link;
+  background-color: $color-secondary;
 
   &,
   &:hover,
   &:active,
   &:focus {
-    text-decoration: none; /* [4] */
     color: $color-white;
   }
 
   &:hover,
   &:focus {
-    background-color: $color-hover;
+    background-color: $color-primary;
+  }
+}
+
+.c-btn--secondary {
+  background-color: $color-white;
+  border: 1px solid $color-secondary;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-primary;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
   }
 }
 
