@@ -1,0 +1,51 @@
+/* ==========================================================================
+   #SPACING
+   ========================================================================== */
+
+@each $key, $size in $spacing {
+  $sides: 'top' 'right' 'bottom' 'left';
+
+  .margin-#{$key} {
+    margin: $size;
+  }
+
+  @each $side in $sides {
+    .margin-#{$side}-#{$key} {
+      margin-#{$side}: $size;
+    }
+  }
+
+  @each $breakpointKey, $breakpoint in $breakpoints {
+    @each $side in $sides {
+      .margin-#{$side}-#{$breakpointKey}-#{$key} {
+        @include bp($breakpointKey) {
+          margin-#{$side}: $size;
+        }
+      }
+    }
+  }
+}
+
+@each $key, $size in $spacing {
+  $sides: 'top' 'right' 'bottom' 'left';
+
+  .padding-#{$key} {
+    padding: $size;
+  }
+
+  @each $side in $sides {
+    .padding-#{$side}-#{$key} {
+      padding-#{$side}: $size;
+    }
+  }
+
+  @each $breakpointKey, $breakpoint in $breakpoints {
+    @each $side in $sides {
+      .padding-#{$side}-#{$breakpointKey}-#{$key} {
+        @include bp($breakpointKey) {
+          padding-#{$side}: $size;
+        }
+      }
+    }
+  }
+}

@@ -1,15 +1,7 @@
 /* ==========================================================================
-   #LINKS
+   #STRONG
    ========================================================================== */
 
-a {
-  color: $color-link;
-
-  > * {
-    text-decoration: underline;
-  }
-
-  &:hover {
-    color: $color-hover;
-  }
+strong {
+  color: $color-secondary;
 }
