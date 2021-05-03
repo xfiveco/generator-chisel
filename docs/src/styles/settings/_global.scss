@@ -4,7 +4,7 @@
 // The global settings file contains any project-wide variables; things that
 // need to be made available to the entire codebase.
 
-$global-radius: 3px !default;
+$global-radius: 5px !default;
 $global-transition: all 300ms ease-in-out !default;
 
 /* Fonts
@@ -31,6 +31,7 @@ $spacing: (
   auto: auto,
   0: 0,
   2: 2rem,
+  3: 3rem,
   4: 4rem,
   6: 6rem,
   8: 8rem,
