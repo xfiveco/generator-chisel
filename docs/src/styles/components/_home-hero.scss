@@ -1,0 +1,89 @@
+/* ==========================================================================
+   #HOME-HERO
+   ========================================================================== */
+
+.c-home-hero__inner {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column-reverse;
+
+  @include bp('large') {
+    flex-direction: row;
+  }
+}
+
+.c-home-hero__content {
+  margin-top: 2rem;
+
+  @include bp('medium') {
+    margin-top: 4rem;
+  }
+
+  @include bp('large') {
+    margin-top: 0;
+    max-width: 44%;
+  }
+}
+
+.c-home-hero__title {
+  font-size: 3.4rem;
+  line-height: 1.25;
+}
+
+.c-home-hero__buttons {
+  display: flex;
+}
+
+.c-home-hero__button {
+  & + & {
+    margin-left: 1.6rem;
+
+    @include bp('large') {
+      margin-left: 3.7rem;
+    }
+  }
+}
+
+.c-home-hero__media {
+  width: 100%;
+
+  @include bp('large') {
+    max-width: 55%;
+  }
+}
+
+.c-home-hero__media-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 61.5%;
+  overflow: hidden;
+}
+
+.c-home-hero__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.c-home-hero__video-button {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.c-home-hero__video-output {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
