@@ -71,6 +71,10 @@
 
 .c-block__image {
   width: 100%;
+
+  @include bp('large') {
+    width: auto;
+  }
 }
 
 .c-block__title {
