@@ -1,0 +1,70 @@
+/* ==========================================================================
+   #SLIDER
+   ========================================================================== */
+
+.c-slider__container {
+  text-align: center;
+}
+
+.c-slider__title {
+  font-size: 3.4rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.c-slider__slides {
+  overflow: hidden;
+  display: flex;
+  margin: -2rem 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  @include bp('large') {
+    flex-direction: row;
+    margin: 0 -1rem;
+  }
+}
+
+.c-slider__slide {
+  filter: drop-shadow(0 4px 10px rgba($color-black, 0.1));
+  flex-shrink: 0;
+  width: 100%;
+  margin: 2rem 0;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @include bp('medium') {
+    width: 60%;
+  }
+
+  @include bp('large') {
+    height: 128px;
+    margin: 0 1rem;
+    width: 23%;
+  }
+}
+
+.c-slider__slide-image {
+  width: 100%;
+}
+
+.c-slider__pagination-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-slider__pagination-item {
+  width: 44px;
+  height: 2px;
+  margin: 0 0.25rem;
+  background-color: $color-mercury;
+}
+
+.c-slider__pagination-item--current {
+  background-color: $color-mulled-wine;
+}

@@ -1,0 +1,60 @@
+{% set args = {
+  title: "Built with <strong>Chisel</strong>",
+  images: [
+    {
+      src: assetPath('images/monte-carlo.png'),
+      alt: 'Monte Carlo Landing Page',
+      link: 'https://www.montecarlodata.com/'
+    },
+    {
+      src: assetPath('images/club-oenologique.png'),
+      alt: 'Club Oenologique Landing Page',
+      link: 'https://cluboenologique.com/'
+    },
+    {
+      src: assetPath('images/payette.png'),
+      alt: 'Payette Landing Page',
+      link: 'https://www.payette.com/'
+    },
+    {
+      src: assetPath('images/xfive.png'),
+      alt: 'Xfive Landing Page',
+      link: 'https://www.xfive.co/'
+    },
+  ],
+  cta: {
+    link: '/docs',
+    text: 'Get started'
+  }
+} %}
+
+<section class="c-slider margin-top-4 margin-top-large-8">
+  <div class="o-container c-slider__container">
+    <h2 class="c-slider__title">{{ args.title }}</h2>
+    <ul class="c-slider__slides margin-top-4 margin-top-large-8 o-list-bare">
+      {% for image in args.images %}
+        <li class="c-slider__slide">
+          <a class="c-slider__slide-link" href="{{ image.link}}">
+            <img
+              class="c-slider__slide-image"
+              src="{{ image.src }}"
+              alt="{{ image.alt }}"
+            >
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% if args.images|length > 4 %}
+      <nav class="c-slider__pagination margin-top-2 margin-top-large-6">
+        <ul class="c-slider__pagination-items o-list-bare">
+          {% for i in range(0, args.images|length / 4) %}
+            <li class="c-slider__pagination-item{{ i == 0 ? ' c-slider__pagination-item--current' }}"></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
+    <a class="c-btn c-btn--primary margin-top-4 margin-top-large-8" href="{{ args.cta.link }}">
+      {{ args.cta.text }}
+    </a>
+  </div>
+</section>
