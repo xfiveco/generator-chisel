@@ -19,6 +19,9 @@
       width: 600,
       height: 370,
     },
+    video: {
+      src: 'https://www.youtube.com/watch?v=J7UwSVsiwzI'
+    }
   },
 } %}
 
@@ -34,11 +37,11 @@
           {% endfor %}
         </div>
       </div>
-      <div class="c-home-hero__media{{args.media.video ? ' js-video'}}">
+      <div class="c-home-hero__media{{args.media.video ? ' js-video'}}" data-src="{{ args.media.video.src }}">
         <div class="c-home-hero__media-wrapper">
           {% if args.media.image %}
             <img
-              class="c-home-hero__image"
+              class="c-home-hero__image js-poster"
               src="{{ args.media.image.src }}"
               alt="{{ args.media.image.alt }}"
               height="{{ args.media.image.height }}"
@@ -48,10 +51,10 @@
           {% if args.media.video %}
             <button
               type="button"
-              class="c-home-hero__video-button"
+              class="c-home-hero__video-button js-video-button"
             >
             </button>
-            <div class="c-home-hero__video-output" data-src="{{ args.media.video.src }}"></div>
+            <div class="c-home-hero__video-output js-video-output"></div>
             <noscript>
               <div class="c-home-hero__noscript">
                   <p>This video requires JavaScript to play</p>
