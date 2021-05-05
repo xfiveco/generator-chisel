@@ -53,9 +53,16 @@ class Video {
           return;
         }
 
-        this.videos[index].player.playVideo();
+        this.playVideo(index);
       });
     });
+  }
+
+  playVideo(index) {
+    const { player } = this.videos[index];
+    if (!player || typeof player.playVideo !== 'function') return;
+
+    player.playVideo();
   }
 
   findVideoWrapper(wrapper) {
@@ -184,7 +191,7 @@ class Video {
         rel: 0,
         showinfo: 0,
         ecver: 2,
-        mute: 1,
+        mute: 0,
         origin: `${window.location.protocol}//${window.location.hostname}`,
       },
       events: {
