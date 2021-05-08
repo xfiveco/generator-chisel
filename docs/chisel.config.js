@@ -1,3 +1,5 @@
+const jsdom = require('jsdom');
+
 const creatorData = {
   chiselVersion: '1.0.0-alpha.11',
   app: {
@@ -21,17 +23,15 @@ function sidebarChildren(post, children, getPosts) {
       const isCurrent = child.id() === post.id();
 
       return /* HTML */ `
-        <li${isCurrent ? ' class="current_page_item"' : ''}>
+        <li class="c-sidebar__child${isCurrent ? ' c-sidebar__current' : ''}">
           <a href="${child.link()}">${child.title()}</a>
-          ${
-            childChildren.length > 0
-              ? /* HTML */ `
-                  <ul class="children">
-                    ${await sidebarChildren(post, childChildren, getPosts)}
-                  </ul>
-                `
-              : ''
-          }
+          ${childChildren.length > 0
+            ? /* HTML */ `
+                <ul class="c-sidebar__children">
+                  ${await sidebarChildren(post, childChildren, getPosts)}
+                </ul>
+              `
+            : ''}
         </li>
       `;
     }),
@@ -57,11 +57,30 @@ module.exports = {
         return /* HTML */ `
           <h2 class="c-sidebar__title">
             ${start.title()}
-            <div class="c-sep c-sep--dark"></div>
           </h2>
 
           <ul>
             ${await sidebarChildren(post, children, getPosts)}
+          </ul>
+        `;
+      },
+      async onPageSidebar({ context: { post } }) {
+        const { JSDOM } = jsdom;
+        const dom = new JSDOM(post.content());
+        const headings = dom.window.document.querySelectorAll('h2');
+        if (headings.length <= 0) return '';
+
+        return /* HTML */ `
+          <ul class="c-sidebar__headings">
+            ${Array.from(headings)
+              .map((head) => {
+                return `<li>
+                <a href="#${head.id}">
+                  ${head.textContent}
+                </a>
+              </li>`;
+              })
+              .join('')}
           </ul>
         `;
       },
