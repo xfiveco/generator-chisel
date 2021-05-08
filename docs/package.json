@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "babel-plugin-prismjs": "^2.0.1",
+    "jsdom": "^16.5.3",
     "prismjs": "^1.20.0"
   },
   "devDependencies": {
