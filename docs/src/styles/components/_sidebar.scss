@@ -1,0 +1,129 @@
+/* ==========================================================================
+   #SIDEBAR
+   ========================================================================== */
+
+.c-sidebar {
+  position: fixed;
+  transform: translateX(-100%);
+  top: 0;
+  left: 0;
+  flex-shrink: 0;
+  margin-right: 5.5rem;
+  padding: 9.5rem 2rem 0;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.2s;
+  background-color: $color-white;
+  z-index: 100;
+
+  &--active {
+    transform: translateX(0);
+  }
+
+  @include bp('large') {
+    position: sticky;
+    transform: none;
+    height: max-content;
+    width: 18.5%;
+    padding: 9.5rem 0 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.c-sidebar__titles {
+  margin-top: 2.2rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @include bp('large') {
+    max-height: calc(100vh - 26rem);
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+
+    @include bp('large') {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.c-sidebar__child--level-1 {
+  > .c-sidebar__link {
+    font-weight: 600;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  .c-sidebar__children {
+    display: none;
+    margin-top: 0;
+  }
+
+  &.c-sidebar__active-parent,
+  &.c-sidebar__current {
+    .c-sidebar__children {
+      display: block;
+    }
+  }
+}
+
+.c-sidebar__current {
+  color: $color-secondary;
+  font-weight: 500;
+
+  > a {
+    color: inherit;
+  }
+}
+
+.c-sidebar__title {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Sidebar variants
+   ========================================================================== */
+.c-sidebar--this-page {
+  margin-right: 0;
+  padding-right: 0;
+  top: 0;
+  right: 0;
+  flex-shrink: 0;
+  height: max-content;
+  width: 100%;
+  margin-left: 0;
+  padding-top: 0;
+  margin-top: 4rem;
+  position: relative;
+
+  @include bp('large') {
+    width: 11%;
+    padding-top: 9.5rem;
+    margin-top: 7.5rem;
+    position: sticky;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.c-sidebar__headings {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: calc(100vh - 31rem);
+
+  li {
+    margin-bottom: 0.5rem;
+
+    @include bp('large') {
+      margin-bottom: 0;
+    }
+  }
+}

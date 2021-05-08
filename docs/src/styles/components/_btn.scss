@@ -101,6 +101,71 @@
   }
 }
 
+.c-menu-button {
+  position: absolute;
+  top: 11rem;
+  left: calc(100% - 1px);
+  height: 26px;
+  width: 29px;
+  padding: 2rem;
+  color: $color-primary;
+  cursor: pointer;
+  background-color: $color-white;
+  border: 1px solid;
+  pointer-events: all !important;
+
+  @include bp('large') {
+    display: none;
+  }
+
+  .c-sidebar--active & {
+    left: auto;
+    right: 2rem;
+  }
+}
+
+.c-menu-button-bar {
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -1px;
+  width: 30px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: $color-primary;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  left: 50%;
+
+  &.c-menu-button-bar--top {
+    transform: translate(-50%, -8px);
+  }
+
+  &.c-menu-button-bar--bottom {
+    transform: translate(-50%, 8px);
+  }
+
+  .c-sidebar--active & {
+    background-color: $color-secondary;
+
+    &.c-menu-button-bar--top {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+
+    &.c-menu-button-bar--middle {
+      opacity: 0;
+    }
+
+    &.c-menu-button-bar--bottom {
+      transform: translate(-50%, 0) rotate(-45deg);
+    }
+  }
+
+  .c-menu-button:hover & {
+    background-color: $color-secondary;
+  }
+}
+
 /* Size variants
    ========================================================================== */
 

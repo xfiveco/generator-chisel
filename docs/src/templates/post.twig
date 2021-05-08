@@ -2,23 +2,29 @@
 {% block content %}
 
   {% set sidebar = sidebar() %}
-
-  <div class="u-sp-top u-sp--xlarge o-layout">
+  <section class="c-post o-container margin-bottom-4">
 
     {% if sidebar is not empty %}
-      <div class="c-sidebar o-layout__sidebar">
-        {{sidebar}}
-      </div>
+      <aside class="c-sidebar o-layout__sidebar js-sidebar">
+        <div class="c-siderbar__content">
+          {{sidebar}}
+        </div>
+        <button class="c-menu-button js-toggle">
+          <span class="c-menu-button-bar c-menu-button-bar--top"></span>
+          <span class="c-menu-button-bar c-menu-button-bar--middle"></span>
+          <span class="c-menu-button-bar c-menu-button-bar--bottom"></span>
+        </button>
+      </aside>
     {% endif %}
 
-    <article id="post-{{post.ID}}" class="c-post o-layout__content">
-      <section>
+    <article id="post-{{post.ID}}" class="c-post__article o-layout__content padding-top-4 padding-top-large-8">
+      <div>
         <h1 class="c-title">{{post.title}}{{ isDev() ? (' (' ~ post.data.order ~ ')') : '' }}</h1>
         <p class="c-intro">{{post.data.excerpt}}</p>
         <div class="c-post__entry">
           {{post.content}}
         </div>
-      </section>
+      </div>
 
       {% if post.parent %}
           <ul class="c-page-nav">
@@ -33,10 +39,17 @@
 
     </article>
 
+    {% set sidebar = onPageSidebar() %}
+
     {% if sidebar is not empty %}
-      <div class="o-layout__gap"></div>
+      <aside class="c-sidebar--this-page margin-left-large-10">
+        <h2 class="c-sidebar__title margin-bottom-2">
+          On this page
+        </h2>
+        {{sidebar}}
+      </aside>
     {% endif %}
 
-  </div>
+  </section>
 
 {% endblock %}

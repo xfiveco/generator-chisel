@@ -1,9 +1,21 @@
 /* ==========================================================================
-   #PAGE
+   #POST
    ========================================================================== */
 
-main {
+.c-post {
+  display: flex;
+  flex-direction: column-reverse;
+
+  @include bp('large') {
+    flex-direction: row;
+  }
+}
+
+.c-post__article {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+}
+
+.c-intro {
+  font-weight: 600;
 }
