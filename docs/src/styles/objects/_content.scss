@@ -1,0 +1,100 @@
+/* ==========================================================================
+   #CONTENT
+   ========================================================================== */
+
+.o-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  pre,
+  ul {
+    margin: 0;
+  }
+
+  h1,
+  h2 {
+    font-weight: 600;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 500;
+  }
+
+  h1 {
+    font-size: 3.2rem;
+  }
+
+  h2,
+  h3 {
+    font-size: 2.4rem;
+    margin: 2rem 0 2.8rem;
+  }
+
+  p {
+    margin-bottom: 2.8rem;
+  }
+
+  pre {
+    margin-bottom: 4.8rem;
+  }
+
+  code {
+    color: $color-secondary;
+  }
+
+  ul {
+    margin-top: 2.8rem;
+    margin-left: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    padding-left: 3.3rem;
+    margin-bottom: 2.8rem;
+
+    &:not(:last-child) {
+      margin-bottom: 2.6rem;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+      background-color: $color-secondary;
+    }
+  }
+
+  a {
+    font-weight: 500;
+  }
+
+  .c-intro {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-top: 3.6rem;
+  }
+
+  .c-post__entry {
+    > :first-child {
+      margin-top: 3.6rem;
+    }
+  }
+
+  .c-page-nav {
+    margin-top: 5.8rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
