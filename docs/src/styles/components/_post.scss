@@ -5,6 +5,7 @@
 .c-post {
   display: flex;
   flex-direction: column-reverse;
+  width: 100%;
 
   @include bp('large') {
     flex-direction: row;
@@ -14,6 +15,7 @@
 .c-post__article {
   display: flex;
   flex-direction: column;
+  max-width: 58%;
 }
 
 .c-intro {

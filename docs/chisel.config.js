@@ -107,7 +107,7 @@ module.exports = {
             ${Array.from(headings)
               .map((head) => {
                 return `<li>
-                <a href="#${head.id}">
+                <a class="c-page-sidebar__link" href="#${head.id}">
                   ${head.textContent}
                 </a>
               </li>`;

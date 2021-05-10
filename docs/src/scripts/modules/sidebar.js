@@ -15,7 +15,7 @@ class Sidebar {
     if (!this.section) return false;
 
     this.mainElements = document.querySelectorAll(
-      'article, .c-sidebar--this-page, header, footer',
+      'article, .c-page-sidebar, header, footer',
     );
     this.button = this.section.querySelector('.js-toggle');
     this.content = this.section.querySelector('.c-siderbar__content');

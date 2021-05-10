@@ -89,7 +89,7 @@
 
 /* Sidebar variants
    ========================================================================== */
-.c-sidebar--this-page {
+.c-page-sidebar {
   margin-right: 0;
   padding-right: 0;
   top: 0;
@@ -108,9 +108,17 @@
     margin-top: 7.5rem;
     position: sticky;
   }
+}
 
-  a {
-    text-decoration: none;
+.c-page-sidebar__link {
+  text-decoration: none;
+
+  &--active {
+    font-weight: 600;
+  }
+
+  &--selected {
+    color: $color-secondary;
   }
 }
 
