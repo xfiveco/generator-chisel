@@ -5,7 +5,7 @@
   <section class="c-post o-container margin-bottom-4">
 
     {% if sidebar is not empty %}
-      <aside class="c-sidebar o-layout__sidebar js-sidebar">
+      <nav class="c-sidebar o-layout__sidebar js-sidebar">
         <div class="c-siderbar__content">
           {{sidebar}}
         </div>
@@ -14,7 +14,7 @@
           <span class="c-menu-button-bar c-menu-button-bar--middle"></span>
           <span class="c-menu-button-bar c-menu-button-bar--bottom"></span>
         </button>
-      </aside>
+      </nav>
     {% endif %}
 
     <article id="post-{{post.ID}}" class="c-post__article o-layout__content padding-top-4 padding-top-large-8">
@@ -42,12 +42,12 @@
     {% set sidebar = onPageSidebar() %}
 
     {% if sidebar is not empty %}
-      <aside class="c-page-sidebar margin-left-large-10">
+      <nav class="c-page-sidebar margin-left-large-10">
         <h2 class="c-sidebar__title margin-bottom-2">
           On this page
         </h2>
         {{sidebar}}
-      </aside>
+      </nav>
     {% endif %}
 
   </section>
