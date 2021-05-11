@@ -36,7 +36,7 @@ class Sidebar {
 
     window.addEventListener('resize', () => {
       if (window.innerWidth > this.BREAKPOINT) {
-        this.closeSidebar();
+        this.destroySidebar();
       } else {
         this.section.setAttribute('inert', 'true');
       }
@@ -71,6 +71,15 @@ class Sidebar {
 
     this.section.classList.remove(activeClass);
     this.section.setAttribute('inert', 'true');
+    this.enableDocumentScroll();
+    this.setInert(this.NOT_ACTIVE);
+  }
+
+  destroySidebar() {
+    const { activeClass } = this.atts;
+
+    this.section.classList.remove(activeClass);
+    this.section.removeAttribute('inert');
     this.enableDocumentScroll();
     this.setInert(this.NOT_ACTIVE);
   }
