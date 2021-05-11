@@ -15,5 +15,8 @@
 .c-post__article {
   display: flex;
   flex-direction: column;
-  max-width: 58%;
+
+  @include bp('large') {
+    max-width: 58%;
+  }
 }

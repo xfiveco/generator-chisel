@@ -18,6 +18,7 @@
 
   &--active {
     transform: translateX(0);
+    overflow-y: auto;
   }
 
   @include bp('large') {
