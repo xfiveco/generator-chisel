@@ -9,9 +9,13 @@
     position: relative;
     display: block;
     font-weight: 600;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     text-decoration: none;
     margin-top: 0.5rem;
+
+    @include bp('medium') {
+      font-size: 2.4rem;
+    }
 
     &::before {
       content: '';
