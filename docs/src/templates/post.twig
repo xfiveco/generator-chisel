@@ -39,6 +39,7 @@
 
     </article>
 
+  {% if post.ID == 'docs' %}
     {% set sidebar = onPageSidebar() %}
 
     {% if sidebar is not empty %}
@@ -49,6 +50,7 @@
         {{sidebar}}
       </nav>
     {% endif %}
+  {% endif %}
 
   </section>
 
