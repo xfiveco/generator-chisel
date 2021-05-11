@@ -17,7 +17,7 @@
       </nav>
     {% endif %}
 
-    <article id="post-{{post.ID}}" class="c-post__article o-content o-layout__content padding-top-4 padding-top-large-8">
+    <article id="post-{{post.ID}}" class="c-post__article o-content o-layout__content padding-top-2 padding-top-medium-4 padding-top-large-8">
       <div>
         <h1 class="c-title">{{post.title}}{{ isDev() ? (' (' ~ post.data.order ~ ')') : '' }}</h1>
         <p class="c-intro">{{post.data.excerpt}}</p>
