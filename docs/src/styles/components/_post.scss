@@ -18,5 +18,6 @@
 
   @include bp('large') {
     max-width: 58%;
+    margin: 0 auto;
   }
 }
