@@ -6,8 +6,12 @@ class Sidebar {
   }
 
   setVars() {
+    this.NOT_ACTIVE = false;
+    this.BREAKPOINT = 1023;
+
     this.atts = {
       activeClass: 'c-sidebar--active',
+      noScroll: 'no-scroll',
     };
 
     this.section = document.querySelector('.js-sidebar');
@@ -25,7 +29,15 @@ class Sidebar {
 
   setEvents() {
     window.addEventListener('DOMContentLoaded', () => {
-      if (window.innerWidth < 1024) {
+      if (window.innerWidth <= this.BREAKPOINT) {
+        this.section.setAttribute('inert', 'true');
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > this.BREAKPOINT) {
+        this.closeSidebar();
+      } else {
         this.section.setAttribute('inert', 'true');
       }
     });
@@ -39,14 +51,28 @@ class Sidebar {
     const { activeClass } = this.atts;
 
     if (this.section.classList.contains(activeClass)) {
-      this.section.classList.remove(activeClass);
-      this.section.setAttribute('inert', 'true');
-      this.setInert(false);
+      this.closeSidebar();
     } else {
-      this.section.classList.add(activeClass);
-      this.section.removeAttribute('inert', 'true');
-      this.setInert();
+      this.openSidebar();
     }
+  }
+
+  openSidebar() {
+    const { activeClass } = this.atts;
+
+    this.section.classList.add(activeClass);
+    this.section.removeAttribute('inert');
+    this.disableDocumentScroll();
+    this.setInert();
+  }
+
+  closeSidebar() {
+    const { activeClass } = this.atts;
+
+    this.section.classList.remove(activeClass);
+    this.section.setAttribute('inert', 'true');
+    this.enableDocumentScroll();
+    this.setInert(this.NOT_ACTIVE);
   }
 
   setInert(isActive = true) {
@@ -55,6 +81,22 @@ class Sidebar {
         ? element.setAttribute('inert', 'true')
         : element.removeAttribute('inert'),
     );
+  }
+
+  disableDocumentScroll() {
+    const { noScroll } = this.atts;
+
+    if (document.documentElement.classList.contains(noScroll)) return;
+
+    document.documentElement.classList.add(noScroll);
+  }
+
+  enableDocumentScroll() {
+    const { noScroll } = this.atts;
+
+    if (!document.documentElement.classList.contains(noScroll)) return;
+
+    document.documentElement.classList.remove(noScroll);
   }
 }
 

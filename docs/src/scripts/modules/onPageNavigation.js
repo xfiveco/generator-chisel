@@ -6,6 +6,8 @@ class onPageNavigation {
   }
 
   setVars() {
+    this.BREAKPOINT = 1023;
+
     this.atts = {
       activeClass: 'c-page-sidebar__link--active',
       selectedClass: 'c-page-sidebar__link--selected',
@@ -28,19 +30,19 @@ class onPageNavigation {
 
   setEvents() {
     window.addEventListener('scroll', () => {
-      if (window.innerWidth > 1023) {
+      if (window.innerWidth > this.BREAKPOINT) {
         this.onScroll();
       }
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1023) {
+      if (window.innerWidth > this.BREAKPOINT) {
         this.titleBoundings = this.setBoundings();
       }
     });
 
     this.links.forEach((link) => {
-      if (window.innerWidth > 1023) {
+      if (window.innerWidth > this.BREAKPOINT) {
         link.addEventListener('click', () => this.setSelectedLink(link));
       }
     });

@@ -7,11 +7,24 @@ html {
   color: $color-text;
   font-family: $font-sans-serif;
   font-size: 0.625rem;
-  line-height: 1.5; /* [1] */
+  line-height: 1.5;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
+}
+
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+
+  @supports (-webkit-touch-callout: none) {
+    height: fill-available;
+
+    body {
+      min-height: fill-available;
+    }
+  }
 }
 
 body {
