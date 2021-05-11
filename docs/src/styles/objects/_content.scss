@@ -28,13 +28,33 @@
   }
 
   h1 {
-    font-size: 3.2rem;
+    font-size: 2.4rem;
+
+    @include bp('large') {
+      font-size: 3.2rem;
+    }
   }
 
   h2,
   h3 {
-    font-size: 2.4rem;
-    margin: 2rem 0 2.8rem;
+    font-size: 2.2rem;
+    margin: 2rem 0;
+
+    @include bp('large') {
+      font-size: 2.4rem;
+      margin: 2rem 0 2.8rem;
+    }
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+
+    @include bp('large') {
+      margin-bottom: 4rem;
+    }
   }
 
   p {
@@ -42,10 +62,19 @@
   }
 
   pre {
-    margin-bottom: 4.8rem;
+    margin-bottom: 3rem;
+
+    @include bp('large') {
+      margin-bottom: 4.8rem;
+    }
   }
 
   code {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  :not(pre) > code {
     color: $color-secondary;
   }
 
@@ -57,22 +86,32 @@
 
   li {
     position: relative;
-    padding-left: 3.3rem;
-    margin-bottom: 2.8rem;
+    margin-bottom: 2rem;
 
-    &:not(:last-child) {
-      margin-bottom: 2.6rem;
+    @include bp('large') {
+      margin-bottom: 2.8rem;
     }
 
-    &::before {
-      content: '';
-      position: absolute;
-      width: 13px;
-      height: 13px;
-      transform: translateY(-50%);
-      top: 50%;
-      left: 0;
-      background-color: $color-secondary;
+    ul > & {
+      padding-left: 3.3rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 13px;
+        height: 13px;
+        top: 8px;
+        left: 0;
+        background-color: $color-secondary;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+
+      @include bp('large') {
+        margin-bottom: 2.6rem;
+      }
     }
   }
 
@@ -81,14 +120,23 @@
   }
 
   .c-intro {
-    font-size: 2.4rem;
     font-weight: 600;
-    margin-top: 3.6rem;
+    margin-top: 2.4rem;
+    font-size: 2rem;
+
+    @include bp('large') {
+      font-size: 2.4rem;
+      margin-top: 3.6rem;
+    }
   }
 
   .c-post__entry {
     > :first-child {
-      margin-top: 3.6rem;
+      margin-top: 2.4rem;
+
+      @include bp('large') {
+        margin-top: 3.6rem;
+      }
     }
   }
 
