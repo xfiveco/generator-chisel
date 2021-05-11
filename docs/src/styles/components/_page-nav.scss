@@ -1,0 +1,41 @@
+/* ==========================================================================
+   #PAGE-NAV
+   ========================================================================== */
+
+.c-page-nav__item {
+  padding-left: 5.2rem;
+
+  a {
+    position: relative;
+    display: block;
+    font-weight: 600;
+    font-size: 2.4rem;
+    text-decoration: none;
+    margin-top: 0.5rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -5.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 17px;
+      background-repeat: no-repeat;
+      background-image: url('~assets/images/arrow.svg');
+    }
+  }
+
+  &:last-of-type {
+    padding: 0 5.2rem 0 2rem;
+    text-align: right;
+
+    a {
+      &::before {
+        transform: translateY(-50%) rotate(180deg);
+        right: -5.2rem;
+        left: auto;
+      }
+    }
+  }
+}
