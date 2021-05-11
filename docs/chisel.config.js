@@ -97,6 +97,7 @@ module.exports = {
         `;
       },
       async onPageSidebar({ context: { post } }) {
+        if (!post.id().startsWith('docs')) return '';
         const { JSDOM } = jsdom;
         const dom = new JSDOM(post.content());
         const headings = dom.window.document.querySelectorAll('h2');
