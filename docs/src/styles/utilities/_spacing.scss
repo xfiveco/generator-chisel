@@ -1,3 +1,5 @@
+/* stylelint-disable max-nesting-depth */
+
 /* ==========================================================================
    #SPACING
    ========================================================================== */
@@ -29,21 +31,23 @@
 @each $key, $size in $spacing {
   $sides: 'top' 'right' 'bottom' 'left';
 
-  .padding-#{$key} {
-    padding: $size;
-  }
-
-  @each $side in $sides {
-    .padding-#{$side}-#{$key} {
-      padding-#{$side}: $size;
+  @if $size != 'auto' {
+    .padding-#{$key} {
+      padding: $size;
     }
-  }
 
-  @each $breakpointKey, $breakpoint in $breakpoints {
     @each $side in $sides {
-      .padding-#{$side}-#{$breakpointKey}-#{$key} {
-        @include bp($breakpointKey) {
-          padding-#{$side}: $size;
+      .padding-#{$side}-#{$key} {
+        padding-#{$side}: $size;
+      }
+    }
+
+    @each $breakpointKey, $breakpoint in $breakpoints {
+      @each $side in $sides {
+        .padding-#{$side}-#{$breakpointKey}-#{$key} {
+          @include bp($breakpointKey) {
+            padding-#{$side}: $size;
+          }
         }
       }
     }
