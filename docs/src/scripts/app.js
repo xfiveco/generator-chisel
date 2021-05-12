@@ -3,13 +3,14 @@
   Author: Xfive
  */
 
-import Prism from 'prismjs';
+import hljs from 'highlight.js';
+import {} from './helpers/inert';
+
 import Video from './modules/video';
 import Sidebar from './modules/sidebar';
 import onPageNavigation from './modules/onPageNavigation';
-import {} from './helpers/inert';
 
-Prism.highlightAll();
+hljs.highlightAll();
 
 const components = [Video, Sidebar, onPageNavigation];
 

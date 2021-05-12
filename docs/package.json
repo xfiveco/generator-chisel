@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "babel-plugin-prismjs": "^2.0.1",
-    "jsdom": "^16.5.3",
-    "prismjs": "^1.20.0"
+    "highlight.js": "^10.7.2",
+    "jsdom": "^16.5.3"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.0",
