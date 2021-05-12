@@ -129,10 +129,6 @@
   max-height: calc(100vh - 31rem);
 
   li {
-    margin-bottom: 0.5rem;
-
-    @include bp('large') {
-      margin-bottom: 0;
-    }
+    margin-bottom: 0.75em;
   }
 }
