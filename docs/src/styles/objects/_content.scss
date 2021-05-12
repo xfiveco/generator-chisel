@@ -109,31 +109,23 @@
     overflow-wrap: break-word;
   }
 
-  .language-bash {
+  pre > code[class*='language-'] {
     overflow-wrap: break-word;
     margin-bottom: 3rem;
 
     @include bp('large') {
       margin-bottom: 4.8rem;
     }
-
-    p > & {
-      margin-top: 2rem;
-
-      @include bp('large') {
-        margin-top: 4rem;
-      }
-    }
   }
 
   .c-intro {
     font-weight: 600;
-    margin: 2.4rem 0 0.4rem;
+    margin: 2.4rem 0 0.8rem;
     font-size: 2rem;
 
     @include bp('large') {
       font-size: 2.4rem;
-      margin: 3.6rem 0 0.6rem;
+      margin: 3.6rem 0 1.2rem;
     }
   }
 
