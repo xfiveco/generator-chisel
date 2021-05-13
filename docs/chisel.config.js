@@ -87,9 +87,7 @@ module.exports = {
         );
 
         return /* HTML */ `
-          <h2 class="c-sidebar__title">
-            ${start.title()}
-          </h2>
+          <h2 class="c-sidebar__title">${start.title()}</h2>
 
           <ul class="o-list-bare c-sidebar__titles">
             ${await sidebarChildren(post, children, getPosts)}
