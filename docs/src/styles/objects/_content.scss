@@ -120,6 +120,29 @@
     }
   }
 
+  blockquote p {
+    position: relative;
+    font-style: normal;
+    color: $color-cornflower-blue;
+    padding-left: 29px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url('~assets/images/checkmark.svg');
+      width: 17px;
+      height: 17px;
+      left: 0;
+      top: 6px;
+    }
+
+    &::after {
+      content: none;
+    }
+  }
+
   .c-intro {
     font-weight: 600;
     margin: 2.4rem 0 0.8rem;
