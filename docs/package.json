@@ -14,7 +14,6 @@
     "add-page": "chisel-scripts add-page"
   },
   "dependencies": {
-    "babel-plugin-prismjs": "^2.0.1",
     "highlight.js": "^10.7.2",
     "jsdom": "^16.5.3"
   },
