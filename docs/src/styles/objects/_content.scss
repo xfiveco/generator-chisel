@@ -62,9 +62,11 @@
   }
 
   code {
-    font-size: inherit;
     font-weight: inherit;
     overflow-wrap: break-word;
+    font-size: 0.889em;
+    background-color: $color-very-light-grey;
+    padding: 4px 7px;
   }
 
   ul {
