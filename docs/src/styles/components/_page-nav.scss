@@ -18,15 +18,12 @@
     }
 
     &::before {
-      content: '';
       position: absolute;
       left: -5.2rem;
       top: 50%;
       transform: translateY(-50%);
       width: 28px;
       height: 17px;
-      background-repeat: no-repeat;
-      background-image: url('~assets/images/arrow.svg');
     }
   }
 

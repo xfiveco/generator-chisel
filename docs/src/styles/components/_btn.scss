@@ -83,17 +83,6 @@
   align-items: center;
   justify-content: center;
 
-  &::before {
-    content: '';
-    height: 50px;
-    width: 50px;
-    background-image: url('~assets/images/play.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    border-radius: 100%;
-    display: block;
-  }
-
   &.loading {
     &::before {
       animation: o-pulse-circle 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
