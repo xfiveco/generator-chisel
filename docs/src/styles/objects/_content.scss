@@ -82,27 +82,27 @@
     @include bp('large') {
       margin-bottom: 2.8rem;
     }
+  }
 
-    ul > & {
-      padding-left: 3.3rem;
+  ul > li {
+    padding-left: 3.3rem;
 
-      &::before {
-        content: '';
-        position: absolute;
-        width: 13px;
-        height: 13px;
-        top: 8px;
-        left: 0;
-        background-color: $color-secondary;
-      }
+    &::before {
+      content: '';
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      top: 8px;
+      left: 0;
+      background-color: $color-secondary;
     }
+  }
 
-    &:not(:last-child) {
-      margin-bottom: 2rem;
+  li:not(:last-child) {
+    margin-bottom: 2rem;
 
-      @include bp('large') {
-        margin-bottom: 2.6rem;
-      }
+    @include bp('large') {
+      margin-bottom: 2.6rem;
     }
   }
 

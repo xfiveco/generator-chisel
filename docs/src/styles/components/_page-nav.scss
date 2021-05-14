@@ -2,13 +2,17 @@
    #PAGE-NAV
    ========================================================================== */
 
+.c-page-nav {
+  display: flex;
+}
+
 .c-page-nav__item {
   &--prev {
     padding-left: 5.2rem;
   }
 
   &--next {
-    padding-right: 5.2rem;
+    padding: 0 5.2rem 0 2rem;
     margin-left: auto;
     text-align: right;
   }
