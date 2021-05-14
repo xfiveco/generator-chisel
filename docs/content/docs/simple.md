@@ -2,6 +2,7 @@
 title: In simple terms
 excerpt: Some of the concepts behind Chisel and similar tools can be difficult to understand at first. We'll try to explain them in simple terms here. So grab your coffee and let's get to it.
 order: 2000
+hideOnpageSidebar: true
 ---
 
 ## What is Chisel?
