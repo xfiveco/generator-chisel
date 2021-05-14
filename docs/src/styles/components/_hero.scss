@@ -1,8 +1,8 @@
 /* ==========================================================================
-   #HOME-HERO
+   #HERO
    ========================================================================== */
 
-.c-home-hero__inner {
+.c-hero__inner {
   display: flex;
   align-items: flex-end;
   flex-direction: column-reverse;
@@ -12,7 +12,7 @@
   }
 }
 
-.c-home-hero__content {
+.c-hero__content {
   margin-top: 2rem;
 
   @include bp('medium') {
@@ -25,16 +25,16 @@
   }
 }
 
-.c-home-hero__title {
+.c-hero__title {
   font-size: 3.4rem;
   line-height: 1.25;
 }
 
-.c-home-hero__buttons {
+.c-hero__buttons {
   display: flex;
 }
 
-.c-home-hero__button {
+.c-hero__button {
   & + & {
     margin-left: 1.6rem;
 
@@ -44,7 +44,7 @@
   }
 }
 
-.c-home-hero__media {
+.c-hero__media {
   width: 100%;
 
   @include bp('large') {
@@ -52,7 +52,7 @@
   }
 }
 
-.c-home-hero__media-wrapper {
+.c-hero__media-wrapper {
   position: relative;
   width: 100%;
   height: 0;
@@ -61,7 +61,7 @@
   background-color: $color-mercury;
 }
 
-.c-home-hero__image {
+.c-hero__image {
   position: absolute;
   top: 0;
   left: 0;
@@ -71,14 +71,14 @@
   z-index: 1;
 }
 
-.c-home-hero__video-button {
+.c-hero__video-button {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
 }
 
-.c-home-hero__video-output {
+.c-hero__video-output {
   z-index: 0;
   position: absolute;
   top: 0;

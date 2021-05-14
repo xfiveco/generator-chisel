@@ -1,41 +1,3 @@
-{% set args = {
-  title: "Built with <strong>Chisel</strong>",
-  images: [
-    {
-      src: assetPath('images/monte-carlo.png'),
-      alt: 'Monte Carlo Landing Page',
-      link: 'https://www.montecarlodata.com/',
-      height: 126,
-      width: 276
-    },
-    {
-      src: assetPath('images/club-oenologique.png'),
-      alt: 'Club Oenologique Landing Page',
-      link: 'https://cluboenologique.com/',
-      height: 126,
-      width: 276
-    },
-    {
-      src: assetPath('images/payette.png'),
-      alt: 'Payette Landing Page',
-      link: 'https://www.payette.com/',
-      height: 126,
-      width: 276
-    },
-    {
-      src: assetPath('images/xfive.png'),
-      alt: 'Xfive Landing Page',
-      link: 'https://www.xfive.co/',
-      height: 126,
-      width: 276
-    },
-  ],
-  cta: {
-    link: '/docs',
-    text: 'Get started'
-  }
-} %}
-
 <section class="c-slider margin-top-4 margin-top-large-8">
   <div class="o-container c-slider__container">
     <h2 class="c-slider__title">{{ args.title }}</h2>
@@ -45,7 +7,7 @@
           <a class="c-slider__slide-link" href="{{ image.link}}">
             <img
               class="c-slider__slide-image"
-              src="{{ image.src }}"
+              src="{{ assetPath(image.src) }}"
               alt="{{ image.alt }}"
               height="{{ image.height }}"
               width="{{ image.width }}"
