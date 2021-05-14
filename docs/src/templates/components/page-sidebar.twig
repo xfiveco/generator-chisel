@@ -1,0 +1,10 @@
+{% set sidebar = onPageSidebar() %}
+
+{% if sidebar is not empty %}
+  <nav class="c-page-sidebar margin-left-large-10">
+    <h2 class="c-sidebar__title margin-bottom-2">
+      On this page
+    </h2>
+    {{sidebar}}
+  </nav>
+{% endif %}

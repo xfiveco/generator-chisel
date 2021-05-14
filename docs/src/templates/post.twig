@@ -1,21 +1,9 @@
 {% extends "layouts/base.twig" %}
 {% block content %}
 
-  {% set sidebar = sidebar() %}
   <section class="c-post o-container margin-bottom-4">
 
-    {% if sidebar is not empty %}
-      <nav class="c-sidebar o-layout__sidebar js-sidebar">
-        <div class="c-siderbar__content">
-          {{sidebar}}
-        </div>
-        <button class="c-menu-button js-toggle" aria-label="Open/Close Menu">
-          <span class="c-menu-button-bar c-menu-button-bar--top"></span>
-          <span class="c-menu-button-bar c-menu-button-bar--middle"></span>
-          <span class="c-menu-button-bar c-menu-button-bar--bottom"></span>
-        </button>
-      </nav>
-    {% endif %}
+    {% include 'components/sidebar.twig' %}
 
     <article id="post-{{post.ID}}" class="c-post__article o-content o-layout__content padding-top-2 padding-top-medium-4 padding-top-large-8">
       <div>
@@ -26,33 +14,10 @@
         </div>
       </div>
 
-      {% if post.parent %}
-          <ul class="c-page-nav">
-            {% if post.prev.title != 'Documentation' and post.prev.title != 'Home' %}
-              <li class="c-page-nav__item c-page-nav__item--prev">
-                Previous <a href="{{post.prev.link}}" class="o-icons o-icons--arrow">{{post.prev.title}}</a>
-              </li>
-            {% endif %}
-            {% if post.next %}
-              <li class="c-page-nav__item c-page-nav__item--next">
-                Next <a href="{{post.next.link}}" class="o-icons o-icons--arrow">{{post.next.title}}</a>
-              </li>
-            {% endif %}
-          </ul>
-      {% endif %}
-
+      {% include 'components/page-nav.twig' %}
     </article>
 
-  {% set sidebar = onPageSidebar() %}
-
-  {% if sidebar is not empty %}
-    <nav class="c-page-sidebar margin-left-large-10">
-      <h2 class="c-sidebar__title margin-bottom-2">
-        On this page
-      </h2>
-      {{sidebar}}
-    </nav>
-  {% endif %}
+    {% include 'components/page-sidebar.twig' %}
 
   </section>
 

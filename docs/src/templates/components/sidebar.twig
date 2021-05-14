@@ -1,0 +1,14 @@
+{% set sidebar = sidebar() %}
+
+{% if sidebar is not empty %}
+  <nav class="c-sidebar o-layout__sidebar js-sidebar">
+    <div class="c-siderbar__content">
+      {{sidebar}}
+    </div>
+    <button class="c-menu-button js-toggle" aria-label="Open/Close Menu">
+      <span class="c-menu-button-bar c-menu-button-bar--top"></span>
+      <span class="c-menu-button-bar c-menu-button-bar--middle"></span>
+      <span class="c-menu-button-bar c-menu-button-bar--bottom"></span>
+    </button>
+  </nav>
+{% endif %}
