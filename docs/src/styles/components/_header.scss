@@ -21,7 +21,7 @@
   justify-content: center;
   align-items: center;
 
-  @include bp('medium') {
+  @include bp('large') {
     justify-content: initial;
     flex-direction: row;
     width: auto;
@@ -32,7 +32,7 @@
   padding-bottom: 1rem;
   font-size: 0.7em;
 
-  @include bp('medium') {
+  @include bp('large') {
     padding-bottom: 0;
     padding-right: 8rem;
     font-size: 1em;
@@ -44,7 +44,7 @@
   list-style: none;
   margin: 0 -1.5rem;
 
-  @include bp('medium') {
+  @include bp('large') {
     margin: 0 -2.5rem;
   }
 }
@@ -52,7 +52,7 @@
 .c-header__nav-item {
   margin: 0;
 
-  @include bp('medium') {
+  @include bp('large') {
     padding: 0 1.5rem;
   }
 
@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
 
-  @include bp-down('medium') {
+  @include bp-down('large') {
     display: none;
   }
 }
