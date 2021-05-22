@@ -99,11 +99,11 @@ If you are using [XAMP](https://www.apachefriends.org/) it would be located in `
 
 ```apacheconf
 <Directory "C:/xampp/xampp/htdocs/">
-     Options Indexes FollowSymLinks Includes ExecCGI
-     AllowOverride All
-     Order allow,deny
-     Allow from all
- </Directory>
+    Options Indexes FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+</Directory>
 
 <VirtualHost *:80>
     ServerName localhost
