@@ -71,6 +71,7 @@
 
 .c-block__image {
   width: 100%;
+  object-fit: contain;
 
   @include bp('large') {
     width: auto;

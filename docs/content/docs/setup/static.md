@@ -28,7 +28,7 @@ Additional features are available during installation, they can be also enabled 
 - _Serve dist directory in dev / don't generate pages index_: by default chisel generates index page with pages you create outside of the dist directory, this may be useful when you're working on static templates that somebody will later work on (for example different developer will integrate with backend). If you're working on a _website_ that'll be deployed from Chisel project it's probably good to enable this to match dev server behavior with deployed site.
 - _Don't include html extension in links (posts API) & support them in dev_: When enabled dev server will support urls without html extension. Additionally, when working with [content](/docs/development/static-content) html extension will be omitted from generated links.
 
-To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install
+> To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install
 
 ## 3. Setting up an existing project
 

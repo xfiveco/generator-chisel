@@ -7,7 +7,7 @@
     "description": "Craft <b>fast</b> and <b>easy to maintain</b> WordPress and static sites. Use the <b>power</b> and <b>simplicity</b> of Timber and Twig. Make your CSS <b>scalable</b> and <b>maintainable</b> with ITCSS. Get rid of tedious manual tasks with Chisel’s <b>modern development workflow.</b>",
     "buttons": [
       {
-        "link": "/docs",
+        "link": "/docs/installation",
         "text": "Get started",
         "fill": true
       },
@@ -103,7 +103,7 @@
       }
     ],
     "cta": {
-      "link": "/docs",
+      "link": "/docs/installation",
       "text": "Get started"
     }
   }
