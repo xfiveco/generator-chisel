@@ -42,7 +42,12 @@
 .c-header__nav {
   display: flex;
   list-style: none;
-  margin: 0 -1.5rem;
+  margin: 1rem -1.5rem;
+
+  @include bp-down('medium') {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
   @include bp('large') {
     margin: 0 -2.5rem;
@@ -50,7 +55,11 @@
 }
 
 .c-header__nav-item {
-  margin: 0;
+  margin: 0.8rem;
+
+  @include bp('small') {
+    margin: 0;
+  }
 
   @include bp('large') {
     padding: 0 1.5rem;
