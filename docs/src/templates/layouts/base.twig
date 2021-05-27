@@ -2,7 +2,11 @@
 <html class="no-js" lang="en" prefix="og: http://ogp.me/ns#" data-webpack-public-path="{{ getDistPath() }}">
   <head>
     <meta charset="utf-8" />
-    <title>{{ post.title }} - Chisel</title>
+    {% if post.data.template == 'template-home' %}
+      <title>Chisel - {{ post.title }}</title>
+    {% else %}
+      <title>{{ post.title }} - Chisel</title>
+    {% endif %}
     <meta name="description" content="A modern development framework for WordPress and static websites. Craft fast and easy to maintain WordPress and static sites.">
     <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
