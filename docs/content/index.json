@@ -24,7 +24,7 @@
         "height": 370
       },
       "video": {
-        "src": "https://www.youtube.com/watch?v=J7UwSVsiwzI"
+        "src": "https://www.youtube.com/watch?v=RIJ8Z_gBh5s"
       }
     }
   },
@@ -36,7 +36,7 @@
         "layout": "default",
         "title": "Simplicity and power of Timber and Twig",
         "excerpt": "Chisel is a WordPress development framework for creating easy to maintain and fast websites",
-        "description": "<p>Use Chisel to build WordPress websites based on a popular <a href=\"http://upstatement.com/timber/\">Timber</a> library. Or build a static website using the same <a href=\"http://upstatement.com/timber/\">Twig template engine</a> and store the content in markdown files.</p>",
+        "description": "<p>Use Chisel to build WordPress websites based on a popular <a href=\"http://upstatement.com/timber/\">Timber</a> library. Or build a static website using the same <a href=\"https://twig.symfony.com/\">Twig template engine</a> and store the content in markdown files.</p>",
         "image": {
           "src": "images/twig.svg",
           "alt": "Twig",
@@ -48,7 +48,7 @@
         "layout": "reversed",
         "title": "Scalable and maintainable CSS with ITCSS",
         "description":
-          "<p><a href=\"http://upstatement.com/timber/\">ITCSS</a> stands for Inverted Triangle CSS - it’s a CSS architecture created by a renowned CSS author, <a href=\"http://upstatement.com/timber/\">Harry Roberts</a>. CSS in Chisel’s projects is organized according to ITCSS and helps you to keep your project styles scalable and maintainable. </p>",
+          "<p><a href=\"https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/\">ITCSS</a> stands for Inverted Triangle CSS - it’s a CSS architecture created by a renowned CSS author, <a href=\"https://csswizardry.com/\">Harry Roberts</a>. CSS in Chisel’s projects is organized according to ITCSS and helps you to keep your project styles scalable and maintainable. </p>",
         "image": {
           "src": "images/itcss.svg",
           "alt": "ITCSS",
@@ -60,7 +60,7 @@
         "layout": "default",
         "title": "Modern development workflow",
         "description":
-          "<p>JS/SCSS bundling with hot reload, JS/SCSS linting, hashed and revisioned static assets, React support and many others... Chisel comes with a lot of features which help you to develop your project faster and with higher quality.</p>",
+          "<p>JS/SCSS bundling with hot reload, JS/SCSS linting, hashed and revisioned static assets, React support and many others... Chisel comes with a lot of <a href=\"/docs\">features</a> which help you to develop your project faster and with higher quality.</p>",
         "image": {
           "src": "images/terminal.svg",
           "alt": "Chisel Create",
