@@ -92,7 +92,7 @@
 
 .c-menu-button {
   position: absolute;
-  top: 6.6rem;
+  top: 10.6rem;
   left: calc(100% - 1px);
   height: 26px;
   width: 29px;
@@ -105,6 +105,10 @@
 
   @include bp('large') {
     display: none;
+  }
+
+  @include bp('small') {
+    top: 8.6rem;
   }
 
   .c-sidebar--active & {
