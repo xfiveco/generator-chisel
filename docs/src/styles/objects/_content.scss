@@ -168,6 +168,20 @@
     }
   }
 
+  figure {
+    position: relative;
+    padding-bottom: 56%;
+    margin-bottom: 4rem;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+
   .c-intro {
     font-weight: 600;
     margin: 2.4rem 0 0.8rem;

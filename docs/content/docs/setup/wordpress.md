@@ -4,6 +4,11 @@ excerpt: How to setup a WordPress website with Chisel
 order: 500
 ---
 
+<figure>
+  <iframe src="https://www.youtube.com/embed/RuvDddISKQo"></iframe>
+</figure>
+
+
 ## 1. Create project directory
 
 Create new project directory and change your working directory to it. You can use the following commands on the command line:
