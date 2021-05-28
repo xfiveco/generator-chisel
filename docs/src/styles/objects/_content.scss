@@ -73,7 +73,8 @@
     padding: 4px 7px;
   }
 
-  ul {
+  ul,
+  ol {
     margin-top: 2.8rem;
     margin-left: 0;
     list-style: none;
@@ -88,9 +89,27 @@
     }
   }
 
-  ul > li {
-    padding-left: 3.3rem;
+  ol {
+    counter-reset: list;
+  }
 
+  ol > li {
+    list-style: decimal;
+
+    &::marker {
+      content: none;
+    }
+
+    &::before {
+      counter-increment: list;
+      content: counter(list) '.';
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  ul > li {
     &::before {
       content: '';
       position: absolute;
@@ -100,6 +119,11 @@
       left: 0;
       background-color: $color-secondary;
     }
+  }
+
+  ol > li,
+  ul > li {
+    padding-left: 3.3rem;
   }
 
   li:not(:last-child) {
@@ -152,6 +176,10 @@
     @include bp('large') {
       font-size: 2.4rem;
       margin: 3.6rem 0 1.2rem;
+    }
+
+    a {
+      font-weight: inherit;
     }
   }
 
