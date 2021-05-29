@@ -14,8 +14,8 @@ A detailed comparison of old-school and modern web development workflows. Find o
 
 ## [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/)
 
-Improve your WordPress themes with ACF, Timber and a grain of inspiration from the MVC pattern.
+Improve your WordPress themes with ACF, Timber, and a grain of inspiration from the MVC pattern.
 
 ## [Easy-to-use Code Blocks in WordPress](https://www.xfive.co/blog/easy-use-code-blocks-wordpress/)
 
-Create easy-to-use code blocks in WordPress with ACF, Timber and Prism.js
+Create easy-to-use code blocks in WordPress with ACF, Timber, and Prism.js

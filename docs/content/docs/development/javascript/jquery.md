@@ -6,7 +6,7 @@ order: 1700
 
 ## Using jQuery plugins with webpack
 
-One of the known issues we encounter while front-end development is usage of jQuery plugins like `flexslider` alongside webpack module bundler.
+One of the known issues we encounter while front-end development is usage of the jQuery plugins like `flexslider` alongside webpack module bundler.
 
 The usual solution to that problem can be treated this way:
 
@@ -30,18 +30,18 @@ window.jQuery = window.$ = require('jquery');
 require('flexslider'); // Usually they bind to global jQuery object
 ```
 
-## Using jQuery and its plugins outside of webpack bundle
+## Using jQuery and its plugins outside of the webpack bundle
 
 <!-- ```bash
 wget https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js
 wget https://cdn.jsdelivr.net/npm/select2@4/dist/js/select2.full.min.js
 ``` -->
 
-From time to time you may stumble upon legacy jQuery plugin or one which just doesn't want to play nice with webpack. In such case you can setup the project to place jQuery and its plugins _outside of the main bundle_.
+From time to time you may stumble upon a legacy jQuery plugin or one which just doesn't want to play nice with webpack. In such a case, you can setup the project to place jQuery and its plugins _outside of the main bundle_.
 
 ### Existing project setup
 
-You can try following steps:
+You can try the following steps:
 
 #### 1) Place jquery in assets directory and load it in the template
 
@@ -52,7 +52,7 @@ Download and place jQuery (for example [`jquery.min.js`](https://cdn.jsdelivr.ne
 <script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
 ```
 
-Note: in the above example we additionally created `jquery` directory in `assets` directory.
+> Note: in the above example we additionally created the `jquery` directory in the `assets` directory.
 
 #### 2) Exclude jQuery from webpack
 
@@ -64,13 +64,13 @@ configureWebpack(config) {
 },
 ```
 
-This ensures that when jQuery is imported from one of your JS files, or linraries imported by your JS files it references global jQuery we're loading in the template instead of loading second copy of jQuery.
+This ensures that when jQuery is imported from one of your JS files, or libraries imported by your JS files it references global jQuery we're loading in the template instead of loading a second copy of jQuery.
 
 ### How to use it
 
-This setup will allow you to place plugins inside special `src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
+This setup will allow you to place plugins inside a special `src/scripts/vendor` directory. Mind they won't be picked up automatically! You need to add the plugin name in the `src/scripts/vendor.json` file. Assuming that you've placed `select2.full.min.js` inside the _vendor_, the _vendor.json_ file should look like this:
 
-When you need to use jQuery plugin that's not compatible with JS bundling tools you can place them in the assets directory and load them between jQuery and your JS.
+When you need to use a jQuery plugin that's not compatible with JS bundling tools you can place them in the assets directory and load them between jQuery and your JS.
 
 ```twig
 <script src="{{ assetPath('jquery/jquery.min.js') }}" defer></script>
@@ -84,4 +84,4 @@ When writing code it's possible to `import $ from 'jquery'` or `var $ = require(
 
 ## Library not available through npm
 
-Place it in assets directory and load in base layout like demonstrated above.
+Place it in assets directory and load in a base layout like demonstrated above.

@@ -1,20 +1,20 @@
 ---
 title: Code Quality
-excerpt: Chisel uses various tools to increase quality of your code
+excerpt: Chisel uses various tools to increase the quality of your code
 order: 1800
 ---
 
 ## [Prettier](https://prettier.io/) - code formatter
 
-Prettier is a code formatter which can automatically format your code when you save file. Your code then automatically conforms to the project's coding standards and passes linter checks.
+Prettier is a code formatter which can automatically format your code when you save a file. Your code then automatically conforms to the project's coding standards and passes linter checks.
 
 Prettier comes preinstalled with Chisel and it's synced with Eslint and stylelint (see below).
 
-One of the easiest ways to use Prettier is to install a plugin for your favourite editor. See _Editor Support_ section on [Prettier's homepage](https://prettier.io/).
+One of the easiest ways to use Prettier is to install a plugin for your favorite editor. See _Editor Support_ section on [Prettier's homepage](https://prettier.io/).
 
 ## [ESLint](https://eslint.org/) - JavaScript linter
 
-ESLint is JavaScript linter which analyze your JavaScript source code for potential errors, stylistic issues, etc.
+ESLint is a JavaScript linter which analyzes your JavaScript source code for potential errors, stylistic issues, etc.
 
 ## [stylelint](https://stylelint.io/) - CSS linter
 

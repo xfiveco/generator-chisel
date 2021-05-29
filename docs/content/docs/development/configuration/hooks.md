@@ -4,7 +4,7 @@ excerpt: Hooks are listeners to events happening inside Chisel allowing you to i
 order: 1975
 ---
 
-Please note that while list of available hooks is limited we're open to adding more when necessary.
+Please note that while the list of available hooks is limited we're open to adding more when necessary.
 
 ## Shared (available in both WordPress and Static projects)
 
@@ -14,7 +14,7 @@ Called before plugins are initialized, allows you to modify the plugins that wil
 
 ### `pluginsInitialized`
 
-Called after all plugins has been initialized.
+Called after all plugins have been initialized.
 
 ## WordPress Websites
 

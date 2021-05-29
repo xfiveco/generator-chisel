@@ -34,7 +34,7 @@ When you add a page on WordPress project:
 
 ### Static Website
 
-In Static project in creates Twig template in `src/templates` directory or it creates Twig templates or markdown files in `content` directory if it is used. The project index is regenerated (if it's used) and the page is added to it.
+In Static project, it creates Twig template in `src/templates` directory or it creates Twig templates or markdown files in `content` directory if it is used. The project index is regenerated (if it's used) and the page is added to it.
 
 ## Removing pages
 

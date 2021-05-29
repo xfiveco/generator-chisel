@@ -1,13 +1,13 @@
 ---
 title: Documentation
-excerpt: Chisel comes with a lot of features which help you to develop your project faster and with higher quality.
+excerpt: Chisel comes with a lot of features that help you to develop your project faster and with higher quality.
 order: 100
 ---
 
-- automatic [WP-CLI](http://wp-cli.org/) based WordPress installation
-- automatic installation of [Timber](http://upstatement.com/timber/) and [Disable Emojis](https://wordpress.org/plugins/disable-emojis/) plugin, optional installation of other plugins like [ACF](https://www.advancedcustomfields.com/)
+- automatic [WP-CLI](https://wp-cli.org/) based WordPress installation
+- automatic installation of [Timber](https://upstatement.com/timber/) and [Disable Emojis](https://wordpress.org/plugins/disable-emojis/) plugin, optional installation of other plugins like [ACF](https://www.advancedcustomfields.com/)
 - Chisel WordPress starter theme with a logical, easy to follow structure
-- [Twig](http://twig.sensiolabs.org/) templating engine
+- [Twig](https://twig.sensiolabs.org/) templating engine
 - webpack based JS/SCSS bundling with hot reload in dev mode
 - creation of separate non-minified bundles during build
 - SCSS with [ITCSS architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)

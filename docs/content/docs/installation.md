@@ -8,7 +8,7 @@ _These installations need to be done just once so you can skip this section if y
 
 ## Node.js
 
-Install [Node.js](http://nodejs.org/) so you can work with `npm`, Node package manager. Version 10.14.2+ or 12+ is required.
+Install [Node.js](https://nodejs.org/) so you can work with `npm`, Node package manager. Version 10.14.2+ or 12+ is required.
 
 ## Chisel
 
@@ -28,20 +28,20 @@ yarn global add generator-chisel@next
 npm -g install generator-chisel@next
 ```
 
-## Apache, PHP and MySQL
+## Apache, PHP, and MySQL
 
-If you want to develop WordPress projects, you need to install Apache, PHP and MySQL. The easiest option is to use development environments like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org). If using MAMP, check _Allow network access to MySQL_.
+If you want to develop WordPress projects, you need to install Apache, PHP, and MySQL. The easiest option is to use development environments like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org). If using MAMP, check _Allow network access to MySQL_.
 
-If you are on macOS, we recommend to install necessary packages with Homebrew according the following guides:
+If you are on macOS, we recommend to install necessary packages with Homebrew according to the following guides:
 
-- [macOS 10.14 Mojave Apache Setup: Multiple PHP Versions](https://getgrav.org/blog/macos-mojave-apache-multiple-php-versions) - skip multiple PHP versions installation if you want
-- [macOS 10.14 Mojave Apache Setup: MySQL, APC & More...](https://getgrav.org/blog/macos-mojave-apache-mysql-vhost-apc) - you can skip YAML and Xdebug installation
+- [macOS 11.0 Big Sur Apache Setup: Multiple PHP Versions](https://getgrav.org/blog/macos-bigsur-apache-multiple-php-versions) - skip multiple PHP versions installation if you want
+- [macOS 11.0 Big Sur Apache Setup: MySQL, Xdebug & More...](https://getgrav.org/blog/macos-bigsur-apache-mysql-vhost-apc) - you can skip YAML and Xdebug installation
 
 ### Known Issues
 
 #### `mysql` or `mysqlcheck` not found
 
-Chisel is using [WP-CLI](http://wp-cli.org/) for most WP-related operations. WP-CLI is using `mysql` and `mysqlcheck` binaries, so check out if you have `mysql` and `mysqlcheck` binaries in your `$PATH` by running the following commands:
+Chisel is using [WP-CLI](https://wp-cli.org/) for most WP-related operations. WP-CLI is using `mysql` and `mysqlcheck` binaries, so check out if you have `mysql` and `mysqlcheck` binaries in your `$PATH` by running the following commands:
 
 ```bash
 mysql --version

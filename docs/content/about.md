@@ -4,7 +4,6 @@ excerpt: Chisel is a creation of <a href="https://www.xfive.co/" target="_blank"
 order: 100
 ---
 
-##
 At Xfive we love WordPress but we think that WordPress development could be a slightly more pleasant experience. That’s why we are fans of [Timber library](https://upstatement.com/timber/). 
 
 A few years ago we created Chisel, a tool for creating and developing WordPress themes based on Timber.

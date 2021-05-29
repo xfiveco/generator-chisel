@@ -4,17 +4,17 @@ excerpt: This step is optional but highly recommended if you develop WordPress p
 order: 300
 ---
 
-It will ensure that each new local development domain will work out of box on your computer and you won’t have to edit `hosts` and `httpd-vhosts.conf` files every time. This is achieved by setting up wildcard virtual hosts and DNS.
+It will ensure that each new local development domain will work out of the box on your computer and you won’t have to edit `hosts` and `httpd-vhosts.conf` files every time. This is achieved by setting up wildcard virtual hosts and DNS.
 
 ## macOS
 
-Throughout this guide we assume that your username is `developer` and you store your projects inside `~/Projects` directory.
+Throughout this guide, we assume that your username is `developer` and you store your projects inside `~/Projects` directory.
 
-Based on awesome tutorial from [Chris Millinson](https://mallinson.ca/osx-web-development/).
+Based on an awesome tutorial from [Chris Mallinson](https://mallinson.ca/osx-web-development/).
 
-This tutorial assumes you have MySQL and Apache installed (they come by default with macOS). If you use MAMP, use it as you like, but this tutorial aims for built-in Apache & MySQL setup. You can find additional information about where MAMP stores its config files [in this article](http://foundationphp.com/tutorials/vhosts_mamp.php).
+This tutorial assumes you have MySQL and Apache installed (they come by default with macOS). If you use MAMP, use it as you like, but this tutorial aims for a built-in Apache & MySQL setup. You can find additional information about where MAMP stores its config files [in this article](https://dev.to/crankysparrow/configuring-virtual-hosts-with-mamp-f3i).
 
-Make sure you have Xcode (`xcode-select --install`) and [brew](http://brew.sh/) installed.
+Make sure you have Xcode (`xcode-select --install`) and [brew](https://brew.sh/) installed.
 
 ### 1. Install and setup `dnsmasq`
 
@@ -67,7 +67,7 @@ sudo apachectl restart
 
 ## Linux
 
-Follow the article here: [http://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns](http://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns).
+Follow the article here: [https://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns](https://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns).
 
 ## Windows
 
@@ -75,7 +75,7 @@ Follow the article here: [http://brunodbo.be/blog/2013/04/26/setting-up-wildcard
 
 This is for `*.test` domain wildcarding
 
-Download and install [Acrylic DNS Proxy](http://mayakron.altervista.org/wikibase/show.php?id=AcrylicHome), then set it up at your system, eg. [Windows 10](http://mayakron.altervista.org/wikibase/show.php?id=AcrylicWindows10Configuration).
+Download and install [Acrylic DNS Proxy](https://mayakron.altervista.org/wikibase/show.php?id=AcrylicHome), then set it up at your system, eg. [Windows 10](http://mayakron.altervista.org/support/acrylic/Windows10Configuration.htm).
 
 Add `127.0.0.1 *.test` to **AcrylicHosts.txt** file so it looks like:
 
@@ -126,7 +126,7 @@ Restart Apache from the XAMPP control.
 
 Now your projects inside `~/Projects` directory (`c:\xampp\htdocs\test` on Windows) will directly map to `*.test` host, so:
 
-- `/User/developer/Projects/testproject` (`c:\xampp\htdocs\test\testproject`) will be available under `http://testproject.test`
-- `/User/developer/Projects/mywork` (`c:\xampp\htdocs\test\mywork`) will be available under `http://mywork.test`
+- `/User/developer/Projects/testproject` (`c:\xampp\htdocs\test\testproject`) will be available under `https://testproject.test`
+- `/User/developer/Projects/mywork` (`c:\xampp\htdocs\test\mywork`) will be available under `https://mywork.test`
 
 And so on. Chisel will set up BrowserSync proxy for you under `your-project-name.test` address. It's advisable that you name your project (during `chisel create` command) exactly the same as the directory you're in, so there's no need for you to configure anything.

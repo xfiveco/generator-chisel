@@ -46,7 +46,7 @@ After project dependencies are installed and WordPress is downloaded you'll be a
 - _Enter the database user_: user who can access the database
 - _Enter the database password_: password for the user
 
-> To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install.
+> To speedup installation process we recommend using [Yarn](https://classic.yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install.
 
 ## 3. Set up virtual host
 

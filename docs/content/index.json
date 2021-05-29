@@ -36,7 +36,7 @@
         "layout": "default",
         "title": "Simplicity and power of Timber and Twig",
         "excerpt": "Chisel is a WordPress development framework for creating easy to maintain and fast websites",
-        "description": "<p>Use Chisel to build WordPress websites based on a popular <a href=\"http://upstatement.com/timber/\">Timber</a> library. Or build a static website using the same <a href=\"https://twig.symfony.com/\">Twig template engine</a> and store the content in markdown files.</p>",
+        "description": "<p>Use Chisel to build WordPress websites based on a popular <a href=\"https://upstatement.com/timber/\">Timber</a> library. Or build a static website using the same <a href=\"https://twig.symfony.com/\">Twig template engine</a> and store the content in markdown files.</p>",
         "image": {
           "src": "images/twig.svg",
           "alt": "Twig",
