@@ -73,4 +73,4 @@ If you are joining development of an existing WordPress project which was alread
 1. Clone the repository.
 1. Run `npm install` or `yarn` and `npm run build`.
 1. Run `npx chisel-scripts wp-config`, it will create the database if necessary and then create _wp-config-local.php_ and generate _dev-vhost.conf_.
-1. Import DB dump or enable _WP Sync DB_ plugin and use it to import database and files. Check out the wiki page explaining how you can [use WP Sync DB plugin to migrate database](https://github.com/xfiveco/generator-chisel/wiki/Setting-up-WordPress-projects-at-Getfives).
+1. Import DB dump or enable _WP Sync DB_ plugin and use it to import database and files. Check out the wiki page explaining how you can [use WP Sync DB plugin to migrate database](https://wptips.dev/wp-sync-db/).

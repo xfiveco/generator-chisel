@@ -67,7 +67,7 @@ sudo apachectl restart
 
 ## Linux
 
-Follow the article here: [https://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns](https://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns).
+Follow the article here: [https://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns](https://web.archive.org/web/20200219082058/http://brunodbo.be/blog/2013/04/26/setting-up-wildcard-apache-virtual-host-wildcard-dns).
 
 ## Windows
 
