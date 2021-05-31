@@ -12,7 +12,7 @@
       </div>
       <div class="c-hero__media{{args.media.video ? ' js-video'}}" data-src="{{ args.media.video.src }}">
         <div class="c-hero__media-wrapper">
-          {% if args.media.image %}
+          {% if args.media.image and not args.media.video %}
             <img
               class="c-hero__image js-poster"
               src="{{ assetPath(args.media.image.src) }}"
@@ -22,17 +22,9 @@
             />
           {% endif %}
           {% if args.media.video %}
-            <button
-              aria-label="Play video button"
-              type="button"
-              class="c-hero__video-button c-btn c-btn--video o-icons o-icons--play js-video-button"
-            ></button>
-            <div class="c-hero__video-output js-video-output"></div>
-            <noscript>
-              <div class="c-hero__noscript">
-                  <p>This video requires JavaScript to play</p>
-              </div>
-            </noscript>
+            <figure>
+              <iframe class="c-hero__video" src="https://www.youtube.com/embed/RuvDddISKQo"></iframe>
+            </figure>
           {% endif %}
         </div>
       </div>
