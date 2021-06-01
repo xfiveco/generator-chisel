@@ -7,7 +7,7 @@ order: 100
 What follows is an outline of particular documentation sections:
 
 ## [Features](/docs/features)
-Chisel features will make your developer’s life easier.
+Chisel features that will make your developer’s life easier.
 
 ## [Installation](/docs/installation)
 
