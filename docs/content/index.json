@@ -29,7 +29,7 @@
     }
   },
   "whychisel" : {
-    "sectionTitle": "Why <strong>Chisel</strong>",
+    "sectionTitle": "Why <span class=\"c-highlight\">Chisel</span>",
     "ctaLink": "If you like Chisel, give it a star on <a href=\"https://github.com/xfiveco/generator-chisel\">GitHub!</a>",
     "blocks": [
       {
@@ -71,7 +71,7 @@
     ]
   },
   "slider": {
-    "title": "Built with <strong>Chisel</strong>",
+    "title": "Built with <span class=\"c-highlight\">Chisel</span>",
     "images": [
       {
         "src": "images/monte-carlo.png",

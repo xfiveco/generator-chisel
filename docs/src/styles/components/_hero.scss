@@ -4,7 +4,7 @@
 
 .c-hero__inner {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   flex-direction: column-reverse;
 
   @include bp('large') {
