@@ -23,7 +23,7 @@
           {% endif %}
           {% if args.media.video %}
             <figure>
-              <iframe class="c-hero__video" src="https://www.youtube.com/embed/RuvDddISKQo"></iframe>
+              <iframe class="c-hero__video" src="{{ args.media.video.src }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </figure>
           {% endif %}
         </div>
