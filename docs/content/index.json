@@ -24,7 +24,7 @@
         "height": 370
       },
       "video": {
-        "src": "https://www.youtube.com/watch?v=RIJ8Z_gBh5s"
+        "src": "https://www.youtube.com/embed/RIJ8Z_gBh5s"
       }
     }
   },
@@ -60,7 +60,7 @@
         "layout": "default",
         "title": "Modern development workflow",
         "description":
-          "<p>JS/SCSS bundling with hot reload, JS/SCSS linting, hashed and revisioned static assets, React support and many others... Chisel comes with a lot of <a href=\"/docs\">features</a> which help you to develop your project faster and with higher quality.</p>",
+          "<p>JS/SCSS bundling with hot reload, JS/SCSS linting, hashed and revisioned static assets, React support and many others... Chisel comes with a lot of <a href=\"/docs/features\">features</a> which help you to develop your project faster and with higher quality.</p>",
         "image": {
           "src": "images/terminal.svg",
           "alt": "Chisel Create",
