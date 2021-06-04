@@ -33,7 +33,7 @@
   }
 
   @include bp('large') {
-    width: 37.5%;
+    width: 40%;
   }
 
   .c-block--reversed & {
@@ -43,7 +43,7 @@
     }
 
     @include bp('large') {
-      width: 33%;
+      width: 40%;
     }
   }
 
@@ -80,10 +80,6 @@
 
 .c-block__title {
   font-size: 2.4rem;
-
-  @include bp('large') {
-    max-width: 320px;
-  }
 }
 
 .c-block__post-entry {
