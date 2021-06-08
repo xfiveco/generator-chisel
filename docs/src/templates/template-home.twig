@@ -1,8 +1,8 @@
 {% extends "layouts/base.twig" %}
 
 {% block content %}
-  {% include 'components/hero.twig' with { 'args': post.data.hero } %}
-  {% include 'components/why-chisel.twig' with { 'args': post.data.whychisel } %}
-  {% include 'components/slider.twig' with { 'args': post.data.slider } %}
-  <div class="margin-bottom-6 margin-bottom-large-8"></div>
+	{% include 'components/hero.twig' with { 'args': post.data.hero } %}
+	{% include 'components/why-chisel.twig' with { 'args': post.data.whychisel } %}
+	{% include 'components/slider.twig' with { 'args': post.data.slider } %}
+	<div class="margin-bottom-6 margin-bottom-large-8"></div>
 {% endblock %}

@@ -10,7 +10,7 @@
           {% endfor %}
         </div>
       </div>
-      <div class="c-hero__media{{args.media.video ? ' js-video'}}" data-src="{{ args.media.video.src }}">
+      <div class="c-hero__media">
         <div class="c-hero__media-wrapper">
           {% if args.media.image and not args.media.video %}
             <img
@@ -23,7 +23,14 @@
           {% endif %}
           {% if args.media.video %}
             <figure>
-              <iframe class="c-hero__video" src="{{ args.media.video.src }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                class="c-hero__video"
+                src="{{ args.media.video.src }}"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </figure>
           {% endif %}
         </div>
