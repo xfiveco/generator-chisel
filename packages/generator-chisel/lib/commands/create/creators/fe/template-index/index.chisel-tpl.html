@@ -157,6 +157,15 @@
       .c-page:hover .c-page__name {
         color: #ff6d54
       }
+
+      .c-section__code {
+        padding: 0.9rem 0.8rem;
+        overflow: auto;
+        display: block;
+        background: #2d2b57;
+        color: #e3dfff;
+        border-radius: 10px;
+      }
     </style>
     <script type="text/x-chisel-pages-template">
       <ul class="c-list">
@@ -188,35 +197,11 @@
           <h2 class="c-heading">Pages</h2>
           <div class="c-section__note">
             To add more pages run:
-            <pre><code>npm run add-page 'My Awesome Page'</code></pre>
+            <pre><code class="c-section__code">npm run add-page 'My Awesome Page'</code></pre>
             or
-            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+            <pre><code class="c-section__code">yarn add-page 'My Awesome Page'</code></pre>
           </div>
-
-          <ul class="c-list">
-            <li>
-              <a href="dist/home.html" class="c-page">
-                <span class="c-page__link">Home</span>
-                <span class="c-page__name">home.html</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="dist/about.html" class="c-page">
-                <span class="c-page__link">About</span>
-                <span class="c-page__name">about.html</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="dist/contact.html" class="c-page">
-                <span class="c-page__link">Contact</span>
-                <span class="c-page__name">contact.html</span>
-              </a>
-            </li>
-
-            <!-- CHISEL-PAGES -->
-          </ul>
+          <!-- CHISEL-PAGES-LIST -->
         </div>
       </div>
       <!-- /c-section -->
