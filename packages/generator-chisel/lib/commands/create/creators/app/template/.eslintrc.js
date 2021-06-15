@@ -1,5 +1,5 @@
 process.env.CHISEL_CONTEXT = __dirname;
-const chiselConfig = require('./chisel.config.js');
+const chiselConfig = require('./chisel.config');
 
 let extend = 'chisel';
 
