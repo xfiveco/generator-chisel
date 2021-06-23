@@ -6,5 +6,5 @@ module.exports = {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
   },
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
 };
