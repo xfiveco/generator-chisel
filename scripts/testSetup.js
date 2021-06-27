@@ -185,7 +185,8 @@ global.chiselTestHelpers = {
         .replace(/dbrand\d+/g, '--DB-RAND--')
         .split(process.cwd())
         .join('--PROJECT-PATH--')
-        .replace(/(?<=--PROJECT-PATH--)\\/g, '/'),
+        .replace(/(?<=--PROJECT-PATH--)\\/g, '/')
+        .replace(/Copyright &copy; 202\d /g, 'Copyright &copy; 2020 '),
     ).toMatchSnapshot();
   },
 
