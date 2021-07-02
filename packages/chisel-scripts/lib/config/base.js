@@ -170,7 +170,7 @@ module.exports = (api, options) => {
       // keep chunk ids stable so async chunks have consistent hash (#1916)
       webpackConfig
         .plugin('named-chunks')
-        .use(require('webpack/lib/NamedChunksPlugin'), [
+        .use(require('webpack/lib/ids/NamedChunkIdsPlugin'), [
           (chunk) => {
             if (chunk.name) {
               return chunk.name;
@@ -187,7 +187,7 @@ module.exports = (api, options) => {
       // keep module.id stable when vendor modules does not change
       webpackConfig
         .plugin('hash-module-ids')
-        .use(require('webpack/lib/HashedModuleIdsPlugin'), [
+        .use(require('webpack/lib/ids/HashedModuleIdsPlugin'), [
           { hashDigest: 'hex' },
         ]);
 

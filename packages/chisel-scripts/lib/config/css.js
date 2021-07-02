@@ -24,7 +24,7 @@ module.exports = (api, options) => {
     };
 
     const extractCssLoaderOptions = {
-      hmr: !isProd,
+      // hmr: !isProd,
       publicPath: path.relative(
         api.resolve(path.join(options.source.base, options.source.styles)),
         api.resolve(options.source.base),
