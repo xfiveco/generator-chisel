@@ -30,7 +30,7 @@ module.exports = class InjectRevisioned {
 
       chunks.forEach((chunk) => {
         // console.log(chunk);
-        // console.log(chunk.names, chunk.name);
+        // console.log('chunk name', chunk.names[0]);
         // console.log(chunk.files);
         chunk.files
           .filter((file) => !file.includes('hot-update'))
@@ -38,7 +38,7 @@ module.exports = class InjectRevisioned {
             const ext = getFileType(file);
             const name = path.posix.join(
               path.posix.dirname(file),
-              `${path.posix.basename(chunk.id)}.${ext}`,
+              `${path.posix.basename(chunk.names[0])}.${ext}`,
             );
 
             map[name] = file;
