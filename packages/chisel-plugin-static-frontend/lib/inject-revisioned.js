@@ -21,33 +21,28 @@ module.exports = class InjectRevisioned {
   apply(compiler) {
     let chunksMap = {};
 
-    compiler.hooks.emit.tap('InjectRevisioned', (compilation) => {
-      const map = {};
-      const { chunks } = compilation
-        .getStats()
-        // .toJson();
-        .toJson({ all: false, chunks: true });
+    compiler.hooks.thisCompilation.tap('InjectRevisioned', (compilation) => {
+      compilation.hooks.processAssets.tap('InjectRevisioned', () => {
+        const map = {};
+        const { chunks } = compilation
+          .getStats()
+          .toJson({ all: false, chunks: true });
 
-      chunks.forEach((chunk) => {
-        // console.log(chunk);
-        // console.log('chunk name', chunk.names[0]);
-        // console.log(chunk.files);
-        chunk.files
-          .filter((file) => !file.includes('hot-update'))
-          .forEach((file) => {
-            const ext = getFileType(file);
-            const name = path.posix.join(
-              path.posix.dirname(file),
-              `${path.posix.basename(chunk.names[0])}.${ext}`,
-            );
+        chunks.forEach((chunk) => {
+          chunk.files
+            .filter((file) => !file.includes('hot-update'))
+            .forEach((file) => {
+              const ext = getFileType(file);
+              const name = path.posix.join(
+                path.posix.dirname(file),
+                `${path.posix.basename(chunk.names[0])}.${ext}`,
+              );
 
-            map[name] = file;
-          });
-      });
-
-      // console.log(map);
-
-      chunksMap = map;
+              map[name] = file;
+            });
+        });
+        chunksMap = map;
+      })
     });
 
     compiler.hooks.compilation.tap('InjectRevisioned', (compilation) => {
