@@ -21,10 +21,11 @@
     <%= app.projectType == 'fe' ? `"chisel-plugin-static-frontend": "*",` : '' %>
     "babel-preset-chisel": "*",
     <% /* version 10 requires postcss 8 (postcss-normalize, and autoprefixer) */ %>
-    "postcss-normalize": "^9.0.0",
-    "autoprefixer": "^9.8.6",
+    "postcss-normalize": "^10.0.0",
+    "autoprefixer": "^10.3.1",
     <% /* required by postcss-normalize for some reason  */ %>
     "browserslist": "^4.16.6",
+    "postcss": "^8.3.5",
     "chisel-plugin-code-style": "*",
     "chisel-scripts": "*"
   },
