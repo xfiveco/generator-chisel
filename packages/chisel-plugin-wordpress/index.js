@@ -44,7 +44,9 @@ module.exports = (api, options) => {
         {
           fileName: `manifest${!isProd ? '-dev' : ''}.json`,
           writeToFileEmit: !isProd,
+          publicPath: '',
           map(obj) {
+
             if (obj.isAsset && obj.name.startsWith(`${outDir}/`)) {
               obj.name = obj.name.replace(/\.[\da-f]{8}(?=(?:\.[^.]*)?$)/, '');
             }
