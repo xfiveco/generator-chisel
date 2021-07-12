@@ -85,7 +85,7 @@ module.exports = (api, options) => {
     if (isProd) {
       webpackConfig
         .plugin('style-only-entries')
-        .use(require('webpack-fix-style-only-entries'), [{ silent: true }]);
+        .use(require('webpack-remove-empty-scripts'), []);
     }
   });
 };
