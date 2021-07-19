@@ -6,8 +6,8 @@ Array [
   Array [
     "  [36m[1mFile[22m[39m                             [36m[1mSize[22m[39m                 [36m[1mGzipped[22m[39m
 
-  [32mscripts/app.98db252c.full.js[39m     4.41 KiB             1.35 KiB
-  [32mscripts/app.98db252c.js[39m          1.18 KiB             0.59 KiB
+  [32mscripts/app.b6c8c19f.full.js[39m     4.41 KiB             1.35 KiB
+  [32mscripts/app.7f7c4ccf.js[39m          1.18 KiB             0.59 KiB
   [34mstyles/main.--HASH--.full.css[39m    18.92 KiB            4.85 KiB
   [34mstyles/main.--HASH--.css[39m         5.25 KiB             1.88 KiB
 
@@ -19,9 +19,9 @@ Array [
 
 exports[`FE Build Generate and build FE Project and process twigs and assets 2`] = `
 Array [
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.7f7c4ccf.js",
+  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -34,8 +34,8 @@ Array [
   Array [
     "  [36m[1mFile[22m[39m                             [36m[1mSize[22m[39m                 [36m[1mGzipped[22m[39m
 
-  [32mscripts/app.98db252c.full.js[39m     4.41 KiB             1.35 KiB
-  [32mscripts/app.98db252c.js[39m          1.18 KiB             0.59 KiB
+  [32mscripts/app.b6c8c19f.full.js[39m     4.41 KiB             1.35 KiB
+  [32mscripts/app.7f7c4ccf.js[39m          1.18 KiB             0.59 KiB
   [34mstyles/main.--HASH--.full.css[39m    18.92 KiB            4.85 KiB
   [34mstyles/main.--HASH--.css[39m         5.25 KiB             1.88 KiB
 
@@ -52,9 +52,9 @@ Array [
   "dist/assets/nested/hello.450876f6.txt",
   "dist/nested/public.jpg",
   "dist/public.txt",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.7f7c4ccf.js",
+  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/some-page.html",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
@@ -75,7 +75,7 @@ exports[`FE Build Generate and build FE Project and process twigs and assets 5`]
   <script>
     document.documentElement.classList.remove('no-js');
   </script>
-  <script src=\\"scripts/app.98db252c.js\\" defer></script>
+  <script src=\\"scripts/app.7f7c4ccf.js\\" defer></script>
 </head>
 
 <body class=\\"\\">
