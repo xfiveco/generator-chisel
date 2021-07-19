@@ -166,13 +166,14 @@ global.chiselTestHelpers = {
     });
 
     if (consoleMock.mock.calls[1] && consoleMock.mock.calls[1][0]) {
-      // in Ci in Node 12 there is difference in gzip compression
-      // ex. https://travis-ci.org/github/xfiveco/generator-chisel/jobs/712710842
-      if (parseInt(process.versions.node.split('.')[0], 10) >= '12') {
-        consoleMock.mock.calls[1][0] = consoleMock.mock.calls[1][0].replace(
-          '4.78 KiB',
-          '4.79 KiB',
-        );
+      // in Ci in Node 12 and 14 there is difference in gzip compression
+      // ex. https://travis-ci.com/github/jakub300/generator-chisel/builds/231019589
+      const nodeVersion = parseInt(process.versions.node.split('.')[0], 10);
+      const call = consoleMock.mock.calls[1][0];
+      if (nodeVersion === 10) {
+        consoleMock.mock.calls[1][0] = call.replace('4.86 KiB', '4.85 KiB');
+      } else if (nodeVersion === 12) {
+        consoleMock.mock.calls[1][0] = call.replace('1.87 KiB', '1.88 KiB');
       }
     }
   },
@@ -185,7 +186,8 @@ global.chiselTestHelpers = {
         .replace(/dbrand\d+/g, '--DB-RAND--')
         .split(process.cwd())
         .join('--PROJECT-PATH--')
-        .replace(/(?<=--PROJECT-PATH--)\\/g, '/'),
+        .replace(/(?<=--PROJECT-PATH--)\\/g, '/')
+        .replace(/Copyright &copy; 202\d /g, 'Copyright &copy; 2020 '),
     ).toMatchSnapshot();
   },
 
