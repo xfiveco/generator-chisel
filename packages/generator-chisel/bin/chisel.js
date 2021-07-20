@@ -32,7 +32,6 @@ const createProgram = () => {
       'link Chisel packages (yarn link) in created project (for development)',
     )
     .action((...args) => {
-      console.log('COMMANDER TEST', args);
       const cmd = args.slice(-1)[0];
       args = args.slice(0, -1);
       return handlePromise(require('../lib/commands/create')({ args, cmd }));
