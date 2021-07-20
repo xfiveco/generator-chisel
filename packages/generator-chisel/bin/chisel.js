@@ -15,6 +15,7 @@ const handlePromise = (promise) =>
 const createProgram = () => {
   const program = new Command();
 
+  // TODO: commander got some big updates I think its breaking here.
   program
     .command('create')
     .description('create a new project powered by Chisel')
@@ -31,6 +32,7 @@ const createProgram = () => {
       'link Chisel packages (yarn link) in created project (for development)',
     )
     .action((...args) => {
+      console.log('COMMANDER TEST', args);
       const cmd = args.slice(-1)[0];
       args = args.slice(0, -1);
       return handlePromise(require('../lib/commands/create')({ args, cmd }));

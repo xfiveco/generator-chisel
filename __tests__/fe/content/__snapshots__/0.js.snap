@@ -3,12 +3,12 @@
 exports[`FE Content Simple 1`] = `
 Array [
   "dist/hello.html",
-  "dist/scripts/app.b6c8c19f.full.js",
   "dist/scripts/app.7f7c4ccf.js",
   "dist/scripts/app.7f7c4ccf.js.map",
+  "dist/scripts/app.b6c8c19f.full.js",
+  "dist/styles/main.--HASH--.full.css",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
-  "dist/styles/main.--HASH--.full.css",
 ]
 `;
 

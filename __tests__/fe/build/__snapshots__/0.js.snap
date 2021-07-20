@@ -19,12 +19,12 @@ Array [
 
 exports[`FE Build Generate and build FE Project and process twigs and assets 2`] = `
 Array [
-  "dist/scripts/app.b6c8c19f.full.js",
   "dist/scripts/app.7f7c4ccf.js",
   "dist/scripts/app.7f7c4ccf.js.map",
+  "dist/scripts/app.b6c8c19f.full.js",
+  "dist/styles/main.--HASH--.full.css",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
-  "dist/styles/main.--HASH--.full.css",
 ]
 `;
 
@@ -52,13 +52,13 @@ Array [
   "dist/assets/nested/hello.450876f6.txt",
   "dist/nested/public.jpg",
   "dist/public.txt",
-  "dist/scripts/app.b6c8c19f.full.js",
   "dist/scripts/app.7f7c4ccf.js",
   "dist/scripts/app.7f7c4ccf.js.map",
+  "dist/scripts/app.b6c8c19f.full.js",
   "dist/some-page.html",
+  "dist/styles/main.--HASH--.full.css",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
-  "dist/styles/main.--HASH--.full.css",
   "dist/very/deeply/nested/file.png",
 ]
 `;
