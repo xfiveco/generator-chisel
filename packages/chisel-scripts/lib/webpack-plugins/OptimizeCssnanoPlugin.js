@@ -19,63 +19,67 @@ function OptimizeCssnanoPlugin(options) {
   }, options);
 
   if (this.options.sourceMap) {
-    this.options.sourceMap = Object.assign(
-      {inline: false},
+    this.options.sourceMap = Object.assign({
+        inline: false
+      },
       this.options.sourceMap || {});
   }
 }
 
-OptimizeCssnanoPlugin.prototype.apply = function(compiler) {
+OptimizeCssnanoPlugin.prototype.apply = function (compiler) {
   const self = this;
 
-  compiler.hooks.emit.tapAsync('OptimizeCssnanoPlugin',
-    function(compilation, callback) {
-      // Search for CSS assets
-      const assetsNames = Object.keys(compilation.assets)
-        .filter((assetName) => {
-          return /(?<!\.full)\.css$/i.test(assetName);
-        });
+  compiler.hooks.thisCompilation.tap('OptimizeCssnanoPlugin', (compilation) => {
+    compilation.hooks.optimizeModules.tap({
+      name: 'OptimizeCssnanoPlugin',
+      stage: compilation.PROCESS_ASSETS_STAGE_OPTIMIZE,
+      additionalAssets: (assets, callback) => {
+        // Search for CSS assets
 
-      let hasErrors = false;
-      const promises = [];
-      // Generate promises for each minification
-      assetsNames.forEach((assetName) => {
-        // Original CSS
-        const asset = compilation.assets[assetName];
-        const originalCss = asset.source();
+        const assetsNames = Object.keys(compilation.assets)
+          .filter((assetName) => {
+            return /(?<!\.full)\.css$/i.test(assetName);
+          });
 
-        // Options for particalar cssnano call
-        const postCssOptions = {
-          from: assetName,
-          to: assetName,
-          map: false,
-        };
-        const cssnanoOptions = self.options.cssnanoOptions;
+        let hasErrors = false;
+        const promises = [];
 
-        // Extract or remove previous map
-        const mapName = assetName + '.map';
-        if (self.options.sourceMap) {
-          // Use previous map if exist...
-          if (compilation.assets[mapName]) {
-            const mapObject = JSON.parse(compilation.assets[mapName].source());
+        // Generate promises for each minification
+        assetsNames.forEach((assetName) => {
+          // Original CSS
+          const asset = compilation.assets[assetName];
+          const originalCss = asset.source();
 
-            // ... and not empty
-            if (mapObject.sources.length > 0 || mapObject.mappings.length > 0) {
-              postCssOptions.map = Object.assign({
-                prev: compilation.assets[mapName].source(),
-              }, self.options.sourceMap);
-            } else {
-              postCssOptions.map = Object.assign({}, self.options.sourceMap);
+          // Options for particalar cssnano call
+          const postCssOptions = {
+            from: assetName,
+            to: assetName,
+            map: false,
+          };
+          const cssnanoOptions = self.options.cssnanoOptions;
+          // Extract or remove previous map
+          const mapName = assetName + '.map';
+          if (self.options.sourceMap) {
+            // Use previous map if exist...
+            if (compilation.assets[mapName]) {
+              // ... and not empty
+              if (mapObject.sources.length > 0 || mapObject.mappings.length > 0) {
+                postCssOptions.map = Object.assign({
+                  prev: compilation.assets[mapName].source(),
+                }, self.options.sourceMap);
+              } else {
+                postCssOptions.map = Object.assign({}, self.options.sourceMap);
+              }
             }
+          } else {
+            delete compilation.assets[mapName];
           }
-        } else {
-          delete compilation.assets[mapName];
-        }
 
-        // Run minification
-        const promise = postcss([cssnano(cssnanoOptions)])
-          .process(originalCss, postCssOptions)
-          .then((result) => {
+          // Run minification
+          const promise = postcss([cssnano(cssnanoOptions)])
+            .process(originalCss, postCssOptions)
+            .then((result) => {
+
               if (hasErrors) {
                 return;
               }
@@ -83,10 +87,10 @@ OptimizeCssnanoPlugin.prototype.apply = function(compiler) {
               // Extract CSS back to assets
               const processedCss = result.css;
               compilation.assets[assetName] = {
-                source: function() {
+                source: function () {
                   return processedCss;
                 },
-                size: function() {
+                size: function () {
                   return processedCss.length;
                 },
               };
@@ -96,30 +100,30 @@ OptimizeCssnanoPlugin.prototype.apply = function(compiler) {
                 const processedMap = result.map.toString();
 
                 compilation.assets[mapName] = {
-                  source: function() {
+                  source: function () {
                     return processedMap;
                   },
-                  size: function() {
+                  size: function () {
                     return processedMap.length;
                   },
                 };
               }
-            }
-          ).catch(function(err) {
+            }).catch(function (err) {
               hasErrors = true;
               throw new Error('CSS minification error: ' + err.message +
                 '. File: ' + assetName);
-            }
-          );
-        promises.push(promise);
-      });
+            });
+          promises.push(promise);
+        });
 
-      Promise.all(promises)
-        .then(function() {
-          callback();
-        })
-        .catch(callback);
-    });
+        Promise.all(promises)
+          .then(function () {
+            callback();
+          })
+          .catch(callback);
+      }
+    }, (assets) => {});
+  })
 };
 
 module.exports = OptimizeCssnanoPlugin;

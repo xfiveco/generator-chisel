@@ -24,7 +24,7 @@ module.exports = (api, options) => {
     };
 
     const extractCssLoaderOptions = {
-      hmr: !isProd,
+      // hmr: !isProd,
       publicPath: path.relative(
         api.resolve(path.join(options.source.base, options.source.styles)),
         api.resolve(options.source.base),
@@ -85,7 +85,7 @@ module.exports = (api, options) => {
     if (isProd) {
       webpackConfig
         .plugin('style-only-entries')
-        .use(require('webpack-fix-style-only-entries'), [{ silent: true }]);
+        .use(require('webpack-remove-empty-scripts'), []);
     }
   });
 };

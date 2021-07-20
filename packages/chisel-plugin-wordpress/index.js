@@ -40,11 +40,13 @@ module.exports = (api, options) => {
 
     webpackConfig
       .plugin('wordpress-manifest')
-      .use(require('webpack-manifest-plugin'), [
+      .use(require('webpack-manifest-plugin').WebpackManifestPlugin, [
         {
           fileName: `manifest${!isProd ? '-dev' : ''}.json`,
           writeToFileEmit: !isProd,
+          publicPath: '',
           map(obj) {
+
             if (obj.isAsset && obj.name.startsWith(`${outDir}/`)) {
               obj.name = obj.name.replace(/\.[\da-f]{8}(?=(?:\.[^.]*)?$)/, '');
             }

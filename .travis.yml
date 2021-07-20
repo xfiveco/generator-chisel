@@ -1,8 +1,8 @@
 dist: bionic
 language: node_js
 node_js:
-  - 10.14.2
-  - 10
+  # - 10.14.2
+  # - 10
   - 12
   - 14
 cache:
