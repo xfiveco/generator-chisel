@@ -32,7 +32,7 @@ module.exports = (api, options) => {
             //   api.service.projectOptions.source.base,
             //   api.service.projectOptions.source.assets
             // ),
-            to: `${outDir}/[path][name].[contenthash:8].[ext]`,
+            to: `${outDir}/[path][name].[contenthash:8][ext]`,
           },
         ],
       },
