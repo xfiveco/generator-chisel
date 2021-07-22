@@ -15,9 +15,9 @@ const handlePromise = (promise) =>
 const createProgram = () => {
   const program = new Command();
 
-  // TODO: commander got some big updates I think its breaking here.
   program
     .command('create')
+    .storeOptionsAsProperties()
     .description('create a new project powered by Chisel')
     .option('--skip-dependencies-install')
     .option('--skip-wp-download')
