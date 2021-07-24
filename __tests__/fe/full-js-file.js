@@ -7,6 +7,6 @@ describe('Full file js', () => {
       defaultAnswers,
     );
 
-    await global.chiselTestHelpers.fileMatchesSnapshot('./dist/scripts/app.b6c8c19f.full.js');
+    await global.chiselTestHelpers.fileMatchesSnapshot('./dist/scripts/app.f4d6aaa9.full.js');
   });
 });
