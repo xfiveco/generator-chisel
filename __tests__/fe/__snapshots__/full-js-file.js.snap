@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Full file js Full file js 1`] = `
+"/******/ (() => { // webpackBootstrap
+/******/ 	\\"use strict\\";
+/******/ 	/* webpack/runtime/compat */
+/******/ 	
+/******/ 	
+/******/ 	// Chisel: Allow public path to be modified during runtime
+/******/ 	__webpack_require__.p = (typeof document !== \\"undefined\\" && document.documentElement.dataset.webpackPublicPath) || __webpack_require__.p;
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+
+;// CONCATENATED MODULE: ./src/scripts/modules/greeting.js
+const greeting = name => {
+  const element = document.querySelector('.js-greeting');
+
+  if (element) {
+    element.innerHTML = name;
+  }
+};
+
+/* harmony default export */ const modules_greeting = (greeting);
+;// CONCATENATED MODULE: ./src/scripts/app.js
+/*
+  Project: FrontEnd
+  Author: Xfive Tester
+ */
+
+modules_greeting('World');
+/******/ })()
+;"
+`;
