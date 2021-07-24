@@ -52,8 +52,6 @@ module.exports = (api, options) => {
         ]);
     }
 
-    webpackConfig.optimization.set('realContentHash', false);
-
     const baseDir = api.resolve(options.source.base);
 
     webpackConfig.context(api.service.context);
