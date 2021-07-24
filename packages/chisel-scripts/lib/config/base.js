@@ -52,6 +52,8 @@ module.exports = (api, options) => {
         ]);
     }
 
+    webpackConfig.optimization.set('realContentHash', false);
+
     const baseDir = api.resolve(options.source.base);
 
     webpackConfig.context(api.service.context);
@@ -113,10 +115,10 @@ module.exports = (api, options) => {
         );
 
         if (!relative) {
-          return `${options.output.assets}/[name].[hash:8].[ext]`;
+          return `${options.output.assets}/[name].[hash:8][ext]`;
         }
 
-        return `${options.output.assets}/[folder]/[name].[hash:8].[ext]`;
+        return `${options.output.assets}/[folder]/[name].[hash:8][ext]`;
       },
     };
 
