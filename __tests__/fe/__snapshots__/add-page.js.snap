@@ -173,9 +173,9 @@ exports[`FE add-page Adds pages in default setup 2`] = `
 exports[`FE add-page Adds pages in default setup 3`] = `
 Array [
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -312,9 +312,9 @@ exports[`FE add-page Adds pages in default setup 5`] = `
 exports[`FE add-page Adds pages in default setup 6`] = `
 Array [
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/second-page.html",
   "dist/some-other-page.html",
   "dist/styles/main.--HASH--.css",
@@ -467,9 +467,9 @@ exports[`FE add-page Adds pages with the same name 2`] = `
 Array [
   "dist/page1-1.html",
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -582,9 +582,9 @@ exports[`FE add-page Adds pages with the same name 4`] = `
 Array [
   "dist/page1-1.html",
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/styles/main.--HASH--.full.css",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
@@ -992,9 +992,9 @@ Array [
   "content/page1.twig",
   "dist/hello.html",
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1127,9 +1127,9 @@ Array [
   "dist/hello.html",
   "dist/nested/interesting-page.html",
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1235,9 +1235,9 @@ Array [
   "content/page1.md",
   "dist/hello.html",
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1371,9 +1371,9 @@ Array [
   "dist/hello.html",
   "dist/nested/interesting-page.html",
   "dist/page1.html",
-  "dist/scripts/app.7f7c4ccf.js",
-  "dist/scripts/app.7f7c4ccf.js.map",
   "dist/scripts/app.b6c8c19f.full.js",
+  "dist/scripts/app.b6c8c19f.js",
+  "dist/scripts/app.b6c8c19f.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1397,7 +1397,7 @@ exports[`FE add-page When using content and markdown adds pages and builds them 
   <script>
     document.documentElement.classList.remove('no-js');
   </script>
-  <script src=\\"scripts/app.7f7c4ccf.js\\" defer></script>
+  <script src=\\"scripts/app.b6c8c19f.js\\" defer></script>
 </head>
 
 <body class=\\"\\">
@@ -1430,7 +1430,7 @@ exports[`FE add-page When using content and markdown adds pages and builds them 
   <script>
     document.documentElement.classList.remove('no-js');
   </script>
-  <script src=\\"../../scripts/app.7f7c4ccf.js\\" defer></script>
+  <script src=\\"../../scripts/app.b6c8c19f.js\\" defer></script>
 </head>
 
 <body class=\\"\\">
