@@ -29,7 +29,7 @@ exports[`FE Content Twig functions work 3`] = `
 <head>
   <title> top-page - md - no p </title>
   <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"styles/main.--HASH--.css\\" type=\\"text/css\\" />
-  <script src=\\"scripts/app.7f7c4ccf.js\\" defer></script>
+  <script src=\\"scripts/app.--HASH--.js\\" defer></script>
 </head>
 
 <body>
@@ -54,7 +54,7 @@ exports[`FE Content Twig functions work 4`] = `
 <head>
   <title> json-page - json - no p </title>
   <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"styles/main.--HASH--.css\\" type=\\"text/css\\" />
-  <script src=\\"scripts/app.7f7c4ccf.js\\" defer></script>
+  <script src=\\"scripts/app.--HASH--.js\\" defer></script>
 </head>
 
 <body>
@@ -79,7 +79,7 @@ exports[`FE Content Twig functions work 5`] = `
 <head>
   <title> nested/page - md - nested </title>
   <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"../styles/main.--HASH--.css\\" type=\\"text/css\\" />
-  <script src=\\"../scripts/app.7f7c4ccf.js\\" defer></script>
+  <script src=\\"../scripts/app.--HASH--.js\\" defer></script>
 </head>
 
 <body>
@@ -104,7 +104,7 @@ exports[`FE Content Twig functions work 6`] = `
 <head>
   <title> really/no-parent-nested/page - md - no p </title>
   <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"../../styles/main.--HASH--.css\\" type=\\"text/css\\" />
-  <script src=\\"../../scripts/app.7f7c4ccf.js\\" defer></script>
+  <script src=\\"../../scripts/app.--HASH--.js\\" defer></script>
 </head>
 
 <body>
