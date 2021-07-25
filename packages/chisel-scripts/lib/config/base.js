@@ -113,10 +113,10 @@ module.exports = (api, options) => {
         );
 
         if (!relative) {
-          return `${options.output.assets}/[name].[hash:8][ext]`;
+          return `${options.output.assets}/[name].[hash:8].[ext]`;
         }
 
-        return `${options.output.assets}/[folder]/[name].[hash:8][ext]`;
+        return `${options.output.assets}/[folder]/[name].[hash:8].[ext]`;
       },
     };
 
