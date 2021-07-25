@@ -95,7 +95,10 @@ describe('Generator Static', () => {
     )
       .sort()
       .map((val) =>
-        val.replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/, '--HASH--'),
+        val
+          .replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/, '--HASH--')
+          .replace(/(?<=scripts\/app\.)[a-z0-9]+(?=\.)/g, '--HASH--')
+        ,
       );
 
     expect(files).toMatchSnapshot();
