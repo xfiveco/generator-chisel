@@ -144,7 +144,7 @@ module.exports = class Service {
       Object.entries(taps).forEach(([name, tap]) => {
         const hook = hooks[name];
 
-        if (hook instanceof AsyncSeriesHook) {
+        if (typeof hook == "object") {
           hook.tapPromise('ChiselConfig', (...args) =>
             Promise.resolve(tap(...args)),
           );
