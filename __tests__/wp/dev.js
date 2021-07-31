@@ -40,15 +40,25 @@ describe.supportsPuppeteer('WP dev', () => {
 
     await global.chiselTestHelpers.oncePromise(page, 'chiselNavigated');
 
+    console.log(`${new Date().toISOString()}: chisel navigated template`);
+
     await expect(page).toMatchElement('#tease-test-1');
 
     // Test Reload on JS Update
 
+    console.log(`${new Date().toISOString()}: starting page load js`);
+
     await page.goto('http://localhost:3000/?p=1');
+
+    console.log(`${new Date().toISOString()}: js page loaded`);
 
     await global.chiselTestHelpers.oncePromise(page, 'bsConnected');
 
+    console.log(`${new Date().toISOString()}: js bs connected`);
+
     await expect(page).toMatchElement('.js-greeting', { text: /^World$/ });
+
+    console.log(`${new Date().toISOString()}: js world found`);
 
     fs.writeFileSync(
       './src/scripts/modules/greeting.js',
@@ -58,7 +68,11 @@ describe.supportsPuppeteer('WP dev', () => {
         .replace('= name;', '= `Updated ${name} Reloads`;'),
     );
 
+    console.log(`${new Date().toISOString()}: js file updated`);
+
     await global.chiselTestHelpers.oncePromise(page, 'chiselNavigated');
+
+    console.log(`${new Date().toISOString()}: js navigated`);
 
     await expect(page).toMatchElement('.js-greeting', {
       text: /^Updated World Reloads$/,
