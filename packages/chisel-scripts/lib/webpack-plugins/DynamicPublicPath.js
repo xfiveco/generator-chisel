@@ -1,3 +1,19 @@
+const RuntimeGlobals = require('webpack/lib/RuntimeGlobals');
+const RuntimeModule = require('webpack/lib/RuntimeModule');
+
+class ChiselDynamicPublicPathRuntimeModule extends RuntimeModule {
+  constructor() {
+    super('publicPath', RuntimeModule.STAGE_BASIC);
+  }
+
+  generate() {
+    return (
+      '\n\n// Chisel: Allow public path to be modified during runtime\n' +
+      `${RuntimeGlobals.publicPath} = (typeof document !== "undefined" && document.documentElement.dataset.webpackPublicPath) || ${RuntimeGlobals.publicPath} || '/';`
+    );
+  }
+}
+
 class DynamicPublicPath {
   constructor(options = {}) {
     this.options = options;
@@ -6,17 +22,14 @@ class DynamicPublicPath {
   // eslint-disable-next-line class-methods-use-this
   apply(compiler) {
     compiler.hooks.compilation.tap('DynamicPublicPath', (compilation) => {
-      compilation.mainTemplate.hooks.requireExtensions.tap(
-        'DynamicPublicPath',
-        (source) => {
-          // Inspired by https://github.com/webpack/webpack/blob/9fe42e7c4027d0a74addaa3352973f6bb6d20689/lib/MainTemplate.js#L237
-          source +=
-            '\n\n// Chisel: Allow public path to be modified during runtime\n' +
-            '__webpack_require__.p = (typeof document !== "undefined" && document.documentElement.dataset.webpackPublicPath) || __webpack_require__.p;';
-
-          return source;
-        },
-      );
+      // based on https://github.com/webpack/webpack/blob/c181294865dca01b28e6e316636fef5f2aad4eb6/lib/RuntimePlugin.js#L177
+      compilation.hooks.runtimeRequirementInTree
+        .for(RuntimeGlobals.publicPath)
+        .tap('DynamicPublicPath', (chunk, set) => {
+          const module = new ChiselDynamicPublicPathRuntimeModule();
+          compilation.addRuntimeModule(chunk, module);
+          return true;
+        });
     });
   }
 }
