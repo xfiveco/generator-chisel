@@ -12,7 +12,7 @@ describe.supportsPuppeteer('WP dev', () => {
   test('Starts dev server and reloads on changes', async () => {
     await global.chiselTestHelpers.generateProjectWithAnswers(
       ['create'],
-      answers({ port: 8081 }),
+      answers(),
       { interceptWpConfig: true, mockRandomBytes: true },
     );
 
