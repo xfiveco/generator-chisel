@@ -166,36 +166,10 @@ module.exports = (api, options) => {
 
     webpackConfig.plugin('webpackbar').use(require('webpackbar'));
 
-    if (isProd) {
-      // keep chunk ids stable so async chunks have consistent hash (#1916)
+    if (isProd && productionMinimize) {
       webpackConfig
-        .plugin('named-chunks')
-        .use(require('webpack/lib/ids/NamedChunkIdsPlugin'), [
-          (chunk) => {
-            if (chunk.name) {
-              return chunk.name;
-            }
-
-            const hash = require('hash-sum');
-            const joinedHash = hash(
-              Array.from(chunk.modulesIterable, (m) => m.id).join('_'),
-            );
-            return `chunk-${joinedHash}`;
-          },
-        ]);
-
-      // keep module.id stable when vendor modules does not change
-      webpackConfig
-        .plugin('hash-module-ids')
-        .use(require('webpack/lib/ids/HashedModuleIdsPlugin'), [
-          { hashDigest: 'hex' },
-        ]);
-
-      if (productionMinimize) {
-        webpackConfig
-          .plugin('unminified-webpack-plugin')
-          .use(require('unminified-webpack-plugin'), [{ postfix: 'full' }]);
-      }
+        .plugin('unminified-webpack-plugin')
+        .use(require('unminified-webpack-plugin'), [{ postfix: 'full' }]);
     }
   });
 };
