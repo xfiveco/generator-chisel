@@ -34,7 +34,7 @@
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.1",
     "lodash": "^4.17.21",
-    "webpack": "^5.44.0",
+    "webpack": "^5.49.0",
     "webpack-dev-middleware": "^5.0.0",
     "webpack-hot-middleware": "git+https://github.com/lukeapage/webpack-hot-middleware#2cdfe0d0111dab6432b8683112fd2d17a5e80572",
     "webpack-manifest-plugin": "3.1.1"
