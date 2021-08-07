@@ -21,6 +21,8 @@ module.exports = (api, options) => {
     } else {
       // webpackConfig.mode('development').devtool('cheap-module-eval-source-map');
       webpackConfig.mode('development').devtool(false);
+      webpackConfig.watch(true);
+      webpackConfig.watchOptions({poll: true, ignored: ["node_modules/**"]});
 
       // Use separate source maps for styles due to
       // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/529
@@ -70,7 +72,7 @@ module.exports = (api, options) => {
         const isScript = ext !== '.scss';
         const outDir = options.output[!isScript ? 'styles' : 'scripts'];
         const name = `${outDir}/${base}`;
-        const entry = webpackConfig.entry(name).add(`./${p}`);
+        const entry = webpackConfig.entry(name).add(!isProd ? 'webpack-plugin-serve/client, ' : '' + `./${p}`);
 
         if (isScript) {
           if (react) {
@@ -160,9 +162,9 @@ module.exports = (api, options) => {
       .plugin('case-sensitive-paths')
       .use(require('case-sensitive-paths-webpack-plugin'));
 
-    webpackConfig
-      .plugin('chisel-dynamic-public-path')
-      .use(require('../webpack-plugins/DynamicPublicPath'));
+    // webpackConfig
+    //   .plugin('chisel-dynamic-public-path')
+    //   .use(require('../webpack-plugins/DynamicPublicPath'));
 
     webpackConfig.plugin('webpackbar').use(require('webpackbar'));
 

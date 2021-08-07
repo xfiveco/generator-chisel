@@ -26,24 +26,42 @@ module.exports = (api, options) => {
     (command) => command.description('start development server'),
     async () => {
       const webpack = require('webpack');
-      const WebpackDevServer = require('webpack-dev-server');
+      const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
       const HtmlWebpackPlugin = require('html-webpack-plugin');
       const { debounce } = require('lodash');
+      const sane = require('sane');
 
       process.env.NODE_ENV = 'development';
 
       const config = await api.service.resolveWebpackConfig();
 
+      console.log('SERVER DIST', options.staticFrontend.serveDist);
+      console.log('OUTPUT BASE', options.output.base);
+
+      config.output.publicPath =
+        options.staticFrontend.serveDist
+          ? '/'
+          : `/${options.output.base}/`;
+
       const projectDevServerOptions = {
-        ...defaults,
-        ...{
-          publicPath: options.staticFrontend.serveDist
-            ? '/'
-            : `/${options.output.base}/`,
+        host: 'localhost',
+        port: 3000,
+        open: true,
+        hmr: true,
+        status: true,
+        progress: true,
+        compress: true,
+        client: {
+          address: 'localhost:3000'
         },
+
         ...config.devServer,
-        ...options.devServer,
+        // ...options.devServer,
       };
+
+      console.log('before watch');
+      const watcher = sane(config.output.path);
+      console.log('after watch');
 
       if (options.staticFrontend.skipHtmlExtension) {
         const oldBefore = projectDevServerOptions.before;
@@ -52,44 +70,79 @@ module.exports = (api, options) => {
           if (oldBefore) oldBefore(...args);
         };
       }
+      console.log('skip html');
 
       projectDevServerOptions.port =
         Number(process.env.PORT) || projectDevServerOptions.port;
 
+      console.log('compiler');
+
       const compiler = webpack(config);
 
-      const server = new WebpackDevServer(compiler, projectDevServerOptions);
+      console.log('after compiler');
 
-      const reloadDebounced = debounce(() => {
-        // console.log('reload');
-        server.sockWrite(server.sockets, 'content-changed');
-      }, 100);
+      const serve = new Serve(projectDevServerOptions);
+      serve.apply(compiler)
 
-      compiler.hooks.compilation.tap(
-        'chisel-plugin-static-frontend',
-        (compilation) => {
-          HtmlWebpackPlugin.getHooks(compilation).afterEmit.tap(
-            'chisel-plugin-static-frontend',
-            // eslint-disable-next-line no-unused-vars
-            (data) => {
-              // console.log(`Emit ${data.outputName}`);
-              reloadDebounced();
-            },
-          );
-        },
-      );
+      
+      config.plugins.push(serve);
+      console.log('plugins', config);
 
-      await new Promise((resolve) => {
-        compiler.hooks.done.tap('chisel-plugin-static-frontend', resolve);
+      // const reloadDebounced = debounce(() => {
+      //   // console.log('reload');
+      //   serve.sockWrite(serve.client, 'content-changed');
+      // }, 100);
+
+      console.log('hooks');
+
+      // compiler.hooks.compilation.tap(
+      //   'chisel-plugin-static-frontend',
+      //   (compilation) => {
+      //     HtmlWebpackPlugin.getHooks(compilation).afterEmit.tap(
+      //       'chisel-plugin-static-frontend',
+      //       // eslint-disable-next-line no-unused-vars
+      //       (data) => {
+      //         console.log(`Emit ${data.outputName}`);
+      //         // reloadDebounced();
+      //       },
+      //     );
+      //   },
+      // );
+
+      console.log('promise');
+
+      // await new Promise((resolve) => {
+      //   console.log('start promise', resolve);
+      //   compiler.hooks.done.tapAsync('chisel-plugin-static-frontend', resolve);
+      // });
+
+      console.log('listening');
+
+
+      serve.on('listening', () => {
+        console.log('onlistening')
+        watcher.on('change', (filePath, root, stat) => {
+          // console.log('stat', stat);
+          serve.emit('reload', { source: 'config' });
+        });
       });
 
-      server.listen(
-        projectDevServerOptions.port,
-        projectDevServerOptions.host,
-        (err) => {
-          if (err) throw err;
-        },
-      );
+      serve.on('close', () => watcher.close());
+
+
+      // console.log('after listening', serve);
+
+      const webpackWatcher = compiler.watch(config.watchOptions, (err, stats) => {
+        // Gets called every time Webpack finishes recompiling.
+      });
+
+      // serve.listen(
+      //   projectDevServerOptions.port,
+      //   projectDevServerOptions.host,
+      //   (err) => {
+      //     if (err) throw err;
+      //   },
+      // );
     },
   );
 };
