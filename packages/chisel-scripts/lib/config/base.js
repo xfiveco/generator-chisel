@@ -23,7 +23,6 @@ module.exports = (api, options) => {
       webpackConfig.optimization.runtimeChunk('single');
       webpackConfig.mode('development').devtool(false);
       webpackConfig.watch(true);
-      // webpackConfig.watchOptions({ poll: true, ignored: ['node_modules/**'] });
 
       // Use separate source maps for styles due to
       // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/529
