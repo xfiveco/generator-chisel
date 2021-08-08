@@ -28,8 +28,8 @@ module.exports = (api, options) => {
       const webpack = require('webpack');
       const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
       const HtmlWebpackPlugin = require('html-webpack-plugin');
-      const { debounce } = require('lodash');
-      const sane = require('sane');
+      // const { debounce } = require('lodash');
+      // const sane = require('sane');
 
       process.env.NODE_ENV = 'development';
 
@@ -38,21 +38,20 @@ module.exports = (api, options) => {
       console.log('SERVER DIST', options.staticFrontend.serveDist);
       console.log('OUTPUT BASE', options.output.base);
 
-      config.output.publicPath =
-        options.staticFrontend.serveDist
-          ? '/'
-          : `/${options.output.base}/`;
+      config.output.publicPath = options.staticFrontend.serveDist
+        ? '/'
+        : `/${options.output.base}/`;
 
       const projectDevServerOptions = {
         host: 'localhost',
         port: 3000,
         open: true,
-        hmr: true,
+        hmr: 'refresh-on-failure',
         status: true,
         progress: true,
         compress: true,
         client: {
-          address: 'localhost:3000'
+          address: 'localhost:3000',
         },
 
         ...config.devServer,
@@ -60,7 +59,7 @@ module.exports = (api, options) => {
       };
 
       console.log('before watch');
-      const watcher = sane(config.output.path);
+      // const watcher = sane(config.output.path);
       console.log('after watch');
 
       if (options.staticFrontend.skipHtmlExtension) {
@@ -75,18 +74,34 @@ module.exports = (api, options) => {
       projectDevServerOptions.port =
         Number(process.env.PORT) || projectDevServerOptions.port;
 
+      const serve = new Serve(projectDevServerOptions);
+
+      config.plugins.push(serve);
+
       console.log('compiler');
 
-      const compiler = webpack(config);
+      const compiler = webpack(config, (err, stats) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        const info = stats.toJson();
+
+        if (stats.hasErrors()) {
+          console.log(stats.toString({ colors: true }));
+          console.error(new Error('Build failed with errors.'));
+          return;
+        }
+
+        if (stats.hasWarnings()) {
+          console.warn(info.warnings);
+        }
+      });
 
       console.log('after compiler');
 
-      const serve = new Serve(projectDevServerOptions);
-      serve.apply(compiler)
-
-      
-      config.plugins.push(serve);
-      console.log('plugins', config);
+      // console.log('plugins', config);
 
       // const reloadDebounced = debounce(() => {
       //   // console.log('reload');
@@ -118,23 +133,28 @@ module.exports = (api, options) => {
 
       console.log('listening');
 
-
       serve.on('listening', () => {
-        console.log('onlistening')
-        watcher.on('change', (filePath, root, stat) => {
-          // console.log('stat', stat);
-          serve.emit('reload', { source: 'config' });
-        });
+        console.log('onlistening');
+        // watcher.on('change', (filePath, root, stat) => {
+        //   // console.log('stat', stat);
+        //   serve.emit('reload', { source: 'config' });
+        // });
       });
 
-      serve.on('close', () => watcher.close());
-
+      // serve.on('close', () => watcher.close());
 
       // console.log('after listening', serve);
 
-      const webpackWatcher = compiler.watch(config.watchOptions, (err, stats) => {
-        // Gets called every time Webpack finishes recompiling.
-      });
+      // const webpackWatcher = compiler.watch(
+      //   config.watchOptions,
+      //   (err, stats) => {
+      //     // Gets called every time Webpack finishes recompiling.
+      //     console.log('RECOMPLIED');
+      //     if (err) {
+      //       console.error(err);
+      //     }
+      //   },
+      // );
 
       // serve.listen(
       //   projectDevServerOptions.port,

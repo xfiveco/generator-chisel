@@ -20,9 +20,10 @@ module.exports = (api, options) => {
       }
     } else {
       // webpackConfig.mode('development').devtool('cheap-module-eval-source-map');
+      webpackConfig.optimization.runtimeChunk('single');
       webpackConfig.mode('development').devtool(false);
       webpackConfig.watch(true);
-      webpackConfig.watchOptions({poll: true, ignored: ["node_modules/**"]});
+      // webpackConfig.watchOptions({ poll: true, ignored: ['node_modules/**'] });
 
       // Use separate source maps for styles due to
       // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/529
@@ -72,12 +73,17 @@ module.exports = (api, options) => {
         const isScript = ext !== '.scss';
         const outDir = options.output[!isScript ? 'styles' : 'scripts'];
         const name = `${outDir}/${base}`;
-        const entry = webpackConfig.entry(name).add(!isProd ? 'webpack-plugin-serve/client, ' : '' + `./${p}`);
+        // if (isScript) return;
+        const entry = webpackConfig.entry(name).add(`./${p}`);
 
         if (isScript) {
           if (react) {
             entry.prepend('react-hot-loader/patch');
           }
+        }
+
+        if (!isProd) {
+          entry.prepend('webpack-plugin-serve/client');
         }
       });
 
