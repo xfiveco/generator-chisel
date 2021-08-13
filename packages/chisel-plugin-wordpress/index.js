@@ -45,6 +45,9 @@ module.exports = (api, options) => {
           fileName: `manifest${!isProd ? '-dev' : ''}.json`,
           writeToFileEmit: !isProd,
           publicPath: '',
+          filter: ({name, path}) => {
+            return !path.endsWith('wps-hmr.json') && !path.endsWith('wps-hmr.js')
+          },
           map(obj) {
 
             if (obj.isAsset && obj.name.startsWith(`${outDir}/`)) {
