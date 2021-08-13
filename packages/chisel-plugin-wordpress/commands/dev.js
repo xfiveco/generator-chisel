@@ -40,7 +40,7 @@ module.exports = (api, options) => {
         open: true,
         hmr: 'refresh-on-failure',
         status: true,
-        progress: false,
+        // progress: false,
         compress: true,
         client: {
           address: 'localhost:3000',
@@ -122,6 +122,9 @@ module.exports = (api, options) => {
         },
         ghostMode: false,
         online: true,
+        open: false,
+        port: 3000
+
         // middleware: [hotMiddleware],
         // port: parseInt(process.env.PORT, 10) || 3000,
       };
@@ -149,52 +152,52 @@ module.exports = (api, options) => {
 
       let watchReady = false;
       let fileManifestBody = '';
-      const watcher = bs.watch(
-        api.resolve(directoryName, 'wp-content/themes', themeName),
-        (ev, file) => {
-          // save initial content of manifest file
-          if (!fileManifestBody && file === devManifestPath) {
-            fs.readFile(file, { encoding: 'utf8' }).then((content) => {
-              fileManifestBody = content;
-            });
-          }
+      // const watcher = bs.watch(
+      //   api.resolve(directoryName, 'wp-content/themes', themeName),
+      //   (ev, file) => {
+      //     // save initial content of manifest file
+      //     if (!fileManifestBody && file === devManifestPath) {
+      //       fs.readFile(file, { encoding: 'utf8' }).then((content) => {
+      //         fileManifestBody = content;
+      //       });
+      //     }
 
-          // don't reload before initialized
-          if (!watchReady) return;
+      //     // don't reload before initialized
+      //     if (!watchReady) return;
 
-          // reload on changes in php and twig files
-          if (file.endsWith('.php') || file.endsWith('.twig')) {
-            bs.reload();
-          }
+      //     // reload on changes in php and twig files
+      //     if (file.endsWith('.php') || file.endsWith('.twig')) {
+      //       bs.reload();
+      //     }
 
-          // detect changes in manifest (so changes in assets) and reload
-          if (fileManifestBody && file === devManifestPath) {
-            fs.readFile(file, { encoding: 'utf8' }).then((content) => {
-              if (content !== fileManifestBody) {
-                fileManifestBody = content;
-                bs.reload();
-              }
-            });
-          }
-        },
-      );
+      //     // detect changes in manifest (so changes in assets) and reload
+      //     if (fileManifestBody && file === devManifestPath) {
+      //       fs.readFile(file, { encoding: 'utf8' }).then((content) => {
+      //         if (content !== fileManifestBody) {
+      //           fileManifestBody = content;
+      //           bs.reload();
+      //         }
+      //       });
+      //     }
+      //   },
+      // );
 
-      await new Promise((resolve) => {
-        watcher.on('ready', () => {
-          watchReady = true;
-          resolve();
-        });
-      });
+      // await new Promise((resolve) => {
+      //   watcher.on('ready', () => {
+      //     watchReady = true;
+      //     resolve();
+      //   });
+      // });
 
-      return () => {
-        bs.exit(); // no callback supported
-        return Promise.all([
-          new Promise((resolve) => {
-            // devMiddleware.close(resolve);
-          }),
-          watcher.close(),
-        ]);
-      };
+      // return () => {
+      //   bs.exit(); // no callback supported
+      //   return Promise.all([
+      //     new Promise((resolve) => {
+      //       // devMiddleware.close(resolve);
+      //     }),
+      //     watcher.close(),
+      //   ]);
+      // };
     },
   );
 };
