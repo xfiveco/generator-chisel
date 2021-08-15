@@ -19,9 +19,6 @@ module.exports = (api, options) => {
 
       let config = await api.service.resolveWebpackConfig();
 
-      config.output.hotUpdateChunkFilename = 'hot/hot-update.js';
-      config.output.hotUpdateChunkFilename = 'hot/hot-update.json';
-
       const projectDevServerOptions = {
         host: 'localhost',
         port: projectPort,
