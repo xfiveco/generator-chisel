@@ -6,71 +6,43 @@ module.exports = (api, options) => {
     (command) => command.description('start development server'),
     async () => {
       const fs = require('fs-extra');
-
-      // api.chainWebpack((webpackConfig) => {
-      //   // webpackConfig
-      //   //   .plugin('hot-module-replacement')
-      //   //   .use(require('webpack/lib/HotModuleReplacementPlugin'));
-
-      //   // const hotPath = require.resolve('webpack-hot-middleware/client');
-      //   // const hotWithQuery = `${hotPath}?reload=true`;
-
-      //   // Object.values(webpackConfig.entryPoints.entries()).forEach((entry) => {
-      //   //   entry.prepend(hotWithQuery);
-      //   // });
-      // });
-
       const browserSync = require('browser-sync');
       const webpack = require('webpack');
       const { WebpackPluginServe } = require('webpack-plugin-serve');
-      // const webpackHotMiddleware = require('webpack-hot-middleware');
+      const { directoryName, themeName } = options.wp;
 
       process.env.NODE_ENV = 'development';
+      const projectPort = parseInt(process.env.PORT, 10) || 3000;
 
       let config = await api.service.resolveWebpackConfig();
 
-      
-      const { directoryName, themeName } = options.wp;
-      console.log('dire', directoryName);
+      config.output.hotUpdateChunkFilename = 'hot/hot-update.js';
+      config.output.hotUpdateChunkFilename = 'hot/hot-update.json';
 
       const projectDevServerOptions = {
         host: 'localhost',
-        port: 3000,
+        port: projectPort,
         open: true,
         hmr: 'refresh-on-failure',
         status: true,
         progress: true,
         compress: true,
         client: {
-          address: '127.0.0.1:3000',
+          address: `127.0.0.1:${projectPort}`,
           retry: true,
+          silent: true, // Change to false for debug
         },
       };
-
-      // await hooks.devMiddlewareOptions.promise(devMiddlewareOptions);
-
-      projectDevServerOptions.port =
-        Number(process.env.PORT) || projectDevServerOptions.port;
 
       console.log('WPS SERVE');
 
       const webpackPluginServe = new WebpackPluginServe(
-        // compiler,
         projectDevServerOptions,
       );
 
       config.plugins.push(webpackPluginServe);
 
       const bs = browserSync.create();
-
-      // const hotMiddlewareOptions = { log: false };
-
-      // await hooks.hotMiddlewareOptions.promise(hotMiddlewareOptions);
-
-      // const hotMiddleware = webpackHotMiddleware(
-      //   compiler,
-      //   hotMiddlewareOptions,
-      // );
 
       const browserSyncConfig = {
         proxy: {
@@ -83,18 +55,8 @@ module.exports = (api, options) => {
         ghostMode: false,
         online: true,
         open: false,
-        port: 3000
-
-        // middleware: [hotMiddleware],
-        // port: parseInt(process.env.PORT, 10) || 3000,
+        port: projectPort
       };
-
-      // await new Promise((resolve) => {
-      //   devMiddleware.context.compiler.hooks.done.tap(
-      //     'chisel-plugin-webpack',
-      //     resolve,
-      //   );
-      // });
 
       await hooks.browserSyncConfig.promise(browserSyncConfig);
       console.log('WPS PROMISE');
@@ -168,15 +130,12 @@ module.exports = (api, options) => {
         });
       });
 
-      // return () => {
-      //   bs.exit(); // no callback supported
-      //   return Promise.all([
-      //     new Promise((resolve) => {
-      //       // devMiddleware.close(resolve);
-      //     }),
-      //     watcher.close(),
-      //   ]);
-      // };
+      return () => {
+        bs.exit(); // no callback supported
+        return Promise.all([
+          watcher.close(),
+        ]);
+      };
     },
   );
 };
