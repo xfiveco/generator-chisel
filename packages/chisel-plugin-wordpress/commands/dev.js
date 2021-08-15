@@ -31,8 +31,7 @@ module.exports = (api, options) => {
 
       
       const { directoryName, themeName } = options.wp;
-      config.output.publicPath = `/wp-content/themes/${themeName}/dist/`;
-      console.log('config', config);
+      console.log('dire', directoryName);
 
       const projectDevServerOptions = {
         host: 'localhost',
@@ -40,33 +39,12 @@ module.exports = (api, options) => {
         open: true,
         hmr: 'refresh-on-failure',
         status: true,
-        // progress: false,
+        progress: true,
         compress: true,
         client: {
-          address: 'localhost:3000',
+          address: '127.0.0.1:3000',
           retry: true,
         },
-
-        // ...config.devServer,
-
-        // middleware: (app, builtins) => {
-        //   // const glob = [
-        //   //   `/wp-content/themes/${themeName}/dist/`,
-        //   // ];
-        //   // builtins.static(glob);
-
-        //   app.use(
-        //     builtins.proxy(`/wp-content/themes/${themeName}/dist/`, {
-        //       target: options.wp.url,
-        //       // pathRewrite: { '^/wp': '' }
-        //     })
-        //   );
-
-        //   // app.use(async (ctx, next) => {
-        //   //   await next();
-        //   //   ctx.set('x-chisel-proxy', '1');
-        //   // })
-        // }
       };
 
       // await hooks.devMiddlewareOptions.promise(devMiddlewareOptions);
@@ -83,24 +61,6 @@ module.exports = (api, options) => {
 
       config.plugins.push(webpackPluginServe);
 
-      const compiler = webpack(config, (err, stats) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-
-        const info = stats.toJson();
-
-        if (stats.hasErrors()) {
-          console.log(stats.toString({ colors: true }));
-          console.error(new Error('Build failed with errors.'));
-          return;
-        }
-
-        if (stats.hasWarnings()) {
-          console.warn(info.warnings);
-        }
-      });
       const bs = browserSync.create();
 
       // const hotMiddlewareOptions = { log: false };
@@ -150,44 +110,63 @@ module.exports = (api, options) => {
 
       console.log('WPS WATCH');
 
+      const compiler = webpack(config, (err, stats) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        const info = stats.toJson();
+
+        if (stats.hasErrors()) {
+          console.log(stats.toString({ colors: true }));
+          console.error(new Error('Build failed with errors.'));
+          return;
+        }
+
+        if (stats.hasWarnings()) {
+          console.warn(info.warnings);
+        }
+      });
+
       let watchReady = false;
       let fileManifestBody = '';
-      // const watcher = bs.watch(
-      //   api.resolve(directoryName, 'wp-content/themes', themeName),
-      //   (ev, file) => {
-      //     // save initial content of manifest file
-      //     if (!fileManifestBody && file === devManifestPath) {
-      //       fs.readFile(file, { encoding: 'utf8' }).then((content) => {
-      //         fileManifestBody = content;
-      //       });
-      //     }
+      const watcher = bs.watch(
+        api.resolve(directoryName, 'wp-content/themes', themeName),
+        (ev, file) => {
+          // save initial content of manifest file
+          if (!fileManifestBody && file === devManifestPath) {
+            fs.readFile(file, { encoding: 'utf8' }).then((content) => {
+              fileManifestBody = content;
+            });
+          }
 
-      //     // don't reload before initialized
-      //     if (!watchReady) return;
+          // don't reload before initialized
+          if (!watchReady) return;
 
-      //     // reload on changes in php and twig files
-      //     if (file.endsWith('.php') || file.endsWith('.twig')) {
-      //       bs.reload();
-      //     }
+          // reload on changes in php and twig files
+          if (file.endsWith('.php') || file.endsWith('.twig')) {
+            bs.reload();
+          }
 
-      //     // detect changes in manifest (so changes in assets) and reload
-      //     if (fileManifestBody && file === devManifestPath) {
-      //       fs.readFile(file, { encoding: 'utf8' }).then((content) => {
-      //         if (content !== fileManifestBody) {
-      //           fileManifestBody = content;
-      //           bs.reload();
-      //         }
-      //       });
-      //     }
-      //   },
-      // );
+          // detect changes in manifest (so changes in assets) and reload
+          if (fileManifestBody && file === devManifestPath) {
+            fs.readFile(file, { encoding: 'utf8' }).then((content) => {
+              if (content !== fileManifestBody) {
+                fileManifestBody = content;
+                bs.reload();
+              }
+            });
+          }
+        },
+      );
 
-      // await new Promise((resolve) => {
-      //   watcher.on('ready', () => {
-      //     watchReady = true;
-      //     resolve();
-      //   });
-      // });
+      await new Promise((resolve) => {
+        watcher.on('ready', () => {
+          watchReady = true;
+          resolve();
+        });
+      });
 
       // return () => {
       //   bs.exit(); // no callback supported
