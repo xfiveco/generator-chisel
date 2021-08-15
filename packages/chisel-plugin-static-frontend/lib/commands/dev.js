@@ -16,6 +16,10 @@ module.exports = (api, options) => {
     'dev',
     (command) => command.description('start development server'),
     async () => {
+      const fs = require('fs-extra');
+      fs.remove(api.resolve(options.output.base))
+      .catch((err) => console.warn(err));
+
       const webpack = require('webpack');
       const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
       const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -39,11 +43,11 @@ module.exports = (api, options) => {
         client: {
           address: 'localhost:3000',
           retry: true,
+          silent: true, // Change to false for debug
         },
 
         ...config.devServer,
       };
-
 
       if (options.staticFrontend.skipHtmlExtension) {
         const oldBefore = projectDevServerOptions.before;
@@ -60,7 +64,6 @@ module.exports = (api, options) => {
 
       config.plugins.push(serve);
 
-      console.log('config', config);
       const compiler = webpack(config, (err, stats) => {
         if (err) {
           console.error(err);
@@ -79,7 +82,6 @@ module.exports = (api, options) => {
           console.warn(info.warnings);
         }
       });
-
     },
   );
 };

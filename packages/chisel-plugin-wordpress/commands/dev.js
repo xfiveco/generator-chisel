@@ -6,6 +6,9 @@ module.exports = (api, options) => {
     (command) => command.description('start development server'),
     async () => {
       const fs = require('fs-extra');
+      fs.remove(api.resolve(options.output.base))
+      .catch((err) => console.warn(err));
+
       const browserSync = require('browser-sync');
       const webpack = require('webpack');
       const { WebpackPluginServe } = require('webpack-plugin-serve');
@@ -34,8 +37,6 @@ module.exports = (api, options) => {
         },
       };
 
-      console.log('WPS SERVE');
-
       const webpackPluginServe = new WebpackPluginServe(
         projectDevServerOptions,
       );
@@ -59,7 +60,6 @@ module.exports = (api, options) => {
       };
 
       await hooks.browserSyncConfig.promise(browserSyncConfig);
-      console.log('WPS PROMISE');
 
       await new Promise((resolve) => {
         bs.init(browserSyncConfig, resolve);
@@ -69,8 +69,6 @@ module.exports = (api, options) => {
         options.output.base,
         'manifest-dev.json',
       );
-
-      console.log('WPS WATCH');
 
       const compiler = webpack(config, (err, stats) => {
         if (err) {
