@@ -38,6 +38,7 @@ module.exports = (api, options) => {
         compress: true,
         client: {
           address: 'localhost:3000',
+          retry: true,
         },
 
         ...config.devServer,
@@ -59,7 +60,7 @@ module.exports = (api, options) => {
 
       config.plugins.push(serve);
 
-
+      console.log('config', config);
       const compiler = webpack(config, (err, stats) => {
         if (err) {
           console.error(err);
