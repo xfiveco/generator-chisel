@@ -1,16 +1,6 @@
 const path = require('path');
 
 
-const beforeAddHtmlExtension = (app) => {
-  app.use((req, res, next) => {
-    // console.log(req.url, req.headers);
-    if (!req.url.endsWith('/') && !path.posix.extname(req.url)) {
-      req.url += '.html';
-    }
-    next();
-  });
-};
-
 module.exports = (api, options) => {
   api.registerCommand(
     'dev',
@@ -22,7 +12,6 @@ module.exports = (api, options) => {
 
       const webpack = require('webpack');
       const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
-      const HtmlWebpackPlugin = require('html-webpack-plugin');
 
       process.env.NODE_ENV = 'development';
 
@@ -49,14 +38,6 @@ module.exports = (api, options) => {
         ...config.devServer,
       };
 
-      if (options.staticFrontend.skipHtmlExtension) {
-        const oldBefore = projectDevServerOptions.before;
-        projectDevServerOptions.before = (...args) => {
-          beforeAddHtmlExtension(...args);
-          if (oldBefore) oldBefore(...args);
-        };
-      }
-
       projectDevServerOptions.port =
         Number(process.env.PORT) || projectDevServerOptions.port;
 
@@ -80,6 +61,13 @@ module.exports = (api, options) => {
 
         if (stats.hasWarnings()) {
           console.warn(info.warnings);
+        }
+      });
+
+      // Calls with the each change
+      compiler.hooks.invalid.tap('invalid', (fileName) => {
+        if (fileName.endsWith('.twig')) {
+          serve.emit('reload');
         }
       });
     },
