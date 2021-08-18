@@ -1,5 +1,14 @@
 const path = require('path');
 
+const beforeAddHtmlExtension = (app) => {
+  app.use((req, res, next) => {
+    // console.log(req.url, req.headers);
+    if (!req.url.endsWith('/') && !path.posix.extname(req.url)) {
+      req.url += '.html';
+    }
+    next();
+  });
+};
 
 module.exports = (api, options) => {
   api.registerCommand(
@@ -12,6 +21,9 @@ module.exports = (api, options) => {
 
       const webpack = require('webpack');
       const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
+      const HtmlWebpackPlugin = require('html-webpack-plugin');
+      const { debounce } = require('lodash');
+
 
       process.env.NODE_ENV = 'development';
 
@@ -64,11 +76,26 @@ module.exports = (api, options) => {
         }
       });
 
-      // Calls with the each change
-      compiler.hooks.invalid.tap('invalid', (fileName) => {
-        if (fileName.endsWith('.twig')) {
-          serve.emit('reload');
-        }
+      const reloadDebounced = debounce(() => {
+        serve.emit('reload');
+      }, 100);
+
+      compiler.hooks.compilation.tap(
+        'chisel-plugin-static-frontend',
+        (compilation) => {
+          HtmlWebpackPlugin.getHooks(compilation).afterEmit.tap(
+            'chisel-plugin-static-frontend',
+            // eslint-disable-next-line no-unused-vars
+            (data) => {
+              // console.log(`Emit ${data.outputName}`);
+              reloadDebounced();
+            },
+          );
+        },
+      );
+
+      await new Promise((resolve) => {
+        compiler.hooks.done.tap('chisel-plugin-static-frontend', resolve);
       });
     },
   );
