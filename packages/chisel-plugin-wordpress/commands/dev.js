@@ -19,7 +19,7 @@ module.exports = (api, options) => {
 
       let config = await api.service.resolveWebpackConfig();
 
-      const projectDevServerOptions = {
+      const webpackPluginServeOptions = {
         host: 'localhost',
         port: projectPort,
         open: true,
@@ -34,8 +34,10 @@ module.exports = (api, options) => {
         },
       };
 
+      await hooks.webpackPluginServeOptions.promise(webpackPluginServeOptions);
+
       const webpackPluginServe = new WebpackPluginServe(
-        projectDevServerOptions,
+        webpackPluginServeOptions,
       );
 
       config.plugins.push(webpackPluginServe);

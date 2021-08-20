@@ -2,8 +2,7 @@ module.exports = (api, options) => {
   const { AsyncSeriesHook } = api.tapable;
 
   api.registerHooks('wordPress', {
-    devMiddlewareOptions: new AsyncSeriesHook(['options']),
-    hotMiddlewareOptions: new AsyncSeriesHook(['options']),
+    webpackPluginServeOptions: new AsyncSeriesHook(['options']),
     browserSyncConfig: new AsyncSeriesHook(['config']),
   });
 
