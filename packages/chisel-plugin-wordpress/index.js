@@ -31,7 +31,10 @@ module.exports = (api, options) => {
             //   api.service.projectOptions.source.base,
             //   api.service.projectOptions.source.assets
             // ),
-            to: `${outDir}/[path][name].[contenthash:8][ext]`,
+            // WPS doesn't replaces hashed files during development, 
+            // It is causing it to generate multiple files with different 
+            // hashes with each change
+            to: `${outDir}/[path][name].${isProd ? '[contenthash:8]' : ''}[ext]`,
           },
         ],
       },
