@@ -6,6 +6,7 @@ Array [
     "{
   [36mmode[39m: [31m'development'[39m,
   [36mdevtool[39m: [34mfalse[39m,
+  [36mwatch[39m: [34mtrue[39m,
   [36mcontext[39m: [31m--PROJECT-PATH--'[39m,
   [36moutput[39m: {
     [36mpath[39m: [31m--PROJECT-PATH--/dist'[39m,
@@ -205,6 +206,7 @@ Array [
     ]
   },
   [36moptimization[39m: {
+    [36mruntimeChunk[39m: [31m'single'[39m,
     [36mminimizer[39m: [
       [32m/* config.optimization.minimizer('js') */[39m
       [34mnew[39m ([36mrequire[39m([31m--PROJECTS-PATH--/node_modules/terser-webpack-plugin/dist/cjs.js'[39m))(),
@@ -237,8 +239,6 @@ Array [
     ),
     [32m/* config.plugin('case-sensitive-paths') */[39m
     [34mnew[39m CaseSensitivePathsPlugin(),
-    [32m/* config.plugin('chisel-dynamic-public-path') */[39m
-    [34mnew[39m DynamicPublicPath(),
     [32m/* config.plugin('webpackbar') */[39m
     [34mnew[39m WebpackBarPlugin(),
     [32m/* config.plugin('extract-css') */[39m
@@ -283,9 +283,11 @@ Array [
   ],
   [36mentry[39m: {
     [31m'scripts/app'[39m: [
+      [31m'webpack-plugin-serve/client'[39m,
       [31m'./src/scripts/app.js'[39m
     ],
     [31m'styles/main'[39m: [
+      [31m'webpack-plugin-serve/client'[39m,
       [31m'./src/styles/main.scss'[39m
     ]
   },
