@@ -29,9 +29,9 @@ module.exports = (api, options) => {
 
       const config = await api.service.resolveWebpackConfig();
 
-      config.output.publicPath = options.staticFrontend.serveDist
-        ? '/'
-        : `/${options.output.base}/`;
+      const outputPath = options.staticFrontend.serveDist
+      ? ''
+      : config.output.path;
 
       const hostAddress = await host('0.0.0.0');
 
@@ -48,6 +48,10 @@ module.exports = (api, options) => {
           retry: true,
           silent: true, // Change to false for debug
         },
+        static: [
+          config.output.constext,
+          outputPath
+        ],
 
         ...config.devServer,
       };
