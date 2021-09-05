@@ -42,7 +42,7 @@ module.exports = class InjectRevisioned {
             });
         });
         chunksMap = map;
-      })
+      });
     });
 
     compiler.hooks.compilation.tap('InjectRevisioned', (compilation) => {

@@ -6,8 +6,9 @@ module.exports = (api, options) => {
     (command) => command.description('start development server'),
     async () => {
       const fs = require('fs-extra');
-      fs.remove(api.resolve(options.output.base))
-      .catch((err) => console.warn(err));
+      fs.remove(api.resolve(options.output.base)).catch((err) =>
+        console.warn(err),
+      );
 
       const webpack = require('webpack');
       const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
@@ -20,8 +21,8 @@ module.exports = (api, options) => {
       const config = await api.service.resolveWebpackConfig();
 
       const outputPath = !options.staticFrontend.serveDist
-      ? '\\'
-      : config.output.path;
+        ? '\\'
+        : config.output.path;
 
       const hostAddress = await host('0.0.0.0');
 
@@ -38,23 +39,24 @@ module.exports = (api, options) => {
           retry: true,
           silent: true, // Change to false for debug
         },
-        static: [
-          config.context,
-          outputPath
-        ],
+        static: [config.context, outputPath],
 
         ...config.devServer,
       };
 
       if (options.staticFrontend.skipHtmlExtension) {
         projectDevServerOptions['middleware'] = (app, builtins) =>
-        app.use(async (ctx, next) => {
-          // console.log('CTX', ctx);
-          if (!ctx.request.url.endsWith('/') && !ctx.request.url.includes('wps') && !path.posix.extname(ctx.request.url)) {
-            ctx.request.url += '.html';
-          }
-          await next();
-        });
+          app.use(async (ctx, next) => {
+            // console.log('CTX', ctx);
+            if (
+              !ctx.request.url.endsWith('/') &&
+              !ctx.request.url.includes('wps') &&
+              !path.posix.extname(ctx.request.url)
+            ) {
+              ctx.request.url += '.html';
+            }
+            await next();
+          });
       }
 
       projectDevServerOptions.port =

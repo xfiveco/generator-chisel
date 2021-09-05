@@ -6,8 +6,9 @@ module.exports = (api, options) => {
     (command) => command.description('start development server'),
     async () => {
       const fs = require('fs-extra');
-      fs.remove(api.resolve(options.output.base))
-      .catch((err) => console.warn(err));
+      fs.remove(api.resolve(options.output.base)).catch((err) =>
+        console.warn(err),
+      );
 
       const browserSync = require('browser-sync');
       const webpack = require('webpack');
@@ -55,7 +56,7 @@ module.exports = (api, options) => {
         ghostMode: false,
         online: true,
         open: false,
-        port: projectPort
+        port: projectPort,
       };
 
       await hooks.browserSyncConfig.promise(browserSyncConfig);
@@ -129,9 +130,7 @@ module.exports = (api, options) => {
 
       return () => {
         bs.exit(); // no callback supported
-        return Promise.all([
-          watcher.close(),
-        ]);
+        return Promise.all([watcher.close()]);
       };
     },
   );

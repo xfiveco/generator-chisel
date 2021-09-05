@@ -31,10 +31,12 @@ module.exports = (api, options) => {
             //   api.service.projectOptions.source.base,
             //   api.service.projectOptions.source.assets
             // ),
-            // WPS doesn't replaces hashed files during development, 
-            // It is causing it to generate multiple files with different 
+            // WPS doesn't replaces hashed files during development,
+            // It is causing it to generate multiple files with different
             // hashes with each change
-            to: `${outDir}/[path][name].${isProd ? '[contenthash:8]' : ''}[ext]`,
+            to: `${outDir}/[path][name].${
+              isProd ? '[contenthash:8]' : ''
+            }[ext]`,
           },
         ],
       },
@@ -47,11 +49,12 @@ module.exports = (api, options) => {
           fileName: `manifest${!isProd ? '-dev' : ''}.json`,
           writeToFileEmit: !isProd,
           publicPath: '',
-          filter: ({name, path}) => {
-            return !path.endsWith('wps-hmr.json') && !path.endsWith('wps-hmr.js')
+          filter: ({ name, path }) => {
+            return (
+              !path.endsWith('wps-hmr.json') && !path.endsWith('wps-hmr.js')
+            );
           },
           map(obj) {
-
             if (obj.isAsset && obj.name.startsWith(`${outDir}/`)) {
               obj.name = obj.name.replace(/\.[\da-f]{8}(?=(?:\.[^.]*)?$)/, '');
             }
