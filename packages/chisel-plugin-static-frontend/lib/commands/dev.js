@@ -1,15 +1,5 @@
 const path = require('path');
 
-const beforeAddHtmlExtension = (app) => {
-  app.use((req, res, next) => {
-    // console.log(req.url, req.headers);
-    if (!req.url.endsWith('/') && !path.posix.extname(req.url)) {
-      req.url += '.html';
-    }
-    next();
-  });
-};
-
 module.exports = (api, options) => {
   api.registerCommand(
     'dev',
@@ -29,8 +19,8 @@ module.exports = (api, options) => {
 
       const config = await api.service.resolveWebpackConfig();
 
-      const outputPath = options.staticFrontend.serveDist
-      ? ''
+      const outputPath = !options.staticFrontend.serveDist
+      ? '\\'
       : config.output.path;
 
       const hostAddress = await host('0.0.0.0');
@@ -49,12 +39,23 @@ module.exports = (api, options) => {
           silent: true, // Change to false for debug
         },
         static: [
-          config.output.constext,
+          config.context,
           outputPath
         ],
 
         ...config.devServer,
       };
+
+      if (options.staticFrontend.skipHtmlExtension) {
+        projectDevServerOptions['middleware'] = (app, builtins) =>
+        app.use(async (ctx, next) => {
+          // console.log('CTX', ctx);
+          if (!ctx.request.url.endsWith('/') && !ctx.request.url.includes('wps') && !path.posix.extname(ctx.request.url)) {
+            ctx.request.url += '.html';
+          }
+          await next();
+        });
+      }
 
       projectDevServerOptions.port =
         Number(process.env.PORT) || projectDevServerOptions.port;
