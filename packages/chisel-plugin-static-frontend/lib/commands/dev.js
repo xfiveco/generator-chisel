@@ -23,7 +23,7 @@ module.exports = (api, options) => {
       const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
       const HtmlWebpackPlugin = require('html-webpack-plugin');
       const { debounce } = require('lodash');
-
+      const { host } = require('chisel-shared-utils');
 
       process.env.NODE_ENV = 'development';
 
@@ -33,8 +33,10 @@ module.exports = (api, options) => {
         ? '/'
         : `/${options.output.base}/`;
 
+      const hostAddress = await host('0.0.0.0');
+
       const projectDevServerOptions = {
-        host: 'localhost',
+        host: hostAddress,
         port: 3000,
         open: true,
         hmr: 'refresh-on-failure',
@@ -42,7 +44,7 @@ module.exports = (api, options) => {
         progress: false,
         compress: true,
         client: {
-          address: 'localhost:3000',
+          address: `${hostAddress}:3000`,
           retry: true,
           silent: true, // Change to false for debug
         },
