@@ -22,25 +22,12 @@ module.exports = class InjectRevisioned {
     let chunksMap = {};
 
     compiler.hooks.thisCompilation.tap('InjectRevisioned', (compilation) => {
-      compilation.hooks.processAssets.tap('InjectRevisioned', () => {
+      compilation.hooks.processAssets.tap('InjectRevisioned', (assets) => {
         const map = {};
-        const { chunks } = compilation
-          .getStats()
-          .toJson({ all: false, chunks: true });
-
-        chunks.forEach((chunk) => {
-          chunk.files
-            .filter((file) => !file.includes('hot-update'))
-            .forEach((file) => {
-              const ext = getFileType(file);
-              const name = path.posix.join(
-                path.posix.dirname(file),
-                `${path.posix.basename(chunk.names[0])}.${ext}`,
-              );
-
-              map[name] = file;
-            });
+        Object.entries(assets).forEach(([pathname]) => {
+          map[pathname] = pathname;
         });
+
         chunksMap = map;
       });
     });
