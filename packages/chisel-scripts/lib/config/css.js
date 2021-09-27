@@ -76,11 +76,15 @@ module.exports = (api, options) => {
         { filename: `[name]${isProd ? '.[contenthash:8]' : ''}.css` },
       ]);
 
-    webpackConfig.optimization
-      .minimizer('css')
-      .use(require.resolve('../webpack-plugins/OptimizeCssnanoPlugin'), [
-        { sourceMap: true },
-      ]);
+    // webpackConfig.optimization
+    //   .minimizer('css')
+    //   .use(require.resolve('../webpack-plugins/OptimizeCssnanoPlugin'), [
+    //     { sourceMap: true },
+    //   ]);
+
+    webpackConfig
+    .plugin('minify-css')
+    .use(require('css-minimizer-webpack-plugin'));
 
     if (isProd) {
       webpackConfig
