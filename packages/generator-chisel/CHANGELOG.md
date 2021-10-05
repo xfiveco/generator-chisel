@@ -2,6 +2,13 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.13 (2021-09-29)
+
+- Change postcss-normalize package ([f1b9ea4](https://github.com/xfiveco/generator-chisel/commit/f1b9ea4))
+- Fix Eslint import error (#493) (#496) ([0e0fabe](https://github.com/xfiveco/generator-chisel/commit/0e0fabe)), closes [#493](https://github.com/xfiveco/generator-chisel/issues/493) [#496](https://github.com/xfiveco/generator-chisel/issues/496)
+- Minify Styles & Update Tests (#501) ([4a2e720](https://github.com/xfiveco/generator-chisel/commit/4a2e720)), closes [#501](https://github.com/xfiveco/generator-chisel/issues/501)
+- Update chisel index page (#497) (#499) ([7219131](https://github.com/xfiveco/generator-chisel/commit/7219131)), closes [#497](https://github.com/xfiveco/generator-chisel/issues/497) [#499](https://github.com/xfiveco/generator-chisel/issues/499) [#499](https://github.com/xfiveco/generator-chisel/issues/499)
+
 ## 1.0.0-alpha.12 (2021-01-23)
 
 - Support Node 14 ([c7da9a6](https://github.com/xfiveco/generator-chisel/commit/c7da9a6))
