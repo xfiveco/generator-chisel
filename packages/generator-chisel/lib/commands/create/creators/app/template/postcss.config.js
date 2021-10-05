@@ -3,6 +3,6 @@
 module.exports = {
   plugins: [
     require('autoprefixer')({ grid: 'autoplace' }),
-    require('postcss-normalize')(),
+    require('@jakub300/postcss-normalize')(),
   ],
 };

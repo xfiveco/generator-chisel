@@ -20,7 +20,7 @@
     <%= app.projectType == 'wp-with-fe' ? `"chisel-plugin-wordpress": "*",` : '' %>
     <%= app.projectType == 'fe' ? `"chisel-plugin-static-frontend": "*",` : '' %>
     "babel-preset-chisel": "*",
-    "postcss-normalize": "^9.0.0",
+    "@jakub300/postcss-normalize": "^9.0.1",
     "autoprefixer": "^9.8.0",
     <% /* required by postcss-normalize for some reason  */ %>
     "browserslist": "^4.12.0",
