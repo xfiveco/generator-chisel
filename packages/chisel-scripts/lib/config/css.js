@@ -24,7 +24,7 @@ module.exports = (api, options) => {
     };
 
     const extractCssLoaderOptions = {
-      hmr: !isProd,
+      // hmr: !isProd,
       publicPath: path.relative(
         api.resolve(path.join(options.source.base, options.source.styles)),
         api.resolve(options.source.base),
@@ -76,16 +76,20 @@ module.exports = (api, options) => {
         { filename: `[name]${isProd ? '.[contenthash:8]' : ''}.css` },
       ]);
 
-    webpackConfig.optimization
-      .minimizer('css')
-      .use(require.resolve('../webpack-plugins/OptimizeCssnanoPlugin'), [
-        { sourceMap: true },
-      ]);
+    // webpackConfig.optimization
+    //   .minimizer('css')
+    //   .use(require.resolve('../webpack-plugins/OptimizeCssnanoPlugin'), [
+    //     { sourceMap: true },
+    //   ]);
+
+    webpackConfig
+    .plugin('minify-css')
+    .use(require('css-minimizer-webpack-plugin'));
 
     if (isProd) {
       webpackConfig
         .plugin('style-only-entries')
-        .use(require('webpack-fix-style-only-entries'), [{ silent: true }]);
+        .use(require('webpack-remove-empty-scripts'), []);
     }
   });
 };

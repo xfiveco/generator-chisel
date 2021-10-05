@@ -1,4 +1,4 @@
-['package-manager', 'run', 'copy'].forEach((lib) => {
+['package-manager', 'run', 'copy', 'host'].forEach((lib) => {
   Object.assign(exports, require(`./lib/${lib}`));
 });
 

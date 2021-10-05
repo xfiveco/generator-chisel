@@ -2,8 +2,7 @@ module.exports = (api, options) => {
   const { AsyncSeriesHook } = api.tapable;
 
   api.registerHooks('wordPress', {
-    devMiddlewareOptions: new AsyncSeriesHook(['options']),
-    hotMiddlewareOptions: new AsyncSeriesHook(['options']),
+    webpackPluginServeOptions: new AsyncSeriesHook(['options']),
     browserSyncConfig: new AsyncSeriesHook(['config']),
   });
 
@@ -32,7 +31,12 @@ module.exports = (api, options) => {
             //   api.service.projectOptions.source.base,
             //   api.service.projectOptions.source.assets
             // ),
-            to: `${outDir}/[path][name].[contenthash:8].[ext]`,
+            // WPS doesn't replaces hashed files during development,
+            // It is causing it to generate multiple files with different
+            // hashes with each change
+            to: `${outDir}/[path][name].${
+              isProd ? '[contenthash:8]' : ''
+            }[ext]`,
           },
         ],
       },
@@ -40,10 +44,16 @@ module.exports = (api, options) => {
 
     webpackConfig
       .plugin('wordpress-manifest')
-      .use(require('webpack-manifest-plugin'), [
+      .use(require('webpack-manifest-plugin').WebpackManifestPlugin, [
         {
           fileName: `manifest${!isProd ? '-dev' : ''}.json`,
           writeToFileEmit: !isProd,
+          publicPath: '',
+          filter: ({ name, path }) => {
+            return (
+              !path.endsWith('wps-hmr.json') && !path.endsWith('wps-hmr.js')
+            );
+          },
           map(obj) {
             if (obj.isAsset && obj.name.startsWith(`${outDir}/`)) {
               obj.name = obj.name.replace(/\.[\da-f]{8}(?=(?:\.[^.]*)?$)/, '');

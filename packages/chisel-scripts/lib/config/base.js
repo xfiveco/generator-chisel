@@ -20,7 +20,9 @@ module.exports = (api, options) => {
       }
     } else {
       // webpackConfig.mode('development').devtool('cheap-module-eval-source-map');
+      webpackConfig.optimization.runtimeChunk('single');
       webpackConfig.mode('development').devtool(false);
+      webpackConfig.watch(true);
 
       // Use separate source maps for styles due to
       // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/529
@@ -70,12 +72,17 @@ module.exports = (api, options) => {
         const isScript = ext !== '.scss';
         const outDir = options.output[!isScript ? 'styles' : 'scripts'];
         const name = `${outDir}/${base}`;
+        // if (isScript) return;
         const entry = webpackConfig.entry(name).add(`./${p}`);
 
         if (isScript) {
           if (react) {
             entry.prepend('react-hot-loader/patch');
           }
+        }
+
+        if (!isProd) {
+          entry.prepend('webpack-plugin-serve/client');
         }
       });
 
@@ -160,9 +167,9 @@ module.exports = (api, options) => {
       .plugin('case-sensitive-paths')
       .use(require('case-sensitive-paths-webpack-plugin'));
 
-    webpackConfig
-      .plugin('chisel-dynamic-public-path')
-      .use(require('../webpack-plugins/DynamicPublicPath'));
+    // webpackConfig
+    //   .plugin('chisel-dynamic-public-path')
+    //   .use(require('../webpack-plugins/DynamicPublicPath'));
 
     webpackConfig.plugin('webpackbar').use(require('webpackbar'));
 
@@ -170,7 +177,7 @@ module.exports = (api, options) => {
       // keep chunk ids stable so async chunks have consistent hash (#1916)
       webpackConfig
         .plugin('named-chunks')
-        .use(require('webpack/lib/NamedChunksPlugin'), [
+        .use(require('webpack/lib/ids/NamedChunkIdsPlugin'), [
           (chunk) => {
             if (chunk.name) {
               return chunk.name;
@@ -187,7 +194,7 @@ module.exports = (api, options) => {
       // keep module.id stable when vendor modules does not change
       webpackConfig
         .plugin('hash-module-ids')
-        .use(require('webpack/lib/HashedModuleIdsPlugin'), [
+        .use(require('webpack/lib/ids/HashedModuleIdsPlugin'), [
           { hashDigest: 'hex' },
         ]);
 

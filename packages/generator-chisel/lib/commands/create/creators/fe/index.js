@@ -17,8 +17,7 @@ module.exports = (api) => {
           },
           {
             value: 'skipHtmlExtension',
-            name:
-              "Don't include html extension in links (posts API) & support them in dev",
+            name: "Don't include html extension in links (posts API) & support them in dev",
           },
         ],
       },

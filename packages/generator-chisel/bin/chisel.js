@@ -17,6 +17,7 @@ const createProgram = () => {
 
   program
     .command('create')
+    .storeOptionsAsProperties()
     .description('create a new project powered by Chisel')
     .option('--skip-dependencies-install')
     .option('--skip-wp-download')

@@ -173,9 +173,9 @@ exports[`FE add-page Adds pages in default setup 2`] = `
 exports[`FE add-page Adds pages in default setup 3`] = `
 Array [
   "dist/page1.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -312,9 +312,9 @@ exports[`FE add-page Adds pages in default setup 5`] = `
 exports[`FE add-page Adds pages in default setup 6`] = `
 Array [
   "dist/page1.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/second-page.html",
   "dist/some-other-page.html",
   "dist/styles/main.--HASH--.css",
@@ -467,9 +467,9 @@ exports[`FE add-page Adds pages with the same name 2`] = `
 Array [
   "dist/page1-1.html",
   "dist/page1.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -679,7 +679,8 @@ exports[`FE add-page Fails when no page is passed 1`] = `"Process.exit: 1"`;
 exports[`FE add-page Fails when no page is passed 2`] = `
 Array [
   Array [
-    "error: missing required argument 'page'",
+    "error: missing required argument 'page'
+",
   ],
 ]
 `;
@@ -877,9 +878,9 @@ Array [
   "content/page1.twig",
   "dist/hello.html",
   "dist/page1.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1012,9 +1013,9 @@ Array [
   "dist/hello.html",
   "dist/nested/interesting-page.html",
   "dist/page1.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1120,9 +1121,9 @@ Array [
   "content/page1.md",
   "dist/hello.html",
   "dist/page1.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1256,9 +1257,9 @@ Array [
   "dist/hello.html",
   "dist/nested/interesting-page.html",
   "dist/page1.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",
@@ -1282,7 +1283,7 @@ exports[`FE add-page When using content and markdown adds pages and builds them 
   <script>
     document.documentElement.classList.remove('no-js');
   </script>
-  <script src=\\"scripts/app.98db252c.js\\" defer></script>
+  <script src=\\"scripts/app.--HASH--.js\\" defer></script>
 </head>
 
 <body class=\\"\\">
@@ -1315,7 +1316,7 @@ exports[`FE add-page When using content and markdown adds pages and builds them 
   <script>
     document.documentElement.classList.remove('no-js');
   </script>
-  <script src=\\"../../scripts/app.98db252c.js\\" defer></script>
+  <script src=\\"../../scripts/app.--HASH--.js\\" defer></script>
 </head>
 
 <body class=\\"\\">

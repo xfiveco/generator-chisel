@@ -125,7 +125,9 @@ global.chiselTestHelpers = {
     let files = (await globby(filesPaths, { dot: true }))
       .sort()
       .map((val) =>
-        val.replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/, '--HASH--'),
+        val
+          .replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/, '--HASH--')
+          .replace(/(?<=scripts\/app\.)[a-z0-9]+(?=\.)/g, '--HASH--'),
       );
 
     const groupsPrefixesCounts = groupsPrefixes.map(
@@ -155,6 +157,7 @@ global.chiselTestHelpers = {
       if (typeof call[0] === 'string') {
         call[0] = call[0]
           .replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/g, '--HASH--')
+          .replace(/(?<=scripts\/app\.)[a-z0-9]+(?=\.)/g, '--HASH--')
           .split(process.cwd())
           .join('--PROJECT-PATH--')
           .replace(/\\+/g, '/')
@@ -183,6 +186,7 @@ global.chiselTestHelpers = {
       fs
         .readFileSync(file, 'utf8')
         .replace(/(?<=styles\/main\.)[a-z0-9]+(?=\.)/g, '--HASH--')
+        .replace(/(?<=scripts\/app\.)[a-z0-9]+(?=\.)/g, '--HASH--')
         .replace(/dbrand\d+/g, '--DB-RAND--')
         .split(process.cwd())
         .join('--PROJECT-PATH--')

@@ -3,9 +3,9 @@
 exports[`FE Content Simple 1`] = `
 Array [
   "dist/hello.html",
-  "dist/scripts/app.98db252c.full.js",
-  "dist/scripts/app.98db252c.js",
-  "dist/scripts/app.98db252c.js.map",
+  "dist/scripts/app.--HASH--.full.js",
+  "dist/scripts/app.--HASH--.js",
+  "dist/scripts/app.--HASH--.js.map",
   "dist/styles/main.--HASH--.css",
   "dist/styles/main.--HASH--.css.map",
   "dist/styles/main.--HASH--.full.css",

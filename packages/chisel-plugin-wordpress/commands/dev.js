@@ -6,73 +6,58 @@ module.exports = (api, options) => {
     (command) => command.description('start development server'),
     async () => {
       const fs = require('fs-extra');
-
-      api.chainWebpack((webpackConfig) => {
-        webpackConfig
-          .plugin('hot-module-replacement')
-          .use(require('webpack/lib/HotModuleReplacementPlugin'));
-
-        const hotPath = require.resolve('webpack-hot-middleware/client');
-        const hotWithQuery = `${hotPath}?reload=true`;
-
-        Object.values(webpackConfig.entryPoints.entries()).forEach((entry) => {
-          entry.prepend(hotWithQuery);
-        });
-      });
+      fs.remove(api.resolve(options.output.base)).catch((err) =>
+        console.warn(err),
+      );
 
       const browserSync = require('browser-sync');
       const webpack = require('webpack');
-      const webpackDevMiddleware = require('webpack-dev-middleware');
-      const webpackHotMiddleware = require('webpack-hot-middleware');
-
-      process.env.NODE_ENV = 'development';
-
-      const config = await api.service.resolveWebpackConfig();
-      const compiler = webpack(config);
-      const bs = browserSync.create();
-
+      const { WebpackPluginServe } = require('webpack-plugin-serve');
       const { directoryName, themeName } = options.wp;
 
-      const devMiddlewareOptions = {
-        publicPath: `/wp-content/themes/${themeName}/dist`,
-        stats: 'errors-warnings',
+      process.env.NODE_ENV = 'development';
+      const projectPort = parseInt(process.env.PORT, 10) || 3000;
+
+      let config = await api.service.resolveWebpackConfig();
+
+      const webpackPluginServeOptions = {
+        host: 'localhost',
+        port: projectPort,
+        open: true,
+        hmr: 'refresh-on-failure',
+        status: true,
+        progress: true,
+        compress: true,
+        client: {
+          address: `127.0.0.1:${projectPort}`,
+          retry: true,
+          silent: true, // Change to false for debug
+        },
       };
 
-      await hooks.devMiddlewareOptions.promise(devMiddlewareOptions);
+      await hooks.webpackPluginServeOptions.promise(webpackPluginServeOptions);
 
-      const devMiddleware = webpackDevMiddleware(
-        compiler,
-        devMiddlewareOptions,
+      const webpackPluginServe = new WebpackPluginServe(
+        webpackPluginServeOptions,
       );
 
-      const hotMiddlewareOptions = { log: false };
+      config.plugins.push(webpackPluginServe);
 
-      await hooks.hotMiddlewareOptions.promise(hotMiddlewareOptions);
-
-      const hotMiddleware = webpackHotMiddleware(
-        compiler,
-        hotMiddlewareOptions,
-      );
+      const bs = browserSync.create();
 
       const browserSyncConfig = {
         proxy: {
           target: options.wp.url,
+          ws: true,
           reqHeaders: {
             'x-chisel-proxy': '1',
           },
         },
         ghostMode: false,
         online: true,
-        middleware: [devMiddleware, hotMiddleware],
-        port: parseInt(process.env.PORT, 10) || 3000,
+        open: false,
+        port: projectPort,
       };
-
-      await new Promise((resolve) => {
-        devMiddleware.context.compiler.hooks.done.tap(
-          'chisel-plugin-webpack',
-          resolve,
-        );
-      });
 
       await hooks.browserSyncConfig.promise(browserSyncConfig);
 
@@ -84,6 +69,25 @@ module.exports = (api, options) => {
         options.output.base,
         'manifest-dev.json',
       );
+
+      const compiler = webpack(config, (err, stats) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        const info = stats.toJson();
+
+        if (stats.hasErrors()) {
+          console.log(stats.toString({ colors: true }));
+          console.error(new Error('Build failed with errors.'));
+          return;
+        }
+
+        if (stats.hasWarnings()) {
+          console.warn(info.warnings);
+        }
+      });
 
       let watchReady = false;
       let fileManifestBody = '';
@@ -126,12 +130,7 @@ module.exports = (api, options) => {
 
       return () => {
         bs.exit(); // no callback supported
-        return Promise.all([
-          new Promise((resolve) => {
-            devMiddleware.close(resolve);
-          }),
-          watcher.close(),
-        ]);
+        return Promise.all([watcher.close()]);
       };
     },
   );

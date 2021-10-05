@@ -8,7 +8,6 @@ const supertest = require('supertest');
 const { answers } = require('./helpers');
 
 global.chiselTestHelpers.setupPhpServer();
-
 describe.supportsPuppeteer('WP dev', () => {
   test('Starts dev server and reloads on changes', async () => {
     await global.chiselTestHelpers.generateProjectWithAnswers(

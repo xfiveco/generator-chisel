@@ -96,7 +96,8 @@ describe('FE add-page', () => {
       .mockImplementation((...args) => {
         throw new Error(`Process.exit: ${args.join(', ')}`);
       });
-    const consoleMock = jest.spyOn(console, 'error');
+
+    const consoleMock = jest.spyOn(process.stderr, 'write');
 
     const addPage = global.chiselTestHelpers.runChiselScript(['add-page']);
 

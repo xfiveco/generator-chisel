@@ -1,68 +1,92 @@
 const path = require('path');
 
-const defaults = {
-  host: '0.0.0.0',
-  port: 3000,
-  https: false,
-  hot: true,
-  stats: 'errors-warnings',
-  open: true,
-  useLocalIp: true,
-};
-
-const beforeAddHtmlExtension = (app) => {
-  app.use((req, res, next) => {
-    // console.log(req.url, req.headers);
-    if (!req.url.endsWith('/') && !path.posix.extname(req.url)) {
-      req.url += '.html';
-    }
-    next();
-  });
-};
-
 module.exports = (api, options) => {
   api.registerCommand(
     'dev',
     (command) => command.description('start development server'),
     async () => {
+      const fs = require('fs-extra');
+      fs.remove(api.resolve(options.output.base)).catch((err) =>
+        console.warn(err),
+      );
+
       const webpack = require('webpack');
-      const WebpackDevServer = require('webpack-dev-server');
+      const { WebpackPluginServe: Serve } = require('webpack-plugin-serve');
       const HtmlWebpackPlugin = require('html-webpack-plugin');
       const { debounce } = require('lodash');
+      const { host } = require('chisel-shared-utils');
 
       process.env.NODE_ENV = 'development';
 
       const config = await api.service.resolveWebpackConfig();
 
+      const outputPath = !options.staticFrontend.serveDist
+        ? '\\'
+        : config.output.path;
+
+      const hostAddress = await host('0.0.0.0');
+
       const projectDevServerOptions = {
-        ...defaults,
-        ...{
-          publicPath: options.staticFrontend.serveDist
-            ? '/'
-            : `/${options.output.base}/`,
+        host: hostAddress,
+        port: 3000,
+        open: true,
+        hmr: 'refresh-on-failure',
+        status: true,
+        progress: false,
+        compress: true,
+        client: {
+          address: `${hostAddress}:3000`,
+          retry: true,
+          silent: true, // Change to false for debug
         },
+        static: [config.context, outputPath],
+
         ...config.devServer,
-        ...options.devServer,
       };
 
       if (options.staticFrontend.skipHtmlExtension) {
-        const oldBefore = projectDevServerOptions.before;
-        projectDevServerOptions.before = (...args) => {
-          beforeAddHtmlExtension(...args);
-          if (oldBefore) oldBefore(...args);
-        };
+        projectDevServerOptions['middleware'] = (app, builtins) =>
+          app.use(async (ctx, next) => {
+            // console.log('CTX', ctx);
+            if (
+              !ctx.request.url.endsWith('/') &&
+              !ctx.request.url.includes('wps') &&
+              !path.posix.extname(ctx.request.url)
+            ) {
+              ctx.request.url += '.html';
+            }
+            await next();
+          });
       }
 
       projectDevServerOptions.port =
         Number(process.env.PORT) || projectDevServerOptions.port;
 
-      const compiler = webpack(config);
+      const serve = new Serve(projectDevServerOptions);
 
-      const server = new WebpackDevServer(compiler, projectDevServerOptions);
+      config.plugins.push(serve);
+
+      const compiler = webpack(config, (err, stats) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        const info = stats.toJson();
+
+        if (stats.hasErrors()) {
+          console.log(stats.toString({ colors: true }));
+          console.error(new Error('Build failed with errors.'));
+          return;
+        }
+
+        if (stats.hasWarnings()) {
+          console.warn(info.warnings);
+        }
+      });
 
       const reloadDebounced = debounce(() => {
-        // console.log('reload');
-        server.sockWrite(server.sockets, 'content-changed');
+        serve.emit('reload');
       }, 100);
 
       compiler.hooks.compilation.tap(
@@ -82,14 +106,6 @@ module.exports = (api, options) => {
       await new Promise((resolve) => {
         compiler.hooks.done.tap('chisel-plugin-static-frontend', resolve);
       });
-
-      server.listen(
-        projectDevServerOptions.port,
-        projectDevServerOptions.host,
-        (err) => {
-          if (err) throw err;
-        },
-      );
     },
   );
 };

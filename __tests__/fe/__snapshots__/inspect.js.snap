@@ -6,6 +6,7 @@ Array [
     "{
   [36mmode[39m: [31m'development'[39m,
   [36mdevtool[39m: [34mfalse[39m,
+  [36mwatch[39m: [34mtrue[39m,
   [36mcontext[39m: [31m--PROJECT-PATH--'[39m,
   [36moutput[39m: {
     [36mpath[39m: [31m--PROJECT-PATH--/dist'[39m,
@@ -43,7 +44,7 @@ Array [
           [32m/* config.module.rule('assets').oneOf('inline') */[39m
           {
             [36mresourceQuery[39m: [31m/inline/[39m,
-            [36muse[39m: [
+            use: [
               [32m/* config.module.rule('assets').oneOf('inline').use('url') */[39m
               {
                 [36mloader[39m: [31m'url-loader'[39m,
@@ -70,7 +71,7 @@ Array [
       [32m/* config.module.rule('js') */[39m
       {
         [36mtest[39m: [31m//.m?jsx?$/[39m,
-        [36mexclude[39m: [
+        exclude: [
           [33m[34mfunction[39m[33m () [39m{ [32m/* omitted long function */[39m },
           [31m--PROJECT-PATH--/src/assets'[39m
         ],
@@ -84,7 +85,7 @@ Array [
       [32m/* config.module.rule('css') */[39m
       {
         [36mtest[39m: [31m//.css$/[39m,
-        [36mexclude[39m: [
+        exclude: [
           [31m--PROJECT-PATH--/src/assets'[39m
         ],
         [36muse[39m: [
@@ -92,7 +93,6 @@ Array [
           {
             [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/mini-css-extract-plugin/dist/loader.js'[39m,
             [36moptions[39m: {
-              [36mhmr[39m: [34mtrue[39m,
               [36mpublicPath[39m: [31m'..'[39m
             }
           },
@@ -106,7 +106,7 @@ Array [
           },
           [32m/* config.module.rule('css').use('postcss-loader') */[39m
           {
-            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/postcss-loader/src/index.js'[39m,
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/postcss-loader/dist/cjs.js'[39m,
             [36moptions[39m: {
               [36msourceMap[39m: [34mtrue[39m
             }
@@ -116,7 +116,7 @@ Array [
       [32m/* config.module.rule('scss') */[39m
       {
         [36mtest[39m: [31m//.scss$/[39m,
-        [36mexclude[39m: [
+        exclude: [
           [31m--PROJECT-PATH--/src/assets'[39m
         ],
         [36muse[39m: [
@@ -124,7 +124,6 @@ Array [
           {
             [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/mini-css-extract-plugin/dist/loader.js'[39m,
             [36moptions[39m: {
-              [36mhmr[39m: [34mtrue[39m,
               [36mpublicPath[39m: [31m'..'[39m
             }
           },
@@ -138,7 +137,7 @@ Array [
           },
           [32m/* config.module.rule('scss').use('postcss-loader') */[39m
           {
-            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/postcss-loader/src/index.js'[39m,
+            [36mloader[39m: [31m--PROJECTS-PATH--/node_modules/postcss-loader/dist/cjs.js'[39m,
             [36moptions[39m: {
               [36msourceMap[39m: [34mtrue[39m
             }
@@ -166,7 +165,7 @@ Array [
       [32m/* config.module.rule('twig') */[39m
       {
         [36mtest[39m: [31m//.twig$/[39m,
-        [36minclude[39m: [
+        include: [
           [31m--PROJECT-PATH--/src/templates'[39m,
           [31m--PROJECT-PATH--/content'[39m
         ],
@@ -183,7 +182,7 @@ Array [
       [32m/* config.module.rule('content') */[39m
       {
         [36mtest[39m: [31m//.(?:md|json)$/[39m,
-        [36mtype[39m: [31m'javascript/auto'[39m,
+        type: [31m'javascript/auto'[39m,
         [36minclude[39m: [
           [31m--PROJECT-PATH--/content'[39m
         ],
@@ -207,6 +206,7 @@ Array [
     ]
   },
   [36moptimization[39m: {
+    [36mruntimeChunk[39m: [31m'single'[39m,
     [36mminimizer[39m: [
       [32m/* config.optimization.minimizer('js') */[39m
       [34mnew[39m ([36mrequire[39m([31m--PROJECTS-PATH--/node_modules/terser-webpack-plugin/dist/cjs.js'[39m))(),
@@ -239,8 +239,6 @@ Array [
     ),
     [32m/* config.plugin('case-sensitive-paths') */[39m
     [34mnew[39m CaseSensitivePathsPlugin(),
-    [32m/* config.plugin('chisel-dynamic-public-path') */[39m
-    [34mnew[39m DynamicPublicPath(),
     [32m/* config.plugin('webpackbar') */[39m
     [34mnew[39m WebpackBarPlugin(),
     [32m/* config.plugin('extract-css') */[39m
@@ -285,9 +283,11 @@ Array [
   ],
   [36mentry[39m: {
     [31m'scripts/app'[39m: [
+      [31m'webpack-plugin-serve/client'[39m,
       [31m'./src/scripts/app.js'[39m
     ],
     [31m'styles/main'[39m: [
+      [31m'webpack-plugin-serve/client'[39m,
       [31m'./src/styles/main.scss'[39m
     ]
   },

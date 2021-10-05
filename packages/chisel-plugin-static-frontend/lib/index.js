@@ -114,7 +114,7 @@ module.exports = (api, options) => {
       const postCreator = require('./Post');
       const getPostsCreator = require('./get-posts');
       const Datastore = require('nedb-promises');
-      const db = Datastore.create();
+      const db = new Datastore();
       loaderOptions.db = db;
       loaderOptions.getPostsCreator = getPostsCreator(loaderOptions);
       const Post = postCreator(loaderOptions);

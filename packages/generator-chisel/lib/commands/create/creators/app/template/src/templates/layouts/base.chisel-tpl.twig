@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.documentElement.classList.remove('no-js');</script>
   {% if isDev() %}
+    <script src="<% if (isWP) { %>{{ revisionedPath('runtime.js') }}<% } else { %>{{ 'runtime.js' }}<% }%>" defer></script>
+    <!-- TODO: dynamic path? -->
+
     <script src="{{ revisionedPath('styles/main.js') }}" defer></script>
   {% endif %}
   <script src="{{ revisionedPath('scripts/app.js') }}" defer></script>

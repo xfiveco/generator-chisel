@@ -21,6 +21,10 @@ describe('WP config hooks', () => {
         `
           hooks: {
             wordPress: {
+              webpackPluginServeOptions(options) {
+                options.port = 3100;
+                options.client.address = '127.0.0.1:3100';
+              },
               browserSyncConfig(config) {
                 config.port = 3100;
               }

@@ -9,7 +9,7 @@ exports[`FE Build Generate and build FE Project and don't format 1`] = `
   <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"styles/main.--HASH--.css\\" type=\\"text/css\\">
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
   <script>document.documentElement.classList.remove('no-js');</script>
-    <script src=\\"scripts/app.98db252c.js\\" defer></script>
+    <script src=\\"scripts/app.--HASH--.js\\" defer></script>
 
     </head>
 

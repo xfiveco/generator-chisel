@@ -3,7 +3,7 @@
 exports[`FE Custom Functions Custom functions work  1`] = `
 "<!DOCTYPE html>
 <ul>
-  <li>scripts/app.98db252c.js</li>
+  <li>scripts/app.--HASH--.js</li>
   <li>ADD: 30</li>
   <li>After timeout</li>
 </ul>"

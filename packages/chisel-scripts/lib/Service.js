@@ -144,7 +144,7 @@ module.exports = class Service {
       Object.entries(taps).forEach(([name, tap]) => {
         const hook = hooks[name];
 
-        if (hook instanceof AsyncSeriesHook) {
+        if (typeof hook == 'object') {
           hook.tapPromise('ChiselConfig', (...args) =>
             Promise.resolve(tap(...args)),
           );
@@ -182,17 +182,11 @@ module.exports = class Service {
 
     const commanderArgs = [...(name ? [name] : []), ...args];
 
-    await this.program.parseAsync(commanderArgs, { from: 'user' });
-    if (this.program._actionResults) {
-      const results = await Promise.all(this.program._actionResults);
-      if (results.length === 1) {
-        return results[0];
-      }
-
-      return results;
-    }
-
-    return undefined;
+    // based on https://github.com/tj/commander.js/blob/a9c9f17c7eff96b8da8c2b9d01751d41f1eb0ae3/lib/command.js#L869
+    const userArgs = this.program._prepareUserArgs(commanderArgs, {
+      from: 'user',
+    });
+    return await this.program._parseCommand([], userArgs);
   }
 
   async resolveChainableWebpackConfig() {
