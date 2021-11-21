@@ -10,7 +10,7 @@ You will write your JavaScript in the `src/sripts` folder which is organized in 
 - `modules` - store your functionality to separate files in this folder and require/import them in the entry point file
 - `modules/greeting.js` - a sample JS module, delete or replace this one with your functionality
 
-Chisel supports multiple entry points so you can create another files in the `scripts` directory next to `app.js` and they will be bundled separately. You can also use [dynamic imports](https://webpack.js.org/api/module-methods/#import-) to load fragment of code only when you need it.
+Chisel supports multiple entry points so you can create other files in the `scripts` directory next to `app.js` and they will be bundled separately. You can also use [dynamic imports](https://webpack.js.org/api/module-methods/#import) to load a fragment of code only when you need it.
 
 ## Files optimization
 

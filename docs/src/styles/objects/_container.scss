@@ -1,0 +1,14 @@
+/* ==========================================================================
+   #WRAPPER
+   ========================================================================== */
+
+/**
+ * Page-level constraining and wrapping elements.
+ */
+
+.o-container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 118rem + 4rem;
+  padding: 0 2rem;
+}

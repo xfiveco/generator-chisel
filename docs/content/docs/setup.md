@@ -15,4 +15,4 @@ Chisel asks you a few questions about your project and allows you to choose the 
 - [WordPress Website Setup](/docs/setup/wordpress)
 - [Static Website Setup](/docs/setup/static)
 
-Chisel then creates all required files for your project and installs necessary software.
+Chisel then creates all required files for your project and installs the necessary software.

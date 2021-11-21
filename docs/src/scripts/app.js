@@ -3,6 +3,14 @@
   Author: Xfive
  */
 
-import Prism from 'prismjs';
+import hljs from 'highlight.js';
+import {} from './helpers/inert';
 
-Prism.highlightAll();
+import Sidebar from './modules/sidebar';
+import onPageNavigation from './modules/onPageNavigation';
+
+hljs.highlightAll();
+
+const components = [Sidebar, onPageNavigation];
+
+Promise.resolve(components.forEach((Component) => new Component()));

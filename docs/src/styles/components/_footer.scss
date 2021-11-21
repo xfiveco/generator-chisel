@@ -3,19 +3,23 @@
    ========================================================================== */
 
 .c-footer {
-  color: $color-text-lighter;
-  font-size: rem(18);
-  margin-top: 2em;
-  padding-top: 1em;
-  text-align: center;
+  font-size: 1.8rem;
+  background-color: $color-very-light-grey;
+  font-weight: 500;
+}
+
+.c-footer__container {
+  padding-top: 5.4rem;
+  padding-bottom: 4.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include bp-down('small') {
+    flex-direction: column;
+  }
 }
 
 .c-footer__link {
-  color: inherit;
   text-decoration: none;
-
-  &:hover {
-    color: inherit;
-    text-decoration: underline;
-  }
 }

@@ -4,6 +4,11 @@ excerpt: How to setup a WordPress website with Chisel
 order: 500
 ---
 
+<figure>
+  <iframe src="https://www.youtube.com/embed/RuvDddISKQo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</figure>
+
+
 ## 1. Create project directory
 
 Create new project directory and change your working directory to it. You can use the following commands on the command line:
@@ -41,7 +46,7 @@ After project dependencies are installed and WordPress is downloaded you'll be a
 - _Enter the database user_: user who can access the database
 - _Enter the database password_: password for the user
 
-To speedup installation process we recommend using [Yarn](https://yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install.
+> To speedup installation process we recommend using [Yarn](https://classic.yarnpkg.com/en/). Chisel will automatically detect it and run if possible. Otherwise it falls back to default NPM install.
 
 ## 3. Set up virtual host
 
@@ -68,4 +73,4 @@ If you are joining development of an existing WordPress project which was alread
 1. Clone the repository.
 1. Run `npm install` or `yarn` and `npm run build`.
 1. Run `npx chisel-scripts wp-config`, it will create the database if necessary and then create _wp-config-local.php_ and generate _dev-vhost.conf_.
-1. Import DB dump or enable _WP Sync DB_ plugin and use it to import database and files. Check out the wiki page explaining how you can [use WP Sync DB plugin to migrate database](https://github.com/xfiveco/generator-chisel/wiki/Setting-up-WordPress-projects-at-Getfives).
+1. Import DB dump or enable _WP Sync DB_ plugin and use it to import database and files. Check out the wiki page explaining how you can [use WP Sync DB plugin to migrate database](https://wptips.dev/wp-sync-db/).

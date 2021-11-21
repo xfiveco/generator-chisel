@@ -1,20 +1,60 @@
+/* ==========================================================================
+   #PAGE-NAV
+   ========================================================================== */
+
 .c-page-nav {
-  @include clearfix();
+  display: flex;
+}
 
-  font-size: rem(22);
-  font-weight: bold;
-  margin: 2rem 0;
-  list-style: none;
+.c-page-nav__item {
+  &--prev {
+    padding-left: 5.2rem;
+  }
 
-  @include bp-xlarge {
-    margin: 2rem 0 0 0;
+  &--next {
+    padding: 0 5.2rem 0 2rem;
+    margin-left: auto;
+    text-align: right;
   }
 }
 
-.c-page-nav__item--prev {
-  float: left;
+.c-page-nav__link {
+  text-decoration: none;
 }
 
-.c-page-nav__item--next {
-  float: right;
+.c-page-nav__heading {
+  display: block;
+}
+
+.c-page-nav__text {
+  position: relative;
+  display: block;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+
+  @include bp('medium') {
+    font-size: 2.4rem;
+  }
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 17px;
+  }
+
+  .c-page-nav__item--prev & {
+    &::before {
+      left: -5.2rem;
+    }
+  }
+
+  .c-page-nav__item--next & {
+    &::before {
+      transform: translateY(-50%) rotate(180deg);
+      right: -5.2rem;
+    }
+  }
 }

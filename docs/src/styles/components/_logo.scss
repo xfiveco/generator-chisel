@@ -1,0 +1,37 @@
+/* ==========================================================================
+   #LOGO
+   ========================================================================== */
+
+$logo-base-font-size: 18;
+
+@function logo-em($size) {
+  @return $size / $logo-base-font-size * 1em;
+}
+
+.c-logo__link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  > * {
+    text-decoration: none;
+  }
+}
+
+.c-logo__icon-wrapper {
+  padding-right: logo-em(8.83);
+}
+
+.c-logo__icon {
+  display: block;
+  width: 1em;
+  height: 1em;
+  font-size: logo-em(44.16);
+}
+
+.c-logo__text {
+  font-size: logo-em(33);
+  font-weight: 700;
+  color: $color-secondary;
+  text-decoration: none;
+}

@@ -1,50 +1,8 @@
 {% extends "layouts/base.twig" %}
 
 {% block content %}
-  {% set blocks = [
-    {
-      layout: 'default',
-      title: 'Introduction',
-      excerpt: 'Chisel is a WordPress development framework for creating easy to maintain and fast websites',
-      description: '
-        <p>Bring your WordPress development to 2020. Use the <strong>power</strong> and <strong>simplicity</strong> of <a href="http://upstatement.com/timber/">Timber</a>. Make your CSS <strong>scalable</strong> and <strong>maintainable</strong> with <a href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/">ITCSS</a>. Get rid of tedious manual tasks with Chisel’s <strong>modern development workflow</strong>. </p>
-        <p>* You can use Chisel to develop <strong>front-end templates</strong>, too.</p>
-      ',
-      image: assetPath('images/1.png'),
-    },
-    {
-      layout: 'reversed',
-      title: 'Features',
-      excerpt: 'Chisel comes with a lot of features which can help you to develop your themes faster',
-      description: '
-        <ul>
-          <li>automatic <a href="http://wp-cli.org/">WP-CLI</a> based WordPress installation</li>
-          <li>automatic installation of <a href="http://upstatement.com/timber/">Timber</a> and <a href="https://wordpress.org/plugins/disable-emojis/">Disable Emojis</a> plugin, optional installation of other plugins like <a href="https://www.advancedcustomfields.com/">ACF</a></li>
-          <li>Chisel WordPress starter theme with a logical, easy to follow structure</li>
-          <li><a href="http://gulpjs.com/">Gulp</a> build system with <a href="https://www.browsersync.io/">Browsersync</a> and <a href="https://github.com/sindresorhus/gulp-rev">gulp-rev</a> support</li>
-          <li><a href="http://twig.sensiolabs.org/">Twig</a> templating engine and SCSS with <a href="https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/">ITCSS architecture</a></li>
-          <li><a href="https://webpack.js.org/">webpack</a> and ES6 with <a href="https://babeljs.io/">Babel</a>, optional jQuery</li>
-          <li></li>
-          <li>stylelint, Prettier and ESLint with <a href="https://github.com/xfiveco/eslint-config-chisel">config tailored for Chisel</a> and <a href="https://prettier.io/">Prettier</a> synced together for consistent and hassle free code formatting</li>
-          <li>HTML validation with <a href="https://github.com/bezoerb/gulp-htmlhint">htmlhint</a></li>
-        </ul>
-      ',
-      image: assetPath('images/3.png'),
-    },
-    {
-      layout: 'default',
-      title: 'Get started',
-      excerpt: 'Getting started and working with Chisel is easy as A, B, C',
-      description: '
-        <p>Once you <a href="/docs/installation">install Chisel</a>, just type the following command in your command line and follow the instructions.</p>
-        <pre><code class="language-bash">yo chisel</code></pre>
-        <p><strong class="c-more">Next: <a href="/docs/installation">Installation</a></strong></p>
-      ',
-      image: assetPath('images/2.png'),
-    },
-  ] %}
-  {% set letters = ['A', 'B', 'C'] %}
-  {% for block_item in blocks %}
-    {% include 'components/block.twig' %}
-  {% endfor %}
+	{% include 'components/hero.twig' with { 'args': post.data.hero } %}
+	{% include 'components/why-chisel.twig' with { 'args': post.data.whychisel } %}
+	{% include 'components/slider.twig' with { 'args': post.data.slider } %}
+	<div class="margin-bottom-6 margin-bottom-large-8"></div>
 {% endblock %}

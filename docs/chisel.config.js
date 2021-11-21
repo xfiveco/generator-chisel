@@ -1,37 +1,69 @@
+const jsdom = require('jsdom');
+
 const creatorData = {
-  chiselVersion: '1.0.0-alpha.8',
+  chiselVersion: '1.0.0-alpha.11',
   app: {
     name: 'Getchisel',
     author: 'Xfive',
     projectType: 'fe',
-    browsers: ['modern', 'edge18', 'ie11'],
+    browsers: ['modern'],
     nameSlug: 'getchisel',
     hasJQuery: false,
   },
   fe: { additionalFeatures: ['serveDist', 'skipHtmlExtension'] },
 };
 
-function sidebarChildren(post, children, getPosts) {
+function containsChild(children, postId) {
+  return children.find((child) => {
+    let isContain = child.id() === postId;
+
+    if (isContain) return isContain;
+
+    if (child.children()) {
+      isContain = containsChild(child.children(), postId);
+    }
+
+    return isContain;
+  });
+}
+
+function sidebarChildren(post, children, getPosts, level = 0) {
+  const currentLevel = level + 1;
+  const currentPostId = post.id();
+  let isActiveParent = false;
+
   return Promise.all(
     children.map(async (child) => {
       const childChildren = await getPosts(
         { parent: child.id() },
         { 'data.order': 1 },
       );
-      const isCurrent = child.id() === post.id();
+
+      const isCurrent = child.id() === currentPostId;
+
+      if (level === 0) {
+        isActiveParent = !!containsChild(childChildren, currentPostId);
+      }
 
       return /* HTML */ `
-        <li${isCurrent ? ' class="current_page_item"' : ''}>
-          <a href="${child.link()}">${child.title()}</a>
-          ${
-            childChildren.length > 0
-              ? /* HTML */ `
-                  <ul class="children">
-                    ${await sidebarChildren(post, childChildren, getPosts)}
-                  </ul>
-                `
-              : ''
-          }
+        <li
+          class="c-sidebar__child c-sidebar__child--level-${currentLevel}${isCurrent
+            ? ' c-sidebar__current'
+            : ''}${isActiveParent ? ' c-sidebar__active-parent' : ''}"
+        >
+          <a class="c-sidebar__link" href="${child.link()}">${child.title()}</a>
+          ${childChildren.length > 0
+            ? /* HTML */ `
+                <ul class="c-sidebar__children o-list-bare">
+                  ${await sidebarChildren(
+                    post,
+                    childChildren,
+                    getPosts,
+                    currentLevel,
+                  )}
+                </ul>
+              `
+            : ''}
         </li>
       `;
     }),
@@ -55,13 +87,31 @@ module.exports = {
         );
 
         return /* HTML */ `
-          <h2 class="c-sidebar__title">
-            ${start.title()}
-            <div class="c-sep c-sep--dark"></div>
-          </h2>
+          <h2 class="c-sidebar__title">${start.title()}</h2>
 
-          <ul>
+          <ul class="o-list-bare c-sidebar__titles">
             ${await sidebarChildren(post, children, getPosts)}
+          </ul>
+        `;
+      },
+      async onPageSidebar({ context: { post } }) {
+        if (!post.id().startsWith('docs')) return '';
+        const { JSDOM } = jsdom;
+        const dom = new JSDOM(post.content());
+        const headings = dom.window.document.querySelectorAll('h2');
+        if (headings.length <= 0) return '';
+
+        return /* HTML */ `
+          <ul class="c-sidebar__headings o-list-bare">
+            ${Array.from(headings)
+              .map((head) => {
+                return `<li>
+                <a class="c-page-sidebar__link" href="#${head.id}">
+                  ${head.textContent}
+                </a>
+              </li>`;
+              })
+              .join('')}
           </ul>
         `;
       },
@@ -76,20 +126,4 @@ module.exports = {
   // react: true,
 
   plugins: ['chisel-plugin-code-style', 'chisel-plugin-static-frontend'],
-
-  // https://cli.vuejs.org/config/#configurewebpack
-  // configureWebpack(config) {},
-  // chainWebpack(config) {},
-
-  // Hooks can be used to change internal behavior, for example:
-  // documentation TBD :(
-  // hooks: {
-  //   wordPress: {
-  //     browserSyncConfig(config) {
-  //       // disable opening of browser window when dev server starts
-  //       // eslint-disable-next-line no-param-reassign
-  //       config.open = false;
-  //     },
-  //   },
-  // },
 };

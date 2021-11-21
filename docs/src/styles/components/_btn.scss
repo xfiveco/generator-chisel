@@ -22,29 +22,140 @@
   font: inherit; /* [3] */
   text-align: center; /* [4] */
   margin: 0; /* [4] */
+  text-decoration: none; /* [4] */
   cursor: pointer; /* [5] */
-  padding: 0.5rem 1rem;
   transition: $global-transition;
   border-radius: $global-radius;
+  line-height: 1.375;
+  font-size: 1.6rem;
+  padding: 1.4rem;
+
+  @include bp('small') {
+    padding: 1.4rem 3.1rem;
+  }
 }
 
 /* Style variants
    ========================================================================== */
 
 .c-btn--primary {
-  background-color: $color-link;
+  background-color: $color-secondary;
 
   &,
   &:hover,
   &:active,
   &:focus {
-    text-decoration: none; /* [4] */
     color: $color-white;
   }
 
   &:hover,
   &:focus {
-    background-color: $color-hover;
+    background-color: $color-primary;
+  }
+}
+
+.c-btn--secondary {
+  background-color: $color-white;
+  border: 1px solid $color-secondary;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color-primary;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
+  }
+}
+
+.c-btn--video {
+  background-color: transparent;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.loading {
+    &::before {
+      animation: o-pulse-circle 1s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+}
+
+.c-menu-button {
+  position: absolute;
+  top: 10.6rem;
+  left: calc(100% - 1px);
+  height: 26px;
+  width: 29px;
+  padding: 2rem;
+  color: $color-primary;
+  cursor: pointer;
+  background-color: $color-white;
+  border: 1px solid;
+  pointer-events: all !important;
+
+  @include bp('large') {
+    display: none;
+  }
+
+  @include bp('small') {
+    top: 8.6rem;
+  }
+
+  .c-sidebar--active & {
+    left: auto;
+    right: 2rem;
+  }
+}
+
+.c-menu-button-bar {
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -1px;
+  width: 30px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: $color-primary;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  left: 50%;
+
+  &.c-menu-button-bar--top {
+    transform: translate(-50%, -8px);
+  }
+
+  &.c-menu-button-bar--bottom {
+    transform: translate(-50%, 8px);
+  }
+
+  .c-sidebar--active & {
+    background-color: $color-secondary;
+
+    &.c-menu-button-bar--top {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+
+    &.c-menu-button-bar--middle {
+      opacity: 0;
+    }
+
+    &.c-menu-button-bar--bottom {
+      transform: translate(-50%, 0) rotate(-45deg);
+    }
+  }
+
+  .c-menu-button:hover & {
+    background-color: $color-secondary;
   }
 }
 

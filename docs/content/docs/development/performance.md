@@ -21,4 +21,4 @@ The file name is revisioned. A content hash is appended to the filename (eg. `ma
 - jQuery is not included by default
 - [Disable Emojis](https://wordpress.org/plugins/disable-emojis/) plugin is installed
 - static resources (CSS, JS, images) are served with far-future expires headers to leverage browser caching
-- we recommned using WordPress hosting which uses a proxy cache (eg. [Pantheon](https://pantheon.io/)) or a cache plugin which generates static HTML files like [WP Rocket](https://wp-rocket.me/)
+- we recommend using WordPress hosting which uses a proxy cache (eg. [Pantheon](https://pantheon.io/)) or a cache plugin which generates static HTML files like [WP Rocket](https://wp-rocket.me/)

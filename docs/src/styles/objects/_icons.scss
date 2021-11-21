@@ -1,0 +1,37 @@
+/* ==========================================================================
+   #ICONS
+   ========================================================================== */
+
+.o-icons::before,
+%o-icons::before {
+  content: '';
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+.o-icons--star::before {
+  width: 33px;
+  height: 33px;
+  background-image: url('~assets/images/star.svg');
+}
+
+.o-icons--play::before {
+  background-image: url('~assets/images/play.svg');
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
+
+.o-icons--arrow::before {
+  background-image: url('~assets/images/arrow.svg');
+  width: 28px;
+  height: 17px;
+  border-radius: 100%;
+}
+
+%o-icons--checkmark::before {
+  background-image: url('~assets/images/checkmark.svg');
+  width: 17px;
+  height: 17px;
+}

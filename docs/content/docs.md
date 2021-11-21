@@ -6,6 +6,9 @@ order: 100
 
 What follows is an outline of particular documentation sections:
 
+## [Features](/docs/features)
+Chisel features that will make your developer’s life easier.
+
 ## [Installation](/docs/installation)
 
 Install necessary software so you can work with Chisel.
@@ -25,3 +28,4 @@ Learn how to develop WordPress themes or front-end templates in Chisel.
 ## [In simple terms](/docs/simple)
 
 Explanation of what Chisel is in simple terms.
+

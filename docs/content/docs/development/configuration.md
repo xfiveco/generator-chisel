@@ -35,7 +35,7 @@ The paths used by Chisel by default are presented below, all can be updated in t
 
 `boolean = false`
 
-Enables react support. When enabled in makes changes necessary to enable JSX processing (Babel), hot reload during development (Babel, webpack) and changes default eslint configuration to support and check react components.
+Enables react support. When enabled it makes changes necessary to enable JSX processing (Babel), hot reload during development (Babel, webpack), and changes default eslint configuration to support and check react components.
 
 Before enabling you should:
 
@@ -46,7 +46,7 @@ Before enabling you should:
 
 `(string|function)[] = []`
 
-List of Chisel plugins to be loaded. This is array that may contain strings that are passed to `require()` so module names or paths to JS files (please use `require.resolve` to ensure path is properly resolved) or functions that are treated as plugins.
+List of Chisel plugins to be loaded. This is an array that may contain strings that are passed to `require()` so module names or paths to JS files (please use `require.resolve` to ensure the path is properly resolved) or functions that are treated as plugins.
 
 ### `transpileDependencies`
 
@@ -72,7 +72,7 @@ See also: [Working with Webpack > Chaining in Vue CLI documentation](https://cli
 
 ### `hooks`
 
-Hooks are advanced feature allowing you to influence Chisel behavior in ways not possible with configuration options. See [Hooks](./configuration/hooks) for details.
+Hooks are an advanced feature allowing you to influence Chisel behavior in ways not possible with configuration options. See [Hooks](./configuration/hooks) for details.
 
 ## WordPress Websites
 
@@ -82,7 +82,7 @@ Hooks are advanced feature allowing you to influence Chisel behavior in ways not
 
 `string = 'wp'`
 
-Name of the directory containing WordPress files. Some situations like [serving website from subdirectory on Pantheon](https://pantheon.io/docs/nested-docroot) may require different directory name. Please note that aditionally you should adjust various ignore files (like `.eslintignore`) and WP CLI config (`wp-cli.yml`). Additionally please note that using non default value has not been well tested.
+Name of the directory containing WordPress files. Some situations like [serving website from a subdirectory on Pantheon](https://pantheon.io/docs/nested-docroot/) may require a different directory name. Please note that additionally you should adjust various ignore files (like `.eslintignore`) and WP CLI config (`wp-cli.yml`). Additionally please note that using non-default value has not been well tested.
 
 ### `wp.themeName`
 
@@ -92,7 +92,7 @@ Name of the directory with your theme, default us `[project-slug]-chisel`.
 
 ### `wp.url`
 
-URL when WordPress is reachable, this is used as proxy target during development, default is `http://[project-slug].test`.
+URL when WordPress is reachable, this is used as a proxy target during development, default is `https://[project-slug].test`.
 
 ## Static Websites
 
@@ -102,7 +102,7 @@ URL when WordPress is reachable, this is used as proxy target during development
 
 `boolean = false`
 
-When enabled development server will serve dist directory, meaning that url for the page generated from `src/templates/hello.twig` template will be `http://localhost:3000/hello.html` instead of `http://localhost:3000/dist/hello.html`.
+When enabled development server will serve the dist directory, meaning that url for the page generated from the `src/templates/hello.twig` template will be `https://localhost:3000/hello.html` instead of `https://localhost:3000/dist/hello.html`.
 
 This is set to `true` when _Serve dist directory in dev / don't generate pages index_ option was selected during project creation.
 
@@ -121,23 +121,23 @@ This is set to `true` when _Don't include html extension in links (posts API) & 
 
 `string = 'prettify': 'prettify' | 'minify' | 'as-is'`
 
-Decide how generated HTML should be formatted. This is applied only during build, not development.
+Decide how generated HTML should be formatted. This is applied only during the build, not development.
 
 - `prettify` (default) - generated is nicely formatted, this is useful when generated files may be manually modified later.
-- `minify` - generated HTML is minified, good to use when site is automatically deployed.
+- `minify` - generated HTML is minified, good to use when the site is automatically deployed.
 - `as-is` - no additional formatting is done, HTML generated during Twig processing is used.
 
 ### `staticFrontend.htmlHint`
 
 `boolean = true`
 
-You can enable or disable [HTML Hint](https://htmlhint.com/) validation here. Note that HTML Hint validation is run on generated html files during development/build not on the source files.
+You can enable or disable [HTML Hint](https://htmlhint.com/) validation here. Note that HTML Hint validation is run on generated html files during development/build, not on the source files.
 
 ### `functions`
 
 `{ [function name]: (functionContext, ...args) => any } = {}`
 
-Object containing functions that will be available in Twig templates.
+The object containing functions that will be available in Twig templates.
 
 - Functions can be `async`.
-- Functions receive `functionContext` object as first argument followed by arguments that were passed to the function. `functionContext` object contains two properties `context` that contains Twig Context (variables available inside Twig templates) and functions object that contains Chisel builtin functions that are available in Twig templates. `context` may contain `post` object when [using content directory](/docs/development/static-content). See config file for this documentation to see example of custom function (TODO: link after merged).
+- Functions receive `functionContext` object as first argument followed by arguments that were passed to the function. `functionContext` object contains two properties `context` that contains Twig Context (variables available inside Twig templates) and functions object that contains Chisel builtin functions that are available in Twig templates. `context` may contain `post` object when [using content directory](/docs/development/static-content). See the config file for this documentation to see an example of a custom function [chisel.config.js](https://github.com/xfiveco/generator-chisel/tree/master/docs/chisel.config.js#L80).

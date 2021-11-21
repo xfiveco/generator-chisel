@@ -1,64 +1,87 @@
+/* ==========================================================================
+   #BLOCK
+   ========================================================================== */
+
 .c-block {
   display: flex;
-  margin: 0 1em;
+  flex-direction: column-reverse;
+  align-items: center;
 
-  @include bp-full {
-    margin: 0;
+  @include bp('medium') {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  @include bp('large') {
+    justify-content: space-between;
   }
 }
 
-.c-block__image {
-  display: none;
-  padding-top: 6em;
-  text-align: center;
-
-  @include bp-medium {
-    display: block;
-    width: 50%;
-  }
-
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 80%;
-
-    @include bp-large {
-      width: auto;
-    }
+.c-block--reversed {
+  @include bp('medium') {
+    flex-direction: row-reverse;
   }
 }
 
 .c-block__content {
-  width: 100%;
+  margin-top: 4rem;
 
-  @include bp-medium {
+  @include bp('medium') {
     width: 50%;
+    margin-right: 6rem;
+    margin-top: 0;
+  }
+
+  @include bp('large') {
+    width: 40%;
   }
 
   .c-block--reversed & {
-    order: 2;
+    @include bp('medium') {
+      margin-right: 0;
+      margin-left: 6rem;
+    }
+
+    @include bp('large') {
+      width: 40%;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 31px;
+    height: 20px;
+    background-color: $color-bright-sun;
+    margin-top: 3rem;
   }
 }
 
-.c-block__letter {
-  border: 1px solid $color-border;
-  display: inline-block;
-  font-size: rem(48);
-  line-height: 1;
-  margin-right: 0.5em;
-  padding: 0.15em 0.4em;
-  position: relative;
-  top: 0.25em;
+.c-block__image-wrapper {
+  flex-shrink: 0;
 
-  @include bp-full {
-    margin-left: -0.65em;
+  @include bp('medium') {
+    width: 50%;
+  }
+
+  @include bp('large') {
+    width: 33%;
   }
 }
 
-.c-block__excerpt {
-  color: $color-text-emp;
-  font-size: rem(30);
-  font-weight: 600;
-  line-height: 1.5;
-  margin: 0.25em 0 0.5em 0;
+.c-block__image {
+  width: 100%;
+  object-fit: contain;
+
+  @include bp('large') {
+    width: auto;
+  }
+}
+
+.c-block__title {
+  font-size: 2.4rem;
+}
+
+.c-block__post-entry {
+  font-size: 1.8rem;
 }

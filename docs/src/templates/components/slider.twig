@@ -1,0 +1,32 @@
+<section class="c-slider margin-top-6 margin-top-medium-8 margin-top-large-12">
+  <div class="o-container c-slider__container">
+    <h2 class="c-slider__title">{{ args.title }}</h2>
+    <ul class="c-slider__slides margin-top-4 margin-top-large-8 o-list-bare">
+      {% for image in args.images %}
+        <li class="c-slider__slide">
+          <a class="c-slider__slide-link" href="{{ image.link}}">
+            <img
+              class="c-slider__slide-image"
+              src="{{ assetPath(image.src) }}"
+              alt="{{ image.alt }}"
+              height="{{ image.height }}"
+              width="{{ image.width }}"
+            >
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% if args.images|length > 4 %}
+      <nav class="c-slider__pagination margin-top-2 margin-top-large-6">
+        <ul class="c-slider__pagination-items o-list-bare">
+          {% for i in range(0, args.images|length / 4) %}
+            <li class="c-slider__pagination-item{{ i == 0 ? ' c-slider__pagination-item--current' }}"></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
+    <a class="c-btn c-btn--primary margin-top-4 margin-top-large-8" href="{{ args.cta.link }}">
+      {{ args.cta.text }}
+    </a>
+  </div>
+</section>

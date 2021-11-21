@@ -2,7 +2,12 @@
 <html class="no-js" lang="en" prefix="og: http://ogp.me/ns#" data-webpack-public-path="{{ getDistPath() }}">
   <head>
     <meta charset="utf-8" />
-    <title>{{ post.title }} - Chisel</title>
+    {% if post.data.template == 'template-home' %}
+      <title>Chisel - {{ post.title }}</title>
+    {% else %}
+      <title>{{ post.title }} - Chisel</title>
+    {% endif %}
+    <meta name="description" content="A modern development framework for WordPress and static websites. Craft fast and easy to maintain WordPress and static sites.">
     <link rel="stylesheet" property="stylesheet" href="{{ revisionedPath('styles/main.css') }}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>document.documentElement.classList.remove('no-js');</script>
@@ -11,19 +16,26 @@
     {% endif %}
     <script src="{{ revisionedPath('scripts/app.js') }}" defer></script>
 
-    <!-- <script>
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ assetPath('images/favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ assetPath('images/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ assetPath('images/favicons/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ assetPath('images/favicons/site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ assetPath('images/favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+
+    <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-9575836-23', 'auto');
       ga('send', 'pageview');
-    </script> -->
+    </script>
 
-    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-italic.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-600.woff2') }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ assetPath('fonts/crimson-text-v8-latin-600italic.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ assetPath('fonts/quicksand-v21-latin-500.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ assetPath('fonts/quicksand-v21-latin-700.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ assetPath('fonts/quicksand-v21-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
 
     {% block head %}
     {% endblock %}
@@ -35,19 +47,12 @@
       {% include 'components/header.twig' %}
     {% endblock %}
 
-    {% include 'components/main-nav.twig' %}
 
-
-    <main class="o-wrapper">
+    <main>
       {% block content %}
         Sorry, no content
       {% endblock %}
     </main>
-
-    {% block ad %}
-      {% include 'components/ad.twig' %}
-    {% endblock %}
-
 
     {% block footer %}
       {% include 'components/footer.twig' %}

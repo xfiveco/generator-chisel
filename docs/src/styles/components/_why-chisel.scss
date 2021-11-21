@@ -1,0 +1,29 @@
+/* ==========================================================================
+   #WHY-CHISEL
+   ========================================================================== */
+
+.c-why-chisel__title {
+  font-size: 3.4rem;
+  text-align: center;
+}
+
+.c-why-chisel__feature-item {
+  & + & {
+    margin-top: 10rem;
+
+    @include bp('medium') {
+      margin-top: 18rem;
+    }
+  }
+}
+
+.c-why-chisel__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-why-chisel__cta-text {
+  font-weight: 500;
+  margin: 0 8px;
+}

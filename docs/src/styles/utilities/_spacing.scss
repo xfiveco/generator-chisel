@@ -1,54 +1,55 @@
-/* stylelint-disable scss/at-extend-no-missing-placeholder */
+/* stylelint-disable max-nesting-depth */
 
-:root {
-  --sp: 1rem;
-  --sp-small: 0.25rem;
-  --sp-large: 2rem;
-  --sp-xlarge: 3rem;
+/* ==========================================================================
+   #SPACING
+   ========================================================================== */
+
+@each $key, $size in $spacing {
+  $sides: 'top' 'right' 'bottom' 'left';
+
+  .margin-#{$key} {
+    margin: $size;
+  }
+
+  @each $side in $sides {
+    .margin-#{$side}-#{$key} {
+      margin-#{$side}: $size;
+    }
+  }
+
+  @each $breakpointKey, $breakpoint in $breakpoints {
+    @each $side in $sides {
+      .margin-#{$side}-#{$breakpointKey}-#{$key} {
+        @include bp($breakpointKey) {
+          margin-#{$side}: $size;
+        }
+      }
+    }
+  }
 }
 
-.u-sp-all {
-  margin: var(--sp);
-}
+@each $key, $size in $spacing {
+  $sides: 'top' 'right' 'bottom' 'left';
 
-.u-sp-top {
-  margin-top: var(--sp);
-}
+  @if $size != 'auto' {
+    .padding-#{$key} {
+      padding: $size;
+    }
 
-.u-sp-bottom {
-  margin-bottom: var(--sp);
-}
+    @each $side in $sides {
+      .padding-#{$side}-#{$key} {
+        padding-#{$side}: $size;
+      }
+    }
 
-.u-sp-left {
-  margin-left: var(--sp);
-}
-
-.u-sp-right {
-  margin-right: var(--sp);
-}
-
-.u-sp-vertical {
-  @extend .u-sp-top;
-  @extend .u-sp-bottom;
-}
-
-.u-sp-horizontal {
-  @extend .u-sp-left;
-  @extend .u-sp-right;
-}
-
-.u-sp--normal {
-  --sp: 1rem;
-}
-
-.u-sp--small {
-  --sp: var(--sp-small);
-}
-
-.u-sp--large {
-  --sp: var(--sp-large);
-}
-
-.u-sp--xlarge {
-  --sp: var(--sp-xlarge);
+    @each $breakpointKey, $breakpoint in $breakpoints {
+      @each $side in $sides {
+        .padding-#{$side}-#{$breakpointKey}-#{$key} {
+          @include bp($breakpointKey) {
+            padding-#{$side}: $size;
+          }
+        }
+      }
+    }
+  }
 }
