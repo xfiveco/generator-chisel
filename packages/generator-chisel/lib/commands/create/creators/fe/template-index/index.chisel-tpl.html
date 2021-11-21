@@ -4,10 +4,13 @@
     <meta charset="utf-8" />
     <title>Project Index - <%= app.name %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700"
+    >
     <!-- prettier-ignore -->
     <style>
-      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#f2e9da;background-image:repeating-linear-gradient(180deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,#eae3d7 0,#eae3d7 41px);color:#1b3729;font-family:Crimson Text,serif;padding:1em}a,a:link{color:#b08b31}a:hover{color:#ecbb42}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0}.c-page-subtitle{border-bottom:7px solid #1b3729;display:inline-block;margin:0;padding-bottom:.25em}.c-intro,.c-page-subtitle{font-size:1.25rem;font-weight:600}.c-intro{margin:0 1em 1em 0;line-height:1.5}.c-heading{border-bottom:5px solid #ecbb42;display:inline-block;font-weight:600;margin:0 0 .5em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ecbb42;content:"";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{text-decoration:underline}.c-page__name{color:#1b3729;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#999}
+      html{font-size:1em;line-height:1.5}@media (min-width:768px){html{font-size:1.25em}}@media (min-width:1024px){html{font-size:1.5em}}body{background:#fff;color:#2a1468;font-family:Quicksand,sans-serif;padding:1em}a,a:link{color:#2a1468;text-decoration:underline}a:hover{color:#ff6d54}p{margin:0 0 1em}.c-wrapper{margin:0 auto;max-width:860px}.c-section{margin-top:.5em}.c-section__content{font-size:.75em}.c-section__text a{font-weight:500}.c-section__intro{font-size:1em;font-weight:600}.c-section:last-child{margin-top:2em}.c-section__note{margin-top:1em}.c-section__note:not(:last-child){display:none}.c-page-title{margin:0;font-size:1.5em}.c-page-subtitle{margin:1.5em 0 0;font-size:1em}.c-heading,.c-page-subtitle{border-bottom:3px solid #ff6d54;display:inline-block;font-weight:600}.c-intro{font-size:1em;font-weight:600;margin:0 1em 1.9em 0;line-height:1.5}.c-heading{margin:0 0 .5em;font-size:1.35em}.c-list{list-style:none;margin:0;padding:0}.c-list li{margin-bottom:.5em;padding-left:1em;position:relative}.c-list li:before{background:#ff6d54;content:"";display:block;height:.5em;left:0;position:absolute;top:.5em;width:.5em}.c-page{text-decoration:none;position:relative;display:block;border-bottom:1px dashed #ccc;padding-bottom:.5em}.c-page__link{font-weight:600}.c-page__name{color:#2a1468;margin-left:.5em;position:absolute;top:0;right:0}.c-page:hover .c-page__name{color:#ff6d54}.c-section__code{padding:.9rem .8rem;overflow:auto;display:block;background:#2d2b57;color:#e3dfff;border-radius:10px}
     </style>
     <script type="text/x-chisel-pages-template">
       <ul class="c-list">
@@ -30,12 +33,18 @@
 
       <div class="c-section c-section--first">
         <div class="c-section__content">
-          <p class="c-intro">This project is powered by <a href="https://www.getchisel.co/">Chisel</a>, a development framework for creating easy to maintain and fast front-end templates.</p>
+          <p class="c-intro">
+            This project is powered by
+            <a href="https://www.getchisel.co/">Chisel</a>, a development
+            framework for creating easy to maintain and fast front-end
+            templates.
+          </p>
           <h2 class="c-heading">Pages</h2>
           <div class="c-section__note">
             To add more pages run:
-            <pre><code>npm run add-page 'My Awesome Page'</code></pre> or
-            <pre><code>yarn add-page 'My Awesome Page'</code></pre>
+            <pre><code class="c-section__code">npm run add-page 'My Awesome Page'</code></pre>
+            or
+            <pre><code class="c-section__code">yarn add-page 'My Awesome Page'</code></pre>
           </div>
           <!-- CHISEL-PAGES-LIST -->
         </div>
@@ -45,9 +54,20 @@
       <section class="c-section">
         <div class="c-section__content">
           <h2 class="c-heading">Documentation</h2>
-          <p><strong>Chisel supports modern web development workflows and helps developers to create a code base which is easy to maintain.</strong></p>
-          <p>For detailed information how Chisel works, please check out <a href="https://www.getchisel.co/">www.getchisel.co</a>.</p>
-          <p>If you are just looking for your deliverable files, they are located inside the <code>dist</code> folder. No files found outside of that folder should usually be uploaded to your server (e.g. this file).</p>
+          <p>
+            <strong class="c-section__intro">Chisel supports modern web development workflows and helps
+              developers to create a code base which is easy to
+              maintain.</strong>
+          </p>
+          <p class="c-section__text">
+            For detailed information how Chisel works, please check out
+            <a href="https://www.getchisel.co/">www.getchisel.co</a>.
+          </p>
+          <p class="c-section__text">
+            If you are just looking for your deliverable files, they are located
+            inside the <code>dist</code> folder. No files found outside of that
+            folder should usually be uploaded to your server (e.g. this file).
+          </p>
         </div>
       </section>
       <!-- /c-section -->

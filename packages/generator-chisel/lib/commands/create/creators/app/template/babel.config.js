@@ -1,4 +1,4 @@
-const chiselConfig = require('./chisel.config.js');
+const chiselConfig = require('./chisel.config');
 
 module.exports = {
   presets: [
