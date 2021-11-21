@@ -110,7 +110,7 @@ p {
   position: relative;
 }
 
-.c-list li:before {
+.c-list li::before {
   background: #ecbb42;
   content: '';
   display: block;

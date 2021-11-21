@@ -7,13 +7,13 @@ blockquote {
   font-style: italic;
 
   p:first-child {
-    &:before {
+    &::before {
       content: open-quote;
     }
   }
 
   p:last-child {
-    &:after {
+    &::after {
       content: close-quote;
     }
   }
