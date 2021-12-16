@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.14 (2021-12-16)
+
+- Fix ::before and ::after ([adf82b3](https://github.com/xfiveco/generator-chisel/commit/adf82b3)), closes [#508](https://github.com/xfiveco/generator-chisel/issues/508)
+
 ## 1.0.0-alpha.13 (2021-09-29)
 
 - Change postcss-normalize package ([f1b9ea4](https://github.com/xfiveco/generator-chisel/commit/f1b9ea4))

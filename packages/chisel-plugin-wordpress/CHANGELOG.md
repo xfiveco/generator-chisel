@@ -2,6 +2,8 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.6 (2021-12-16)
+
 ## 1.0.0-alpha.5 (2020-09-21)
 
 - Add Changelogs ([25d6245](https://github.com/xfiveco/generator-chisel/commit/25d6245))

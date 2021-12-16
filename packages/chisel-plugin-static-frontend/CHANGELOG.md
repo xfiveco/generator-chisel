@@ -2,6 +2,8 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 1.0.0-alpha.5 (2021-12-16)
+
 ## 1.0.0-alpha.4 (2020-09-21)
 
 - Update HTMLHint: add default config and add HTMLHtnt tests ([cf3db2c](https://github.com/xfiveco/generator-chisel/commit/cf3db2c))
