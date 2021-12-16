@@ -72,15 +72,18 @@ Object.entries(oldVersions).map(async ([name, version]) => {
 });
 
 // TODO: Not Well Tested
-if (packagesVersions['generator-chisel'] !== oldVersions['generator-chisel']) {
+if (
+  !process.env.LENRA_CHANGELOG_SKIP &&
+  packagesVersions['generator-chisel'] !== oldVersions['generator-chisel']
+) {
   (async () => {
-    const config = loadConfig({
-      nextVersion: `v${packagesVersions['generator-chisel']}`,
-    });
+    const config = loadConfig();
+
+    config.nextVersion = `v${packagesVersions['generator-chisel']}`;
 
     const options = {
       tagFrom:
-        process.env.LENRA_TAG_FROM ||
+        process.env.LENRA_CHANGELOG_TAG_FROM ||
         `generator-chisel@${oldVersions['generator-chisel']}`,
     };
 
