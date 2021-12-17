@@ -1,0 +1,46 @@
+{
+  "name": "generator-chisel",
+  "version": "1.0.0-alpha.14",
+  "description": "A generator for scaffolding front-end and WordPress projects",
+  "bin": {
+    "chisel": "bin/chisel.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xfiveco/generator-chisel.git",
+    "directory": "packages/generator-chisel"
+  },
+  "author": {
+    "name": "Xfive",
+    "email": "hello@xfive.co",
+    "url": "https://www.xfive.co"
+  },
+  "homepage": "https://www.getchisel.co/",
+  "license": "MIT",
+  "keywords": [
+    "twig",
+    "wordpress",
+    "scss",
+    "itcss",
+    "webpack",
+    "babel"
+  ],
+  "scripts": {
+    "test": "bash test/run-tests.sh"
+  },
+  "engines": {
+    "node": "^10.13.0 || ^12 || ^14"
+  },
+  "dependencies": {
+    "chisel-shared-utils": "^1.0.0-alpha.0",
+    "commander": "^5.1.0",
+    "execa": "^4.0.2",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
+    "inquirer": "^7.1.0",
+    "lodash": "^4.17.15",
+    "speakingurl": "^14.0.1",
+    "tinyqueue": "^2.0.3",
+    "update-notifier": "^4.1.0"
+  }
+}

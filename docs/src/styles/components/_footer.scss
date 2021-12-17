@@ -1,0 +1,25 @@
+/* ==========================================================================
+   #FOOTER
+   ========================================================================== */
+
+.c-footer {
+  font-size: 1.8rem;
+  background-color: $color-very-light-grey;
+  font-weight: 500;
+}
+
+.c-footer__container {
+  padding-top: 5.4rem;
+  padding-bottom: 4.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include bp-down('small') {
+    flex-direction: column;
+  }
+}
+
+.c-footer__link {
+  text-decoration: none;
+}

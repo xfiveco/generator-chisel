@@ -1,0 +1,32 @@
+{
+  "name": "stylelint-config-chisel",
+  "version": "1.0.0-alpha.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xfiveco/generator-chisel.git",
+    "directory": "packages/stylelint-config-chisel"
+  },
+  "author": {
+    "name": "Xfive",
+    "email": "hello@xfive.co",
+    "url": "https://www.xfive.co"
+  },
+  "homepage": "https://www.getchisel.co/",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/xfiveco/generator-chisel/issues"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-prettier": "^1.1.2",
+    "stylelint-scss": "^3.17.2"
+  }
+}

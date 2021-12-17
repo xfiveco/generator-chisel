@@ -1,0 +1,13 @@
+:not(pre) > code {
+  // background: $color-fill;
+  // color: $color-text-emp;
+  font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+    monospace;
+  font-weight: 400;
+  // font-size: rem(20);
+  // padding: 0.1em 0.3em;
+
+  // &::selection {
+  //   background: #fce29f;
+  // }
+}

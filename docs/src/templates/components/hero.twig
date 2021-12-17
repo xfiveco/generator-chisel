@@ -1,0 +1,40 @@
+<section class="c-hero margin-top-4 margin-top-medium-6 margin-top-large-14">
+  <div class="o-container">
+    <div class="c-hero__inner">
+      <div class="c-hero__content margin-right-medium-6">
+        <h1 class="c-hero__title margin-bottom-2 margin-bottom-large-3">{{ args.title }}</h1>
+        <p class="c-hero__description margin-bottom-2 margin-bottom-large-3">{{ args.description }}</p>
+        <div class="c-hero__buttons">
+          {% for button in args.buttons %}
+            <a class="c-hero__button c-btn {{ button.fill ? 'c-btn--primary' : 'c-btn--secondary' }}" href="{{ button.link }}">{{ button.text }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="c-hero__media">
+        <div class="c-hero__media-wrapper">
+          {% if args.media.image and not args.media.video %}
+            <img
+              class="c-hero__image js-poster"
+              src="{{ assetPath(args.media.image.src) }}"
+              alt="{{ args.media.image.alt }}"
+              height="{{ args.media.image.height }}"
+              width="{{ args.media.image.width }}"
+            />
+          {% endif %}
+          {% if args.media.video %}
+            <figure>
+              <iframe
+                class="c-hero__video"
+                src="{{ args.media.video.src }}"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </figure>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

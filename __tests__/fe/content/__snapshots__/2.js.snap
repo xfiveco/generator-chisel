@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FE Content Twig functions work 1`] = `
+"<!DOCTYPE html>
+<ul>
+  <li></li>
+  <li></li>
+  <li>c-hello</li>
+  <li>c-hello c-hello--world c-hello--something c-hello--prod</li>
+</ul>"
+`;
+
+exports[`FE Content Twig functions work 2`] = `
+"<!DOCTYPE html>
+<ul>
+  <li> class-name - 0 <br /> ( - get-posts) </li>
+  <li> get-posts - 0 <br /> (class-name - json-page) </li>
+  <li> json-page - 0 <br /> (get-posts - nested) </li>
+  <li> nested - 1 <br /> (json-page - nested/page) </li>
+  <li> really/no-parent-nested/page - 0 <br /> (nested/page - top-page) </li>
+  <li> top-page - 0 <br /> (really/no-parent-nested/page - ) </li>
+</ul>"
+`;
+
+exports[`FE Content Twig functions work 3`] = `
+"<!DOCTYPE html>
+<html data-webpack-public-path=\\"./\\">
+
+<head>
+  <title> top-page - md - no p </title>
+  <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"styles/main.--HASH--.css\\" type=\\"text/css\\" />
+  <script src=\\"scripts/app.98db252c.js\\" defer></script>
+</head>
+
+<body>
+  <div> Here is <a href=\\"assets/hello.77a781b9.txt\\">Text File</a> and <a href=\\"assets/nested/file.a5d6752d.txt\\">DNF</a>. </div>
+  <div> Links: <ul>
+      <li>Absolute <a href=\\"/nested/page.html\\">Nested Page</a></li>
+      <li> Relative 1 <a href=\\"nested/page.html\\">Nested Page</a>
+      </li>
+      <li> Relative 2 <a href=\\"nested/page.html\\">Nested Page</a>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>"
+`;
+
+exports[`FE Content Twig functions work 4`] = `
+"<!DOCTYPE html>
+<html data-webpack-public-path=\\"./\\">
+
+<head>
+  <title> json-page - json - no p </title>
+  <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"styles/main.--HASH--.css\\" type=\\"text/css\\" />
+  <script src=\\"scripts/app.98db252c.js\\" defer></script>
+</head>
+
+<body>
+  <div> Here is <a href=\\"assets/hello.77a781b9.txt\\">Text File</a> and <a href=\\"assets/nested/file.a5d6752d.txt\\">DNF</a>. </div>
+  <div> Links: <ul>
+      <li>Absolute <a href=\\"/nested/page.html\\">Nested Page</a></li>
+      <li> Relative 1 <a href=\\"nested/page.html\\">Nested Page</a>
+      </li>
+      <li> Relative 2 <a href=\\"nested/page.html\\">Nested Page</a>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>"
+`;
+
+exports[`FE Content Twig functions work 5`] = `
+"<!DOCTYPE html>
+<html data-webpack-public-path=\\"../\\">
+
+<head>
+  <title> nested/page - md - nested </title>
+  <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"../styles/main.--HASH--.css\\" type=\\"text/css\\" />
+  <script src=\\"../scripts/app.98db252c.js\\" defer></script>
+</head>
+
+<body>
+  <div> Here is <a href=\\"../assets/hello.77a781b9.txt\\">Text File</a> and <a href=\\"../assets/nested/file.a5d6752d.txt\\">DNF</a>. </div>
+  <div> Links: <ul>
+      <li>Absolute <a href=\\"/nested/page.html\\">Nested Page</a></li>
+      <li> Relative 1 <a href=\\"page.html\\">Nested Page</a>
+      </li>
+      <li> Relative 2 <a href=\\"page.html\\">Nested Page</a>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>"
+`;
+
+exports[`FE Content Twig functions work 6`] = `
+"<!DOCTYPE html>
+<html data-webpack-public-path=\\"../../\\">
+
+<head>
+  <title> really/no-parent-nested/page - md - no p </title>
+  <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"../../styles/main.--HASH--.css\\" type=\\"text/css\\" />
+  <script src=\\"../../scripts/app.98db252c.js\\" defer></script>
+</head>
+
+<body>
+  <div> Here is <a href=\\"../../assets/hello.77a781b9.txt\\">Text File</a> and <a href=\\"../../assets/nested/file.a5d6752d.txt\\">DNF</a>. </div>
+  <div> Links: <ul>
+      <li>Absolute <a href=\\"/nested/page.html\\">Nested Page</a></li>
+      <li> Relative 1 <a href=\\"../../nested/page.html\\">Nested Page</a>
+      </li>
+      <li> Relative 2 <a href=\\"../../nested/page.html\\">Nested Page</a>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>"
+`;

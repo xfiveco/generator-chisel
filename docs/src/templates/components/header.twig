@@ -1,0 +1,29 @@
+{% set main_nav = [
+  { title: 'Docs', link: '/docs' },
+  getPosts({ id: 'tutorials' })[0],
+  { title: 'About', link: '/about' },
+] %}
+
+
+<header class="c-header">
+  <div class="o-container">
+    <div class="c-header__inner">
+      <div class="c-header__left">
+        <div class="c-header__logo">
+          {% include 'components/logo.twig' %}
+        </div>
+        <ul class="c-header__nav">
+          {% for item in main_nav %}
+            <li class="{{ className('c-header__nav-item', (post.link starts with item.link ? 'current')) }}">
+              <a href="{{ item.link }}" class="c-header__nav-link">{{ item.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="c-header__right">
+        <iframe src="https://ghbtns.com/github-btn.html?user=xfiveco&amp;repo=generator-chisel&amp;type=star&amp;count=true&amp;size=large" class="c-header__right-iframe" title="github star count"></iframe>
+      </div>
+    </div>
+  </div>
+</header>

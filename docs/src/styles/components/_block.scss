@@ -1,0 +1,87 @@
+/* ==========================================================================
+   #BLOCK
+   ========================================================================== */
+
+.c-block {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+
+  @include bp('medium') {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  @include bp('large') {
+    justify-content: space-between;
+  }
+}
+
+.c-block--reversed {
+  @include bp('medium') {
+    flex-direction: row-reverse;
+  }
+}
+
+.c-block__content {
+  margin-top: 4rem;
+
+  @include bp('medium') {
+    width: 50%;
+    margin-right: 6rem;
+    margin-top: 0;
+  }
+
+  @include bp('large') {
+    width: 40%;
+  }
+
+  .c-block--reversed & {
+    @include bp('medium') {
+      margin-right: 0;
+      margin-left: 6rem;
+    }
+
+    @include bp('large') {
+      width: 40%;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 31px;
+    height: 20px;
+    background-color: $color-bright-sun;
+    margin-top: 3rem;
+  }
+}
+
+.c-block__image-wrapper {
+  flex-shrink: 0;
+
+  @include bp('medium') {
+    width: 50%;
+  }
+
+  @include bp('large') {
+    width: 33%;
+  }
+}
+
+.c-block__image {
+  width: 100%;
+  object-fit: contain;
+
+  @include bp('large') {
+    width: auto;
+  }
+}
+
+.c-block__title {
+  font-size: 2.4rem;
+}
+
+.c-block__post-entry {
+  font-size: 1.8rem;
+}

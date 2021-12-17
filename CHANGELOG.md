@@ -1,5 +1,7 @@
 # Changelog
 
+<!-- INSERT-NEW-ENTRIES-HERE -->
+
 ## v0.16.1 (03/01/2020)
 
 #### Enhancements:
@@ -87,7 +89,7 @@
 
 #### Fixes:
 
-- [#350](https://github.com/xfiveco/generator-chisel/issues/350) Set more specific paths for dist and vendor folders  in .gitignore
+- [#350](https://github.com/xfiveco/generator-chisel/issues/350) Set more specific paths for dist and vendor folders in .gitignore
 
 ---
 
@@ -140,6 +142,7 @@
 ---
 
 ## v0.9.0 (25/10/2017)
+
 - [**enhancement**] When running Chisel check if it is up to date [#298](https://github.com/xfiveco/generator-chisel/issues/298)
 - [**enhancement**] Update link in the readme in generated project to link to specific version [#297](https://github.com/xfiveco/generator-chisel/issues/297)
 - [**enhancement**] Save Chisel version used to generate project in .yo-rc.json [#296](https://github.com/xfiveco/generator-chisel/issues/296)
@@ -150,7 +153,7 @@
 - [**enhancement**] Add Media class to Chisel namespace in WP for various media adjustments [#265](https://github.com/xfiveco/generator-chisel/issues/265)
 - [**enhancement**] Switch to yeoman-generator 2.0 [#262](https://github.com/xfiveco/generator-chisel/issues/262)
 - [**enhancement**] Change .dev to .test [#261](https://github.com/xfiveco/generator-chisel/issues/261)
-- [**enhancement**] Remove get_ from twigs wherever possible [#257](https://github.com/xfiveco/generator-chisel/issues/257)
+- [**enhancement**] Remove get\_ from twigs wherever possible [#257](https://github.com/xfiveco/generator-chisel/issues/257)
 - [**enhancement**] Add doctoc as devDependency and add script to generate TOC in README.md [#256](https://github.com/xfiveco/generator-chisel/issues/256)
 - [**documentation**] Documented assetPath function [#242](https://github.com/xfiveco/generator-chisel/issues/242)
 - [**enhancement**] Provide functionality for web fonts loading [#233](https://github.com/xfiveco/generator-chisel/issues/233)
@@ -159,6 +162,7 @@
 ---
 
 ## v0.8.0 (21/09/2017)
+
 - Adding option to select how much ITCSS styling should be included (#182)
 - Adding JavaScript vendor concatenation (#185)
 - Using native font stack (#232)
@@ -170,13 +174,17 @@
 - Switching to the original gulp-twig package (#253)
 - Moving scripts to head (#258)
 - Adding unminified versions of styles and scripts to dist (#259)
+
 ---
 
 ## v0.7.1 (27/07/2017)
+
 - temporary reverting gulp-stylelint to previous version, fixes #229 (#230)
+
 ---
 
 ## v0.7.0 (21/07/2017)
+
 - Added support for local `.yo-rc.json` (#204)
 - Chisel starter theme improvements - reorganizing things to the Chisel namespace classes for easier updates and adding new functionality, see [Developing theme functionality](https://github.com/xfiveco/generator-chisel#developing-theme-functionality) (#206)
 - Replacing deprecated `selector-no-id` with `selector-max-id` in stylelint config (#217)
@@ -184,9 +192,11 @@
 - Updating dependencies (#223)
 - README updates (#226)
 - Added wiki page [Setting up WordPress projects at Getfives](https://github.com/xfiveco/generator-chisel/wiki/Setting-up-WordPress-projects-at-Getfives)
+
 ---
 
 ## v0.6.4 (06/06/2017)
+
 - Select ES6 by default during project scaffolding (#188)
 - Use .babelrc for configuring babelify (#190)
 - Changed Timber core classes names to current convention (#197)
@@ -200,22 +210,27 @@
 ---
 
 ## v0.6.3 (15/05/2017)
+
 - increasing serve performance (#176)
 - improve watch mode performance (#181)
 - allowing to choose port for connecting to DB during project setup (#180)
 - adding `vendor` directory to `scripts` and `styles`, excluding them from linting (#178)
 - fixing that project folder with number in name didn't match the project slug (#184)
+
 ---
 
 ## v0.6.2 (06/04/2017)
+
 - use npm scripts instead of calling gulp directly (#169)
 - add className function (#171)
 - add ignore for VS editor files and local "dist (#170)
 - new Chisel tutorial - [Easy-to-use Code Blocks in WordPress](https://www.xfive.co/blog/easy-use-code-blocks-wordpress/)
+
 ---
 
 ## v0.6.1 (29/03/2017)
-- Stylelint adjustments (#154) 
+
+- Stylelint adjustments (#154)
 - Use yarn as install method if available (#159)
 - Disable BrowserSync synchronization of scroll and clicks
 - Add autoprefixer to watch
@@ -227,6 +242,7 @@
 ---
 
 ## v0.6.0 (15/02/2017)
+
 - ITCSS improvements and automatic style guide generation - added new elements, objects and sample components
 - default styles for WP projects - editor content, posts, comments, main navigation, etc. allows quicker prototyping themes
 - removed compilation of prefixed templates (eg. _template.twig_), now only top level templates compile to pages
@@ -237,15 +253,16 @@
 - fixing broken WP screenshot
 - migrating to Yeoman 1.0
 - resolving styling deprecation warnings
-- [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/) - a blog post showing a sample project which uses Chisel for development 
+- [An MVC-like WordPress Development with ACF and Timber](https://www.xfive.co/blog/mvc-like-wordpress-development-acf-timber/) - a blog post showing a sample project which uses Chisel for development
 
 ---
 
 ## v0.5.1 (24/01/2017)
+
 - Introduced revisionedPath and change behaviour of assetPath (#127)
 - Used hash of project name slug as table name prefix in WP projects
-- Added no-undef rule to ESlint 
-- Support browser globar variables 
+- Added no-undef rule to ESlint
+- Support browser globar variables
 - Remove template related things on WordPress projects
 - Allow manual modification of Browsersync proxy URL
 - Updating docs with explanation how to use jQuery plugins with Browserify
@@ -253,16 +270,18 @@
 ---
 
 ## v0.5.0 (28/11/2016)
+
 - Replacing Composer with WP-CLI (it’s a part of Chisel so no additional install is necessary)
 - automatic WordPress setup and installation from command line
 - pages generator works in WordPress projects too
 - default project name based on the project directory name
 - default author set to Xfive
-- clearfix extend replaced with mixin 
+- clearfix extend replaced with mixin
 
 ---
 
 ## v0.4.0 (11/11/2016)
+
 - syncing front-end and WordPress Twig templates (#97)
 - Chisel starter theme consistency improvements (indentation, automatically generated theme name and author, correct package information)
 - added project type question
@@ -276,43 +295,52 @@
 ---
 
 ## v0.3.1 (02/11/2016)
-This is a patch release. 
+
+This is a patch release.
+
 - Remove `.git` directory from theme folder (#96)
 
 ---
 
 ## v0.3.0: WordPress support (02/11/2016)
+
 Notable changes and features:
+
 - WP support (#81, #80, #74, #70, #59), thanks @jakub300 and welcome to the team!
-- Loosening ESLint rules enhancement (#78) 
+- Loosening ESLint rules enhancement (#78)
 - Base our Stylelint config on external standard enhancement (#47)
 - Tons of bugfixes in development workflow
 
 ---
 
 ## v0.2.2 (19/09/2016)
+
 - HTML validation with [gulp-htmlhint](https://github.com/bezoerb/gulp-htmlhint)
-- Watchify errors handling, see #34 
+- Watchify errors handling, see #34
 
 ---
 
 ## v0.2.1 (24/08/2016)
+
 - making the project index font size smaller
 
 ---
 
 ## v0.2.0 (24/08/2016)
+
 - new project index design
 - excluding private (prefixed with \_) templates from rendering to HTML, see #32
 
 ---
 
 ## v0.1.6 (17/08/2016)
--  fixing problems with forcing Unix newlines on binary files, eg. font files or PNGs, see #30
+
+- fixing problems with forcing Unix newlines on binary files, eg. font files or PNGs, see #30
 
 ---
 
 ## v0.1.5 (12/08/2016)
+
 - Fixes #19 - adding stylelint - CSS linting task and configuration
 - Fixes #29 - adding Twig templates base path
 - improving editorconfig template
@@ -320,4 +348,5 @@ Notable changes and features:
 ---
 
 ## v0.1.4 (08/08/2016)
+
 - listing page sub generator in `package.json`

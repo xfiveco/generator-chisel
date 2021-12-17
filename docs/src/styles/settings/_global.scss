@@ -1,0 +1,74 @@
+// ==========================================================================
+// #GLOBAL
+// ==========================================================================
+// The global settings file contains any project-wide variables; things that
+// need to be made available to the entire codebase.
+
+$global-radius: 5px !default;
+$global-transition: all 300ms ease-in-out !default;
+
+/* Fonts
+   ========================================================================== */
+
+$font-sans-serif: 'Quicksand', -apple-system, system-ui, BlinkMacSystemFont,
+  'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif !default;
+
+/* Breakpoints
+   ========================================================================== */
+
+$breakpoints: (
+  small: 480 / 16 * 1rem,
+  medium: 768 / 16 * 1rem,
+  large: 1024 / 16 * 1rem,
+  xlarge: 1280 / 16 * 1rem,
+  full: 1600 / 16 * 1rem,
+);
+
+/* Spacing
+   ========================================================================== */
+
+$spacing: (
+  auto: auto,
+  0: 0,
+  2: 2rem,
+  3: 3rem,
+  4: 4rem,
+  6: 6rem,
+  8: 8rem,
+  10: 8rem,
+  12: 12rem,
+  14: 14rem,
+  16: 16rem,
+  18: 18rem,
+);
+
+/* Colors
+   ========================================================================== */
+
+// Colors shouldn't be used directly but reassigned
+$color-white: #fff;
+$color-black: #000;
+$color-very-light-grey: #f0f1f3;
+$color-light-grey: #999;
+$color-medium-grey: #666;
+$color-dark-grey: #333;
+
+$color-primary: #2a1468;
+$color-secondary: #ff6d54;
+$color-rhino: #2d2b57;
+$color-titan-white: #e3dfff;
+$color-bright-sun: #fed049;
+$color-mercury: #e4e4e4;
+$color-mulled-wine: #494771;
+$color-cornflower-blue: #915ff2;
+
+// Text
+$color-bg: $color-white;
+$color-text: $color-primary;
+
+// Links
+$color-link: $color-primary;
+$color-hover: $color-secondary;
+
+// Borders
+$color-border: $color-very-light-grey;

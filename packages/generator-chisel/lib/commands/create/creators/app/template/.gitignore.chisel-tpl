@@ -1,0 +1,53 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*~
+
+# OS or Editor folders
+.DS_Store
+._*
+Desktop.ini
+Thumbs.db
+.Spotlight-V100
+.Trashes
+.cache
+.project
+.settings
+.tmproj
+*.esproj
+nbproject
+*.sublime-project
+*.sublime-workspace
+.idea
+
+# Folders to ignore
+temp
+tmp
+.tmp
+node_modules
+
+# Others
+npm-debug.log
+.rbenv
+.rbenv-version
+.ruby-gemset
+.ruby-version
+.rvmrc
+.vagrant
+
+# Chisel
+/dev-vhost.conf
+/chisel.config.local.js
+/dist

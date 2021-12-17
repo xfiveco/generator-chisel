@@ -1,0 +1,60 @@
+/* ==========================================================================
+   #PAGE-NAV
+   ========================================================================== */
+
+.c-page-nav {
+  display: flex;
+}
+
+.c-page-nav__item {
+  &--prev {
+    padding-left: 5.2rem;
+  }
+
+  &--next {
+    padding: 0 5.2rem 0 2rem;
+    margin-left: auto;
+    text-align: right;
+  }
+}
+
+.c-page-nav__link {
+  text-decoration: none;
+}
+
+.c-page-nav__heading {
+  display: block;
+}
+
+.c-page-nav__text {
+  position: relative;
+  display: block;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-top: 0.5rem;
+
+  @include bp('medium') {
+    font-size: 2.4rem;
+  }
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 17px;
+  }
+
+  .c-page-nav__item--prev & {
+    &::before {
+      left: -5.2rem;
+    }
+  }
+
+  .c-page-nav__item--next & {
+    &::before {
+      transform: translateY(-50%) rotate(180deg);
+      right: -5.2rem;
+    }
+  }
+}

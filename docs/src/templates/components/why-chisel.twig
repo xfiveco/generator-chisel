@@ -1,0 +1,19 @@
+<section id="why-chisel" class="c-why-chisel margin-top-6 margin-top-medium-8 margin-top-large-14">
+  <div class="c-why-chisel__container o-container">
+    <h2 class="c-why-chisel__title">{{ args.sectionTitle }}</h2>
+      <ul class="c-why-chisel__features margin-top-6 margin-top-large-12 o-list-bare">
+        {% for block_item in args.blocks %}
+          <li class="c-why-chisel__feature-item">
+            {% include 'components/block.twig' %}
+          </li>
+        {% endfor %}
+      </ul>
+    <div class="c-why-chisel__cta margin-top-12 margin-top-large-16">
+      <i class="o-icons o-icons--star" aria-hidden="true"></i>
+      <p class="c-why-chisel__cta-text">
+        {{ args.ctaLink }}
+      </p>
+      <i class="o-icons o-icons--star" aria-hidden="true"></i>
+    </div>
+  </div>
+</section>

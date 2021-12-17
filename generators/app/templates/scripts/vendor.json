@@ -1,3 +1,0 @@
-<% if (has_jquery_vendor_config) { %>[
-  "/node_modules/jquery/dist/jquery.js"
-]<% } else { %>[]<% } %>

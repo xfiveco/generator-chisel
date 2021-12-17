@@ -1,52 +1,68 @@
 {
-  "name": "generator-chisel",
-  "version": "0.16.1",
-  "description": "A Yeoman generator for scaffolding front-end and WordPress projects",
-  "homepage": "https://www.getchisel.co/",
-  "author": {
-    "name": "Xfive",
-    "email": "hello@xfive.co",
-    "url": "https://www.xfive.co"
-  },
-  "files": [
-    "generators",
-    "helpers"
-  ],
-  "main": "generators\\index.js",
-  "keywords": [
-    "yeoman-generator",
-    "twig",
-    "wordpress",
-    "scss",
-    "itcss",
-    "webpack",
-    "babel"
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "docs",
+    "test-projects/*"
   ],
   "scripts": {
-    "test": "bash test/run-tests.sh",
-    "prepublish": "php -r \"copy('https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', 'helpers/wp-cli.phar'); if(!file_exists('helpers/wp-cli.phar')) exit(1);\""
+    "lint": "eslint --no-eslintrc -c .eslintrc.js **/*.js",
+    "version": "node scripts/index-versions.js",
+    "prepare-links": "node scripts/prepare-links.js",
+    "lerna-version": "lerna version --no-private",
+    "lerna-publish": "lerna publish from-git",
+    "lerna-publish-next": "lerna publish from-git --pre-dist-tag next",
+    "test-local": "jest -w 1",
+    "test": "jest --coverage"
   },
-  "dependencies": {
-    "async": "^2.6.3",
-    "chalk": "^2.4.2",
-    "command-exists": "^1.2.8",
-    "fs-extra": "^8.1.0",
-    "limax": "^1.7.0",
-    "lodash": "^4.17.15",
-    "mysql": "^2.17.1",
-    "update-notifier": "^3.0.1",
-    "yeoman-generator": "^4.0.1"
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 240000,
+    "globalSetup": "<rootDir>/scripts/testGlobalSetup.js",
+    "globalTeardown": "<rootDir>/scripts/testGlobalTeardown.js",
+    "setupFiles": [
+      "<rootDir>/scripts/testSetup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/scripts/testSetupAfterEnv.js",
+      "expect-puppeteer"
+    ],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/test-projects",
+      "<rootDir>/.jest-projects"
+    ],
+    "testPathIgnorePatterns": [
+      "helpers",
+      "/node_modules/"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/.jest-projects/**",
+      "!**/test-projects/**",
+      "!**/coverage/**",
+      "!<rootDir>/packages/generator-chisel/lib/commands/create/creators/*/template/**/*.js"
+    ]
   },
   "devDependencies": {
-    "cross-spawn": "^6.0.5",
-    "eslint": "^6.1.0",
-    "mocha": "^6.2.0",
-    "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^2.0.0"
+    "conventional-changelog": "^3.1.21",
+    "eslint": "^7.2.0",
+    "execa": "^4.0.2",
+    "expect-puppeteer": "^4.4.0",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
+    "jest": "^26.1.0",
+    "jest-environment-puppeteer": "^4.4.0",
+    "lerna": "^3.22.0",
+    "lerna-changelog": "^1.0.1",
+    "node-eval": "^2.0.0",
+    "prettier": "^2.0.5",
+    "random-js": "^2.1.0",
+    "stream-to-promise": "^3.0.0",
+    "supertest": "^4.0.2"
   },
-  "engines": {
-    "node": "^8.10.0 || ^10.13.0"
-  },
-  "repository": "git@github.com:xfiveco/generator-chisel.git",
-  "license": "MIT"
+  "optionalDependencies": {
+    "puppeteer": "^5.2.1"
+  }
 }

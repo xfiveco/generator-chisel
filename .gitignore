@@ -52,4 +52,7 @@ npm-debug.log
 .rvmrc
 .vagrant
 
-helpers/wp-cli.phar
+# Chisel
+/test-projects
+/.jest-projects
+/.changelog

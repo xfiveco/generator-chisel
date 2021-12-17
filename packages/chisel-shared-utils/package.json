@@ -1,0 +1,35 @@
+{
+  "name": "chisel-shared-utils",
+  "version": "1.0.0-alpha.0",
+  "description": "TODO",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xfiveco/generator-chisel.git",
+    "directory": "packages/chisel-shared-utils"
+  },
+  "author": {
+    "name": "Xfive",
+    "email": "hello@xfive.co",
+    "url": "https://www.xfive.co"
+  },
+  "homepage": "https://www.getchisel.co/",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/xfiveco/generator-chisel/issues"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "command-exists": "^1.2.9",
+    "execa": "^4.0.2",
+    "fs-extra": "^9.0.1",
+    "globby": "^11.0.1",
+    "lodash": "^4.17.15"
+  }
+}

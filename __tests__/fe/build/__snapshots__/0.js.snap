@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FE Build Generate and build FE Project and process twigs and assets 1`] = `
+Array [
+  Array [],
+  Array [
+    "  [36m[1mFile[22m[39m                             [36m[1mSize[22m[39m                 [36m[1mGzipped[22m[39m
+
+  [32mscripts/app.98db252c.full.js[39m     4.41 KiB             1.35 KiB
+  [32mscripts/app.98db252c.js[39m          1.18 KiB             0.59 KiB
+  [34mstyles/main.--HASH--.full.css[39m    18.38 KiB            4.70 KiB
+  [34mstyles/main.--HASH--.css[39m         5.50 KiB             1.89 KiB
+
+  [90mImages and other types of assets omitted.[39m
+",
+  ],
+]
+`;
+
+exports[`FE Build Generate and build FE Project and process twigs and assets 2`] = `
+Array [
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+]
+`;
+
+exports[`FE Build Generate and build FE Project and process twigs and assets 3`] = `
+Array [
+  Array [],
+  Array [
+    "  [36m[1mFile[22m[39m                             [36m[1mSize[22m[39m                 [36m[1mGzipped[22m[39m
+
+  [32mscripts/app.98db252c.full.js[39m     4.41 KiB             1.35 KiB
+  [32mscripts/app.98db252c.js[39m          1.18 KiB             0.59 KiB
+  [34mstyles/main.--HASH--.full.css[39m    18.38 KiB            4.70 KiB
+  [34mstyles/main.--HASH--.css[39m         5.50 KiB             1.89 KiB
+
+  [90mImages and other types of assets omitted.[39m
+",
+  ],
+]
+`;
+
+exports[`FE Build Generate and build FE Project and process twigs and assets 4`] = `
+Array [
+  "dist/assets/hello.97980e85.txt",
+  "dist/assets/nested/file.0aa8fd1f.abc",
+  "dist/assets/nested/hello.450876f6.txt",
+  "dist/nested/public.jpg",
+  "dist/public.txt",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/some-page.html",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "dist/very/deeply/nested/file.png",
+]
+`;
+
+exports[`FE Build Generate and build FE Project and process twigs and assets 5`] = `
+"<!DOCTYPE html>
+<html class=\\"no-js\\" lang=\\"en\\" prefix=\\"og: http://ogp.me/ns#\\" data-webpack-public-path=\\"./\\">
+
+<head>
+  <meta charset=\\"utf-8\\" />
+  <title>Some Page - FrontEnd</title>
+  <link rel=\\"stylesheet\\" property=\\"stylesheet\\" href=\\"styles/main.--HASH--.css\\" type=\\"text/css\\">
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+  <script>
+    document.documentElement.classList.remove('no-js');
+  </script>
+  <script src=\\"scripts/app.98db252c.js\\" defer></script>
+</head>
+
+<body class=\\"\\">
+  <header class=\\"o-wrapper c-header\\">
+    <a href=\\"/\\" rel=\\"home\\">FrontEnd</a>
+  </header>
+  <main class=\\"o-wrapper\\">
+    <h1>Hello <span class=\\"js-greeting\\"></span></h1>
+    <ul>
+      <li>assets/hello.97980e85.txt</li>
+      <li>assets/nested/file.0aa8fd1f.abc</li>
+      <li>assets/nested/hello.450876f6.txt</li>
+    </ul>
+  </main>
+  <footer class=\\"o-wrapper c-footer\\">
+    <p>Copyright &copy; 2020 FrontEnd</p>
+  </footer>
+</body>
+
+</html>"
+`;

@@ -1,0 +1,31 @@
+{% extends "layouts/base.twig" %}
+{% block content %}
+
+	<section class="c-post o-container margin-bottom-4">
+		{% set sidebar = sidebar() %}
+		{% include 'components/sidebar.twig' %}
+
+		<article
+        id="post-{{ post.ID }}"
+        class="c-post__article o-layout__content padding-top-2 padding-top-medium-4 padding-top-large-8{{
+        sidebar is empty ? ' margin-left-large-auto margin-right-large-auto' : ''
+      }}"
+      >
+			<div class="o-content">
+				<h1 class="c-title">{{ post.title }}{{ isDev() ? (' (' ~ post.data.order ~ ')') : '' }}</h1>
+				<p class="c-intro">{{ post.data.excerpt }}</p>
+				<div class="c-post__entry">
+					{{post.content}}
+				</div>
+			</div>
+			{% include 'components/page-nav.twig' %}
+		</article>
+
+		{% if not post.data.hideOnpageSidebar %}
+			{% set sidebar = onPageSidebar() %}
+			{% include 'components/page-sidebar.twig' %}
+		{% endif %}
+
+	</section>
+
+{% endblock %}

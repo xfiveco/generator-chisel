@@ -1,0 +1,398 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generator Static Generate and build FE Project 1`] = `
+Array [
+  ".browserslistrc",
+  ".editorconfig",
+  ".eslintignore",
+  ".eslintrc.js",
+  ".gitattributes",
+  ".gitignore",
+  ".htmlhintrc",
+  ".prettierignore",
+  ".stylelintignore",
+  "README.md",
+  "babel.config.js",
+  "chisel.config.js",
+  "dist/scripts/app.98db252c.full.js",
+  "dist/scripts/app.98db252c.js",
+  "dist/scripts/app.98db252c.js.map",
+  "dist/styles/main.--HASH--.css",
+  "dist/styles/main.--HASH--.css.map",
+  "dist/styles/main.--HASH--.full.css",
+  "index.html",
+  "package.json",
+  "postcss.config.js",
+  "prettier.config.js",
+  "public/.keep",
+  "src/assets/fonts/.keep",
+  "src/assets/images/.keep",
+  "src/scripts/app.js",
+  "src/scripts/modules/greeting.js",
+  "src/styles/components/_btn.scss",
+  "src/styles/components/_footer.scss",
+  "src/styles/components/_header.scss",
+  "src/styles/elements/_blockquote.scss",
+  "src/styles/elements/_headings.scss",
+  "src/styles/elements/_hr.scss",
+  "src/styles/elements/_html.scss",
+  "src/styles/elements/_images.scss",
+  "src/styles/elements/_links.scss",
+  "src/styles/elements/_lists.scss",
+  "src/styles/elements/_tables.scss",
+  "src/styles/generic/_box-sizing.scss",
+  "src/styles/generic/_font-face.scss",
+  "src/styles/generic/_normalize.scss",
+  "src/styles/generic/_reset.scss",
+  "src/styles/generic/_shared.scss",
+  "src/styles/main.scss",
+  "src/styles/objects/_layout.scss",
+  "src/styles/objects/_list-bare.scss",
+  "src/styles/objects/_list-inline.scss",
+  "src/styles/objects/_media.scss",
+  "src/styles/objects/_table.scss",
+  "src/styles/objects/_wrapper.scss",
+  "src/styles/settings/_global.scss",
+  "src/styles/tools/_breakpoints.scss",
+  "src/styles/tools/_clearfix.scss",
+  "src/styles/tools/_hidden.scss",
+  "src/styles/utilities/_align.scss",
+  "src/styles/utilities/_clearfix.scss",
+  "src/styles/utilities/_hide.scss",
+  "src/styles/vendor/.keep",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "stylelint.config.js",
+]
+`;
+
+exports[`Generator Static Generate and build FE Project 2`] = `
+"/* eslint-disable no-param-reassign */
+
+const creatorData = {
+  chiselVersion: '--VERSION--',
+  app: {
+    name: 'FrontEnd',
+    author: 'Xfive Tester',
+    projectType: 'fe',
+    browsers: ['modern'],
+    nameSlug: 'frontend',
+    hasJQuery: false,
+  },
+  fe: { additionalFeatures: [] },
+};
+
+module.exports = {
+  creatorData,
+
+  staticFrontend: {
+    serveDist: false,
+    skipHtmlExtension: false,
+  },
+
+  // To use React and hot reload for React components:
+  // 1. Run \`yarn add react-hot-loader @hot-loader/react-dom\`
+  // 3. Mark your root component as hot-exported as described on
+  //    https://github.com/gaearon/react-hot-loader#getting-started (step 2)
+  // 4. Uncomment line below
+  // react: true,
+
+  plugins: ['chisel-plugin-code-style', 'chisel-plugin-static-frontend'],
+};
+"
+`;
+
+exports[`Generator Static Generates all expected files and config 1`] = `
+Array [
+  ".browserslistrc",
+  ".editorconfig",
+  ".eslintignore",
+  ".eslintrc.js",
+  ".gitattributes",
+  ".gitignore",
+  ".htmlhintrc",
+  ".prettierignore",
+  ".stylelintignore",
+  "README.md",
+  "babel.config.js",
+  "chisel.config.js",
+  "index.html",
+  "package.json",
+  "postcss.config.js",
+  "prettier.config.js",
+  "public/.keep",
+  "src/assets/fonts/.keep",
+  "src/assets/images/.keep",
+  "src/scripts/app.js",
+  "src/scripts/modules/greeting.js",
+  "src/styles/components/_btn.scss",
+  "src/styles/components/_footer.scss",
+  "src/styles/components/_header.scss",
+  "src/styles/elements/_blockquote.scss",
+  "src/styles/elements/_headings.scss",
+  "src/styles/elements/_hr.scss",
+  "src/styles/elements/_html.scss",
+  "src/styles/elements/_images.scss",
+  "src/styles/elements/_links.scss",
+  "src/styles/elements/_lists.scss",
+  "src/styles/elements/_tables.scss",
+  "src/styles/generic/_box-sizing.scss",
+  "src/styles/generic/_font-face.scss",
+  "src/styles/generic/_normalize.scss",
+  "src/styles/generic/_reset.scss",
+  "src/styles/generic/_shared.scss",
+  "src/styles/main.scss",
+  "src/styles/objects/_layout.scss",
+  "src/styles/objects/_list-bare.scss",
+  "src/styles/objects/_list-inline.scss",
+  "src/styles/objects/_media.scss",
+  "src/styles/objects/_table.scss",
+  "src/styles/objects/_wrapper.scss",
+  "src/styles/settings/_global.scss",
+  "src/styles/tools/_breakpoints.scss",
+  "src/styles/tools/_clearfix.scss",
+  "src/styles/tools/_hidden.scss",
+  "src/styles/utilities/_align.scss",
+  "src/styles/utilities/_clearfix.scss",
+  "src/styles/utilities/_hide.scss",
+  "src/styles/vendor/.keep",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "stylelint.config.js",
+]
+`;
+
+exports[`Generator Static Generates all expected files and config 2`] = `
+"/* eslint-disable no-param-reassign */
+
+const creatorData = {
+  chiselVersion: \\"--VERSION--\\",
+  app: {
+    name: \\"FrontEnd\\",
+    author: \\"Xfive Tester\\",
+    projectType: \\"fe\\",
+    browsers: [\\"modern\\"],
+    nameSlug: \\"frontend\\",
+    hasJQuery: false,
+  },
+  fe: { additionalFeatures: [] },
+};
+
+module.exports = {
+  creatorData,
+
+  staticFrontend: {
+    serveDist: false,
+    skipHtmlExtension: false,
+  },
+
+  // To use React and hot reload for React components:
+  // 1. Run \`yarn add react-hot-loader @hot-loader/react-dom\`
+  // 3. Mark your root component as hot-exported as described on
+  //    https://github.com/gaearon/react-hot-loader#getting-started (step 2)
+  // 4. Uncomment line below
+  // react: true,
+
+  plugins: [\\"chisel-plugin-code-style\\", \\"chisel-plugin-static-frontend\\"],
+};
+"
+`;
+
+exports[`Generator Static Generates all expected files and config with serveDist 1`] = `
+Array [
+  ".browserslistrc",
+  ".editorconfig",
+  ".eslintignore",
+  ".eslintrc.js",
+  ".gitattributes",
+  ".gitignore",
+  ".htmlhintrc",
+  ".prettierignore",
+  ".stylelintignore",
+  "README.md",
+  "babel.config.js",
+  "chisel.config.js",
+  "package.json",
+  "postcss.config.js",
+  "prettier.config.js",
+  "public/.keep",
+  "src/assets/fonts/.keep",
+  "src/assets/images/.keep",
+  "src/scripts/app.js",
+  "src/scripts/modules/greeting.js",
+  "src/styles/components/_btn.scss",
+  "src/styles/components/_footer.scss",
+  "src/styles/components/_header.scss",
+  "src/styles/elements/_blockquote.scss",
+  "src/styles/elements/_headings.scss",
+  "src/styles/elements/_hr.scss",
+  "src/styles/elements/_html.scss",
+  "src/styles/elements/_images.scss",
+  "src/styles/elements/_links.scss",
+  "src/styles/elements/_lists.scss",
+  "src/styles/elements/_tables.scss",
+  "src/styles/generic/_box-sizing.scss",
+  "src/styles/generic/_font-face.scss",
+  "src/styles/generic/_normalize.scss",
+  "src/styles/generic/_reset.scss",
+  "src/styles/generic/_shared.scss",
+  "src/styles/main.scss",
+  "src/styles/objects/_layout.scss",
+  "src/styles/objects/_list-bare.scss",
+  "src/styles/objects/_list-inline.scss",
+  "src/styles/objects/_media.scss",
+  "src/styles/objects/_table.scss",
+  "src/styles/objects/_wrapper.scss",
+  "src/styles/settings/_global.scss",
+  "src/styles/tools/_breakpoints.scss",
+  "src/styles/tools/_clearfix.scss",
+  "src/styles/tools/_hidden.scss",
+  "src/styles/utilities/_align.scss",
+  "src/styles/utilities/_clearfix.scss",
+  "src/styles/utilities/_hide.scss",
+  "src/styles/vendor/.keep",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "stylelint.config.js",
+]
+`;
+
+exports[`Generator Static Generates all expected files and config with serveDist 2`] = `
+"/* eslint-disable no-param-reassign */
+
+const creatorData = {
+  chiselVersion: \\"--VERSION--\\",
+  app: {
+    name: \\"FrontEnd\\",
+    author: \\"Xfive Tester\\",
+    projectType: \\"fe\\",
+    browsers: [\\"modern\\"],
+    nameSlug: \\"frontend\\",
+    hasJQuery: false,
+  },
+  fe: { additionalFeatures: [\\"serveDist\\"] },
+};
+
+module.exports = {
+  creatorData,
+
+  staticFrontend: {
+    serveDist: true,
+    skipHtmlExtension: false,
+  },
+
+  // To use React and hot reload for React components:
+  // 1. Run \`yarn add react-hot-loader @hot-loader/react-dom\`
+  // 3. Mark your root component as hot-exported as described on
+  //    https://github.com/gaearon/react-hot-loader#getting-started (step 2)
+  // 4. Uncomment line below
+  // react: true,
+
+  plugins: [\\"chisel-plugin-code-style\\", \\"chisel-plugin-static-frontend\\"],
+};
+"
+`;
+
+exports[`Generator Static Generates all expected files and config with skipHtmlExtension 1`] = `
+Array [
+  ".browserslistrc",
+  ".editorconfig",
+  ".eslintignore",
+  ".eslintrc.js",
+  ".gitattributes",
+  ".gitignore",
+  ".htmlhintrc",
+  ".prettierignore",
+  ".stylelintignore",
+  "README.md",
+  "babel.config.js",
+  "chisel.config.js",
+  "index.html",
+  "package.json",
+  "postcss.config.js",
+  "prettier.config.js",
+  "public/.keep",
+  "src/assets/fonts/.keep",
+  "src/assets/images/.keep",
+  "src/scripts/app.js",
+  "src/scripts/modules/greeting.js",
+  "src/styles/components/_btn.scss",
+  "src/styles/components/_footer.scss",
+  "src/styles/components/_header.scss",
+  "src/styles/elements/_blockquote.scss",
+  "src/styles/elements/_headings.scss",
+  "src/styles/elements/_hr.scss",
+  "src/styles/elements/_html.scss",
+  "src/styles/elements/_images.scss",
+  "src/styles/elements/_links.scss",
+  "src/styles/elements/_lists.scss",
+  "src/styles/elements/_tables.scss",
+  "src/styles/generic/_box-sizing.scss",
+  "src/styles/generic/_font-face.scss",
+  "src/styles/generic/_normalize.scss",
+  "src/styles/generic/_reset.scss",
+  "src/styles/generic/_shared.scss",
+  "src/styles/main.scss",
+  "src/styles/objects/_layout.scss",
+  "src/styles/objects/_list-bare.scss",
+  "src/styles/objects/_list-inline.scss",
+  "src/styles/objects/_media.scss",
+  "src/styles/objects/_table.scss",
+  "src/styles/objects/_wrapper.scss",
+  "src/styles/settings/_global.scss",
+  "src/styles/tools/_breakpoints.scss",
+  "src/styles/tools/_clearfix.scss",
+  "src/styles/tools/_hidden.scss",
+  "src/styles/utilities/_align.scss",
+  "src/styles/utilities/_clearfix.scss",
+  "src/styles/utilities/_hide.scss",
+  "src/styles/vendor/.keep",
+  "src/templates/components/footer.twig",
+  "src/templates/components/header.twig",
+  "src/templates/layouts/base.twig",
+  "src/templates/layouts/page.twig",
+  "stylelint.config.js",
+]
+`;
+
+exports[`Generator Static Generates all expected files and config with skipHtmlExtension 2`] = `
+"/* eslint-disable no-param-reassign */
+
+const creatorData = {
+  chiselVersion: \\"--VERSION--\\",
+  app: {
+    name: \\"FrontEnd\\",
+    author: \\"Xfive Tester\\",
+    projectType: \\"fe\\",
+    browsers: [\\"modern\\"],
+    nameSlug: \\"frontend\\",
+    hasJQuery: false,
+  },
+  fe: { additionalFeatures: [\\"skipHtmlExtension\\"] },
+};
+
+module.exports = {
+  creatorData,
+
+  staticFrontend: {
+    serveDist: false,
+    skipHtmlExtension: true,
+  },
+
+  // To use React and hot reload for React components:
+  // 1. Run \`yarn add react-hot-loader @hot-loader/react-dom\`
+  // 3. Mark your root component as hot-exported as described on
+  //    https://github.com/gaearon/react-hot-loader#getting-started (step 2)
+  // 4. Uncomment line below
+  // react: true,
+
+  plugins: [\\"chisel-plugin-code-style\\", \\"chisel-plugin-static-frontend\\"],
+};
+"
+`;

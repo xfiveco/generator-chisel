@@ -1,0 +1,53 @@
+/* ==========================================================================
+   #FONT-FACE
+   ========================================================================== */
+
+/**
+ * Add font-display: swap to font-face blocks here
+ * https://www.zachleat.com/web/comprehensive-webfonts/#font-display
+ */
+
+/* quicksand-300 - latin */
+// @font-face {
+//   font-family: Quicksand;
+//   font-style: normal;
+//   font-weight: 300;
+//   font-display: swap;
+//   src: url('../assets/fonts/quicksand-v21-latin-300.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+// }
+
+/* quicksand-regular - latin */
+@font-face {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/quicksand-v21-latin-regular.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+/* quicksand-500 - latin */
+@font-face {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/quicksand-v21-latin-500.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+/* quicksand-600 - latin */
+// @font-face {
+//   font-family: Quicksand;
+//   font-style: normal;
+//   font-weight: 600;
+//   font-display: swap;
+//   src: url('../assets/fonts/quicksand-v21-latin-600.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+// }
+
+/* quicksand-700 - latin */
+@font-face {
+  font-family: Quicksand;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/quicksand-v21-latin-700.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}

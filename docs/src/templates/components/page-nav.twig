@@ -1,0 +1,24 @@
+{% if post.parent %}
+	<ul class="c-page-nav o-list-bare margin-top-4 margin-medium-top-6">
+		{% if post.prev.title != 'Documentation' and post.prev.title != 'Home' %}
+			<li class="c-page-nav__item c-page-nav__item--prev">
+				<a href="{{ post.prev.link }}" class="c-page-nav__link">
+					<span class="c-page-nav__heading">Previous</span>
+					<span class="c-page-nav__text o-icons o-icons--arrow">
+						{{ post.prev.title }}
+					</span>
+				</a>
+			</li>
+		{% endif %}
+		{% if post.next %}
+			<li class="c-page-nav__item c-page-nav__item--next">
+				<a href="{{ post.next.link }}" class="c-page-nav__link">
+					<span class="c-page__heading">Next</span>
+					<span class="c-page-nav__text o-icons o-icons--arrow">
+						{{ post.next.title }}
+					</span>
+				</a>
+			</li>
+		{% endif %}
+	</ul>
+{% endif %}

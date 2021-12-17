@@ -1,0 +1,50 @@
+// ==========================================================================
+// #GLOBAL
+// ==========================================================================
+// The global settings file contains any project-wide variables; things that
+// need to be made available to the entire codebase.
+
+$global-radius: 3px !default;
+$global-transition: all 300ms ease-in-out !default;
+
+/* Fonts
+   ========================================================================== */
+
+$font-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
+  'Roboto', 'Helvetica Neue', 'Arial', sans-serif !default;
+
+/* Breakpoints
+   ========================================================================== */
+
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  large: 1024px,
+  xlarge: 1280px,
+  full: 1600px,
+);
+
+/* Colors
+   ========================================================================== */
+
+// Colors shouldn't be used directly but reassigned
+$color-white: #fff;
+$color-black: #000;
+$color-very-light-grey: #ccc;
+$color-light-grey: #999;
+$color-medium-grey: #666;
+$color-dark-grey: #333;
+
+// Text
+$color-bg: $color-white;
+$color-text: $color-black;
+
+// Links
+$color-link: $color-medium-grey;
+$color-hover: $color-light-grey;
+
+// Borders
+$color-border: $color-very-light-grey;
+
+// Fills
+$color-fill: $color-very-light-grey;
