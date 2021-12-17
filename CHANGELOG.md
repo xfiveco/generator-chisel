@@ -2,6 +2,22 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## v1.0.0 (2021-12-17)
+
+#### :rocket: Enhancement
+
+- `babel-preset-chisel`, `chisel-plugin-code-style`, `chisel-plugin-static-frontend`, `chisel-plugin-wordpress`, `chisel-scripts`, `chisel-shared-utils`, `eslint-config-chisel`, `generator-chisel`, `stylelint-config-chisel`
+  - [#509](https://github.com/xfiveco/generator-chisel/pull/509) Rewrite with Webpack ([@jakub300](https://github.com/jakub300))
+
+#### :memo: Documentation
+
+- `babel-preset-chisel`, `chisel-plugin-code-style`, `chisel-plugin-static-frontend`, `chisel-plugin-wordpress`, `chisel-scripts`, `chisel-shared-utils`, `eslint-config-chisel`, `generator-chisel`, `stylelint-config-chisel`
+  - [#509](https://github.com/xfiveco/generator-chisel/pull/509) Rewrite with Webpack ([@jakub300](https://github.com/jakub300))
+
+#### Committers: 1
+
+- Jakub Bogucki ([@jakub300](https://github.com/jakub300))
+
 ## v0.16.1 (03/01/2020)
 
 #### Enhancements:
