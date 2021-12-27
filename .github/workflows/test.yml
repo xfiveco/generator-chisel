@@ -13,11 +13,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: true
           cache: yarn
-      - run: yarn install --frozen-lockfile
-      - run: yarn test fe
+
+      - name: Enable colors
+        run: export FORCE_COLOR=3
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run tests
+        run: yarn test fe
