@@ -45,6 +45,15 @@ jobs:
           FORCE_COLOR: 3
         run: yarn test generator/wp
 
+      - run: ls -lah
+        if: failure()
+
+      - run: ls -lah ./.jest-projects
+        if: failure()
+
+      - run: ls -lah ./.jest-projects/**/wp
+        if: failure()
+
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
