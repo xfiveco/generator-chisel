@@ -25,10 +25,8 @@ global.chiselTestHelpers = {
       question += 1;
 
       const answers = answersGenerator(data);
-      const res = answers[question] ? answers[question]() : undefined;
-      console.log(questions, res);
 
-      return res;
+      return answers[question] ? answers[question]() : undefined;
     });
 
     return () => {
