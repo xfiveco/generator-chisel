@@ -25,7 +25,7 @@ const defaultAnswers = [
     databasePort: '3306',
     databaseName: `chisel-test-wp-dbrand${Date.now()}`,
     databaseUser: 'root',
-    databasePassword: '',
+    databasePassword: 'hello',
   },
 ];
 
