@@ -24,11 +24,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Enable colors
-        run: export FORCE_COLOR=3
-
       - name: Prepare WP CLI
         run: yarn workspace chisel-plugin-wordpress run prepare
 
       - name: Run tests
-        run: yarn test wp
+        env:
+          FORCE_COLOR: 3
+        run: yarn test fe
