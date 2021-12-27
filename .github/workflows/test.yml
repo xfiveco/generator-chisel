@@ -11,6 +11,14 @@ jobs:
         node-version: [12]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
+    services:
+      db:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: ''
+        ports:
+          - 3306
+
     steps:
       - uses: actions/checkout@v2
 
@@ -33,4 +41,4 @@ jobs:
       - name: Run tests
         env:
           FORCE_COLOR: 3
-        run: yarn test generator
+        run: yarn test generator/wp
