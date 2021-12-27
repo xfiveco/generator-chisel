@@ -94,11 +94,13 @@ global.chiselTestHelpers = {
     }
 
     const chisel = require('../packages/generator-chisel/bin/chisel');
-    await chisel([process.argv[0], binPath, ...params]);
-
-    if (unMockAnswers) unMockAnswers();
-    if (unMockRun) unMockRun();
-    if (unMockRandomBytes) unMockRandomBytes();
+    try {
+      await chisel([process.argv[0], binPath, ...params]);
+    } finally {
+      if (unMockAnswers) unMockAnswers();
+      if (unMockRun) unMockRun();
+      if (unMockRandomBytes) unMockRandomBytes();
+    }
   },
 
   async runChiselScript(args) {
