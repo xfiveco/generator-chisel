@@ -69,7 +69,7 @@ describe('Generator WordPress', () => {
     );
   });
 
-  test('Generates all expected files, downloads, configures and installs WP', async () => {
+  test.only('Generates all expected files, downloads, configures and installs WP', async () => {
     await jest.resetModules();
     await global.chiselTestHelpers.generateProjectWithAnswers(
       ['create'],

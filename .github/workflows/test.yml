@@ -38,7 +38,15 @@ jobs:
       - name: Prepare WP CLI
         run: yarn workspace chisel-plugin-wordpress run prepare
 
+      - run: php -v
+
       - name: Run tests
         env:
           FORCE_COLOR: 3
-        run: yarn test
+        run: yarn test generator/wp
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: wp-config
+          path: '**/wp-config.php'
