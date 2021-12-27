@@ -54,6 +54,12 @@ jobs:
       - run: ls -lah ./.jest-projects/**/wp
         if: failure()
 
+      - run: cat ./.jest-projects/**/wp/wp-config.php
+        if: failure()
+
+      - run: cat ./.jest-projects/**/wp/wp-config-local.php
+        if: failure()
+
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
