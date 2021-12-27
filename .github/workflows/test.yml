@@ -15,7 +15,7 @@ jobs:
       db:
         image: mysql:8
         env:
-          MYSQL_ROOT_PASSWORD: hello
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
           - 3306:3306
 
