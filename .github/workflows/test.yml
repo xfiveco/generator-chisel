@@ -41,4 +41,4 @@ jobs:
       - name: Run tests
         env:
           FORCE_COLOR: 3
-        run: yarn test
+        run: yarn test generator/wp
