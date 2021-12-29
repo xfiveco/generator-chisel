@@ -1,10 +1,8 @@
- [![Build Status](https://travis-ci.org/xfiveco/generator-chisel.svg?branch=master)](https://travis-ci.org/xfiveco/generator-chisel) [![NPM version](https://badge.fury.io/js/generator-chisel.svg)](https://badge.fury.io/js/generator-chisel) [![NPM dependiencies](https://david-dm.org/xfiveco/generator-chisel.svg)](https://david-dm.org/xfiveco/generator-chisel)
-
 # Chisel
 
-Chisel is a development framework for creating easy to maintain and fast WordPress websites and front-end templates.
+[![npm](https://img.shields.io/npm/v/generator-chisel)](https://www.npmjs.com/package/generator-chisel) [![Travis (.org)](https://img.shields.io/travis/xfiveco/generator-chisel)](https://travis-ci.org/xfiveco/generator-chisel)
 
-**New version: We are currently working on a complete rewrite of Chisel with Webpack. Check out [how to install and test the new version](https://github.com/xfiveco/generator-chisel/issues/465).**
+Chisel is a development framework for creating easy to maintain and fast WordPress websites and front-end templates.
 
 ## Learn more
 - [Introduction](https://www.getchisel.co/)
