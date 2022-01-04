@@ -1,6 +1,6 @@
 # Chisel
 
-[![npm](https://img.shields.io/npm/v/generator-chisel)](https://www.npmjs.com/package/generator-chisel) [![Travis (.org)](https://img.shields.io/travis/xfiveco/generator-chisel)](https://travis-ci.org/xfiveco/generator-chisel)
+[![npm](https://img.shields.io/npm/v/generator-chisel)](https://www.npmjs.com/package/generator-chisel)
 
 Chisel is a development framework for creating easy to maintain and fast WordPress websites and front-end templates.
 
