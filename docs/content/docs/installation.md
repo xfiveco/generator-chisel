@@ -39,6 +39,10 @@ If you are on macOS, we recommend to install necessary packages with Homebrew ac
 
 ### Known Issues
 
+#### Error: Too many positional arguments: 1
+
+If you run `chisel create` command on Windows with npm v6 installed, the project creation may end with this error when attempting to set up database. The issue can be resolved by updating npm or using Yarn.
+
 #### `mysql` or `mysqlcheck` not found
 
 Chisel is using [WP-CLI](https://wp-cli.org/) for most WP-related operations. WP-CLI is using `mysql` and `mysqlcheck` binaries, so check out if you have `mysql` and `mysqlcheck` binaries in your `$PATH` by running the following commands:
