@@ -30,6 +30,7 @@ jobs:
         with:
           # https://stackoverflow.com/q/69910916
           php-version: '7.4'
+          extensions: mysqli, curl, exif, fileinfo, mbstring, openssl, gd
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
