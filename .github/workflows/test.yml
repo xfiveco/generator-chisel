@@ -32,7 +32,8 @@ jobs:
       - name: Setup PHP with fail-fast
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          # https://stackoverflow.com/q/69910916
+          php-version: '7.4'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
