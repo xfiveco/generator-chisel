@@ -161,8 +161,8 @@ global.chiselTestHelpers = {
           .join('--PROJECT-PATH--')
           .replace(/\\+/g, '/')
           .replace(
-            /(?<=Can't connect to MySQL server on '[\d.]+' \()[^\)]+(?=\))/g,
-            '--ERROR-DETAILS-',
+            /(?<=Can't connect to MySQL server on '[\d.:]+' \()[^\)]+(?=\))/g,
+            '--ERROR-DETAILS--',
           );
       }
     });
