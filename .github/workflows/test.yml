@@ -4,12 +4,14 @@ on: [push]
 
 jobs:
   Test:
-    runs-on: ubuntu-20.04
-
     strategy:
       matrix:
+        os: [ubuntu-20.04]
         node-version: [12]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        # os: [ubuntu-20.04, windows-2019, macos-11]
+        # node-version: [12, 14] # https://nodejs.org/en/about/releases/
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
@@ -35,15 +37,27 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Prepare Links
+      - name: Prepare links
         run: yarn prepare-links
 
       - name: Prepare WP CLI
         run: yarn workspace chisel-plugin-wordpress run prepare
 
-      - run: php -v
-
       - name: Run tests
         env:
           FORCE_COLOR: 3
         run: yarn test
+
+      - name: Save coverage as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          env_vars: OS, NODE_VERSION
+        env:
+          OS: ${{ matrix.os }}
+          NODE_VERSION: ${{ matrix.node-version }}
