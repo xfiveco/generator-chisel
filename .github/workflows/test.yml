@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   Test:
-    runs-on: ubuntu-20.04
+    runs-on: windows-2019
 
     strategy:
       matrix:
@@ -17,8 +17,6 @@ jobs:
       - uses: ankane/setup-mysql@v1
         with:
           mysql-version: 8.0
-
-      - run: mysql -e 'SELECT VERSION()'
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
