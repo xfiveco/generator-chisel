@@ -11,16 +11,14 @@ jobs:
         node-version: [12]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    services:
-      db:
-        image: mysql:8
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-        ports:
-          - 3306:3306
-
     steps:
       - uses: actions/checkout@v2
+
+      - uses: ankane/setup-mysql@v1
+        with:
+          mysql-version: 8.0
+
+      - run: mysql -e 'SELECT VERSION()'
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -49,4 +47,4 @@ jobs:
       - name: Run tests
         env:
           FORCE_COLOR: 3
-        run: yarn test
+        run: yarn test generator/wp
