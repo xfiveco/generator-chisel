@@ -7,10 +7,10 @@ jobs:
     strategy:
       matrix:
         # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
-        os: [ubuntu-20.04, macos-11]
+        os: [windows-2022]
         # os: [ubuntu-20.04, windows-2019, macos-11]
         # https://nodejs.org/en/about/releases/
-        node-version: [12, 14]
+        node-version: [12]
 
     name: Test (${{ matrix.os }}, Node ${{ matrix.node-version }})
 
