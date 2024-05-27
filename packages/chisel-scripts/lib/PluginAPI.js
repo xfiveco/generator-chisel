@@ -40,6 +40,7 @@ module.exports = class PluginAPI {
     }
   }
 
+  // 2024 remove?
   registerHooks(scope, hooks = {}) {
     if (this.service.hooksFromPlugins[scope]) {
       throw new Error(`Hooks scope ${scope} is already registered`);
@@ -50,31 +51,6 @@ module.exports = class PluginAPI {
       ...this.service.hooksBase,
       ...this.service.hooksFromPlugins,
     });
-  }
-
-  /**
-   * Register a function that will receive a chainable webpack config
-   * the function is lazy and won't be called until `resolveWebpackConfig` is
-   * called
-   *
-   * @param {function} fn
-   */
-  chainWebpack(fn) {
-    this.service.webpackChainFns.push(fn);
-  }
-
-  /**
-   * Register
-   * - a webpack configuration object that will be merged into the config
-   * OR
-   * - a function that will receive the raw webpack config.
-   *   the function can either mutate the config directly or return an object
-   *   that will be merged into the config.
-   *
-   * @param {object | function} fn
-   */
-  configureWebpack(fn) {
-    this.service.webpackRawConfigFns.push(fn);
   }
 
   /**

@@ -29,7 +29,7 @@
     "test": "bash test/run-tests.sh"
   },
   "engines": {
-    "node": "^10.13.0 || ^12 || ^14"
+    "node": "^20"
   },
   "dependencies": {
     "chisel-shared-utils": "^1.0.0",
