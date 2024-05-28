@@ -49,15 +49,22 @@ module.exports = (api, options) => {
 
         answers.databaseHostPort = `${answers.databaseHost}:${answers.databasePort}`;
 
-        const { url } = options.wp;
-        const { tablePrefix } = options.creatorData.wp;
+        // TODO
+        // const { url } = options.wp;
+        // const { tablePrefix } = options.creatorData.wp;
+
+        const url = 'http://localhost';
+        const tablePrefix = 'wp_';
+
+        console.log('Creating database...');
+        console.log(api.resolve());
 
         await copy({
           from: path.join(__dirname, '../template'),
-          to: api.resolve(),
+          to: api.resolveRoot(),
           templateData: {
             ...answers,
-            documentRoot: api.resolve('wp'),
+            documentRoot: api.resolveRoot(),
             serverName: new URL(url).hostname,
             tablePrefix,
           },
@@ -103,6 +110,7 @@ module.exports = (api, options) => {
           await promptAndCreateDB();
           break;
         } catch (e) {
+          console.log(e); // TODO: remove
           console.log('');
           console.log('Trying again...');
           console.log('');

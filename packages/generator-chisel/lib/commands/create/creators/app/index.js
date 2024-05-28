@@ -10,17 +10,17 @@ const {
 const packagesVersions = require('../../packages-versions');
 
 module.exports = async (api) => {
+  let app;
+
   const runLocalCurrent = (args, opts) =>
-    runLocal(args, { ...opts, cwd: api.resolve() });
+    runLocal(args, { ...opts, cwd: api.resolve(app.themePath) });
 
   api.schedule(api.PRIORITIES.PROMPT, async () => {
-    // TODO: project exisits
-
     const userName = execa('git', ['config', 'user.name'], {
       timeout: 2000,
     }).catch(() => ({}));
 
-    const app = await api.prompt([
+    app = await api.prompt([
       {
         name: 'name',
         message: 'Please enter the project name:',
@@ -41,50 +41,19 @@ module.exports = async (api) => {
             name: 'WordPress Website',
             value: 'wp-with-fe',
           },
-          {
-            name: 'Static Website',
-            value: 'fe',
-          },
-        ],
-      },
-      {
-        type: 'checkbox',
-        name: 'browsers',
-        message: 'Which browsers are you supporting?',
-        choices: [
-          {
-            name: 'Modern (3 recent versions of popular browsers)',
-            short: 'Modern',
-            value: 'modern',
-            checked: true,
-          },
-          {
-            name: 'Edge 18 (last Edge version before engine change)',
-            short: 'Edge 18',
-            value: 'edge18',
-            checked: true,
-          },
-          {
-            name: 'Internet Explorer 11',
-            value: 'ie11',
-          },
         ],
       },
     ]);
-
-    const { projectType } = app;
 
     app.nameSlug = speakingUrl(app.name)
       .replace(/(?<=[^\d])-(\d+)/g, (_, d) => d)
       .replace(/[^a-z0-9-]/g, '-');
     // app.nameCamel = camelCase(app.nameSlug);
     app.hasJQuery = false;
+    app.themeName = `${app.nameSlug}-chisel`;
+    app.themePath = `wp-content/themes/${app.themeName}`;
 
-    if (projectType === 'wp-with-fe') {
-      await api.creator.loadCreator('wp');
-    } else if (projectType === 'fe') {
-      await api.creator.loadCreator('fe');
-    }
+    await api.creator.loadCreator('wp');
   });
 
   // For linking we need to first install packages from npm registry and then
@@ -93,11 +62,13 @@ module.exports = async (api) => {
   let installedPackages;
   api.schedule(api.PRIORITIES.COPY, async () => {
     await api.copy();
+    await api.copy({ from: 'chisel-starter-theme', to: app.themePath });
 
     const modifyDependencies = (deps) => {
       Object.keys(deps).forEach((dep) => {
         if (!packagesVersions[dep]) return;
         if (process.env.CHISEL_TEST) {
+          // TODO: probably wrong
           deps[dep] = `file:../../packages/${dep}`;
           return;
         }
@@ -105,7 +76,7 @@ module.exports = async (api) => {
       });
     };
 
-    await api.modifyFile('package.json', (body) => {
+    await api.modifyFile(`${app.themePath}/package.json`, (body) => {
       installedPackages = [
         ...Object.keys(body.dependencies),
         ...Object.keys(body.devDependencies),
@@ -127,7 +98,7 @@ module.exports = async (api) => {
       );
     }
 
-    await installDependencies({ cwd: api.resolve() });
+    await installDependencies({ cwd: api.resolve(app.themePath) });
 
     if (api.creator.cmd.link) {
       const availablePackages = Object.keys(packagesVersions);
@@ -137,15 +108,11 @@ module.exports = async (api) => {
 
       for (const pkg of installedAndAvailable) {
         console.log(`Running yarn link ${pkg}...`);
-        await run(['yarn', 'link', pkg], { cwd: api.resolve() });
+        await run(['yarn', 'link', pkg], { cwd: api.resolve(app.themePath) });
       }
 
       console.log(`Linking done`);
     }
-  });
-
-  api.schedule(api.PRIORITIES.COPY_SECOND, async () => {
-    await api.copy({ file: 'chisel.config.chisel-tpl.js' });
   });
 
   api.schedule(api.PRIORITIES.FORMAT, async () => {

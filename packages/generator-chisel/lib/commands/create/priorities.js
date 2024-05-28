@@ -23,9 +23,6 @@ module.exports = {
   WP_THEME_ACTIVATE: 1500,
   WP_PLUGINS: 1600,
 
-  COPY_SECOND: 2000,
-
-  FE_ADD_INDEX: 2600,
   FORMAT: 2500,
 
   BUILD: 3000,

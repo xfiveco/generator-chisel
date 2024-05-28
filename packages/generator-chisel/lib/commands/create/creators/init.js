@@ -79,7 +79,7 @@ module.exports = async (api) => {
   });
 
   api.schedule(api.PRIORITIES.CHECK_EXIST, async () => {
-    if (await fs.pathExists(api.resolve('chisel.config.js'))) {
+    if (await fs.pathExists(api.resolve('wp-config.php'))) {
       console.log('A Chisel project already exists in this folder.');
       console.log(
         'If you are trying to setup an existing project, check out the' +

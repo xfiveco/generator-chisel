@@ -28,7 +28,7 @@ module.exports = (api) => {
         { activate: true },
         ...selectedPlugins.map((name) => plugins.plugins[name]),
       ],
-      { cwd: api.resolve() },
+      { cwd: api.resolve(api.creator.data.app.themePath) },
     );
   });
 };

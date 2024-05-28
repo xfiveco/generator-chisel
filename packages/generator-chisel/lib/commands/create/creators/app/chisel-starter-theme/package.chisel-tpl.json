@@ -1,0 +1,28 @@
+<% /* This file will be later formatted and sorted */ %>
+<% /* Don't worry too much how it looks here */ %>
+{
+  "name": "<%= app.nameSlug %>",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "<%= app.author %>",
+  "description": "<%= app.name %>",
+  "scripts": {
+    "dev": "chisel-scripts dev",
+    "watch": "chisel-scripts dev",
+    "build": "chisel-scripts lint && chisel-scripts build",
+    "build-report": "chisel-scripts build --report",
+    "wp": "chisel-scripts wp",
+    "add-page": "chisel-scripts add-page",
+    "lint": "chisel-scripts lint"
+  },
+  "engines": {
+    "node": "^20"
+  },
+  "devDependencies": {
+    "chisel-plugin-wordpress": "*",
+    "chisel-scripts": "*"
+  },
+  "dependencies": {
+  }
+}

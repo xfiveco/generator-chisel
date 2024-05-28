@@ -49,5 +49,5 @@ npm-debug.log
 
 # Chisel
 /dev-vhost.conf
-/chisel.config.local.js
-/dist
+/wp-content/uploads
+/wp-config-local.php

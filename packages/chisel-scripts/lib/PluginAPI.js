@@ -62,4 +62,8 @@ module.exports = class PluginAPI {
   resolve(..._path) {
     return path.resolve(this.service.context, ..._path.filter(Boolean));
   }
+
+  resolveRoot(..._path) {
+    return this.resolve('../../..', ..._path);
+  }
 };
