@@ -64,8 +64,9 @@ module.exports = class Service {
 
     this.program.version(require('../package.json').version);
 
-    // TODO: remove options
-    this.projectOptions = {};
+    const packageJson = require(path.resolve(this.context, 'package.json'));
+
+    this.projectOptions = { ...packageJson.chisel };
 
     // TODO: remove all hooks
     await this.hooks.projectOptionsLoaded.promise(this.projectOptions);

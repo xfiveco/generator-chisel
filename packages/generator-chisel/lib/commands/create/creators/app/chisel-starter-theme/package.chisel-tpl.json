@@ -11,8 +11,9 @@
     "dev": "chisel-scripts dev",
     "watch": "chisel-scripts dev",
     "build": "chisel-scripts lint && chisel-scripts build",
-    "build-report": "chisel-scripts build --report",
     "wp": "chisel-scripts wp",
+    "composer": "chisel-scripts composer",
+    "wp-config": "chisel-scripts wp-config",
     "add-page": "chisel-scripts add-page",
     "lint": "chisel-scripts lint"
   },

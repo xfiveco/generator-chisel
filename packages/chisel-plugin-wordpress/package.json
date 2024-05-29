@@ -17,7 +17,7 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "prepare": "node ./fetch-wp-cli.js"
+    "prepare": "node ./fetch-packages.js"
   },
   "bugs": {
     "url": "https://github.com/xfiveco/generator-chisel/issues"

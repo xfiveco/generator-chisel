@@ -49,12 +49,7 @@ module.exports = (api, options) => {
 
         answers.databaseHostPort = `${answers.databaseHost}:${answers.databasePort}`;
 
-        // TODO
-        // const { url } = options.wp;
-        // const { tablePrefix } = options.creatorData.wp;
-
-        const url = 'http://localhost';
-        const tablePrefix = 'wp_';
+        const { url, tablePrefix } = options;
 
         console.log('Creating database...');
         console.log(api.resolve());

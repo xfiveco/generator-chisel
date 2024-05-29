@@ -119,7 +119,8 @@ module.exports = async (api) => {
     if (api.creator.cmd.skipFormatAndBuild) return;
 
     console.log('Formatting code...');
-    await runLocalCurrent(['chisel-scripts', 'lint'], { silent: true });
+    console.log('TODO');
+    // await runLocalCurrent(['chisel-scripts', 'lint'], { silent: true });
   });
 
   api.schedule(api.PRIORITIES.BUILD, async () => {

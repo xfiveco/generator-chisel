@@ -1,9 +1,9 @@
 module.exports = (api) => {
   api.registerCommand(
-    'wp',
+    'composer',
     (command) =>
       command
-        .description('run WP-CLI command')
+        .description('run Composer command')
         .allowUnknownOption()
         .helpOption('--chisel-help'),
     async () => {
@@ -11,14 +11,14 @@ module.exports = (api) => {
       const path = require('path');
 
       const args = process.argv.slice(3);
-      const wpCliPath = path.resolve(__dirname, '..', 'wp-cli.phar');
+      const composerPath = path.resolve(__dirname, '..', 'composer.phar');
 
       try {
         // TODO: use: reject: false
         // TODO: use chisel-shared-utils
-        const wp = await execa('php', [wpCliPath, '--color', ...args], {
+        const wp = await execa('php', [composerPath, '--ansi', ...args], {
           stdio: 'inherit',
-          cwd: api.resolveRoot(),
+          cwd: api.resolve(),
         });
         process.exit(wp.exitCode);
       } catch (e) {

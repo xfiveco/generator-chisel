@@ -82,6 +82,16 @@ module.exports = (api) => {
           crypto.randomBytes(30).toString('base64'),
         ),
     );
+
+    await api.modifyFile(
+      `${api.creator.data.app.themePath}/package.json`,
+      (body) => {
+        body.chisel = {
+          url: api.creator.data.wp.url,
+          tablePrefix,
+        };
+      },
+    );
   });
 
   api.schedule(api.PRIORITIES.WP_DOWNLOAD, async () => {
@@ -125,13 +135,10 @@ module.exports = (api) => {
   api.schedule(api.PRIORITIES.WP_INSTALL_PLUGINS, async () => {
     if (api.creator.cmd.skipWpCommands) return;
 
-    await wp([
-      'plugin',
-      'install',
-      'timber-library',
-      'disable-emojis',
-      { activate: true },
-    ]);
+    await runLocal(['chisel-scripts', 'composer', 'install'], {
+      cwd: api.resolve(themePath),
+    });
+    await wp(['plugin', 'install', 'disable-emojis', { activate: true }]);
   });
 
   api.schedule(api.PRIORITIES.WP_THEME_ACTIVATE, async () => {
