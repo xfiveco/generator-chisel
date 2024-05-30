@@ -1,5 +1,4 @@
 const path = require('path');
-const tapable = require('tapable');
 
 // Based on https://github.com/vuejs/vue-cli/blob/80b93951b1710733a66765cbd535b12b7bb59279/packages/%40vue/cli-service/lib/PluginAPI.js
 
@@ -8,12 +7,6 @@ module.exports = class PluginAPI {
     this.id = id;
     /** @type import('./Service') */
     this.service = service;
-
-    this.tapable = tapable;
-  }
-
-  get hooks() {
-    return this.service.hooks;
   }
 
   /**
@@ -38,19 +31,6 @@ module.exports = class PluginAPI {
     if (opts) {
       opts(command);
     }
-  }
-
-  // 2024 remove?
-  registerHooks(scope, hooks = {}) {
-    if (this.service.hooksFromPlugins[scope]) {
-      throw new Error(`Hooks scope ${scope} is already registered`);
-    }
-
-    this.service.hooksFromPlugins[scope] = Object.freeze({ ...hooks });
-    this.service.hooks = Object.freeze({
-      ...this.service.hooksBase,
-      ...this.service.hooksFromPlugins,
-    });
   }
 
   /**

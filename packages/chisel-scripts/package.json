@@ -31,10 +31,7 @@
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
     "inquirer": "^7.1.0",
-    "lodash": "^4.17.15",
-    "open": "^7.0.4",
-    "source-map-explorer": "^2.4.2",
-    "tapable": "^1.1.3"
+    "lodash": "^4.17.15"
   },
   "peerDependencies": {
     "@wordpress/scripts": "^27.9.0"
