@@ -2,9 +2,7 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "docs",
-    "test-projects/*"
+    "packages/*"
   ],
   "scripts": {
     "lint": "eslint --no-eslintrc -c .eslintrc.js **/*.js",

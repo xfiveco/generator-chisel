@@ -36,5 +36,9 @@
   },
   "lint-staged": {
     "*.{js,scss}": "chisel-scripts lint"
+  },
+  "resolutions": {
+    "postcss-normalize/sanitize.css": "11.0.1",
+    "chisel-scripts/sass": "1.32.13"
   }
 }
