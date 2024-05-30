@@ -25,12 +25,6 @@
     "webpack",
     "babel"
   ],
-  "scripts": {
-    "test": "bash test/run-tests.sh"
-  },
-  "engines": {
-    "node": "^20"
-  },
   "dependencies": {
     "chisel-shared-utils": "^1.0.0",
     "commander": "^5.1.0",

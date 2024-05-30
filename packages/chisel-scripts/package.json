@@ -24,9 +24,6 @@
   "bugs": {
     "url": "https://github.com/xfiveco/generator-chisel/issues"
   },
-  "engines": {
-    "node": ">=10"
-  },
   "dependencies": {
     "chisel-shared-utils": "^1.0.0",
     "commander": "^5.1.0",

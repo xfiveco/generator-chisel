@@ -26,9 +26,6 @@
     "chisel-scripts": "^1.0.0-alpha.7",
     "postcss-normalize": "^9.0.0"
   },
-  "engines": {
-    "node": "^20"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
