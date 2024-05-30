@@ -54,5 +54,4 @@ npm-debug.log
 
 # Chisel
 /test-projects
-/.jest-projects
 /.changelog
