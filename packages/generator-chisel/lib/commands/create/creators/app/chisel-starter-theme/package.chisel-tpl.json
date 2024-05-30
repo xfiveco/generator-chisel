@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^27.9.0",
-    "chisel-plugin-wordpress": "*",
     "chisel-scripts": "*"
   },
   "dependencies": {

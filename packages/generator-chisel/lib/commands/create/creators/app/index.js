@@ -32,17 +32,6 @@ module.exports = async (api) => {
         message: 'Please enter author name:',
         default: async () => (await userName).stdout,
       },
-      {
-        type: 'list',
-        name: 'projectType',
-        message: 'Please select project type:',
-        choices: [
-          {
-            name: 'WordPress Website',
-            value: 'wp-with-fe',
-          },
-        ],
-      },
     ]);
 
     app.nameSlug = speakingUrl(app.name)

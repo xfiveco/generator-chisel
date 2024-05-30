@@ -1,5 +1,5 @@
 const fs = require('fs');
-const execa = require('execa');
+const { execa } = require('chisel-shared-utils');
 
 const get = (url) =>
   fetch(url).then((res) => {

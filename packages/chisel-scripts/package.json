@@ -18,7 +18,8 @@
   "homepage": "https://www.getchisel.co/",
   "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "prepare": "node ./fetch-packages.js"
   },
   "bugs": {
     "url": "https://github.com/xfiveco/generator-chisel/issues"
@@ -32,6 +33,7 @@
     "fast-glob": "^3.3.2",
     "fs-extra": "^9.0.1",
     "globby": "^11.0.1",
+    "inquirer": "^7.1.0",
     "lodash": "^4.17.15",
     "open": "^7.0.4",
     "source-map-explorer": "^2.4.2",

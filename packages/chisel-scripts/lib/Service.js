@@ -35,11 +35,13 @@ module.exports = class Service {
     });
 
     const builtInPlugins = [
-      // './commands/serve',
-      './commands/build',
-      './commands/start',
-      // './config/prod',
-    ];
+      'build',
+      'start',
+      'composer',
+      'wp',
+      'wp-config',
+      'add-page',
+    ].map((id) => `./commands/${id}`);
 
     const plugins = [];
 
@@ -75,12 +77,6 @@ module.exports = class Service {
     this.initializeProjectOptionsHooks();
 
     await this.hooks.configHooksLoaded.promise(this);
-
-    // TODO: merge into scripts
-    this.plugins.push({
-      id: 'chisel-plugin-wordpress',
-      apply: require('chisel-plugin-wordpress'),
-    });
 
     await this.initializePlugins();
   }
