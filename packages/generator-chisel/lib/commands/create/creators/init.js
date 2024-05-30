@@ -24,7 +24,6 @@ module.exports = async (api) => {
   }
 
   api.schedule(api.PRIORITIES.HELLO, async () => {
-    if (process.env.CHISEL_TEST) return;
     console.log();
     console.log(chalk.yellow('*'.repeat(47)));
     console.log();
@@ -38,8 +37,6 @@ module.exports = async (api) => {
   });
 
   api.schedule(api.PRIORITIES.CHECK_UPDATE, async () => {
-    if (process.env.CHISEL_TEST) return;
-
     const timeout = new Promise((_, reject) =>
       setTimeout(() => reject(new Error('timeout')), 5000),
     );

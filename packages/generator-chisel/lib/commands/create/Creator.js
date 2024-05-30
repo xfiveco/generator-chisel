@@ -35,7 +35,6 @@ module.exports = class Creator {
   async run() {
     while (this.queue.length) {
       const item = this.queue.pop();
-      console.log(`Running action with priority ${item.priority}`);
       await item.action();
     }
   }

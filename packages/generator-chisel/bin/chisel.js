@@ -2,21 +2,11 @@
 
 const { Command } = require('commander');
 
-const handlePromise = (promise) =>
-  promise.catch((err) => {
-    if (typeof jest === 'undefined') {
-      console.error(err);
-      process.exit(1);
-    }
-
-    return Promise.reject(err);
-  });
-
 const createProgram = () => {
   const program = new Command();
 
   program
-    .command('create')
+    .command('create', { isDefault: true })
     .description('create a new project powered by Chisel')
     .option('--skip-dependencies-install')
     .option('--skip-wp-download')
@@ -24,7 +14,6 @@ const createProgram = () => {
     .option('--skip-wp-install')
     .option('--skip-wp-commands')
     .option('--skip-wp-plugins')
-    .option('--skip-fe-add-index')
     .option('--skip-format-and-build')
     .option(
       '--link',
@@ -33,23 +22,14 @@ const createProgram = () => {
     .action((...args) => {
       const cmd = args.slice(-1)[0];
       args = args.slice(0, -1);
-      return handlePromise(require('../lib/commands/create')({ args, cmd }));
+      return require('../lib/commands/create')({ args, cmd });
     });
 
   return program;
 };
 
 (async () => {
-  if (typeof jest !== 'undefined') {
-    module.exports = (argv) => createProgram().parseAsync(argv);
-    return;
-  }
-
   const program = createProgram();
 
   program.parse(process.argv);
-
-  if (process.argv.length <= 2) {
-    program.outputHelp();
-  }
 })();
