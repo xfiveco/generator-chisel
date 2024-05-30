@@ -8,22 +8,21 @@
   "author": "<%= app.author %>",
   "description": "<%= app.name %>",
   "scripts": {
-    "dev": "chisel-scripts dev",
-    "watch": "chisel-scripts dev",
-    "build": "chisel-scripts lint && chisel-scripts build",
+    "start": "chisel-scripts start",
+    "build": "chisel-scripts build",
     "wp": "chisel-scripts wp",
     "composer": "chisel-scripts composer",
     "wp-config": "chisel-scripts wp-config",
-    "add-page": "chisel-scripts add-page",
-    "lint": "chisel-scripts lint"
-  },
-  "engines": {
-    "node": "^20"
+    "add-page": "chisel-scripts add-page"
   },
   "devDependencies": {
+    "@wordpress/scripts": "^27.9.0",
     "chisel-plugin-wordpress": "*",
     "chisel-scripts": "*"
   },
   "dependencies": {
+  },
+  "engines": {
+    "node": "^20"
   }
 }

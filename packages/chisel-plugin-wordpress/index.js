@@ -7,7 +7,7 @@ module.exports = (api, options) => {
     browserSyncConfig: new AsyncSeriesHook(['config']),
   });
 
-  ['composer', 'dev', 'wp', 'wp-config', 'add-page'].forEach((command) => {
+  ['composer', 'wp', 'wp-config', 'add-page'].forEach((command) => {
     require(`./commands/${command}`)(api, options);
   });
 };

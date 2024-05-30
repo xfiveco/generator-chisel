@@ -37,6 +37,7 @@ module.exports = class Service {
     const builtInPlugins = [
       // './commands/serve',
       './commands/build',
+      './commands/start',
       // './config/prod',
     ];
 

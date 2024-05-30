@@ -41,3 +41,24 @@ function runLocal(args, options = {}) {
 }
 
 module.exports.runLocal = runLocal;
+
+async function runWithExitBase(args, options = {}, helper) {
+  const { exitCode } = await helper(args, {
+    interactive: true,
+    ...options,
+    reject: false,
+  });
+  process.exit(exitCode);
+}
+
+function runWithExit(args, options) {
+  return runWithExitBase(args, options, run);
+}
+
+module.exports.runWithExit = runWithExit;
+
+function runLocalWithExit(args, options) {
+  return runWithExitBase(args, options, runLocal);
+}
+
+module.exports.runLocalWithExit = runLocalWithExit;

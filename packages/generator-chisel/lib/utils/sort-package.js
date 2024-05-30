@@ -28,15 +28,8 @@ function sortObject(obj, keyOrder, dontSortByUnicode) {
 module.exports = function sortPackage(pkg) {
   pkg.dependencies = sortObject(pkg.dependencies);
   pkg.devDependencies = sortObject(pkg.devDependencies);
-  pkg.scripts = sortObject(pkg.scripts, [
-    'dev',
-    'watch',
-    'build',
-    'build-report',
-    'lint',
-    'add-page',
-    'wp',
-  ]);
+  // pkg.scripts = sortObject(pkg.scripts, [
+  // ]);
   pkg = sortObject(pkg, [
     'name',
     'version',
@@ -51,6 +44,7 @@ module.exports = function sortPackage(pkg) {
     'jsDelivr',
     'unpkg',
     'files',
+    'chisel',
     'dependencies',
     'devDependencies',
     'peerDependencies',

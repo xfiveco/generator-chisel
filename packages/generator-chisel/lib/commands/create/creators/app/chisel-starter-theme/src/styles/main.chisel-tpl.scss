@@ -3,11 +3,17 @@
   Author: <%= app.author %>
  */
 
-@import 'settings/*';
-@import 'tools/*';
-@import 'generic/*';
-@import 'elements/*';
-@import 'vendor/*';
-@import 'objects/*';
-@import 'components/*';
-@import 'utilities/*';
+// @import 'settings/*';
+// @import 'tools/*';
+// @import 'generic/*';
+// @import 'elements/*';
+// @import 'vendor/*';
+// @import 'objects/*';
+// @import 'components/*';
+// @import 'utilities/*';
+
+$test1: #f00;
+
+.hello {
+  color: $test1;
+}
