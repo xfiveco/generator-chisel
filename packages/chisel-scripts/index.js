@@ -37,6 +37,13 @@ function adjustWebpackConfig(baseConfig, directory) {
   const updatedConfig = {
     ...baseConfig,
     entry,
+    resolve: {
+      ...baseConfig.resolve,
+      alias: {
+        ...baseConfig.resolve.alias,
+        '~design$': pathMod.join(src, 'design'),
+      },
+    },
     devServer: baseConfig.devServer && {
       ...baseConfig.devServer,
       allowedHosts: [new URL(packageJson.chisel.url).host],
