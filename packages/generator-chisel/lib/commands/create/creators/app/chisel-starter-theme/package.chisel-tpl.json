@@ -10,10 +10,11 @@
   "scripts": {
     "start": "chisel-scripts start",
     "build": "chisel-scripts build",
+    "add-page": "chisel-scripts add-page",
+    "create-block": "chisel-scripts create-block",
     "wp": "chisel-scripts wp",
     "composer": "chisel-scripts composer",
-    "wp-config": "chisel-scripts wp-config",
-    "add-page": "chisel-scripts add-page"
+    "wp-config": "chisel-scripts wp-config"
   },
   "devDependencies": {
     "@wordpress/scripts": "^27.9.0",

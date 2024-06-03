@@ -14,30 +14,40 @@ module.exports = class Service {
     this.program = new Command('chisel-scripts');
     this.programCommands = {};
     this.context = context || process.env.CHISEL_CONTEXT || process.cwd();
-    this.plugins = this.loadPlugins();
+    this.plugins = [];
+    this.projectOptions = {};
   }
 
   // eslint-disable-next-line class-methods-use-this
-  loadPlugins() {
+  async loadPlugins() {
     const idToPlugin = (id) => ({
       id: id.replace(/^.\//, 'built-in:'),
       apply: require(id),
     });
 
     const builtInPlugins = [
-      'build',
-      'start',
+      'wp-scripts.mjs', // start, build
       'composer',
       'wp',
       'wp-config',
       'add-page',
+      'create-block',
     ].map((id) => `./commands/${id}`);
 
     const plugins = [];
 
-    plugins.push(...builtInPlugins.map(idToPlugin));
+    for (const id of builtInPlugins) {
+      if (id.endsWith('.mjs')) {
+        plugins.push({
+          id: id.replace(/^.\//, 'built-in:'),
+          apply: (await import(id)).default,
+        });
+      } else {
+        plugins.push(idToPlugin(id));
+      }
+    }
 
-    return plugins;
+    this.plugins = plugins;
   }
 
   async initializePlugins() {
@@ -51,6 +61,8 @@ module.exports = class Service {
   async init() {
     if (this.initialized) return;
     this.initialized = true;
+
+    await this.loadPlugins();
 
     this.program.version(require('../package.json').version);
 
