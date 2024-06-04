@@ -77,6 +77,20 @@ module.exports = async (api) => {
 
     await installDependencies({ cwd: api.resolve(app.themePath) });
 
+    // await run(['xfive-coding-standards', '--skip-staged-check'], {
+    //   cwd: api.resolve(app.themePath),
+    // });
+
+    const oldVal = process.env.npm_config_force;
+    process.env.npm_config_force = 'true';
+
+    await run(
+      ['npx', '--yes', '@xfive/coding-standards@latest', '--skip-staged-check'],
+      { cwd: api.resolve(app.themePath) },
+    );
+
+    process.env.npm_config_force = oldVal;
+
     if (api.creator.cmd.link) {
       const availablePackages = Object.keys(packagesVersions);
       const installedAndAvailable = installedPackages.filter((pkg) =>
@@ -87,19 +101,6 @@ module.exports = async (api) => {
         console.log(`Running npm link ${pkg}...`);
         await run(['npm', 'link', pkg], { cwd: api.resolve(app.themePath) });
       }
-
-      // await run(['xfive-coding-standards', '--skip-staged-check'], {
-      //   cwd: api.resolve(app.themePath),
-      // });
-      await run(
-        [
-          'npx',
-          '--yes',
-          '@xfive/coding-standards@latest',
-          '--skip-staged-check',
-        ],
-        { cwd: api.resolve(app.themePath) },
-      );
     }
   });
 
