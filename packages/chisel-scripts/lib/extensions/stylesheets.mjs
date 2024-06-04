@@ -10,9 +10,7 @@ export const build = async (api) => {
   const files = (await fastGlob(convertPathToPattern(pattern))).sort();
 
   const groups = files.sort().reduce((acc, file) => {
-    const group = fastGlob
-      .convertPathToPattern(relative(stylesDir, file))
-      .split('/')[0];
+    const group = convertPathToPattern(relative(stylesDir, file)).split('/')[0];
     acc[group] = acc[group] || [];
     acc[group].push(file);
     return acc;

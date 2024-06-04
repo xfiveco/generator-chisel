@@ -84,21 +84,33 @@ module.exports = async (api) => {
       );
 
       for (const pkg of installedAndAvailable) {
-        console.log(`Running yarn link ${pkg}...`);
-        await run(['yarn', 'link', pkg], { cwd: api.resolve(app.themePath) });
+        console.log(`Running npm link ${pkg}...`);
+        await run(['npm', 'link', pkg], { cwd: api.resolve(app.themePath) });
       }
 
-      console.log(`Linking done`);
+      // await run(['xfive-coding-standards', '--skip-staged-check'], {
+      //   cwd: api.resolve(app.themePath),
+      // });
+      await run(
+        [
+          'npx',
+          '--yes',
+          '@xfive/coding-standards@latest',
+          '--skip-staged-check',
+        ],
+        { cwd: api.resolve(app.themePath) },
+      );
     }
   });
 
-  api.schedule(api.PRIORITIES.FORMAT, async () => {
-    if (api.creator.cmd.skipFormatAndBuild) return;
+  // formatting done during coding standards installation but we may do extra for php and twig
+  // api.schedule(api.PRIORITIES.FORMAT, async () => {
+  //   if (api.creator.cmd.skipFormatAndBuild) return;
 
-    console.log('Formatting code...');
-    console.log('TODO');
-    // await runLocalCurrent(['chisel-scripts', 'lint'], { silent: true });
-  });
+  //   // console.log('Formatting code...');
+  //   // console.log('TODO');
+  //   // await runLocalCurrent(['chisel-scripts', 'lint'], { silent: true });
+  // });
 
   api.schedule(api.PRIORITIES.BUILD, async () => {
     if (api.creator.cmd.skipFormatAndBuild) return;

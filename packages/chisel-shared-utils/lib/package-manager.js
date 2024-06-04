@@ -1,5 +1,6 @@
 let $hasYarn;
 function hasYarn() {
+  return false; // v2 is always using npm
   if ($hasYarn !== undefined) return $hasYarn;
 
   const commandExists = require('command-exists');

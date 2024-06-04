@@ -10,6 +10,6 @@ const dirs = globby
 
 dirs.forEach((dir) => {
   console.log(`Running yarn link in ${dir}`);
-  execa.sync('yarn', ['link'], { cwd: dir, stdio: 'inherit' });
+  execa.sync('npm', ['link'], { cwd: dir, stdio: 'inherit' });
   console.log();
 });
