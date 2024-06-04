@@ -6,8 +6,8 @@ const { convertPathToPattern } = fastGlob;
 
 export const build = async (api) => {
   const stylesDir = api.resolve('src/styles');
-  const pattern = join(stylesDir, '*/**/*.scss');
-  const files = (await fastGlob(convertPathToPattern(pattern))).sort();
+  const pattern = convertPathToPattern(stylesDir) + '/*/**/*.scss';
+  const files = (await fastGlob(pattern)).sort();
 
   const groups = files.sort().reduce((acc, file) => {
     const group = convertPathToPattern(relative(stylesDir, file)).split('/')[0];
@@ -40,7 +40,7 @@ export const start = async (api) => {
   const { default: chokidar } = await import('chokidar');
 
   const stylesDir = api.resolve('src/styles');
-  const pattern = join(stylesDir, '*/**/*.scss');
+  const pattern = convertPathToPattern(stylesDir) + '/*/**/*.scss';
 
   const watcher = chokidar.watch(convertPathToPattern(pattern), {
     persistent: false,
