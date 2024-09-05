@@ -1,0 +1,10 @@
+@use '~design' as *;
+
+.o-block {
+  // margin: 1rem auto;
+
+  &--heading,
+  &--paragraph {
+    margin: 0 0 get-margin('small');
+  }
+}

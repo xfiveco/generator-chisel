@@ -1,0 +1,122 @@
+@use '~design' as *;
+@use 'node_modules/swiper/swiper-bundle';
+
+.swiper {
+  opacity: 0;
+  transition: get-transition('slow');
+}
+
+.swiper-initialized {
+  opacity: 1;
+}
+
+.swiper-slide {
+  height: auto;
+
+  img {
+    @include object-fit-cover;
+  }
+}
+
+.swiper-navigation-wrapper {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  transform: translateY(-50%);
+
+  .swiper-button {
+    width: px-rem(48);
+    height: px-rem(48);
+    appearance: none;
+    background-color: rgba(255, 255, 255, 30%);
+    border: none;
+    opacity: 1;
+    transition: get-transition('normal');
+
+    &::after {
+      font-size: px-rem(24);
+      color: get-color('primary');
+      transition: get-transition('normal');
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 100%);
+
+      &::after {
+        color: get-color('secondary');
+      }
+    }
+  }
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+}
+
+.swiper-pagination-wrapper {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: get-padding('tiny');
+  background-color: rgba(255, 255, 255, 30%);
+  border-radius: get-border-radius('tiny');
+  transition: get-transition('normal');
+  transform: translateX(-50%);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 100%);
+  }
+}
+
+.swiper-pagination.swiper-pagination-horizontal {
+  position: relative;
+  inset: auto;
+  transform: none;
+}
+
+.swiper-pagination-bullet {
+  width: px-rem(10);
+  height: px-rem(10);
+  background-color: get-color('primary');
+  opacity: 0.3;
+}
+
+.swiper-pagination-bullet-active-main,
+.swiper-pagination:not(.swiper-pagination-dots-dynamic) .swiper-pagination-bullet-active {
+  background-color: get-color('secondary');
+  opacity: 1;
+}
+
+.swiper-thumbs {
+  padding: get-padding('small') 0;
+
+  .swiper-slide {
+    cursor: pointer;
+    background-color: get-color('white');
+
+    img {
+      @include object-fit-cover;
+
+      border: 2px solid get-color('primary');
+      opacity: 0.7;
+      transition: get-transition('normal');
+    }
+
+    &.swiper-slide-thumb-active img {
+      border: 2px solid get-color('secondary');
+      opacity: 1;
+    }
+  }
+}

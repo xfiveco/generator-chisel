@@ -1,0 +1,6 @@
+@use '~design' as *;
+
+a {
+  transition: get-transition('normal');
+  cursor: pointer;
+}

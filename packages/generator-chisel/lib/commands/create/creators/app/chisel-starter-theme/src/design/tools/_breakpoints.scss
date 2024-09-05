@@ -1,71 +1,70 @@
+@use 'sass:meta';
+@use 'sass:map';
 @use '../settings';
 
 $_breakpoints: settings.$breakpoints;
 
-@function _bp-val($name) {
-  @if type-of($name) == 'number' {
+@function bp-val($name) {
+  @if meta.type-of($name) == 'number' {
     @return $name;
   }
 
-  $val: map-get($_breakpoints, $name);
+  $val: map.get($_breakpoints, $name);
 
-  @if $val == null {
+  @if not $val {
     @error 'Breakpoint #{$name} not found';
   }
 
   @return $val;
 }
 
-@function _bp-val-next($name) {
-  $breakpoint-names: map_keys($_breakpoints);
-  $n: index($breakpoint-names, $name);
+@function bp-val-next($name) {
+  $breakpoint-names: map.keys($_breakpoints);
+  $n: list.index($breakpoint-names, $name);
 
-  @if $n >= length($breakpoint-names) {
+  @if $n >= list.length($breakpoint-names) {
     @error 'Next breakpoint after #{$name} not found';
   }
 
-  $next-key: nth($breakpoint-names, $n + 1);
-  @return map-get($_breakpoints, $next-key);
+  $next-key: list.nth($breakpoint-names, $n + 1);
+
+  @return map.get($_breakpoints, $next-key);
 }
 
-@mixin above($name) {
-  // TODO: handle zero breakpoint
-
-  $val: _bp-val($name);
+@mixin bp($name) {
+  $val: bp-val($name);
 
   @media (min-width: $val) {
     @content;
   }
 }
 
-@mixin below($name) {
-  $val: _bp-val($name);
+@mixin bp-down($name) {
+  $val: bp-val($name);
 
-  @media (max-width: $val - 0.02) {
+  @media (max-width: ($val - 0.02)) {
     @content;
   }
 }
 
-@mixin only($name) {
-  // TODO handle last breakpoint
-
-  @if type-of($name) == 'number' {
+@mixin bp-only($name) {
+  @if meta.type-of($name) == 'number' {
     @error '#{$name} should be breakpoint name';
   }
 
-  $min: _bp-val($name);
-  $max: _bp-val-next($name);
+  $min: bp-val($name);
+  $max: bp-val-next($name);
 
-  @media (min-width: $min) and (max-width: $max - 0.02) {
+  @media (min-width: $min) and (max-width: ($max - 0.02)) {
     @content;
   }
 }
 
-@mixin between($name1, $name2) {
-  $min: _bp-val($name1);
-  $max: _bp-val($name2);
+@mixin bp-between($name1, $name2) {
+  $min: bp-val($name1);
+  $max: bp-val($name2);
 
-  @media (min-width: $min) and (max-width: $max - 0.02) {
+  @media (min-width: $min) and (max-width: ($max - 0.02)) {
     @content;
   }
 }

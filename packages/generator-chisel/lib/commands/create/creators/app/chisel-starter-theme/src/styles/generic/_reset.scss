@@ -1,50 +1,83 @@
-/* ==========================================================================
-   #RESET
-   ========================================================================== */
+/* --------------------------------------
+#RESET
+-------------------------------------- */
 
-/**
- * A very simple reset that sits on top of Normalize.css.
- */
+/*
+* 1. Use a more-intuitive box-sizing model. By default inherits border-box from html element.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
-body,
-h1, h2, h3, h4, h5, h6,
-blockquote, p, pre,
-dl, dd, ol, ul,
-figure,
-hr,
-fieldset, legend {
+/*
+* 2. Remove default margin
+*/
+* {
   margin: 0;
-  padding: 0;
 }
 
-
-/**
- * Remove trailing margins from nested lists.
- */
-
-li > {
-  ol,
-  ul {
-    margin-bottom: 0;
-  }
+/*
+* Typographic tweaks!
+* 3. Add accessible line-height
+* 4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+  isolation: isolate;
 }
 
+/*
+* 5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*
+* 6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/*
+* 7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
 
 /**
- * Remove default table spacing.
- */
-
+* 8. Remove default table spacing.
+*/
 table {
-  border-collapse: collapse;
   border-spacing: 0;
+  border-collapse: collapse;
 }
 
-
 /**
- * 1. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;`
- *    on fieldsets.
- */
-
+* 9. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;` on fieldsets.
+*/
 fieldset {
   min-width: 0; /* [1] */
   border: 0;

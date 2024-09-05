@@ -1,0 +1,804 @@
+/*!
+ * Hamburgers
+ * @description Tasty CSS-animated hamburgers
+ * @author Jonathan Suh @jonsuh
+ * @site https://jonsuh.com/hamburgers
+ * @link https://github.com/jonsuh/hamburgers
+ */
+
+@use '~design' as *;
+
+// Settings
+// ==================================================
+$hamburger-padding-x: get-padding('normal');
+$hamburger-padding-y: get-padding('normal');
+$hamburger-layer-width: px-rem(36);
+$hamburger-layer-height: px-rem(4);
+$hamburger-layer-spacing: px-rem(6);
+$hamburger-layer-color: get-color('primary');
+$hamburger-layer-border-radius: get-border-radius('little');
+$hamburger-hover-opacity: 0.7;
+$hamburger-active-layer-color: $hamburger-layer-color;
+$hamburger-active-hover-opacity: $hamburger-hover-opacity;
+
+// ==================================================
+// Hamburger
+// ==================================================
+
+.c-main-nav__toggle {
+  right: px-rem(16);
+  display: inline-block;
+  display: block;
+  padding: $hamburger-padding-y $hamburger-padding-x;
+  margin: 0;
+  overflow: visible;
+
+  // Normalize (<button>)
+  font: inherit;
+  line-height: 1;
+  color: inherit;
+  text-transform: none;
+  appearance: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  transition-timing-function: linear;
+  transition-duration: 0.15s;
+  transition-property: opacity;
+
+  @include bp(large) {
+    display: none;
+  }
+
+  &:hover {
+    opacity: $hamburger-hover-opacity;
+  }
+
+  &.is-active {
+    z-index: 999;
+
+    &:hover {
+      opacity: $hamburger-active-hover-opacity;
+    }
+
+    .c-main-nav__toggle-inner,
+    .c-main-nav__toggle-inner::before,
+    .c-main-nav__toggle-inner::after {
+      background-color: $hamburger-active-layer-color;
+    }
+  }
+}
+
+.c-main-nav__toggle-box {
+  position: relative;
+  display: inline-block;
+  width: $hamburger-layer-width;
+  height: $hamburger-layer-height * 3 + $hamburger-layer-spacing * 2;
+}
+
+.c-main-nav__toggle-inner {
+  top: 50%;
+  display: block;
+  margin-top: calc($hamburger-layer-height / -2);
+
+  &,
+  &::before,
+  &::after {
+    position: absolute;
+    width: $hamburger-layer-width;
+    height: $hamburger-layer-height;
+    background-color: $hamburger-layer-color;
+    border-radius: $hamburger-layer-border-radius;
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+    transition-property: transform;
+  }
+
+  &::before,
+  &::after {
+    display: block;
+    content: '';
+  }
+
+  &::before {
+    top: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+
+  &::after {
+    bottom: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+}
+
+// ==================================================
+// squeeze effect
+// ==================================================
+.c-main-nav__toggle--squeeze {
+  .c-main-nav__toggle-inner {
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 0.075s;
+
+    &::before {
+      transition:
+        top 0.075s 0.12s ease,
+        opacity 0.075s ease;
+    }
+
+    &::after {
+      transition:
+        bottom 0.075s 0.12s ease,
+        transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-delay: 0.12s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: rotate(45deg);
+
+      &::before {
+        top: 0;
+        opacity: 0;
+        transition:
+          top 0.075s ease,
+          opacity 0.075s 0.12s ease;
+      }
+
+      &::after {
+        bottom: 0;
+        transition:
+          bottom 0.075s ease,
+          transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// slider effect
+// ==================================================
+.c-main-nav__toggle--slider,
+.c-main-nav__toggle--slider-r {
+  .c-main-nav__toggle-inner {
+    top: calc($hamburger-layer-height / 2);
+
+    &::before {
+      top: $hamburger-layer-height + $hamburger-layer-spacing;
+      transition-timing-function: ease;
+      transition-duration: 0.15s;
+      transition-property: transform, opacity;
+    }
+
+    &::after {
+      top: ($hamburger-layer-height * 2) + ($hamburger-layer-spacing * 2);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      $y-offset: $hamburger-layer-spacing + $hamburger-layer-height;
+
+      transform: translate3d(0, $y-offset, 0) rotate(45deg);
+
+      &::before {
+        opacity: 0;
+        transform: rotate(-45deg)
+          translate3d(calc($hamburger-layer-width / -7), $hamburger-layer-spacing * -1, 0);
+      }
+
+      &::after {
+        transform: translate3d(0, $y-offset * -2, 0) rotate(-90deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--slider-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      $y-offset: $hamburger-layer-spacing + $hamburger-layer-height;
+
+      transform: translate3d(0, $y-offset, 0) rotate(-45deg);
+
+      &::before {
+        transform: rotate(45deg)
+          translate3d(calc($hamburger-layer-width / 7), $hamburger-layer-spacing * -1, 0);
+      }
+
+      &::after {
+        transform: translate3d(0, $y-offset * -2, 0) rotate(90deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// spin effect
+// ==================================================
+.c-main-nav__toggle--spin,
+.c-main-nav__toggle--spin-r {
+  .c-main-nav__toggle-inner {
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 0.22s;
+
+    &::before {
+      transition:
+        top 0.1s 0.25s ease-in,
+        opacity 0.1s ease-in;
+    }
+
+    &::after {
+      transition:
+        bottom 0.1s 0.25s ease-in,
+        transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-delay: 0.12s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: rotate(225deg);
+
+      &::before {
+        top: 0;
+        opacity: 0;
+        transition:
+          top 0.1s ease-out,
+          opacity 0.1s 0.12s ease-out;
+      }
+
+      &::after {
+        bottom: 0;
+        transition:
+          bottom 0.1s ease-out,
+          transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--spin-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotate(-225deg);
+
+      &::after {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// elastic effect
+// ==================================================
+.c-main-nav__toggle--elastic,
+.c-main-nav__toggle--elastic-r {
+  .c-main-nav__toggle-inner {
+    top: calc($hamburger-layer-height / 2);
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition-duration: 0.275s;
+
+    &::before {
+      top: $hamburger-layer-height + $hamburger-layer-spacing;
+      transition: opacity 0.125s 0.275s ease;
+    }
+
+    &::after {
+      top: ($hamburger-layer-height * 2) + ($hamburger-layer-spacing * 2);
+      transition: transform 0.275s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      $y-offset: $hamburger-layer-spacing + $hamburger-layer-height;
+
+      transition-delay: 0.075s;
+      transform: translate3d(0, $y-offset, 0) rotate(135deg);
+
+      &::before {
+        opacity: 0;
+        transition-delay: 0s;
+      }
+
+      &::after {
+        transition-delay: 0.075s;
+        transform: translate3d(0, $y-offset * -2, 0) rotate(-270deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--elastic-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      $y-offset: $hamburger-layer-spacing + $hamburger-layer-height;
+
+      transform: translate3d(0, $y-offset, 0) rotate(-135deg);
+
+      &::after {
+        transform: translate3d(0, $y-offset * -2, 0) rotate(270deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// emphatic effect
+// ==================================================
+.c-main-nav__toggle--emphatic {
+  overflow: hidden;
+
+  .c-main-nav__toggle-inner {
+    transition: background-color 0.125s 0.175s ease-in;
+
+    &::before {
+      left: 0;
+      transition:
+        transform 0.125s cubic-bezier(0.6, 0.04, 0.98, 0.335),
+        top 0.05s 0.125s linear,
+        left 0.125s 0.175s ease-in;
+    }
+
+    &::after {
+      top: ($hamburger-layer-height) + ($hamburger-layer-spacing);
+      right: 0;
+      transition:
+        transform 0.125s cubic-bezier(0.6, 0.04, 0.98, 0.335),
+        top 0.05s 0.125s linear,
+        right 0.125s 0.175s ease-in;
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transition-delay: 0s;
+      transition-timing-function: ease-out;
+
+      &::before {
+        top: $hamburger-layer-width * -2;
+        left: $hamburger-layer-width * -2;
+        transition:
+          left 0.125s ease-out,
+          top 0.05s 0.125s linear,
+          transform 0.125s 0.175s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform: translate3d($hamburger-layer-width * 2, $hamburger-layer-width * 2, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        top: $hamburger-layer-width * -2;
+        right: $hamburger-layer-width * -2;
+        transition:
+          right 0.125s ease-out,
+          top 0.05s 0.125s linear,
+          transform 0.125s 0.175s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform: translate3d($hamburger-layer-width * -2, $hamburger-layer-width * 2, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// collapse effect
+// ==================================================
+.c-main-nav__toggle--collapse,
+.c-main-nav__toggle--collapse-r {
+  .c-main-nav__toggle-inner {
+    top: auto;
+    bottom: 0;
+    transition-delay: 0.13s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 0.13s;
+
+    &::after {
+      top: ($hamburger-layer-spacing * 2 + $hamburger-layer-height * 2) * -1;
+      transition:
+        top 0.2s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        opacity 0.1s linear;
+    }
+
+    &::before {
+      transition:
+        top 0.12s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-delay: 0.22s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: translate3d(0, ($hamburger-layer-spacing + $hamburger-layer-height) * -1, 0)
+        rotate(-45deg);
+
+      &::after {
+        top: 0;
+        opacity: 0;
+        transition:
+          top 0.2s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          opacity 0.1s 0.22s linear;
+      }
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.1s 0.16s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--collapse-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: translate3d(0, ($hamburger-layer-spacing + $hamburger-layer-height) * -1, 0)
+        rotate(45deg);
+
+      &::before {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// vortex effect
+// ==================================================
+.c-main-nav__toggle--vortex,
+.c-main-nav__toggle--vortex-r {
+  .c-main-nav__toggle-inner {
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    transition-duration: 0.2s;
+
+    &::before,
+    &::after {
+      transition-delay: 0.1s;
+      transition-timing-function: linear;
+      transition-duration: 0s;
+    }
+
+    &::before {
+      transition-property: top, opacity;
+    }
+
+    &::after {
+      transition-property: bottom, transform;
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+      transform: rotate(765deg);
+
+      &::before,
+      &::after {
+        transition-delay: 0s;
+      }
+
+      &::before {
+        top: 0;
+        opacity: 0;
+      }
+
+      &::after {
+        bottom: 0;
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--vortex-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotate(-765deg);
+
+      &::after {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// stand effect
+// ==================================================
+.c-main-nav__toggle--stand,
+.c-main-nav__toggle--stand-r {
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.075s 0.15s cubic-bezier(0.55, 0.055, 0.675, 0.19),
+      background-color 0s 0.075s linear;
+
+    &::before {
+      transition:
+        top 0.075s 0.075s ease-in,
+        transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    &::after {
+      transition:
+        bottom 0.075s 0.075s ease-in,
+        transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transition:
+        transform 0.075s 0s cubic-bezier(0.215, 0.61, 0.355, 1),
+        background-color 0s 0.15s linear;
+      transform: rotate(90deg);
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.075s 0.1s ease-out,
+          transform 0.075s 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(-45deg);
+      }
+
+      &::after {
+        bottom: 0;
+        transition:
+          bottom 0.075s 0.1s ease-out,
+          transform 0.075s 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--stand-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+// ==================================================
+// spring effect
+// ==================================================
+.c-main-nav__toggle--spring {
+  .c-main-nav__toggle-inner {
+    top: calc($hamburger-layer-height / 2);
+    transition: background-color 0s 0.13s linear;
+
+    &::before {
+      top: $hamburger-layer-height + $hamburger-layer-spacing;
+      transition:
+        top 0.1s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    &::after {
+      top: ($hamburger-layer-height * 2) + ($hamburger-layer-spacing * 2);
+      transition:
+        top 0.2s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transition-delay: 0.22s;
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.1s 0.15s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translate3d(0, $hamburger-layer-spacing + $hamburger-layer-height, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        top: 0;
+        transition:
+          top 0.2s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translate3d(0, $hamburger-layer-spacing + $hamburger-layer-height, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--spring-r {
+  .c-main-nav__toggle-inner {
+    top: auto;
+    bottom: 0;
+    transition-delay: 0s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 0.13s;
+
+    &::after {
+      top: ($hamburger-layer-spacing * 2 + $hamburger-layer-height * 2) * -1;
+      transition:
+        top 0.2s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        opacity 0s linear;
+    }
+
+    &::before {
+      transition:
+        top 0.1s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-delay: 0.22s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: translate3d(0, ($hamburger-layer-spacing + $hamburger-layer-height) * -1, 0)
+        rotate(-45deg);
+
+      &::after {
+        top: 0;
+        opacity: 0;
+        transition:
+          top 0.2s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          opacity 0s 0.22s linear;
+      }
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.1s 0.15s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+// ==================================================
+// 3dx effect
+// ==================================================
+.c-main-nav__toggle--3dx,
+.c-main-nav__toggle--3dx-r {
+  .c-main-nav__toggle-box {
+    perspective: $hamburger-layer-width * 2;
+  }
+
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transform: rotateY(180deg);
+
+      &::before {
+        transform: translate3d(0, $hamburger-layer-height + $hamburger-layer-spacing, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ($hamburger-layer-height + $hamburger-layer-spacing) * -1, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--3dx-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotateY(-180deg);
+    }
+  }
+}
+
+// ==================================================
+// 3dy effect
+// ==================================================
+.c-main-nav__toggle--3dy,
+.c-main-nav__toggle--3dy-r {
+  .c-main-nav__toggle-box {
+    perspective: $hamburger-layer-width * 2;
+  }
+
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transform: rotateX(-180deg);
+
+      &::before {
+        transform: translate3d(0, $hamburger-layer-height + $hamburger-layer-spacing, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ($hamburger-layer-height + $hamburger-layer-spacing) * -1, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--3dy-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotateX(180deg);
+    }
+  }
+}
+
+// ==================================================
+// 3dxy effect
+// ==================================================
+.c-main-nav__toggle--3dxy,
+.c-main-nav__toggle--3dxy-r {
+  .c-main-nav__toggle-box {
+    perspective: $hamburger-layer-width * 2;
+  }
+
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transform: rotateX(180deg) rotateY(180deg);
+
+      &::before {
+        transform: translate3d(0, $hamburger-layer-height + $hamburger-layer-spacing, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ($hamburger-layer-height + $hamburger-layer-spacing) * -1, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--3dxy-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotateX(180deg) rotateY(180deg) rotateZ(-180deg);
+    }
+  }
+}

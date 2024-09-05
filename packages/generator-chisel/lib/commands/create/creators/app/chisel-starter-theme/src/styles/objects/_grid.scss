@@ -1,0 +1,30 @@
+@use '../../design/settings';
+@use '~design' as *;
+
+$_layout-gutter: settings.$layout-gutter;
+$_layout-columns-no: settings.$layout-columns-no;
+$_breakpoints: settings.$breakpoints;
+
+.o-grid {
+  width: 100%;
+  display: grid;
+  gap: $_layout-gutter;
+
+  &--cols {
+    @for $i from 1 through $_layout-columns-no {
+      &-#{$i} {
+        grid-template-columns: repeat($i, 1fr);
+      }
+    }
+
+    @each $name, $val in $_breakpoints {
+      @include bp($name) {
+        @for $i from 1 through $_layout-columns-no {
+          &-#{$i}-#{$name} {
+            grid-template-columns: repeat($i, 1fr);
+          }
+        }
+      }
+    }
+  }
+}

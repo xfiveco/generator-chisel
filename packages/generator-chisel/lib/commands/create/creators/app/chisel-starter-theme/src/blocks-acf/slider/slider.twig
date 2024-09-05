@@ -1,0 +1,26 @@
+{% set slidesHtml = '' %}
+
+<div {{ wrapper_attributes }} data-block-id="{{ block.id }}">
+  <div class="b-slider__inner alignfull">
+    {% if fields.acf_block_slider_slides is not empty %}
+      {% for slide in fields.acf_block_slider_slides %}
+        {% if slide.acf_bs_image %}
+          {% set slidesHtml %}
+            {{slidesHtml}}
+            <div class="b-slider__slide swiper-slide" data-thumbnail-url="{{ get_image(slide.acf_bs_image).src('medium') }}">
+              {{ get_responsive_image(slide.acf_bs_image, 'large') }}
+            </div>
+          {% endset %}
+        {% endif %}
+      {% endfor %}
+
+      {% include 'components/slider.twig' with {
+        slidesHtml,
+        params: {
+          'slides-per-view': 1,
+          block_settings: fields.slider_options
+        }
+      } %}
+    {% endif %}
+  </div>
+</div>

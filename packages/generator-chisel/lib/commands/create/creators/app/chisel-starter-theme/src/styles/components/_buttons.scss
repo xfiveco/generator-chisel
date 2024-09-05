@@ -1,0 +1,23 @@
+@use '~design' as *;
+
+.c-btn {
+  @include button();
+}
+
+.c-btn--primary {
+  @include button-primary();
+}
+
+.c-btn--primary:hover,
+.c-btn--primary:focus {
+  @include button-primary-hover();
+}
+
+.c-btn--secondary {
+  @include button-secondary();
+}
+
+.c-btn--secondary:hover,
+.c-btn--secondary:focus {
+  @include button-secondary-hover();
+}

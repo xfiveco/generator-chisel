@@ -1,18 +1,18 @@
 {
   "config": {
-      "allow-plugins": {
-          "composer/installers": true,
-          "php-http/discovery": true,
-          "dealerdirect/phpcodesniffer-composer-installer": true
-      }
+    "allow-plugins": {
+      "composer/installers": true,
+      "php-http/discovery": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "require-dev": {
-      "squizlabs/php_codesniffer": "^3.9",
-      "wp-coding-standards/wpcs": "^3.1",
-      "friendsoftwig/twigcs": "^6.1",
-      "vincentlanglet/twig-cs-fixer": "^0.6.1"
+    "squizlabs/php_codesniffer": "^3.9",
+    "wp-coding-standards/wpcs": "^3.1",
+    "friendsoftwig/twigcs": "^6.1",
+    "vincentlanglet/twig-cs-fixer": "^0.6.1"
   },
   "require": {
-      "timber/timber": "^2.1"
+    "timber/timber": "^2.1"
   }
 }

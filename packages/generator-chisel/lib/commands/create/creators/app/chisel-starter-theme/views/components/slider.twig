@@ -1,0 +1,12 @@
+{% set slider_params = slider_prepare_params(params) %}
+
+<div class="swiper-container js-slider-container c-slider__container is-type-{{ slider_params.data.type }}">
+  <!-- Slider main container -->
+  <div class="swiper js-slider c-slider c-slider--{{ slider_params.data.type }}" {{ slider_params.attrs|join(' ') }}>
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper c-slider__slides">
+      <!-- Slides html. Each slide must have a 'swiper-slide' class -->
+      {{ slidesHtml }}
+    </div>
+  </div>
+</div>

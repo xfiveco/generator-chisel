@@ -1,0 +1,51 @@
+<article class="{{ post_classes(post.class) }} c-product-item c-post-card">
+
+  {{ timber_set_product(post) }}
+
+  <div class="c-product-item__inner">
+
+    {#
+     * Hook: woocommerce_before_shop_loop_item.
+    *
+    * @hooked woocommerce_template_loop_product_link_open - 10 (Removed by the theme)
+    #}
+    {% do action('woocommerce_before_shop_loop_item') %}
+
+    <a class="c-product-item__content" href="{{ post.link }}">
+
+      {#
+      * Hook: woocommerce_before_shop_loop_item_title.
+      *
+      * @hooked woocommerce_show_product_loop_sale_flash - 10
+      * @hooked woocommerce_template_loop_product_thumbnail - 10 (Removed by the theme)
+      #}
+      {% do action('woocommerce_before_shop_loop_item_title') %}
+
+      <h2 class="c-product-item__title">{{ post.title }}</h2>
+
+      {#
+      * Hook: woocommerce_after_shop_loop_item_title.
+      *
+      * @hooked woocommerce_template_loop_rating - 5
+      * @hooked woocommerce_template_loop_price - 10
+      #}
+      {% do action('woocommerce_after_shop_loop_item_title') %}
+
+      {% if post.get_thumbnail() %}
+        <div class="c-product-item__image">
+          {{ post.get_thumbnail() }}
+        </div>
+      {% endif %}
+
+    </a>
+
+    {#
+    * Hook: woocommerce_after_shop_loop_item.
+    *
+    * @hooked woocommerce_template_loop_product_link_close - 5 (Removed by the theme)
+    * @hooked woocommerce_template_loop_add_to_cart - 10
+    #}
+    {% do action('woocommerce_after_shop_loop_item') %}
+  </div>
+
+</article>

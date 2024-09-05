@@ -1,0 +1,16 @@
+@use '~design' as *;
+
+.c-sidebar {
+  padding-bottom: get-padding('large');
+
+  .c-post & {
+    padding-top: get-padding('large');
+  }
+}
+
+.c-sidebar__inner {
+  padding: get-padding('normal');
+  border-radius: get-border-radius('small');
+  border: 1px solid get-color('light-grey');
+  background-color: get-color('white');
+}

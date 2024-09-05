@@ -1,0 +1,24 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+@use '~design' as *;
+
+.b-accordion {
+  .block-editor-block-list__layout {
+    * {
+      margin-top: 0 !important;
+    }
+
+    & > *:nth-last-child(1) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.b-accordion__item-title {
+  margin: 0 !important;
+  font-size: get-font-size('medium') !important;
+}

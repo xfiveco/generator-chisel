@@ -1,0 +1,38 @@
+@use '~design' as *;
+
+.c-content:not(.has-sidebar) {
+  .c-content__inner {
+    > .alignfull {
+      position: relative;
+
+      width: calc(100% + 32px);
+      max-width: calc(100% + 32px);
+      left: -16px;
+
+      @include bp(xlarge) {
+        @include alignfull;
+      }
+    }
+
+    > .alignwide {
+      position: relative;
+
+      @include bp(full) {
+        @include alignwide;
+      }
+    }
+  }
+}
+
+.c-content {
+  .wp-element-button,
+  .wp-block-button__link {
+    @include button();
+    @include button-primary();
+
+    &:hover,
+    &:focus {
+      @include button-primary-hover();
+    }
+  }
+}

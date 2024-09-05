@@ -1,0 +1,18 @@
+@use '~design' as *;
+
+.c-footer {
+  background-color: get-color('light-grey');
+}
+
+.c-footer__inner {
+  padding-top: get-padding('small');
+  padding-bottom: get-padding('small');
+}
+
+.c-footer__column {
+  .c-widget:first-child {
+    :first-child {
+      margin-top: 0;
+    }
+  }
+}

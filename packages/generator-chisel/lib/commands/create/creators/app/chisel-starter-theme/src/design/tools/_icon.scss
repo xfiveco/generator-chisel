@@ -1,0 +1,5 @@
+@mixin get-icon($name, $extension: 'svg') {
+  mask: url('../../assets/icons/#{$name}.#{$extension}');
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}

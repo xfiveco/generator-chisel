@@ -5,7 +5,9 @@
  *
  * If you're not using a plugin that requries this behavior (ones that do include Events Calendar Pro and
  * WooCommerce) you can delete this file and footer.php
+ *
+ * @package Chisel
  */
 
-$GLOBALS['timberContext'] = \Timber\Timber::get_context();
+$GLOBALS['timberContext'] = \Timber\Timber::context();
 ob_start();

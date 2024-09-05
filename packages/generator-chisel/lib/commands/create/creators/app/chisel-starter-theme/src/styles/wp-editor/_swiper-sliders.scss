@@ -1,0 +1,12 @@
+@use '../components//slider';
+
+.o-block {
+  .swiper {
+    opacity: 1;
+    transition: get-transition('slow');
+  }
+
+  .swiper-wrapper {
+    display: flex;
+  }
+}

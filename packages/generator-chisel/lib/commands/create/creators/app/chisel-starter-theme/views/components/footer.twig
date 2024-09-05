@@ -1,0 +1,9 @@
+<footer id="footer" class="o-wrapper c-footer">
+  <div class="c-footer__inner o-layout is-flex has-gap-medium o-wrapper__inner">
+    {% for column in footer_sidebars.columns %}
+      <div class="o-layout__item {{ footer_sidebars.column_class }} c-footer__column">
+        {{ column }}
+      </div>
+    {% endfor %}
+  </div>
+</footer>

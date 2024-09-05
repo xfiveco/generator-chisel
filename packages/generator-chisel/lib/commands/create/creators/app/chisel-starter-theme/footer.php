@@ -5,13 +5,20 @@
  *
  * If you're not using a plugin that requries this behavior (ones that do include Events Calendar Pro and
  * WooCommerce) you can delete this file and header.php
+ *
+ * @package Chisel
  */
 
-$timberContext = $GLOBALS['timberContext'];
-if ( ! isset( $timberContext ) ) {
+use Chisel\ChiselCache;
+
+$context = $GLOBALS['timberContext'];
+
+if ( ! isset( $context ) ) {
 	throw new \Exception( 'Timber context not set in footer.' );
 }
-$timberContext['content'] = ob_get_contents();
+
+$context['content'] = ob_get_contents();
 ob_end_clean();
 $templates = array( 'page-plugin.twig' );
-\Timber\Timber::render( $templates, $timberContext );
+
+\Timber\Timber::render( $templates, $context, ChiselCache::expiry() );

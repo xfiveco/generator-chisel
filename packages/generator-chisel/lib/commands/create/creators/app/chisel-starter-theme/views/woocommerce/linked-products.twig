@@ -1,0 +1,15 @@
+<div class="o-layout c-product-linked c-product-linked--{{ linked_type|default('related') }}">
+  {% if linked_title %}
+  <div class="o-layout__item">
+    <h2 class="c-product-linked__title">{{ linked_title }}</h2>
+  </div>
+  {% endif %}
+
+  <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large">
+    <div class="c-product-linked__items o-grid o-grid--cols-1 o-grid--cols-3-medium">
+      {% for post in linked_products %}
+        {% include "woocommerce/content-product.twig" with {post: post} %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

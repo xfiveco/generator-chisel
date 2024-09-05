@@ -1,0 +1,30 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <article id="post-{{ post.ID }}" class="c-post {{ post_classes(post.class) }}">
+    <section class="o-wrapper__inner c-post__inner {{ wrapper_class }}">
+
+      <div class="o-layout c-content{% if sidebar %} has-sidebar{% endif %}">
+        <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large c-content__inner">
+
+          {{ the_title }}
+          {% block inner_content %}
+
+            {% if post.get_thumbnail('large') %}
+              <div class="c-posts__image">
+                {{ post.get_thumbnail() }}
+              </div>
+            {% endif %}
+
+            {{ post.content }}
+          {% endblock %}
+        </div>
+
+        {% if sidebar %}
+          {% include 'sidebar-blog.twig' %}
+        {% endif %}
+      </div>
+    </section>
+  </article>
+{% endblock %}
+

@@ -1,7 +1,3 @@
-/* ==========================================================================
-   #IMAGES
-   ========================================================================== */
-
 /**
  * 1. Fluid images for responsive purposes.
  * 2. Offset `alt` text from surrounding copy.
@@ -11,18 +7,12 @@
  */
 
 img {
-  font-style: italic; /* [2] */
   max-width: 100%; /* [1] */
+  font-style: italic; /* [2] */
   vertical-align: middle; /* [3] */
 }
 
-
-/**
- * 1. If a `width` and/or `height` attribute have been explicitly defined, let’s
- *    not make the image fluid.
- */
-
 img[width],
 img[height] {
-  max-width: none;
+  max-width: 100%;
 }

@@ -1,9 +1,0 @@
-<article class="c-tease c-tease--{{post.post_type}}" id="tease-{{post.ID}}">
-  {% block content %}
-    <h2><a href="{{post.link}}">{{post.title}}</a></h2>
-    <p>{{post.preview}}</p>
-    {% if post.thumbnail %}
-      <img src="{{post.thumbnail.src}}">
-    {% endif %}
-  {% endblock %}
-</article>

@@ -1,0 +1,60 @@
+/* ACF Sync module styles */
+
+.xfive-acf-sync-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+
+  &.is-open {
+    display: flex;
+  }
+}
+
+.xfive-acf-sync-modal__box {
+  padding: 16px;
+  max-width: 500px;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.xfive-acf-sync-modal__content {
+  padding: 24px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0.1) 0 1px 3px 0, rgba(0, 0, 0, 0.1) 0 1px 2px -1px;
+  font-size: 20px;
+  line-height: 1.5;
+
+  h3 {
+    font-size: 18px !important;
+    margin-bottom: 30px;
+  }
+}
+
+.xfive-acf-sync-modal__actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  a,
+  button {
+    font-size: 15px;
+    justify-content: center;
+  }
+}
+
+.xfive-acf-sync-modal__icon {
+  text-align: center;
+
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+}

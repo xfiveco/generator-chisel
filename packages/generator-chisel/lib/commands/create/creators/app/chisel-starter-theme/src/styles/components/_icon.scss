@@ -1,0 +1,19 @@
+@use '../../design/settings';
+@use '~design' as *;
+
+$_buttons-icons: settings.$buttons-icons;
+
+.c-icon {
+  display: inline-block;
+  width: px-rem(24);
+  height: px-rem(24);
+  font-style: normal;
+  vertical-align: middle;
+  background-color: get-color('black');
+
+  @each $button-icon in $_buttons-icons {
+    &--#{$button-icon} {
+      @include get-icon($button-icon);
+    }
+  }
+}

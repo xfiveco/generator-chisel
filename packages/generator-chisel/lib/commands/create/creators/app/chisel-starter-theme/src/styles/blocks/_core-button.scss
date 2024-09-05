@@ -1,0 +1,26 @@
+@use '~design' as *;
+
+.wp-block-button {
+  .wp-block-button__link {
+    @include button();
+  }
+
+  .wp-block-button__link,
+  &.is-style-primary .wp-block-button__link {
+    @include button-primary();
+
+    &:hover,
+    &:focus {
+      @include button-primary-hover();
+    }
+  }
+
+  &.is-style-secondary .wp-block-button__link {
+    @include button-secondary();
+
+    &:hover,
+    &:focus {
+      @include button-secondary-hover();
+    }
+  }
+}

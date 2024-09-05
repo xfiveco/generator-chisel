@@ -1,0 +1,29 @@
+@use '~design' as *;
+
+.c-pagination {
+  margin: get-padding('large') auto;
+}
+
+.c-pagination__items {
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.c-pagination__item {
+  margin: 0;
+
+  &--page {
+    .page-number {
+      display: inline-block;
+      padding: get-padding('tiny') get-padding('little');
+      text-decoration: none;
+
+      &.current {
+        text-decoration: underline;
+      }
+    }
+  }
+}

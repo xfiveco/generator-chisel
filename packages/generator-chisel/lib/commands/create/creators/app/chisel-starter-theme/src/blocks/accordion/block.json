@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "chisel/accordion",
+  "version": "0.1.0",
+  "title": "Accordion",
+  "category": "chisel-blocks",
+  "icon": "editor-justify",
+  "description": "Accordion Block",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "chisel",
+  "attributes": {
+    "closeOthers": {
+      "type": "boolean",
+      "default": false
+    },
+    "firstOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "titleTag": {
+      "type": "string",
+      "default": "h3"
+    }
+  },
+  "providesContext": {
+    "chiselAccordionTitleTag": "titleTag"
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

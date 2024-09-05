@@ -1,0 +1,38 @@
+@use '~design' as *;
+
+.woocommerce:where(body:not(.woocommerce-uses-block-theme)) {
+  div.product span.price,
+  div.product p.price {
+    color: get-color('secondary');
+  }
+}
+
+.woocommerce {
+  span.onsale {
+    position: absolute;
+    top: -get-margin('tiny');
+    left: -get-margin('tiny');
+    z-index: 9;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: px-rem(48);
+    min-height: px-rem(48);
+    padding: get-padding('tiny');
+    margin: 0;
+    font-size: get-font-size('small');
+    font-weight: 700;
+    line-height: get-line-height('large');
+    color: get-color('white');
+    text-align: center;
+    background-color: get-color('secondary');
+    border-radius: 100%;
+  }
+}
+
+.woocommerce-product-gallery {
+  overflow: hidden;
+  background-color: get-color('white');
+  border: 1px solid get-color('light-grey');
+  border-radius: get-border-radius('small');
+}

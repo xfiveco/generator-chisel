@@ -1,0 +1,16 @@
+@use '../../design/settings';
+
+html {
+  font-size: settings.$root-font-size;
+  min-height: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+
+  &.is-locked {
+    min-height: 50%;
+    body {
+      overflow: hidden;
+      height: 80vh;
+    }
+  }
+}

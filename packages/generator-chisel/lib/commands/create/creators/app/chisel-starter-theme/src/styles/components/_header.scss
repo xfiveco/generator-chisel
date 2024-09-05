@@ -1,0 +1,32 @@
+@use '~design' as *;
+
+.c-header {
+  background-color: get-color('light-grey');
+
+  .c-logo {
+    max-width: px-rem(200);
+    height: px-rem(80);
+
+    &__link {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.c-header__inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: get-gap('normal');
+  padding-top: get-padding('little');
+  padding-bottom: get-padding('little');
+}

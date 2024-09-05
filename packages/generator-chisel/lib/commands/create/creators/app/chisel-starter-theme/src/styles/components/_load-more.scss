@@ -1,0 +1,6 @@
+@use '~design' as *;
+
+.c-load-more {
+  padding: get-padding('normal') 0;
+  text-align: center;
+}

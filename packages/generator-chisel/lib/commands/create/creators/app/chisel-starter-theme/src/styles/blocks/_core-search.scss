@@ -1,0 +1,10 @@
+.wp-block-search {
+  &__inside-wrapper {
+    align-items: flex-start;
+  }
+
+  &__button,
+  &__input {
+    margin: 0;
+  }
+}

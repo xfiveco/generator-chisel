@@ -1,0 +1,6 @@
+@use '~design' as *;
+
+.c-shop-items {
+  padding-top: get-padding('tiny');
+  padding-bottom: get-padding('large');
+}

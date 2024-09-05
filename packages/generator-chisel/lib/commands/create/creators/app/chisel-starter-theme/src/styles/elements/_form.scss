@@ -1,0 +1,331 @@
+@use '~design' as *;
+
+$form-field-padding: get-padding('small') get-padding('normal');
+$form-field-margin: get-margin('normal');
+$form-button-margin: get-margin('small');
+$form-select-padding-right: get-padding('xlarge');
+$form-field-border-width: 1px;
+$form-field-border-radius: get-border-radius('tiny');
+$form-field-disabled-opacity: 0.5;
+$form-field-transition: get-transition('normal');
+$form-field-line-height: get-line-height('normal');
+$form-field-accent: get-color('primary');
+$form-field-accent-contrast: get-color('white');
+$form-field-border-color: get-color('medium-grey');
+$form-field-focus-border-color: $form-field-accent;
+$form-field-placeholder-color: get-color('grey');
+$form-field-shadow-focus: 0 0 0 3px hsla(256deg, 68%, 24%, 50%);
+$form-field-bg-color: get-color('white');
+$form-field-bg-range-track: get-color('secondary');
+$form-field-range-shadow-focus: 0 0 0 2px hsla(9deg, 100%, 66%, 50%);
+$form-field-range-thumb-shadow-focus: 0 0 0 2px hsla(256deg, 68%, 24%, 50%);
+$form-textarea-width: 100%;
+$form-textarea-height: px-rem(250);
+$form-checkbox-radio-width: px-rem(18);
+$form-checkbox-radio-height: px-rem(18);
+$form-label-margin: get-margin('little');
+
+/* All elements regardless of types */
+input,
+select,
+option,
+textarea,
+form button,
+datalist,
+fieldset,
+legend,
+optgroup,
+output,
+input::file-selector-button {
+  font: inherit;
+  line-height: $form-field-line-height;
+  color: inherit;
+  appearance: none;
+  accent-color: $form-field-accent;
+  background: none;
+  border: none;
+  outline: none;
+  transition: $form-field-transition;
+
+  :read-only:not(
+      :disabled,
+      label,
+      button,
+      input[type='button'],
+      input[type='submit'],
+      input[type='reset']
+    ) {
+    cursor: default;
+  }
+
+  :disabled {
+    cursor: not-allowed;
+    opacity: $form-field-disabled-opacity;
+  }
+}
+
+/* All elements with types */
+
+/* Select and text-fields */
+select,
+textarea,
+input[type='date'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='time'],
+input[type='url'],
+input[type='week'] {
+  width: 100%;
+  max-width: 100%;
+  padding: $form-field-padding;
+  margin: 0 0 $form-field-margin;
+  background-color: $form-field-bg-color;
+  border: $form-field-border-width solid $form-field-border-color;
+  border-radius: $form-field-border-radius;
+
+  &:focus {
+    outline: 0;
+
+    &:not([readonly], [disabled]) {
+      box-shadow: $form-field-shadow-focus;
+    }
+  }
+
+  &:hover:not([readonly], [disabled]),
+  &:active:not([readonly], [disabled]),
+  &:focus:not([readonly], [disabled]),
+  &:required:valid:hover:not([readonly], [disabled]),
+  &:required:valid:focus:not([readonly], [disabled]),
+  &:required:invalid:focus:not([readonly], [disabled]) {
+    border-color: $form-field-focus-border-color;
+  }
+
+  &::selection {
+    color: $form-field-accent-contrast;
+    background-color: $form-field-accent;
+  }
+
+  &::placeholder {
+    color: $form-field-placeholder-color;
+  }
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $form-checkbox-radio-width;
+  height: $form-checkbox-radio-height;
+  vertical-align: text-bottom;
+  border: $form-field-border-width solid $form-field-border-color;
+
+  &::before {
+    width: 65%;
+    height: 65%;
+    content: '';
+    box-shadow: inset 1em 1em $form-field-accent;
+    transition: 120ms transform ease-in-out;
+    transform: scale(0);
+  }
+
+  &:checked {
+    border-color: $form-field-focus-border-color;
+
+    &::before {
+      transform: scale(1);
+    }
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+input[type='checkbox'] {
+  &::before {
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+}
+
+input[type='radio'] {
+  border-radius: 50%;
+
+  &::before {
+    border-radius: 50%;
+  }
+}
+
+select:not([multiple]) {
+  padding-right: $form-select-padding-right;
+  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+
+  /* icon size, then gradient */
+  background-size: 0.75rem auto;
+}
+
+select:not([disabled], [readonly]) option:focus,
+select:not([disabled], [readonly]) option:active,
+select:not([disabled], [readonly]) option:hover,
+select:not([disabled], [readonly]) option:checked {
+  color: $form-field-accent-contrast;
+  background-color: $form-field-accent;
+}
+
+input[type='color'] {
+  cursor: pointer;
+  background-color: $form-field-bg-color;
+  border-color: $form-field-border-color;
+  border-style: solid;
+  border-radius: $form-field-border-radius;
+
+  &:hover:not([disabled]),
+  &:active:not([disabled]) {
+    border-color: $form-field-border-color;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus:not([disabled]) {
+    border-color: $form-field-focus-border-color;
+  }
+}
+
+form button,
+input[type='reset'],
+input[type='submit'],
+input[type='button'],
+input::file-selector-button {
+  @include button;
+  @include button-primary;
+
+  margin: $form-button-margin 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    @include button-primary-hover;
+  }
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: $form-label-margin;
+  cursor: pointer;
+}
+
+label + label,
+label + input,
+label + select,
+label + button,
+label + textarea {
+  margin-top: $form-label-margin;
+}
+
+textarea {
+  max-width: $form-textarea-width;
+  height: $form-textarea-height;
+}
+
+textarea:read-only,
+textarea:disabled {
+  resize: none;
+}
+
+input::file-selector-button {
+  margin-right: px-rem(10);
+}
+
+label:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: $form-field-disabled-opacity;
+}
+
+label:has(input:disabled) :disabled {
+  opacity: 1;
+}
+
+input[type='range']::-ms-track {
+  width: 100%;
+  color: transparent;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  width: px-rem(16);
+  height: px-rem(16);
+  margin-top: -4px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  appearance: none;
+  cursor: pointer;
+  background: $form-field-accent;
+  border: none;
+  border-radius: $form-field-border-radius;
+  box-shadow: none;
+  transition: $form-field-transition;
+}
+
+input[type='range']:focus::-webkit-slider-thumb {
+  box-shadow: $form-field-range-thumb-shadow-focus;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: px-rem(16);
+  height: px-rem(16);
+  cursor: pointer;
+  background: $form-field-accent;
+  border: none;
+  border-radius: $form-field-border-radius;
+  box-shadow: none;
+  transition: $form-field-transition;
+}
+
+input[type='range']:focus::-moz-range-thumb {
+  box-shadow: $form-field-range-thumb-shadow-focus;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: px-rem(8);
+  cursor: pointer;
+  background: $form-field-bg-range-track;
+  border: none;
+  border-radius: $form-field-border-radius;
+  box-shadow: none;
+  transition: $form-field-transition;
+}
+
+input[type='range']:focus::-webkit-slider-runnable-track {
+  background: $form-field-bg-range-track;
+  box-shadow: $form-field-range-shadow-focus;
+}
+
+input[type='range']::-moz-range-track {
+  width: 100%;
+  height: px-rem(8);
+  cursor: pointer;
+  background: $form-field-bg-range-track;
+  border: none;
+  border-radius: $form-field-border-radius;
+  box-shadow: none;
+  transition: $form-field-transition;
+}
+
+input[type='range']:focus::-moz-range-track {
+  background: $form-field-bg-range-track;
+  box-shadow: $form-field-range-shadow-focus;
+}

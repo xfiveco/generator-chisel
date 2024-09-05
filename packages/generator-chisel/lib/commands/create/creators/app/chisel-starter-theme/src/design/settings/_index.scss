@@ -1,9 +1,27 @@
-// TODO: use em, add all
+@forward '../tools/theme';
+
+$root-font-size: 16px;
 
 $breakpoints: (
   small: 480px,
+  msmall: 640px,
   medium: 768px,
   large: 1024px,
-  xlarge: 1280px,
+  xlarge: 1200px,
   full: 1600px,
 );
+
+$layout-columns-no: 12;
+$layout-gutter: get-gap('big');
+
+$gaps: (
+  'tiny': get-gap('tiny'),
+  'little': get-gap('little'),
+  'small': get-gap('small'),
+  'normal': get-gap('normal'),
+  'medium': get-gap('medium'),
+  'large': get-gap('large'),
+  'xlarge': get-gap('xlarge'),
+  'big': get-gap('big'),
+);
+$buttons-icons: ('minus', 'plus');

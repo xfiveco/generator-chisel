@@ -1,45 +1,62 @@
+@use 'sass:map';
+@use '../../design/settings';
 @use '~design' as *;
 
-.o-layout {
-  display: block;
+$_layout-gutter: settings.$layout-gutter;
+$_layout-columns-no: settings.$layout-columns-no;
+$_breakpoints: settings.$breakpoints;
+$_gaps: settings.$gaps;
 
-  @include above('medium') {
-    display: flex;
+@function get-flex-col-width($column_no, $layout-gutter) {
+  $layout-col-width: calc(((100 / 12) * $column_no) * 1%);
+  $layout-gutter-width: calc($layout-gutter - ($layout-gutter / $column_no));
+
+  @if $column_no == 12 {
+    $layout-gutter-width: 0%;
+  }
+
+  @return calc($layout-col-width - $layout-gutter-width);
+}
+
+.o-layout {
+  display: flex;
+  flex-flow: row wrap;
+  gap: $_layout-gutter;
+  width: 100%;
+}
+
+@each $gap-size in map.keys($map: $_gaps) {
+  .has-gap-#{$gap-size} {
+    gap: get-gap($gap-size);
+
+    $layout-gutter: get-gap($gap-size);
   }
 }
 
 .o-layout__item {
-  flex: 1;
-}
+  width: 100%;
 
-.o-layout--guttered {
-  justify-content: space-between;
+  @for $i from 1 through $_layout-columns-no {
+    $layout-col-width: get-flex-col-width($i, $_layout-gutter);
 
-  > .o-layout__item {
-    flex: none;
-  }
-}
-
-.o-layout--2 {
-  > .o-layout__item {
-    @include above('medium') {
-      width: 49%;
+    &--#{$i} {
+      flex: 0 0 $layout-col-width;
+      width: $layout-col-width;
+      max-width: $layout-col-width;
     }
   }
-}
 
-.o-layout--3 {
-  > .o-layout__item {
-    @include above('medium') {
-      width: 32%;
-    }
-  }
-}
+  @each $name, $val in $_breakpoints {
+    @include bp($name) {
+      @for $i from 1 through $_layout-columns-no {
+        $layout-col-width: get-flex-col-width($i, $_layout-gutter);
 
-.o-layout--4 {
-  > .o-layout__item {
-    @include above('medium') {
-      width: 24%;
+        &--#{$i}-#{$name} {
+          flex: 0 0 $layout-col-width;
+          width: $layout-col-width;
+          max-width: $layout-col-width;
+        }
+      }
     }
   }
 }

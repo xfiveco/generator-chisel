@@ -1,0 +1,26 @@
+<article id="post-{{ post.ID }}" class="{{ post_classes(post.class) }} c-post-item">
+  <div class="c-post-item__content">
+    <h2 class="c-post-item__title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
+
+    {% if post.category and post.category.id != 1 %}
+      <span class="c-post-item__category"><a class="c-badge" href="{{ post.category.link }}">{{ post.category }}</a></span>
+    {% endif %}
+    <span class="c-post-item__meta">
+      <span class="c-post-item__author"><a href="{{ post.author.link }}">{{ __('By', 'chisel') }} {{ post.author.name }}</a></span> •
+      <time datetime="{{ post.date }}">{{ post.date }}</time></span>
+      <p class="c-post-item__excerpt">{{ post.excerpt({words: 20, read_more: __('Keep reading', 'chisel'), end: '...'}) }}</p>
+
+    {% if post.tags %}
+      <span class="c-post-item__tags">
+        {% for tag in post.tags %}
+          <a class="c-post-item__tag" href="{{ tag.link }}">#{{ tag }}</a>
+        {% endfor %}
+      </span>
+    {% endif %}
+  </div>
+  {% if post.get_thumbnail() %}
+    <div class="c-post-item__image">
+      <a href="{{ post.link }}" tabindex="-1">{{ post.get_thumbnail() }}</a>
+    </div>
+  {% endif %}
+</article>

@@ -1,0 +1,5 @@
+@use '~design' as *;
+
+.c-widget__title {
+  font-size: get-font-size('large');
+}

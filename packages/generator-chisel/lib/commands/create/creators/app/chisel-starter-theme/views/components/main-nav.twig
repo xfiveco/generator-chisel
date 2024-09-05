@@ -1,0 +1,27 @@
+{#
+Main navigation with support up to 3 levels.
+Two variants of submenus are available:
+1. Default submenu dropdowns of level 2 and 3. Level 3 opens to the right side of the parent menu item and to the left on screens below the "full" breakpoint.
+2. Full width submenu dorpdown with columns where level 2 items are column titles and level 3 items are column items. There can be 2, 3 or 4 columns. To enable this variant, add "c-main-nav--columns" class to the nav tag and "has-2-columns", "has-3-columns" or "has-4-columns" class to specify the number of columns.
+#}
+
+{% set main_nav = get_nav_menu('main_nav') %}
+
+{% if main_nav %}
+  {% set main_nav_level_max = 3 %}
+  {% set main_nav_level = 1 %}
+
+  <nav id="navigation" class="c-main-nav js-main-nav" aria-label="{{ __('Main menu', 'chisel') }}">
+    <button class="c-main-nav__toggle c-main-nav__toggle--slider js-main-nav-toggle" aria-expanded="false" aria-controls="main-menu" aria-label="{{ __('Toggle main menu', 'chisel') }}">
+      <span class="c-main-nav__toggle-box">
+        <span class="c-main-nav__toggle-inner"></span>
+      </span>
+    </button>
+
+    <ul id="main-menu" class="c-main-nav__items js-main-nav__items is-level-{{ main_nav_level }}">
+      {% for item in main_nav.items %}
+        {% include 'components/main-nav-item.twig' with {item: item, main_nav_level_max: main_nav_level_max} %}
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}

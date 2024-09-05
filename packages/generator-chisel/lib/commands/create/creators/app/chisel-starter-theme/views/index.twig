@@ -1,0 +1,36 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <section class="o-wrapper__inner">
+    {% if title %}
+      <h1>{{ title }}</h1>
+    {% endif %}
+
+    {% block before_loop %}
+    {% endblock %}
+
+    <div class="o-layout">
+      <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large">
+        <div class="c-posts-items o-grid o-grid--cols-1 o-grid--cols-2-small o-grid--cols-{% if sidebar %}2{% else %}3{% endif %}-medium js-load-more-container">
+          {% if posts is not empty %}
+            {% for post in posts %}
+              {% include "components/post-item.twig" with {post: post} %}
+            {% endfor %}
+          {% else %}
+            dupa
+          {% endif %}
+        </div>
+
+        {% include 'partials/pagination.twig' with {type: 'load-more'} %}
+      </div>
+
+      {% if sidebar %}
+        {% include 'sidebar-blog.twig' %}
+      {% endif %}
+    </div>
+
+    {% block after_loop %}
+    {% endblock %}
+  </section>
+{% endblock %}
+

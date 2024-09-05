@@ -1,0 +1,75 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+  {% do action('woocommerce_before_single_product') %}
+
+  <article id="post-{{ post.ID }}" itemscope itemtype="https://schema.org/Product" class="{{ post_classes(post.class) }}">
+    <section class="o-wrapper__inner {{ wrapper_class }} c-post c-post--{{ post.type|default('page') }}">
+
+      <div class="o-layout c-content{% if sidebar %} has-sidebar{% endif %} product">
+        <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large c-content__inner">
+
+          <div class="o-layout c-product__inner">
+            <div class="c-product__gallery o-layout__item o-layout__item--6-large">
+              {#
+              * Hook: woocommerce_before_single_product_summary.
+              *
+              * @hooked woocommerce_show_product_sale_flash - 10
+              * @hooked woocommerce_show_product_images - 20
+              #}
+              {% do action('woocommerce_before_single_product_summary') %}
+            </div>
+
+            <div class="c-product__summary o-layout__item o-layout__item--6-large">
+              {#
+              * Hook: woocommerce_single_product_summary.
+              *
+              * @hooked woocommerce_template_single_title - 5
+              * @hooked woocommerce_template_single_rating - 10
+              * @hooked woocommerce_template_single_price - 10
+              * @hooked woocommerce_template_single_excerpt - 20
+              * @hooked woocommerce_template_single_add_to_cart - 30
+              * @hooked woocommerce_template_single_meta - 40
+              * @hooked woocommerce_template_single_sharing - 50
+              * @hooked WC_Structured_Data::generate_product_data() - 60
+              #}
+              {% do action('woocommerce_single_product_summary') %}
+            </div>
+          </div>
+
+          <div class="c-product__content">
+            {#
+            * Hook: woocommerce_after_single_product_summary.
+            *
+            * @hooked woocommerce_output_product_data_tabs - 10
+            * @hooked woocommerce_upsell_display - 15
+            * @hooked woocommerce_output_related_products - 20
+            #}
+            {% do action('woocommerce_after_single_product_summary') %}
+
+            {% if upsells_products is not empty %}
+              {% include 'woocommerce/linked-products.twig' with {linked_title: __('You may also like:', 'chisel'), linked_products: upsells_products, linked_type: 'upsells'} %}
+            {% endif %}
+
+            {% if related_products is not empty %}
+              {% include 'woocommerce/linked-products.twig' with {linked_title: __('Related products:', 'chisel'), linked_products: related_products, linked_type: 'related'} %}
+            {% endif %}
+
+            <meta itemprop="url" content="{{ post.link }}" />
+          </div>
+        </div>
+
+        {% if sidebar %}
+          {% include 'sidebar-blog.twig' %}
+        {% endif %}
+      </div>
+    </section>
+  </article>
+
+  {#
+  * Hook: woocommerce_after_single_product.
+  #}
+  {% do action('woocommerce_after_single_product') %}
+
+{% endblock %}

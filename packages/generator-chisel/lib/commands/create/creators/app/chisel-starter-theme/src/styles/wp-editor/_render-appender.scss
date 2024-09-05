@@ -1,0 +1,33 @@
+@use '~design' as *;
+
+.block-editor-block-list__block.has-custom-render-appender {
+  .block-list-appender {
+    position: relative;
+    width: 100%;
+    margin: get-margin('small') 0;
+  }
+
+  .c-block-appender {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: get-padding('normal');
+    font-size: get-font-size('normal');
+    color: get-color('black');
+    background-color: get-color('light-grey');
+    border: 1px solid get-color('medium-grey');
+    transition: none;
+
+    span {
+      line-height: 1;
+      transition: none;
+    }
+
+    .dashicon {
+      position: relative;
+      top: px-rem(2px);
+      margin-right: px-rem(8px);
+    }
+  }
+}

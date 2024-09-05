@@ -1,0 +1,18 @@
+@use '~design' as *;
+
+.o-wrapper {
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.o-wrapper * {
+  box-sizing: border-box;
+}
+
+.o-wrapper__inner {
+  width: 100%;
+  max-width: get-layout-size('content');
+  margin-inline: auto;
+  padding-inline: get-padding('small');
+}

@@ -1,0 +1,470 @@
+{% extends "single.twig" %}
+
+{% block inner_content %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.content }}</p>
+
+  <!-- Slider main container -->
+  <div class="swiper swiper1 js-slider">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      ...
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div>
+
+  <!-- Slider main container -->
+  <div class="swiper swiper2 js-slider">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      ...
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div>
+
+  <style>
+
+
+    section {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .element {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 1rem;
+      background: #fff;
+    }
+
+    .element__name {
+      font-size: 1.6rem;
+      color: #333;
+    }
+
+    .o-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      font-size: var(--o-icon-size, 1em);
+    }
+    .o-icon__icon {
+      display: block;
+      width: 100%;
+      height: 1em;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    .o-icon__icon:not(.o-icon__icon--color) {
+      fill: currentcolor;
+      stroke: currentcolor;
+      stroke-width: 0;
+    }
+    .o-icon--icon-color-crave-logo-icon{ width: calc(0.9375 * 1em); }
+    .o-icon--icon-crave-logo{ width: calc(2.9583333333333335 * 1em); }
+  </style>
+
+  <section>
+    <h2>Colorful Icons</h2>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-color-crave-logo-icon">
+          <!-- <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#icon-color-crave-logo-icon-view" alt="icon-color-crave-logo-icon"> -->
+          <iframe class="o-icon__icon" src="./icons.svg#icon-color-crave-logo-icon-view"></iframe>
+        </div>
+        <p class="element__name">icon-color-crave-logo-icon</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-color-facebook-logo">
+          <!-- <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#icon-color-facebook-logo-view" alt="icon-color-facebook-logo"> -->
+          <iframe class="o-icon__icon" src="./icons.svg#icon-color-facebook-logo-view"></iframe>
+        </div>
+        <p class="element__name">icon-color-facebook-logo</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-color-google-logo">
+          <!-- <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#icon-color-google-logo-view" alt="icon-color-google-logo"> -->
+          <iframe class="o-icon__icon" src="./icons.svg#icon-color-google-logo-view"></iframe>
+        </div>
+        <p class="element__name">icon-color-google-logo</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-color-instagram-logo">
+          <!-- <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#icon-color-instagram-logo-view" alt="icon-color-instagram-logo"> -->
+          <iframe class="o-icon__icon" src="./icons.svg#icon-color-instagram-logo-view"></iframe>
+        </div>
+        <p class="element__name">icon-color-instagram-logo</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-color-tiktok-logo">
+          <!-- <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#icon-color-tiktok-logo-view" alt="icon-color-tiktok-logo"> -->
+          <iframe class="o-icon__icon" src="./icons.svg#icon-color-tiktok-logo-view"></iframe>
+        </div>
+        <p class="element__name">icon-color-tiktok-logo</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-color-tiktok-logo-black">
+          <!-- <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#icon-color-tiktok-logo-black-view" alt="icon-color-tiktok-logo-black"> -->
+          <iframe class="o-icon__icon" src="./icons.svg#icon-color-tiktok-logo-black-view"></iframe>
+        </div>
+        <p class="element__name">icon-color-tiktok-logo-black</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-color-youtube-logo">
+          <!-- <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#icon-color-youtube-logo-view" alt="icon-color-youtube-logo"> -->
+          <iframe class="o-icon__icon" src="./icons.svg#icon-color-youtube-logo-view"></iframe>
+        </div>
+        <p class="element__name">icon-color-youtube-logo</p>
+      </div>
+  </section>
+
+  <section>
+    <h2>Monochromatic Icons</h2>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-add-circle-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-add-circle-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-add-circle-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-album-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-album-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-album-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-arrow-left-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-arrow-left-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-arrow-left-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-arrow-right-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-arrow-right-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-arrow-right-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-calendar-month-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-calendar-month-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-calendar-month-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-check-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-check-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-check-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-close-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-close-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-close-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-crave-logo">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-crave-logo"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-crave-logo</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-delete-2-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-delete-2-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-delete-2-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-dot-grid-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-dot-grid-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-dot-grid-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-down-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-down-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-down-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-down-small-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-down-small-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-down-small-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-edit-2-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-edit-2-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-edit-2-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-edit-4-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-edit-4-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-edit-4-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-exit-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-exit-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-exit-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-eye-2-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-eye-2-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-eye-2-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-group-3-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-group-3-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-group-3-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-information-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-information-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-information-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-key-2-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-key-2-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-key-2-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-mail-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-mail-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-mail-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-menu-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-menu-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-menu-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-music-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-music-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-music-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-photo-album-2-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-photo-album-2-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-photo-album-2-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-sparkles-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-sparkles-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-sparkles-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-thumb-up-2-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-thumb-up-2-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-thumb-up-2-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-time-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-time-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-time-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-transfer-4-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-transfer-4-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-transfer-4-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-upload-2-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-upload-2-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-upload-2-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-user-3-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-user-3-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-user-3-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-user-4-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-user-4-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-user-4-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-user-edit-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-user-edit-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-user-edit-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-video-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-video-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-video-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-wallet-3-line">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-wallet-3-line"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-wallet-3-line</p>
+      </div>
+
+      <div class="element">
+        <div class="o-icon o-icon--icon-x-logo">
+          <svg class="o-icon__icon">
+            <use href="./icons.svg#icon-x-logo"></use>
+          </svg>
+        </div>
+        <p class="element__name">icon-x-logo</p>
+      </div>
+  </section>
+{% endblock %}
+

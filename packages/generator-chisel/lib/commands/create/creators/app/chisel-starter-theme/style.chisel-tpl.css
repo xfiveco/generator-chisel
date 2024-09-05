@@ -1,5 +1,12 @@
 /*
  * Theme Name: <%= app.name %>
- * Description: Chisel Starter Theme to use with Timber
+ * Theme URI: https://www.getchisel.co/
  * Author: <%= app.author %>
+ * Description: Chisel Wordpress Starter Theme based on Timber library.
+ * Version: 1.0.0
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Tags: chisel, custom, starter, theme, WordPress
+ * Text Domain: chisel
+ * Domain Path: /languages
 */

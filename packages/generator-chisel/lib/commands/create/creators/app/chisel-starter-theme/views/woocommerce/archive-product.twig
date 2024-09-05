@@ -1,0 +1,81 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+<section class="o-wrapper__inner c-shop">
+
+  {#
+  * Hook: woocommerce_before_main_content.
+  *
+  * @hooked woocommerce_output_content_wrapper - 10 (Removed by the theme)
+  * @hooked woocommerce_breadcrumb - 20
+  * @hooked WC_Structured_Data::generate_website_data() - 30
+  #}
+  {% do action('woocommerce_before_main_content') %}
+
+  {#
+  * Hook: woocommerce_shop_loop_header.
+  *
+  * @since 8.6.0
+  *
+  * @hooked woocommerce_product_taxonomy_archive_header - 10
+  #}
+  {% do action('woocommerce_shop_loop_header') %}
+
+  {#
+  * Hook: woocommerce_before_shop_loop.
+  *
+  * @hooked woocommerce_output_all_notices - 10
+  * @hooked woocommerce_result_count - 20
+  * @hooked woocommerce_catalog_ordering - 30
+  #}
+  {% do action('woocommerce_before_shop_loop') %}
+
+  <div class="o-layout">
+    <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large">
+      <div class="c-posts-items c-shop-items {{ loop_columns_class }} js-load-more-container">
+      {% if products is not empty %}
+        {% for post in products %}
+
+          {#
+          * Hook: woocommerce_shop_loop.
+          #}
+          {% do action('woocommerce_shop_loop') %}
+
+          {% include "woocommerce/content-product.twig" with {post: post} %}
+        {% endfor %}
+
+        {% include 'partials/pagination.twig' with {type: 'load-more'} %}
+
+        {#
+        * Hook: woocommerce_after_shop_loop.
+        *
+        * @hooked woocommerce_pagination - 10 (Removed by the theme)
+        #}
+        {% do action('woocommerce_after_shop_loop') %}
+      {% else %}
+        {#
+        * Hook: woocommerce_no_products_found.
+        *
+        * @hooked wc_no_products_found - 10
+        #}
+        {% do action('woocommerce_no_products_found') %}
+      {% endif %}
+      </div>
+    </div>
+
+    {% if sidebar %}
+      {% include 'sidebar-blog.twig' %}
+    {% endif %}
+  </div>
+
+
+  {#
+  * Hook: woocommerce_after_main_content.
+  *
+  * @hooked woocommerce_output_content_wrapper_end - 10 (Removed by the theme)
+  #}
+  {% do action('woocommerce_after_main_content') %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+.block-editor-block-inspector {
+  opacity: 0;
+
+  &.e-block-sidebar {
+    opacity: 1;
+
+    &--core-spacer {
+      // Hide the height settings for the spacer block.
+      .block-editor-block-card + div + div {
+        display: none;
+      }
+    }
+  }
+}

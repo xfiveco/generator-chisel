@@ -1,0 +1,21 @@
+{% set item_title = item.attr_title is not empty ? 'title="' ~ item.attr_title ~ '"' : '' %}
+{% set item_target = item.target == '_blank' ? 'target="_blank"' : '' %}
+{% set item_current = item.current %}
+{% set item_aria_current = item_current ? 'aria-current="page"' : '' %}
+{% set has_submenu = item.children is not empty and main_nav_level < main_nav_level_max %}
+{% set caret = has_submenu ? '<button class="c-main-nav__caret is-caret" aria-label="' ~ __('Toggle submenu', 'chisel') ~ '"></button>' : '' %}
+{% set is_active = 'current-menu-parent' in item.classes %}
+
+<li class="c-main-nav__{{ sub }}item {{ item.classes|join(' ') }} js-main-nav-item{{ is_active ? ' is-active' : '' }}">
+  <a href="{{ item.url }}" class="c-main-nav__{{ sub }}link js-main-nav-link" {{ item_target }} {{ item_title }} {{ item_aria_current }}>{{ item.title }}{{ caret }}</a>
+
+  {% if has_submenu %}
+    {% set main_nav_level = main_nav_level + 1 %}
+
+    <ul class="c-main-nav__subitems is-level-{{ main_nav_level }}">
+      {% for subitem in item.children %}
+        {% include 'components/main-nav-item.twig' with {item: subitem, sub: 'sub'} %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</li>

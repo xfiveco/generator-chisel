@@ -1,0 +1,63 @@
+{
+  "key": "group_6665890751dc3",
+  "title": "Theme settings",
+  "fields": [
+    {
+      "key": "field_666589075a8b5",
+      "label": "Color",
+      "name": "ts_color",
+      "aria-label": "",
+      "type": "color_picker",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "enable_opacity": 0,
+      "return_format": "string"
+    },
+    {
+      "key": "field_666589195a8b6",
+      "label": "Content",
+      "name": "ts_content",
+      "aria-label": "",
+      "type": "wysiwyg",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "default_value": "",
+      "tabs": "all",
+      "toolbar": "full",
+      "media_upload": 1,
+      "delay": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "theme-sub-settings"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "modified": 1717930289
+}

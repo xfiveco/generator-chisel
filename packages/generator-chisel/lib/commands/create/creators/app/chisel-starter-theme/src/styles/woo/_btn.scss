@@ -1,0 +1,29 @@
+@use '~design' as *;
+
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles)),
+:where(body:not(.woocommerce-block-theme-has-button-styles)) {
+  #respond input#submit,
+  .woocommerce #respond input#submit,
+  #respond input#submit.alt,
+  .woocommerce #respond input#submit.alt,
+  a.button,
+  .woocommerce a.button,
+  a.button.alt,
+  .woocommerce a.button.alt,
+  button.button,
+  .woocommerce button.button,
+  button.button.alt,
+  .woocommerce button.button.alt,
+  input.button,
+  .woocommerce input.button,
+  input.button.alt,
+  .woocommerce input.button.alt {
+    @include button();
+    @include button-secondary();
+
+    &:hover,
+    &:focus {
+      @include button-secondary-hover();
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@use '~design' as *;
+
+p,
+ul,
+ol,
+li,
+address,
+pre,
+fieldset,
+hr,
+dl,
+blockquote,
+table,
+figure {
+  margin-bottom: get-margin('normal');
+}
+
+ul, ol {
+  padding-left: get-padding('medium');
+}
+
+hr {
+  display: block;
+}

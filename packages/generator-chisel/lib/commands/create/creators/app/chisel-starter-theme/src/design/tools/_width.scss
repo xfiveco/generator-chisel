@@ -1,0 +1,12 @@
+@mixin alignfull() {
+  left: calc(-50vw + (50% + (var(--scrollbar-width) / 2)));
+  width: calc(100vw - var(--scrollbar-width));
+  max-width: calc(100vw - var(--scrollbar-width));
+}
+
+@mixin alignwide() {
+  width: get-layout-size('wide');
+  max-width: get-layout-size('wide');
+  margin-right: calc(((get-layout-size('wide') - get-layout-size('content')) / 2) * -1);
+  margin-left: calc(((get-layout-size('wide') - get-layout-size('content')) / 2) * -1);
+}

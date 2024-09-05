@@ -1,0 +1,10 @@
+<div class="c-logo">
+  <a href="{{ site.link }}" class="c-logo__link">
+    <span class="u-sr-only">{{ site.title }}</span>
+    {% if logo_image %}
+      {{ logo_image }}
+    {% else %}
+      <span class="c-logo__text">{{ site.title }}</span>
+    {% endif %}
+  </a>
+</div>

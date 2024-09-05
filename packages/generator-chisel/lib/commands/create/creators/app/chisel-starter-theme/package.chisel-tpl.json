@@ -1,31 +1,57 @@
-<% /* This file will be later formatted and sorted */ %>
-<% /* Don't worry too much how it looks here */ %>
 {
   "name": "<%= app.nameSlug %>",
   "version": "0.0.0",
   "private": true,
   "license": "UNLICENSED",
   "author": "<%= app.author %>",
-  "description": "<%= app.name %>",
+  "description": "Chisel WP",
   "scripts": {
     "start": "chisel-scripts start",
-    "build": "chisel-scripts build",
+    "dev": "npm run start",
+    "build": "chisel-scripts build && npm run lint && npm run phpcs && npm run twigcs",
+    "build-scripts": "chisel-scripts build",
     "add-page": "chisel-scripts add-page",
-    "create-block": "chisel-scripts create-block",
+    "create-block": "chisel-scripts create-block --category=chisel-blocks --namespace=chisel",
+    "create-dynamic-block": "npm run create-block --variant=dynamic",
     "wp": "chisel-scripts wp",
     "composer": "chisel-scripts composer",
-    "wp-config": "chisel-scripts wp-config"
+    "wp-config": "chisel-scripts wp-config",
+    "prepare": "cd ../../.. && husky install wp-content/themes/<%= app.nameSlug %>-chisel/.husky",
+    "lint:script": "eslint . --ignore-path .gitignore --fix --ext .js,.jsx,.ts,.tsx,.vue,.cjs,.mjs && echo Linting scripts completed successfully",
+    "lint:style": "stylelint \"**/*.{css,scss,vue}\" --aei --fix --ignore-path .stylelintignore --ignore-path .gitignore && echo Linting styles completed successfully",
+    "lint": "npm run --silent lint:script && npm run --silent lint:style",
+    "format": "prettier --write --ignore-unknown --log-level warn \"**/*\" && echo Formatting completed successfully",
+    "format-and-lint": "npm run --silent format && npm run --silent lint",
+    "phpcs": "vendor\\bin\\phpcs --extensions=php",
+    "twigcs": "vendor\\bin\\twigcs --config=twig_cs.php"
   },
   "devDependencies": {
     "@wordpress/scripts": "^27.9.0",
-    "chisel-scripts": "*"
-  },
-  "dependencies": {
+    "@xfive/eslint-config-prettier": "^0.1.0",
+    "chisel-scripts": "^1.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.35.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.9",
+    "prettier": "^3.3.3",
+    "stylelint": "^16.8.2",
+    "stylelint-config-css-modules": "^4.4.0",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-recess-order": "^4.6.0",
+    "stylelint-config-standard-scss": "^12.0.0",
+    "stylelint-prettier": "^5.0.2"
   },
   "overrides": {
     "@wordpress/scripts": {
       "eslint-config-prettier": "^9.0.0",
       "prettier": "^3.0.0"
     }
+  },
+  "chisel": {
+    "url": "http://<%= app.nameSlug %>.test/",
+    "tablePrefix": "<%= wp.tablePrefix %>"
+  },
+  "dependencies": {
+    "swiper": "^11.1.10"
   }
 }

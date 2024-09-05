@@ -1,0 +1,14 @@
+@use '~design' as *;
+@use "sass:meta";
+
+.editor-styles-wrapper {
+  @include meta.load-css('../blocks/core-spacer');
+
+  .wp-block-spacer {
+    background-color: get-color('light-grey');
+
+    .components-resizable-box__container {
+      display: none;
+    }
+  }
+}

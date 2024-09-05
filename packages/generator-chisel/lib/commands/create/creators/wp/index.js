@@ -75,6 +75,7 @@ module.exports = (api) => {
 
   api.schedule(api.PRIORITIES.COPY, async () => {
     const { tablePrefix } = api.creator.data.wp;
+    api.creator.data.app.tablePrefix = tablePrefix;
     await api.modifyFile('wp-config.php', (body) =>
       body
         .replace('wp_', tablePrefix)

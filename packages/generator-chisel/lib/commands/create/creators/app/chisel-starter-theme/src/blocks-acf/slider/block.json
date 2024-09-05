@@ -1,0 +1,26 @@
+{
+  "name": "chisel/slider",
+  "title": "Slider",
+  "description": "Images slider",
+  "category": "chisel-blocks",
+  "icon": "carrot",
+  "apiVersion": 3,
+  "keywords": ["slider", "carousel", "images"],
+  "textdomain": "chisel",
+  "acf": {
+    "mode": "preview",
+    "usePostMeta": false,
+    "renderCallback": "\\Chisel\\AcfBlocks::acf_block_render"
+  },
+  "supports": {
+    "anchor": true,
+    "align": ["wide", "full"],
+    "alignWide": true,
+    "alignContent": false,
+    "className": true,
+    "customClassName": true,
+    "multiple": true,
+    "reusable": true
+  },
+  "style": ["file:./style.css"]
+}

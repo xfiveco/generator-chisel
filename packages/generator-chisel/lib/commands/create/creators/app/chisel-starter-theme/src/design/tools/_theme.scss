@@ -1,0 +1,57 @@
+/* Functions used to get theme.json variables */
+
+@function get-layout-size($name) {
+  @return var(--wp--style--global--#{$name}-size);
+}
+
+@function get-color($name) {
+  @return var(--wp--preset--color--#{$name});
+}
+
+@function get-gradient($name) {
+  @return var(--wp--preset--gradient--#{$name});
+}
+
+@function get-font-size($name) {
+  @return var(--wp--preset--font-size--#{$name});
+}
+
+@function get-font-family($name) {
+  @return var(--wp--preset--font-family--#{$name});
+}
+
+@function get-margin($name) {
+  @return var(--wp--custom--margin--#{$name});
+}
+
+@function get-padding($name) {
+  @return var(--wp--custom--padding--#{$name});
+}
+
+@function get-gap($name) {
+  @return var(--wp--custom--gap--#{$name});
+}
+
+@function get-border-radius($name) {
+  @return var(--wp--custom--border-radius--#{$name});
+}
+
+@function get-border-width($name) {
+  @return var(--wp--custom--border-width--#{$name});
+}
+
+@function get-box-shadow($name) {
+  @return var(--wp--custom--box-shadow--#{$name});
+}
+
+@function get-letter-spacing($name) {
+  @return var(--wp--custom--letter-spacing--#{$name});
+}
+
+@function get-line-height($name) {
+  @return var(--wp--custom--line-height--#{$name});
+}
+
+@function get-transition($name: 'normal') {
+  @return var(--wp--custom--transition--#{$name});
+}

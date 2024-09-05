@@ -1,0 +1,305 @@
+@use '~design' as *;
+
+.c-main-nav__items {
+  display: none;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  @include bp-down(large) {
+    visibility: hidden;
+    opacity: 0;
+    transition: get-transition('normal');
+
+    &.is-active {
+      position: fixed;
+      inset: 0;
+      z-index: 998;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: px-rem(100) 0 px-rem(20);
+      overflow: auto;
+      text-align: center;
+      background-color: get-color('white');
+    }
+
+    &.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  @include bp(large) {
+    display: flex;
+  }
+}
+
+.c-main-nav__item {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.c-main-nav__caret {
+  position: relative;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: px-rem(20);
+  height: px-rem(20);
+  padding: 0;
+  margin: 0 0 0 get-margin('tiny');
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  border: 0;
+
+  @include bp-down(large) {
+    top: -2px;
+    width: px-rem(24);
+    height: px-rem(24);
+
+    .c-main-nav__item.is-active & {
+      transform: rotate(180deg);
+    }
+  }
+
+  &::before {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    content: '';
+    border-top: px-rem(5) solid get-color('primary');
+    border-right: px-rem(5) solid transparent;
+    border-left: px-rem(5) solid transparent;
+    transition: get-transition('normal');
+
+    .c-main-nav__subitems & {
+      transform: rotate(-90deg);
+      transform-origin: top center;
+    }
+  }
+
+  .c-main-nav__subitems & {
+    @include bp-down(large) {
+      display: none;
+    }
+  }
+
+  .c-main-nav--columns & {
+    @include bp(large) {
+      display: none;
+    }
+  }
+}
+
+.c-main-nav__link {
+  display: block;
+  padding: get-padding('little') get-padding('small');
+  font-size: get-font-size('large');
+  text-align: center;
+  text-decoration: none;
+
+  @include bp(large) {
+    padding: get-padding('normal');
+    font-size: get-font-size('medium');
+  }
+
+  &:hover,
+  &:focus,
+  .current-menu-item > &,
+  .current-menu-parent > & {
+    color: get-color('secondary');
+    text-decoration: none;
+
+    .c-main-nav__caret::before {
+      border-top-color: get-color('secondary');
+    }
+  }
+}
+
+.c-main-nav__subitems {
+  position: relative;
+  display: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  background-color: transparent;
+
+  @include bp-down(large) {
+    .c-main-nav__item.is-active & {
+      display: block;
+    }
+  }
+
+  @include bp(large) {
+    position: absolute;
+    top: calc(100% + px-rem(16));
+    left: px-rem(16);
+    z-index: -999;
+    display: block;
+    width: px-rem(160);
+    padding: get-padding('little') 0;
+    margin-top: get-margin('small');
+    visibility: hidden;
+    box-shadow: none;
+    opacity: 0;
+    transition:
+      opacity 0.3s ease-in-out,
+      visibility 0.3s ease-in-out,
+      margin 0.3s ease-in-out,
+      z-index 0s ease-in-out 0.3s;
+
+    &::after {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      content: '';
+      background-color: get-color('white');
+      border-radius: get-border-radius('small');
+      box-shadow: get-box-shadow('3-r');
+
+      @include bp(full) {
+        box-shadow: get-box-shadow('3');
+      }
+    }
+
+    &.is-level-3 {
+      top: px-rem(-1);
+      left: -100%;
+
+      @include bp(full) {
+        left: 100%;
+      }
+    }
+
+    .menu-item-has-children:hover > & {
+      z-index: 999;
+      margin-top: 0;
+      visibility: visible;
+      opacity: 1;
+      transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out,
+        margin 0.3s ease-in-out,
+        z-index 0s ease-in-out;
+    }
+  }
+}
+
+.c-main-nav__subitem {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.c-main-nav__sublink {
+  display: block;
+  padding: get-padding('little') get-padding('small');
+  font-size: get-font-size('large');
+  text-decoration: none;
+
+  @include bp(large) {
+    font-size: get-font-size('normal');
+  }
+
+  &:hover,
+  &:focus,
+  .current-menu-item > & {
+    color: get-color('secondary');
+    text-decoration: none;
+
+    @include bp(large) {
+      background-color: get-color('light-grey');
+    }
+
+    .c-main-nav__caret::before {
+      border-top-color: get-color('secondary');
+    }
+  }
+}
+
+@include bp(large) {
+  .c-main-nav--columns {
+    .c-main-nav__item {
+      position: static;
+    }
+
+    .current-menu-item > .c-main-nav__sublink {
+      background-color: transparent;
+    }
+
+    .c-main-nav__sublink {
+      &:hover,
+      &:focus,
+      .current-menu-item > & {
+        background-color: transparent;
+      }
+    }
+
+    .c-main-nav__subitems {
+      &.is-level-2 {
+        top: calc(100% - px-rem(16));
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-flow: row wrap;
+        gap: get-gap('normal');
+        width: 100%;
+        max-width: 100%;
+        padding-inline: get-padding('small');
+        padding-top: get-padding('large');
+
+        &::after {
+          top: get-margin('normal');
+          box-shadow: get-box-shadow('4');
+
+          // border-top-left-radius: 0;
+          // border-top-right-radius: 0;
+        }
+
+        > .c-main-nav__subitem > .c-main-nav__sublink {
+          font-weight: 700;
+        }
+      }
+
+      &.is-level-3 {
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        padding: 0;
+        margin-top: 0;
+        visibility: visible;
+        opacity: 1;
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    &.has-2-columns .is-level-2 > .c-main-nav__subitem {
+      width: get-flex-col-width(6, get-gap('normal'));
+    }
+
+    &.has-3-columns .is-level-2 > .c-main-nav__subitem {
+      width: get-flex-col-width(4, get-gap('normal'));
+    }
+
+    &.has-4-columns .is-level-2 > .c-main-nav__subitem {
+      width: get-flex-col-width(3, get-gap('normal'));
+    }
+  }
+}

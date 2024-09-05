@@ -1,0 +1,33 @@
+@use 'theme' as *;
+
+@mixin button() {
+  display: inline-flex;
+  appearance: none;
+  border: none;
+  padding: get-padding('small') get-padding('medium');
+  border-radius: get-border-radius('little');
+  font-size: get-font-size('normal');
+  line-height: get-line-height('normal');
+  transition: get-transition('normal');
+  cursor: pointer;
+}
+
+@mixin button-primary() {
+  background-color: get-color('primary');
+  color: get-color('white');
+}
+
+@mixin button-primary-hover() {
+  background-color: get-color('secondary');
+  color: get-color('white');
+}
+
+@mixin button-secondary() {
+  background-color: get-color('secondary');
+  color: get-color('white');
+}
+
+@mixin button-secondary-hover() {
+  background-color: get-color('primary');
+  color: get-color('white');
+}
