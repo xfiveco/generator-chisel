@@ -165,6 +165,7 @@ abstract class RegisterBlocks {
 						if ( isset( $block_file ) && strpos( $block_file, 'file:' ) !== false ) {
 							$file_name = str_replace( 'file:./', '', $block_file );
 							$is_style  = strpos( $script_handle, 'style' ) !== false;
+							$load_css_only = isset( $block_metadata['loadCssOnly'] ) ? absint( $block_metadata['loadCssOnly'] ) : 0;
 
 							// Set the asset handle.
 							$block_metadata[$script] = $block_handle;
@@ -187,13 +188,15 @@ abstract class RegisterBlocks {
 									$block_handle
 								);
 
-								wp_register_script(
-									$block_handle,
-									$file_url,
-									$script_asset['dependencies'],
-									$script_asset['version'],
-									$register_script_args,
-								);
+								if ( ! $load_css_only ) {
+									wp_register_script(
+										$block_handle,
+										$file_url,
+										$script_asset['dependencies'],
+										$script_asset['version'],
+										$register_script_args,
+									);
+								}
 							}
 						}
 					}

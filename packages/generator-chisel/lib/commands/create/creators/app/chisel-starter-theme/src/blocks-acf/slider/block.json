@@ -22,5 +22,7 @@
     "multiple": true,
     "reusable": true
   },
-  "style": ["file:./style.css"]
+  "loadCssOnly": true,
+  "script": "file:./script.js",
+  "style": ["file:./style-script.css"]
 }
