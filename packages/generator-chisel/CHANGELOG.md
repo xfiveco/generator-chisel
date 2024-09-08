@@ -2,6 +2,31 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.0 (2024-09-08)
+
+- acf block json custom arg to load css only ([0659521](https://github.com/xfiveco/generator-chisel/commit/0659521))
+- add block creator ([ea0e956](https://github.com/xfiveco/generator-chisel/commit/ea0e956))
+- Add Coding Standards, Minor Improvements ([cfcb017](https://github.com/xfiveco/generator-chisel/commit/cfcb017))
+- add prettier override ([c86cf4d](https://github.com/xfiveco/generator-chisel/commit/c86cf4d))
+- add styles indexing ([192b71d](https://github.com/xfiveco/generator-chisel/commit/192b71d))
+- cleanup ([e78d5d4](https://github.com/xfiveco/generator-chisel/commit/e78d5d4))
+- cleanup layout ([b0d5b5e](https://github.com/xfiveco/generator-chisel/commit/b0d5b5e))
+- cleanup, working start and build ([0f82f3b](https://github.com/xfiveco/generator-chisel/commit/0f82f3b))
+- composer json update ([81ac720](https://github.com/xfiveco/generator-chisel/commit/81ac720))
+- create design styles ([a395fb5](https://github.com/xfiveco/generator-chisel/commit/a395fb5))
+- fix dependencies ([9997915](https://github.com/xfiveco/generator-chisel/commit/9997915))
+- fix package template ([eb476f4](https://github.com/xfiveco/generator-chisel/commit/eb476f4))
+- Merge branch 'v2' of github.com:xfiveco/generator-chisel into v2 ([02bda4e](https://github.com/xfiveco/generator-chisel/commit/02bda4e))
+- more cleanup, use default command ([e1fcf10](https://github.com/xfiveco/generator-chisel/commit/e1fcf10))
+- move coding standards ([faecb0d](https://github.com/xfiveco/generator-chisel/commit/faecb0d))
+- New chisel theme ([a05665b](https://github.com/xfiveco/generator-chisel/commit/a05665b))
+- remove engines, cleanup ([d562e69](https://github.com/xfiveco/generator-chisel/commit/d562e69))
+- remove wordpress plugin and move code to chisel scripts ([bb90260](https://github.com/xfiveco/generator-chisel/commit/bb90260))
+- separate docs dependencies, cleanup ([d5cf033](https://github.com/xfiveco/generator-chisel/commit/d5cf033))
+- update timber ([1f4d08c](https://github.com/xfiveco/generator-chisel/commit/1f4d08c))
+- WiP ([802891c](https://github.com/xfiveco/generator-chisel/commit/802891c))
+- working setup with composer ([abd16db](https://github.com/xfiveco/generator-chisel/commit/abd16db))
+
 ## 1.0.0 (2021-12-17)
 
 - Rewrite with Webpack (#509) ([14fa2d0](https://github.com/xfiveco/generator-chisel/commit/14fa2d0)), closes [#509](https://github.com/xfiveco/generator-chisel/issues/509)

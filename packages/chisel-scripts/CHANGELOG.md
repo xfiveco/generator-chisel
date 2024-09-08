@@ -2,6 +2,23 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.0 (2024-09-08)
+
+- add block creator ([ea0e956](https://github.com/xfiveco/generator-chisel/commit/ea0e956))
+- Add Coding Standards, Minor Improvements ([cfcb017](https://github.com/xfiveco/generator-chisel/commit/cfcb017))
+- add styles indexing ([192b71d](https://github.com/xfiveco/generator-chisel/commit/192b71d))
+- adjust patterns ([b48eabb](https://github.com/xfiveco/generator-chisel/commit/b48eabb))
+- cleanup ([e78d5d4](https://github.com/xfiveco/generator-chisel/commit/e78d5d4))
+- cleanup, working start and build ([0f82f3b](https://github.com/xfiveco/generator-chisel/commit/0f82f3b))
+- create design styles ([a395fb5](https://github.com/xfiveco/generator-chisel/commit/a395fb5))
+- more cleanup, remove hooks ([dd9243b](https://github.com/xfiveco/generator-chisel/commit/dd9243b))
+- more cleanup, use default command ([e1fcf10](https://github.com/xfiveco/generator-chisel/commit/e1fcf10))
+- New chisel theme ([a05665b](https://github.com/xfiveco/generator-chisel/commit/a05665b))
+- remove engines, cleanup ([d562e69](https://github.com/xfiveco/generator-chisel/commit/d562e69))
+- remove wordpress plugin and move code to chisel scripts ([bb90260](https://github.com/xfiveco/generator-chisel/commit/bb90260))
+- WiP ([802891c](https://github.com/xfiveco/generator-chisel/commit/802891c))
+- working setup with composer ([abd16db](https://github.com/xfiveco/generator-chisel/commit/abd16db))
+
 ## 1.0.0 (2021-12-17)
 
 - Rewrite with Webpack (#509) ([14fa2d0](https://github.com/xfiveco/generator-chisel/commit/14fa2d0)), closes [#509](https://github.com/xfiveco/generator-chisel/issues/509)
