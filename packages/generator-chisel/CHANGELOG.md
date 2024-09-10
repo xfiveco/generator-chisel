@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.2 (2024-09-10)
+
+- correct gitignore ([22542dc](https://github.com/xfiveco/generator-chisel/commit/22542dc))
+
 ## 2.0.0-alpha.1 (2024-09-10)
 
 - adjust commands ([b289bd8](https://github.com/xfiveco/generator-chisel/commit/b289bd8))
