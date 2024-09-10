@@ -64,10 +64,12 @@ class Acf implements Instance {
 		$this->acf_options_pages = apply_filters(
 			'chisel_acf_options_pages',
 			array(
-				array(
-					'menu_slug'  => 'theme-settings',
-					'page_title' => __( 'Theme Settings', 'chisel' ),
-				),
+				// phpcs:disable
+				// array(
+				// 	'menu_slug'  => 'theme-settings',
+				// 	'page_title' => __( 'Theme Settings', 'chisel' ),
+				// ),
+				// phpcs:enable
 			)
 		);
 	}
@@ -79,12 +81,14 @@ class Acf implements Instance {
 		$this->acf_options_sub_pages = apply_filters(
 			'chisel_acf_options_sub_pages',
 			array(
-				array(
-					'menu_slug'   => 'theme-sub-settings',
-					'page_title'  => __( 'Theme Sub settings', 'chisel' ),
-					'menu_title'  => __( 'Theme Sub settings', 'chisel' ),
-					'parent_slug' => 'theme-settings',
-				),
+				// phpcs:disable
+				// array(
+				// 	'menu_slug'   => 'theme-sub-settings',
+				// 	'page_title'  => __( 'Theme Sub settings', 'chisel' ),
+				// 	'menu_title'  => __( 'Theme Sub settings', 'chisel' ),
+				// 	'parent_slug' => 'theme-settings',
+				// ),
+				// phpcs:enable
 			)
 		);
 	}

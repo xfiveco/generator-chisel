@@ -1,148 +1,148 @@
 {
-    "key": "group_66d5a4ebb41cd",
-    "title": "Slider Settings",
-    "fields": [
-        {
-            "key": "field_66d5a4f9ee449",
-            "label": "Settings",
-            "name": "slider_settings",
-            "aria-label": "",
-            "type": "checkbox",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "arrows": "Arrows",
-                "dots": "Dots",
-                "loop": "Loop",
-                "autoplay": "Autoplay",
-                "thumbnails": "Thumbnails"
-            },
-            "default_value": [
-                "arrows",
-                "dots"
-            ],
-            "return_format": "value",
-            "allow_custom": 0,
-            "layout": "vertical",
-            "toggle": 0,
-            "save_custom": 0,
-            "custom_choice_button_text": "Add new choice"
-        },
-        {
-            "key": "field_66d5a74076f5f",
-            "label": "Dynamic dots",
-            "name": "slider_settings_dynamic_dots",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_66d5a4f9ee449",
-                        "operator": "==",
-                        "value": "dots"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "yes": "Yes",
-                "no": "No"
-            },
-            "default_value": "no",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
-            "key": "field_66d5a77e76f60",
-            "label": "No of thumbnails",
-            "name": "slider_settings_thumbnails_no",
-            "aria-label": "",
-            "type": "number",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_66d5a4f9ee449",
-                        "operator": "==",
-                        "value": "thumbnails"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": 8,
-            "min": 1,
-            "max": "",
-            "placeholder": "",
-            "step": 1,
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_66d5a9feca5b9",
-            "label": "Autoplay timeout",
-            "name": "slider_settings_autoplay_timeout",
-            "aria-label": "",
-            "type": "number",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_66d5a4f9ee449",
-                        "operator": "==",
-                        "value": "autoplay"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": 5000,
-            "min": 1000,
-            "max": "",
-            "placeholder": "",
-            "step": 100,
-            "prepend": "",
-            "append": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "post"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": true,
-    "description": "",
-    "show_in_rest": 0,
-    "modified": 1725278752
+  "key": "group_66d5a4ebb41cd",
+  "title": "Slider Settings",
+  "fields": [
+      {
+          "key": "field_66d5a4f9ee449",
+          "label": "Settings",
+          "name": "slider_settings",
+          "aria-label": "",
+          "type": "checkbox",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "choices": {
+              "arrows": "Arrows",
+              "dots": "Dots",
+              "loop": "Loop",
+              "autoplay": "Autoplay",
+              "thumbnails": "Thumbnails"
+          },
+          "default_value": [
+              "arrows",
+              "dots"
+          ],
+          "return_format": "value",
+          "allow_custom": 0,
+          "layout": "vertical",
+          "toggle": 0,
+          "save_custom": 0,
+          "custom_choice_button_text": "Add new choice"
+      },
+      {
+          "key": "field_66d5a74076f5f",
+          "label": "Dynamic dots",
+          "name": "slider_settings_dynamic_dots",
+          "aria-label": "",
+          "type": "button_group",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": [
+              [
+                  {
+                      "field": "field_66d5a4f9ee449",
+                      "operator": "==",
+                      "value": "dots"
+                  }
+              ]
+          ],
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "choices": {
+              "yes": "Yes",
+              "no": "No"
+          },
+          "default_value": "no",
+          "return_format": "value",
+          "allow_null": 0,
+          "layout": "horizontal"
+      },
+      {
+          "key": "field_66d5a77e76f60",
+          "label": "No of thumbnails",
+          "name": "slider_settings_thumbnails_no",
+          "aria-label": "",
+          "type": "number",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": [
+              [
+                  {
+                      "field": "field_66d5a4f9ee449",
+                      "operator": "==",
+                      "value": "thumbnails"
+                  }
+              ]
+          ],
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": 8,
+          "min": 1,
+          "max": "",
+          "placeholder": "",
+          "step": 1,
+          "prepend": "",
+          "append": ""
+      },
+      {
+          "key": "field_66d5a9feca5b9",
+          "label": "Autoplay timeout",
+          "name": "slider_settings_autoplay_timeout",
+          "aria-label": "",
+          "type": "number",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": [
+              [
+                  {
+                      "field": "field_66d5a4f9ee449",
+                      "operator": "==",
+                      "value": "autoplay"
+                  }
+              ]
+          ],
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": 5000,
+          "min": 1000,
+          "max": "",
+          "placeholder": "",
+          "step": 100,
+          "prepend": "",
+          "append": ""
+      }
+  ],
+  "location": [
+      [
+          {
+              "param": "post_type",
+              "operator": "==",
+              "value": "page"
+          }
+      ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": false,
+  "description": "For cloning only",
+  "show_in_rest": 0,
+  "modified": 1725978785
 }

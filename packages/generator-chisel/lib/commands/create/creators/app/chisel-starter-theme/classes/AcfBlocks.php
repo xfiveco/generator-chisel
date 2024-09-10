@@ -35,7 +35,7 @@ class AcfBlocks extends RegisterBlocks implements Instance {
 	 * Set properties.
 	 */
 	public function set_properties() {
-		$this->blocks_twig_base_path = apply_filters( 'chisel_blocks_twig_base_path', 'src/blocks-acf/' );
+		$this->blocks_twig_base_path = 'src/blocks-acf/';
 	}
 
 	/**
