@@ -1,3 +1,5 @@
+@use 'theme' as *;
+
 @mixin alignfull() {
   left: calc(-50vw + (50% + (var(--scrollbar-width) / 2)));
   width: calc(100vw - var(--scrollbar-width));

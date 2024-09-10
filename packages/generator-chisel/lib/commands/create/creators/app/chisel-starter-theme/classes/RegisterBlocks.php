@@ -163,8 +163,8 @@ abstract class RegisterBlocks {
 
 					foreach ( $block_files as $block_file ) {
 						if ( isset( $block_file ) && strpos( $block_file, 'file:' ) !== false ) {
-							$file_name = str_replace( 'file:./', '', $block_file );
-							$is_style  = strpos( $script_handle, 'style' ) !== false;
+							$file_name     = str_replace( 'file:./', '', $block_file );
+							$is_style      = strpos( $script_handle, 'style' ) !== false;
 							$load_css_only = isset( $block_metadata['loadCssOnly'] ) ? absint( $block_metadata['loadCssOnly'] ) : 0;
 
 							// Set the asset handle.
@@ -222,7 +222,7 @@ abstract class RegisterBlocks {
 	 * @return array
 	 */
 	protected function get_blocks() {
-		$blocks         = get_option( $this->blocks_option_name, array() );
+		$blocks         = get_option( $this->blocks_option_name, array() ) ?: array();
 		$blocks_version = get_option( $this->blocks_version_option_name, 0 );
 
 		if ( ! $blocks || version_compare( $this->theme->get( 'Version' ), $blocks_version ) ) {

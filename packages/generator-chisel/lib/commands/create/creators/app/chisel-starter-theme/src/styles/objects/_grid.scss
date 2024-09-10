@@ -1,14 +1,14 @@
-@use '../../design/settings';
 @use '~design' as *;
+@use '../../design/settings';
 
 $_layout-gutter: settings.$layout-gutter;
 $_layout-columns-no: settings.$layout-columns-no;
 $_breakpoints: settings.$breakpoints;
 
 .o-grid {
-  width: 100%;
   display: grid;
   gap: $_layout-gutter;
+  width: 100%;
 
   &--cols {
     @for $i from 1 through $_layout-columns-no {

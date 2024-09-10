@@ -1,7 +1,5 @@
-{% extends "layouts/base.twig" %}
+{% extends "single.twig" %}
 
-{% block content %}
-  <div>
-    {{ content }}
-  </div>
+{% block inner_content %}
+  {{ post.content }}
 {% endblock %}

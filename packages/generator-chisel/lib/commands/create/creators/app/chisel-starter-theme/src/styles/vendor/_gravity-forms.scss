@@ -1,0 +1,140 @@
+@use '~design' as *;
+@use '../elements/form' as *;
+
+/* stylelint-disable selector-class-pattern */
+
+%gf-styled-select {
+  line-height: $form-field-line-height;
+  background: $form-field-bg-color;
+  background-color: $form-field-bg-color;
+  border: $form-field-border-width solid $form-field-border-color;
+  border-radius: $form-field-border-radius;
+  box-shadow: $form-field-box-shadow;
+}
+
+.gform_wrapper.gravity-theme {
+  .gform_heading {
+    margin-bottom: get-margin('large');
+  }
+
+  .gfield-choice-input {
+    display: inline-flex;
+  }
+
+  .description,
+  .gfield_description,
+  .gsection_description,
+  .instruction {
+    padding: 0;
+    font-size: get-font-size('small');
+  }
+
+  [aria-invalid='true'] + label,
+  label + [aria-invalid='true'],
+  .gfield_error legend,
+  .gfield_error label,
+  .gfield_error .gfield_repeater_cell label {
+    color: $form-field-color;
+  }
+
+  .gfield_required,
+  .gfield_validation_message,
+  .validation_message {
+    color: $form-field-error-color;
+  }
+
+  .gfield_error [aria-invalid='true'] {
+    border-color: $form-field-error-color;
+
+    &:focus {
+      outline: 0;
+
+      &:not([readonly], [disabled]) {
+        box-shadow: $form-field-error-shadow-focus;
+      }
+    }
+  }
+
+  .gfield_validation_message,
+  .validation_message {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .gform_validation_errors {
+    padding: get-padding('normal');
+    background: none;
+    border: calc($form-field-border-width * 2) solid $form-field-error-color;
+    border-radius: $form-field-border-radius;
+    box-shadow: none;
+
+    .gform-icon {
+      display: none;
+    }
+
+    > h2 {
+      font-size: get-font-size('small');
+      font-weight: 700;
+      color: $form-field-error-color;
+      text-align: center;
+    }
+  }
+
+  // Styled select
+  .chosen-container-single .chosen-single,
+  .chosen-container-active.chosen-with-drop .chosen-single {
+    @extend %gf-styled-select;
+
+    div {
+      width: px-rem(26);
+
+      b {
+        background: $form-select-arrow;
+        background-repeat: no-repeat;
+        background-position: right 0.7rem top 50%;
+      }
+    }
+
+    &:focus {
+      outline: 0;
+
+      &:not([readonly], [disabled]) {
+        box-shadow: $form-field-shadow-focus;
+      }
+    }
+  }
+
+  .chosen-container-active.chosen-with-drop .chosen-single {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: $form-field-shadow-focus;
+  }
+
+  .chosen-container-single .chosen-search input[type='text'] {
+    box-shadow: none;
+  }
+
+  .chosen-container-single .chosen-drop,
+  .chosen-container .chosen-drop {
+    margin-top: 2px;
+    border: $form-field-border-width solid $form-field-border-color;
+    box-shadow: $form-field-shadow-focus;
+  }
+}
+
+body .gform_wrapper.gravity-theme {
+  .chosen-container a.chosen-single {
+    @extend %gf-styled-select;
+  }
+}
+
+.gform_confirmation_message {
+  padding: get-padding('normal');
+  font-size: get-font-size('small');
+  font-weight: 700;
+  color: $form-field-success-color;
+  text-align: center;
+  border: calc($form-field-border-width * 2) solid $form-field-success-color;
+  border-radius: $form-field-border-radius;
+}

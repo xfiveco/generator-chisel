@@ -19,7 +19,7 @@ class MainNav {
       navItem: '.js-main-nav-item',
       navItems: '.js-main-nav__items',
       navToggle: '.js-main-nav-toggle',
-    }
+    };
   }
 
   initElements() {
@@ -28,7 +28,7 @@ class MainNav {
       navLink: document.querySelectorAll(this.selectors.navLink),
       navItems: document.querySelector(this.selectors.navItems),
       navToggle: document.querySelector(this.selectors.navToggle),
-    }
+    };
   }
 
   initClassnames() {
@@ -37,7 +37,7 @@ class MainNav {
       open: 'is-open',
       caret: 'is-caret',
       locked: 'is-locked',
-    }
+    };
   }
 
   init() {
@@ -47,7 +47,9 @@ class MainNav {
   bindEvents() {
     this.elements.navToggle.addEventListener('click', () => this.navToggleClickHandler());
 
-    this.elements.navLink.forEach(link => link.addEventListener('click', (e) => this.navLinkClickHandler(e)));
+    this.elements.navLink.forEach((link) =>
+      link.addEventListener('click', (e) => this.navLinkClickHandler(e)),
+    );
   }
 
   navLinkClickHandler(e) {

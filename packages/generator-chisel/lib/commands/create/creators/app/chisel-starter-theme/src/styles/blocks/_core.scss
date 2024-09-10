@@ -1,1 +1,66 @@
-// Core blocks
+@use '~design' as *;
+@use '../../blocks/accordion/style' as *;
+
+.c-block {
+  &--heading,
+  &--paragraph,
+  &--details,
+  &--quote,
+  &--post-title,
+  &--post-excerpt,
+  &--post-author-name,
+  &--post-date,
+  &--post-navigation-link,
+  &--read-more,
+  &--loginout {
+    margin: 0 0 get-margin('normal');
+
+    // margin-block-end: get-margin('normal') !important;
+  }
+
+  &--quote {
+    padding-left: get-padding('medium');
+  }
+
+  &--code {
+    padding: get-padding('small');
+  }
+
+  &--pullquote,
+  &--table,
+  &--image,
+  &--gallery,
+  &--audio,
+  &--cover,
+  &--file,
+  &--media-text,
+  &--video,
+  &--buttons,
+  &--columns,
+  &--group,
+  &--calendar,
+  &--latest-posts,
+  &--rss,
+  &--search,
+  &--query,
+  &--avatar,
+  &--post-featured-image,
+  &--post-author,
+  &--embed {
+    margin: 0 auto get-margin('large');
+  }
+
+  &--separator {
+    margin: 0 auto get-margin('medium');
+  }
+}
+
+.wp-element-caption {
+  font-size: get-font-size('small');
+}
+
+.is-style-rounded {
+  img {
+    border-radius: get-border-radius('normal');
+  }
+}

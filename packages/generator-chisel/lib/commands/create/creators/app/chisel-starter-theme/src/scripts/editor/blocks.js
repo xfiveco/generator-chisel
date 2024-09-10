@@ -7,11 +7,11 @@ class Blocks {
   constructor() {
     document.addEventListener('DOMContentLoaded', () => {
       subscribe(() => {
-        const selectedBlock = select('core/block-editor').getSelectedBlock();
-        const isBlockSidebarOpen =
-          select('core/edit-post').getActiveGeneralSidebarName() === 'edit-post/block';
+        const selectedBlock = select('core/block-editor')?.getSelectedBlock();
+        // const isBlockSidebarOpen =
+        //   select('core/edit-post')?.getActiveGeneralSidebarName() === 'edit-post/block';
 
-        if (selectedBlock?.name && isBlockSidebarOpen) {
+        if (selectedBlock?.name) {
           const blockInspector = document.querySelector('.block-editor-block-inspector');
 
           if (blockInspector) {

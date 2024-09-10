@@ -52,6 +52,20 @@ class Assets implements Instance {
 	protected $editor_scripts = array();
 
 	/**
+	 * Login page styles to be registered and enqueued.
+	 *
+	 * @var array
+	 */
+	protected $login_styles = array();
+
+	/**
+	 * Login page scripts to be registered and enqueued.
+	 *
+	 * @var array
+	 */
+	protected $login_scripts = array();
+
+	/**
 	 * WP React Refresh runtime dependency.
 	 *
 	 * @var string
@@ -81,70 +95,96 @@ class Assets implements Instance {
 			},
 		);
 
-		$this->frontend_styles = apply_filters(
-			'chisel_frontend_styles',
-			array(
-				'main'        => array(),
-				'woocommerce' => array(
-					'condition' => Woocommerce::is_woocommerce_active(),
-				),
-			)
-		);
+		if ( ! is_admin() ) {
+			$this->frontend_styles = apply_filters(
+				'chisel_frontend_styles',
+				array(
+					'main'        => array(),
+					'woocommerce' => array(
+						'condition' => Woocommerce::is_woocommerce_active(),
+					),
+				)
+			);
 
-		$this->frontend_scripts = apply_filters(
-			'chisel_frontend_scripts',
-			array(
-				'runtime' => $runtime_script,
-				'app'     => array(
-					'deps'     => array( 'wp-i18n' ),
-					'localize' => array(
-						'name' => 'chiselScripts',
-						'data' => array(
-							'ajax' => array(
-								'url'   => esc_url( Ajax::get_ajax_endpoint_url() ),
-								'nonce' => wp_create_nonce( 'wp_rest' ), // this (wp_rest) authenticates users and allows using get_current_user functions in rest api endpoints.
+			$this->frontend_scripts = apply_filters(
+				'chisel_frontend_scripts',
+				array(
+					'runtime' => $runtime_script,
+					'app'     => array(
+						'deps'     => array( 'wp-i18n' ),
+						'localize' => array(
+							'name' => 'chiselScripts',
+							'data' => array(
+								'ajax' => array(
+									'url'   => esc_url( Ajax::get_ajax_endpoint_url() ),
+									'nonce' => wp_create_nonce( 'wp_rest' ), // this (wp_rest) authenticates users and allows using get_current_user functions in rest api endpoints.
+								),
 							),
 						),
 					),
-				),
-			)
-		);
+				)
+			);
 
-		$this->admin_styles = apply_filters(
-			'chisel_admin_styles',
-			array(
-				'admin' => array(),
-			)
-		);
+			if ( is_login() ) {
+				$this->login_styles = apply_filters(
+					'chisel_login_styles',
+					array(
+						'login' => array(),
+					)
+				);
 
-		$this->admin_scripts = apply_filters(
-			'chisel_admin_scripts',
-			array(
-				'runtime' => $runtime_script,
-				'admin'   => array(
-					'localize' => array(
-						'name' => 'chiselAdminScripts',
-						'data' => array(
-							'acfColorPickerPalette' => Helpers::get_colors_palette( 'acf' ),
+				$this->login_scripts = apply_filters(
+					'chisel_login_scripts',
+					array(
+						'runtime' => $runtime_script,
+						'login'   => array(
+							'localize' => array(
+								'name' => 'chiselScripts',
+								'data' => array(
+									'logoUrl' => Helpers::get_login_page_logo_url(),
+								),
+							),
+						),
+					)
+				);
+			}
+		} else {
+			$this->admin_styles = apply_filters(
+				'chisel_admin_styles',
+				array(
+					'admin' => array(),
+				)
+			);
+
+			$this->admin_scripts = apply_filters(
+				'chisel_admin_scripts',
+				array(
+					'runtime' => $runtime_script,
+					'admin'   => array(
+						'localize' => array(
+							'name' => 'chiselAdminScripts',
+							'data' => array(
+								'acfColorPickerPalette' => Helpers::get_colors_palette( 'acf' ),
+							),
 						),
 					),
-				),
-			)
-		);
+				)
+			);
 
-		$this->editor_styles = apply_filters(
-			'chisel_editor_styles',
-			array(
-				'editor' => array(),
-			)
-		);
+			$this->editor_styles = apply_filters(
+				'chisel_editor_styles',
+				array(
+					'editor' => array(),
+				)
+			);
 
-		$this->editor_scripts = apply_filters(
-			'chisel_editor_scripts',
-			array(
-				'editor' => array(),
-			)
-		);
+			$this->editor_scripts = apply_filters(
+				'chisel_editor_scripts',
+				array(
+					'editor' => array(),
+				)
+			);
+		}
 	}
 
 	/**
@@ -153,9 +193,10 @@ class Assets implements Instance {
 	public function action_hooks() {
 		add_action( 'init', array( $this, 'register_assets' ) );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ), 11 ); // Higher priority 9 overwrite plugins if needed.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ), 99 ); // Higher priority, overwrite plugins if needed.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ), 11 );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ) );
+		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_login_page_assets' ), 99 );
 
 		// Removes PHP Notice: Function wp_enqueue_script() was called incorrectly. "wp-editor" script should not be enqueued together with the new widgets editor (wp-edit-widgets or wp-customize-widgets).
 		remove_action( 'admin_head', 'wp_check_widget_editor_deps' );
@@ -171,27 +212,55 @@ class Assets implements Instance {
 	 * Register assets.
 	 */
 	public function register_assets() {
-		if ( ! is_admin() ) {
+		if ( $this->frontend_scripts ) {
 			foreach ( $this->frontend_scripts as $file_name => $args ) {
 				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
 			}
+		}
 
+		if ( $this->frontend_styles ) {
 			foreach ( $this->frontend_styles as $file_name => $args ) {
 				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
 			}
-		} else {
+		}
+
+		if ( $this->login_styles ) {
+			$login_styles_data = array();
+
+			foreach ( $this->login_styles as $file_name => $args ) {
+				$login_styles_data = $this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+			}
+
+			if ( isset( $login_styles_data['ver'] ) ) {
+				wp_register_style( 'global-styles', false, array(), $login_styles_data['ver'] );
+			}
+		}
+
+		if ( $this->login_scripts ) {
+			foreach ( $this->login_scripts as $file_name => $args ) {
+				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+			}
+		}
+
+		if ( $this->admin_scripts ) {
 			foreach ( $this->admin_scripts as $file_name => $args ) {
 				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
 			}
+		}
 
+		if ( $this->admin_styles ) {
 			foreach ( $this->admin_styles as $file_name => $args ) {
 				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
 			}
+		}
 
+		if ( $this->editor_scripts ) {
 			foreach ( $this->editor_scripts as $file_name => $args ) {
 				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
 			}
+		}
 
+		if ( $this->editor_styles ) {
 			foreach ( $this->editor_styles as $file_name => $args ) {
 				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
 			}
@@ -202,16 +271,20 @@ class Assets implements Instance {
 	 * Enqueue front-end assets.
 	 */
 	public function enqueue_frontend_assets() {
-		foreach ( $this->frontend_scripts as $handle => $args ) {
-			wp_enqueue_script( self::get_final_handle( $handle ) );
-			$this->set_script_translations( $handle, $args );
+		if ( $this->frontend_scripts ) {
+			foreach ( $this->frontend_scripts as $handle => $args ) {
+				wp_enqueue_script( self::get_final_handle( $handle ) );
+				$this->set_script_translations( $handle, $args );
+			}
 		}
 
-		foreach ( $this->frontend_styles as $handle => $args ) {
-			wp_enqueue_style( self::get_final_handle( $handle ) );
+		if ( $this->frontend_styles ) {
+			foreach ( $this->frontend_styles as $handle => $args ) {
+				wp_enqueue_style( self::get_final_handle( $handle ) );
 
-			// Enqueue js file for fast refresh of the css file.
-			$this->enqueue_style_js_for_dev( $handle );
+				// Enqueue js file for fast refresh of the css file.
+				$this->enqueue_style_js_for_dev( $handle );
+			}
 		}
 	}
 
@@ -219,16 +292,20 @@ class Assets implements Instance {
 	 * Enqueue admin assets.
 	 */
 	public function enqueue_admin_assets() {
-		foreach ( $this->admin_scripts as $handle => $args ) {
-			wp_enqueue_script( self::get_final_handle( $handle ) );
-			$this->set_script_translations( $handle, $args );
+		if ( $this->admin_scripts ) {
+			foreach ( $this->admin_scripts as $handle => $args ) {
+				wp_enqueue_script( self::get_final_handle( $handle ) );
+				$this->set_script_translations( $handle, $args );
+			}
 		}
 
-		foreach ( $this->admin_styles as $handle => $args ) {
-			wp_enqueue_style( self::get_final_handle( $handle ) );
+		if ( $this->admin_styles ) {
+			foreach ( $this->admin_styles as $handle => $args ) {
+				wp_enqueue_style( self::get_final_handle( $handle ) );
 
-			// Enqueue js file for fast refresh of the css file.
-			$this->enqueue_style_js_for_dev( $handle );
+				// Enqueue js file for fast refresh of the css file.
+				$this->enqueue_style_js_for_dev( $handle );
+			}
 		}
 	}
 
@@ -236,16 +313,47 @@ class Assets implements Instance {
 	 * Enqueue editor scripts.
 	 */
 	public function enqueue_editor_scripts() {
-		foreach ( $this->editor_scripts as $handle => $args ) {
-			wp_enqueue_script( self::get_final_handle( $handle ) );
-			$this->set_script_translations( $handle, $args );
+		if ( $this->editor_scripts ) {
+			foreach ( $this->editor_scripts as $handle => $args ) {
+				wp_enqueue_script( self::get_final_handle( $handle ) );
+				$this->set_script_translations( $handle, $args );
+			}
 		}
 
-		foreach ( $this->editor_styles as $handle => $args ) {
-			wp_enqueue_style( self::get_final_handle( $handle ) );
+		if ( $this->editor_styles ) {
+			foreach ( $this->editor_styles as $handle => $args ) {
+				wp_enqueue_style( self::get_final_handle( $handle ) );
 
-			// Enqueue js file for fast refresh of the css file.
-			$this->enqueue_style_js_for_dev( $handle );
+				// Enqueue js file for fast refresh of the css file.
+				$this->enqueue_style_js_for_dev( $handle );
+			}
+		}
+	}
+
+	/**
+	 * Enqueue login page scripts.
+	 */
+	public function enqueue_login_page_assets() {
+		$stylesheet = wp_get_global_stylesheet();
+
+		if ( empty( $stylesheet ) ) {
+			return;
+		}
+
+		wp_add_inline_style( 'global-styles', $stylesheet );
+		wp_enqueue_style( 'global-styles' );
+
+		if ( $this->login_scripts ) {
+			foreach ( $this->login_scripts as $handle => $args ) {
+				wp_enqueue_script( self::get_final_handle( $handle ) );
+				$this->set_script_translations( $handle, $args );
+			}
+		}
+
+		if ( $this->login_styles ) {
+			foreach ( $this->login_styles as $handle => $args ) {
+				wp_enqueue_style( self::get_final_handle( $handle ) );
+			}
 		}
 	}
 
@@ -299,6 +407,15 @@ class Assets implements Instance {
 				),
 			);
 		}
+
+		return array(
+			'src'       => $src,
+			'deps'      => $deps,
+			'ver'       => $ver,
+			'media'     => $media,
+			'condition' => $condition,
+			'handle'    => $handle,
+		);
 	}
 
 	/**
@@ -345,6 +462,16 @@ class Assets implements Instance {
 		if ( $inline ) {
 			wp_add_inline_script( $handle, $inline['data'], $inline['position'] );
 		}
+
+		return array(
+			'src'       => $src,
+			'deps'      => $deps,
+			'ver'       => $ver,
+			'strategy'  => $strategy,
+			'condition' => $condition,
+			'localize'  => $localize,
+			'handle'    => $handle,
+		);
 	}
 
 	/**

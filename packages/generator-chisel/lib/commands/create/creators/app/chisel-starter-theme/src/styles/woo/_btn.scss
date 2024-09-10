@@ -18,12 +18,32 @@
   .woocommerce input.button,
   input.button.alt,
   .woocommerce input.button.alt {
-    @include button();
-    @include button-secondary();
+    @include button;
+    @include button-secondary;
 
     &:hover,
     &:focus {
-      @include button-secondary-hover();
+      @include button-secondary-hover;
+    }
+
+    &.loading {
+      padding-right: px-rem(42);
+
+      &::after {
+        top: auto;
+      }
+    }
+
+    &.view {
+      @include button-small;
+    }
+  }
+
+  .c-product-item a.button {
+    @include button-small;
+
+    &.loading {
+      padding-right: px-rem(42);
     }
   }
 }

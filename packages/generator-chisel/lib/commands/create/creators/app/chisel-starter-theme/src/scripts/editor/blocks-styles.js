@@ -18,6 +18,7 @@ class BlocksStyles {
   registerBlockStyles() {
     this.registerButtonsStyles();
     this.registerSpacerStyles();
+    // this.registerLatestPostsStyles();
   }
 
   registerButtonsStyles() {
@@ -28,8 +29,25 @@ class BlocksStyles {
         isDefault: true,
       },
       {
+        name: 'primary-outline',
+        label: __('Primary Outlined', 'chisel'),
+        isDefault: true,
+      },
+      {
         name: 'secondary',
         label: __('Secondary', 'chisel'),
+      },
+      {
+        name: 'secondary-outline',
+        label: __('Secondary Outlined', 'chisel'),
+      },
+      {
+        name: 'tertiary',
+        label: __('Tertiary', 'chisel'),
+      },
+      {
+        name: 'tertiary-outline',
+        label: __('Tertiary Outlined', 'chisel'),
       },
     ];
 
@@ -42,6 +60,10 @@ class BlocksStyles {
         name: 'default',
         label: __('Default', 'chisel'),
         isDefault: true,
+      },
+      {
+        name: 'tiny',
+        label: 'XS',
       },
       {
         name: 'small',
@@ -66,6 +88,26 @@ class BlocksStyles {
     ];
 
     this.registerStyles('core/spacer', spacerStyles);
+  }
+
+  registerLatestPostsStyles() {
+    const latestPostsStyles = [
+      {
+        name: 'list',
+        label: __('List', 'chisel'),
+        isDefault: true,
+      },
+      {
+        name: 'grid-3',
+        label: 'Grid of 3',
+      },
+      {
+        name: 'grid-4',
+        label: 'Grid of 4',
+      },
+    ];
+
+    this.registerStyles('core/latest-posts', latestPostsStyles);
   }
 
   registerStyles = (blockName, styles) => {

@@ -1,0 +1,5 @@
+@use './core-latest-posts' as *;
+
+.wp-block-post-date {
+  @extend .wp-block-latest-posts__post-date;
+}

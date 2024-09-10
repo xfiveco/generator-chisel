@@ -1,7 +1,6 @@
-@forward '../tools/theme';
+@use '../tools/theme' as *;
 
 $root-font-size: 16px;
-
 $breakpoints: (
   small: 480px,
   msmall: 640px,
@@ -10,10 +9,8 @@ $breakpoints: (
   xlarge: 1200px,
   full: 1600px,
 );
-
 $layout-columns-no: 12;
 $layout-gutter: get-gap('big');
-
 $gaps: (
   'tiny': get-gap('tiny'),
   'little': get-gap('little'),

@@ -1,0 +1,7 @@
+@use '../../styles/components/posts-items' as *;
+@use '~design' as *;
+
+.wp-block-post-title {
+  @extend .c-post-item__title;
+  @include link-reverse;
+}

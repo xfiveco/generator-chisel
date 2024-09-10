@@ -1,0 +1,24 @@
+@use '~design' as *;
+
+.woocommerce div.product {
+  .woocommerce-tabs ul.tabs li {
+    color: get-color('primary');
+    background-color: get-color('light-grey');
+  }
+}
+
+.woocommerce-product-gallery {
+  overflow: hidden;
+  background-color: get-color('white');
+  border: 1px solid get-color('light-grey');
+  border-radius: get-border-radius('small');
+}
+
+.c-product__gallery {
+  position: relative;
+}
+
+.c-product-linked {
+  gap: get-gap('small');
+  margin-bottom: get-margin('large');
+}

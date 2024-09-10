@@ -1,0 +1,53 @@
+@use '~design' as *;
+@use '../elements/form' as *;
+
+.wc-block-components-form {
+  .wc-block-components-text-input {
+    &,
+    &.is-active {
+      input[type='email'],
+      input[type='number'],
+      input[type='password'],
+      input[type='tel'],
+      input[type='text'],
+      input[type='url'] {
+        &:focus {
+          outline: 0;
+
+          &:not([readonly], [disabled]) {
+            box-shadow: $form-field-shadow-focus;
+          }
+        }
+      }
+    }
+
+    &.has-error {
+      input {
+        border-color: $form-field-error-color !important;
+      }
+
+      label {
+        color: $form-field-error-color !important;
+      }
+    }
+  }
+
+  label + label,
+  label + input,
+  label + select,
+  label + button,
+  label + textarea {
+    margin-top: 0;
+  }
+}
+
+.wc-block-components-validation-error {
+  color: $form-field-error-color !important;
+}
+
+.wc-block-components-notice-banner {
+  &.is-error {
+    color: $form-field-color !important;
+    border-color: $form-field-error-color !important;
+  }
+}

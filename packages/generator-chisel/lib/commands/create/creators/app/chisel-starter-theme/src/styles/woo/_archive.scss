@@ -1,6 +1,32 @@
 @use '~design' as *;
 
+.c-shop {
+  padding-top: get-padding('normal');
+}
+
 .c-shop-items {
-  padding-top: get-padding('tiny');
   padding-bottom: get-padding('large');
+}
+
+.c-shop__sort {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: get-padding('normal');
+  margin-bottom: get-margin('large');
+
+  .woocommerce-result-count,
+  .woocommerce-ordering,
+  .woocommerce-ordering select {
+    margin: 0;
+  }
+
+  @include bp-down(small) {
+    flex-direction: column;
+
+    .woocommerce-result-count {
+      margin-bottom: get-margin('small');
+    }
+  }
 }

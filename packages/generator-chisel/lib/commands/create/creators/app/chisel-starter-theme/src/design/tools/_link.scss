@@ -1,0 +1,15 @@
+@mixin link() {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@mixin link-reverse() {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

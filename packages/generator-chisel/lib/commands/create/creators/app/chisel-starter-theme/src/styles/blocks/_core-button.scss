@@ -2,25 +2,61 @@
 
 .wp-block-button {
   .wp-block-button__link {
-    @include button();
+    @include button;
   }
 
   .wp-block-button__link,
   &.is-style-primary .wp-block-button__link {
-    @include button-primary();
+    @include button-primary;
 
     &:hover,
     &:focus {
-      @include button-primary-hover();
+      @include button-primary-hover;
+    }
+  }
+
+  &.is-style-primary-outline .wp-block-button__link {
+    @include button-primary-outline;
+
+    &:hover,
+    &:focus {
+      @include button-primary-outline-hover;
     }
   }
 
   &.is-style-secondary .wp-block-button__link {
-    @include button-secondary();
+    @include button-secondary;
 
     &:hover,
     &:focus {
-      @include button-secondary-hover();
+      @include button-secondary-hover;
+    }
+  }
+
+  &.is-style-secondary-outline .wp-block-button__link {
+    @include button-secondary-outline;
+
+    &:hover,
+    &:focus {
+      @include button-secondary-outline-hover;
+    }
+  }
+
+  &.is-style-tertiary .wp-block-button__link {
+    @include button-tertiary;
+
+    &:hover,
+    &:focus {
+      @include button-tertiary-hover;
+    }
+  }
+
+  &.is-style-tertiary-outline .wp-block-button__link {
+    @include button-tertiary-outline;
+
+    &:hover,
+    &:focus {
+      @include button-tertiary-outline-hover;
     }
   }
 }

@@ -14,7 +14,7 @@ class ACF {
   }
 
   customColorsPalette() {
-    this.acf.addFilter('color_picker_args', args => {
+    this.acf.addFilter('color_picker_args', (args) => {
       const newArgs = args;
 
       newArgs.palettes = chiselAdminScripts.acfColorPickerPalette;

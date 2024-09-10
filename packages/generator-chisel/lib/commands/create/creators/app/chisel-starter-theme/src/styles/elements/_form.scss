@@ -1,14 +1,17 @@
 @use '~design' as *;
 
+$form-field-font-size: get-font-size('normal');
 $form-field-padding: get-padding('small') get-padding('normal');
 $form-field-margin: get-margin('normal');
 $form-button-margin: get-margin('small');
 $form-select-padding-right: get-padding('xlarge');
 $form-field-border-width: 1px;
 $form-field-border-radius: get-border-radius('tiny');
+$form-field-box-shadow: none;
 $form-field-disabled-opacity: 0.5;
 $form-field-transition: get-transition('normal');
 $form-field-line-height: get-line-height('normal');
+$form-field-color: get-color('foreground');
 $form-field-accent: get-color('primary');
 $form-field-accent-contrast: get-color('white');
 $form-field-border-color: get-color('medium-grey');
@@ -19,11 +22,15 @@ $form-field-bg-color: get-color('white');
 $form-field-bg-range-track: get-color('secondary');
 $form-field-range-shadow-focus: 0 0 0 2px hsla(9deg, 100%, 66%, 50%);
 $form-field-range-thumb-shadow-focus: 0 0 0 2px hsla(256deg, 68%, 24%, 50%);
+$form-field-error-color: get-color('error');
+$form-field-success-color: get-color('success');
+$form-field-error-shadow-focus: 0 0 0 3px hsla(6deg, 98%, 58%, 50%);
 $form-textarea-width: 100%;
 $form-textarea-height: px-rem(250);
 $form-checkbox-radio-width: px-rem(18);
 $form-checkbox-radio-height: px-rem(18);
 $form-label-margin: get-margin('little');
+$form-select-arrow: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E');
 
 /* All elements regardless of types */
 input,
@@ -68,6 +75,7 @@ input::file-selector-button {
 
 /* Select and text-fields */
 select,
+.select2-container .select2-selection--single,
 textarea,
 input[type='date'],
 input[type='datetime-local'],
@@ -85,9 +93,13 @@ input[type='week'] {
   max-width: 100%;
   padding: $form-field-padding;
   margin: 0 0 $form-field-margin;
+  font-size: $form-field-font-size;
+  line-height: $form-field-line-height;
+  color: $form-field-color;
   background-color: $form-field-bg-color;
   border: $form-field-border-width solid $form-field-border-color;
   border-radius: $form-field-border-radius;
+  box-shadow: $form-field-box-shadow;
 
   &:focus {
     outline: 0;
@@ -158,24 +170,26 @@ input[type='radio'] {
   border-radius: 50%;
 
   &::before {
-    border-radius: 50%;
+    clip-path: circle(50% at 50% 50%);
   }
 }
 
 select:not([multiple]) {
   padding-right: $form-select-padding-right;
-  background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  background-image: $form-select-arrow;
   background-repeat: no-repeat;
   background-position: right 0.7rem top 50%;
-
-  /* icon size, then gradient */
   background-size: 0.75rem auto;
 }
 
 select:not([disabled], [readonly]) option:focus,
 select:not([disabled], [readonly]) option:active,
 select:not([disabled], [readonly]) option:hover,
-select:not([disabled], [readonly]) option:checked {
+select:not([disabled], [readonly]) option:checked,
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.select2-container--default
+  .select2-results__option--highlighted[data-selected]
+  .select2-results__option--highlighted[data-selected] {
   color: $form-field-accent-contrast;
   background-color: $form-field-accent;
 }
@@ -220,8 +234,9 @@ input::file-selector-button {
 
 /* Labels */
 label {
-  display: block;
+  display: inline-block;
   margin-bottom: $form-label-margin;
+  line-height: $form-field-line-height;
   cursor: pointer;
 }
 

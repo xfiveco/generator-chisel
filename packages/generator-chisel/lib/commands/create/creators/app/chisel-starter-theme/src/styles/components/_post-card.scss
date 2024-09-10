@@ -6,7 +6,7 @@
   gap: get-gap('normal');
   width: 100%;
   padding: get-padding('normal');
-  border-radius: get-border-radius('small');
-  border: 1px solid get-color('light-grey');
   background-color: get-color('white');
+  border: 1px solid get-color('light-grey');
+  border-radius: get-border-radius('small');
 }

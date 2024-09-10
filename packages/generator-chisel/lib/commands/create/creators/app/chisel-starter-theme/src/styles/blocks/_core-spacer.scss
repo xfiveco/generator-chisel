@@ -2,8 +2,14 @@
 
 .wp-block-spacer {
   padding: get-margin('normal') 0;
+  margin: 0 !important;
+  margin-block-start: 0 !important;
 
   &.is-style {
+    &-tiny {
+      padding: get-margin('tiny') 0;
+    }
+
     &-small {
       padding: get-margin('small') 0;
     }

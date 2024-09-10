@@ -6,11 +6,15 @@
   .c-post & {
     padding-top: get-padding('large');
   }
+
+  &--left {
+    order: -1;
+  }
 }
 
 .c-sidebar__inner {
   padding: get-padding('normal');
-  border-radius: get-border-radius('small');
-  border: 1px solid get-color('light-grey');
   background-color: get-color('white');
+  border: 1px solid get-color('light-grey');
+  border-radius: get-border-radius('small');
 }

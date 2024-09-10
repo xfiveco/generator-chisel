@@ -5,8 +5,9 @@
   padding: get-padding('tiny') get-padding('small');
   font-size: px-rem(12);
   font-weight: 700;
-  text-transform: uppercase;
   color: get-color('white');
+  text-decoration: none;
+  text-transform: uppercase;
   background-color: get-color('secondary');
   border-radius: get-border-radius('little');
   transition: get-transition('normal');

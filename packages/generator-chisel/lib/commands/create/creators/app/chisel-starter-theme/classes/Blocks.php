@@ -53,9 +53,9 @@ class Blocks extends RegisterBlocks implements Instance {
 		$this->block_patterns_categories = apply_filters(
 			'chisel_block_patterns_categories',
 			array(
-				'sections' => array(
-					'label'       => __( 'Sections', 'chisel' ),
-					'description' => __( 'Page sections.', 'chisel' ),
+				'cta' => array(
+					'label'       => __( 'Call to Action', 'chisel' ),
+					'description' => __( 'Call to Action Sections.', 'chisel' ),
 				),
 			)
 		);
@@ -77,6 +77,9 @@ class Blocks extends RegisterBlocks implements Instance {
 		add_filter( 'block_categories_all', array( $this, 'block_categories' ) );
 		add_filter( 'timber/locations', array( $this, 'tiwg_files_locations' ) );
 		add_filter( 'render_block', array( $this, 'render_block' ), 10, 3 );
+
+		add_filter( 'should_load_separate_core_block_assets', array( $this, 'should_load_separate_core_block_assets' ) );
+		add_filter( 'styles_inline_size_limit', array( $this, 'styles_inline_size_limit' ) );
 	}
 
 	/**
@@ -138,6 +141,7 @@ class Blocks extends RegisterBlocks implements Instance {
 		}
 
 		foreach ( $this->block_patterns_categories as $slug => $category ) {
+			$category['label'] = '[Chisel] ' . $category['label'];
 			register_block_pattern_category( 'chisel-block-patterns-' . $slug, $category );
 		}
 	}
@@ -174,20 +178,44 @@ class Blocks extends RegisterBlocks implements Instance {
 			return $block_content;
 		}
 
-		// Skip for acf block to avoid removing object classnames. For ACF blocks they are added in acf_block_render method.
-		if ( isset( $block['attrs']['name'] ) ) {
-			return $block_content;
-		}
-
 		$custom_classnames = self::get_block_object_classnames( $block['blockName'] );
 
 		if ( empty( $custom_classnames ) ) {
 			return $block_content;
 		}
 
-		$block_content = preg_replace( '/class="/', 'class="' . $custom_classnames . ' ', $block_content, 1 );
+		$processor = new \WP_HTML_Tag_Processor( $block_content );
+		$processor->next_tag(); // Get first tag.
+		$processor->add_class( $custom_classnames );
+		$processor->remove_class( 'is-layout-flow' ); // It overwrites margin styles. Let's get rid of it.
 
-		return $block_content;
+		return $processor->get_updated_html();
+	}
+
+	/**
+	 * Set inline size limit for the styles. Default wp limit is 20000.
+	 *
+	 * @param int $limit
+	 *
+	 * @return int
+	 */
+	public function styles_inline_size_limit( $limit ) {
+		$limit = apply_filters( 'chisel_styles_inline_size_limit', 10000 );
+
+		return $limit;
+	}
+
+	/**
+	 * Should load separate core block assets or in bulk in one block-library css file.
+	 *
+	 * @param bool $load
+	 *
+	 * @return bool
+	 */
+	public function should_load_separate_core_block_assets( $load ) {
+		$load = apply_filters( 'chisel_load_separate_core_block_assets', false );
+
+		return $load;
 	}
 
 	/**
@@ -198,13 +226,17 @@ class Blocks extends RegisterBlocks implements Instance {
 	 * @return string
 	 */
 	public static function get_block_object_classnames( $block_name ) {
+		if ( ! $block_name ) {
+			return '';
+		}
+
 		$block_name_parts = explode( '/', $block_name );
 
 		if ( empty( $block_name_parts ) || ! isset( $block_name_parts[1] ) ) {
 			return '';
 		}
 
-		return 'o-block o-block--' . $block_name_parts[0] . ' o-block--' . $block_name_parts[1];
+		return 'c-block c-block--' . $block_name_parts[0] . ' c-block--' . $block_name_parts[1];
 	}
 
 	/**

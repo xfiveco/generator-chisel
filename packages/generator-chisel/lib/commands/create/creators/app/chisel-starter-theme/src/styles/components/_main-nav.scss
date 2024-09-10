@@ -163,7 +163,7 @@
       content: '';
       background-color: get-color('white');
       border-radius: get-border-radius('small');
-      box-shadow: get-box-shadow('3-r');
+      box-shadow: get-box-shadow('3r');
 
       @include bp(full) {
         box-shadow: get-box-shadow('3');

@@ -1,0 +1,25 @@
+@use '~design' as *;
+
+.woocommerce-account {
+  .c-content {
+    .woocommerce {
+      display: grid;
+      grid-template-columns: 100%;
+
+      @include bp(medium) {
+        grid-template-columns: 30% 70%;
+      }
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .addresses .title .edit {
+    @include button;
+    @include button-primary;
+    @include button-small;
+  }
+}

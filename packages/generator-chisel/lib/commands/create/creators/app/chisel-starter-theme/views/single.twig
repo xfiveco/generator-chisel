@@ -8,13 +8,39 @@
         <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large c-content__inner">
 
           {{ the_title }}
+
           {% block inner_content %}
 
+            <div class="c-post__meta">
+              <span class="c-post__author"><a href="{{ post.author.link }}">{{ __('By', 'chisel') }} {{ post.author.name }}</a></span> •
+              <time datetime="{{ post.date }}">{{ post.date }}</time></span>
+            </div>
+
             {% if post.get_thumbnail('large') %}
-              <div class="c-posts__image">
+              <div class="c-post__image">
                 {{ post.get_thumbnail() }}
               </div>
             {% endif %}
+
+            <div class="c-post__terms">
+              {% if post.categories %}
+                <p class="c-post__categories">
+                  {{ __('Categories', 'chisel') }}:
+                  {% for category in post.categories %}
+                    <span class="c-post__categories"><a href="{{ category.link }}">{{ category }}</a>{% if not loop.last %}, {% endif %}</span>
+                  {% endfor %}
+                </p>
+              {% endif %}
+
+              {% if post.tags %}
+                <p class="c-post__tags">
+                  {{ __('Tags', 'chisel') }}:
+                  {% for tag in post.tags %}
+                    <span class="c-post__tags"><a href="{{ tag.link }}">#{{ tag }}</a>{% if not loop.last %}, {% endif %}</span>
+                  {% endfor %}
+                </p>
+              {% endif %}
+            </div>
 
             {{ post.content }}
           {% endblock %}

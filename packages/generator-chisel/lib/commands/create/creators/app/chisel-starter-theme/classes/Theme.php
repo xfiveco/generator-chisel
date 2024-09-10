@@ -63,6 +63,8 @@ class Theme implements Instance {
 	public function filter_hooks() {
 		add_filter( 'body_class', array( $this, 'body_classes' ) );
 		add_filter( 'tiny_mce_before_init', array( $this, 'mce_custom_colors' ) );
+		add_filter( 'login_headertext', array( $this, 'login_headertext' ) );
+		add_filter( 'login_headerurl', array( $this, 'login_headerurl' ) );
 	}
 
 	/**
@@ -232,6 +234,32 @@ class Theme implements Instance {
 		$settings['textcolor_rows'] = 7; // expand colour grid to 7 rows.
 
 		return $settings;
+	}
+
+	/**
+	 * Add custom login page logo text.
+	 *
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function login_headertext( $text ) {
+		$text = esc_attr( get_bloginfo( 'name' ) );
+
+		return $text;
+	}
+
+	/**
+	 * Add custom login page logo url.
+	 *
+	 * @param string $url
+	 *
+	 * @return string
+	 */
+	public function login_headerurl( $url ) {
+		$url = esc_url( get_bloginfo( 'url' ) );
+
+		return $url;
 	}
 
 	/**

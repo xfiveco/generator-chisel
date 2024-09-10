@@ -1,0 +1,9 @@
+@use '~design' as *;
+
+.wp-block-gallery {
+  figure.wp-block-image {
+    @include bp-down(small) {
+      width: 100% !important;
+    }
+  }
+}

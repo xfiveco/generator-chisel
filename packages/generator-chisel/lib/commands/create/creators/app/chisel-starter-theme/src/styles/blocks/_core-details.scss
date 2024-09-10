@@ -1,0 +1,18 @@
+@use '~design' as *;
+@use '../../blocks/accordion/style' as *;
+
+.wp-block-details {
+  @extend .b-accordion__item;
+
+  summary {
+    @extend .b-accordion__item-header;
+
+    + * {
+      margin-top: get-padding('small');
+    }
+  }
+
+  *:not(summary) {
+    padding-inline: get-padding('small');
+  }
+}

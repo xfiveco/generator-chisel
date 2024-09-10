@@ -3,6 +3,7 @@
 namespace Chisel;
 
 use Timber\Timber;
+use Chisel\ChiselCache;
 
 /**
  * Use this class to get site components.
@@ -93,7 +94,8 @@ class Components {
 
 		return Timber::compile(
 			'partials/logo.twig',
-			$context
+			$context,
+			ChiselCache::expiry( DAY_IN_SECONDS )
 		);
 	}
 
@@ -116,6 +118,10 @@ class Components {
 
 		if ( is_singular( 'post' ) ) {
 			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-blog' );
+		}
+
+		if ( function_exists( 'is_shop' ) && is_shop() ) {
+			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-woocommerce' );
 		}
 
 		return self::$sidebar;
@@ -173,19 +179,30 @@ class Components {
 	 * @return string|html
 	 */
 	public static function get_the_title( $post_id ) {
+		$context = Timber::context();
+
 		if ( self::$the_title === null ) {
-			$display = get_field( 'page_title_display', $post_id ) ?: 'show';
+			$display = Acf::get_field( 'page_title_display', $post_id ) ?: 'show';
 
 			if ( $display === 'hide' ) {
-				self::$the_title = '';
+				self::$the_title = array();
 			} else {
 				$title   = get_the_title( $post_id );
 				$sr_only = $display === 'hide-visually' ? 'u-sr-only' : '';
 
-				self::$the_title = sprintf( '<h1 class="c-title %s">%s</h1>', $sr_only, $title );
+				self::$the_title = array(
+					'class' => sprintf( 'c-title %s', $sr_only ),
+					'text'  => esc_html( $title ),
+				);
 			}
 		}
 
-		return self::$the_title;
+		$context['the_title'] = apply_filters( 'chisel_the_title', self::$the_title, $post_id );
+
+		return Timber::compile(
+			'partials/the-title.twig',
+			$context,
+			ChiselCache::expiry()
+		);
 	}
 }

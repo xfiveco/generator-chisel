@@ -12,13 +12,33 @@ dl,
 blockquote,
 table,
 figure {
+  margin-top: 0;
   margin-bottom: get-margin('normal');
 }
 
-ul, ol {
+fieldset {
+  padding: 0;
+}
+
+li {
+  margin-bottom: get-margin('tiny');
+
+  > ul,
+  > ol {
+    margin-top: get-margin('tiny');
+  }
+}
+
+ul,
+ol {
   padding-left: get-padding('medium');
 }
 
 hr {
   display: block;
+}
+
+mark {
+  font-weight: 700;
+  background-color: transparent;
 }

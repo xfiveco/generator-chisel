@@ -9,6 +9,8 @@ namespace Chisel;
  */
 class Woocommerce implements Instance {
 
+	protected $sidebars = array();
+
 	/**
 	 * Class constructor.
 	 */
@@ -25,7 +27,14 @@ class Woocommerce implements Instance {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {}
+	public function set_properties() {
+		$this->sidebars = array(
+			'woocommerce' => array(
+					'name'        => __( 'Woocommerce', 'chisel' ),
+					'description' => __( 'Sidebar for shop pages', 'chisel' ),
+				),
+		);
+	}
 
 	/**
 	 * Register action hooks.
@@ -34,12 +43,16 @@ class Woocommerce implements Instance {
 		$this->remove_actions();
 
 		add_action( 'after_setup_theme', array( $this, 'add_woocommerce_support' ) );
+
+		add_action( 'woocommerce_before_shop_loop', array( $this, 'before_shop_loop_div_open' ), 19 );
+		add_action( 'woocommerce_before_shop_loop', array( $this, 'before_shop_loop_div_close' ), 31 );
 	}
 
 	/**
 	 * Register filter hooks.
 	 */
 	public function filter_hooks() {
+		add_filter( 'chisel_sidebars', array( $this, 'register_sidebars' ) );
 		add_filter( 'woocommerce_enqueue_styles', array( $this, 'enqueue_styles' ) );
 	}
 
@@ -75,6 +88,20 @@ class Woocommerce implements Instance {
 		add_theme_support( 'wc-product-gallery-slider' );
 	}
 
+	public function before_shop_loop_div_open() {
+		echo '<div class="c-shop__sort"> ';
+	}
+
+	public function before_shop_loop_div_close() {
+		echo ' </div> ';
+	}
+
+	public function register_sidebars( $sidebars ) {
+		$sidebars = array_merge( $sidebars, $this->sidebars );
+
+		return $sidebars;
+	}
+
 	/**
 	 * Modify woocommerce enqueued styles.
 	 *
@@ -108,6 +135,37 @@ class Woocommerce implements Instance {
 	 */
 	public static function is_woocommerce_active() {
 		return class_exists( '\Woocommerce' );
+	}
+
+	public static function get_products_grid_classnames( $products, $has_sidebar ) {
+		$loop_columns = wc_get_loop_prop( 'columns' );
+
+		// Set max columns to 4.
+		if ( $loop_columns > 4 ) {
+			$loop_columns = 4;
+		}
+
+		$columns_data = array(
+			'medium' => $loop_columns,
+			'small'  => $loop_columns > 2 ? $loop_columns - 1 : $loop_columns,
+		);
+
+		$grid_classnames = array(
+			'o-grid',
+			'o-grid--cols-1',
+		);
+
+		if ( $products ) {
+			$grid_classnames[] = 'o-grid--cols-' . $columns_data['small'] . '-small';
+
+			if ( $has_sidebar ) {
+				$grid_classnames[] = 'o-grid--cols-' . $columns_data['small'] . '-medium';
+			} else {
+				$grid_classnames[] = 'o-grid--cols-' . $columns_data['medium'] . '-medium';
+			}
+		}
+
+		return implode( ' ', $grid_classnames );
 	}
 
 	/**

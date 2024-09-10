@@ -297,8 +297,8 @@ class Slider {
       this.classNames.sliderThumbs,
     );
 
-    // Update cloned images before displaying the thumbs slider.
     const slides = thumbsSlider.querySelectorAll(this.selectors.slide);
+
     slides.forEach((slide) => {
       const { thumbnailUrl } = slide.dataset;
       const slideImg = slide.querySelector('img');

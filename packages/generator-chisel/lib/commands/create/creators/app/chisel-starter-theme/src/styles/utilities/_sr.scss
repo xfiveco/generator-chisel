@@ -1,9 +1,9 @@
 @use '~design' as *;
 
 .u-sr-only {
-  @include sr-only();
+  @include sr-only;
 }
 
 .u-sr-only-focusable {
-  @include sr-only-focusable();
+  @include sr-only-focusable;
 }

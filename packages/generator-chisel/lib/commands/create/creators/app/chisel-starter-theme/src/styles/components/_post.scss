@@ -1,8 +1,22 @@
+@use '~design' as *;
+
 .c-post {
   display: flex;
   flex-direction: column;
 }
 
-.c-posts__image {
-  order: -1;
+.c-post__inner {
+  margin-bottom: get-margin('medium');
+}
+
+.c-post__meta {
+  margin-bottom: get-margin('medium');
+}
+
+.c-post__image {
+  margin-bottom: get-margin('big');
+}
+
+.c-post__categories + .c-post__tags {
+  margin-top: calc(get-margin('small') * -1);
 }

@@ -61,7 +61,8 @@
         </div>
 
         {% if sidebar %}
-          {% include 'sidebar-blog.twig' %}
+          {# Register product sidebar in Woocommerce.php if you want to use it #}
+          {% include 'sidebar-woocommerce-product.twig' %}
         {% endif %}
       </div>
     </section>

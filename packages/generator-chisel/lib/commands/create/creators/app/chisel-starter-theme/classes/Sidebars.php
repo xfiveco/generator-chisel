@@ -29,34 +29,31 @@ class Sidebars implements Instance {
 	 * Set properties.
 	 */
 	public function set_properties() {
-		$this->sidebars = apply_filters(
-			'chisel_sidebars',
-			array(
-				'blog'      => array(
-					'name'        => __( 'Blog Sidebar', 'chisel' ),
-					'description' => __( 'Sidebar for blog pages', 'chisel' ),
-				),
-				'footer-1'  => array(
-					'name'        => __( 'Footer Column 1', 'chisel' ),
-					'description' => __( 'First column in the footer', 'chisel' ),
-				),
-				'footer-2'  => array(
-					'name'        => __( 'Footer Column 2', 'chisel' ),
-					'description' => __( 'Second column in the footer', 'chisel' ),
-				),
-				'footer-3'  => array(
-					'name'        => __( 'Footer Column 3', 'chisel' ),
-					'description' => __( 'Third column in the footer', 'chisel' ),
-				),
-				'footer-4'  => array(
-					'name'        => __( 'Footer Column 4', 'chisel' ),
-					'description' => __( 'Fourth column in the footer', 'chisel' ),
-				),
-				'copyright' => array(
-					'name'        => __( 'Copyright', 'chisel' ),
-					'description' => __( 'Footer copyright', 'chisel' ),
-				),
-			)
+		$this->sidebars = array(
+			'blog'      => array(
+				'name'        => __( 'Blog', 'chisel' ),
+				'description' => __( 'Sidebar for blog pages', 'chisel' ),
+			),
+			'footer-1'  => array(
+				'name'        => __( 'Footer Column 1', 'chisel' ),
+				'description' => __( 'First column in the footer', 'chisel' ),
+			),
+			'footer-2'  => array(
+				'name'        => __( 'Footer Column 2', 'chisel' ),
+				'description' => __( 'Second column in the footer', 'chisel' ),
+			),
+			'footer-3'  => array(
+				'name'        => __( 'Footer Column 3', 'chisel' ),
+				'description' => __( 'Third column in the footer', 'chisel' ),
+			),
+			'footer-4'  => array(
+				'name'        => __( 'Footer Column 4', 'chisel' ),
+				'description' => __( 'Fourth column in the footer', 'chisel' ),
+			),
+			'copyright' => array(
+				'name'        => __( 'Copyright', 'chisel' ),
+				'description' => __( 'Footer copyright', 'chisel' ),
+			),
 		);
 	}
 
@@ -77,6 +74,12 @@ class Sidebars implements Instance {
 	 * Register sidebars.
 	 */
 	public function register_sidebars() {
+		$this->sidebars = apply_filters( 'chisel_sidebars', $this->sidebars );
+
+		if ( ! $this->sidebars ) {
+			return;
+		}
+
 		foreach ( $this->sidebars as $id => $data ) {
 			register_sidebar(
 				array(

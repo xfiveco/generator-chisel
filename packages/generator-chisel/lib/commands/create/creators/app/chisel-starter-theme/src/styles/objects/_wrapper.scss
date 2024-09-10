@@ -1,9 +1,9 @@
 @use '~design' as *;
 
 .o-wrapper {
+  box-sizing: border-box;
   width: 100%;
   margin-inline: auto;
-  box-sizing: border-box;
 }
 
 .o-wrapper * {
@@ -13,6 +13,6 @@
 .o-wrapper__inner {
   width: 100%;
   max-width: get-layout-size('content');
-  margin-inline: auto;
   padding-inline: get-padding('small');
+  margin-inline: auto;
 }

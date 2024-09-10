@@ -3,6 +3,7 @@
 namespace Chisel;
 
 use Timber\Timber;
+use Chisel\ChiselCache;
 
 /**
  * ACF blocks related functionalities.
@@ -154,7 +155,6 @@ class AcfBlocks extends RegisterBlocks implements Instance {
 			isset( $block['className'] ) ? array( $block['className'] ) : array(),
 			$is_preview ? array( 'is-preview' ) : array(),
 			$block['supports']['align'] ? array( 'align' . $context['block']['align'] ) : array(),
-			array( Blocks::get_block_object_classnames( $block['name'] ) )
 		);
 
 		$context['block']['class_names'] = $classes;
@@ -172,7 +172,7 @@ class AcfBlocks extends RegisterBlocks implements Instance {
 			)
 		);
 
-		Timber::render( self::get_instance()->blocks_twig_base_path . $block_slug . '/' . $block_slug . '.twig', $context );
+		Timber::render( self::get_instance()->blocks_twig_base_path . $block_slug . '/' . $block_slug . '.twig', $context, ChiselCache::expiry() );
 	}
 
 	/**

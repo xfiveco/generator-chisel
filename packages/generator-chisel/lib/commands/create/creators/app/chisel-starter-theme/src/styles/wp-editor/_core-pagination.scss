@@ -1,0 +1,12 @@
+@use '~design' as *;
+
+.editor-styles-wrapper {
+  .wp-block-query-pagination {
+    margin: get-padding('large') auto !important;
+  }
+
+  .wp-block-query-pagination-previous,
+  .wp-block-query-pagination-next {
+    color: get-color('white') !important;
+  }
+}

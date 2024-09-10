@@ -31,7 +31,7 @@ class ChiselCache implements Instance {
 	 * Set properties.
 	 */
 	public function set_properties() {
-		$this->cache_expiry = apply_filters( 'chisel_cache_expiry', 3600 );
+		$this->cache_expiry = apply_filters( 'chisel_cache_expiry', HOUR_IN_SECONDS );
 	}
 
 	/**
@@ -64,10 +64,12 @@ class ChiselCache implements Instance {
 	/**
 	 * Get the cache expiry time.
 	 *
+	 * @param int $custom_expiry The custom expiry time.
+	 *
 	 * @return int
 	 */
-	public static function expiry() {
-		return self::get_instance()->cache_expiry;
+	public static function expiry( $custom_expiry = null ) {
+		return $custom_expiry ? $custom_expiry : self::get_instance()->cache_expiry;
 	}
 
 	/**

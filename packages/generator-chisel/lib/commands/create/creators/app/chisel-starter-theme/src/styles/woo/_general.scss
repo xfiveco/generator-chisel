@@ -1,4 +1,7 @@
 @use '~design' as *;
+@use '../elements/form' as *;
+
+/* stylelint-disable selector-class-pattern */
 
 .woocommerce:where(body:not(.woocommerce-uses-block-theme)) {
   div.product span.price,
@@ -28,11 +31,38 @@
     background-color: get-color('secondary');
     border-radius: 100%;
   }
-}
 
-.woocommerce-product-gallery {
-  overflow: hidden;
-  background-color: get-color('white');
-  border: 1px solid get-color('light-grey');
-  border-radius: get-border-radius('small');
+  a.added_to_cart {
+    display: block;
+    margin: 0;
+    text-align: center;
+  }
+
+  p.stars a {
+    color: get-color('secondary');
+
+    &:hover {
+      color: get-color('primary');
+    }
+  }
+
+  form {
+    .form-row {
+      padding: 0;
+      margin: 0;
+
+      .select2-container {
+        line-height: $form-field-line-height;
+      }
+
+      input.input-text,
+      textarea {
+        margin: 0 0 $form-field-margin;
+      }
+
+      label {
+        line-height: $form-field-line-height;
+      }
+    }
+  }
 }

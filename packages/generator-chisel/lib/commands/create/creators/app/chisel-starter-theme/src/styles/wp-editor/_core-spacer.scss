@@ -1,5 +1,5 @@
 @use '~design' as *;
-@use "sass:meta";
+@use 'sass:meta';
 
 .editor-styles-wrapper {
   @include meta.load-css('../blocks/core-spacer');

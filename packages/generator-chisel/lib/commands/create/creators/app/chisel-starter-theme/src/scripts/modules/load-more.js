@@ -1,4 +1,4 @@
-import Utils from "./utils";
+import Utils from './utils';
 
 class LoadMore {
   constructor() {
@@ -24,14 +24,14 @@ class LoadMore {
       postType,
       perPage,
       maxPage,
-    }
+    };
   }
 
   setState(newState) {
     this.state = {
       ...this.state,
       ...newState,
-    }
+    };
   }
 
   initSelectors() {
@@ -39,7 +39,7 @@ class LoadMore {
       container: '.js-load-more-container',
       loadMore: '.js-load-more',
       loadMoreButton: '.js-load-more-button',
-    }
+    };
   }
 
   initElements() {
@@ -47,13 +47,13 @@ class LoadMore {
       container: document.querySelector(this.selectors.container),
       loadMore: document.querySelector(this.selectors.loadMore),
       loadMoreButton: document.querySelector(this.selectors.loadMoreButton),
-    }
+    };
   }
 
   initClassnames() {
     this.classnames = {
       loading: 'is-loading',
-    }
+    };
   }
 
   init() {
@@ -70,15 +70,15 @@ class LoadMore {
     }
 
     this.setState({ loading: true });
-    this.elements.loadMore.classList.add(this.classnames.loading);
+    this.elements.loadMoreButton.classList.add(this.classnames.loading);
 
     Utils.ajaxRequest('load-more', {
       page: this.state.page,
       post_type: this.state.postType,
       per_page: this.state.perPage,
       max_page: this.state.maxPage,
-    }).then(response => {
-      this.elements.loadMore.classList.remove(this.classnames.loading);
+    }).then((response) => {
+      this.elements.loadMoreButton.classList.remove(this.classnames.loading);
       this.elements.container.insertAdjacentHTML('beforeend', response.data);
 
       if (this.state.page >= parseFloat(this.state.maxPage)) {

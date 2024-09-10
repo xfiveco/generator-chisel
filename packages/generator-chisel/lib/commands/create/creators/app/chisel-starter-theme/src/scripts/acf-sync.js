@@ -6,7 +6,7 @@ class XfiveACFSync {
       return;
     }
 
-    this.clssnames = {
+    this.classnames = {
       open: 'is-open',
     };
 
@@ -17,7 +17,7 @@ class XfiveACFSync {
 
   modalCloseHandler() {
     this.modalCloseButton.addEventListener('click', () => {
-      this.modal.classList.remove(this.clssnames.open);
+      this.modal.classList.remove(this.classnames.open);
     });
   }
 }

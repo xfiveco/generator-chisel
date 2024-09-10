@@ -1,5 +1,29 @@
 @use '~design' as *;
+@use '../../styles/components/posts-items' as *;
 
 .c-product-item {
   position: relative;
+}
+
+.c-product-item__inner {
+  @extend .c-post-item__content;
+
+  align-items: center;
+}
+
+.c-product-item__content {
+  @extend .c-post-item__content;
+
+  margin-bottom: get-margin('normal');
+  text-align: center;
+}
+
+.c-product-item__image {
+  @extend .c-post-item__image;
+}
+
+.c-product-item__title {
+  margin: get-margin('little') 0;
+  font-size: clamp(get-font-size('normal'), calc(1.667vw + 0.5rem), get-font-size('extra-large'));
+  font-weight: 700;
 }

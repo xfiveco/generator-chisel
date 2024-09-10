@@ -45,8 +45,6 @@
           {% include "woocommerce/content-product.twig" with {post: post} %}
         {% endfor %}
 
-        {% include 'partials/pagination.twig' with {type: 'load-more'} %}
-
         {#
         * Hook: woocommerce_after_shop_loop.
         *
@@ -62,10 +60,14 @@
         {% do action('woocommerce_no_products_found') %}
       {% endif %}
       </div>
+
+      {% if products is not empty %}
+        {% include 'partials/pagination.twig' with {type: 'load-more'} %}
+      {% endif %}
     </div>
 
     {% if sidebar %}
-      {% include 'sidebar-blog.twig' %}
+      {% include 'sidebar-woocommerce.twig' %}
     {% endif %}
   </div>
 

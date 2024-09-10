@@ -1,33 +1,104 @@
 @use 'theme' as *;
+@use 'icon' as *;
+@use 'px-to-rem' as *;
 
 @mixin button() {
   display: inline-flex;
-  appearance: none;
-  border: none;
   padding: get-padding('small') get-padding('medium');
-  border-radius: get-border-radius('little');
   font-size: get-font-size('normal');
+  font-weight: 400;
   line-height: get-line-height('normal');
-  transition: get-transition('normal');
+  text-decoration: none;
+  appearance: none;
   cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: get-border-radius('little');
+  transition: get-transition('normal');
 }
 
 @mixin button-primary() {
-  background-color: get-color('primary');
   color: get-color('white');
+  background-color: get-color('primary');
+  border-color: get-color('primary');
 }
 
 @mixin button-primary-hover() {
-  background-color: get-color('secondary');
   color: get-color('white');
+  background-color: get-color('secondary');
+  border-color: get-color('secondary');
+}
+
+@mixin button-primary-outline() {
+  color: get-color('primary');
+  background-color: transparent;
+  border-color: get-color('primary');
+}
+
+@mixin button-primary-outline-hover() {
+  color: get-color('white');
+  background-color: get-color('primary');
+  border-color: get-color('primary');
 }
 
 @mixin button-secondary() {
-  background-color: get-color('secondary');
   color: get-color('white');
+  background-color: get-color('secondary');
+  border-color: get-color('secondary');
 }
 
 @mixin button-secondary-hover() {
-  background-color: get-color('primary');
   color: get-color('white');
+  background-color: get-color('primary');
+  border-color: get-color('primary');
+}
+
+@mixin button-secondary-outline() {
+  color: get-color('secondary');
+  background-color: transparent;
+  border-color: get-color('secondary');
+}
+
+@mixin button-secondary-outline-hover() {
+  color: get-color('white');
+  background-color: get-color('secondary');
+  border-color: get-color('secondary');
+}
+
+@mixin button-tertiary() {
+  color: get-color('white');
+  background-color: get-color('black');
+  border-color: get-color('black');
+}
+
+@mixin button-tertiary-hover() {
+  color: get-color('white');
+  background-color: get-color('grey');
+  border-color: get-color('grey');
+}
+
+@mixin button-tertiary-outline() {
+  color: get-color('black');
+  background-color: transparent;
+  border-color: get-color('black');
+}
+
+@mixin button-tertiary-outline-hover() {
+  color: get-color('white');
+  background-color: get-color('black');
+  border-color: get-color('black');
+}
+
+@mixin button-small() {
+  padding: get-padding('little') get-padding('normal');
+}
+
+@mixin button-loading($color: currentColor) {
+  &::after {
+    width: px-rem(24);
+    height: px-rem(24);
+    margin-left: px-rem(8);
+    content: '';
+    background-color: $color;
+    @include get-icon('loader');
+  }
 }

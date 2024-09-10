@@ -3,18 +3,31 @@
 
 .woocommerce-notices-wrapper {
   @extend .o-wrapper__inner;
-  margin-top: get-margin('normal');
-  margin-bottom: get-margin('normal');
+
+  padding-inline: 0;
+
+  .o-wrapper > & {
+    padding-inline: get-padding('small');
+  }
+
+  .single-product & {
+    margin-top: get-margin('large');
+  }
+
+  > * {
+    margin-top: get-margin('normal');
+    margin-bottom: get-margin('normal');
+  }
 }
 
 .woocommerce-error,
 .woocommerce-info,
 .woocommerce-message {
+  position: relative;
   padding: get-padding('normal') get-padding('large') get-padding('normal') px-rem(48);
   margin: 0 0 get-margin('xlarge');
-  position: relative;
-  background-color: get-color('light-grey');
   color: get-color('foreground');
+  background-color: get-color('light-grey');
   border-top: 3px solid get-color('info');
 
   &::before {

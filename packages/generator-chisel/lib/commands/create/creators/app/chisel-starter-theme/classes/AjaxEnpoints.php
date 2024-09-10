@@ -3,6 +3,7 @@
 namespace Chisel;
 
 use Timber\Timber;
+use Chisel\ChiselCache;
 
 /**
  * Custom Ajax enpoints callbacks
@@ -47,7 +48,7 @@ class AjaxEnpoints {
 
 		if ( $posts ) {
 			foreach ( $posts as $post ) {
-				$response .= Timber::compile( $templates, array( 'post' => $post ) );
+				$response .= Timber::compile( $templates, array( 'post' => $post ), ChiselCache::expiry() );
 			}
 		}
 

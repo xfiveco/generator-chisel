@@ -1,0 +1,45 @@
+@use '~design' as *;
+@use '../elements/form' as *;
+
+.select2-container {
+  display: block;
+  line-height: $form-field-line-height;
+
+  .select2-dropdown {
+    border-color: $form-field-focus-border-color;
+  }
+
+  .select2-selection--single {
+    height: auto;
+    transition: $form-field-transition;
+
+    .select2-selection__rendered {
+      padding: 0;
+      line-height: $form-field-line-height;
+    }
+
+    .select2-selection__placeholder {
+      color: $form-field-placeholder-color;
+    }
+
+    .select2-selection__arrow {
+      width: px-rem(32);
+      height: 100%;
+      background-image: $form-select-arrow;
+      background-repeat: no-repeat;
+      background-position: right 0.7rem top 50%;
+      background-size: 0.75rem auto;
+
+      b {
+        display: none;
+      }
+    }
+  }
+
+  &--open,
+  &--focus {
+    .select2-selection--single {
+      border-color: $form-field-focus-border-color;
+    }
+  }
+}

@@ -1,23 +1,67 @@
 @use '~design' as *;
 
 .c-btn {
-  @include button();
+  @include button;
+
+  &.is-loading {
+    @include button-loading;
+  }
 }
 
 .c-btn--primary {
-  @include button-primary();
+  @include button-primary;
 }
 
 .c-btn--primary:hover,
 .c-btn--primary:focus {
-  @include button-primary-hover();
+  @include button-primary-hover;
+}
+
+.c-btn--primary-outline {
+  @include button-primary-outline;
+}
+
+.c-btn--primary-outline:hover,
+.c-btn--primary-outline:focus {
+  @include button-primary-outline-hover;
 }
 
 .c-btn--secondary {
-  @include button-secondary();
+  @include button-secondary;
 }
 
 .c-btn--secondary:hover,
 .c-btn--secondary:focus {
-  @include button-secondary-hover();
+  @include button-secondary-hover;
+}
+
+.c-btn--secondary-outline {
+  @include button-secondary-outline;
+}
+
+.c-btn--secondary-outline:hover,
+.c-btn--secondary-outline:focus {
+  @include button-secondary-outline-hover;
+}
+
+.c-btn--tertiary {
+  @include button-tertiary;
+}
+
+.c-btn--tertiary:hover,
+.c-btn--tertiary:focus {
+  @include button-tertiary-hover;
+}
+
+.c-btn--tertiary-outline {
+  @include button-tertiary-outline;
+}
+
+.c-btn--tertiary-outline:hover,
+.c-btn--tertiary-outline:focus {
+  @include button-tertiary-outline-hover;
+}
+
+.c-btn--small {
+  @include button-small;
 }
