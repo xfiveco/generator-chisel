@@ -1,6 +1,9 @@
 function adjustWebpackConfig(baseConfig, directory) {
   const { sync: glob } = require('fast-glob');
   const pathMod = require('path');
+  const CopyWebpackPlugin = require(require.resolve('copy-webpack-plugin', {
+    paths: [directory],
+  }));
 
   const src = pathMod.join(directory, 'src');
   const isProduction = process.env.NODE_ENV === 'production';
@@ -52,6 +55,18 @@ function adjustWebpackConfig(baseConfig, directory) {
       ...baseConfig.optimization,
       ...(!isProduction && { runtimeChunk: 'single' }),
     },
+    plugins: [
+      ...baseConfig.plugins,
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: '**/*.twig',
+            context: 'src',
+            noErrorOnMissing: true,
+          },
+        ],
+      }),
+    ],
   };
 
   return updatedConfig;
