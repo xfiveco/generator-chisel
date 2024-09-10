@@ -2,6 +2,14 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.1 (2024-09-10)
+
+- adjust commands ([b289bd8](https://github.com/xfiveco/generator-chisel/commit/b289bd8))
+- Cleanup coding standards, minor adjustments, install ACF automatically ([816eada](https://github.com/xfiveco/generator-chisel/commit/816eada))
+- fix whitespace ([9d58dba](https://github.com/xfiveco/generator-chisel/commit/9d58dba))
+- theme acf adjustments ([27016f7](https://github.com/xfiveco/generator-chisel/commit/27016f7))
+- theme adjustments and bug fixes ([1253e18](https://github.com/xfiveco/generator-chisel/commit/1253e18))
+
 ## 2.0.0-alpha.0 (2024-09-08)
 
 - acf block json custom arg to load css only ([0659521](https://github.com/xfiveco/generator-chisel/commit/0659521))

@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.1 (2024-09-10)
+
+- copy twig files ([67ff991](https://github.com/xfiveco/generator-chisel/commit/67ff991))
+- fix whitespace ([9d58dba](https://github.com/xfiveco/generator-chisel/commit/9d58dba))
+
 ## 2.0.0-alpha.0 (2024-09-08)
 
 - add block creator ([ea0e956](https://github.com/xfiveco/generator-chisel/commit/ea0e956))
