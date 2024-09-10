@@ -5,6 +5,8 @@ module.exports = (api) => {
   if (api.creator.cmd.skipWpPlugins) return;
 
   api.schedule(api.PRIORITIES.PROMPT, async () => {
+    console.log('Advanced Custom Fields Pro is installed by default.');
+
     await api.prompt([
       {
         type: 'checkbox',

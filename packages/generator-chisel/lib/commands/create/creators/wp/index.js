@@ -139,7 +139,13 @@ module.exports = (api) => {
     await runLocal(['chisel-scripts', 'composer', 'install'], {
       cwd: api.resolve(themePath),
     });
-    await wp(['plugin', 'install', 'disable-emojis', { activate: true }]);
+    await wp([
+      'plugin',
+      'install',
+      'disable-emojis',
+      'https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip',
+      { activate: true },
+    ]);
   });
 
   api.schedule(api.PRIORITIES.WP_THEME_ACTIVATE, async () => {

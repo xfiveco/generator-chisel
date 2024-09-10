@@ -77,12 +77,12 @@ module.exports = async (api) => {
 
     await installDependencies({ cwd: api.resolve(app.themePath) });
 
-    // await run(['xfive-coding-standards', '--skip-staged-check'], {
+    // await run(['xfive-coding-standards', '--skip-checks'], {
     //   cwd: api.resolve(app.themePath),
     // });
 
     await run(
-      ['npx', '--yes', '@xfive/coding-standards@latest', '--skip-staged-check'],
+      ['npx', '--yes', '@xfive/coding-standards@latest', '--skip-checks'],
       { cwd: api.resolve(app.themePath) },
     );
 
