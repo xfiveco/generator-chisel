@@ -64,6 +64,7 @@ class Twig implements Instance {
 		$this->register_function( $twig, 'post_classes', array( $this, 'post_classes' ) );
 		$this->register_function( $twig, 'slider_prepare_params', array( $this, 'slider_prepare_params' ) );
 		$this->register_function( $twig, 'get_responsive_image', array( $this, 'get_responsive_image' ) );
+		$this->register_function( $twig, 'comments_template', array( $this, 'comments_template' ) );
 
 		return $twig;
 	}
@@ -224,6 +225,13 @@ class Twig implements Instance {
 	 */
 	public function get_responsive_image( $image_id, $image_size ) {
 		return Timber::get_image( $image_id )->responsive( $image_size );
+	}
+
+	/**
+	 * Display comments template - the comments and the form.
+	 */
+	public function comments_template() {
+		return Comments::comments_template();
 	}
 
 	/**

@@ -22,7 +22,7 @@
     "multiple": true,
     "reusable": true
   },
-  "loadCssOnly": true,
+  "ignoreScripts": ["script"],
   "script": "file:./script.js",
   "style": ["file:./style-script.css"]
 }

@@ -45,11 +45,8 @@ class Ajax extends \WP_REST_Controller implements Instance {
 	 * Set properties.
 	 */
 	public function set_properties() {
-		$this->routes = apply_filters(
-			'chisel_ajax_routes',
-			array(
-				'load-more' => array(),
-			)
+		$this->routes = array(
+			'load-more' => array(),
 		);
 	}
 
@@ -71,20 +68,24 @@ class Ajax extends \WP_REST_Controller implements Instance {
 	 * @return void
 	 */
 	public function register_endpoints() {
-		foreach ( $this->routes as $route_name => $route_params ) {
-			$route   = sprintf( self::ROUTE_BASE . '/%s/', $route_name );
-			$methods = isset( $route_params['methods'] ) ? $route_params['methods'] : array( 'POST' );
+		$this->routes = apply_filters( 'chisel_ajax_routes', $this->routes );
 
-			register_rest_route(
-				self::ROUTE_NAMESPACE,
-				$route,
-				array(
-					'methods'             => $methods,
-					'callback'            => array( $this, 'callback' ),
-					'permission_callback' => array( $this, 'permissions_check' ),
-					'args'                => $this->get_endpoint_args_for_item_schema( true ),
-				)
-			);
+		if ( $this->routes ) {
+			foreach ( $this->routes as $route_name => $route_params ) {
+				$route   = sprintf( self::ROUTE_BASE . '/%s/', $route_name );
+				$methods = isset( $route_params['methods'] ) ? $route_params['methods'] : array( 'POST' );
+
+				register_rest_route(
+					self::ROUTE_NAMESPACE,
+					$route,
+					array(
+						'methods'             => $methods,
+						'callback'            => array( $this, 'callback' ),
+						'permission_callback' => array( $this, 'permissions_check' ),
+						'args'                => $this->get_endpoint_args_for_item_schema( true ),
+					)
+				);
+			}
 		}
 	}
 

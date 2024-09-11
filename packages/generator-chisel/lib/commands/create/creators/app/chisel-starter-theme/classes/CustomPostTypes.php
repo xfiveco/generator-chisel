@@ -58,6 +58,8 @@ class CustomPostTypes implements Instance {
 	 * Register custom post types.
 	 */
 	public function register_post_types() {
+		$this->post_types = apply_filters( 'chisel_custom_post_types', $this->post_types );
+
 		if ( empty( $this->post_types ) ) {
 			return;
 		}
@@ -171,6 +173,8 @@ class CustomPostTypes implements Instance {
 	 * Register custom taxonomies.
 	 */
 	public function register_taxonomies() {
+		$this->taxonomies = apply_filters( 'chisel_custom_taxonomies', $this->taxonomies );
+
 		if ( empty( $this->taxonomies ) ) {
 			return;
 		}
@@ -388,22 +392,21 @@ class CustomPostTypes implements Instance {
 	 * Set custom post types.
 	 */
 	protected function set_post_types() {
-		$this->post_types = apply_filters(
-			'chisel_custom_post_types',
-			array(
-				'chisel-cpt' => array(
-					'singular'      => __( 'Chisel CPT', 'chisel' ),
-					'plural'        => __( 'Chisel CPTs', 'chisel' ),
-					'supports'      => array( 'editor', 'thumbnail', 'excerpt' ),
-					'icon'          => 'location-alt',
-					'hierarchical'  => true,
-					'public'        => true,
-					'menu_position' => 20,
-					'rewrite'       => array(
-						'slug' => 'chisel-post',
-					),
-				),
-			)
+		$this->post_types = array(
+			// phpcs:disable
+			// 'chisel-cpt' => array(
+			// 	'singular'      => __( 'Chisel CPT', 'chisel' ),
+			// 	'plural'        => __( 'Chisel CPTs', 'chisel' ),
+			// 	'supports'      => array( 'editor', 'thumbnail', 'excerpt' ),
+			// 	'icon'          => 'location-alt',
+			// 	'hierarchical'  => true,
+			// 	'public'        => true,
+			// 	'menu_position' => 20,
+			// 	'rewrite'       => array(
+			// 		'slug' => 'chisel-post',
+			// 	),
+			// ),
+			// phpcs:enable
 		);
 	}
 
@@ -411,19 +414,18 @@ class CustomPostTypes implements Instance {
 	 * Set custom taxonomies.
 	 */
 	protected function set_taxonomies() {
-		$this->taxonomies = apply_filters(
-			'chisel_custom_taxonomies',
-			array(
-				'chisel-tax' => array(
-					'singular'   => __( 'Chisel Tax', 'chisel' ),
-					'plural'     => __( 'Chisel Taxes', 'chisel' ),
-					'post_types' => array( 'chisel-cpt' ),
-					'public'     => true,
-					'rewrite'    => array(
-						'slug' => 'chisel-category',
-					),
-				),
-			)
+		$this->taxonomies = array(
+			// phpcs:disable
+			// 'chisel-tax' => array(
+			// 	'singular'   => __( 'Chisel Tax', 'chisel' ),
+			// 	'plural'     => __( 'Chisel Taxes', 'chisel' ),
+			// 	'post_types' => array( 'chisel-cpt' ),
+			// 	'public'     => true,
+			// 	'rewrite'    => array(
+			// 		'slug' => 'chisel-category',
+			// 	),
+			// ),
+			// phpcs:enable
 		);
 	}
 

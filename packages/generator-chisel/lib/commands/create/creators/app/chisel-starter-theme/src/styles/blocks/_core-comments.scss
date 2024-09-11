@@ -1,0 +1,16 @@
+@use '~design' as *;
+
+.wp-block-comments {
+  margin: get-margin('xlarge') 0;
+}
+
+.wp-block-comment-content {
+  padding-top: get-padding('small');
+  font-style: italic;
+}
+
+.comment-reply-link {
+  @include button;
+  @include button-primary;
+  @include button-small;
+}

@@ -54,6 +54,7 @@ class Woocommerce implements Instance {
 	public function filter_hooks() {
 		add_filter( 'chisel_sidebars', array( $this, 'register_sidebars' ) );
 		add_filter( 'woocommerce_enqueue_styles', array( $this, 'enqueue_styles' ) );
+		add_filter( 'chisel_frontend_styles', array( $this, 'register_custom_styles' ) );
 	}
 
 	/**
@@ -88,14 +89,27 @@ class Woocommerce implements Instance {
 		add_theme_support( 'wc-product-gallery-slider' );
 	}
 
+	/**
+	 * Open container for sort bar.
+	*/
 	public function before_shop_loop_div_open() {
 		echo '<div class="c-shop__sort"> ';
 	}
 
+	/**
+	 * Close container for sort bar.
+	*/
 	public function before_shop_loop_div_close() {
 		echo ' </div> ';
 	}
 
+	/**
+	 * Register woocommerce sidebars.
+	 *
+	 * @param array $sidebars
+	 *
+	 * @return array
+	*/
 	public function register_sidebars( $sidebars ) {
 		$sidebars = array_merge( $sidebars, $this->sidebars );
 
@@ -115,6 +129,20 @@ class Woocommerce implements Instance {
 		return $enqueue_styles;
 	}
 
+
+	/**
+	 * Register custom styles.
+	 *
+	 * @param array $styles
+	 *
+	 * @return array
+	 */
+	public function register_custom_styles( $styles ) {
+		$styles['woocommerce'] = array();
+
+		return $styles;
+	}
+
 	/**
 	 * Set the product object. For some reason, products in the loop don’t get the right context by default. Without this, some elements of the listed products would show the same information as the first product in the loop. This function fixes that.
 	 *
@@ -126,15 +154,6 @@ class Woocommerce implements Instance {
 		if ( is_woocommerce() ) {
 			$product = wc_get_product( $post->ID );
 		}
-	}
-
-	/**
-	 * Check if WooCommerce is active.
-	 *
-	 * @return bool
-	 */
-	public static function is_woocommerce_active() {
-		return class_exists( '\Woocommerce' );
 	}
 
 	public static function get_products_grid_classnames( $products, $has_sidebar ) {
@@ -166,6 +185,15 @@ class Woocommerce implements Instance {
 		}
 
 		return implode( ' ', $grid_classnames );
+	}
+
+	/**
+	 * Check if WooCommerce is active.
+	 *
+	 * @return bool
+	 */
+	public static function is_woocommerce_active() {
+		return class_exists( '\Woocommerce' );
 	}
 
 	/**

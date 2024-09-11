@@ -1,13 +1,12 @@
 <?php
 /**
  * Title: Call to Action
- * Slug: chisel-cta
- * Categories: chisel-block-patterns-cta
+ * Slug: chisel/cta
+ * Categories: chisel-patterns/cta
  * Description: A CTA section pattern
  * Keywords: cta
  * Post Types: post, page
  * Template Types: post, page
- * Block Types: core/post-content
  *
  * @package Chisel
  */

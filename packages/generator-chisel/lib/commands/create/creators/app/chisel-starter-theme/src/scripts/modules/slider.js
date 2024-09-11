@@ -368,12 +368,16 @@ export default () => {
   }
 
   const loadModules = async () => {
-    const swiper = await import('swiper');
-    const swiperModules = await import('swiper/modules');
+    const [swiper, swiperModules, style] = await Promise.all([
+      import('swiper'),
+      import('swiper/modules'),
+      import('swiper/swiper-bundle.css'),
+    ]);
 
     return {
       swiper,
       swiperModules,
+      style,
     };
   };
 

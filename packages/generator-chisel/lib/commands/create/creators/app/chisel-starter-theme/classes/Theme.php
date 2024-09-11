@@ -37,12 +37,9 @@ class Theme implements Instance {
 	 */
 	public function set_properties() {
 		// Set nav menus to register.
-		$this->nav_menus = apply_filters(
-			'chisel_nav_menus',
-			array(
-				'chisel_main_nav'   => __( 'Main Navigation', 'chisel' ),
-				'chisel_footer_nav' => __( 'Footer Navigation', 'chisel' ),
-			)
+		$this->nav_menus = array(
+			'chisel_main_nav'   => __( 'Main Navigation', 'chisel' ),
+			'chisel_footer_nav' => __( 'Footer Navigation', 'chisel' ),
 		);
 	}
 
@@ -65,6 +62,8 @@ class Theme implements Instance {
 		add_filter( 'tiny_mce_before_init', array( $this, 'mce_custom_colors' ) );
 		add_filter( 'login_headertext', array( $this, 'login_headertext' ) );
 		add_filter( 'login_headerurl', array( $this, 'login_headerurl' ) );
+		add_filter( 'wp_revisions_to_keep', array( $this, 'wp_revisions_to_keep' ), 99, 2 );
+		add_filter( 'heartbeat_settings', array( $this, 'heartbeat_settings' ) );
 	}
 
 	/**
@@ -108,8 +107,6 @@ class Theme implements Instance {
 	 * Remove post supports.
 	 */
 	public function remove_post_supports() {
-		remove_post_type_support( 'page', 'comments' );
-		remove_post_type_support( 'page', 'trackbacks' );
 		remove_post_type_support( 'page', 'excerpt' );
 		remove_post_type_support( 'attachment', 'comments' );
 	}
@@ -118,6 +115,8 @@ class Theme implements Instance {
 	 * Register navigation menus.
 	 */
 	public function register_nav_menus() {
+		$this->nav_menus = apply_filters( 'chisel_nav_menus', $this->nav_menus );
+
 		register_nav_menus( $this->nav_menus );
 	}
 
@@ -260,6 +259,31 @@ class Theme implements Instance {
 		$url = esc_url( get_bloginfo( 'url' ) );
 
 		return $url;
+	}
+
+	/**
+	 * Set the limit of revisions to keep.
+	 *
+	 * @param int    $num
+	 * @param object $post
+	 *
+	 * @return int
+	 */
+	public function wp_revisions_to_keep( $num, $post ) {
+		return 10;
+	}
+
+	/**
+	 * Increase the heartbeat interval from default 15 to 30 seconds.
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function heartbeat_settings( $settings ) {
+		$settings['interval'] = 30;
+
+		return $settings;
 	}
 
 	/**

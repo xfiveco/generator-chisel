@@ -61,16 +61,13 @@ class Acf implements Instance {
 	 * Set ACF options pages.
 	 */
 	public function set_options_pages() {
-		$this->acf_options_pages = apply_filters(
-			'chisel_acf_options_pages',
-			array(
-				// phpcs:disable
-				// array(
-				// 	'menu_slug'  => 'theme-settings',
-				// 	'page_title' => __( 'Theme Settings', 'chisel' ),
-				// ),
-				// phpcs:enable
-			)
+		$this->acf_options_pages = array(
+			// phpcs:disable
+			// array(
+			// 	'menu_slug'  => 'theme-settings',
+			// 	'page_title' => __( 'Theme Settings', 'chisel' ),
+			// ),
+			// phpcs:enable
 		);
 	}
 
@@ -78,18 +75,15 @@ class Acf implements Instance {
 	 * Set ACF options sub pages.
 	 */
 	public function set_options_sub_pages() {
-		$this->acf_options_sub_pages = apply_filters(
-			'chisel_acf_options_sub_pages',
-			array(
-				// phpcs:disable
-				// array(
-				// 	'menu_slug'   => 'theme-sub-settings',
-				// 	'page_title'  => __( 'Theme Sub settings', 'chisel' ),
-				// 	'menu_title'  => __( 'Theme Sub settings', 'chisel' ),
-				// 	'parent_slug' => 'theme-settings',
-				// ),
-				// phpcs:enable
-			)
+		$this->acf_options_sub_pages = array(
+			// phpcs:disable
+			// array(
+			// 	'menu_slug'   => 'theme-sub-settings',
+			// 	'page_title'  => __( 'Theme Sub settings', 'chisel' ),
+			// 	'menu_title'  => __( 'Theme Sub settings', 'chisel' ),
+			// 	'parent_slug' => 'theme-settings',
+			// ),
+			// phpcs:enable
 		);
 	}
 
@@ -97,6 +91,9 @@ class Acf implements Instance {
 	 * Register ACF options pages.
 	 */
 	public function options_pages() {
+		$this->acf_options_pages     = apply_filters( 'chisel_acf_options_pages', $this->acf_options_pages );
+		$this->acf_options_sub_pages = apply_filters( 'chisel_acf_options_sub_pages', $this->acf_options_sub_pages );
+
 		if ( $this->acf_options_pages && function_exists( 'acf_add_options_page' ) ) {
 			foreach ( $this->acf_options_pages as $data ) {
 				$this->register_options_page( $data, 'page' );

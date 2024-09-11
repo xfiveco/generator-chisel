@@ -49,15 +49,12 @@ class Blocks extends RegisterBlocks implements Instance {
 	 * Set properties.
 	 */
 	public function set_properties() {
-		$this->blocks_category           = apply_filters( 'chisel_blocks_category', 'chisel-blocks' );
-		$this->block_patterns_categories = apply_filters(
-			'chisel_block_patterns_categories',
-			array(
-				'cta' => array(
-					'label'       => __( 'Call to Action', 'chisel' ),
-					'description' => __( 'Call to Action Sections.', 'chisel' ),
-				),
-			)
+		$this->blocks_category           = 'chisel-blocks';
+		$this->block_patterns_categories = array(
+			'cta' => array(
+				'label'       => __( 'Call to Action', 'chisel' ),
+				'description' => __( 'Call to Action Sections.', 'chisel' ),
+			),
 		);
 	}
 
@@ -142,7 +139,7 @@ class Blocks extends RegisterBlocks implements Instance {
 
 		foreach ( $this->block_patterns_categories as $slug => $category ) {
 			$category['label'] = '[Chisel] ' . $category['label'];
-			register_block_pattern_category( 'chisel-block-patterns-' . $slug, $category );
+			register_block_pattern_category( 'chisel-patterns/' . $slug, $category );
 		}
 	}
 

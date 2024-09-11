@@ -1,5 +1,4 @@
 @use '~design' as *;
-@use 'node_modules/swiper/swiper-bundle';
 
 .swiper {
   opacity: 0;
@@ -11,7 +10,7 @@
 }
 
 .swiper-slide {
-  height: auto;
+  height: auto !important;
 
   img {
     @include object-fit-cover;
@@ -64,7 +63,7 @@
 
 .swiper-pagination-wrapper {
   position: absolute;
-  bottom: 10px;
+  bottom: px-rem(10);
   left: 50%;
   z-index: 10;
   display: flex;
@@ -82,8 +81,8 @@
 
 .swiper-pagination.swiper-pagination-horizontal {
   position: relative;
-  inset: auto;
-  transform: none;
+  inset: auto !important;
+  transform: none !important;
 }
 
 .swiper-pagination-bullet {
@@ -100,7 +99,7 @@
 }
 
 .swiper-thumbs {
-  padding: get-padding('small') 0;
+  padding: get-padding('small') 0 !important;
 
   .swiper-slide {
     cursor: pointer;

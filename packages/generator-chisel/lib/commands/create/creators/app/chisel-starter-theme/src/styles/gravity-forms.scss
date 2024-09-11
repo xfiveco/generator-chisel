@@ -1,5 +1,5 @@
 @use '~design' as *;
-@use '../elements/form' as *;
+@use './elements/form' as *;
 
 /* stylelint-disable selector-class-pattern */
 
@@ -78,6 +78,10 @@
       font-weight: 700;
       color: $form-field-error-color;
       text-align: center;
+
+      .gform-icon {
+        display: none;
+      }
     }
   }
 
