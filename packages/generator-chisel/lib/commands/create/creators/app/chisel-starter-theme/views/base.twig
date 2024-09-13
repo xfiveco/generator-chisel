@@ -10,6 +10,8 @@
 
   {% block head %}
   {% endblock %}
+
+  {% do action('chisel_after_wp_head') %}
 </head>
 <body class="{{ body_class }}">
 
@@ -38,6 +40,8 @@
 
   {% block foot %}
   {% endblock %}
+
+  {% do action('chisel_after_wp_footer') %}
 
 </body>
 </html>

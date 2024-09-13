@@ -31,7 +31,7 @@ class Blocks extends RegisterBlocks implements Instance {
 	 *
 	 * @var string
 	 */
-	protected $blocks_twig_base_path = 'src/blocks/';
+	protected $blocks_twig_base_path = 'build/blocks/';
 
 	/**
 	 * Class constructor.
