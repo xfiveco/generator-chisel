@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.3 (2024-09-13)
+
+- refactor, adjustments, css spliting, comments, 3rd party integration classes ([e1fe3cd](https://github.com/xfiveco/generator-chisel/commit/e1fe3cd))
+- update blocks path, add action hooks ([e20d184](https://github.com/xfiveco/generator-chisel/commit/e20d184))
+
 ## 2.0.0-alpha.2 (2024-09-10)
 
 - correct gitignore ([22542dc](https://github.com/xfiveco/generator-chisel/commit/22542dc))
