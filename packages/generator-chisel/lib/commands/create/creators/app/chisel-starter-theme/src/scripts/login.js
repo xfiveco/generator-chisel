@@ -13,13 +13,16 @@ class LoginPage {
     };
 
     this.logo = this.loginPage.querySelector('#login h1 a');
+    this.logoUrl = chiselScripts?.logoUrl;
 
-    this.setLogoImage();
+    if (this.logoUrl) {
+      this.setLogoImage();
+    }
   }
 
   setLogoImage() {
     if (this.logo) {
-      this.logo.setAttribute('style', `background-image: url("${chiselScripts.logoUrl}");`);
+      this.logo.setAttribute('style', `background-image: url("${this.logoUrl}");`);
       this.logo.setAttribute('aria-hidden', 'true');
       this.logo.parentElement.classList.add(this.classnames.loaded);
     }

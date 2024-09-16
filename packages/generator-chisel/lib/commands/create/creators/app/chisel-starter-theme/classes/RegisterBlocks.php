@@ -189,7 +189,7 @@ abstract class RegisterBlocks {
 									$block
 								);
 
-								if ( ! in_array( $script, $ignore_scripts ) ) {
+								if ( ! in_array( $script, $ignore_scripts, true ) ) {
 									wp_register_script(
 										$block_handle,
 										$file_url,

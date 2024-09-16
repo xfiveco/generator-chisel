@@ -78,10 +78,7 @@
       ],
       "duotone": [
         {
-          "colors": [
-            "#2a1468",
-            "#ff6d54"
-          ],
+          "colors": ["#2a1468", "#ff6d54"],
           "slug": "primary-secondary",
           "name": "Primary & Secondary"
         }
@@ -185,7 +182,7 @@
               "fontStyle": "normal",
               "fontStretch": "normal",
               "fontDisplay": "swap",
-              "src": [ "file:./fonts/quicksand-regular.woff2" ]
+              "src": ["file:./assets/fonts/quicksand-regular.woff2"]
             },
             {
               "fontFamily": "Quicksand",
@@ -193,7 +190,7 @@
               "fontStyle": "normal",
               "fontStretch": "normal",
               "fontDisplay": "swap",
-              "src": [ "file:./fonts/quicksand-700.woff2" ]
+              "src": ["file:./assets/fonts/quicksand-700.woff2"]
             }
           ]
         }
@@ -206,21 +203,14 @@
       "width": false
     },
     "layout": {
-        "contentSize": "1200px",
-        "wideSize": "1440px"
+      "contentSize": "1200px",
+      "wideSize": "1440px"
     },
     "spacing": {
       "blockGap": false,
       "margin": false,
       "padding": false,
-      "units": [
-        "%",
-        "px",
-        "em",
-        "rem",
-        "vh",
-        "vw"
-      ],
+      "units": ["%", "px", "em", "rem", "vh", "vw"],
       "defaultSpacingSizes": false,
       "spacingScale": {
         "operator": "+",

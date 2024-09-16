@@ -127,7 +127,7 @@ class Assets implements Instance {
 						'localize' => array(
 							'name' => 'chiselScripts',
 							'data' => array(
-								'logoData' => Helpers::get_login_page_logo_url(),
+								'logoUrl' => Helpers::get_login_page_logo_url(),
 							),
 						),
 					),
