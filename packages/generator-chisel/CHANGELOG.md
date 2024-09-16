@@ -2,6 +2,16 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.4 (2024-09-16)
+
+- adjust plugins ([bc2343a](https://github.com/xfiveco/generator-chisel/commit/bc2343a))
+- bug fixes, phpcs and twigcs fixes ([118297b](https://github.com/xfiveco/generator-chisel/commit/118297b))
+- remove lint staged (it is in coding standards) ([e51b4b6](https://github.com/xfiveco/generator-chisel/commit/e51b4b6))
+- remove unnecessary gitignore ([f48e528](https://github.com/xfiveco/generator-chisel/commit/f48e528))
+- scripts enqueueing fixes ([5a8badf](https://github.com/xfiveco/generator-chisel/commit/5a8badf))
+- theme gitignore update ([9ef8d60](https://github.com/xfiveco/generator-chisel/commit/9ef8d60))
+- twig cs adjustments ([84493cd](https://github.com/xfiveco/generator-chisel/commit/84493cd))
+
 ## 2.0.0-alpha.3 (2024-09-13)
 
 - refactor, adjustments, css spliting, comments, 3rd party integration classes ([e1fe3cd](https://github.com/xfiveco/generator-chisel/commit/e1fe3cd))

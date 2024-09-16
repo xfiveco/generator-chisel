@@ -1,6 +1,6 @@
 {
   "name": "generator-chisel",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "description": "A generator for scaffolding front-end and WordPress projects",
   "bin": {
     "chisel": "bin/chisel.js"
