@@ -259,9 +259,10 @@ class Assets implements Instance {
 		if ( $this->frontend_styles ) {
 			foreach ( $this->frontend_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_frontend_style', true, $handle, $args );
+				$style_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_style ) {
-					wp_enqueue_style( self::get_final_handle( $handle ) );
+				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
+					wp_enqueue_style( $style_handle );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -272,9 +273,10 @@ class Assets implements Instance {
 		if ( $this->frontend_scripts ) {
 			foreach ( $this->frontend_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_frontend_script', true, $handle, $args );
+				$script_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_script ) {
-					wp_enqueue_script( self::get_final_handle( $handle ) );
+				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
+					wp_enqueue_script( $script_handle );
 					$this->set_script_translations( $handle, $args );
 				}
 			}
@@ -291,9 +293,10 @@ class Assets implements Instance {
 		if ( $this->admin_styles ) {
 			foreach ( $this->admin_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_admin_style', true, $handle, $args );
+				$style_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_style ) {
-					wp_enqueue_style( self::get_final_handle( $handle ) );
+				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
+					wp_enqueue_style( $style_handle );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -304,9 +307,10 @@ class Assets implements Instance {
 		if ( $this->admin_scripts ) {
 			foreach ( $this->admin_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_admin_script', true, $handle, $args );
+				$script_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_script ) {
-					wp_enqueue_script( self::get_final_handle( $handle ) );
+				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
+					wp_enqueue_script( $script_handle );
 					$this->set_script_translations( $handle, $args );
 				}
 			}
@@ -323,9 +327,10 @@ class Assets implements Instance {
 		if ( $this->editor_styles ) {
 			foreach ( $this->editor_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_editor_style', true, $handle, $args );
+				$style_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_style ) {
-					wp_enqueue_style( self::get_final_handle( $handle ) );
+				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
+					wp_enqueue_style( $style_handle );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -336,9 +341,10 @@ class Assets implements Instance {
 		if ( $this->editor_scripts ) {
 			foreach ( $this->editor_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_editor_script', true, $handle, $args );
+				$script_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_script ) {
-					wp_enqueue_script( self::get_final_handle( $handle ) );
+				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
+					wp_enqueue_script( $script_handle );
 					$this->set_script_translations( $handle, $args );
 				}
 			}
@@ -364,9 +370,10 @@ class Assets implements Instance {
 		if ( $this->login_styles ) {
 			foreach ( $this->login_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_login_style', true, $handle, $args );
+				$style_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_style ) {
-					wp_enqueue_style( self::get_final_handle( $handle ) );
+				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
+					wp_enqueue_style( $style_handle );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -377,9 +384,10 @@ class Assets implements Instance {
 		if ( $this->login_scripts ) {
 			foreach ( $this->login_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_login_script', true, $handle, $args );
+				$script_handle  = self::get_final_handle( $handle );
 
-				if ( $enqueue_script ) {
-					wp_enqueue_script( self::get_final_handle( $handle ) );
+				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
+					wp_enqueue_script( $script_handle );
 					$this->set_script_translations( $handle, $args );
 				}
 			}
