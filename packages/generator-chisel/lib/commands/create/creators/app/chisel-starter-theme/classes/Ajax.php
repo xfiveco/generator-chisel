@@ -97,11 +97,8 @@ class Ajax extends \WP_REST_Controller implements Instance {
 	 * @return callable
 	 */
 	public function callback( $request ) {
-			$route       = $request->get_route();
-			$route_parts = explode( '/', $route );
-			$callback    = str_replace( '-', '_', end( $route_parts ) );
-
-			$ajax_endpoints = new AjaxEnpoints();
+		$callback       = self::get_callback_name( $request );
+		$ajax_endpoints = new AjaxEnpoints();
 
 		if ( method_exists( $ajax_endpoints, $callback ) ) {
 			if ( ! defined( 'DOING_AJAX' ) ) {
@@ -124,7 +121,9 @@ class Ajax extends \WP_REST_Controller implements Instance {
 	 * @return boolean
 	 */
 	public function permissions_check( $request ) {
-		return true;
+		$permission = apply_filters( 'chisel_ajax_permissions_check', true, self::get_callback_name( $request ), $request );
+
+		return $permission;
 	}
 
 	/**
@@ -145,6 +144,21 @@ class Ajax extends \WP_REST_Controller implements Instance {
 	 */
 	public static function ajax_json_decode( $value ) {
 		return (array) json_decode( stripslashes( $value ) );
+	}
+
+	/**
+	 * Get callback name from ajax request.
+	 *
+	 * @param \WP_REST_Request $request
+	 *
+	 * @return string
+	 */
+	public static function get_callback_name( $request ) {
+		$route       = $request->get_route();
+		$route_parts = explode( '/', $route );
+		$callback    = str_replace( '-', '_', end( $route_parts ) );
+
+		return $callback;
 	}
 
 	/**

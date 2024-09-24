@@ -207,11 +207,15 @@ class Comments implements Instance {
 		<script>
 			wp.domReady( () => {
 				const blockType = 'core/latest-comments';
-				if ( wp.blocks && wp.data && wp.data.select( 'core/blocks' ).getBlockType( blockType ) ){
+				if (!wp?.data) {
+					return;
+				}
+
+				if ( wp?.blocks && wp.data && wp.data.select( 'core/blocks' ).getBlockType( blockType ) ){
 					wp.blocks.unregisterBlockType( blockType );
 				}
 
-				wp.data.dispatch( 'core/edit-post').removeEditorPanel( 'discussion-panel' ); // Discussion
+				wp.data.dispatch( 'core/edit-post')?.removeEditorPanel( 'discussion-panel' ); // Discussion
 			} );
 		</script>
 		<?php

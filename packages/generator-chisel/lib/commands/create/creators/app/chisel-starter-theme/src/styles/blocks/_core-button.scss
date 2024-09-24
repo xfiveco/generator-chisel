@@ -1,13 +1,25 @@
 @use '~design' as *;
+@use '../../design/settings';
+
+$_buttons-icons: settings.$buttons-icons;
 
 .wp-block-button {
   .wp-block-button__link {
     @include button;
+
+    &.has-text-align-center {
+      justify-content: center;
+    }
+
+    &:disabled {
+      @include button-disabled;
+    }
   }
 
   .wp-block-button__link,
   &.is-style-primary .wp-block-button__link {
     @include button-primary;
+    @include button-primary-icon;
 
     &:hover,
     &:focus {
@@ -17,10 +29,12 @@
 
   &.is-style-primary-outline .wp-block-button__link {
     @include button-primary-outline;
+    @include button-primary-outline-icon;
 
     &:hover,
     &:focus {
       @include button-primary-outline-hover;
+      @include button-primary-outline-icon-hover;
     }
   }
 
@@ -35,10 +49,12 @@
 
   &.is-style-secondary-outline .wp-block-button__link {
     @include button-secondary-outline;
+    @include button-secondary-outline-icon;
 
     &:hover,
     &:focus {
       @include button-secondary-outline-hover;
+      @include button-secondary-outline-icon-hover;
     }
   }
 
@@ -53,10 +69,41 @@
 
   &.is-style-tertiary-outline .wp-block-button__link {
     @include button-tertiary-outline;
+    @include button-tertiary-outline-icon;
 
     &:hover,
     &:focus {
       @include button-tertiary-outline-hover;
+      @include button-tertiary-outline-icon-hover;
+    }
+  }
+
+  &.is-size-small .wp-block-button__link {
+    @include button-small;
+  }
+
+  &.is-size-large .wp-block-button__link {
+    @include button-large;
+  }
+
+  &.has-icon {
+    @include button-icon;
+
+    .wp-block-button__link {
+      &::after {
+        width: px-rem(24);
+        height: px-rem(24);
+        margin-left: px-rem(8);
+        content: '';
+      }
+    }
+  }
+
+  @each $button-icon in $_buttons-icons {
+    &.has-icon-#{$button-icon} .wp-block-button__link {
+      &::after {
+        @include get-icon($button-icon);
+      }
     }
   }
 }

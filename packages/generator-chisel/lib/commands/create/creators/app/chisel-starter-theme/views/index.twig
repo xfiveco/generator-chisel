@@ -17,7 +17,7 @@
               {% include "components/post-item.twig" with {post: post} %}
             {% endfor %}
           {% else %}
-            dupa
+            <h2>{{ __('No results found', 'chisel') }}</h2>
           {% endif %}
         </div>
 

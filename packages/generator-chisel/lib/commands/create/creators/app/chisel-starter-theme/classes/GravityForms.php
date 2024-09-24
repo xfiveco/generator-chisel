@@ -40,6 +40,8 @@ class GravityForms implements Instance {
 	public function filter_hooks() {
 		add_filter( 'chisel_frontend_styles', array( $this, 'register_custom_styles' ) );
 		add_filter( 'chisel_enqueue_frontend_style', array( $this, 'enqueue_custom_styles' ), 10, 3 );
+		add_filter( 'gform_form_theme_slug', array( $this, 'default_form_styles' ), 99, 2 );
+		add_filter( 'gform_plugin_settings_fields', array( $this, 'plugin_settings_fields' ), 99 );
 	}
 
 	/**
@@ -83,6 +85,35 @@ class GravityForms implements Instance {
 		}
 
 		return $enqueue;
+	}
+
+	/**
+	 * Set default form styles for all forms so that our custom styles can be used.
+	 *
+	 * @param string $slug
+	 * @param array  $form
+	 *
+	 * @return string
+	 */
+	public function default_form_styles( $slug, $form ) {
+		$slug = 'gravity-theme';
+
+		return $slug;
+	}
+
+	/**
+	 * Remove default theme settings so that we can use our custom styles.
+	 *
+	 * @param array $fields
+	 *
+	 * @return array
+	 */
+	public function plugin_settings_fields( $fields ) {
+		if ( isset( $fields['default_theme'] ) ) {
+			unset( $fields['default_theme'] );
+		}
+
+		return $fields;
 	}
 
 	/**

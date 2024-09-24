@@ -1,4 +1,7 @@
 @use '~design' as *;
+@use '../../design/settings';
+
+$_buttons-icons: settings.$buttons-icons;
 
 .c-btn {
   @include button;
@@ -6,10 +9,15 @@
   &.is-loading {
     @include button-loading;
   }
+
+  &:disabled {
+    @include button-disabled;
+  }
 }
 
 .c-btn--primary {
   @include button-primary;
+  @include button-primary-icon;
 }
 
 .c-btn--primary:hover,
@@ -19,11 +27,13 @@
 
 .c-btn--primary-outline {
   @include button-primary-outline;
+  @include button-primary-outline-icon;
 }
 
 .c-btn--primary-outline:hover,
 .c-btn--primary-outline:focus {
   @include button-primary-outline-hover;
+  @include button-primary-outline-icon-hover;
 }
 
 .c-btn--secondary {
@@ -37,11 +47,13 @@
 
 .c-btn--secondary-outline {
   @include button-secondary-outline;
+  @include button-secondary-outline-icon;
 }
 
 .c-btn--secondary-outline:hover,
 .c-btn--secondary-outline:focus {
   @include button-secondary-outline-hover;
+  @include button-secondary-outline-icon-hover;
 }
 
 .c-btn--tertiary {
@@ -55,13 +67,38 @@
 
 .c-btn--tertiary-outline {
   @include button-tertiary-outline;
+  @include button-tertiary-outline-icon;
 }
 
 .c-btn--tertiary-outline:hover,
 .c-btn--tertiary-outline:focus {
   @include button-tertiary-outline-hover;
+  @include button-tertiary-outline-icon-hover;
 }
 
 .c-btn--small {
   @include button-small;
+}
+
+.c-btn--large {
+  @include button-large;
+}
+
+.c-btn.has-icon {
+  @include button-icon;
+
+  &::after {
+    width: px-rem(24);
+    height: px-rem(24);
+    margin-left: px-rem(8);
+    content: '';
+  }
+}
+
+@each $button-icon in $_buttons-icons {
+  .c-btn.has-icon-#{$button-icon} {
+    &::after {
+      @include get-icon($button-icon);
+    }
+  }
 }

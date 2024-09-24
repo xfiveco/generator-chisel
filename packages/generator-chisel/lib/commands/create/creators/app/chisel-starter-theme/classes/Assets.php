@@ -127,7 +127,7 @@ class Assets implements Instance {
 						'localize' => array(
 							'name' => 'chiselScripts',
 							'data' => array(
-								'logoUrl' => Helpers::get_login_page_logo_url(),
+								'logoData' => Helpers::get_login_page_logo_data(),
 							),
 						),
 					),
@@ -155,7 +155,17 @@ class Assets implements Instance {
 			);
 
 			$this->editor_scripts = array(
-				'editor' => array(),
+				'editor' => array(
+					'localize' => array(
+						'name' => 'chiselEditorScripts',
+						'data' => array(
+							'icons' => array(
+								'minus' => __( 'Minus', 'chisel' ),
+								'plus'  => __( 'Plus', 'chisel' ),
+							),
+						),
+					),
+				),
 			);
 		}
 	}

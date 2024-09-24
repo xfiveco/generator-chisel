@@ -231,7 +231,7 @@
 
 @include bp(large) {
   .c-main-nav--columns {
-    .c-main-nav__item {
+    .c-main-nav__item:not(.is-default) {
       position: static;
     }
 
@@ -247,7 +247,7 @@
       }
     }
 
-    .c-main-nav__subitems {
+    .c-main-nav__item:not(.is-default) .c-main-nav__subitems {
       &.is-level-2 {
         top: calc(100% - px-rem(16));
         right: 0;

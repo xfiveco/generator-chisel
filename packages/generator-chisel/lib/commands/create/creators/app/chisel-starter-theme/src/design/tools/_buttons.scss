@@ -3,7 +3,9 @@
 @use 'px-to-rem' as *;
 
 @mixin button() {
+  box-sizing: border-box;
   display: inline-flex;
+  align-items: center;
   padding: get-padding('small') get-padding('medium');
   font-size: get-font-size('normal');
   font-weight: 400;
@@ -14,6 +16,21 @@
   border: 1px solid transparent;
   border-radius: get-border-radius('little');
   transition: get-transition('normal');
+
+  &::after {
+    transition: get-transition('normal');
+  }
+}
+
+@mixin button-disabled() {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
+}
+
+@mixin button-icon() {
+  padding-top: px-rem(14);
+  padding-bottom: px-rem(14);
 }
 
 @mixin button-primary() {
@@ -28,6 +45,12 @@
   border-color: get-color('secondary');
 }
 
+@mixin button-primary-icon() {
+  &::after {
+    background-color: get-color('white');
+  }
+}
+
 @mixin button-primary-outline() {
   color: get-color('primary');
   background-color: transparent;
@@ -38,6 +61,18 @@
   color: get-color('white');
   background-color: get-color('primary');
   border-color: get-color('primary');
+}
+
+@mixin button-primary-outline-icon() {
+  &::after {
+    background-color: get-color('primary');
+  }
+}
+
+@mixin button-primary-outline-icon-hover() {
+  &::after {
+    background-color: get-color('white');
+  }
 }
 
 @mixin button-secondary() {
@@ -64,6 +99,18 @@
   border-color: get-color('secondary');
 }
 
+@mixin button-secondary-outline-icon() {
+  &::after {
+    background-color: get-color('secondary');
+  }
+}
+
+@mixin button-secondary-outline-icon-hover() {
+  &::after {
+    background-color: get-color('white');
+  }
+}
+
 @mixin button-tertiary() {
   color: get-color('white');
   background-color: get-color('black');
@@ -88,8 +135,26 @@
   border-color: get-color('black');
 }
 
+@mixin button-tertiary-outline-icon() {
+  &::after {
+    background-color: get-color('black');
+  }
+}
+
+@mixin button-tertiary-outline-icon-hover() {
+  &::after {
+    background-color: get-color('white');
+  }
+}
+
 @mixin button-small() {
   padding: get-padding('little') get-padding('normal');
+  font-size: get-font-size('small');
+  line-height: get-line-height('normal');
+}
+
+@mixin button-large() {
+  padding: get-padding('normal') get-padding('large');
 }
 
 @mixin button-loading($color: currentColor) {

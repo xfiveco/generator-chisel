@@ -116,20 +116,25 @@ class Helpers {
 	}
 
 	/**
-	 * Get logo url for the wp login page.
+	 * Get logo data for the wp login page.
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public static function get_login_page_logo_url() {
-		$logo_url = '';
-		$logo_id  = get_theme_mod( 'custom_logo', 0 );
+	public static function get_login_page_logo_data() {
+		$logo_id   = get_theme_mod( 'custom_logo', 0 );
+		$logo_data = array();
 
 		if ( $logo_id ) {
-			$logo_url = wp_get_attachment_image_url( $logo_id, 'medium' );
+			$logo_data = wp_get_attachment_image_src( $logo_id, 'medium' );
 		} else {
-			$logo_url = self::get_image_url( 'chisel.png' );
+			$logo_data = array(
+				self::get_image_url( 'chisel.png' ),
+				84,
+				84,
+				0,
+			);
 		}
 
-		return $logo_url;
+		return $logo_data;
 	}
 }

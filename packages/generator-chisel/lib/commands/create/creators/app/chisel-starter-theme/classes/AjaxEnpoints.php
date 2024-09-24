@@ -40,7 +40,7 @@ class AjaxEnpoints {
 			)
 		);
 
-		$templates = array( 'components/post-item.twig', 'components/' . $post_type . '-item.twig' );
+		$templates = array( 'components/' . $post_type . '-item.twig', 'components/post-item.twig' );
 
 		if ( $post_type === 'product' ) {
 			array_unshift( $templates, 'woocommerce/content-product.twig' );

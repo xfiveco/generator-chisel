@@ -32,7 +32,8 @@ $form-checkbox-radio-height: px-rem(18);
 $form-label-margin: get-margin('little');
 $form-select-arrow: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E');
 
-/* All elements regardless of types */
+/* Some rules have an important declaration to overwrite gravity forms rules */
+
 input,
 select,
 option,
@@ -71,9 +72,6 @@ input::file-selector-button {
   }
 }
 
-/* All elements with types */
-
-/* Select and text-fields */
 select,
 .select2-container .select2-selection--single,
 textarea,
@@ -89,11 +87,11 @@ input[type='text'],
 input[type='time'],
 input[type='url'],
 input[type='week'] {
-  width: 100%;
+  width: 100% !important;
   max-width: 100%;
-  padding: $form-field-padding;
+  padding: $form-field-padding !important;
   margin: 0 0 $form-field-margin;
-  font-size: $form-field-font-size;
+  font-size: $form-field-font-size !important;
   line-height: $form-field-line-height;
   color: $form-field-color;
   background-color: $form-field-bg-color;

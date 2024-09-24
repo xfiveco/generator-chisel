@@ -138,15 +138,20 @@ body.login {
     a {
       display: block;
       min-width: px-rem(84);
-      max-width: 100%;
+      max-width: px-rem(200);
+      height: auto;
       max-height: px-rem(100);
       margin: 0;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
 
+      @include bp(360px) {
+        max-width: 100%;
+      }
+
       @include bp(medium) {
-        max-width: px-rem(400);
+        max-width: px-rem(300);
       }
     }
 
