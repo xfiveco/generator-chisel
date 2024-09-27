@@ -240,7 +240,7 @@ $o-icon-icons: (
     }
   }
 
-  async function generateIconsHTMLPreviewColor(svgIconsDataMono = [], svgIconsDataColor = []) {
+  async function generateIconsHTMLPreview(svgIconsDataMono = [], svgIconsDataColor = []) {
     const allIconsData = [...svgIconsDataColor, ...svgIconsDataMono];
 
     const iconsColorHTML = svgIconsDataColor
@@ -419,7 +419,7 @@ $o-icon-icons: (
       generateIconsFile(svgIconsDataMono, svgIconsDataColor),
       generateScssSettingsFile(allIconsData),
       generateIconsJsonFile(allIconsData),
-      generateIconsHTMLPreviewColor(svgIconsDataMono, svgIconsDataColor),
+      generateIconsHTMLPreview(svgIconsDataMono, svgIconsDataColor),
     ]);
 
     printLog(chalk.green('Icons files generated successfully'));
