@@ -34,7 +34,7 @@ class ExtendedPost extends TimberPost {
 	 */
 	public function get_thumbnail( $size = 'medium' ) {
 		if ( ! $this->thumbnail_html ) {
-			$this->thumbnail_html = has_post_thumbnail( $this->ID ) ? Timber::get_image( get_post_thumbnail_id( $this->ID ) )->responsive( $size ) : '';
+			$this->thumbnail_html = has_post_thumbnail( $this->ID ) ? Helpers::get_responsive_image( get_post_thumbnail_id( $this->ID ), $size ) : '';
 		}
 
 		return $this->thumbnail_html;

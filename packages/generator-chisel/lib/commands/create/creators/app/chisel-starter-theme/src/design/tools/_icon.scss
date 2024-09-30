@@ -1,5 +1,11 @@
-@mixin get-icon($name, $extension: 'svg') {
-  mask: url('../../assets/icons/#{$name}.#{$extension}');
+@mixin get-icon($name, $extension: 'svg', $is-block: false) {
+  $path: '../../';
+
+  @if $is-block {
+    $path: '../../../';
+  }
+
+  mask: url('#{$path}assets/icons/#{$name}.#{$extension}');
   mask-repeat: no-repeat;
   mask-size: contain;
 }

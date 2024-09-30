@@ -2,6 +2,8 @@
 
 namespace Chisel;
 
+use Timber\Timber;
+
 /**
  * Helper functions.
  *
@@ -113,6 +115,19 @@ class Helpers {
 		}
 
 		return get_template_directory_uri() . $image_path;
+	}
+
+	/**
+	 * Get responsive image html
+	 *
+	 * @param int    $image_id Image ID.
+	 * @param string $image_size Image size.
+	 * @param array  $attrs Image attributes.
+	 *
+	 * @return string|html
+	 */
+	public static function get_responsive_image( $image_id, $image_size = 'medium', $attrs = array() ) {
+		return Timber::get_image( $image_id )->responsive( $image_size, $attrs );
 	}
 
 	/**

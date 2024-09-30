@@ -1,6 +1,6 @@
-@use '../components//slider';
+@use '../components/slider';
 
-.o-block {
+.b-slider {
   .swiper {
     opacity: 1;
     transition: get-transition('slow');
@@ -8,5 +8,14 @@
 
   .swiper-wrapper {
     display: flex;
+  }
+
+  .swiper-slide {
+    width: 100%;
+    flex: 1 0 100%;
+
+    &:nth-child(n+2) {
+      display: none;
+    }
   }
 }

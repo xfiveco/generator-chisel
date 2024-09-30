@@ -16,7 +16,6 @@ $context   = Timber::context();
 $templates = array( 'index.twig' );
 
 if ( is_home() ) {
-	$context['title'] = get_the_title();
 	array_unshift( $templates, 'home.twig' );
 }
 

@@ -12,24 +12,13 @@ $templates = array( 'archive.twig', 'index.twig' );
 
 $context = Timber::context();
 
-$context['title'] = 'Archive';
-if ( is_day() ) {
-	$context['title'] = 'Archive: ' . get_the_date( 'D M Y' );
-} elseif ( is_month() ) {
-	$context['title'] = 'Archive: ' . get_the_date( 'M Y' );
-} elseif ( is_year() ) {
-	$context['title'] = 'Archive: ' . get_the_date( 'Y' );
-} elseif ( is_tag() ) {
-	$context['title'] = __( 'Tag: ', 'chisel' ) . ' ' . single_tag_title( '', false );
+if ( is_tag() ) {
 	array_unshift( $templates, 'archive-' . get_queried_object()->slug . '.twig' );
 } elseif ( is_category() ) {
-	$context['title'] = __( 'Category: ', 'chisel' ) . ' ' . single_cat_title( '', false );
 	array_unshift( $templates, 'archive-' . get_queried_object()->slug . '.twig' );
 } elseif ( is_post_type_archive() ) {
-	$context['title'] = post_type_archive_title( '', false );
 	array_unshift( $templates, 'archive-' . get_post_type() . '.twig' );
 } elseif ( is_tax() ) {
-	$context['title'] = single_term_title( '', false );
 	array_unshift( $templates, 'archive-' . get_queried_object()->taxonomy . '.twig' );
 }
 

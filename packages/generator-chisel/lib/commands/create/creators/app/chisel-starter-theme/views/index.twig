@@ -2,9 +2,7 @@
 
 {% block content %}
   <section class="o-wrapper__inner c-blog">
-    {% if title %}
-      <h1>{{ title }}</h1>
-    {% endif %}
+    {{ the_title }}
 
     {% block before_loop %}
     {% endblock %}
@@ -17,7 +15,7 @@
               {% include "components/post-item.twig" with {post: post} %}
             {% endfor %}
           {% else %}
-            <h2>{{ __('No results found', 'chisel') }}</h2>
+            <h2>{{ __('No posts found', 'chisel') }}</h2>
           {% endif %}
         </div>
 

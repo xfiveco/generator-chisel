@@ -86,7 +86,7 @@ class Components {
 			$logo_id = get_theme_mod( 'custom_logo', 0 );
 
 			if ( $logo_id ) {
-				self::$logo_image = Timber::get_image( $logo_id )->responsive();
+				self::$logo_image = Helpers::get_responsive_image( $logo_id );
 			}
 
 			$context['logo_image'] = self::$logo_image;
@@ -172,36 +172,73 @@ class Components {
 	}
 
 	/**
-	 * Get the page or post title html based on the acf field value.
-	 *
-	 * @param int $post_id
+	 * Get the current page title.
 	 *
 	 * @return string|html
 	 */
-	public static function get_the_title( $post_id ) {
-		$context = Timber::context();
+	public static function get_the_title() {
+		$classname   = 'c-title';
+		$the_title   = array();
+		$title_text  = '';
+		$title_class = '';
 
-		if ( self::$the_title === null ) {
-			$display = Acf::get_field( 'page_title_display', $post_id ) ?: 'show';
-
-			if ( $display === 'hide' ) {
-				self::$the_title = array();
-			} else {
-				$title   = get_the_title( $post_id );
-				$sr_only = $display === 'hide-visually' ? 'u-sr-only' : '';
-
-				self::$the_title = array(
-					'class' => sprintf( 'c-title %s', $sr_only ),
-					'text'  => esc_html( $title ),
-				);
-			}
+		if ( self::$the_title !== null ) {
+			return self::$the_title;
 		}
 
-		$context['the_title'] = apply_filters( 'chisel_the_title', self::$the_title, $post_id );
+		if ( is_singular() ) {
+			global $post;
+
+			if ( isset( $post->ID ) ) {
+				$display_title = Acf::get_field( 'page_title_display', $post->ID ) ?: 'show';
+
+				if ( $display_title !== 'hide' ) {
+					$title_text  = get_the_title( $post->ID );
+					$sr_only     = $display_title === 'hide-visually' ? 'u-sr-only' : '';
+					$title_class = sprintf( '%s %s', $classname, $sr_only );
+				}
+			}
+		} elseif ( is_home() ) {
+			$posts_page_id = absint( get_option( 'page_for_posts' ) );
+
+			if ( $posts_page_id ) {
+				$title_text = get_the_title( $posts_page_id );
+			}
+		} elseif ( is_author() ) {
+			$author     = Timber::get_user( get_queried_object_id() );
+			$title_text = __( 'Author: ', 'chisel' ) . $author->name;
+		} elseif ( is_day() ) {
+			$title_text = __( 'Date archive: ', 'chisel' ) . ' ' . get_the_date( 'D M Y' );
+		} elseif ( is_month() ) {
+			$title_text = __( 'Date archive: ', 'chisel' ) . ' ' . get_the_date( 'M Y' );
+		} elseif ( is_year() ) {
+			$title_text = __( 'Date archive: ', 'chisel' ) . ' ' . get_the_date( 'Y' );
+		} elseif ( is_tag() ) {
+			$title_text = __( 'Tag: ', 'chisel' ) . ' ' . single_tag_title( '', false );
+		} elseif ( is_category() ) {
+			$title_text = __( 'Category: ', 'chisel' ) . ' ' . single_cat_title( '', false );
+		} elseif ( is_post_type_archive() ) {
+			$title_text = post_type_archive_title( '', false );
+		} elseif ( is_tax() ) {
+			$title_text = single_term_title( '', false );
+		} elseif ( is_search() ) {
+			$title_text = __( 'Search results for: ', 'chisel' ) . ' ' . get_search_query();
+		} elseif ( is_404() ) {
+			$title_text = __( '404 - Page not found', 'chisel' );
+		}
+
+		if ( $title_text ) {
+			$the_title = array(
+				'text'  => esc_html( $title_text ),
+				'class' => $title_class ? esc_attr( $title_class ) : $classname,
+			);
+		}
+
+		self::$the_title = apply_filters( 'chisel_the_title', $the_title );
 
 		return Timber::compile(
 			'partials/the-title.twig',
-			$context,
+			array( 'the_title' => self::$the_title ),
 			ChiselCache::expiry()
 		);
 	}

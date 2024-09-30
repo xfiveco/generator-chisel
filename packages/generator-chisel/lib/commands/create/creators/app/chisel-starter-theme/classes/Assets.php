@@ -17,6 +17,13 @@ class Assets implements Instance {
 	protected $frontend_styles = array();
 
 	/**
+	 * Front-end styles to be registered and enqueued in footer.
+	 *
+	 * @var array
+	 */
+	protected $frontend_footer_styles = array();
+
+	/**
 	 * Front-end scripts to be registered and enqueued.
 	 *
 	 * @var array
@@ -177,6 +184,7 @@ class Assets implements Instance {
 		add_action( 'init', array( $this, 'register_assets' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ), 99 ); // Higher priority, overwrite plugins if needed.
+		add_action( 'wp_footer', array( $this, 'enqueue_frontend_assets_in_footer' ), 11 ); // Higher priority, overwrite plugins if needed.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ), 11 );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ) );
 		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_login_page_assets' ), 99 );
@@ -195,17 +203,24 @@ class Assets implements Instance {
 	 * Register assets.
 	 */
 	public function register_assets() {
-		$this->frontend_styles  = apply_filters( 'chisel_frontend_styles', $this->frontend_styles );
-		$this->frontend_scripts = apply_filters( 'chisel_frontend_scripts', $this->frontend_scripts );
-		$this->login_styles     = apply_filters( 'chisel_login_styles', $this->login_styles );
-		$this->login_scripts    = apply_filters( 'chisel_login_scripts', $this->login_scripts );
-		$this->admin_styles     = apply_filters( 'chisel_admin_styles', $this->admin_styles );
-		$this->admin_scripts    = apply_filters( 'chisel_admin_scripts', $this->admin_scripts );
-		$this->editor_styles    = apply_filters( 'chisel_editor_styles', $this->editor_styles );
-		$this->editor_scripts   = apply_filters( 'chisel_editor_scripts', $this->editor_scripts );
+		$this->frontend_styles        = apply_filters( 'chisel_frontend_styles', $this->frontend_styles );
+		$this->frontend_footer_styles = apply_filters( 'chisel_frontend_footer_styles', $this->frontend_footer_styles );
+		$this->frontend_scripts       = apply_filters( 'chisel_frontend_scripts', $this->frontend_scripts );
+		$this->login_styles           = apply_filters( 'chisel_login_styles', $this->login_styles );
+		$this->login_scripts          = apply_filters( 'chisel_login_scripts', $this->login_scripts );
+		$this->admin_styles           = apply_filters( 'chisel_admin_styles', $this->admin_styles );
+		$this->admin_scripts          = apply_filters( 'chisel_admin_scripts', $this->admin_scripts );
+		$this->editor_styles          = apply_filters( 'chisel_editor_styles', $this->editor_styles );
+		$this->editor_scripts         = apply_filters( 'chisel_editor_scripts', $this->editor_scripts );
 
 		if ( $this->frontend_styles ) {
 			foreach ( $this->frontend_styles as $file_name => $args ) {
+				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+			}
+		}
+
+		if ( $this->frontend_footer_styles ) {
+			foreach ( $this->frontend_footer_styles as $file_name => $args ) {
 				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
 			}
 		}
@@ -288,6 +303,27 @@ class Assets implements Instance {
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
 					wp_enqueue_script( $script_handle );
 					$this->set_script_translations( $handle, $args );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Enqueue front-end styles in footer, ie. Gravity Forms custom styles.
+	 */
+	public function enqueue_frontend_assets_in_footer() {
+		$this->frontend_footer_styles = apply_filters( 'chisel_pre_enqueue_frontend_footer_styles', $this->frontend_footer_styles );
+
+		if ( $this->frontend_footer_styles ) {
+			foreach ( $this->frontend_footer_styles as $handle => $args ) {
+				$enqueue_style = apply_filters( 'chisel_enqueue_frontend_footer_style', true, $handle, $args );
+				$style_handle  = self::get_final_handle( $handle );
+
+				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
+					wp_enqueue_style( $style_handle );
+
+					// Enqueue js file for fast refresh of the css file.
+					$this->enqueue_style_js_for_dev( $handle );
 				}
 			}
 		}

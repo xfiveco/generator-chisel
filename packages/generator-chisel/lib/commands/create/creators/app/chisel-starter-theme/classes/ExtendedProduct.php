@@ -27,7 +27,7 @@ class ExtendedProduct extends TimberPost {
 	 */
 	public function get_thumbnail( $size = 'woocommerce_thumbnail' ) {
 		if ( ! $this->thumbnail_html ) {
-			$thumbnail_html = has_post_thumbnail( $this->ID ) ? Timber::get_image( get_post_thumbnail_id( $this->ID ) )->responsive( $size ) : '';
+			$thumbnail_html = has_post_thumbnail( $this->ID ) ? Helpers::get_responsive_image( get_post_thumbnail_id( $this->ID ), $size ) : '';
 
 			if ( ! $thumbnail_html ) {
 				$thumbnail_html = wc_placeholder_img( $size );

@@ -3,7 +3,7 @@
   "title": "Slider",
   "description": "Images slider",
   "category": "chisel-blocks",
-  "icon": "carrot",
+  "icon": "slides",
   "apiVersion": 3,
   "keywords": ["slider", "carousel", "images"],
   "textdomain": "chisel",

@@ -4,3 +4,13 @@
   object-fit: cover;
   object-position: $position;
 }
+
+@mixin background-image($name, $extension: 'svg', $is-block: false) {
+  $path: '../../';
+
+  @if $is-block {
+    $path: '../../../';
+  }
+
+  background-image: url('#{$path}assets/icons/#{$name}.#{$extension}');
+}

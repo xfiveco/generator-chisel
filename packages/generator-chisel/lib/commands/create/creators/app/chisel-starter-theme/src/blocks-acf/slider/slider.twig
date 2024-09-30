@@ -21,6 +21,8 @@
           block_settings: fields.slider_options
         }
       } %}
+    {% else %}
+      {% include 'partials/block-edit-button.twig' with { 'block_name': 'slider' } %}
     {% endif %}
   </div>
 </div>

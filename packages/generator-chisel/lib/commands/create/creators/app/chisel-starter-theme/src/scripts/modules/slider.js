@@ -180,7 +180,12 @@ class Slider {
   /*
    * Set default slider params. This params will only apply to default slider type.
    */
-  defaultSliderParams() {}
+  defaultSliderParams() {
+    this.params = {
+      ...this.params,
+      spaceBetween: 0,
+    };
+  }
 
   /*
    * Create and initialize arrows navigation.

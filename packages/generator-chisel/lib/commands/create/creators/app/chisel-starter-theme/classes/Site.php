@@ -40,7 +40,6 @@ class Site extends TimberSite implements Instance {
 	 */
 	public function filter_hooks() {
 		add_filter( 'timber/context', array( $this, 'add_to_context' ) );
-		add_filter( 'timber/context', array( $this, 'set_page_title' ) );
 		add_filter( 'timber/post/classmap', array( $this, 'post_classmap' ) );
 		add_filter( 'timber/term/classmap', array( $this, 'term_classmap' ) );
 	}
@@ -56,23 +55,7 @@ class Site extends TimberSite implements Instance {
 		$context['menus']           = Components::get_menus();
 		$context['sidebar']         = Components::get_sidebar();
 		$context['footer_sidebars'] = Components::get_footer_sidebars();
-
-		return $context;
-	}
-
-	/**
-	 * Set the page / post title
-	 *
-	 * @param array $context The context.
-	 *
-	 * @return array
-	 */
-	public function set_page_title( $context ) {
-		global $post;
-
-		if ( isset( $post->post_type ) ) {
-			$context['the_title'] = Components::get_the_title( $post->ID );
-		}
+		$context['the_title']       = Components::get_the_title();
 
 		return $context;
 	}

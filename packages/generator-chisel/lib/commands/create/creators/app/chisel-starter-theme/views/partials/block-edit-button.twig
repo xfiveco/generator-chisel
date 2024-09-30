@@ -1,0 +1,3 @@
+{% if fn('is_admin') %}
+  <button type="button" aria-disabled="false" class="components-button is-secondary is-compact">{{ __('Edit', 'chisel') }} {{ block_name }} {{ __('block', 'chisel') }}</button>
+{% endif %}

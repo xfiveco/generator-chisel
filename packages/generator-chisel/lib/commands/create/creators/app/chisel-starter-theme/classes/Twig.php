@@ -220,11 +220,12 @@ class Twig implements Instance {
 	 *
 	 * @param int    $image_id Image ID.
 	 * @param string $image_size Image size.
+	 * @param array  $attrs Image attributes.
 	 *
-	 * @return string
+	 * @return string|html
 	 */
-	public function get_responsive_image( $image_id, $image_size ) {
-		return Timber::get_image( $image_id )->responsive( $image_size );
+	public function get_responsive_image( $image_id, $image_size = 'medium', $attrs = array() ) {
+		return Helpers::get_responsive_image( $image_id, $image_size, $attrs );
 	}
 
 	/**
