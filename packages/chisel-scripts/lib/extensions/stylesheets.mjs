@@ -42,8 +42,7 @@ export const start = async (api) => {
   const stylesDir = api.resolve('src/styles');
   const pattern = convertPathToPattern(stylesDir) + '/*/**/*.scss';
 
-  const watcher = chokidar.watch(convertPathToPattern(pattern), {
-    persistent: false,
+  const watcher = chokidar.watch(pattern, {
     ignoreInitial: true,
   });
   watcher.on('add', () => build(api));
