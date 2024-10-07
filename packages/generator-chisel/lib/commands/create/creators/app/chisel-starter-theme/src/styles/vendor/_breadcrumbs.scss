@@ -3,7 +3,7 @@
 
 .c-breadcrumbs {
   position: relative;
-  max-width: $full-width;
+  max-width: get-layout-size('full');
   margin-inline: auto;
   font-size: get-font-size('small');
 
