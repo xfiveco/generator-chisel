@@ -29,6 +29,16 @@
 }
 
 @mixin button-icon() {
+  padding-top: px-rem(10);
+  padding-bottom: px-rem(10);
+}
+
+@mixin button-icon-small() {
+  padding-top: px-rem(6);
+  padding-bottom: px-rem(6);
+}
+
+@mixin button-icon-large() {
   padding-top: px-rem(14);
   padding-bottom: px-rem(14);
 }

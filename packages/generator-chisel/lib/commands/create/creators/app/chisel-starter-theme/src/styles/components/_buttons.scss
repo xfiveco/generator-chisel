@@ -87,6 +87,14 @@ $_buttons-icons: settings.$buttons-icons;
 .c-btn.has-icon {
   @include button-icon;
 
+  &.c-btn--small {
+    @include button-icon-small;
+  }
+
+  &.c-btn--large {
+    @include button-icon-large;
+  }
+
   &::after,
   &::before {
     display: block;

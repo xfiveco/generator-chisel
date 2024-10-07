@@ -87,9 +87,17 @@ $_buttons-icons: settings.$buttons-icons;
   }
 
   &.has-icon {
-    @include button-icon;
-
     .wp-block-button__link {
+      @include button-icon;
+
+      &.is-size-small .wp-block-button__link {
+        @include button-icon-small;
+      }
+
+      &.is-size-large .wp-block-button__link {
+        @include button-icon-large;
+      }
+
       &::after,
       &::before {
         display: block;

@@ -1,6 +1,8 @@
 {
   "plugins": {
     "WP Premium: Gravity Forms": "https://github.com/wp-premium/gravityforms/archive/master.zip",
-    "WP Migrate Lite": "wp-migrate-db"
+    "SVG Support": "svg-support",
+    "Yoast SEO": "wordpress-seo",
+    "Yoast SEO ACF": "acf-content-analysis-for-yoast-seo"
   }
 }
