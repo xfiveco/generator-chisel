@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-2.0.0-alpha.3.0 (2024-10-07)
+
+- update chisel-scripts version ([2957e4c](https://github.com/xfiveco/generator-chisel/commit/2957e4c))
+
 ## 2.0.0-alpha.2 (2024-10-07)
 
 - fix styles file watching on mac ([d2cfca8](https://github.com/xfiveco/generator-chisel/commit/d2cfca8))
