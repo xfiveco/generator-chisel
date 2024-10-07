@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.6 (2024-10-07)
+
+- blocks, assets, css adjustments, breadcrumbs, bem fn ([b3460ce](https://github.com/xfiveco/generator-chisel/commit/b3460ce))
+- page title, gravity forms, responsive image, slider fixes ([619789e](https://github.com/xfiveco/generator-chisel/commit/619789e))
+
 ## 2.0.0-alpha.5 (2024-09-27)
 
 - bugs fixes, blocks mods, adjustments ([5a2b460](https://github.com/xfiveco/generator-chisel/commit/5a2b460))

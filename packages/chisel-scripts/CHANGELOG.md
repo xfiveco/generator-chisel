@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.2 (2024-10-07)
+
+- fix styles file watching on mac ([d2cfca8](https://github.com/xfiveco/generator-chisel/commit/d2cfca8))
+
 ## 2.0.0-alpha.1 (2024-09-10)
 
 - copy twig files ([67ff991](https://github.com/xfiveco/generator-chisel/commit/67ff991))
