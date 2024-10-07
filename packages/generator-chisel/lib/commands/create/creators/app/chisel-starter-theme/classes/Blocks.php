@@ -77,6 +77,7 @@ class Blocks extends RegisterBlocks implements Instance {
 
 		add_filter( 'should_load_separate_core_block_assets', array( $this, 'should_load_separate_core_block_assets' ) );
 		add_filter( 'styles_inline_size_limit', array( $this, 'styles_inline_size_limit' ) );
+		add_filter( 'chisel_editor_scripts', array( $this, 'blocks_alignment_data' ) );
 	}
 
 	/**
@@ -213,6 +214,21 @@ class Blocks extends RegisterBlocks implements Instance {
 		$load = apply_filters( 'chisel_load_separate_core_block_assets', false );
 
 		return $load;
+	}
+
+	/**
+	 * Set default alignment for blocks.
+	 *
+	 * @param array $editor_scripts_data
+	 *
+	 * @return array
+	 */
+	public function blocks_alignment_data( $editor_scripts_data ) {
+		$editor_scripts_data['editor']['localize']['data']['blocksDefaultAlignment'] = array(
+			'chisel/slider' => 'full',
+		);
+
+		return $editor_scripts_data;
 	}
 
 	/**

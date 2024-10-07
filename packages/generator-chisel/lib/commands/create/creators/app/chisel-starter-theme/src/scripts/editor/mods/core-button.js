@@ -1,8 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { Fragment } from '@wordpress/element';
-import { PanelBody, SelectControl } from '@wordpress/components';
+import { Fragment, useEffect } from '@wordpress/element';
+import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/blockEditor';
 import Utils from '../utils';
 
@@ -35,6 +35,10 @@ const chiselButtonBlockAttributes = (settings, name) => {
           type: 'string',
           default: '',
         },
+        buttonIconPosition: {
+          type: 'boolean',
+          default: false,
+        },
       }),
     });
   }
@@ -45,15 +49,47 @@ addFilter('blocks.registerBlockType', 'chisel/button-block', chiselButtonBlockAt
 
 const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
   return (props) => {
-    const { attributes, setAttributes, isSelected } = props;
+    const { attributes, setAttributes, isSelected, name } = props;
 
-    let { buttonSize = '', className = '', buttonIcon = '' } = attributes;
+    if (name !== blockName) {
+      return <BlockEdit {...props} />;
+    }
+
+    let {
+      buttonSize = '',
+      className = '',
+      buttonIcon = '',
+      buttonIconPosition = false,
+    } = attributes;
+
+    useEffect(() => {
+      if (isSelected && className !== '') {
+        const attrs = {};
+        const size = className.match(/is-size-(\w*)/);
+        const icon = className.match(/has-icon-(\w*)/);
+        const iconLeft = className.match('has-icon-left');
+
+        if (icon.length) {
+          attrs.buttonIcon = icon[1];
+        }
+
+        if (size.length) {
+          attrs.buttonSize = size[1];
+        }
+
+        if (iconLeft) {
+          attrs.buttonIconPosition = true;
+        }
+
+        setAttributes(attrs);
+      }
+    }, []);
 
     return (
       <Fragment>
         <BlockEdit {...props} />
 
-        {isSelected && props.name === blockName && (
+        {isSelected && (
           <InspectorControls>
             <PanelBody title={__('Button Size', 'lps')}>
               <SelectControl
@@ -89,6 +125,25 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
 
                   setAttributes({
                     buttonIcon: value,
+                    className,
+                  });
+                }}
+              />
+            </PanelBody>
+            <PanelBody title={__('Icon Position', 'lps')}>
+              <ToggleControl
+                label={__('Icon on the left', 'chisel')}
+                help={__('By default icons are on the right', 'chisel')}
+                checked={!!buttonIconPosition}
+                onChange={(isLeft) => {
+                  className = className.replace('has-icon-left', '').trim();
+
+                  if (isLeft) {
+                    className += ' has-icon-left';
+                  }
+
+                  setAttributes({
+                    buttonIconPosition: isLeft,
                     className,
                   });
                 }}

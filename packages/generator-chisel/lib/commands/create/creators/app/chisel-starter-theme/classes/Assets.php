@@ -203,73 +203,78 @@ class Assets implements Instance {
 	 * Register assets.
 	 */
 	public function register_assets() {
-		$this->frontend_styles        = apply_filters( 'chisel_frontend_styles', $this->frontend_styles );
-		$this->frontend_footer_styles = apply_filters( 'chisel_frontend_footer_styles', $this->frontend_footer_styles );
-		$this->frontend_scripts       = apply_filters( 'chisel_frontend_scripts', $this->frontend_scripts );
-		$this->login_styles           = apply_filters( 'chisel_login_styles', $this->login_styles );
-		$this->login_scripts          = apply_filters( 'chisel_login_scripts', $this->login_scripts );
-		$this->admin_styles           = apply_filters( 'chisel_admin_styles', $this->admin_styles );
-		$this->admin_scripts          = apply_filters( 'chisel_admin_scripts', $this->admin_scripts );
-		$this->editor_styles          = apply_filters( 'chisel_editor_styles', $this->editor_styles );
-		$this->editor_scripts         = apply_filters( 'chisel_editor_scripts', $this->editor_scripts );
+		if ( ! is_admin() ) {
+			$this->frontend_styles        = apply_filters( 'chisel_frontend_styles', $this->frontend_styles );
+			$this->frontend_footer_styles = apply_filters( 'chisel_frontend_footer_styles', $this->frontend_footer_styles );
+			$this->frontend_scripts       = apply_filters( 'chisel_frontend_scripts', $this->frontend_scripts );
+			$this->login_styles           = apply_filters( 'chisel_login_styles', $this->login_styles );
+			$this->login_scripts          = apply_filters( 'chisel_login_scripts', $this->login_scripts );
 
-		if ( $this->frontend_styles ) {
-			foreach ( $this->frontend_styles as $file_name => $args ) {
-				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
-			}
-		}
-
-		if ( $this->frontend_footer_styles ) {
-			foreach ( $this->frontend_footer_styles as $file_name => $args ) {
-				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
-			}
-		}
-
-		if ( $this->frontend_scripts ) {
-			foreach ( $this->frontend_scripts as $file_name => $args ) {
-				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
-			}
-		}
-
-		if ( $this->login_styles ) {
-			$login_styles_data = array();
-
-			foreach ( $this->login_styles as $file_name => $args ) {
-				$login_styles_data = $this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+			if ( $this->frontend_styles ) {
+				foreach ( $this->frontend_styles as $file_name => $args ) {
+					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+				}
 			}
 
-			if ( isset( $login_styles_data['ver'] ) ) {
-				wp_register_style( 'global-styles', false, array(), $login_styles_data['ver'] );
+			if ( $this->frontend_footer_styles ) {
+				foreach ( $this->frontend_footer_styles as $file_name => $args ) {
+					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+				}
 			}
-		}
 
-		if ( $this->login_scripts ) {
-			foreach ( $this->login_scripts as $file_name => $args ) {
-				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+			if ( $this->frontend_scripts ) {
+				foreach ( $this->frontend_scripts as $file_name => $args ) {
+					$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+				}
 			}
-		}
 
-		if ( $this->admin_styles ) {
-			foreach ( $this->admin_styles as $file_name => $args ) {
-				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+			if ( is_login() ) {
+				if ( $this->login_styles ) {
+					$login_styles_data = array();
+
+					foreach ( $this->login_styles as $file_name => $args ) {
+						$login_styles_data = $this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+					}
+
+					if ( isset( $login_styles_data['ver'] ) ) {
+						wp_register_style( 'global-styles', false, array(), $login_styles_data['ver'] );
+					}
+				}
+
+				if ( $this->login_scripts ) {
+					foreach ( $this->login_scripts as $file_name => $args ) {
+						$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+					}
+				}
 			}
-		}
+		} else {
+			$this->admin_styles   = apply_filters( 'chisel_admin_styles', $this->admin_styles );
+			$this->admin_scripts  = apply_filters( 'chisel_admin_scripts', $this->admin_scripts );
+			$this->editor_styles  = apply_filters( 'chisel_editor_styles', $this->editor_styles );
+			$this->editor_scripts = apply_filters( 'chisel_editor_scripts', $this->editor_scripts );
 
-		if ( $this->admin_scripts ) {
-			foreach ( $this->admin_scripts as $file_name => $args ) {
-				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+			if ( $this->admin_styles ) {
+				foreach ( $this->admin_styles as $file_name => $args ) {
+					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+				}
 			}
-		}
 
-		if ( $this->editor_styles ) {
-			foreach ( $this->editor_styles as $file_name => $args ) {
-				$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+			if ( $this->admin_scripts ) {
+				foreach ( $this->admin_scripts as $file_name => $args ) {
+					$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+				}
 			}
-		}
 
-		if ( $this->editor_scripts ) {
-			foreach ( $this->editor_scripts as $file_name => $args ) {
-				$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+			if ( $this->editor_styles ) {
+				foreach ( $this->editor_styles as $file_name => $args ) {
+					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+				}
+			}
+
+			if ( $this->editor_scripts ) {
+				foreach ( $this->editor_scripts as $file_name => $args ) {
+					$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+				}
 			}
 		}
 	}

@@ -189,7 +189,8 @@ abstract class RegisterBlocks {
 									$block
 								);
 
-								if ( ! in_array( $script, $ignore_scripts, true ) ) {
+								// Register ignored scripts in dev mode in order to watch changes.
+								if ( Assets::is_fast_refresh() || ( ! Assets::is_fast_refresh() && ! in_array( $script, $ignore_scripts, true ) ) ) {
 									wp_register_script(
 										$block_handle,
 										$file_url,

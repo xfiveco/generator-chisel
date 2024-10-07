@@ -162,7 +162,7 @@ class AcfBlocks extends RegisterBlocks implements Instance {
 
 		// allow to use filters to manipulate the output.
 		$context = apply_filters( 'chisel_timber_acf_blocks_data', $context );
-		$context = apply_filters( 'chisel_timber_acf_blocks_data_' . $slug, $context );
+		$context = apply_filters( 'chisel_timber_acf_blocks_data_' . $block_slug, $context );
 		$context = apply_filters( 'chisel_timber_acf_blocks_data_' . $block['id'], $context );
 
 		$context['wrapper_attributes'] = get_block_wrapper_attributes(

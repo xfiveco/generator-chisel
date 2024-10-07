@@ -5,12 +5,17 @@
   object-position: $position;
 }
 
-@mixin background-image($name, $extension: 'svg', $is-block: false) {
+@mixin background-image($name, $extension: 'svg', $is-block: false, $is-icon: false) {
   $path: '../../';
+  $folder: 'images';
 
   @if $is-block {
     $path: '../../../';
   }
 
-  background-image: url('#{$path}assets/icons/#{$name}.#{$extension}');
+  @if $is-icon {
+    $folder: 'icons';
+  }
+
+  background-image: url('#{$path}assets/#{$folder}/#{$name}.#{$extension}');
 }

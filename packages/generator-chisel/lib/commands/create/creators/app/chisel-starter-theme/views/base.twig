@@ -28,6 +28,10 @@
   {% endblock %}
 
   <main id="main" class="o-wrapper">
+    {% block breadcrumbs %}
+      {{ breadcrumbs() }}
+    {% endblock %}
+
     {% block content %}
     {% endblock %}
   </main>

@@ -398,7 +398,7 @@ class CustomPostTypes implements Instance {
 			// 	'singular'      => __( 'Chisel CPT', 'chisel' ),
 			// 	'plural'        => __( 'Chisel CPTs', 'chisel' ),
 			// 	'supports'      => array( 'editor', 'thumbnail', 'excerpt' ),
-			// 	'icon'          => 'location-alt',
+			// 	'menu_icon'     => 'location-alt',
 			// 	'hierarchical'  => true,
 			// 	'public'        => true,
 			// 	'menu_position' => 20,

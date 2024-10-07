@@ -47,11 +47,10 @@ class Theme implements Instance {
 	 * Register action hooks.
 	 */
 	public function action_hooks() {
-		add_action( 'after_setup_theme', array( $this, 'theme_supports' ) );
+		add_action( 'init', array( $this, 'theme_supports' ), 11 );
 		add_action( 'after_setup_theme', array( $this, 'remove_post_supports' ), 99 );
 		add_action( 'init', array( $this, 'register_nav_menus' ) );
 		add_action( 'after_setup_theme', array( $this, 'i18n' ) );
-		add_action( 'wp_head', array( $this, 'set_scrollbar_width_for_css' ) );
 	}
 
 	/**
@@ -143,24 +142,6 @@ class Theme implements Instance {
 				get_template_directory()
 			)
 		);
-	}
-
-	/**
-	 * Calculate scrollbar width and set it as a CSS variable.
-	 */
-	public function set_scrollbar_width_for_css() {
-		?>
-		<script>
-			function getScrollbarWidth() {
-				return window.innerWidth - document.documentElement.clientWidth;
-			}
-
-			setTimeout(() => {
-				const scrollbarWidth = getScrollbarWidth();
-				document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-			}, 10);
-		</script>
-		<?php
 	}
 
 	/**

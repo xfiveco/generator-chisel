@@ -87,17 +87,36 @@ $_buttons-icons: settings.$buttons-icons;
 .c-btn.has-icon {
   @include button-icon;
 
-  &::after {
+  &::after,
+  &::before {
+    display: block;
     width: px-rem(24);
     height: px-rem(24);
     margin-left: px-rem(8);
     content: '';
   }
+
+  &::before {
+    display: none;
+  }
+
+  &.has-icon-left {
+    &::before {
+      display: block;
+      margin-right: px-rem(8);
+      margin-left: 0;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
 }
 
 @each $button-icon in $_buttons-icons {
   .c-btn.has-icon-#{$button-icon} {
-    &::after {
+    &::after,
+    &::before {
       @include get-icon($button-icon);
     }
   }

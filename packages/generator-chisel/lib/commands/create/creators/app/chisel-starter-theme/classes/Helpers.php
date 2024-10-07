@@ -127,7 +127,59 @@ class Helpers {
 	 * @return string|html
 	 */
 	public static function get_responsive_image( $image_id, $image_size = 'medium', $attrs = array() ) {
+		if ( ! $image_id ) {
+			return '';
+		}
+
 		return Timber::get_image( $image_id )->responsive( $image_size, $attrs );
+	}
+
+	/**
+	 * Generate BEM class names with modifiers
+	 *
+	 * @param string $name
+	 * @param mixed  ...$modifiers
+	 *
+	 * @return string
+	 */
+	public static function bem( $name = '', ...$modifiers ) {
+		if ( empty( $name ) || empty( $modifiers ) ) {
+			return '';
+		}
+
+		$classnames = array( $name );
+
+		foreach ( $modifiers as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$values = array_map(
+					function ( $val ) use ( $name, $value ) {
+						return $name . '--' . _wp_to_kebab_case( $val . '-' . $value[ $val ] );
+					},
+					array_keys( $value )
+				);
+
+				$classnames = array_merge( $classnames, $values );
+				continue;
+			}
+
+			if ( $value === false || $value === null || $value === '' ) {
+				continue;
+			}
+
+			if ( is_string( $key ) ) {
+				$classname = $name . '--' . _wp_to_kebab_case( $key );
+
+				if ( ! is_bool( $value ) ) {
+					$classname .= '-' . _wp_to_kebab_case( $value );
+				}
+			} else {
+				$classname = $name . '--' . _wp_to_kebab_case( $value );
+			}
+
+			$classnames[] = $classname;
+		}
+
+		return implode( ' ', $classnames );
 	}
 
 	/**

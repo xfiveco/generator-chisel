@@ -1,0 +1,16 @@
+@use '~design' as *;
+@use '../../design/settings/' as *;
+
+.c-breadcrumbs {
+  position: relative;
+  max-width: $full-width;
+  margin-inline: auto;
+  font-size: get-font-size('small');
+
+  span {
+    span {
+      display: inline-block;
+      margin-inline: px-rem(8);
+    }
+  }
+}

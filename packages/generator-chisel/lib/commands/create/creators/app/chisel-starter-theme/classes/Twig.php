@@ -65,6 +65,8 @@ class Twig implements Instance {
 		$this->register_function( $twig, 'slider_prepare_params', array( $this, 'slider_prepare_params' ) );
 		$this->register_function( $twig, 'get_responsive_image', array( $this, 'get_responsive_image' ) );
 		$this->register_function( $twig, 'comments_template', array( $this, 'comments_template' ) );
+		$this->register_function( $twig, 'bem', array( $this, 'bem' ) );
+		$this->register_function( $twig, 'breadcrumbs', array( $this, 'breadcrumbs' ) );
 
 		return $twig;
 	}
@@ -102,6 +104,36 @@ class Twig implements Instance {
 	 */
 	protected function register_function( $twig, $name, $callback ) {
 		$twig->addFunction( new \Twig\TwigFunction( $name, $callback ) );
+
+		return $twig;
+	}
+
+	/**
+	 * Register a Twig filter.
+	 *
+	 * @param   \Twig_Environment $twig The Twig environment.
+	 * @param   string            $name The name of the function.
+	 * @param   callable          $callback The callback function.
+	 *
+	 * @return \Twig_Environment
+	 */
+	protected function register_filter( $twig, $name, $callback ) {
+		$twig->addFilter( new \Twig\TwigFilter( $name, $callback ) );
+
+		return $twig;
+	}
+
+	/**
+	 * Register a Twig test.
+	 *
+	 * @param   \Twig_Environment $twig The Twig environment.
+	 * @param   string            $name The name of the function.
+	 * @param   callable          $callback The callback function.
+	 *
+	 * @return \Twig_Environment
+	 */
+	protected function register_test( $twig, $name, $callback ) {
+		$twig->addTest( new \Twig\TwigTest( $name, $callback ) );
 
 		return $twig;
 	}
@@ -233,6 +265,27 @@ class Twig implements Instance {
 	 */
 	public function comments_template() {
 		return Comments::comments_template();
+	}
+
+	/**
+	 * Generate BEM class names with modifiers
+	 *
+	 * @param string $name
+	 * @param mixed  ...$modifiers
+	 *
+	 * @return string
+	 */
+	public function bem( $name = '', ...$modifiers ) {
+		return Helpers::bem( $name, ...$modifiers );
+	}
+
+	/**
+	 * Display breadcrumbs. Requires Yoast plugin.
+	 *
+	 * @return html
+	 */
+	public function breadcrumbs() {
+		return Yoast::breadcrumbs();
 	}
 
 	/**

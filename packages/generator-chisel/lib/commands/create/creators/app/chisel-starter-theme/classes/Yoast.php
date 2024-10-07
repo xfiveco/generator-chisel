@@ -38,6 +38,23 @@ class Yoast implements Instance {
 	public function filter_hooks() {}
 
 	/**
+	 * Display breadcrumbs.
+	 *
+	 * @return html
+	 */
+	public static function breadcrumbs() {
+		if ( ! self::is_yoast_active() ) {
+			return '';
+		}
+
+		if ( is_front_page() ) {
+			return '';
+		}
+
+		return yoast_breadcrumb( '<div class="c-breadcrumbs">', '</div>', false );
+	}
+
+	/**
 	 * Check if Gravity Forms plugin is active.
 	 *
 	 * @return bool
