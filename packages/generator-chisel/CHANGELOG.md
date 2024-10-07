@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.7 (2024-10-07)
+
+- update gitignore ([164b521](https://github.com/xfiveco/generator-chisel/commit/164b521))
+- update gitignore, plugins list and buttons css ([e136434](https://github.com/xfiveco/generator-chisel/commit/e136434))
+
 ## 2.0.0-alpha.6 (2024-10-07)
 
 - blocks, assets, css adjustments, breadcrumbs, bem fn ([b3460ce](https://github.com/xfiveco/generator-chisel/commit/b3460ce))
