@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.8 (2024-10-07)
+
+- fixes ([4cdc3e1](https://github.com/xfiveco/generator-chisel/commit/4cdc3e1))
+- Publish ([ad109c1](https://github.com/xfiveco/generator-chisel/commit/ad109c1))
+
 ## 2.0.0-alpha.7 (2024-10-07)
 
 - update gitignore ([164b521](https://github.com/xfiveco/generator-chisel/commit/164b521))
