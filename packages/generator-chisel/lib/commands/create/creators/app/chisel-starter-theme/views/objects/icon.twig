@@ -1,0 +1,32 @@
+{#
+Input Data:
+
+name: string // name of the icon
+inline: boolean // required for icons that should be displayed as an inline element and not a block
+rectangle: boolean // required for icons that are rectangles (not squares) to be properly sized
+forceMono: boolean // use in case the monochromatic icons name starts with "color-"
+alt: string
+#}
+
+{% set nameHintIsColor = name matches '/^color-.*/' %}
+{% set isColor = forceMono ? false : nameHintIsColor %}
+{% set inlineClass = inline ? 'o-icon--inline' : '' %}
+{% set rectangleClass = rectangle ? 'o-icon--icon-' ~ name : '' %}
+{% set iconPrefix = 'icon-' %}
+{% set iconName = iconPrefix ~ name %}
+
+<div class="o-icon {{inlineClass}} {{rectangleClass}}">
+  {% if isColor %}
+  <img class="o-icon__icon o-icon__icon--color" alt="{{ alt ? alt : '' }}"
+    src="{{ fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ iconName ~ '-view' }}">
+  {% else %}
+  <svg class="o-icon__icon">
+    {% if alt %}
+    <title>
+      {{ alt }}
+    </title>
+    {% endif %}
+    <use href="{{ fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ iconName }}" />
+  </svg>
+  {% endif %}
+</div>

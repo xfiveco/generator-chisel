@@ -1,0 +1,33 @@
+@use 'sass:math';
+@use '../../design/settings/icon-settings' as *;
+
+.o-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  font-size: var(--o-icon-size, 1em);
+  color: var(--o-icon-color, currentcolor);
+
+  &--inline {
+    display: inline-flex;
+  }
+
+  @each $icon, $width-ratio in $o-icon-icons {
+    &--#{$icon} {
+      width: $width-ratio * 1em;
+    }
+  }
+}
+
+.o-icon__icon {
+  display: block;
+  width: 100%;
+  height: 1em;
+
+  &:not(&--color) {
+    fill: currentcolor;
+    stroke: currentcolor;
+    stroke-width: 0;
+  }
+}
