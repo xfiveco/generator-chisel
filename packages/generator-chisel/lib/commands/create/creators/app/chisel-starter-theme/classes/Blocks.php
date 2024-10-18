@@ -182,12 +182,14 @@ class Blocks extends RegisterBlocks implements Instance {
 			return $block_content;
 		}
 
-		$processor = new \WP_HTML_Tag_Processor( $block_content );
-		$processor->next_tag(); // Get first tag.
-		$processor->add_class( $custom_classnames );
-		$processor->remove_class( 'is-layout-flow' ); // It overwrites margin styles. Let's get rid of it.
+		$block_content = preg_replace( '/<([^>]+) class="([^"]+)">/', '<$1 class="$2 ' . $custom_classnames . '">', $block_content, 1 );
+		$block_content = preg_replace( '/class="([^"]*) is-layout-flow ([^"]*)"/', 'class="$1 $2"', $block_content ); // It overwrites margin styles. Let's get rid of it.
 
-		return $processor->get_updated_html();
+		if ( $block['blockName'] === 'core/table' ) {
+			$block_content = preg_replace( '/<([^>]+) class="([^"]+)">/', '<$1 class="$2 u-table-responsive">', $block_content, 1 );
+		}
+
+		return $block_content;
 	}
 
 	/**

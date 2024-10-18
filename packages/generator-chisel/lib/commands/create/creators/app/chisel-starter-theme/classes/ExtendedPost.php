@@ -20,13 +20,6 @@ class ExtendedPost extends TimberPost {
 	public $thumbnail_html;
 
 	/**
-	 * Post title.
-	 *
-	 * @var string
-	 */
-	public $dynamic_title = null;
-
-	/**
 	 * Get the post thumbnail. Returns the thumbnail responsive image html.
 	 *
 	 * @param string $size Thumbnail size.

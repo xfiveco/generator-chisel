@@ -91,9 +91,9 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
 
         {isSelected && (
           <InspectorControls>
-            <PanelBody title={__('Button Size', 'lps')}>
+            <PanelBody title={__('Button Size', 'chisel')}>
               <SelectControl
-                label={__('Size', 'lps')}
+                label={__('Size', 'chisel')}
                 options={buttonSizes}
                 value={buttonSize}
                 onChange={(value) => {
@@ -110,9 +110,9 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
                 }}
               />
             </PanelBody>
-            <PanelBody title={__('Button Icon', 'lps')}>
+            <PanelBody title={__('Button Icon', 'chisel')}>
               <SelectControl
-                label={__('Icon', 'lps')}
+                label={__('Icon', 'chisel')}
                 options={buttonIcons}
                 value={buttonIcon}
                 onChange={(value) => {
@@ -130,7 +130,7 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
                 }}
               />
             </PanelBody>
-            <PanelBody title={__('Icon Position', 'lps')}>
+            <PanelBody title={__('Icon Position', 'chisel')}>
               <ToggleControl
                 label={__('Icon on the left', 'chisel')}
                 help={__('By default icons are on the right', 'chisel')}

@@ -8,7 +8,7 @@
     <span class="c-post-item__meta">
       <span class="c-post-item__author"><a href="{{ post.author.link }}">{{ __('By', 'chisel') }} {{ post.author.name }}</a></span> •
       <time datetime="{{ post.date }}">{{ post.date }}</time></span>
-      <p class="c-post-item__excerpt">{{ post.excerpt({words: 20, read_more: __('Keep reading', 'chisel'), end: '...'}) }}</p>
+      <p class="c-post-item__excerpt">{{ post.excerpt({words: 20, read_more: __('Keep reading', 'chisel'), end: '...', force: true}) }}</p>
 
     {% if post.tags %}
       <span class="c-post-item__tags">

@@ -1,4 +1,2 @@
 /build
 /vendor
-package-lock.json
-composer.lock

@@ -22,5 +22,5 @@ const chiselBlocksDefaultAlignment = createHigherOrderComponent((BlockEdit) => {
 
     return <BlockEdit {...props} />;
   };
-}, 'coreButtonCustomControls');
-addFilter('editor.BlockEdit', 'chisel/button-block', chiselBlocksDefaultAlignment);
+}, 'blocksAlignmentCustomControls');
+addFilter('editor.BlockEdit', 'chisel/blocks-alignment', chiselBlocksDefaultAlignment);
