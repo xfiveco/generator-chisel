@@ -5,6 +5,7 @@
   <file>.</file>
 
   <!-- Exclude paths -->
+  <exclude-pattern>*/assets/hashes.php</exclude-pattern>
   <exclude-pattern>*/acf-json/*</exclude-pattern>
   <exclude-pattern>*/dist/*</exclude-pattern>
   <exclude-pattern>*/build/*</exclude-pattern>
