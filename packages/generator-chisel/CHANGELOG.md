@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.9 (2024-10-18)
+
+- fixes, adjustments, optimize ([f73f855](https://github.com/xfiveco/generator-chisel/commit/f73f855))
+
 ## 2.0.0-alpha.8 (2024-10-07)
 
 - fixes ([4cdc3e1](https://github.com/xfiveco/generator-chisel/commit/4cdc3e1))
