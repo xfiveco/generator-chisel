@@ -1,0 +1,39 @@
+version: '3.8'
+
+name: <%= app.nameSlug %>_devcontainer
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Keep this in sync with installed WordPress version
+        # See https://hub.docker.com/_/wordpress for available versions
+        BASE_IMAGE_VERSION: FILL_ME
+        CHISEL_PORT: 3000
+
+    ports:
+      - '127.0.0.1:3000:3000'
+      - '127.0.0.1:3001:3001'
+
+    volumes:
+      - ..:/workspaces/<%= app.nameSlug %>
+      - ..:/var/www/html
+
+    environment:
+      CHISEL_THEME_NAME: '<%= app.themeName %>'
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+      MYSQL_DATABASE: mariadb
+      MYSQL_USER: mariadb
+      MYSQL_PASSWORD: mariadb
+
+volumes:
+  db:

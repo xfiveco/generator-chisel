@@ -131,6 +131,18 @@ module.exports = (api) => {
     ]);
 
     delete wpData.adminPassword;
+
+    const version = ((await wp(['core', 'version'])).stdout || '').trim();
+    const defaultPhpVersion = '8.3';
+
+    if (version) {
+      await api.modifyFile('.devcontainer/docker-compose.yml', (body) =>
+        body.replace(
+          'BASE_IMAGE_VERSION: FILL_ME',
+          `BASE_IMAGE_VERSION: ${version}-php${defaultPhpVersion}`,
+        ),
+      );
+    }
   });
 
   api.schedule(api.PRIORITIES.WP_INSTALL_PLUGINS, async () => {

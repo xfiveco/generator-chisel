@@ -54,14 +54,31 @@ module.exports = (api, options) => {
         console.log('Creating database...');
         console.log(api.resolve());
 
+        const templateData = {
+          ...answers,
+          documentRoot: api.resolveRoot(),
+          serverName: new URL(url).hostname,
+          tablePrefix,
+        };
+
         await copy({
           from: path.join(__dirname, '../template'),
           to: api.resolveRoot(),
+          templateData,
+        });
+
+        await copy({
+          from: path.join(__dirname, '../template'),
+          to: api.resolveRoot('.devcontainer'),
+          file: 'wp-config-local.chisel-tpl.php',
           templateData: {
-            ...answers,
-            documentRoot: api.resolveRoot(),
-            serverName: new URL(url).hostname,
-            tablePrefix,
+            ...templateData,
+            databaseName: 'mariadb',
+            databaseUser: 'mariadb',
+            databasePassword: 'mariadb',
+            databaseHost: 'db',
+            databasePort: 3306,
+            databaseHostPort: 'db:3306',
           },
         });
 
