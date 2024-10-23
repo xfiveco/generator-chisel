@@ -3,6 +3,7 @@
   "name": "WordPress Development",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
+  // when changing workspace name or theme path, also update the docker-compose.yml file
   "workspaceFolder": "/workspaces/<%= app.nameSlug %>/<%= app.themePath %>",
 
   // Features to add to the dev container. More info: https://containers.dev/features.
@@ -15,19 +16,6 @@
     },
     "ghcr.io/devcontainers/features/git:1": {}
   },
-
-  "mounts": [
-    {
-      "source": "node_modules",
-      "target": "<%= '${containerWorkspaceFolder}' %>/node_modules",
-      "type": "volume"
-    },
-    {
-      "source": "vendor",
-      "target": "<%= '${containerWorkspaceFolder}' %>/vendor",
-      "type": "volume"
-    }
-  ],
 
   "postCreateCommand": "../../../.devcontainer/post-create-command.sh",
 

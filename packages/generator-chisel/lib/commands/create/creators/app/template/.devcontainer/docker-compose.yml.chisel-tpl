@@ -14,12 +14,15 @@ services:
         CHISEL_PORT: 3000
 
     ports:
-      - '127.0.0.1:3000:3000'
-      - '127.0.0.1:3001:3001'
+      - '127.0.0.1:3000:3000' # should be CHISEL_PORT
+      - '127.0.0.1:3001:3001' # should be CHISEL_PORT + 1
 
     volumes:
       - ..:/workspaces/<%= app.nameSlug %>
       - ..:/var/www/html
+      - node_modules:/workspaces/<%= app.nameSlug %>/wp-content/themes/<%= app.themeName %>/node_modules
+      - vendor:/workspaces/<%= app.nameSlug %>/wp-content/themes/<%= app.themeName %>/vendor
+      - vendor:/var/www/html/wp-content/themes/<%= app.themeName %>/vendor
 
     environment:
       CHISEL_THEME_NAME: '<%= app.themeName %>'
@@ -37,3 +40,5 @@ services:
 
 volumes:
   db:
+  vendor:
+  node_modules:
