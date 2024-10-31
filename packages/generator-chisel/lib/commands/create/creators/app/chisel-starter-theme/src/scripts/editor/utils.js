@@ -1,18 +1,6 @@
 /* global chiselEditorScripts */
 
 class Utils {
-  generateClassNamesRegex = (options, classPrefix) => {
-    const classNames = options
-      .map((option) => option.value)
-      .filter((className) => className !== '');
-
-    return new RegExp(`${classPrefix}-(${classNames.join('|')})`, 'gi');
-  };
-
-  prepareClassName = (className, classNames) => {
-    return className.replace(classNames, '').trim().replace('/[ ]{2,}/g', ' ');
-  };
-
   generateIconsChoices = () => {
     const icons = chiselEditorScripts?.icons || null;
 

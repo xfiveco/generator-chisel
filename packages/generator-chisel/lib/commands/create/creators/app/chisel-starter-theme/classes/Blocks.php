@@ -183,7 +183,7 @@ class Blocks extends RegisterBlocks implements Instance {
 		}
 
 		$block_content = preg_replace( '/<([^>]+) class="([^"]+)">/', '<$1 class="$2 ' . $custom_classnames . '">', $block_content, 1 );
-		$block_content = preg_replace( '/class="([^"]*) is-layout-flow ([^"]*)"/', 'class="$1 $2"', $block_content ); // It overwrites margin styles. Let's get rid of it.
+		$block_content = preg_replace( '/class="([^"]*) (is-layout-flow|is-layout-constrained) ([^"]*)"/', 'class="$1 $3"', $block_content ); // It overwrites margin styles. Let's get rid of it.
 
 		if ( $block['blockName'] === 'core/table' ) {
 			$block_content = preg_replace( '/<([^>]+) class="([^"]+)">/', '<$1 class="$2 u-table-responsive">', $block_content, 1 );

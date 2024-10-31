@@ -12,7 +12,7 @@
         <div class="c-posts-items o-grid o-grid--cols-1 o-grid--cols-2-small o-grid--cols-{% if sidebar %}2{% else %}3{% endif %}-medium js-load-more-container">
           {% if posts is not empty %}
             {% for post in posts %}
-              {% include "components/post-item.twig" with {post: post} %}
+              {% include ['components/' ~ post.post_type ~ '-item.twig', 'components/post-item.twig'] with {post: post} only %}
             {% endfor %}
           {% else %}
             <h2>{{ __('No posts found', 'chisel') }}</h2>

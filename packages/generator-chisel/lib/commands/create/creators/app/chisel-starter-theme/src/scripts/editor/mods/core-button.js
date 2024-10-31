@@ -19,8 +19,6 @@ const buttonIcons = [
   },
   ...Utils.generateIconsChoices(),
 ];
-const buttonSizesClassNamesRegex = Utils.generateClassNamesRegex(buttonSizes, 'is-size');
-const buttonIconsClassNamesRegex = Utils.generateClassNamesRegex(buttonIcons, 'has-icon');
 
 // Add Custom Attributes
 const chiselButtonBlockAttributes = (settings, name) => {
@@ -62,6 +60,11 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
       buttonIconPosition = false,
     } = attributes;
 
+    const prev = {
+      buttonSize,
+      buttonIcon,
+    };
+
     useEffect(() => {
       if (isSelected && className !== '') {
         const attrs = {};
@@ -97,10 +100,11 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
                 options={buttonSizes}
                 value={buttonSize}
                 onChange={(value) => {
-                  className = Utils.prepareClassName(className, buttonSizesClassNamesRegex);
+                  const prevClassname = `is-size-${prev.buttonSize}`;
+                  className = className.replace(prevClassname, '').trim();
 
                   if (value) {
-                    className += ` ${`is-size-${value}`}`;
+                    className += ` is-size-${value}`;
                   }
 
                   setAttributes({
@@ -116,11 +120,11 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
                 options={buttonIcons}
                 value={buttonIcon}
                 onChange={(value) => {
-                  className = Utils.prepareClassName(className, buttonIconsClassNamesRegex);
-                  className = className.replace('has-icon', '').trim();
+                  const prevClassname = `has-icon has-icon-${prev.buttonIcon}`;
+                  className = className.replace(prevClassname, '').trim();
 
                   if (value) {
-                    className += ` has-icon ${`has-icon-${value}`}`;
+                    className += ` has-icon has-icon-${value}`;
                   }
 
                   setAttributes({

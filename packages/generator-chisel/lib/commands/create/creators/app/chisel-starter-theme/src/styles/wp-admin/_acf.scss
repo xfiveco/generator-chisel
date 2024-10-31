@@ -1,0 +1,21 @@
+@use '~design' as *;
+
+.acf-color-picker {
+  .iris-picker {
+    padding-bottom: px-rem(40) !important; // Increase if needed, i.e. when you have more colors.
+  }
+
+  .iris-palette-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+
+    .iris-palette {
+      display: block;
+      width: 16px !important;
+      height: 16px !important;
+      float: none !important;
+      margin: 0 2px 2px 0 !important;
+    }
+  }
+}

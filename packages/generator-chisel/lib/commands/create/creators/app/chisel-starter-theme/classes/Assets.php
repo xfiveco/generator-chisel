@@ -292,7 +292,7 @@ class Assets implements Instance {
 				$style_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
-					wp_enqueue_style( $style_handle );
+					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -306,8 +306,7 @@ class Assets implements Instance {
 				$script_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
-					wp_enqueue_script( $script_handle );
-					$this->set_script_translations( $handle, $args );
+					$this->enqueue_script( $script_handle, $args );
 				}
 			}
 		}
@@ -325,7 +324,7 @@ class Assets implements Instance {
 				$style_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
-					wp_enqueue_style( $style_handle );
+					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -347,7 +346,7 @@ class Assets implements Instance {
 				$style_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
-					wp_enqueue_style( $style_handle );
+					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -361,8 +360,7 @@ class Assets implements Instance {
 				$script_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
-					wp_enqueue_script( $script_handle );
-					$this->set_script_translations( $handle, $args );
+					$this->enqueue_script( $script_handle, $args );
 				}
 			}
 		}
@@ -381,7 +379,7 @@ class Assets implements Instance {
 				$style_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
-					wp_enqueue_style( $style_handle );
+					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -395,8 +393,7 @@ class Assets implements Instance {
 				$script_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
-					wp_enqueue_script( $script_handle );
-					$this->set_script_translations( $handle, $args );
+					$this->enqueue_script( $script_handle, $args );
 				}
 			}
 		}
@@ -424,7 +421,7 @@ class Assets implements Instance {
 				$style_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
-					wp_enqueue_style( $style_handle );
+					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
 					$this->enqueue_style_js_for_dev( $handle );
@@ -438,8 +435,7 @@ class Assets implements Instance {
 				$script_handle  = self::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
-					wp_enqueue_script( $script_handle );
-					$this->set_script_translations( $handle, $args );
+					$this->enqueue_script( $script_handle, $args );
 				}
 			}
 		}
@@ -461,7 +457,6 @@ class Assets implements Instance {
 		$deps      = isset( $args['deps'] ) ? $args['deps'] : array();
 		$ver       = isset( $args['ver'] ) ? $args['ver'] : $asset_data['version'];
 		$media     = isset( $args['media'] ) ? $args['media'] : 'all';
-		$inline    = isset( $args['inline'] ) ? $args['inline'] : '';
 		$condition = isset( $args['condition'] ) ? $args['condition'] : null;
 
 		// Use condition to determine if the style should be registered. It can be either a boolean or a function.
@@ -480,10 +475,6 @@ class Assets implements Instance {
 		}
 
 		wp_register_style( $handle, $src, $deps, $ver, $media );
-
-		if ( $inline ) {
-			wp_add_inline_style( $handle, $inline['data'] );
-		}
 
 		// Register js file for fast refresh of the css file.
 		if ( self::is_fast_refresh() ) {
@@ -507,6 +498,28 @@ class Assets implements Instance {
 	}
 
 	/**
+	 * Enqueue script wrapper function.
+	 *
+	 * @param string $handle - full script handle.
+	 * @param array  $args
+	 *
+	 * @return array
+	 */
+	protected function enqueue_style( $handle, $args ) {
+		$inline = isset( $args['inline'] ) ? $args['inline'] : '';
+
+		if ( $inline ) {
+			wp_add_inline_style( $handle, $inline['data'] );
+		}
+
+		wp_enqueue_style( $handle );
+
+		return array(
+			'handle' => $handle,
+		);
+	}
+
+	/**
 	 * Register script wrapper function.
 	 *
 	 * @param string $handle
@@ -522,8 +535,6 @@ class Assets implements Instance {
 		$deps      = isset( $args['deps'] ) ? $args['deps'] : array();
 		$ver       = isset( $args['ver'] ) ? $args['ver'] : $asset_data['version'];
 		$strategy  = isset( $args['strategy'] ) ? $args['strategy'] : true; // Strategy can be a boolean, which determines if the script should be enqueued in the footer, or an array with the following keys: 'in_footer':boolean and 'strategy':string (defer or async).
-		$localize  = isset( $args['localize'] ) ? $args['localize'] : array();
-		$inline    = isset( $args['inline'] ) ? $args['inline'] : '';
 		$condition = isset( $args['condition'] ) ? $args['condition'] : null;
 
 		// Use condition to determine if the script should be registered. It can be either a boolean or a function.
@@ -543,6 +554,28 @@ class Assets implements Instance {
 
 		wp_register_script( $handle, $src, $deps, $ver, $strategy );
 
+		return array(
+			'src'       => $src,
+			'deps'      => $deps,
+			'ver'       => $ver,
+			'strategy'  => $strategy,
+			'condition' => $condition,
+			'handle'    => $handle,
+		);
+	}
+
+	/**
+	 * Enqueue script wrapper function.
+	 *
+	 * @param string $handle - full script handle.
+	 * @param array  $args
+	 *
+	 * @return array
+	 */
+	protected function enqueue_script( $handle, $args ) {
+		$localize = isset( $args['localize'] ) ? $args['localize'] : array();
+		$inline   = isset( $args['inline'] ) ? $args['inline'] : '';
+
 		if ( $localize ) {
 			wp_localize_script( $handle, $localize['name'], $localize['data'] );
 		}
@@ -551,14 +584,12 @@ class Assets implements Instance {
 			wp_add_inline_script( $handle, $inline['data'], $inline['position'] );
 		}
 
+		wp_enqueue_script( $handle );
+		$this->set_script_translations( $handle, $args );
+
 		return array(
-			'src'       => $src,
-			'deps'      => $deps,
-			'ver'       => $ver,
-			'strategy'  => $strategy,
-			'condition' => $condition,
-			'localize'  => $localize,
-			'handle'    => $handle,
+			'localize' => $localize,
+			'handle'   => $handle,
 		);
 	}
 
