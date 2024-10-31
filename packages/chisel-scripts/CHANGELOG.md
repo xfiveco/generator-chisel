@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.3.1 (2024-10-31)
+
+- add assets index ([fed4fd3](https://github.com/xfiveco/generator-chisel/commit/fed4fd3))
+
 ## 2.0.0-alpha.3.0 (2024-10-07)
 
 - update chisel-scripts version ([2957e4c](https://github.com/xfiveco/generator-chisel/commit/2957e4c))

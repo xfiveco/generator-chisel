@@ -2,6 +2,12 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.10 (2024-10-31)
+
+- add assets index ([fed4fd3](https://github.com/xfiveco/generator-chisel/commit/fed4fd3))
+- CPTs, assets, blocks changes and fixes ([0014d9b](https://github.com/xfiveco/generator-chisel/commit/0014d9b))
+- ignore assets index ([b951521](https://github.com/xfiveco/generator-chisel/commit/b951521))
+
 ## 2.0.0-alpha.9 (2024-10-18)
 
 - fixes, adjustments, optimize ([f73f855](https://github.com/xfiveco/generator-chisel/commit/f73f855))
