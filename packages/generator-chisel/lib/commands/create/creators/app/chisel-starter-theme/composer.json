@@ -4,6 +4,9 @@
       "composer/installers": true,
       "php-http/discovery": true,
       "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "platform": {
+      "php": "7.4"
     }
   },
   "require-dev": {
