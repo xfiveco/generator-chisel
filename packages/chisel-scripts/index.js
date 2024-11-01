@@ -50,6 +50,10 @@ function adjustWebpackConfig(baseConfig, directory) {
     devServer: baseConfig.devServer && {
       ...baseConfig.devServer,
       allowedHosts: [new URL(packageJson.chisel.url).host],
+      ...(process.env.CHISEL_PORT && {
+        host: '0.0.0.0',
+        port: Number(process.env.CHISEL_PORT) + 1,
+      }),
     },
     optimization: {
       ...baseConfig.optimization,
