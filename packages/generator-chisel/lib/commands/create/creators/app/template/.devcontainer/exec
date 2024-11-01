@@ -3,5 +3,6 @@
 if [ -f /.dockerenv ]; then
   exec "${@}"
 else
-  npm run --silent devcontainer -- exec --workspace-folder . "${@}"
+  this_file_dir=$(dirname "${BASH_SOURCE[0]}")
+  npm run --silent devcontainer -- exec --workspace-folder "${this_file_dir}/.." "${@}"
 fi

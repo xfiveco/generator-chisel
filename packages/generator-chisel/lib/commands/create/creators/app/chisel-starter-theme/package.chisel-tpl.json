@@ -6,8 +6,12 @@
   "author": "<%= app.author %>",
   "description": "Chisel WP",
   "scripts": {
+    "devcontainer": "npx @devcontainers/cli@0.71",
+    "devcontainer:up": "npm run --silent devcontainer -- up --workspace-folder ../../..",
+    "devcontainer:enter": "../../../.devcontainer/exec bash",
+    "devcontainer:start": "../../../.devcontainer/exec npm run --silent start",
     "start": "chisel-scripts start",
-    "dev": "npm run start",
+    "dev": "npm run --silent start",
     "build": "chisel-scripts build && npm run lint && npm run phpcs && npm run twigcs",
     "build-scripts": "chisel-scripts build",
     "add-page": "chisel-scripts add-page",
