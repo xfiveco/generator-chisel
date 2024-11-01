@@ -1,11 +1,21 @@
+const devContainerDefaultDatabaseCredentials = {
+  databaseHost: 'db',
+  databasePort: 3306,
+  databaseName: 'mariadb',
+  databaseUser: 'mariadb',
+  databasePassword: 'mariadb',
+};
+
 module.exports = (api, options) => {
   api.registerCommand(
     'wp-config',
     (command) =>
-      command.description(
-        'configure WP (writes wp/wp-config-local.php an dev-vhost.conf)',
-      ),
-    async () => {
+      command
+        .description(
+          'configure WP (writes wp/wp-config-local.php an dev-vhost.conf)',
+        )
+        .option('--devcontainer', 'use default database credentials', false),
+    async ({ devcontainer }) => {
       const { runLocal, copy } = require('chisel-shared-utils');
       const wp = (args, opts) =>
         runLocal(['chisel-scripts', 'wp', ...args], {
@@ -45,7 +55,9 @@ module.exports = (api, options) => {
       ];
 
       const promptAndCreateDB = async () => {
-        const answers = await inquirer.prompt(prompts);
+        const answers = devcontainer
+          ? devContainerDefaultDatabaseCredentials
+          : await inquirer.prompt(prompts);
 
         answers.databaseHostPort = `${answers.databaseHost}:${answers.databasePort}`;
 
@@ -67,21 +79,6 @@ module.exports = (api, options) => {
           templateData,
         });
 
-        await copy({
-          from: path.join(__dirname, '../template'),
-          to: api.resolveRoot('.devcontainer'),
-          file: 'wp-config-local.chisel-tpl.php',
-          templateData: {
-            ...templateData,
-            databaseName: 'mariadb',
-            databaseUser: 'mariadb',
-            databasePassword: 'mariadb',
-            databaseHost: 'db',
-            databasePort: 3306,
-            databaseHostPort: 'db:3306',
-          },
-        });
-
         const res = await wp(['db', 'query', 'SELECT 1'], {
           reject: false,
           silent: true,
@@ -98,7 +95,7 @@ module.exports = (api, options) => {
             console.log(res.stderr);
             throw res;
           }
-        } else {
+        } else if (!devcontainer) {
           // exists
           const { useExisting } = await inquirer.prompt([
             {
@@ -116,16 +113,20 @@ module.exports = (api, options) => {
         }
       };
 
-      // eslint-disable-next-line no-constant-condition
-      while (true) {
-        try {
-          await promptAndCreateDB();
-          break;
-        } catch (e) {
-          console.log(e); // TODO: remove
-          console.log('');
-          console.log('Trying again...');
-          console.log('');
+      if (devcontainer) {
+        await promptAndCreateDB();
+      } else {
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          try {
+            await promptAndCreateDB();
+            break;
+          } catch (e) {
+            console.log(e); // TODO: remove
+            console.log('');
+            console.log('Trying again...');
+            console.log('');
+          }
         }
       }
     },
