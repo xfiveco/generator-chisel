@@ -21,6 +21,8 @@ const icons = (api) => {
   const iconsScssSettingsFileDestinationFile =
     iconsScssSettingsFileDestinationFolder + '/_icon-settings.scss';
 
+  const iconsScssMixinsFileDestinationFile = api.resolve('src/design/tools/_icons.scss')
+
   function optimizeSVG(svgContent, idPrefix, colorfulIcons) {
     const configMono = [
       {
@@ -139,7 +141,7 @@ const icons = (api) => {
     return contentData;
   }
 
-  async function generateFileContentDataOfSvgIconsColor(svgIconsData) {
+  async function generateFileContentDataOfSvgIconsColor(svgIconsData, viewBoxYStartAt = 0) {
     const iconsViewGap = 10;
     const viewBoxMaxWidth = svgIconsData
       .map((data) => data.svgWidth)
@@ -153,7 +155,8 @@ const icons = (api) => {
       viewBoxMaxWidth,
     };
 
-    let viewBoxY = 0;
+    // let viewBoxY = 0;
+    let viewBoxY = viewBoxYStartAt;
 
     svgIconsData.forEach((data) => {
       const tmpViewBoxElementPositionY = viewBoxY;
@@ -172,12 +175,16 @@ const icons = (api) => {
   </svg>`;
     });
 
-    return contentData;
+    // return contentData;
+    return {contentData, viewBoxY};
   }
 
   async function generateIconsFile(svgIconsDataMono, svgIconsDataColor) {
-    const contentDataMono = await generateFileContentDataOfSvgIconsMono(svgIconsDataMono);
-    const contentDataColor = await generateFileContentDataOfSvgIconsColor(svgIconsDataColor);
+    // const contentDataMono = await generateFileContentDataOfSvgIconsMono(svgIconsDataMono);
+    // const contentDataMono = await generateFileContentDataOfSvgIconsColor(svgIconsDataMono);
+    // const contentDataColor = await generateFileContentDataOfSvgIconsColor(svgIconsDataColor);
+    const {contentData: contentDataMono, viewBoxY} = await generateFileContentDataOfSvgIconsColor(svgIconsDataMono);
+    const {contentData: contentDataColor} = await generateFileContentDataOfSvgIconsColor(svgIconsDataColor, viewBoxY);
 
     const iconsSVG =
       `
@@ -186,9 +193,11 @@ const icons = (api) => {
 <svg version="1.1" viewBox="0 0 ${contentDataColor.viewBoxMaxWidth} ${contentDataColor.viewBoxTotalHeight}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     ${contentDataColor.defs.trim()}
-    ${contentDataMono.defs.trim()}
-    ${contentDataMono.symbols.trim()}
   </defs>
+
+  ${contentDataMono.views.trim()}
+
+  ${contentDataMono.groups.trim()}
 
   ${contentDataColor.views.trim()}
 
@@ -203,12 +212,49 @@ const icons = (api) => {
     }
   }
 
+//   async function generateIconsFile(svgIconsDataMono, svgIconsDataColor) {
+//     const contentDataMono = await generateFileContentDataOfSvgIconsMono(svgIconsDataMono);
+//     const contentDataColor = await generateFileContentDataOfSvgIconsColor(svgIconsDataColor);
+
+//     const iconsSVG =
+//       `
+// <!-- This file is auto generated. Do not edit directly. -->
+
+// <svg version="1.1" viewBox="0 0 ${contentDataColor.viewBoxMaxWidth} ${contentDataColor.viewBoxTotalHeight}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+//   <defs>
+//     ${contentDataColor.defs.trim()}
+//     ${contentDataMono.defs.trim()}
+//     ${contentDataMono.symbols.trim()}
+//   </defs>
+
+//   ${contentDataColor.views.trim()}
+
+//   ${contentDataColor.groups.trim()}
+// </svg>`.trim() + '\n';
+
+//     try {
+//       await fs.writeFile(iconsFileDestinationFile, iconsSVG, 'utf-8');
+//       printLog(`Generated SVG icons file: ${chalk.italic.underline(iconsFileDestinationFile)}`);
+//     } catch (error) {
+//       throw new Error(`Error generating ${iconsFileDestinationFile}: ${error.message}`);
+//     }
+//   }
+
   async function generateScssSettingsFile(svgIconsData) {
     const scssVariables = svgIconsData
       .filter((data) => data.svgWidth / data.svgHeight !== 1)
       .map((data) => {
         return `
   ${data.iconId}: math.div(${data.svgWidth}, ${data.svgHeight}),`;
+      })
+      .join('')
+      .trim();
+
+      const scssVariablesRatio = svgIconsData
+      .filter((data) => data.svgWidth / data.svgHeight !== 1)
+      .map((data) => {
+        return `
+  ${data.iconId}: "${data.svgWidth}/${data.svgHeight}",`;
       })
       .join('')
       .trim();
@@ -220,6 +266,10 @@ const icons = (api) => {
 
 $o-icon-icons: (
   ${scssVariables}
+);
+
+$o-icon-icons-ratio: (
+  ${scssVariablesRatio}
 );`.trim() + '\n';
 
     try {
@@ -229,6 +279,52 @@ $o-icon-icons: (
       throw new Error(`Error generating ${iconsScssSettingsFileDestinationFile}: ${error.message}`);
     }
   }
+
+  // -----------------------
+  async function generateScssMixinsFile(svgIconsData) {
+    const scssVariables = svgIconsData
+      .filter((data) => data.svgWidth / data.svgHeight !== 1)
+      .map((data) => {
+        return `
+  ${data.iconId}: math.div(${data.svgWidth}, ${data.svgHeight}),`;
+      })
+      .join('')
+      .trim();
+
+    const scssSettingsFileContent =
+      `@use 'sass:map';
+@use '../settings/icon-settings' as *;
+
+/* This file is auto generated. Do not edit directly. */
+
+@function parse-aspect-ratio($ratio) {
+  $width: nth($ratio, 1) * 1; // Przekształca na liczbę
+  $height: nth($ratio, 2) * 1;
+  @return $width / $height;
+}
+
+@mixin icon($name, $color: currentcolor) {
+  mask: url('../../assets/icons/icons.svg#icon-#{$name}-view');
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  background-color: $color;
+
+  @if map-has-key($o-icon-icons-ratio , 'icon-#{$name}') {
+    $aspect-ratio: map-get($o-icon-icons-ratio, 'icon-#{$name}');
+    aspect-ratio: parse-aspect-ratio($aspect-ratio);
+  } @else {
+    aspect-ratio: 1;
+  }
+}`.trim() + '\n';
+
+    try {
+      await fs.writeFile(iconsScssMixinsFileDestinationFile, scssSettingsFileContent, 'utf-8');
+      printLog(`Generated SCSS mixins file: ${chalk.italic.underline(iconsScssMixinsFileDestinationFile)}`);
+    } catch (error) {
+      throw new Error(`Error generating ${iconsScssMixinsFileDestinationFile}: ${error.message}`);
+    }
+  }
+  // -----------------------
 
   async function generateIconsJsonFile(svgIconsData) {
     try {
@@ -418,6 +514,7 @@ $o-icon-icons: (
     await Promise.all([
       generateIconsFile(svgIconsDataMono, svgIconsDataColor),
       generateScssSettingsFile(allIconsData),
+      generateScssMixinsFile(allIconsData),
       generateIconsJsonFile(allIconsData),
       generateIconsHTMLPreview(svgIconsDataMono, svgIconsDataColor),
     ]);
