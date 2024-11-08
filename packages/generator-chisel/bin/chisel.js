@@ -19,6 +19,12 @@ const createProgram = () => {
       '--link',
       'link Chisel packages (yarn link) in created project (for development)',
     )
+    .option('--devcontainer', 'create devcontainer', false)
+    .option(
+      '--devcontainer-complete <details>',
+      'complete creation inside devcontainer',
+      false
+    )
     .action((...args) => {
       const cmd = args.slice(-1)[0];
       args = args.slice(0, -1);

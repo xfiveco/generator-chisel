@@ -15,6 +15,12 @@ module.exports = class Creator {
     this.args = opts.args;
     this.cmd = opts.cmd;
     this.index = 0;
+
+    if (this.cmd.devcontainerComplete) {
+      this.data.devcontainerComplete = JSON.parse(
+        Buffer.from(this.cmd.devcontainerComplete, 'base64').toString(),
+      );
+    }
   }
 
   schedule(priority, action) {

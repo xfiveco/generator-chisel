@@ -8,14 +8,15 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Keep this in sync with installed WordPress version
+        # Keep this in sync with installed WordPress version and
+        # PHP version used in production
         # See https://hub.docker.com/_/wordpress for available versions
-        BASE_IMAGE_VERSION: FILL_ME
-        CHISEL_PORT: 3000
+        BASE_IMAGE_VERSION: <%= app.wordpressVersion %>-php8.3
+        CHISEL_PORT: <%= app.devcontainerPort %>
 
     ports:
-      - '127.0.0.1:3000:3000' # should be CHISEL_PORT
-      - '127.0.0.1:3001:3001' # should be CHISEL_PORT + 1
+      - '127.0.0.1:<%= app.devcontainerPort %>:<%= app.devcontainerPort %>' # should be CHISEL_PORT
+      - '127.0.0.1:<%= app.devcontainerPort + 1 %>:<%= app.devcontainerPort + 1 %>' # should be CHISEL_PORT + 1
 
     volumes:
       - ..:/workspaces/<%= app.nameSlug %>
@@ -25,6 +26,7 @@ services:
       - vendor:/var/www/html/wp-content/themes/<%= app.themeName %>/vendor
 
     environment:
+      npm_config_registry: http://host.docker.internal:4873
       CHISEL_THEME_NAME: '<%= app.themeName %>'
 
   db:
