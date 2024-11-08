@@ -6,19 +6,17 @@ sudo chown "$USER:$USER" node_modules vendor
 
 pushd ../../..
 
-<% if (app.devcontainer) { %>
-npx --yes generator-chisel@<%= chiselVersion %> --devcontainer-complete <%= app.responsesAsBase64 %>
-<% } %>
-
 sudo chown "$USER:$USER" . index.php wp-config.php
 if [ -d .git ] ; then sudo chown "$USER:$USER" .git ; fi
-
-popd
-
-<% if (!app.devcontainer) { %>
-npm run wp-config -- --devcontainer
-npm install
-npm run composer install
-npm run build
+<% if (app.devcontainer) { %>
+{
+    npx --yes generator-chisel@<%= chiselVersion %> --devcontainer-complete <%= app.responsesAsBase64 %>
+    exit
+}
 <% } %>
-
+popd
+<% if (!app.devcontainer) { %>
+npm install
+npm run wp-config -- --devcontainer
+npm run composer install
+npm run build<% } %>

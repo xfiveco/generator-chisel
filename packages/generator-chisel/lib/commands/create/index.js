@@ -6,7 +6,10 @@ const createCommand = async ({ args, cmd }) => {
   if (cmd.devcontainer) {
     await creator.loadCreator('devcontainer');
   } else {
-    await creator.loadCreator('init');
+    if (!cmd.devcontainerComplete) {
+      await creator.loadCreator('init');
+    }
+
     await creator.loadCreator('app');
   }
 

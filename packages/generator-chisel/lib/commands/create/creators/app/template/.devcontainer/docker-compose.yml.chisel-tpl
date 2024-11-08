@@ -26,7 +26,8 @@ services:
       - vendor:/var/www/html/wp-content/themes/<%= app.themeName %>/vendor
 
     environment:
-      npm_config_registry: http://host.docker.internal:4873
+      # npm_config_registry: http://host.docker.internal:4873
+      npm_config_registry: https://randy-show-associations-mystery.trycloudflare.com
       CHISEL_THEME_NAME: '<%= app.themeName %>'
 
   db:

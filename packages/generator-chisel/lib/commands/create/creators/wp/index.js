@@ -29,14 +29,14 @@ module.exports = (api) => {
     let url = `http://${api.creator.data.app.nameSlug}.test/`;
     const { devcontainerPort } = api.creator.data.app;
 
-    if (await fs.exists('/.dockerenv')) {
-      url = `http://127.0.0.1:${devcontainerPort}/`;
-    } else if (process.env.CODESPACES === 'true') {
+    if (process.env.CODESPACES === 'true') {
       const {
         CODESPACE_NAME,
         GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN,
       } = process.env;
       url = `https://${CODESPACE_NAME}-${devcontainerPort}.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/`;
+    } else if (await fs.exists('/.dockerenv')) {
+      url = `http://127.0.0.1:${devcontainerPort}/`;
     }
 
     await api.prompt([
