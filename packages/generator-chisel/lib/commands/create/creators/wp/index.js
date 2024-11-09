@@ -104,7 +104,6 @@ module.exports = (api) => {
       `${api.creator.data.app.themePath}/package.json`,
       (body) => {
         body.chisel = {
-          url: api.creator.data.wp.url,
           tablePrefix,
         };
       },
