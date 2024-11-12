@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.13 (2024-11-12)
+
+- Adjust command ([c1b4471](https://github.com/xfiveco/generator-chisel/commit/c1b4471))
+
 ## 2.0.0-alpha.12 (2024-11-12)
 
 - Try adjusting commands ([1c322a0](https://github.com/xfiveco/generator-chisel/commit/1c322a0))
