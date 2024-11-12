@@ -21,8 +21,6 @@ const icons = (api) => {
   const iconsScssSettingsFileDestinationFile =
     iconsScssSettingsFileDestinationFolder + '/_icon-settings.scss';
 
-  const iconsScssMixinsFileDestinationFile = api.resolve('src/design/tools/_icons.scss')
-
   function optimizeSVG(svgContent, idPrefix, colorfulIcons) {
     const configMono = [
       {
@@ -68,6 +66,7 @@ const icons = (api) => {
   async function parseSVGFileData(iconSourceFilePath, iconColorful) {
     const iconName = path.basename(iconSourceFilePath, '.svg').replace(/[_|\s]/gm, '-');
     const iconId = iconColorful ? `icon-color-${iconName}` : `icon-${iconName}`;
+    const iconViewId = `${iconId}-view`;
     const svgContent = await fs.readFile(iconSourceFilePath, 'utf-8');
     const optimizedSvgContent = optimizeSVG(svgContent, iconId, iconColorful);
     const viewBoxMatch = optimizedSvgContent.match(/viewBox=["']([^'|^"]+)["']/);
@@ -93,6 +92,7 @@ const icons = (api) => {
       iconName,
       iconColorful,
       iconId,
+      iconViewId,
       svgViewBox,
       svgWidth,
       svgHeight,
@@ -124,22 +124,6 @@ const icons = (api) => {
     dirCreation && printLog(`Destination directory created:`, chalk.italic.underline(dirCreation));
   }
 
-  // async function generateFileContentDataOfSvgIconsMono(svgIconsData) {
-  //   const contentData = {
-  //     defs: ``,
-  //     symbols: ``,
-  //   };
-
-  //   svgIconsData.forEach((data) => {
-  //     contentData.defs += data.svgDefsContent ? `\t\t${data.svgDefsContent}\n` : '';
-  //     contentData.symbols += `
-  //   <symbol id="${data.iconId}" viewBox="${data.svgViewBox}">
-  //     ${data.svgIconDataNoDefs}
-  //   </symbol>`;
-  //   });
-
-  //   return contentData;
-  // }
 
   async function generateFileContentDataOfSvgIcons(svgIconsData, viewBoxYStartAt = 0) {
     const iconsViewGap = 10;
@@ -211,34 +195,6 @@ const icons = (api) => {
     }
   }
 
-//   async function generateIconsFile(svgIconsDataMono, svgIconsDataColor) {
-//     const contentDataMono = await generateFileContentDataOfSvgIconsMono(svgIconsDataMono);
-//     const contentDataColor = await generateFileContentDataOfSvgIconsColor(svgIconsDataColor);
-
-//     const iconsSVG =
-//       `
-// <!-- This file is auto generated. Do not edit directly. -->
-
-// <svg version="1.1" viewBox="0 0 ${contentDataColor.viewBoxMaxWidth} ${contentDataColor.viewBoxTotalHeight}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-//   <defs>
-//     ${contentDataColor.defs.trim()}
-//     ${contentDataMono.defs.trim()}
-//     ${contentDataMono.symbols.trim()}
-//   </defs>
-
-//   ${contentDataColor.views.trim()}
-
-//   ${contentDataColor.groups.trim()}
-// </svg>`.trim() + '\n';
-
-//     try {
-//       await fs.writeFile(iconsFileDestinationFile, iconsSVG, 'utf-8');
-//       printLog(`Generated SVG icons file: ${chalk.italic.underline(iconsFileDestinationFile)}`);
-//     } catch (error) {
-//       throw new Error(`Error generating ${iconsFileDestinationFile}: ${error.message}`);
-//     }
-//   }
-
   async function generateScssSettingsFile(svgIconsData) {
     const scssVariables = svgIconsData
       .filter((data) => data.svgWidth / data.svgHeight !== 1)
@@ -266,62 +222,6 @@ $o-icon-icons: (
     }
   }
 
-  // -----------------------
-  async function generateScssMixinsFile(svgIconsData) {
-    const scssVariables = svgIconsData
-      .filter((data) => data.svgWidth / data.svgHeight !== 1)
-      .map((data) => {
-        return `
-  ${data.iconId}: math.div(${data.svgWidth}, ${data.svgHeight}),`;
-      })
-      .join('')
-      .trim();
-
-    const scssSettingsFileContent =
-      `@use 'sass:map';
-@use '../settings/icon-settings' as *;
-
-/* This file is auto generated. Do not edit directly. */
-
-@mixin icon($name, $multicolor: false) {
-  display: inline-block;
-  height: 1em;
-  line-height: 1em;
-
-  &::before {
-    content: '';
-    display: block;
-    height: 1em;
-    line-height: 1em;
-
-    @if $multicolor {
-      background-image: url('../../assets/icons/icons.svg#icon-#{$name}-view');
-      background-repeat: no-repeat;
-      background-size: contain;
-    } @else {
-      mask: url('../../assets/icons/icons.svg#icon-#{$name}-view');
-      mask-repeat: no-repeat;
-      mask-size: contain;
-      background-color: var(--o-icon-color, currentcolor);
-    }
-
-    @if map-has-key($o-icon-icons , 'icon-#{$name}') {
-      width: map-get($o-icon-icons, 'icon-#{$name}') * 1em;
-    } @else {
-      width: 1em;
-    }
-  }
-}`.trim() + '\n';
-
-    try {
-      await fs.writeFile(iconsScssMixinsFileDestinationFile, scssSettingsFileContent, 'utf-8');
-      printLog(`Generated SCSS mixins file: ${chalk.italic.underline(iconsScssMixinsFileDestinationFile)}`);
-    } catch (error) {
-      throw new Error(`Error generating ${iconsScssMixinsFileDestinationFile}: ${error.message}`);
-    }
-  }
-  // -----------------------
-
   async function generateIconsJsonFile(svgIconsData) {
     try {
       const jsonContent = JSON.stringify(svgIconsData, null, 2).trim() + '\n';
@@ -339,12 +239,17 @@ $o-icon-icons: (
       .map((data) => {
         return `
       <div class="element">
+        <!-- Alternative HTML usage example
         <div class="o-icon o-icon--${data.iconId}">
-          <img class="o-icon__icon o-icon__icon--color" src="./icons.svg#${data.iconId}-view" alt="${data.iconId}">
-          <!-- <iframe class="o-icon__icon" src="./icons.svg#${data.iconId}-view"></iframe> -->
+          1: <img class="o-icon__icon" src="./icons.svg#${data.iconId}-view" alt="${data.iconId}">
+          2: <iframe class="o-icon__icon" src="./icons.svg#${data.iconId}-view"></iframe>
         </div>
+        -->
+        <i class="o-icon o-icon--color o-icon--${data.iconId}" style="background-image: url(./icons.svg#${data.iconViewId});"></i>
+
         <p class="element__name" title="Usage name">${data.iconId.replace('icon-', '')}</p>
-        <p class="element__id">ID: ${data.iconId}</p>
+        <!-- <p class="element__id">ID: ${data.iconId}</p> -->
+        <p class="element__id">View ID: ${data.iconViewId}</p>
       </div>`;
       })
       .join('\n').trim();
@@ -353,13 +258,11 @@ $o-icon-icons: (
       .map((data) => {
         return `
       <div class="element">
-        <div class="o-icon o-icon--${data.iconId}">
-          <svg class="o-icon__icon">
-            <use href="./icons.svg#${data.iconId}"></use>
-          </svg>
-        </div>
+        <i class="o-icon o-icon--mono o-icon--${data.iconId}" style="mask-image: url(./icons.svg#${data.iconViewId});"></i>
+
         <p class="element__name" title="Usage name">${data.iconId.replace('icon-', '')}</p>
-        <p class="element__id">ID: ${data.iconId}</p>
+        <!-- <p class="element__id">ID: ${data.iconId}</p> -->
+        <p class="element__id">View ID: ${data.iconViewId}</p>
       </div>`;
       })
       .join('\n').trim();
@@ -447,24 +350,23 @@ $o-icon-icons: (
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 1em;
+      line-height: 1em;;
       width: 1em;
       font-size: var(--o-icon-size, 1em);
     }
 
-    .o-icon__icon {
-      display: block;
-      width: 100%;
-      height: 1em;
-      margin: 0;
-      padding: 0;
-      border: none;
+    .o-icon--color {
+      background-repeat: no-repeat;
+      background-size: contain;
     }
 
-    .o-icon__icon:not(.o-icon__icon--color) {
-      fill: currentcolor;
-      stroke: currentcolor;
-      stroke-width: 0;
+    .o-icon--mono {
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      background-color: var(--o-icon-color, currentcolor);
     }
+
     ${cssClasses}
   </style>
   </head>
@@ -510,7 +412,6 @@ $o-icon-icons: (
     await Promise.all([
       generateIconsFile(svgIconsDataMono, svgIconsDataColor),
       generateScssSettingsFile(allIconsData),
-      generateScssMixinsFile(allIconsData),
       generateIconsJsonFile(allIconsData),
       generateIconsHTMLPreview(svgIconsDataMono, svgIconsDataColor),
     ]);
