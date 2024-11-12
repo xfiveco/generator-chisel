@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.1 (2024-11-12)
+
+- V2: Add Devcontainers (#538) ([b878421](https://github.com/xfiveco/generator-chisel/commit/b878421)), closes [#538](https://github.com/xfiveco/generator-chisel/issues/538)
+
 ## 2.0.0-alpha.0 (2024-09-08)
 
 - Add Coding Standards, Minor Improvements ([cfcb017](https://github.com/xfiveco/generator-chisel/commit/cfcb017))

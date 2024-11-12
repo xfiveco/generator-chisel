@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.11 (2024-11-12)
+
+- V2: Add Devcontainers (#538) ([b878421](https://github.com/xfiveco/generator-chisel/commit/b878421)), closes [#538](https://github.com/xfiveco/generator-chisel/issues/538)
+- composer, wp-config, plugins list updates ([642f983](https://github.com/xfiveco/generator-chisel/commit/642f983))
+
 ## 2.0.0-alpha.10 (2024-10-31)
 
 - add assets index ([fed4fd3](https://github.com/xfiveco/generator-chisel/commit/fed4fd3))
