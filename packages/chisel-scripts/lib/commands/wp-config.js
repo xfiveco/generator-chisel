@@ -69,8 +69,8 @@ module.exports = (api, options) => {
         const templateData = {
           ...answers,
           documentRoot: api.resolveRoot(),
-          serverName: new URL(url).hostname,
           tablePrefix,
+          codespaces: process.env.CODESPACES === 'true',
         };
 
         await copy({

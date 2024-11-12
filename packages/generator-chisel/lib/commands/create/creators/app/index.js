@@ -8,6 +8,7 @@ const {
 } = require('chisel-shared-utils');
 const packagesVersions = require('../../packages-versions');
 const { prepareName, getWordpressVersion } = require('../utils');
+const fs = require('fs/promises');
 
 module.exports = async (api) => {
   let app;
@@ -97,6 +98,25 @@ module.exports = async (api) => {
     await run(
       ['npx', '--yes', '@xfive/coding-standards@latest', '--skip-checks'],
       { cwd: api.resolve(app.themePath) },
+    );
+
+    await api.modifyFile(
+      '.devcontainer/devcontainer.json',
+      async (body) => {
+        const extensionsText = await fs.readFile(
+          api.resolve(app.themePath, '.vscode/extensions.json'),
+          'utf8',
+        );
+        const { recommendations } = JSON.parse(extensionsText);
+
+        return body.replace(
+          / +\/\/ EXTENSIONS-FROM-VSCODE-EXTENSIONS-FILE/,
+          recommendations
+            .map((ext) => `        ${JSON.stringify(ext)}`)
+            .join(',\n'),
+        );
+      },
+      { isJson: false },
     );
 
     if (api.creator.cmd.link) {

@@ -46,6 +46,17 @@ module.exports = async (api) => {
   });
 
   api.schedule(api.PRIORITIES.END_MESSAGE, async () => {
-    console.log('END MESSAGE');
+    console.log(`
+Devcontainer definition is ready.
+
+To continue creating the project do one of the following:
+
+1. If you are using VS Code, open the folder in VS Code and run
+   "Dev Containers: Reopen in Container" from the command palette.
+
+2. Otherwise you have to use Dev Containers CLI to start the container:
+   > npx -y @devcontainers/cli@latest up --workspace-folder .
+   (dot at the end is part of the command)
+`);
   });
 };
