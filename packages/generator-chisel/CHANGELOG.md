@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.12 (2024-11-12)
+
+- Try adjusting commands ([1c322a0](https://github.com/xfiveco/generator-chisel/commit/1c322a0))
+
 ## 2.0.0-alpha.11 (2024-11-12)
 
 - V2: Add Devcontainers (#538) ([b878421](https://github.com/xfiveco/generator-chisel/commit/b878421)), closes [#538](https://github.com/xfiveco/generator-chisel/issues/538)
