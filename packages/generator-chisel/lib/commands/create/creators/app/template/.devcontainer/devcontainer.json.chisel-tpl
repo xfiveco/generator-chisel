@@ -17,7 +17,7 @@
     "ghcr.io/devcontainers/features/git:1": {}
   },
 
-  "postCreateCommand": "../../../.devcontainer/post-create-command.sh",
+  "postCreateCommand": "bash ../../../.devcontainer/post-create-command.sh",
 
   "remoteUser": "wordpress",
 
