@@ -192,15 +192,15 @@ const icons = (api) => {
     ${contentDataColor.defs.trim()}
   </defs>
 
-  <!-- Colored icons -->
-  ${contentDataColor.views.trim()}
-
-  ${contentDataColor.groups.trim()}
-
   <!-- Monochromatic icons -->
   ${contentDataMono.views.trim()}
 
   ${contentDataMono.groups.trim()}
+
+  <!-- Colored icons -->
+  ${contentDataColor.views.trim()}
+
+  ${contentDataColor.groups.trim()}
 </svg>`.trim() + '\n';
 
     try {
@@ -283,20 +283,27 @@ $o-icon-icons: (
 
 /* This file is auto generated. Do not edit directly. */
 
-@mixin icon($name) {
+@mixin icon($name, $multicolor: false) {
   display: inline-block;
   height: 1em;
   line-height: 1em;
 
   &::before {
     content: '';
-    display: inline-block;
-    mask: url('../../assets/icons/icons.svg#icon-#{$name}-view');
-    mask-repeat: no-repeat;
-    mask-size: contain;
-    background-color: var(--o-icon-color, currentcolor);
+    display: block;
     height: 1em;
     line-height: 1em;
+
+    @if $multicolor {
+      background-image: url('../../assets/icons/icons.svg#icon-#{$name}-view');
+      background-repeat: no-repeat;
+      background-size: contain;
+    } @else {
+      mask: url('../../assets/icons/icons.svg#icon-#{$name}-view');
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      background-color: var(--o-icon-color, currentcolor);
+    }
 
     @if map-has-key($o-icon-icons , 'icon-#{$name}') {
       width: map-get($o-icon-icons, 'icon-#{$name}') * 1em;
