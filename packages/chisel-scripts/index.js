@@ -50,13 +50,12 @@ function adjustWebpackConfig(baseConfig, directory) {
             {
               cwd: directory,
               encoding: 'utf8',
+              shell: true,
             },
           );
           return stdout.trim();
         } catch (e) {
-          throw new Error(
-            'Failed to get current website url',
-          );
+          throw new Error('Failed to get current website url', { cause: e });
         }
       })());
   })();
