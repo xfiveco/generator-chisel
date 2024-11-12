@@ -1,0 +1,31 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "WordPress Development",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  // when changing workspace name or theme path, also update the docker-compose.yml file
+  "workspaceFolder": "/workspaces/<%= app.nameSlug %>/<%= app.themePath %>",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "wordpress"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+
+  "postCreateCommand": "../../../.devcontainer/post-create-command.sh",
+
+  "remoteUser": "wordpress",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // EXTENSIONS-FROM-VSCODE-EXTENSIONS-FILE
+      ]
+    }
+  }
+}

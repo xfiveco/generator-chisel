@@ -37,6 +37,29 @@ function adjustWebpackConfig(baseConfig, directory) {
     ...entriesFromFiles(stylesFiles),
   };
 
+  const getUrl = (() => {
+    let url;
+
+    return () =>
+      (url ||= (() => {
+        const { execFileSync } = require('node:child_process');
+        try {
+          const stdout = execFileSync(
+            'npm',
+            ['run', '--silent', 'wp', 'option', 'get', 'home'],
+            {
+              cwd: directory,
+              encoding: 'utf8',
+              shell: true,
+            },
+          );
+          return stdout.trim();
+        } catch (e) {
+          throw new Error('Failed to get current website url', { cause: e });
+        }
+      })());
+  })();
+
   const updatedConfig = {
     ...baseConfig,
     entry,
@@ -49,7 +72,33 @@ function adjustWebpackConfig(baseConfig, directory) {
     },
     devServer: baseConfig.devServer && {
       ...baseConfig.devServer,
-      allowedHosts: [new URL(packageJson.chisel.url).host],
+      allowedHosts: [new URL(getUrl()).host],
+      ...(process.env.CHISEL_PORT && {
+        host: '0.0.0.0',
+        port: Number(process.env.CHISEL_PORT) + 1,
+        ...(() => {
+          const webSocketURL = new URL(getUrl());
+          webSocketURL.protocol = webSocketURL.protocol.replace('http', 'ws');
+          webSocketURL.pathname = '/ws';
+          const webSocketURLString = webSocketURL.toString();
+
+          if (!webSocketURLString.includes(process.env.CHISEL_PORT)) {
+            return;
+          }
+
+          return {
+            client: {
+              ...baseConfig.devServer.client,
+              webSocketURL: webSocketURL
+                .toString()
+                .replace(
+                  process.env.CHISEL_PORT,
+                  Number(process.env.CHISEL_PORT) + 1,
+                ),
+            },
+          };
+        })(),
+      }),
     },
     optimization: {
       ...baseConfig.optimization,

@@ -26,16 +26,31 @@ module.exports = (api) => {
     const userName = gitConfig('user.name');
     const userEmail = gitConfig('user.email');
 
+    let url = `http://${api.creator.data.app.nameSlug}.test/`;
+    const { devcontainerPort } = api.creator.data.app;
+
+    if (process.env.CODESPACES === 'true') {
+      const {
+        CODESPACE_NAME,
+        GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN,
+      } = process.env;
+      url = `https://${CODESPACE_NAME}-${devcontainerPort}.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/`;
+    } else if (await fs.exists('/.dockerenv')) {
+      url = `http://127.0.0.1:${devcontainerPort}/`;
+    }
+
     await api.prompt([
       {
         name: 'title',
         message: 'Enter title for the new site:',
         default: api.creator.data.app.name,
+        validate: (val) => Boolean(val),
       },
       {
         name: 'url',
         message: 'Enter URL:',
-        default: `http://${api.creator.data.app.nameSlug}.test/`,
+        default: url,
+        validate: (val) => Boolean(val),
       },
       {
         name: 'adminUser',
@@ -47,6 +62,7 @@ module.exports = (api) => {
             nameParts[0].toLowerCase() + Math.floor(1000 + Math.random() * 9000)
           );
         },
+        validate: (val) => Boolean(val),
       },
       {
         name: 'adminPassword',
@@ -88,7 +104,6 @@ module.exports = (api) => {
       `${api.creator.data.app.themePath}/package.json`,
       (body) => {
         body.chisel = {
-          url: api.creator.data.wp.url,
           tablePrefix,
         };
       },
@@ -104,7 +119,13 @@ module.exports = (api) => {
   api.schedule(api.PRIORITIES.WP_CONFIG, async () => {
     if (api.creator.cmd.skipWpConfig) return;
 
-    await runLocal(['chisel-scripts', 'wp-config'], {
+    const extraArgs = [];
+
+    if (api.creator.data.devcontainerComplete) {
+      extraArgs.push('--devcontainer');
+    }
+
+    await runLocal(['chisel-scripts', 'wp-config', ...extraArgs], {
       cwd: api.resolve(themePath),
       execaOpts: { stdio: 'inherit' },
     });

@@ -35,10 +35,11 @@ module.exports.copy = async function copy(options = {}) {
 
       return fs
         .readFile(f, { encoding: 'utf8' })
-        .then((fileBody) =>
+        .then(async (fileBody) =>
           fs.outputFile(
             target,
             template(fileBody, { sourceURL: f })(templateData),
+            { mode: (await fs.stat(f)).mode }
           ),
         );
     }

@@ -1,0 +1,42 @@
+version: '3.8'
+
+name: <%= app.nameSlug %>_devcontainer
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Keep this in sync with installed WordPress version and
+        # PHP version used in production
+        # See https://hub.docker.com/_/wordpress for available versions
+        BASE_IMAGE_VERSION: <%= app.wordpressVersion %>-php8.3
+        CHISEL_PORT: <%= app.devcontainerPort %>
+
+    ports:
+      - '127.0.0.1:<%= app.devcontainerPort %>:<%= app.devcontainerPort %>' # should be CHISEL_PORT
+      - '127.0.0.1:<%= app.devcontainerPort + 1 %>:<%= app.devcontainerPort + 1 %>' # should be CHISEL_PORT + 1
+
+    volumes:
+      - ..:/workspaces/<%= app.nameSlug %>
+      - ..:/var/www/html
+      - node_modules:/workspaces/<%= app.nameSlug %>/wp-content/themes/<%= app.themeName %>/node_modules
+      - vendor:/workspaces/<%= app.nameSlug %>/wp-content/themes/<%= app.themeName %>/vendor
+      - vendor:/var/www/html/wp-content/themes/<%= app.themeName %>/vendor
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+      MYSQL_DATABASE: mariadb
+      MYSQL_USER: mariadb
+      MYSQL_PASSWORD: mariadb
+
+volumes:
+  db:
+  vendor:
+  node_modules:

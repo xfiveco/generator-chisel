@@ -1,6 +1,5 @@
 const path = require('path');
 const { startCase } = require('lodash');
-const speakingUrl = require('speakingurl');
 const {
   execa,
   run,
@@ -8,6 +7,8 @@ const {
   installDependencies,
 } = require('chisel-shared-utils');
 const packagesVersions = require('../../packages-versions');
+const { prepareName, getWordpressVersion } = require('../utils');
+const fs = require('fs/promises');
 
 module.exports = async (api) => {
   let app;
@@ -20,27 +21,40 @@ module.exports = async (api) => {
       timeout: 2000,
     }).catch(() => ({}));
 
-    app = await api.prompt([
-      {
-        name: 'name',
-        message: 'Please enter the project name:',
-        default: () => startCase(path.basename(process.cwd())),
-        validate: (val) => Boolean(val),
-      },
-      {
-        name: 'author',
-        message: 'Please enter author name:',
-        default: async () => (await userName).stdout,
-      },
-    ]);
+    const { devcontainerComplete } = api.creator.data;
 
-    app.nameSlug = speakingUrl(app.name)
-      .replace(/(?<=[^\d])-(\d+)/g, (_, d) => d)
-      .replace(/[^a-z0-9-]/g, '-');
-    // app.nameCamel = camelCase(app.nameSlug);
+    app = await api.prompt(
+      [
+        !devcontainerComplete && {
+          name: 'name',
+          message: 'Please enter the project name:',
+          default: () => startCase(path.basename(process.cwd())),
+          validate: (val) => Boolean(val),
+        },
+        !devcontainerComplete && {
+          type: 'number',
+          name: 'devcontainerPort',
+          message: 'Enter the devcontainer port:',
+          default: 3000,
+          validate: (val) => Boolean(val),
+        },
+        {
+          name: 'author',
+          message: 'Please enter author name:',
+          default: async () => (await userName).stdout,
+          validate: (val) => Boolean(val),
+        },
+      ].filter(Boolean),
+    );
+
     app.hasJQuery = false;
-    app.themeName = `${app.nameSlug}-chisel`;
-    app.themePath = `wp-content/themes/${app.themeName}`;
+    app.wordpressVersion = await getWordpressVersion();
+
+    if (devcontainerComplete) {
+      Object.assign(app, devcontainerComplete);
+    }
+
+    Object.assign(app, prepareName(app.name));
 
     await api.creator.loadCreator('wp');
   });
@@ -84,6 +98,25 @@ module.exports = async (api) => {
     await run(
       ['npx', '--yes', '@xfive/coding-standards@latest', '--skip-checks'],
       { cwd: api.resolve(app.themePath) },
+    );
+
+    await api.modifyFile(
+      '.devcontainer/devcontainer.json',
+      async (body) => {
+        const extensionsText = await fs.readFile(
+          api.resolve(app.themePath, '.vscode/extensions.json'),
+          'utf8',
+        );
+        const { recommendations } = JSON.parse(extensionsText);
+
+        return body.replace(
+          / +\/\/ EXTENSIONS-FROM-VSCODE-EXTENSIONS-FILE/,
+          recommendations
+            .map((ext) => `        ${JSON.stringify(ext)}`)
+            .join(',\n'),
+        );
+      },
+      { isJson: false },
     );
 
     if (api.creator.cmd.link) {
