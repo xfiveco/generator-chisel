@@ -124,24 +124,24 @@ const icons = (api) => {
     dirCreation && printLog(`Destination directory created:`, chalk.italic.underline(dirCreation));
   }
 
-  async function generateFileContentDataOfSvgIconsMono(svgIconsData) {
-    const contentData = {
-      defs: ``,
-      symbols: ``,
-    };
+  // async function generateFileContentDataOfSvgIconsMono(svgIconsData) {
+  //   const contentData = {
+  //     defs: ``,
+  //     symbols: ``,
+  //   };
 
-    svgIconsData.forEach((data) => {
-      contentData.defs += data.svgDefsContent ? `\t\t${data.svgDefsContent}\n` : '';
-      contentData.symbols += `
-    <symbol id="${data.iconId}" viewBox="${data.svgViewBox}">
-      ${data.svgIconDataNoDefs}
-    </symbol>`;
-    });
+  //   svgIconsData.forEach((data) => {
+  //     contentData.defs += data.svgDefsContent ? `\t\t${data.svgDefsContent}\n` : '';
+  //     contentData.symbols += `
+  //   <symbol id="${data.iconId}" viewBox="${data.svgViewBox}">
+  //     ${data.svgIconDataNoDefs}
+  //   </symbol>`;
+  //   });
 
-    return contentData;
-  }
+  //   return contentData;
+  // }
 
-  async function generateFileContentDataOfSvgIconsColor(svgIconsData, viewBoxYStartAt = 0) {
+  async function generateFileContentDataOfSvgIcons(svgIconsData, viewBoxYStartAt = 0) {
     const iconsViewGap = 10;
     const viewBoxMaxWidth = svgIconsData
       .map((data) => data.svgWidth)
@@ -180,11 +180,8 @@ const icons = (api) => {
   }
 
   async function generateIconsFile(svgIconsDataMono, svgIconsDataColor) {
-    // const contentDataMono = await generateFileContentDataOfSvgIconsMono(svgIconsDataMono);
-    // const contentDataMono = await generateFileContentDataOfSvgIconsColor(svgIconsDataMono);
-    // const contentDataColor = await generateFileContentDataOfSvgIconsColor(svgIconsDataColor);
-    const {contentData: contentDataMono, viewBoxY} = await generateFileContentDataOfSvgIconsColor(svgIconsDataMono);
-    const {contentData: contentDataColor} = await generateFileContentDataOfSvgIconsColor(svgIconsDataColor, viewBoxY);
+    const {contentData: contentDataMono, viewBoxY} = await generateFileContentDataOfSvgIcons(svgIconsDataMono);
+    const {contentData: contentDataColor} = await generateFileContentDataOfSvgIcons(svgIconsDataColor, viewBoxY);
 
     const iconsSVG =
       `
@@ -195,13 +192,15 @@ const icons = (api) => {
     ${contentDataColor.defs.trim()}
   </defs>
 
-  ${contentDataMono.views.trim()}
-
-  ${contentDataMono.groups.trim()}
-
+  <!-- Colored icons -->
   ${contentDataColor.views.trim()}
 
   ${contentDataColor.groups.trim()}
+
+  <!-- Monochromatic icons -->
+  ${contentDataMono.views.trim()}
+
+  ${contentDataMono.groups.trim()}
 </svg>`.trim() + '\n';
 
     try {
@@ -250,15 +249,6 @@ const icons = (api) => {
       .join('')
       .trim();
 
-      const scssVariablesRatio = svgIconsData
-      .filter((data) => data.svgWidth / data.svgHeight !== 1)
-      .map((data) => {
-        return `
-  ${data.iconId}: "${data.svgWidth}/${data.svgHeight}",`;
-      })
-      .join('')
-      .trim();
-
     const scssSettingsFileContent =
       `@use 'sass:math';
 
@@ -266,10 +256,6 @@ const icons = (api) => {
 
 $o-icon-icons: (
   ${scssVariables}
-);
-
-$o-icon-icons-ratio: (
-  ${scssVariablesRatio}
 );`.trim() + '\n';
 
     try {
@@ -297,23 +283,26 @@ $o-icon-icons-ratio: (
 
 /* This file is auto generated. Do not edit directly. */
 
-@function parse-aspect-ratio($ratio) {
-  $width: nth($ratio, 1) * 1; // Przekształca na liczbę
-  $height: nth($ratio, 2) * 1;
-  @return $width / $height;
-}
+@mixin icon($name) {
+  display: inline-block;
+  height: 1em;
+  line-height: 1em;
 
-@mixin icon($name, $color: currentcolor) {
-  mask: url('../../assets/icons/icons.svg#icon-#{$name}-view');
-  mask-repeat: no-repeat;
-  mask-size: contain;
-  background-color: $color;
+  &::before {
+    content: '';
+    display: inline-block;
+    mask: url('../../assets/icons/icons.svg#icon-#{$name}-view');
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    background-color: var(--o-icon-color, currentcolor);
+    height: 1em;
+    line-height: 1em;
 
-  @if map-has-key($o-icon-icons-ratio , 'icon-#{$name}') {
-    $aspect-ratio: map-get($o-icon-icons-ratio, 'icon-#{$name}');
-    aspect-ratio: parse-aspect-ratio($aspect-ratio);
-  } @else {
-    aspect-ratio: 1;
+    @if map-has-key($o-icon-icons , 'icon-#{$name}') {
+      width: map-get($o-icon-icons, 'icon-#{$name}') * 1em;
+    } @else {
+      width: 1em;
+    }
   }
 }`.trim() + '\n';
 
