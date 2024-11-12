@@ -8,8 +8,8 @@
   "scripts": {
     "devcontainer": "npx @devcontainers/cli@0.71",
     "devcontainer:up": "npm run --silent devcontainer -- up --workspace-folder ../../..",
-    "devcontainer:enter": "../../../.devcontainer/exec bash",
-    "devcontainer:start": "../../../.devcontainer/exec npm run --silent start",
+    "devcontainer:enter": "/usr/bin/env bash ../../../.devcontainer/exec bash",
+    "devcontainer:start": "/usr/bin/env bash ../../../.devcontainer/exec npm run --silent start",
     "start": "chisel-scripts start",
     "dev": "npm run --silent start",
     "build": "chisel-scripts build && npm run lint && npm run phpcs && npm run twigcs",
