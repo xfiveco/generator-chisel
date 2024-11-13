@@ -1,6 +1,5 @@
 {#
 Input Data:
-
 name: string // name of the icon
 inline: boolean // required for icons that should be displayed as an inline element and not a block
 rectangle: boolean // required for icons that are rectangles (not squares) to be properly sized
@@ -20,4 +19,7 @@ alt: string
 {% set inlineStyle = styleVariant ~ ': url(' ~ iconPath ~ ');' %}
 {% set style = 'style="' ~ inlineStyle ~ '"' %}
 
-<i class="o-icon {{[inlineClass, rectangleClass, iconVariantClass]|filter(v => v|length)|join(' ')}}" aria-hidden="true" {{ style }}></i>
+<i class="o-icon {{[inlineClass, rectangleClass, iconVariantClass]|filter(v => v|length)|join(' ')}}"
+  {{ alt ? 'role="img"' : '' }}
+  {{ alt ? 'aria-label="' ~ alt ~ '"' : 'aria-hidden="true"' }}
+  {{ style }}></i>

@@ -3,10 +3,10 @@
 .c-icons-preview {
   display: block;
   width: 100%;
+}
 
-  h4 {
-    font-size: 1.5rem;
-  }
+.c-icons-preview__h4 {
+  font-size: 1.5rem;
 }
 
 .c-icons-preview__article {
@@ -28,33 +28,45 @@
 // Mono
 .c-icons-preview__css-icon1{
   @include icon('chisel-logo');
+  display: block;
 }
 
 .c-icons-preview__css-icon2 {
-  @include icon('color-pallet');
+  @include icon('x-logo');
 }
 
 .c-icons-preview__css-icon3 {
-  @include icon('chisel-icon');
+  @include icon('color-pallet');
 }
 
 .c-icons-preview__css-icon4 {
-  @include icon('color-pallet');
+  @include icon('chisel-icon');
+}
+
+.c-icons-preview__css-icon5 {
+  @include icon('chisel-icon');
   font-size: 4rem;
 }
 
-.c-icons-preview__css-icon5 {
+.c-icons-preview__css-icon6 {
   @include icon('chisel-icon');
-  color: red
-}
-
-.c-icons-preview__css-icon5 {
-  @include icon('chisel-icon');
-  color: green;
   background: rgba(0, 0, 255, 20%);
   width: auto;
   height: auto;
   padding: 1rem;
+}
+
+.c-icons-preview__css-icon7 {
+  @include icon('chisel-icon');
+  color: green;
+}
+
+.c-icons-preview__css-icon8 {
+  @include icon('chisel-icon');
+  color: blue;
+  --o-icon-color: red;
+  --o-icon-size: 2rem;
+
 }
 
 // Color
@@ -75,10 +87,11 @@
   font-size: 4rem;
 }
 
-.c-icons-preview__css-color-icon4 {
+.c-icons-preview__css-color-icon5 {
   @include icon('color-chisel-icon', true);
   background: rgba(0, 0, 255, 20%);
   width: auto;
   height: auto;
   padding: 1rem;
 }
+
