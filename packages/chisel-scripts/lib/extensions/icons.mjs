@@ -139,7 +139,6 @@ const icons = (api) => {
       viewBoxMaxWidth,
     };
 
-    // let viewBoxY = 0;
     let viewBoxY = viewBoxYStartAt;
 
     svgIconsData.forEach((data) => {
@@ -159,7 +158,6 @@ const icons = (api) => {
   </svg>`;
     });
 
-    // return contentData;
     return {contentData, viewBoxY};
   }
 
