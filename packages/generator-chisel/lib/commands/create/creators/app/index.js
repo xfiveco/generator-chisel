@@ -7,7 +7,7 @@ const {
   installDependencies,
 } = require('chisel-shared-utils');
 const packagesVersions = require('../../packages-versions');
-const { prepareName, getWordpressVersion } = require('../utils');
+const { prepareName, getDevcontainerBaseImageVersion } = require('../utils');
 const fs = require('fs/promises');
 
 module.exports = async (api) => {
@@ -48,7 +48,7 @@ module.exports = async (api) => {
     );
 
     app.hasJQuery = false;
-    app.wordpressVersion = await getWordpressVersion();
+    app.devcontainerBaseImageVersion = await getDevcontainerBaseImageVersion();
 
     if (devcontainerComplete) {
       Object.assign(app, devcontainerComplete);

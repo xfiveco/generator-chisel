@@ -1,4 +1,4 @@
-const { prepareName, getWordpressVersion } = require('./utils');
+const { prepareName, getDevcontainerBaseImageVersion } = require('./utils');
 const fsPromises = require('fs/promises');
 
 module.exports = async (api) => {
@@ -27,7 +27,7 @@ module.exports = async (api) => {
     Object.assign(app, prepareName(app.name));
     app.devcontainer = true;
     app.responsesAsBase64 = responsesAsBase64;
-    app.wordpressVersion = await getWordpressVersion();
+    app.devcontainerBaseImageVersion = await getDevcontainerBaseImageVersion();
     api.creator.data.app = app;
   });
 

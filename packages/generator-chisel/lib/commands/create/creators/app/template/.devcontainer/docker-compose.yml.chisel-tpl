@@ -1,5 +1,3 @@
-version: '3.8'
-
 name: <%= app.nameSlug %>_devcontainer
 
 services:
@@ -11,7 +9,7 @@ services:
         # Keep this in sync with installed WordPress version and
         # PHP version used in production
         # See https://hub.docker.com/_/wordpress for available versions
-        BASE_IMAGE_VERSION: <%= app.wordpressVersion %>-php8.3
+        BASE_IMAGE_VERSION: <%= app.devcontainerBaseImageVersion %>
         CHISEL_PORT: <%= app.devcontainerPort %>
 
     ports:
