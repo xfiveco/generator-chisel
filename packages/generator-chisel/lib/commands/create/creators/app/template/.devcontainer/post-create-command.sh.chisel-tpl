@@ -3,6 +3,7 @@
 set -eux
 
 sudo chown "$USER:$USER" node_modules vendor
+touch .use-devcontainer
 
 pushd ../../..
 

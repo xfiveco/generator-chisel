@@ -119,6 +119,27 @@ module.exports = async (api) => {
       { isJson: false },
     );
 
+    const preCommitPath = api.resolve(app.themePath, '.husky/pre-commit');
+
+    if (
+      await fs
+        .access(preCommitPath)
+        .then(() => true)
+        .catch(() => false)
+    ) {
+      await api.modifyFile(preCommitPath, (body) => {
+        const str = [
+          '',
+          'if [ -f .use-devcontainer ]; then',
+          '  alias npx="/usr/bin/env bash ../../../.devcontainer/exec npx"',
+          'fi',
+          '',
+        ].join('\n');
+
+        return body.replace('npx ', str + '\nnpx ');
+      });
+    }
+
     if (api.creator.cmd.link) {
       const availablePackages = Object.keys(packagesVersions);
       const installedAndAvailable = installedPackages.filter((pkg) =>
