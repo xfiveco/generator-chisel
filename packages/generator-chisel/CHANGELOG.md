@@ -2,6 +2,12 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.14 (2024-12-04)
+
+- adjust base version logic, remove compose version ([69f340e](https://github.com/xfiveco/generator-chisel/commit/69f340e))
+- run git hooks in devcontainer if .use-devcontainer is present ([d4fc782](https://github.com/xfiveco/generator-chisel/commit/d4fc782))
+- theme refactor, example blocks, bugs fixes ([96bf7ce](https://github.com/xfiveco/generator-chisel/commit/96bf7ce))
+
 ## 2.0.0-alpha.13 (2024-11-12)
 
 - Adjust command ([c1b4471](https://github.com/xfiveco/generator-chisel/commit/c1b4471))
