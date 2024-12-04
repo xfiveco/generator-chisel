@@ -1,0 +1,36 @@
+{
+  "name": "chisel/acf-example-block",
+  "title": "Acf-example-block",
+  "description": "Example ACF Block - This file contains some specific acf settings in acf section. The renderCallback value must be the same for all acf blocks. There one custom setting, called ignoreScript, which should be used in cases when you use the script only to import scss - adding the script key to the ignoreScripts array will prevent the script from being loaded. The style array contains two values, because if the style.scss is imprted into both script.js and index.js two files will be built. All scripts and styles values may be arrays or strings.",
+  "category": "chisel-blocks",
+  "icon": "carrot",
+  "apiVersion": 3,
+  "keywords": ["example", "block"],
+  "textdomain": "chisel",
+  "acf": {
+      "mode": "preview",
+      "usePostMeta": false,
+      "renderCallback": "\\Chisel\\AcfBlocks::acf_block_render"
+  },
+  "styles": [
+    { "name": "default", "label": "Default", "isDefault": true },
+    { "name": "other", "label": "Other" }
+  ],
+  "supports": {
+    "anchor": true,
+    "align": false,
+    "alignWide": false,
+    "alignContent": false,
+    "className": true,
+    "customClassName": true,
+    "multiple": true,
+    "reusable": true
+  },
+  "ignoreScripts": ["script"],
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": ["file:./style-index.css", "file:./style-script.css"],
+  "script": "file:./script.js",
+  "viewScript": "file:./view.js",
+  "viewStyle": "file:./view.css"
+}

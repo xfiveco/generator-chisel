@@ -13,6 +13,12 @@
   background-color: get-color('white');
   border: 1px solid get-color('light-grey');
   border-radius: get-border-radius('small');
+
+  @include bp(msmall) {
+    .c-posts-items--list & {
+      flex-direction: row;
+    }
+  }
 }
 
 .c-post-item__content {

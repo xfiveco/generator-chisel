@@ -1,0 +1,70 @@
+{% if posts.pagination.pages is not empty %}
+  <nav class="c-pagination">
+
+    {% if type == 'load-more' %}
+      <div class="c-load-more js-load-more" data-post-type="{{ load_more.post_type }}" data-per-page="{{ load_more.per_page }}" data-max-page="{{ posts.pagination.total }}">
+        <button type="button" class="c-load-more__button {{ bem('c-btn', 'primary') }} js-load-more-button">{{ __('Load more', 'chisel') }}</button>
+      </div>
+    {% else %}
+      <ul class="c-pagination__items o-layout is-flex has-gap-small">
+        {# First #}
+        {% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
+          <li class="{{ bem('c-pagination__item', 'first') }}">
+            <a href="{{ posts.pagination.pages|first.link }}" class="c-badge">{{ __('First', 'chisel') }}</a>
+          </li>
+        {% else %}
+          <li class="{{ bem('c-pagination__item', 'first') }} is-disabled">
+            <span class="c-badge">{{ __('First', 'chisel') }}</span>
+          </li>
+        {% endif %}
+
+        {# Previous #}
+        {% if posts.pagination.prev %}
+          <li class="{{ bem('c-pagination__item', 'prev') }}">
+            <a href="{{ posts.pagination.prev.link }}" class="c-badge">{{ __('Previous', 'chisel') }}</a>
+          </li>
+        {% else %}
+          <li class="{{ bem('c-pagination__item', 'prev') }} is-disabled">
+            <span class="c-badge">{{ __('Previous', 'chisel') }}</span>
+          </li>
+        {% endif %}
+
+        {# Pages #}
+        {% for page in posts.pagination.pages %}
+          {% if page.link %}
+            <li class="{{ bem('c-pagination__item', 'page') }}">
+              <a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
+            </li>
+          {% else %}
+            <li class="{{ bem('c-pagination__item', 'page') }} is-current">
+              <span class="{{ page.class }}">{{ page.title }}</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {# Next #}
+        {% if posts.pagination.next %}
+          <li class="{{ bem('c-pagination__item', 'next') }}">
+            <a href="{{ posts.pagination.next.link }}" class="c-badge">{{ __('Next', 'chisel') }}</a>
+          </li>
+        {% else %}
+          <li class="{{ bem('c-pagination__item', 'next') }} is-disabled">
+            <span class="c-badge">{{ __('Next', 'chisel') }}</span>
+          </li>
+        {% endif %}
+
+        {# Last #}
+        {% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
+          <li class="{{ bem('c-pagination__item', 'last') }}">
+            <a href="{{ posts.pagination.pages|last.link }}" class="c-badge">{{ __('Last', 'chisel') }}</a>
+          </li>
+        {% else %}
+            <li class="{{ bem('c-pagination__item', 'last') }} is-disabled">
+              <span class="c-badge">{{ __('Last', 'chisel') }}</span>
+            </li>
+        {% endif %}
+
+      </ul>
+    {% endif %}
+  </nav>
+{% endif %}

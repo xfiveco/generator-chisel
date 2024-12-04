@@ -9,7 +9,7 @@
  * @package Chisel
  */
 
-use Chisel\ChiselCache;
+use Chisel\Helper\CacheHelpers;
 
 $context = $GLOBALS['timberContext'];
 
@@ -21,4 +21,4 @@ $context['content'] = ob_get_contents();
 ob_end_clean();
 $templates = array( 'page-plugin.twig' );
 
-\Timber\Timber::render( $templates, $context, ChiselCache::expiry() );
+\Timber\Timber::render( $templates, $context, CacheHelpers::expiry() );

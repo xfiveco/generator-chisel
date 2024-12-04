@@ -1,15 +1,20 @@
+{#
+In order to convert the grid into a list, remove the o-grid--cols classes from the c-posts-items element, leaving only the o-grid--cols-1 class and add the "c-posts-items--list" modifier class to the c-posts-items element.
+In order to covert back to a grid, add the following classes to the c-posts-items element: o-grid--cols-2-small o-grid--cols-{% if sidebar %}2{% else %}3{% endif %}-medium
+#}
+
 {% extends "base.twig" %}
 
 {% block content %}
   <section class="o-wrapper__inner c-blog">
-    {{ the_title }}
+    {% include 'components/the-title.twig' %}
 
     {% block before_loop %}
     {% endblock %}
 
     <div class="o-layout">
-      <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large">
-        <div class="c-posts-items o-grid o-grid--cols-1 o-grid--cols-2-small o-grid--cols-{% if sidebar %}2{% else %}3{% endif %}-medium js-load-more-container">
+      <div class="{{ bem('o-layout__item', (sidebar ? '8' : '12') ~ '-large') }}">
+        <div class="c-posts-items {{ bem('o-grid', 'cols-1', 'cols-2-small', (sidebar ? 'cols-2' : 'cols-3') ~ '-medium') }} js-load-more-container">
           {% if posts is not empty %}
             {% for post in posts %}
               {% include ['components/' ~ post.post_type ~ '-item.twig', 'components/post-item.twig'] with {post: post} only %}
@@ -19,7 +24,7 @@
           {% endif %}
         </div>
 
-        {% include 'partials/pagination.twig' with {type: 'load-more'} %}
+        {% include 'components/pagination.twig' with {type: 'load-more'} %}
       </div>
 
       {% if sidebar %}

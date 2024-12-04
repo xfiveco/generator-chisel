@@ -5,7 +5,7 @@
  * @package Chisel
  */
 
-use Chisel\ChiselCache;
+use Chisel\Helper\CacheHelpers;
 use Timber\Timber;
 
 $context = Timber::context();
@@ -13,4 +13,4 @@ $context = Timber::context();
 $context['post']['ID']    = 'error-404';
 $context['post']['class'] = 'is-404';
 
-Timber::render( '404.twig', $context, ChiselCache::expiry() );
+Timber::render( '404.twig', $context, CacheHelpers::expiry() );

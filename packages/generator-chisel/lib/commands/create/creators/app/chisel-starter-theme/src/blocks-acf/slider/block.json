@@ -10,7 +10,7 @@
   "acf": {
     "mode": "preview",
     "usePostMeta": false,
-    "renderCallback": "\\Chisel\\AcfBlocks::acf_block_render"
+    "renderCallback": "\\Chisel\\Helper\\BlocksHelpers::acf_block_render"
   },
   "supports": {
     "anchor": true,

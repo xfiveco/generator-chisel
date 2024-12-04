@@ -5,7 +5,7 @@
  * @package Chisel
  */
 
-use Chisel\ChiselCache;
+use Chisel\Helper\CacheHelpers;
 use Timber\Timber;
 
 $templates = array( 'archive.twig', 'index.twig' );
@@ -22,6 +22,4 @@ if ( is_tag() ) {
 	array_unshift( $templates, 'archive-' . get_queried_object()->taxonomy . '.twig' );
 }
 
-$context['posts'] = Timber::get_posts();
-
-Timber::render( $templates, $context, ChiselCache::expiry() );
+Timber::render( $templates, $context, CacheHelpers::expiry() );

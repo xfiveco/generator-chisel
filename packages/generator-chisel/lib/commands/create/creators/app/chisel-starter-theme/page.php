@@ -5,7 +5,7 @@
  * @package Chisel
  */
 
-use Chisel\ChiselCache;
+use Chisel\Helper\CacheHelpers;
 use Timber\Timber;
 
 $context = Timber::context();
@@ -13,7 +13,7 @@ $context = Timber::context();
 $timber_post = Timber::get_post();
 
 if ( post_password_required( $timber_post->ID ) ) {
-	Timber::render( 'single-password.twig', $context, ChiselCache::expiry() );
+	Timber::render( 'single-password.twig', $context, CacheHelpers::expiry() );
 } else {
 	$templates = array( 'page-' . $timber_post->post_name . '.twig', 'page.twig' );
 
@@ -21,5 +21,5 @@ if ( post_password_required( $timber_post->ID ) ) {
 		array_unshift( $templates, 'front-page.twig' );
 	}
 
-	Timber::render( $templates, $context, ChiselCache::expiry() );
+	Timber::render( $templates, $context, CacheHelpers::expiry() );
 }

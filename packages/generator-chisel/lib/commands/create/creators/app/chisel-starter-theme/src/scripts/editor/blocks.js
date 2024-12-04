@@ -13,10 +13,16 @@ class Blocks {
 
           if (blockInspector) {
             const blockNameClassName = selectedBlock.name.replace('/', '-');
-            blockInspector.classList.add(
-              'e-block-sidebar',
-              `e-block-sidebar--${blockNameClassName}`,
-            );
+            const currentClassNames = blockInspector.classList;
+            const blockClassName = `e-block-sidebar--${blockNameClassName}`;
+
+            currentClassNames.forEach((className) => {
+              if (className.includes('e-block-sidebar')) {
+                blockInspector.classList.remove(className);
+              }
+            });
+
+            blockInspector.classList.add('e-block-sidebar', blockClassName);
           }
         }
       });

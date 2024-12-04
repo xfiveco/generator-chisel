@@ -1,0 +1,32 @@
+{
+  "name": "chisel/example-server-side-block",
+  "title": "example-server-side-block",
+  "description": "Example Block - This file contains the block settings. There is one custom setting, called ignoreScript, which should be used in cases when you use the script only to import scss - adding the script key to the ignoreScripts array will prevent the script from being loaded. The style array contains two values, because if the style.scss is imprted into both script.js and index.js two files will be built. All scripts and styles values may be arrays or strings. In order to render the block on the server side add render setting with the render.php file name and use ServerSideRender component in edit.js file.",
+  "category": "chisel-blocks",
+  "icon": "carrot",
+  "apiVersion": 3,
+  "keywords": ["example", "block"],
+  "textdomain": "chisel",
+  "styles": [
+    { "name": "default", "label": "Default", "isDefault": true },
+    { "name": "other", "label": "Other" }
+  ],
+  "supports": {
+    "anchor": true,
+    "align": false,
+    "alignWide": false,
+    "alignContent": false,
+    "className": true,
+    "customClassName": true,
+    "multiple": true,
+    "reusable": true
+  },
+  "ignoreScripts": ["script"],
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": ["file:./style-index.css", "file:./style-script.css"],
+  "script": "file:./script.js",
+  "viewScript": "file:./view.js",
+  "viewStyle": "file:./view.css",
+  "render": "file:./render.php"
+}

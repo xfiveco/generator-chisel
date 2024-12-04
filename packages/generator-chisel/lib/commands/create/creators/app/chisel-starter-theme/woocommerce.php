@@ -5,9 +5,9 @@
  * @package Chisel
  */
 
-use Chisel\ChiselCache;
-use Chisel\Woocommerce;
 use Timber\Timber;
+use Chisel\Helper\CacheHelpers;
+use Chisel\Helper\WoocommerceHelpers;
 
 $context = Timber::context();
 
@@ -25,19 +25,19 @@ if ( is_singular( 'product' ) ) {
 	$context['upsells_products'] = $upsells_ids ? Timber::get_posts( $upsells_ids ) : array();
 	$context['related_products'] = $related_ids ? Timber::get_posts( $related_ids ) : array();
 	$context['wrapper_class']    = 'c-product';
-	$context['grid_classnames']  = Woocommerce::get_products_grid_classnames( true, false );
+	$context['grid_classnames']  = WoocommerceHelpers::get_products_grid_classnames( true, false );
 
 	// Restore the context and loop back to the main query loop.
 	wp_reset_postdata();
 
-	Timber::render( 'woocommerce/single-product.twig', $context, ChiselCache::expiry() );
+	Timber::render( 'woocommerce/single-product.twig', $context, CacheHelpers::expiry() );
 } else {
 	$products     = Timber::get_posts();
 	$has_sidebar  = ! empty( $context['sidebar'] );
 	$loop_columns = wc_get_loop_prop( 'columns' );
 	$loop_rows    = wc_get_default_product_rows_per_page();
 
-	$grid_classnames = Woocommerce::get_products_grid_classnames( $products, $has_sidebar );
+	$grid_classnames = WoocommerceHelpers::get_products_grid_classnames( $products, $has_sidebar );
 
 	$context['products']           = $products;
 	$context['loop_columns_class'] = $grid_classnames;
@@ -53,5 +53,5 @@ if ( is_singular( 'product' ) ) {
 		$context['title']    = single_term_title( '', false );
 	}
 
-	Timber::render( 'woocommerce/archive-product.twig', $context, ChiselCache::expiry() );
+	Timber::render( 'woocommerce/archive-product.twig', $context, CacheHelpers::expiry() );
 }

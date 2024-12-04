@@ -9,7 +9,7 @@
  * @package Chisel
  */
 
-use Chisel\ChiselCache;
+use Chisel\Helper\CacheHelpers;
 use Timber\Timber;
 
 $context   = Timber::context();
@@ -24,5 +24,4 @@ $context['load_more'] = array(
 	'post_type' => 'post',
 );
 
-
-Timber::render( $templates, $context, ChiselCache::expiry() );
+Timber::render( $templates, $context, CacheHelpers::expiry() );

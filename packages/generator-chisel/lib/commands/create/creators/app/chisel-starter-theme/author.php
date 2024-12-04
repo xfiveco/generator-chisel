@@ -5,10 +5,9 @@
  * @package Chisel
  */
 
-use Chisel\ChiselCache;
+use Chisel\Helper\CacheHelpers;
 use Timber\Timber;
 
-$context          = Timber::context();
-$context['posts'] = Timber::get_posts();
+$context = Timber::context();
 
-Timber::render( array( 'author.twig', 'archive.twig' ), $context, ChiselCache::expiry() );
+Timber::render( array( 'author.twig', 'archive.twig' ), $context, CacheHelpers::expiry() );

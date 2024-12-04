@@ -32,7 +32,7 @@
   {% do action('woocommerce_before_shop_loop') %}
 
   <div class="o-layout">
-    <div class="o-layout__item o-layout__item--{% if sidebar %}8{% else %}12{% endif %}-large">
+    <div class="{{ bem('o-layout__item', (sidebar ? '8' : '12') ~ '-large') }}">
       <div class="c-posts-items c-shop-items {{ loop_columns_class }} js-load-more-container">
       {% if products is not empty %}
         {% for post in products %}
@@ -62,7 +62,7 @@
       </div>
 
       {% if products is not empty %}
-        {% include 'partials/pagination.twig' with {type: 'load-more'} %}
+        {% include 'components/pagination.twig' with {type: 'load-more'} %}
       {% endif %}
     </div>
 
