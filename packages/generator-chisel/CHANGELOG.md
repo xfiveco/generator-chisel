@@ -2,6 +2,16 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.15 (2024-12-06)
+
+- icons add color param and improve caching keys ([9619163](https://github.com/xfiveco/generator-chisel/commit/9619163))
+- integrate icons feature, get_icon twig function with cache ([3612fe9](https://github.com/xfiveco/generator-chisel/commit/3612fe9))
+- Merge branch 'v2-feature-icons-improved' of github.com:xfiveco/generator-chisel into v2-feature-icon ([cc45f09](https://github.com/xfiveco/generator-chisel/commit/cc45f09))
+- feature: added missing files for icons ([772d4c4](https://github.com/xfiveco/generator-chisel/commit/772d4c4))
+- feature: icons - improved icon.twig, updated examples preview, styles adjustments ([7b31431](https://github.com/xfiveco/generator-chisel/commit/7b31431))
+- refactor: icons.mjs - updated preview generation ([16f7792](https://github.com/xfiveco/generator-chisel/commit/16f7792))
+- fix: added missing files ([fd93bac](https://github.com/xfiveco/generator-chisel/commit/fd93bac))
+
 ## 2.0.0-alpha.14 (2024-12-04)
 
 - adjust base version logic, remove compose version ([69f340e](https://github.com/xfiveco/generator-chisel/commit/69f340e))

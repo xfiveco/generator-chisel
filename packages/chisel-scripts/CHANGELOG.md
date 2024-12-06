@@ -2,6 +2,19 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.5 (2024-12-06)
+
+- refactor: icons.mjs - updated preview generation ([16f7792](https://github.com/xfiveco/generator-chisel/commit/16f7792))
+- refactor: modified icons.mjs ([6c61b40](https://github.com/xfiveco/generator-chisel/commit/6c61b40))
+- refactor: removed uneeded comments from icons.mjs ([ab62eb5](https://github.com/xfiveco/generator-chisel/commit/ab62eb5))
+- composer, wp-config, plugins list updates ([642f983](https://github.com/xfiveco/generator-chisel/commit/642f983))
+- modified icons.mjs ([eff3391](https://github.com/xfiveco/generator-chisel/commit/eff3391))
+- Publish ([3209b73](https://github.com/xfiveco/generator-chisel/commit/3209b73))
+- feature: added svg icons generation bundle ([8cda54a](https://github.com/xfiveco/generator-chisel/commit/8cda54a))
+- feature: testing new approach to icons generating ([35b3064](https://github.com/xfiveco/generator-chisel/commit/35b3064))
+- chore: renamed name of the function ([68c4deb](https://github.com/xfiveco/generator-chisel/commit/68c4deb))
+- V2: Add Devcontainers (#538) ([b878421](https://github.com/xfiveco/generator-chisel/commit/b878421)), closes [#538](https://github.com/xfiveco/generator-chisel/issues/538)
+
 ## 2.0.0-alpha.4 (2024-11-12)
 
 - V2: Add Devcontainers (#538) ([b878421](https://github.com/xfiveco/generator-chisel/commit/b878421)), closes [#538](https://github.com/xfiveco/generator-chisel/issues/538)
