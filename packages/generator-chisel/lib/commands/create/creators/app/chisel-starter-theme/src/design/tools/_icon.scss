@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../settings/icon-settings' as *;
+
 @mixin get-icon($name, $extension: 'svg', $is-block: false) {
   $path: '../../';
 
@@ -8,4 +11,35 @@
   mask: url('#{$path}assets/icons/#{$name}.#{$extension}');
   mask-repeat: no-repeat;
   mask-size: contain;
+}
+
+@mixin icon($name, $multicolor: false) {
+  display: inline-block;
+  height: 1em;
+  line-height: 1em;
+  font-size: var(--o-icon-size, 1em);
+
+  &::before {
+    content: '';
+    display: block;
+    height: 1em;
+    line-height: 1em;
+
+    @if $multicolor {
+      background-image: url('../../assets/icons/icons.svg#icon-#{$name}-view');
+      background-repeat: no-repeat;
+      background-size: contain;
+    } @else {
+      mask: url('../../assets/icons/icons.svg#icon-#{$name}-view');
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      background-color: var(--o-icon-color, currentcolor);
+    }
+
+    @if map-has-key($o-icon-icons , 'icon-#{$name}') {
+      width: map-get($o-icon-icons, 'icon-#{$name}') * 1em;
+    } @else {
+      width: 1em;
+    }
+  }
 }

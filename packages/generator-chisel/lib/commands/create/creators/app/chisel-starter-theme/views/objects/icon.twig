@@ -1,0 +1,25 @@
+{#
+Input Data:
+name: string // name of the icon
+inline: boolean // required for icons that should be displayed as an inline element and not a block
+rectangle: boolean // required for icons that are rectangles (not squares) to be properly sized
+forceMono: boolean // use in case the monochromatic icons name starts with "color-"
+alt: string
+#}
+
+{% set nameHintIsColor = name matches '/^color-.*/' %}
+{% set isColor = forceMono ? false : nameHintIsColor %}
+{% set inlineClass = inline ? 'o-icon--inline' : '' %}
+{% set iconVariantClass = isColor ? 'o-icon--color' : 'o-icon--mono' %}
+{% set rectangleClass = rectangle ? 'o-icon--icon-' ~ name : '' %}
+{% set iconPrefix = 'icon-' %}
+{% set iconName = iconPrefix ~ name %}
+{% set iconPath = fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ iconName ~ '-view' %}
+{% set styleVariant = isColor ? 'background-image' : 'mask-image' %}
+{% set inlineStyle = styleVariant ~ ': url(' ~ iconPath ~ ');' %}
+{% set style = 'style="' ~ inlineStyle ~ '"' %}
+
+<i class="o-icon {{[inlineClass, rectangleClass, iconVariantClass]|filter(v => v|length)|join(' ')}}"
+  {{ alt ? 'role="img"' : '' }}
+  {{ alt ? 'aria-label="' ~ alt ~ '"' : 'aria-hidden="true"' }}
+  {{ style }}></i>

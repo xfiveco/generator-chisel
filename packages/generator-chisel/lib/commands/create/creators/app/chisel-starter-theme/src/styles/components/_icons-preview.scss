@@ -1,0 +1,97 @@
+@use '~design' as *;
+
+.c-icons-preview {
+  display: block;
+  width: 100%;
+}
+
+.c-icons-preview__h4 {
+  font-size: 1.5rem;
+}
+
+.c-icons-preview__article {
+  margin: 2rem 0;
+  background: rgba(0,0,0, 2%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.c-icons-preview__section {
+  margin: 1rem 0;
+}
+
+
+
+// CSS Usage of icons
+// -----------------------------------------------------------------------------
+
+// Mono
+.c-icons-preview__css-icon1{
+  @include icon('chisel-logo');
+  display: block;
+}
+
+.c-icons-preview__css-icon2 {
+  @include icon('x-logo');
+}
+
+.c-icons-preview__css-icon3 {
+  @include icon('color-pallet');
+}
+
+.c-icons-preview__css-icon4 {
+  @include icon('chisel-icon');
+}
+
+.c-icons-preview__css-icon5 {
+  @include icon('chisel-icon');
+  font-size: 4rem;
+}
+
+.c-icons-preview__css-icon6 {
+  @include icon('chisel-icon');
+  background: rgba(0, 0, 255, 20%);
+  width: auto;
+  height: auto;
+  padding: 1rem;
+}
+
+.c-icons-preview__css-icon7 {
+  @include icon('chisel-icon');
+  color: green;
+}
+
+.c-icons-preview__css-icon8 {
+  @include icon('chisel-icon');
+  color: blue;
+  --o-icon-color: red;
+  --o-icon-size: 2rem;
+
+}
+
+// Color
+.c-icons-preview__css-color-icon1 {
+  @include icon('color-chisel-logo', true);
+}
+
+.c-icons-preview__css-color-icon2 {
+  @include icon('color-facebook-logo', true);
+}
+
+.c-icons-preview__css-color-icon3 {
+  @include icon('color-chisel-icon', true);
+}
+
+.c-icons-preview__css-color-icon4 {
+  @include icon('color-chisel-icon', true);
+  font-size: 4rem;
+}
+
+.c-icons-preview__css-color-icon5 {
+  @include icon('color-chisel-icon', true);
+  background: rgba(0, 0, 255, 20%);
+  width: auto;
+  height: auto;
+  padding: 1rem;
+}
+

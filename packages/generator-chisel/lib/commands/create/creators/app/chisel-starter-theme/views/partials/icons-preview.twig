@@ -1,0 +1,81 @@
+<section class="o-wrapper__inner c-icons-preview">
+  <h2>Icons preview</h2>
+
+
+  <article class="c-icons-preview__article">
+    <h3>Icons HTML usage example</h3>
+
+    <section class="c-icons-preview__section">
+      <h4 class="c-icons-preview__h4">Monochromatic</h4>
+      <div style="font-size: 2rem;">
+        {% include 'objects/icon.twig' with {name: 'chisel-logo', rectangle: true, alt: 'Chisel logo'} %}
+        {% include 'objects/icon.twig' with {name: 'x-logo', inline: true} %}
+        {% include 'objects/icon.twig' with {name: 'color-pallet', forceMono: true, inline: true} %}
+        {% include 'objects/icon.twig' with {name: 'chisel-icon', forceMono: true, inline: true} %}
+        <span style="font-size: 4rem">{% include 'objects/icon.twig' with {name: 'chisel-icon', forceMono: true, inline: true} %}</span>
+        <span style="display: inline-block;padding: 1rem; background: rgba(0, 0, 255, 20%);">
+          {% include 'objects/icon.twig' with {name: 'chisel-icon'} %}
+        </span>
+        <span style="display: inline-block; color: green">
+          {% include 'objects/icon.twig' with {name: 'chisel-icon'} %}
+        </span>
+        <span style="display: block; color: blue; font-size: 1.2rem; --o-icon-color: red; --o-icon-size: 2rem">
+          Blue text with red icon: {% include 'objects/icon.twig' with {name: 'chisel-icon', inline: true} %}
+        </span>
+      </div>
+    </section>
+
+    <section class="c-icons-preview__section">
+      <h4 class="c-icons-preview__h4">Multicolor</h4>
+      <div style="font-size: 2rem;">
+        {% include 'objects/icon.twig' with {name: 'color-chisel-logo', alt: 'Chisel logo ALT', rectangle: true, inline: true} %}
+        {% include 'objects/icon.twig' with {name: 'color-facebook-logo', inline: true} %}
+        {% include 'objects/icon.twig' with {name: 'color-chisel-icon', inline: true} %}
+        <span style="font-size: 4rem">
+          {% include 'objects/icon.twig' with {name: 'color-chisel-icon', inline: true} %}
+        </span>
+        <span style="display: inline-block;padding: 1rem; background: rgba(0, 0, 255, 20%);">
+          {% include 'objects/icon.twig' with {name: 'color-chisel-icon', inline: false} %}
+        </span>
+      </div>
+    </section>
+  </article>
+
+  <article class="c-icons-preview__article">
+    <h3>Icons CSS usage example</h3>
+
+    <section class="c-icons-preview__section">
+      <h4 class="c-icons-preview__h4">Monochromatic</h4>
+      <div style="font-size: 2rem;">
+        <i class="c-icons-preview__css-icon1"></i>
+        <i class="c-icons-preview__css-icon2"></i>
+        <i class="c-icons-preview__css-icon3"></i>
+        <i class="c-icons-preview__css-icon4"></i>
+        <i class="c-icons-preview__css-icon5"></i>
+        <i class="c-icons-preview__css-icon6"></i>
+        <i class="c-icons-preview__css-icon7"></i>
+        <div style="display: block; color: blue; font-size: 1.2rem;">
+          Blue text with red icon: <i class="c-icons-preview__css-icon8"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="c-icons-preview__section">
+      <h4 class="c-icons-preview__h4">Multicolor</h4>
+      <div style="font-size: 2rem;">
+        <i class="c-icons-preview__css-color-icon1"></i>
+        <i class="c-icons-preview__css-color-icon2"></i>
+        <i class="c-icons-preview__css-color-icon3"></i>
+        <i class="c-icons-preview__css-color-icon4"></i>
+        <i class="c-icons-preview__css-color-icon5"></i>
+      </div>
+    </section>
+  </article>
+
+  <!-- TODO: list all of the available icons -->
+  <article class="c-icons-preview__article">
+    <h3>All available icons</h3>
+    <section class="c-icons-preview__section">TODO :)</section>
+  </article>
+
+</section>
