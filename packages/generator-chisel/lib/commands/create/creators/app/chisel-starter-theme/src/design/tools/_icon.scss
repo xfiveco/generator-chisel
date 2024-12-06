@@ -33,7 +33,6 @@
 }
 
 @mixin icon($name, $multicolor: false, $animated: false) {
-  display: inline-block;
   height: 1em;
   font-size: var(--o-icon-size, 1em);
   line-height: 1em;

@@ -250,12 +250,21 @@ class Components {
 	public static function get_icon( $args ) {
 		$icon_slug = sanitize_title( $args['name'] );
 
-		if ( isset( self::$icons[$icon_slug] ) ) {
-			return self::$icons[$icon_slug];
+		$icon_key = '';
+		foreach ( $args as $key => $value ) {
+			if ( is_bool( $value ) ) {
+				$value = $value ? 'yes' : 'no';
+			}
+
+			$icon_key .= sanitize_title( $key . $value );
 		}
 
-		self::$icons[$icon_slug] = Timber::compile( 'objects/icon.twig', $args, CacheHelpers::expiry() );
+		if ( isset( self::$icons[$icon_key] ) ) {
+			return self::$icons[$icon_key];
+		}
 
-		return self::$icons[$icon_slug];
+		self::$icons[$icon_key] = Timber::compile( 'objects/icon.twig', $args, CacheHelpers::expiry() );
+
+		return self::$icons[$icon_key];
 	}
 }

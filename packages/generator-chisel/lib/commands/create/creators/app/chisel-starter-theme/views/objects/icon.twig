@@ -6,6 +6,7 @@ rectangle: boolean // required for icons that are rectangles (not squares) to be
 force_mono: boolean // use in case the monochromatic icons name starts with "color-"
 alt: string
 is_css: boolean // whether the icon should be loaded with css. This requires adding the icon to the css map in css settings file.
+color: string // css color for the icon
 #}
 
 {% set name_hint_is_color = name matches '/^color-.*/' %}
@@ -16,15 +17,19 @@ is_css: boolean // whether the icon should be loaded with css. This requires add
 {% set icon_prefix = 'icon-' %}
 {% set icon_name = icon_prefix ~ name %}
 {% set icon_path = fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ icon_name ~ '-view' %}
-{% set style_variant = is_color ? 'background-image' : 'mask-image' %}
-{% set inline_style = style_variant ~ ': url(' ~ icon_path ~ ');' %}
-{% set style = 'style="' ~ inline_style ~ '"' %}
+{% set bg_style_variant = is_color ? 'background-image' : 'mask-image' %}
+{% set color_style_variant = is_css ? 'color' : 'color' %}
+{% set color_style = color ? color_style_variant ~ ': ' ~ color ~ ';' : '' %}
 
 {% if is_css %}
   {% set icon_variant_class = '' %}
-  {% set style = '' %}
   {% set inline_class = 'is-css ' ~ inline_class %}
+  {% set inline_style = color_style %}
+{% else %}
+  {% set inline_style = bg_style_variant ~ ': url(' ~ icon_path ~ ');' ~ color_style %}
 {% endif %}
+
+{% set style = inline_style ? 'style="' ~ inline_style ~ '"' : '' %}
 
 <i class="o-icon o-icon--{{ icon_name }} {{ [inline_class, rectangle_class, icon_variant_class]|filter(v => v|length)|join(' ') }}"
   {{ alt ? 'role="img"' : '' }}
