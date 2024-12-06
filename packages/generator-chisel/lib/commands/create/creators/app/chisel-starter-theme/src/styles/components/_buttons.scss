@@ -1,7 +1,7 @@
 @use '~design' as *;
 @use '../../design/settings';
 
-$_buttons-icons: settings.$buttons-icons;
+$_static-icons: settings.$static-icons;
 
 .c-btn {
   @include button;
@@ -84,6 +84,15 @@ $_buttons-icons: settings.$buttons-icons;
   @include button-large;
 }
 
+@each $icon in $_static-icons {
+  .c-btn.has-icon-#{$icon} {
+    &::after,
+    &::before {
+      @include icon-svg($icon);
+    }
+  }
+}
+
 .c-btn.has-icon {
   @include button-icon;
 
@@ -100,7 +109,8 @@ $_buttons-icons: settings.$buttons-icons;
     display: block;
     width: px-rem(24);
     height: px-rem(24);
-    margin-left: px-rem(8);
+    margin-right: px-rem(-6);
+    margin-left: px-rem(6);
     content: '';
   }
 
@@ -111,21 +121,12 @@ $_buttons-icons: settings.$buttons-icons;
   &.has-icon-left {
     &::before {
       display: block;
-      margin-right: px-rem(8);
-      margin-left: 0;
+      margin-right: px-rem(6);
+      margin-left: px-rem(-6);
     }
 
     &::after {
       display: none;
-    }
-  }
-}
-
-@each $button-icon in $_buttons-icons {
-  .c-btn.has-icon-#{$button-icon} {
-    &::after,
-    &::before {
-      @include get-icon($button-icon);
     }
   }
 }

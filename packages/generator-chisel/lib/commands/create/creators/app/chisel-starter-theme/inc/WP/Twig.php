@@ -13,6 +13,7 @@ use Chisel\Helper\ImageHelpers;
 use Chisel\Helper\ThemeHelpers;
 use Chisel\Helper\WoocommerceHelpers;
 use Chisel\Helper\YoastHelpers;
+use Chisel\WP\Components;
 
 /**
  * Class used to extend Timber functionality.
@@ -80,6 +81,7 @@ class Twig implements InstanceInterface, HooksInterface {
 		$this->register_function( $twig, 'comments_template', array( $this, 'comments_template' ) );
 		$this->register_function( $twig, 'bem', array( $this, 'bem' ) );
 		$this->register_function( $twig, 'breadcrumbs', array( $this, 'breadcrumbs' ) );
+		$this->register_function( $twig, 'get_icon', array( $this, 'get_icon' ) );
 
 		return $twig;
 	}
@@ -299,5 +301,16 @@ class Twig implements InstanceInterface, HooksInterface {
 	 */
 	public function breadcrumbs() {
 		return YoastHelpers::breadcrumbs();
+	}
+
+	/**
+	 * Get svg icon. The arguments are described in objects/icon.twig file
+	 *
+	 * @param array $args
+	 *
+	 * @return html
+	 */
+	public function get_icon( $args ) {
+		return Components::get_icon( $args );
 	}
 }

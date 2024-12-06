@@ -66,8 +66,8 @@ registerBlockType('chisel/accordion-item', {
           <RichText.Content tagName={titleTag} className="b-accordion__item-title" value={title} />
 
           <span className="b-accordion__icons" aria-hidden="true">
-            <i className="c-icon c-icon--plus"></i>
-            <i className="c-icon c-icon--minus"></i>
+            <i className="o-icon is-css o-icon--icon-plus"></i>
+            <i className="o-icon is-css o-icon--icon-minus"></i>
           </span>
         </summary>
         <div className="b-accordion__item-content js-accordion-content">

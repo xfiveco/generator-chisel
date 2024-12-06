@@ -5,6 +5,7 @@ namespace Chisel\WP;
 use Timber\Timber;
 use Chisel\Helper\ImageHelpers;
 use Chisel\Helper\AcfHelpers;
+use Chisel\Helper\CacheHelpers;
 
 /**
  * Use this class to get site components.
@@ -47,6 +48,13 @@ class Components {
 	 * @var array
 	 */
 	private static $the_title = array();
+
+	/**
+	 * The svg icons.
+	 *
+	 * @var array
+	 */
+	private static $icons = array();
 
 	/**
 	 * Get the site nav menus.
@@ -230,5 +238,24 @@ class Components {
 		}
 
 		return self::$the_title;
+	}
+
+	/**
+	 * Get svg icon. The arguments are described in objects/icon.twig file
+	 *
+	 * @param array $args
+	 *
+	 * @return html
+	 */
+	public static function get_icon( $args ) {
+		$icon_slug = sanitize_title( $args['name'] );
+
+		if ( isset( self::$icons[$icon_slug] ) ) {
+			return self::$icons[$icon_slug];
+		}
+
+		self::$icons[$icon_slug] = Timber::compile( 'objects/icon.twig', $args, CacheHelpers::expiry() );
+
+		return self::$icons[$icon_slug];
 	}
 }

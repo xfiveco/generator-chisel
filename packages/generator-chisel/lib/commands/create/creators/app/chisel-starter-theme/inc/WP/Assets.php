@@ -176,8 +176,10 @@ class Assets implements InstanceInterface, HooksInterface {
 						'name' => 'chiselEditorScripts',
 						'data' => array(
 							'icons' => array(
-								'minus' => __( 'Minus', 'chisel' ),
-								'plus'  => __( 'Plus', 'chisel' ),
+								'arrow-left'  => __( 'Arrow Left', 'chisel' ),
+								'arrow-right' => __( 'Arrow Right', 'chisel' ),
+								'minus'       => __( 'Minus', 'chisel' ),
+								'plus'        => __( 'Plus', 'chisel' ),
 							),
 						),
 					),

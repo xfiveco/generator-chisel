@@ -1,14 +1,20 @@
 @use 'sass:math';
+@use 'sass:map';
+@use '~design' as *;
+@use '../../design/settings';
 @use '../../design/settings/icon-settings' as *;
+
+$_static-icons: settings.$static-icons;
+$_animated-icons: settings.$animated-icons;
 
 .o-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 1em;
-  line-height: 1em;;
   width: 1em;
+  height: 1em;
   font-size: var(--o-icon-size, 1em);
+  line-height: 1em;
 
   &--color {
     background-repeat: no-repeat;
@@ -16,9 +22,9 @@
   }
 
   &--mono {
+    background-color: var(--o-icon-color, currentcolor);
     mask-repeat: no-repeat;
     mask-size: contain;
-    background-color: var(--o-icon-color, currentcolor);
   }
 
   &--inline {
@@ -28,6 +34,18 @@
   @each $icon, $width-ratio in $o-icon-icons {
     &--#{$icon} {
       width: $width-ratio * 1em;
+    }
+  }
+
+  @each $static-icon in $_static-icons {
+    &--icon-#{$static-icon}.is-css {
+      @include icon($static-icon);
+    }
+  }
+
+  @each $animated-icon in $_animated-icons {
+    &--icon-#{$animated-icon}.is-css {
+      @include icon($animated-icon, false, true);
     }
   }
 }

@@ -57,24 +57,31 @@
   height: px-rem(24);
   margin-left: get-margin('small');
 
-  .c-icon {
+  .o-icon {
+    width: 100%;
+    height: 100%;
     color: get-color('black');
+
+    &::before {
+      width: 100%;
+      height: 100%;
+    }
   }
 
-  .c-icon--plus {
+  .o-icon--icon-plus {
     display: block;
   }
 
-  .c-icon--minus {
+  .o-icon--icon-minus {
     display: none;
   }
 
   .b-accordion__item[open] & {
-    .c-icon--plus {
+    .o-icon--icon-plus {
       display: none;
     }
 
-    .c-icon--minus {
+    .o-icon--icon-minus {
       display: block;
     }
   }

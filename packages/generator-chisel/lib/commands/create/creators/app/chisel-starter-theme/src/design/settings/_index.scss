@@ -21,4 +21,5 @@ $gaps: (
   'xlarge': get-gap('xlarge'),
   'big': get-gap('big'),
 );
-$buttons-icons: ('minus', 'plus');
+$static-icons: ('minus', 'plus', 'arrow-right', 'arrow-left');
+$animated-icons: ('loader');

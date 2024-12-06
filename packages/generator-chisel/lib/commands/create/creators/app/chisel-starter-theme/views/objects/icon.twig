@@ -3,23 +3,30 @@ Input Data:
 name: string // name of the icon
 inline: boolean // required for icons that should be displayed as an inline element and not a block
 rectangle: boolean // required for icons that are rectangles (not squares) to be properly sized
-forceMono: boolean // use in case the monochromatic icons name starts with "color-"
+force_mono: boolean // use in case the monochromatic icons name starts with "color-"
 alt: string
+is_css: boolean // whether the icon should be loaded with css. This requires adding the icon to the css map in css settings file.
 #}
 
-{% set nameHintIsColor = name matches '/^color-.*/' %}
-{% set isColor = forceMono ? false : nameHintIsColor %}
-{% set inlineClass = inline ? 'o-icon--inline' : '' %}
-{% set iconVariantClass = isColor ? 'o-icon--color' : 'o-icon--mono' %}
-{% set rectangleClass = rectangle ? 'o-icon--icon-' ~ name : '' %}
-{% set iconPrefix = 'icon-' %}
-{% set iconName = iconPrefix ~ name %}
-{% set iconPath = fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ iconName ~ '-view' %}
-{% set styleVariant = isColor ? 'background-image' : 'mask-image' %}
-{% set inlineStyle = styleVariant ~ ': url(' ~ iconPath ~ ');' %}
-{% set style = 'style="' ~ inlineStyle ~ '"' %}
+{% set name_hint_is_color = name matches '/^color-.*/' %}
+{% set is_color = force_mono ? false : name_hint_is_color %}
+{% set inline_class = inline ? 'o-icon--inline' : '' %}
+{% set icon_variant_class = is_color ? 'o-icon--color' : 'o-icon--mono' %}
+{% set rectangle_class = rectangle ? 'o-icon--icon-' ~ name : '' %}
+{% set icon_prefix = 'icon-' %}
+{% set icon_name = icon_prefix ~ name %}
+{% set icon_path = fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ icon_name ~ '-view' %}
+{% set style_variant = is_color ? 'background-image' : 'mask-image' %}
+{% set inline_style = style_variant ~ ': url(' ~ icon_path ~ ');' %}
+{% set style = 'style="' ~ inline_style ~ '"' %}
 
-<i class="o-icon {{[inlineClass, rectangleClass, iconVariantClass]|filter(v => v|length)|join(' ')}}"
+{% if is_css %}
+  {% set icon_variant_class = '' %}
+  {% set style = '' %}
+  {% set inline_class = 'is-css ' ~ inline_class %}
+{% endif %}
+
+<i class="o-icon o-icon--{{ icon_name }} {{ [inline_class, rectangle_class, icon_variant_class]|filter(v => v|length)|join(' ') }}"
   {{ alt ? 'role="img"' : '' }}
   {{ alt ? 'aria-label="' ~ alt ~ '"' : 'aria-hidden="true"' }}
   {{ style }}></i>
