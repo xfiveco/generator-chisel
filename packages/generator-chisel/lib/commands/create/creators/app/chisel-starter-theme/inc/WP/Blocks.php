@@ -9,6 +9,8 @@ use Chisel\Interface\HooksInterface;
 use Chisel\Trait\Singleton;
 use Chisel\Factory\RegisterBlocks;
 use Chisel\Helper\BlocksHelpers;
+use Chisel\Helper\ThemeHelpers;
+use Chisel\Trait\PageBlocks;
 
 /**
  * Blocks related functionalities.
@@ -18,6 +20,7 @@ use Chisel\Helper\BlocksHelpers;
 class Blocks implements InstanceInterface, HooksInterface {
 
 	use Singleton;
+	use PageBlocks;
 
 	/**
 	 * Register blocks factory.
@@ -88,6 +91,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		add_action( 'after_setup_theme', array( $this, 'blocks_theme_supports' ) );
 		add_action( 'init', array( $this, 'register_block_patterns_categories' ) );
+		add_action( 'wp_print_styles', array( $this, 'dequeue_blocks_styles' ), 999 );
 	}
 
 	/**
@@ -142,7 +146,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 				$categories,
 				array(
 					'slug'  => $this->blocks_category,
-					'title' => __( 'Chisel Blocks', 'chisel' ),
+					'title' => sprintf( '%s %s', ThemeHelpers::get_theme_name(), esc_html__( 'Blocks', 'chisel' ) ),
 					'icon'  => '<svg width="44" height="44" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.16 44.16"><path d="M22.08,0a22,22,0,0,0-12,3.55.83.83,0,0,0-.25,1.16A.84.84,0,0,0,11,5,20.41,20.41,0,1,1,8.37,7,.84.84,0,1,0,7.23,5.74,22.08,22.08,0,1,0,22.08,0Zm15,12.07a.84.84,0,1,0-1.4.93,16.3,16.3,0,1,1-2.16-2.61.84.84,0,0,0,1.19,0,.85.85,0,0,0,0-1.19,18.14,18.14,0,1,0,2.38,2.88Zm-15-2.86a12.83,12.83,0,0,0-7.65,2.52.85.85,0,0,0-.17,1.18.84.84,0,0,0,1.18.18A11.18,11.18,0,1,1,24.8,32.93.84.84,0,0,0,25,34.59l.2,0A12.87,12.87,0,0,0,22.08,9.21ZM15,30.74A11.19,11.19,0,0,1,13,15.62a.84.84,0,1,0-1.37-1,12.86,12.86,0,0,0,2.36,17.4.84.84,0,0,0,.53.19.86.86,0,0,0,.66-.31A.85.85,0,0,0,15,30.74Z" fill="#2a1468"></path><path d="M28.49,25.69a.85.85,0,0,0-1.18.19,6.46,6.46,0,1,1-1.43-9,.84.84,0,1,0,1-1.36,8.15,8.15,0,1,0,1.8,11.38A.85.85,0,0,0,28.49,25.69Zm-6.41-7a3.43,3.43,0,1,0,3.43,3.43A3.44,3.44,0,0,0,22.08,18.65Zm0,5.17a1.74,1.74,0,1,1,1.74-1.74A1.74,1.74,0,0,1,22.08,23.82Z" fill="#ff6d54"></path></svg>',
 				)
 			);
@@ -162,7 +166,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 		}
 
 		foreach ( $this->block_patterns_categories as $slug => $category ) {
-			$category['label'] = '[Chisel] ' . $category['label'];
+			$category['label'] = sprintf( '[%s] %s', ThemeHelpers::get_theme_name(), esc_attr( $category['label'] ) );
 			register_block_pattern_category( 'chisel-patterns/' . $slug, $category );
 		}
 	}
@@ -254,5 +258,40 @@ class Blocks implements InstanceInterface, HooksInterface {
 		);
 
 		return $editor_scripts_data;
+	}
+
+	/**
+	 * Dequeue blocks styles that are not used on current page and add inline critical css for blocks.
+	 *
+	 * @return void
+	 */
+	public function dequeue_blocks_styles() {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$blocks_used_on_page = $this->get_content_blocks_names();
+		$blocks              = $this->blocks;
+
+		if ( $blocks ) {
+			$blocks_path = $this->register_blocks_factory->get_blocks_path();
+			$blocks_url  = $this->register_blocks_factory->get_blocks_url();
+
+			foreach ( $blocks as $block_name ) {
+				if ( ! in_array( $block_name, $blocks_used_on_page, true ) ) {
+					wp_dequeue_style( 'block-wp-' . $block_name . '-style' );
+				} else {
+					$block_critical_css = $blocks_path . '/' . $block_name . '/script.css';
+
+					if ( is_file( $block_critical_css ) ) {
+						$css = BlocksHelpers::get_block_inline_css( $blocks_url, $block_name );
+
+						if ( $css ) {
+							$add = wp_add_inline_style( AssetsHelpers::get_final_handle( 'main' ), $css );
+						}
+					}
+				}
+			}
+		}
 	}
 }

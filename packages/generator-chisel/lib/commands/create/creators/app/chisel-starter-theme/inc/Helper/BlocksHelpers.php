@@ -95,4 +95,24 @@ class BlocksHelpers {
 
 		Timber::render( AcfBlocks::get_instance()->blocks_twig_base_path . $block_slug . '/' . $block_slug . '.twig', $context, CacheHelpers::expiry() );
 	}
+
+	/**
+	 * Get block inline css from url. The critical.scss imported into script.js will be built into script.css.
+	 *
+	 * @param string $blocks_url
+	 * @param string $block_name
+	 *
+	 * @return string
+	 */
+	public static function get_block_inline_css( $blocks_url, $block_name ) {
+		$css_url  = $blocks_url . '/' . $block_name . '/script.css';
+		$response = wp_remote_get( $css_url );
+		$css      = '';
+
+		if ( is_array( $response ) && ! is_wp_error( $response ) ) {
+			$css = wp_remote_retrieve_body( $response );
+		}
+
+		return $css;
+	}
 }

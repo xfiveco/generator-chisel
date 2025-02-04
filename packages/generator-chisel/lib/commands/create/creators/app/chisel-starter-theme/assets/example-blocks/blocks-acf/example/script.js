@@ -5,3 +5,4 @@
  */
 
 import './style.scss';
+import './critical.scss'; // this will become script.css and will be displayed as inline css

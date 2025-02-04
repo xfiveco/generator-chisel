@@ -1,0 +1,11 @@
+@function get-flex-col-width($column_no, $layout-gutter) {
+  $layout-col-width: calc(((100 / 12) * $column_no) * 1%);
+  $layout-gap-divider: calc(12 / $column_no);
+  $layout-gutter-width: calc($layout-gutter - ($layout-gutter / $layout-gap-divider));
+
+  @if $column_no == 12 {
+    $layout-gutter-width: 0%;
+  }
+
+  @return calc($layout-col-width - $layout-gutter-width);
+}

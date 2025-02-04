@@ -254,6 +254,24 @@ class RegisterBlocks {
 	}
 
 	/**
+	 * Get the blocks url.
+	 *
+	 * @return string
+	 */
+	public function get_blocks_url() {
+		return $this->blocks_url;
+	}
+
+	/**
+	 * Get the blocks path.
+	 *
+	 * @return string
+	 */
+	public function get_blocks_path() {
+		return $this->blocks_path;
+	}
+
+	/**
 	 * Get the blocks path src.
 	 *
 	 * @return string

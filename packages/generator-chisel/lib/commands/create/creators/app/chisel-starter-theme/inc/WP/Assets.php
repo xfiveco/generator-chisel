@@ -7,6 +7,7 @@ use Chisel\Interface\HooksInterface;
 use Chisel\Trait\Singleton;
 use Chisel\Helper\ThemeHelpers;
 use Chisel\Helper\AjaxHelpers;
+use Chisel\Helper\AssetsHelpers;
 
 /**
  * Class for enqueuing scripts and styles.
@@ -193,6 +194,7 @@ class Assets implements InstanceInterface, HooksInterface {
 	 */
 	public function action_hooks() {
 		add_action( 'init', array( $this, 'register_assets' ) );
+		add_action( 'init', array( $this, 'move_scripts_to_footer' ), 2 );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ), 99 ); // Higher priority, overwrite plugins if needed.
 		add_action( 'wp_footer', array( $this, 'enqueue_frontend_assets_in_footer' ), 11 ); // Higher priority, overwrite plugins if needed.
@@ -208,6 +210,25 @@ class Assets implements InstanceInterface, HooksInterface {
 	 * Register filter hooks.
 	 */
 	public function filter_hooks() {
+		add_filter( 'script_loader_tag', array( $this, 'async_script' ), 99, 2 );
+		add_filter( 'script_loader_tag', array( $this, 'defer_script' ), 99, 2 );
+		add_filter( 'style_loader_tag', array( $this, 'preload_styles' ), 99, 2 );
+	}
+
+	/**
+	 * Move all scripts to footer
+	 *
+	 * @return void
+	 */
+	public function move_scripts_to_footer() {
+		if ( ! is_admin() ) {
+			remove_action( 'wp_head', 'wp_print_scripts' );
+			remove_action( 'wp_head', 'wp_print_head_scripts', 9 );
+			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+
+			add_action( 'wp_footer', 'wp_print_scripts', 5 );
+			add_action( 'wp_footer', 'wp_print_head_scripts', 5 );
+		}
 	}
 
 	/**
@@ -223,19 +244,19 @@ class Assets implements InstanceInterface, HooksInterface {
 
 			if ( $this->frontend_styles ) {
 				foreach ( $this->frontend_styles as $file_name => $args ) {
-					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+					$this->register_style( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 				}
 			}
 
 			if ( $this->frontend_footer_styles ) {
 				foreach ( $this->frontend_footer_styles as $file_name => $args ) {
-					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+					$this->register_style( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 				}
 			}
 
 			if ( $this->frontend_scripts ) {
 				foreach ( $this->frontend_scripts as $file_name => $args ) {
-					$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+					$this->register_script( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 				}
 			}
 
@@ -244,7 +265,7 @@ class Assets implements InstanceInterface, HooksInterface {
 					$login_styles_data = array();
 
 					foreach ( $this->login_styles as $file_name => $args ) {
-						$login_styles_data = $this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+						$login_styles_data = $this->register_style( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 					}
 
 					if ( isset( $login_styles_data['ver'] ) ) {
@@ -254,7 +275,7 @@ class Assets implements InstanceInterface, HooksInterface {
 
 				if ( $this->login_scripts ) {
 					foreach ( $this->login_scripts as $file_name => $args ) {
-						$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+						$this->register_script( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 					}
 				}
 			}
@@ -266,25 +287,25 @@ class Assets implements InstanceInterface, HooksInterface {
 
 			if ( $this->admin_styles ) {
 				foreach ( $this->admin_styles as $file_name => $args ) {
-					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+					$this->register_style( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 				}
 			}
 
 			if ( $this->admin_scripts ) {
 				foreach ( $this->admin_scripts as $file_name => $args ) {
-					$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+					$this->register_script( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 				}
 			}
 
 			if ( $this->editor_styles ) {
 				foreach ( $this->editor_styles as $file_name => $args ) {
-					$this->register_style( self::get_final_handle( $file_name ), $file_name, $args );
+					$this->register_style( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 				}
 			}
 
 			if ( $this->editor_scripts ) {
 				foreach ( $this->editor_scripts as $file_name => $args ) {
-					$this->register_script( self::get_final_handle( $file_name ), $file_name, $args );
+					$this->register_script( AssetsHelpers::get_final_handle( $file_name ), $file_name, $args );
 				}
 			}
 		}
@@ -300,7 +321,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->frontend_styles ) {
 			foreach ( $this->frontend_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_frontend_style', true, $handle, $args );
-				$style_handle  = self::get_final_handle( $handle );
+				$style_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
 					$this->enqueue_style( $style_handle, $args );
@@ -314,7 +335,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->frontend_scripts ) {
 			foreach ( $this->frontend_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_frontend_script', true, $handle, $args );
-				$script_handle  = self::get_final_handle( $handle );
+				$script_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
 					$this->enqueue_script( $script_handle, $args );
@@ -332,7 +353,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->frontend_footer_styles ) {
 			foreach ( $this->frontend_footer_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_frontend_footer_style', true, $handle, $args );
-				$style_handle  = self::get_final_handle( $handle );
+				$style_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
 					$this->enqueue_style( $style_handle, $args );
@@ -354,7 +375,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->admin_styles ) {
 			foreach ( $this->admin_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_admin_style', true, $handle, $args );
-				$style_handle  = self::get_final_handle( $handle );
+				$style_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
 					$this->enqueue_style( $style_handle, $args );
@@ -368,7 +389,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->admin_scripts ) {
 			foreach ( $this->admin_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_admin_script', true, $handle, $args );
-				$script_handle  = self::get_final_handle( $handle );
+				$script_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
 					$this->enqueue_script( $script_handle, $args );
@@ -387,7 +408,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->editor_styles ) {
 			foreach ( $this->editor_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_editor_style', true, $handle, $args );
-				$style_handle  = self::get_final_handle( $handle );
+				$style_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
 					$this->enqueue_style( $style_handle, $args );
@@ -401,7 +422,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->editor_scripts ) {
 			foreach ( $this->editor_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_editor_script', true, $handle, $args );
-				$script_handle  = self::get_final_handle( $handle );
+				$script_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
 					$this->enqueue_script( $script_handle, $args );
@@ -429,7 +450,7 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->login_styles ) {
 			foreach ( $this->login_styles as $handle => $args ) {
 				$enqueue_style = apply_filters( 'chisel_enqueue_login_style', true, $handle, $args );
-				$style_handle  = self::get_final_handle( $handle );
+				$style_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_style && wp_style_is( $style_handle, 'registered' ) ) {
 					$this->enqueue_style( $style_handle, $args );
@@ -443,13 +464,127 @@ class Assets implements InstanceInterface, HooksInterface {
 		if ( $this->login_scripts ) {
 			foreach ( $this->login_scripts as $handle => $args ) {
 				$enqueue_script = apply_filters( 'chisel_enqueue_login_script', true, $handle, $args );
-				$script_handle  = self::get_final_handle( $handle );
+				$script_handle  = AssetsHelpers::get_final_handle( $handle );
 
 				if ( $enqueue_script && wp_script_is( $script_handle, 'registered' ) ) {
 					$this->enqueue_script( $script_handle, $args );
 				}
 			}
 		}
+	}
+
+	/**
+	 * Async scripts by handle.
+	 *
+	 * @param string $tag
+	 * @param string $handle
+	 *
+	 * @return string
+	 */
+	public function async_script( $tag, $handle ) {
+		if ( is_admin() ) {
+			return $tag;
+		}
+
+		$scripts = array();
+
+		if ( $scripts ) {
+			foreach ( $scripts as $script_handle ) {
+				if ( $handle === $script_handle ) {
+					$tag = str_replace( ' src', ' async src', $tag );
+				}
+			}
+		}
+
+		return $tag;
+	}
+
+	/**
+	 * Defer scripts by handle.
+	 *
+	 * @param string $tag
+	 * @param string $handle
+	 *
+	 * @return string
+	 */
+	public function defer_script( $tag, $handle ) {
+		if ( is_admin() ) {
+			return $tag;
+		}
+
+		$scripts = array();
+
+		// Defer all wp scripts.
+		if ( strpos( $handle, 'wp' ) === false ) {
+			if ( strpos( $handle, 'defer' ) === false ) {
+				$tag = str_replace( ' src', ' defer src', $tag );
+			}
+		}
+
+		if ( $scripts ) {
+			foreach ( $scripts as $script_handle ) {
+				if ( $handle === $script_handle ) {
+					$tag = str_replace( ' src', ' defer src', $tag );
+				}
+			}
+		}
+
+		return $tag;
+	}
+
+	/**
+	 * Preload styles by handle.
+	 *
+	 * @param string $tag
+	 * @param string $handle
+	 *
+	 * @return string
+	 */
+	public function preload_styles( $tag, $handle ) {
+		if ( is_admin() ) {
+			return $tag;
+		}
+
+		$styles_handles = array(
+			'wp-block-library',
+		);
+
+		$styles_handles_start_with = array(
+			'gform_',
+			'block',
+		);
+
+		if ( $styles_handles ) {
+			foreach ( $styles_handles as $style_handle ) {
+				if ( $handle === $style_handle ) {
+					$tag = $this->preload_style( $tag );
+				}
+			}
+		}
+
+		if ( $styles_handles_start_with ) {
+			foreach ( $styles_handles_start_with as $style_handle ) {
+				if ( strpos( $handle, $style_handle ) === 0 ) {
+					$tag = $this->preload_style( $tag );
+				}
+			}
+		}
+
+		return $tag;
+	}
+
+	/**
+	 * Preload style tag.
+	 *
+	 * @param string $tag
+	 *
+	 * @return string
+	 */
+	private function preload_style( $tag ) {
+		$preload_tag = str_replace( "rel='stylesheet'", "rel='preload' as='style'", $tag );
+		$tag         = $preload_tag . str_replace( "media='all'", "media='print' onload='this.media=\"all\"'", $tag );
+
+		return $tag;
 	}
 
 	/**
@@ -545,7 +680,10 @@ class Assets implements InstanceInterface, HooksInterface {
 		$src       = isset( $args['src'] ) ? $args['src'] : $this->get_script_src( $file_name );
 		$deps      = isset( $args['deps'] ) ? $args['deps'] : array();
 		$ver       = isset( $args['ver'] ) ? $args['ver'] : $asset_data['version'];
-		$strategy  = isset( $args['strategy'] ) ? $args['strategy'] : true; // Strategy can be a boolean, which determines if the script should be enqueued in the footer, or an array with the following keys: 'in_footer':boolean and 'strategy':string (defer or async).
+		$strategy  = isset( $args['strategy'] ) ? $args['strategy'] : array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		); // Strategy can be a boolean, which determines if the script should be enqueued in the footer, or an array with the following keys: 'in_footer':boolean and 'strategy':string (defer or async).
 		$condition = isset( $args['condition'] ) ? $args['condition'] : null;
 
 		// Use condition to determine if the script should be registered. It can be either a boolean or a function.
@@ -614,7 +752,7 @@ class Assets implements InstanceInterface, HooksInterface {
 	 */
 	private function set_script_translations( $handle, $args ) {
 		if ( isset( $args['deps'] ) && in_array( 'wp-i18n', $args['deps'], true ) ) {
-			wp_set_script_translations( self::get_final_handle( $handle ), 'chisel', get_template_directory() . '/languages' );
+			wp_set_script_translations( AssetsHelpers::get_final_handle( $handle ), 'chisel', get_template_directory() . '/languages' );
 		}
 	}
 
@@ -627,7 +765,7 @@ class Assets implements InstanceInterface, HooksInterface {
 	 */
 	private function enqueue_style_js_for_dev( $handle ) {
 		if ( ThemeHelpers::is_fast_refresh() ) {
-			wp_enqueue_script( 'style-' . self::get_final_handle( $handle ) );
+			wp_enqueue_script( 'style-' . AssetsHelpers::get_final_handle( $handle ) );
 		}
 	}
 
@@ -692,22 +830,5 @@ class Assets implements InstanceInterface, HooksInterface {
 		}
 
 		return $asset;
-	}
-
-	/**
-	 * Get the final handle for the asset.
-	 *
-	 * @param string $handle
-	 *
-	 * @return string
-	 */
-	private function get_final_handle( $handle ) {
-		$handle = 'chisel-' . $handle;
-
-		if ( ThemeHelpers::is_fast_refresh() ) {
-			$handle .= '-fast-refresh';
-		}
-
-		return $handle;
 	}
 }

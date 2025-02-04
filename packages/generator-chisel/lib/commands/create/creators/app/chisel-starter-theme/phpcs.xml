@@ -31,6 +31,7 @@
 
   <rule ref="WordPress">
     <!-- <exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"/> -->
+    <exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores"/>
 
     <!-- Intentionally different names. -->
     <!-- <exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"/>

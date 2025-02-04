@@ -90,12 +90,6 @@
       display: none;
     }
   }
-
-  .c-main-nav--columns & {
-    @include bp(large) {
-      display: none;
-    }
-  }
 }
 
 .c-main-nav__link {
@@ -290,15 +284,31 @@
       }
     }
 
-    &.has-2-columns .is-level-2 > .c-main-nav__subitem {
+    &.has-1-columns
+      .c-main-nav__item:not(.is-default)
+      .c-main-nav__subitems.is-level-2
+      > .c-main-nav__subitem {
+      width: get-flex-col-width(12, get-gap('normal'));
+    }
+
+    &.has-2-columns
+      .c-main-nav__item:not(.is-default)
+      .c-main-nav__subitems.is-level-2
+      > .c-main-nav__subitem {
       width: get-flex-col-width(6, get-gap('normal'));
     }
 
-    &.has-3-columns .is-level-2 > .c-main-nav__subitem {
+    &.has-3-columns
+      .c-main-nav__item:not(.is-default)
+      .c-main-nav__subitems.is-level-2
+      > .c-main-nav__subitem {
       width: get-flex-col-width(4, get-gap('normal'));
     }
 
-    &.has-4-columns .is-level-2 > .c-main-nav__subitem {
+    &.has-4-columns
+      .c-main-nav__item:not(.is-default)
+      .c-main-nav__subitems.is-level-2
+      > .c-main-nav__subitem {
       width: get-flex-col-width(3, get-gap('normal'));
     }
   }

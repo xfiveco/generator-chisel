@@ -71,6 +71,7 @@ class Theme implements InstanceInterface, HooksInterface {
 		add_filter( 'login_headerurl', array( $this, 'login_headerurl' ) );
 		add_filter( 'wp_revisions_to_keep', array( $this, 'wp_revisions_to_keep' ), 99, 2 );
 		add_filter( 'heartbeat_settings', array( $this, 'heartbeat_settings' ) );
+		add_filter( 'jpeg_quality', array( $this, 'jpeg_quality' ) );
 	}
 
 	/**
@@ -273,5 +274,16 @@ class Theme implements InstanceInterface, HooksInterface {
 		$settings['interval'] = 30;
 
 		return $settings;
+	}
+
+	/**
+	 * Set JPEG quality to 90%
+	 *
+	 * @param int $quality
+	 *
+	 * @return int
+	 */
+	public function jpeg_quality( $quality ) {
+		return 90;
 	}
 }

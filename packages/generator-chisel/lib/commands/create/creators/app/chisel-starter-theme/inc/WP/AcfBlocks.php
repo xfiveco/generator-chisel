@@ -7,6 +7,9 @@ use Chisel\Interface\InstanceInterface;
 use Chisel\Interface\HooksInterface;
 use Chisel\Trait\Singleton;
 use Chisel\Factory\RegisterBlocks;
+use Chisel\Trait\PageBlocks;
+use Chisel\Helper\BlocksHelpers;
+use Chisel\Helper\AssetsHelpers;
 
 /**
  * ACF blocks related functionalities.
@@ -16,6 +19,7 @@ use Chisel\Factory\RegisterBlocks;
 class AcfBlocks implements InstanceInterface, HooksInterface {
 
 	use Singleton;
+	use PageBlocks;
 
 	/**
 	 * Register blocks factory.
@@ -46,6 +50,7 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 		$this->blocks                  = $this->register_blocks_factory->get_blocks();
 
 		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
+		add_action( 'wp_print_styles', array( $this, 'dequeue_blocks_styles' ), 999 );
 
 		$this->action_hooks();
 		$this->filter_hooks();
@@ -107,7 +112,7 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	 */
 	public function load_acf_field_group( $paths ) {
 		if ( ! is_array( $this->blocks ) || ! $this->blocks ) {
-			return;
+			return $paths;
 		}
 
 		foreach ( $this->blocks as $block ) {
@@ -140,12 +145,47 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 							return $path;
 						}
 
-						return $this->blocks_path_src . '/' . $block_name . '/acf-json';
+						return $this->register_blocks_factory->get_blocks_path_src() . '/' . $block_name . '/acf-json';
 					}
 				}
 			}
 		}
 
 		return $path;
+	}
+
+	/**
+	 * Dequeue blocks styles that are not used on current page and add inline critical css for blocks.
+	 *
+	 * @return void
+	 */
+	public function dequeue_blocks_styles() {
+		if ( is_admin() ) {
+			return;
+		}
+
+		$blocks_used_on_page = $this->get_content_blocks_names();
+		$blocks              = $this->blocks;
+
+		if ( $blocks ) {
+			$blocks_path = $this->register_blocks_factory->get_blocks_path();
+			$blocks_url  = $this->register_blocks_factory->get_blocks_url();
+
+			foreach ( $blocks as $block_name ) {
+				if ( ! in_array( $block_name, $blocks_used_on_page, true ) ) {
+					wp_dequeue_style( 'block-acf-' . $block_name . '-style' );
+				} else {
+					$block_critical_css = $blocks_path . '/' . $block_name . '/script.css';
+
+					if ( is_file( $block_critical_css ) ) {
+						$css = BlocksHelpers::get_block_inline_css( $blocks_url, $block_name );
+
+						if ( $css ) {
+							$add = wp_add_inline_style( AssetsHelpers::get_final_handle( 'main' ), $css );
+						}
+					}
+				}
+			}
+		}
 	}
 }

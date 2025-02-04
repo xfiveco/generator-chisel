@@ -5,8 +5,9 @@
 {% set has_submenu = item.children is not empty and main_nav_level < main_nav_level_max %}
 {% set caret = has_submenu ? '<button class="c-main-nav__caret is-caret" aria-label="' ~ __('Toggle submenu', 'chisel') ~ '"></button>' : '' %}
 {% set is_active = 'current-menu-parent' in item.classes %}
+{% set has_default_submenu = item.meta('mega_menu_default_dropdown') %}
 
-<li class="c-main-nav__{{ sub }}item {{ item.classes|join(' ') }} js-main-nav-item{{ is_active ? ' is-active' : '' }}">
+<li class="c-main-nav__{{ sub }}item {{ item.classes|join(' ') }} js-main-nav-item{{ is_active ? ' is-active' : '' }}{% if has_default_submenu == 'yes' %} is-default{% endif %}">
   <a href="{{ item.url }}" class="c-main-nav__{{ sub }}link js-main-nav-link" {{ item_target }} {{ item_title }} {{ item_aria_current }}>{{ item.title }}{{ caret }}</a>
 
   {% if has_submenu %}

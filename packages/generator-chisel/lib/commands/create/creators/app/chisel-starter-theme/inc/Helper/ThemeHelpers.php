@@ -51,6 +51,15 @@ class ThemeHelpers {
 	}
 
 	/**
+	 * Get theme name / site title.
+	 *
+	 * @return bool
+	 */
+	public static function get_theme_name() {
+		return esc_attr( get_bloginfo( 'name' ) );
+	}
+
+	/**
 	 * Generate BEM class names with modifiers
 	 *
 	 * @param string $name

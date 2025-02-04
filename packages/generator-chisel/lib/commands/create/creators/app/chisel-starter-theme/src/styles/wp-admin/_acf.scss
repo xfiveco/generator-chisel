@@ -19,3 +19,11 @@
     }
   }
 }
+
+.menu-item {
+  &:not(.menu-item-depth-0) {
+    .acf-field[data-name='mega_menu_default_dropdown'] {
+      display: none !important;
+    }
+  }
+}

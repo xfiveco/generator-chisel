@@ -1,4 +1,5 @@
 {% set slides_html = '' %}
+{% set has_thumbnails_nav = 'thumbnails' in fields.slider_options.slider_settings %}
 
 <div {{ wrapper_attributes }} data-block-id="{{ block.id }}">
   <div class="b-slider__inner alignfull">
@@ -7,8 +8,9 @@
         {% if slide.acf_bs_image %}
           {% set slides_html %}
             {{ slides_html }}
-            <div class="b-slider__slide swiper-slide" data-thumbnail-url="{{ get_image(slide.acf_bs_image).src('medium') }}">
-              {{ get_responsive_image(slide.acf_bs_image, 'large') }}
+
+            <div class="b-slider__slide swiper-slide" {% if has_thumbnails_nav %}data-thumbnail-url="{{ get_image(slide.acf_bs_image).src('medium') }}"{% endif %}>
+              {{ get_responsive_image(slide.acf_bs_image, 'large', {fetchpriority: loop.first ? 'high' : 'auto'}) }}
             </div>
           {% endset %}
         {% endif %}

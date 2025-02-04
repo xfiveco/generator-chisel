@@ -11,8 +11,10 @@ Two variants of submenus are available:
 {% if main_nav %}
   {% set main_nav_level_max = 3 %}
   {% set main_nav_level = 1 %}
+  {% set has_mega_menu = main_nav.meta('mega_menu_enable') %}
+  {% set mega_menu_columns = has_mega_menu ? main_nav.meta('mega_menu_columns') : '' %}
 
-  <nav id="navigation" class="c-main-nav js-main-nav" aria-label="{{ __('Main menu', 'chisel') }}">
+  <nav id="navigation" class="c-main-nav js-main-nav{% if has_mega_menu == 'yes' %} c-main-nav--columns has-{{ mega_menu_columns }}-columns{% endif %}" aria-label="{{ __('Main menu', 'chisel') }}">
     <button class="{{ bem('c-main-nav__toggle', 'slider') }} js-main-nav-toggle" aria-expanded="false" aria-controls="main-menu" aria-label="{{ __('Toggle main menu', 'chisel') }}">
       <span class="c-main-nav__toggle-box">
         <span class="c-main-nav__toggle-inner"></span>

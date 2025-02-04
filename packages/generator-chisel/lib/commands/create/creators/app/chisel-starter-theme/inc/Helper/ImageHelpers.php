@@ -12,6 +12,13 @@ use Timber\Timber;
 class ImageHelpers {
 
 	/**
+	 * Responsive image data.
+	 *
+	 * @var array
+	 */
+	private static $responsive_image_data = array();
+
+	/**
 	 * Get image url of the theme images.
 	 *
 	 * @param string $image_name
@@ -47,6 +54,49 @@ class ImageHelpers {
 
 		$image = Timber::get_image( $image_id );
 
-		return $image ? $image->responsive( $image_size, $attrs ) : '';
+		self::$responsive_image_data = array(
+			'image_id' => $image_id,
+			'attrs'    => $attrs,
+		);
+
+		// Adjust image width and height to prevent layout shifts.
+		if ( isset( $attrs['width'] ) && isset( $attrs['height'] ) ) {
+			add_filter(
+				'wp_get_attachment_image_src',
+				array( self::class, 'responsive_image_dimensions' ),
+				10,
+				4
+			);
+		}
+
+		$responsive_image = $image ? $image->responsive( $image_size, $attrs ) : '';
+
+		remove_filter(
+			'wp_get_attachment_image_src',
+			array( self::class, 'responsive_image_dimensions' ),
+			10
+		);
+
+		return $responsive_image;
+	}
+
+	/**
+	 * Adjust image width and height to prevent layout shifts
+	 *
+	 * @param array $src
+	 * @param int   $id
+	 *
+	 * @return array
+	 */
+	public static function responsive_image_dimensions( $src, $id ) {
+		$image_id = self::$responsive_image_data['image_id'] ?? 0;
+		$attrs    = self::$responsive_image_data['attrs'] ?? array();
+
+		if ( $id === $image_id && isset( $attrs['width'] ) && isset( $attrs['height'] ) ) {
+				$src[1] = $attrs['width'];
+				$src[2] = $attrs['height'];
+		}
+
+		return $src;
 	}
 }

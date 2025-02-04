@@ -50,7 +50,7 @@ $table_prefix = '<%= tablePrefix %>';
  */
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_LOG', true );
-define( 'WP_DEBUG_DISPLAY', true );
+define( 'WP_DEBUG_DISPLAY', false );
 
 // Required for the theme fast refresh mode.
 define( 'SCRIPT_DEBUG', true );
