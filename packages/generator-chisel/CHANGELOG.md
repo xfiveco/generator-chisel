@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.16 (2025-02-04)
+
+- blocks, scripts, images optimize, mega menu settings ([d8a8b3c](https://github.com/xfiveco/generator-chisel/commit/d8a8b3c))
+
 ## 2.0.0-alpha.15 (2024-12-06)
 
 - icons add color param and improve caching keys ([9619163](https://github.com/xfiveco/generator-chisel/commit/9619163))

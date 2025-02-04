@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.6 (2025-02-04)
+
+- blocks, scripts, images optimize, mega menu settings ([d8a8b3c](https://github.com/xfiveco/generator-chisel/commit/d8a8b3c))
+
 ## 2.0.0-alpha.5 (2024-12-06)
 
 - refactor: icons.mjs - updated preview generation ([16f7792](https://github.com/xfiveco/generator-chisel/commit/16f7792))
