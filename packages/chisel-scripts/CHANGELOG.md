@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-2.0.0-alpha.8.0 (2025-02-04)
+
+- config local update ([ce2a342](https://github.com/xfiveco/generator-chisel/commit/ce2a342))
+
 ## 2.0.0-alpha.6 (2025-02-04)
 
 - blocks, scripts, images optimize, mega menu settings ([d8a8b3c](https://github.com/xfiveco/generator-chisel/commit/d8a8b3c))
