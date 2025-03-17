@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.17 (2025-03-17)
+
+- add ajax nonce, chisel readme and GF fix ([4738035](https://github.com/xfiveco/generator-chisel/commit/4738035))
+- Publish ([8e3e3d2](https://github.com/xfiveco/generator-chisel/commit/8e3e3d2))
+
 ## 2.0.0-alpha.16 (2025-02-04)
 
 - blocks, scripts, images optimize, mega menu settings ([d8a8b3c](https://github.com/xfiveco/generator-chisel/commit/d8a8b3c))
