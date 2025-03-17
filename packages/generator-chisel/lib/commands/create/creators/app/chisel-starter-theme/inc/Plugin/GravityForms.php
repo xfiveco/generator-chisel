@@ -104,7 +104,9 @@ class GravityForms implements InstanceInterface, HooksInterface {
 	 * @return string
 	 */
 	public function default_form_styles( $slug, $form ) {
-		$slug = 'gravity-theme';
+		if ( ! is_admin() ) {
+			$slug = 'gravity-theme';
+		}
 
 		return $slug;
 	}

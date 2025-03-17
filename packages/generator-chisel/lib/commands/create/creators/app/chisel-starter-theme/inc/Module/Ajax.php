@@ -127,7 +127,9 @@ class Ajax extends \WP_REST_Controller implements InstanceInterface, HooksInterf
 	 * @return boolean
 	 */
 	public function permissions_check( $request ) {
-		$permission = apply_filters( 'chisel_ajax_permissions_check', true, $this->get_callback_name( $request ), $request );
+		$verify_nonce = wp_verify_nonce( $request->get_header( 'x_wp_nonce' ), 'wp_rest' );
+
+		$permission = apply_filters( 'chisel_ajax_permissions_check', (bool) $verify_nonce, $this->get_callback_name( $request ), $request );
 
 		return $permission;
 	}
