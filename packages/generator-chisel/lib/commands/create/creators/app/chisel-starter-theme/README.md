@@ -6,6 +6,8 @@ Chisel is a Wordpress Starter Theme powered by Timber library that helps to sepr
 
 ## Installation
 
+Use node version `20.12.2`
+
 Chisel is installed as a npm package using npx command: `npx generator-chisel@next`, which installs the whole projet for you including composer and node dependencies, however when you join the project and clone the repository, follow these steps to start the local developent:
 
 1. Go to the theme folder
