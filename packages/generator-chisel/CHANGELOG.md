@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0-alpha.18 (2025-03-18)
+
+- fix Interfaces and Traits namespaces in php < 8, add nvmrc to root folder ([cb60f42](https://github.com/xfiveco/generator-chisel/commit/cb60f42))
+- update readme ([204adbe](https://github.com/xfiveco/generator-chisel/commit/204adbe))
+
 ## 2.0.0-alpha.17 (2025-03-17)
 
 - add ajax nonce, chisel readme and GF fix ([4738035](https://github.com/xfiveco/generator-chisel/commit/4738035))
