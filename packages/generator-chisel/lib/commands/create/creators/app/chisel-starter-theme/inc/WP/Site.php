@@ -6,9 +6,9 @@ use Automattic\WooCommerce\Internal\Admin\ProductForm\Component;
 use Timber\Timber;
 use Timber\Site as TimberSite;
 
-use Chisel\Interface\InstanceInterface;
-use Chisel\Interface\HooksInterface;
-use Chisel\Trait\Singleton;
+use Chisel\Interfaces\InstanceInterface;
+use Chisel\Interfaces\HooksInterface;
+use Chisel\Traits\Singleton;
 
 /**
  * Site related functionality related to timber.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chisel\Trait;
+namespace Chisel\Traits;
 
 trait Singleton {
 	/**

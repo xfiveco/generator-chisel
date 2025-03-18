@@ -4,13 +4,13 @@ namespace Chisel\WP;
 
 use Timber\Timber;
 
-use Chisel\Interface\InstanceInterface;
-use Chisel\Interface\HooksInterface;
-use Chisel\Trait\Singleton;
+use Chisel\Interfaces\InstanceInterface;
+use Chisel\Interfaces\HooksInterface;
+use Chisel\Traits\Singleton;
 use Chisel\Factory\RegisterBlocks;
 use Chisel\Helper\BlocksHelpers;
 use Chisel\Helper\ThemeHelpers;
-use Chisel\Trait\PageBlocks;
+use Chisel\Traits\PageBlocks;
 
 /**
  * Blocks related functionalities.

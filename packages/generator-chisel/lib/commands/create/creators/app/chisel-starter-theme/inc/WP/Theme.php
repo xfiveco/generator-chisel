@@ -2,9 +2,9 @@
 
 namespace Chisel\WP;
 
-use Chisel\Interface\InstanceInterface;
-use Chisel\Interface\HooksInterface;
-use Chisel\Trait\Singleton;
+use Chisel\Interfaces\InstanceInterface;
+use Chisel\Interfaces\HooksInterface;
+use Chisel\Traits\Singleton;
 use Chisel\Helper\ThemeHelpers;
 
 /**

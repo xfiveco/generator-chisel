@@ -3,9 +3,9 @@
 namespace Chisel\Module;
 
 use Chisel\WP\AjaxEnpoints;
-use Chisel\Interface\InstanceInterface;
-use Chisel\Interface\HooksInterface;
-use Chisel\Trait\Singleton;
+use Chisel\Interfaces\InstanceInterface;
+use Chisel\Interfaces\HooksInterface;
+use Chisel\Traits\Singleton;
 
 /**
  * Custom Ajax class based on REST API.

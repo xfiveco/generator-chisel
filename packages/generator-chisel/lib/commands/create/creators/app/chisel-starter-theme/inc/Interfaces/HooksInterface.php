@@ -1,6 +1,6 @@
 <?php
 
-namespace Chisel\Interface;
+namespace Chisel\Interfaces;
 
 /**
  * Hooks Interface
