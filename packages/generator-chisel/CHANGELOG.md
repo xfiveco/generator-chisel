@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0 (2025-04-07)
+
+- Update chisel version and readme ([0aca167](https://github.com/xfiveco/generator-chisel/commit/0aca167))
+
 ## 2.0.0-alpha.18 (2025-03-18)
 
 - fix Interfaces and Traits namespaces in php < 8, add nvmrc to root folder ([cb60f42](https://github.com/xfiveco/generator-chisel/commit/cb60f42))
