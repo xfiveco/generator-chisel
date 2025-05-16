@@ -37,7 +37,7 @@ class RegisterAcfOptionsPage {
 	/**
 	 * Register ACF options page.
 	 */
-	private function register_options_page() {
+	public function register() {
 		$options_page_args = array(
 			'page_title'      => $this->args['page_title'],
 			'menu_title'      => isset( $this->args['menu_title'] ) ? $this->args['menu_title'] : $this->args['page_title'],

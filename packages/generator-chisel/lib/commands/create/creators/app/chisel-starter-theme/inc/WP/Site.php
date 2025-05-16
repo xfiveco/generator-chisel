@@ -92,7 +92,8 @@ class Site extends TimberSite implements InstanceInterface, HooksInterface {
 	 */
 	public function term_classmap( $classmap ) {
 		$custom_classmap = array(
-			'category' => ChiselTerm::class,
+			'category'    => ChiselTerm::class,
+			'product_cat' => ChiselProductCategory::class,
 		);
 
 		return array_merge( $classmap, $custom_classmap );

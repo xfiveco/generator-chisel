@@ -115,4 +115,16 @@ class Acf implements InstanceInterface, HooksInterface {
 			}
 		}
 	}
+
+	/**
+	 * Register ACF options pages.
+	 *
+	 * @param array  $data
+	 * @param string $type
+	 *
+	 * @return void
+	 */
+	private function register_options_page( $data, $type = 'page' ) {
+		( new RegisterAcfOptionsPage( $data, $type ) )->register();
+	}
 }

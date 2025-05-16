@@ -26,7 +26,7 @@ spl_autoload_register(
 
 Timber\Timber::init();
 
-\Chisel\Module\Ajax::get_instance();
+\Chisel\Controllers\AjaxController::get_instance();
 \Chisel\WP\Blocks::get_instance();
 \Chisel\WP\Acf::get_instance();
 \Chisel\WP\AcfBlocks::get_instance();

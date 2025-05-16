@@ -2,19 +2,18 @@
 
 namespace Chisel\WP;
 
-use Timber\Post as TimberPost;
-use Timber\Timber;
+use Timber\Term as TimberTerm;
 use Chisel\Helper\ImageHelpers;
 
 /**
- * Extend Timber Post class with custom functionality. This is a woocommerce product class.
+ * Extend Timber Term class with custom functionality.
  *
  * @package Chisel
  */
-class ChiselProduct extends TimberPost {
+class ChiselProductCategory extends TimberTerm {
 
 	/**
-	 * Product thumbnail.
+	 * Category thumbnail.
 	 *
 	 * @var html
 	 */
@@ -31,10 +30,11 @@ class ChiselProduct extends TimberPost {
 	 * Get the product thumbnail. Returns the thumbnail responsive image html.
 	 *
 	 * @param string $size Thumbnail size.
+	 *
 	 * @return html
 	 */
 	public function get_thumbnail( $size = 'woocommerce_thumbnail' ) {
-		$size = apply_filters( 'single_product_archive_thumbnail_size', $size );
+		$size = apply_filters( 'subcategory_archive_thumbnail_size', $size );
 
 		if ( $this->thumbnail_html === null ) {
 			$thumbnail_id = $this->get_thumbnail_id( $size );
@@ -46,13 +46,13 @@ class ChiselProduct extends TimberPost {
 	}
 
 	/**
-	 * Get the product thumbnail id
+	 * Get the product thumbnail id.
 	 *
 	 * @return int
 	 */
 	public function get_thumbnail_id() {
 		if ( $this->thumbnail_id === null ) {
-			$thumbnail_id = get_post_thumbnail_id( $this->ID );
+			$thumbnail_id = $this->meta( 'thumbnail_id' );
 
 			if ( ! $thumbnail_id ) {
 				$thumbnail_id = get_option( 'woocommerce_placeholder_image', 0 );

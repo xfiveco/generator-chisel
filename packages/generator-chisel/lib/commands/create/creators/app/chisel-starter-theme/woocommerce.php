@@ -32,26 +32,36 @@ if ( is_singular( 'product' ) ) {
 
 	Timber::render( 'woocommerce/single-product.twig', $context, CacheHelpers::expiry() );
 } else {
-	$products     = Timber::get_posts();
+	$display_type  = woocommerce_get_loop_display_mode();
+	$show_products = true;
+	$categories    = array();
+
+	if ( $display_type === 'subcategories' ) {
+		$categories = woocommerce_get_product_subcategories( is_product_category() ? get_queried_object_id() : 0 );
+
+		$show_products = empty( $categories );
+	}
+
+	if ( $show_products ) {
+		$items = Timber::get_posts();
+	} else {
+		$items = array_map( 'Timber::get_term', $categories );
+	}
+
 	$has_sidebar  = ! empty( $context['sidebar'] );
 	$loop_columns = wc_get_loop_prop( 'columns' );
 	$loop_rows    = wc_get_default_product_rows_per_page();
 
 	$grid_classnames = WoocommerceHelpers::get_products_grid_classnames( $products, $has_sidebar );
 
-	$context['products']           = $products;
+	$context['show_products']      = $show_products;
+	$context['items']              = $items;
+	$context['categories']         = $categories;
 	$context['loop_columns_class'] = $grid_classnames;
 	$context['load_more']          = array(
 		'per_page'  => absint( $loop_columns * $loop_rows ),
 		'post_type' => 'product',
 	);
-
-	if ( is_product_category() ) {
-		$queried_object      = get_queried_object();
-		$term_id             = $queried_object->term_id;
-		$context['category'] = get_term( $term_id, 'product_cat' );
-		$context['title']    = single_term_title( '', false );
-	}
 
 	Timber::render( 'woocommerce/archive-product.twig', $context, CacheHelpers::expiry() );
 }

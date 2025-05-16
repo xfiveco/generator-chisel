@@ -1,0 +1,42 @@
+<article class="c-product-item c-product-item--category c-post-card">
+  <div class="c-product-item__inner">
+
+    {#
+     * Hook: woocommerce_before_subcategory.
+    *
+    * @hooked woocommerce_template_loop_category_link_open - 10 (Removed by the theme)
+    #}
+    {% do action('woocommerce_before_subcategory', term) %}
+
+    <a class="c-product-item__content" href="{{ term.link }}">
+      {#
+      * Hook: woocommerce_before_subcategory_title.
+      *
+      * hooked woocommerce_subcategory_thumbnail - 10 (Removed by the theme)
+      #}
+      {% do action('woocommerce_before_subcategory_title', term) %}
+
+      <h2 class="c-product-item__title">{{ term.title }}</h2>
+
+      {#
+      * Hook: woocommerce_after_subcategory_title.
+      #}
+      {% do action('woocommerce_after_subcategory_title') %}
+
+      {% if term.get_thumbnail() %}
+        <div class="c-product-item__image">
+          {{ term.get_thumbnail() }}
+        </div>
+      {% endif %}
+
+    </a>
+
+    {#
+    * Hook: woocommerce_after_subcategory.
+    *
+    * @hooked woocommerce_template_loop_category_link_close - 10 (Removed by the theme)
+    #}
+    {% do action('woocommerce_after_subcategory', term) %}
+
+  </div>
+</article>

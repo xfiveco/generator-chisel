@@ -2,7 +2,7 @@
 
 namespace Chisel\Helper;
 
-use Chisel\Module\Ajax;
+use Chisel\Controllers\AjaxController;
 
 /**
  * Helper functions.
@@ -17,7 +17,7 @@ class AjaxHelpers {
 	 * @return string
 	 */
 	public static function get_ajax_endpoint_url() {
-		return sprintf( '%s/wp-json/%s/%s', esc_url( get_bloginfo( 'url' ) ), Ajax::ROUTE_NAMESPACE, Ajax::ROUTE_BASE );
+		return sprintf( '%s/wp-json/%s/%s', esc_url( get_bloginfo( 'url' ) ), AjaxController::ROUTE_NAMESPACE, AjaxController::ROUTE_BASE );
 	}
 
 	/**

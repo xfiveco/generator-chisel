@@ -1,6 +1,6 @@
 <?php
 
-namespace Chisel\Module;
+namespace Chisel\Controllers;
 
 use Chisel\WP\AjaxEnpoints;
 use Chisel\Interfaces\InstanceInterface;
@@ -12,7 +12,7 @@ use Chisel\Traits\Singleton;
  *
  * @package Chisel
  */
-class Ajax extends \WP_REST_Controller implements InstanceInterface, HooksInterface {
+class AjaxController extends \WP_REST_Controller implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 

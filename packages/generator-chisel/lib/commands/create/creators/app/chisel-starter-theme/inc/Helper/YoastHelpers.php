@@ -10,7 +10,7 @@ namespace Chisel\Helper;
 class YoastHelpers {
 
 	/**
-	 * Check if Gravity Forms plugin is active.
+	 * Check if Yoast plugin is active.
 	 *
 	 * @return bool
 	 */

@@ -34,15 +34,19 @@
   <div class="o-layout">
     <div class="{{ bem('o-layout__item', (sidebar ? '8' : '12') ~ '-large') }}">
       <div class="c-posts-items c-shop-items {{ loop_columns_class }} js-load-more-container">
-      {% if products is not empty %}
-        {% for post in products %}
+      {% if items is not empty %}
+        {% for item in items %}
 
           {#
           * Hook: woocommerce_shop_loop.
           #}
           {% do action('woocommerce_shop_loop') %}
 
-          {% include "woocommerce/content-product.twig" with {post: post} %}
+          {% if show_products %}
+            {% include "woocommerce/content-product.twig" with {post: item} %}
+          {% else %}
+            {% include "woocommerce/content-product-cat.twig" with {term: item} %}
+          {% endif %}
         {% endfor %}
 
         {#
@@ -61,7 +65,7 @@
       {% endif %}
       </div>
 
-      {% if products is not empty %}
+      {% if items is not empty and show_products %}
         {% include 'components/pagination.twig' with {type: 'load-more'} %}
       {% endif %}
     </div>

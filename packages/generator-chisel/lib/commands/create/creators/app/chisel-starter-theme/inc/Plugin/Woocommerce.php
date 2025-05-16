@@ -59,6 +59,8 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'before_shop_loop_div_open' ), 19 );
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'before_shop_loop_div_close' ), 31 );
+
+		add_action( 'customize_register', array( $this, 'modify_customizer' ), 20 );
 	}
 
 	/**
@@ -77,6 +79,12 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 		// Remove loop product link open and close, so we can use our own.
 		remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
 		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+
+		// Remove loop category link open and close, so we can use our own.
+		remove_action( 'woocommerce_before_subcategory', 'woocommerce_template_loop_category_link_open', 10 );
+		remove_action( 'woocommerce_after_subcategory', 'woocommerce_template_loop_category_link_close', 10 );
+		// Remove category default thumbnail.
+		remove_action( 'woocommerce_before_subcategory_title', 'woocommerce_subcategory_thumbnail', 10 );
 
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 		remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
@@ -113,6 +121,26 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	 */
 	public function before_shop_loop_div_close() {
 		echo ' </div> ';
+	}
+
+	/**
+	 * Modify woocommerce customizer settings.
+	 *
+	 * @param WP_Customize_Manager $wp_customize
+	 *
+	 * @return void
+	 */
+	public function modify_customizer( $wp_customize ) {
+		$shop_page_display_control     = $wp_customize->get_control( 'woocommerce_shop_page_display' );
+		$category_page_display_control = $wp_customize->get_control( 'woocommerce_category_archive_display' );
+
+		if ( $shop_page_display_control && isset( $shop_page_display_control->choices ) ) {
+				unset( $shop_page_display_control->choices['both'] );
+		}
+
+		if ( $category_page_display_control && isset( $category_page_display_control->choices ) ) {
+				unset( $category_page_display_control->choices['both'] );
+		}
 	}
 
 	/**
