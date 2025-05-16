@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.1.0 (2025-05-16)
+
+- acf sync module as a plugin, add x5 plugins to installation script ([93b4f8a](https://github.com/xfiveco/generator-chisel/commit/93b4f8a))
+- improve woocommerce support, small refactor ([1968fbc](https://github.com/xfiveco/generator-chisel/commit/1968fbc))
+
 ## 2.0.0 (2025-04-07)
 
 - Update chisel version and readme ([0aca167](https://github.com/xfiveco/generator-chisel/commit/0aca167))
