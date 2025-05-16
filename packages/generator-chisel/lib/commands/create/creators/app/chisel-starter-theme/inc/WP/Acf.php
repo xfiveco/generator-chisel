@@ -5,7 +5,6 @@ namespace Chisel\WP;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Module\AcfSync;
 use Chisel\Factory\RegisterAcfOptionsPage;
 
 /**
@@ -39,10 +38,6 @@ class Acf implements InstanceInterface, HooksInterface {
 
 		$this->action_hooks();
 		$this->filter_hooks();
-
-		if ( class_exists( '\ACF_Admin_Internal_Post_Type_List' ) ) {
-			AcfSync::get_instance();
-		}
 	}
 
 	/**

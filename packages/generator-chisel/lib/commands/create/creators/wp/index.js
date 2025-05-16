@@ -165,6 +165,7 @@ module.exports = (api) => {
       'install',
       'disable-emojis',
       'https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip',
+      'xfive-sync-watcher-for-acf',
       { activate: true },
     ]);
   });

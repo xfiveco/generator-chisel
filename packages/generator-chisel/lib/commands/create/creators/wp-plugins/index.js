@@ -6,6 +6,7 @@ module.exports = (api) => {
 
   api.schedule(api.PRIORITIES.PROMPT, async () => {
     console.log('Advanced Custom Fields Pro is installed by default.');
+    console.log('X5 Plato - Reliable Sync Watcher for ACF is installed by default.');
 
     await api.prompt([
       {
