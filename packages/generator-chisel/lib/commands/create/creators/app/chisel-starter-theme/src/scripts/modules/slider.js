@@ -312,6 +312,12 @@ class Slider {
         slideImg.removeAttribute(attr);
       });
 
+      if (!thumbnailUrl) {
+        throw new Error(
+          'data-thumbnail-url attribute must be present on each swiper-slide element.',
+        );
+      }
+
       const imageSize = thumbnailUrl.match(/(\d+)x(\d+)\./i);
 
       if (imageSize?.[2]) {

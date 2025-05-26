@@ -55,20 +55,6 @@ class RegisterBlocks {
 	private $blocks = array();
 
 	/**
-	 * Blocks option name.
-	 *
-	 * @var string
-	 */
-	private $blocks_option_name;
-
-	/**
-	 * Blocks version option name.
-	 *
-	 * @var string
-	 */
-	private $blocks_version_option_name;
-
-	/**
 	 * Theme.
 	 *
 	 * @var mixed
@@ -102,15 +88,13 @@ class RegisterBlocks {
 	 * @param string $blocks_type The blocks type : acf or wp.
 	 */
 	public function __construct( $blocks_type ) {
-		$this->blocks_type                = $blocks_type;
-		$this->theme                      = wp_get_theme();
-		$this->blocks_folder              = $this->blocks_type === 'acf' ? 'blocks-acf' : 'blocks';
-		$this->blocks_path                = get_template_directory() . '/' . $this->build_folder . '/' . $this->blocks_folder;
-		$this->blocks_path_src            = get_template_directory() . '/' . $this->src_folder . '/' . $this->blocks_folder;
-		$this->blocks_url                 = get_template_directory_uri() . '/' . $this->build_folder . '/' . $this->blocks_folder;
-		$this->blocks                     = $this->get_blocks();
-		$this->blocks_option_name         = 'chisel_' . $this->blocks_type;
-		$this->blocks_version_option_name = 'chisel_' . $this->blocks_type . '_version';
+		$this->blocks_type     = $blocks_type;
+		$this->theme           = wp_get_theme();
+		$this->blocks_folder   = $this->blocks_type === 'acf' ? 'blocks-acf' : 'blocks';
+		$this->blocks_path     = get_template_directory() . '/' . $this->build_folder . '/' . $this->blocks_folder;
+		$this->blocks_path_src = get_template_directory() . '/' . $this->src_folder . '/' . $this->blocks_folder;
+		$this->blocks_url      = get_template_directory_uri() . '/' . $this->build_folder . '/' . $this->blocks_folder;
+		$this->blocks          = $this->get_blocks();
 
 		$this->register_scripts = apply_filters( 'chisel_blocks_register_scripts', true, $this->blocks_type );
 	}
@@ -228,29 +212,27 @@ class RegisterBlocks {
 	 * @return array
 	 */
 	public function get_blocks() {
-		$blocks         = get_option( $this->blocks_option_name, array() ) ?: array();
-		$blocks_version = get_option( $this->blocks_version_option_name, 0 );
+		if ( $this->blocks ) {
+			return $this->blocks;
+		}
 
-		if ( ! $blocks || version_compare( $this->theme->get( 'Version' ), $blocks_version ) ) {
-			$blocks_list = is_dir( $this->blocks_path ) ? new \DirectoryIterator( $this->blocks_path ) : array();
+		$blocks_list = is_dir( $this->blocks_path ) ? new \DirectoryIterator( $this->blocks_path ) : array();
 
-			if ( $blocks_list ) {
-				foreach ( $blocks_list as $item ) {
-					if ( $item->isDot() || ! $item->isDir() ) {
-						continue;
-					}
-
-					$blocks[] = $item->getFilename();
+		if ( $blocks_list ) {
+			foreach ( $blocks_list as $item ) {
+				if ( $item->isDot() || ! $item->isDir() ) {
+					continue;
 				}
-			}
 
-			if ( ! ThemeHelpers::is_fast_refresh() ) {
-				update_option( $this->blocks_option_name, $blocks );
-				update_option( $this->blocks_version_option_name, $this->theme->get( 'Version' ) );
+				$block_name = $item->getFilename();
+
+				if ( ! in_array( $block_name, $this->blocks, true ) ) {
+					$this->blocks[] = $item->getFilename();
+				}
 			}
 		}
 
-		return $blocks;
+		return $this->blocks;
 	}
 
 	/**

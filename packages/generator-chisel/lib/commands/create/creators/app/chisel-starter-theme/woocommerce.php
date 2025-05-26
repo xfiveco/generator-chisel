@@ -16,11 +16,11 @@ if ( is_singular( 'product' ) ) {
 	$context['product'] = wc_get_product( $context['post']->ID );
 
 	// Get upsells ids.
-	$upsells_ids = $context['product']->get_upsell_ids();
+	$upsells_ids = apply_filters( 'chisel_woocommerce_upsell_display', true ) ? $context['product']->get_upsell_ids() : array();
 
 	// Get related / crossells products ids.
 	$related_limit = wc_get_loop_prop( 'columns' );
-	$related_ids   = wc_get_related_products( $context['post']->id, $related_limit, $upsells_ids );
+	$related_ids   = apply_filters( 'chisel_woocommerce_output_related_products', true ) ? wc_get_related_products( $context['post']->id, $related_limit, $upsells_ids ) : array();
 
 	$context['upsells_products'] = $upsells_ids ? Timber::get_posts( $upsells_ids ) : array();
 	$context['related_products'] = $related_ids ? Timber::get_posts( $related_ids ) : array();
