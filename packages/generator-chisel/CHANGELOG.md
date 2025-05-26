@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.1.1 (2025-05-26)</small>
+
+- add woo hooks, get_blocks fixes, js slider adjustments ([8c02af7](https://github.com/xfiveco/generator-chisel/commit/8c02af7))
+
 ## 2.1.0 (2025-05-16)
 
 - acf sync module as a plugin, add x5 plugins to installation script ([93b4f8a](https://github.com/xfiveco/generator-chisel/commit/93b4f8a))
