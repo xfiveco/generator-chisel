@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.1.2 (2025-09-30)</small>
+
+- minor fixes and adjustments, disable xmlrpc ([0bf6f64](https://github.com/xfiveco/generator-chisel/commit/0bf6f64))
+
 ## <small>2.1.1 (2025-05-26)</small>
 
 - add woo hooks, get_blocks fixes, js slider adjustments ([8c02af7](https://github.com/xfiveco/generator-chisel/commit/8c02af7))
