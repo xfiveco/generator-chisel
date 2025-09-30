@@ -209,11 +209,22 @@ class Blocks implements InstanceInterface, HooksInterface {
 			return $block_content;
 		}
 
-		$block_content = preg_replace( '/<([^>]+) class="([^"]+)">/', '<$1 class="$2 ' . $custom_classnames . '">', $block_content, 1 );
-		$block_content = preg_replace( '/class="([^"]*) (is-layout-flow|is-layout-constrained) ([^"]*)"/', 'class="$1 $3"', $block_content ); // It overwrites margin styles. Let's get rid of it.
+		$processor = new \WP_HTML_Tag_Processor( $block_content );
 
-		if ( $block['blockName'] === 'core/table' ) {
-			$block_content = preg_replace( '/<([^>]+) class="([^"]+)">/', '<$1 class="$2 u-table-responsive">', $block_content, 1 );
+		if ( $processor->next_tag() ) {
+			$classes_to_remove = array( 'is-layout-flow', 'is-layout-constrained' );
+
+			$processor->add_class( $custom_classnames );
+
+			foreach ( $classes_to_remove as $class ) {
+				$processor->remove_class( $class );
+			}
+
+			if ( $block['blockName'] === 'core/table' ) {
+				$processor->add_class( 'u-table-responsive' );
+			}
+
+			$block_content = $processor->get_updated_html();
 		}
 
 		return $block_content;

@@ -37,7 +37,7 @@ class Cache implements InstanceInterface, HooksInterface {
 	 *
 	 * @var int
 	 */
-	private $environment_cache = true;
+	private $environment_cache = false;
 
 	/**
 	 * Class constructor.

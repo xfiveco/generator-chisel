@@ -10,7 +10,7 @@ use Chisel\Helper\CacheHelpers;
  *
  * @package Chisel
  */
-class AjaxEnpoints {
+class AjaxEndpoints {
 
 	/**
 	 * Ajax call for load more feature.

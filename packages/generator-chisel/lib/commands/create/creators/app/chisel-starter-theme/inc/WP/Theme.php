@@ -72,6 +72,9 @@ class Theme implements InstanceInterface, HooksInterface {
 		add_filter( 'wp_revisions_to_keep', array( $this, 'wp_revisions_to_keep' ), 99, 2 );
 		add_filter( 'heartbeat_settings', array( $this, 'heartbeat_settings' ) );
 		add_filter( 'jpeg_quality', array( $this, 'jpeg_quality' ) );
+
+		// Disable legacy support for XML-RPC.
+		add_filter( 'xmlrpc_enabled', '__return_false' );
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace Chisel\Controllers;
 
-use Chisel\WP\AjaxEnpoints;
+use Chisel\WP\AjaxEndpoints;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
@@ -104,7 +104,7 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 	 */
 	public function callback( $request ) {
 		$callback       = $this->get_callback_name( $request );
-		$ajax_endpoints = new AjaxEnpoints();
+		$ajax_endpoints = new AjaxEndpoints();
 
 		if ( method_exists( $ajax_endpoints, $callback ) ) {
 			if ( ! defined( 'DOING_AJAX' ) ) {

@@ -10,7 +10,7 @@
             {{ slides_html }}
 
             <div class="b-slider__slide swiper-slide" {% if has_thumbnails_nav %}data-thumbnail-url="{{ get_image(slide.acf_bs_image).src('medium') }}"{% endif %}>
-              {{ get_responsive_image(slide.acf_bs_image, 'large', {fetchpriority: loop.first ? 'high' : 'auto'}) }}
+              {{ get_responsive_image(slide.acf_bs_image, (block.align == 'full' ? 'full' : 'large'), {fetchpriority: loop.first ? 'high' : 'auto'}) }}
             </div>
           {% endset %}
         {% endif %}

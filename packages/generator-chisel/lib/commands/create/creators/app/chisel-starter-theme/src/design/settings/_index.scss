@@ -1,5 +1,6 @@
 @use '../tools/theme' as *;
 
+$scrollbar-width: 15px;
 $root-font-size: 16px;
 $breakpoints: (
   small: 480px,
