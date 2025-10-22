@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.2.0 (2025-10-22)
+
+- composer update, min req php 8.2, refactor to modern php ([d55aae0](https://github.com/xfiveco/generator-chisel/commit/d55aae0))
+
 ## <small>2.1.2 (2025-09-30)</small>
 
 - minor fixes and adjustments, disable xmlrpc ([0bf6f64](https://github.com/xfiveco/generator-chisel/commit/0bf6f64))
