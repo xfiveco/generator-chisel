@@ -6,8 +6,8 @@
  */
 
 use Timber\Timber;
-use Chisel\Helper\CacheHelpers;
-use Chisel\Helper\WoocommerceHelpers;
+use Chisel\Helpers\CacheHelpers;
+use Chisel\Helpers\WoocommerceHelpers;
 
 $context = Timber::context();
 
@@ -52,7 +52,7 @@ if ( is_singular( 'product' ) ) {
 	$loop_columns = wc_get_loop_prop( 'columns' );
 	$loop_rows    = wc_get_default_product_rows_per_page();
 
-	$grid_classnames = WoocommerceHelpers::get_products_grid_classnames( $products, $has_sidebar );
+	$grid_classnames = WoocommerceHelpers::get_products_grid_classnames( true, $has_sidebar );
 
 	$context['show_products']      = $show_products;
 	$context['items']              = $items;

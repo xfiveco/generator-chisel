@@ -9,7 +9,7 @@
  * @package Chisel
  */
 
-use Chisel\Helper\CacheHelpers;
+use Chisel\Helpers\CacheHelpers;
 use Timber\Timber;
 
 $context   = Timber::context();

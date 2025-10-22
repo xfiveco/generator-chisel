@@ -12,5 +12,5 @@ interface InstanceInterface {
 	/**
 	 * Get the instance of the class.
 	 */
-	public static function get_instance();
+	public static function get_instance(): static;
 }

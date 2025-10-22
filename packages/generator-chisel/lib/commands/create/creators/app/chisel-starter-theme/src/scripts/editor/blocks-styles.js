@@ -11,8 +11,9 @@ class BlocksStyles {
   }
 
   unregisterBlockStyles() {
-    unregisterBlockStyle('core/button', 'fill');
-    unregisterBlockStyle('core/button', 'outline');
+    setTimeout(() => {
+      unregisterBlockStyle('core/button', ['fill', 'outline']);
+    }, 10);
   }
 
   registerBlockStyles() {

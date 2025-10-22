@@ -1,34 +1,34 @@
 <?php
 
-namespace Chisel\Factory;
+namespace Chisel\Factories;
 
 /**
  * Custom axonomies wrapper class.
  *
  * @package Chisel
  */
-class RegisterCustomTaxonomy {
+final class RegisterCustomTaxonomy {
 
 	/**
 	 * Taxonomy.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	private $taxonomy;
+	private string $taxonomy;
 
 	/**
 	 * Arguments.
 	 *
 	 * @var array
 	 */
-	private $args;
+	private array $args;
 
 	/**
 	 * Default arguments.
 	 *
 	 * @var array
 	 */
-	private $defaults;
+	private array $defaults;
 
 	/**
 	 * Class constructor.
@@ -37,7 +37,7 @@ class RegisterCustomTaxonomy {
 	 * @param array  $args Arguments.
 	 * @param array  $defaults Default arguments.
 	 */
-	public function __construct( $taxonomy, $args, $defaults = array() ) {
+	public function __construct( string $taxonomy, array $args, array $defaults = array() ) {
 		$this->taxonomy = $taxonomy;
 		$this->args     = $args;
 		$this->defaults = $defaults;
@@ -46,33 +46,37 @@ class RegisterCustomTaxonomy {
 	/**
 	 * Register custom taxonomy.
 	 */
-	public function register_taxonomy() {
+	public function register_taxonomy(): void {
 		$taxonomy      = $this->taxonomy;
 		$taxonomy_args = $this->args;
 		$defaults      = $this->defaults;
 
-		$default_capabilities = isset( $defaults['capabilities'] ) ? apply_filters( 'chisel_default_taxonomy_capabilities_' . $taxonomy, $defaults['capabilities'] ) : array();
-		$default_rewrite      = isset( $defaults['rewrite_args'] ) ? apply_filters( 'chisel_default_taxonomy_rewrite_args_' . $taxonomy, $defaults['rewrite_args'] ) : array();
+		$default_capabilities = isset( $defaults['capabilities'] )
+			? (array) apply_filters( 'chisel_default_taxonomy_capabilities_' . $taxonomy, $defaults['capabilities'] )
+			: array();
+		$default_rewrite      = isset( $defaults['rewrite_args'] )
+			? (array) apply_filters( 'chisel_default_taxonomy_rewrite_args_' . $taxonomy, $defaults['rewrite_args'] )
+			: array();
 
 		$labels = $this->get_taxonomy_labels();
 
 		$default_rewrite['slug'] = $taxonomy;
 
-		$description        = isset( $taxonomy_args['description'] ) ? $taxonomy_args['description'] : '';
-		$public             = isset( $taxonomy_args['public'] ) ? $taxonomy_args['public'] : true;
-		$publicly_queryable = isset( $taxonomy_args['publicly_queryable'] ) ? $taxonomy_args['publicly_queryable'] : $public;
-		$hierarchical       = isset( $taxonomy_args['hierarchical'] ) ? $taxonomy_args['hierarchical'] : false; // true for a taxonomy like categories.
-		$show_ui            = isset( $taxonomy_args['show_ui'] ) ? $taxonomy_args['show_ui'] : $public; // show in admin.
-		$show_in_menu       = isset( $taxonomy_args['show_in_menu'] ) ? $taxonomy_args['show_in_menu'] : $show_ui; // Show in admin menu (as a submenu of post type).
-		$show_in_nav_menus  = isset( $taxonomy_args['show_in_nav_menus'] ) ? $taxonomy_args['show_in_nav_menus'] : $public;
-		$show_in_rest       = isset( $taxonomy_args['show_in_rest'] ) ? $taxonomy_args['show_in_rest'] : true; // set to false to hide in block editor.
-		$show_tagcloud      = isset( $taxonomy_args['show_tagcloud'] ) ? $taxonomy_args['show_tagcloud'] : $show_ui;
-		$show_in_quick_edit = isset( $taxonomy_args['show_in_quick_edit'] ) ? $taxonomy_args['show_in_quick_edit'] : $show_ui;
-		$show_admin_column  = isset( $taxonomy_args['show_admin_column'] ) ? $taxonomy_args['show_admin_column'] : $public;
-		$capabilities       = isset( $taxonomy_args['capabilities'] ) ? wp_parse_args( $taxonomy_args['capabilities'], $default_capabilities ) : $default_capabilities;
-		$rewrite            = isset( $taxonomy_args['rewrite'] ) ? wp_parse_args( $taxonomy_args['rewrite'], $default_rewrite ) : $default_rewrite;
-		$query_var          = isset( $taxonomy_args['query_var'] ) ? $taxonomy_args['query_var'] : $taxonomy;
-		$rest_base          = isset( $taxonomy_args['rest_base'] ) ? $taxonomy_args['rest_base'] : $taxonomy;
+		$description        = $taxonomy_args['description'] ?? '';
+		$public             = (bool) ( $taxonomy_args['public'] ?? true );
+		$publicly_queryable = (bool) ( $taxonomy_args['publicly_queryable'] ?? $public );
+		$hierarchical       = (bool) ( $taxonomy_args['hierarchical'] ?? false ); // true for a taxonomy like categories.
+		$show_ui            = (bool) ( $taxonomy_args['show_ui'] ?? $public ); // show in admin.
+		$show_in_menu       = $taxonomy_args['show_in_menu'] ?? $show_ui; // Show in admin menu (as a submenu of post type) - bool|string (submenu parent).
+		$show_in_nav_menus  = (bool) ( $taxonomy_args['show_in_nav_menus'] ?? $public );
+		$show_in_rest       = (bool) ( $taxonomy_args['show_in_rest'] ?? true ); // set to false to hide in block editor.
+		$show_tagcloud      = (bool) ( $taxonomy_args['show_tagcloud'] ?? $show_ui );
+		$show_in_quick_edit = (bool) ( $taxonomy_args['show_in_quick_edit'] ?? $show_ui );
+		$show_admin_column  = (bool) ( $taxonomy_args['show_admin_column'] ?? $public );
+		$capabilities       = isset( $taxonomy_args['capabilities'] ) ? wp_parse_args( (array) $taxonomy_args['capabilities'], $default_capabilities ) : $default_capabilities;
+		$rewrite            = isset( $taxonomy_args['rewrite'] ) ? wp_parse_args( (array) $taxonomy_args['rewrite'], $default_rewrite ) : $default_rewrite;
+		$query_var          = $taxonomy_args['query_var'] ?? $taxonomy;
+		$rest_base          = $taxonomy_args['rest_base'] ?? $taxonomy;
 
 		$args = array(
 			'labels'             => $labels,
@@ -109,7 +113,7 @@ class RegisterCustomTaxonomy {
 			}
 		}
 
-		register_taxonomy( $taxonomy, $taxonomy_args['post_types'], $args );
+		register_taxonomy( $taxonomy, (array) $taxonomy_args['post_types'], $args );
 	}
 
 	/**
@@ -117,8 +121,16 @@ class RegisterCustomTaxonomy {
 	 *
 	 * @return array
 	 */
-	private function get_taxonomy_labels() {
+	private function get_taxonomy_labels(): array {
 		$taxonomy_args = $this->args;
+
+		if ( empty( $taxonomy_args['plural'] ) ) {
+			$taxonomy_args['plural'] = __( 'Items', 'chisel' );
+		}
+
+		if ( empty( $taxonomy_args['singular'] ) ) {
+			$taxonomy_args['singular'] = __( 'Item', 'chisel' );
+		}
 
 		$labels = array(
 			'name'                       => $taxonomy_args['plural'],

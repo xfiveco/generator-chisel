@@ -12,7 +12,7 @@ use Chisel\Traits\Singleton;
  *
  * @package Chisel
  */
-class AjaxController extends \WP_REST_Controller implements InstanceInterface, HooksInterface {
+final class AjaxController extends \WP_REST_Controller implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -21,21 +21,21 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 	 *
 	 * @var string
 	 */
-	const ROUTE_NAMESPACE = 'chisel/v2';
+	public const ROUTE_NAMESPACE = 'chisel/v2';
 
 	/**
 	 * Ajax custom route base.
 	 *
 	 * @var string
 	 */
-	const ROUTE_BASE = 'ajax';
+	public const ROUTE_BASE = 'ajax';
 
 	/**
 	 * Ajax custom routes.
 	 *
 	 * @var array
 	 */
-	private $routes = array();
+	private array $routes = array();
 
 	/**
 	 * Class constructor.
@@ -50,7 +50,7 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		$this->routes = array(
 			'load-more' => array(),
 		);
@@ -59,26 +59,26 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'rest_api_init', array( $this, 'register_endpoints' ) );
 	}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {}
+	public function filter_hooks(): void {}
 
 	/**
 	 * Register endpoints
 	 *
 	 * @return void
 	 */
-	public function register_endpoints() {
+	public function register_endpoints(): void {
 		$this->routes = apply_filters( 'chisel_ajax_routes', $this->routes );
 
 		if ( $this->routes ) {
 			foreach ( $this->routes as $route_name => $route_params ) {
-				$route   = sprintf( self::ROUTE_BASE . '/%s/', $route_name );
+				$route   = sprintf( '%s/%s/', self::ROUTE_BASE, $route_name );
 				$methods = isset( $route_params['methods'] ) ? $route_params['methods'] : array( 'POST' );
 
 				register_rest_route(
@@ -100,9 +100,9 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 	 *
 	 * @param \WP_REST_Request $request WP_REST_Request.
 	 *
-	 * @return callable
+	 * @return \WP_REST_Response|\WP_Error|array
 	 */
-	public function callback( $request ) {
+	public function callback( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error|array {
 		$callback       = $this->get_callback_name( $request );
 		$ajax_endpoints = new AjaxEndpoints();
 
@@ -115,8 +115,12 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 				define( 'DOING_CHISEL_AJAX', true );
 			}
 
-			return call_user_func( array( $ajax_endpoints, $callback ), $request );
+			$callable = array( $ajax_endpoints, $callback );
+
+			return $callable( $request );
 		}
+
+		return new \WP_Error( 'chisel_ajax_callback_missing', sprintf( 'Callback %s not found', $callback ), array( 'status' => 404 ) );
 	}
 
 	/**
@@ -126,10 +130,11 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 	 *
 	 * @return boolean
 	 */
-	public function permissions_check( $request ) {
+	public function permissions_check( \WP_REST_Request $request ): bool|\WP_Error {
 		$verify_nonce = wp_verify_nonce( $request->get_header( 'x_wp_nonce' ), 'wp_rest' );
+		$allowed      = (bool) $verify_nonce;
 
-		$permission = apply_filters( 'chisel_ajax_permissions_check', (bool) $verify_nonce, $this->get_callback_name( $request ), $request );
+		$permission = apply_filters( 'chisel_ajax_permissions_check', $allowed, $this->get_callback_name( $request ), $request );
 
 		return $permission;
 	}
@@ -141,7 +146,7 @@ class AjaxController extends \WP_REST_Controller implements InstanceInterface, H
 	 *
 	 * @return string
 	 */
-	private function get_callback_name( $request ) {
+	private function get_callback_name( \WP_REST_Request $request ): string {
 		$route       = $request->get_route();
 		$route_parts = explode( '/', $route );
 		$callback    = str_replace( '-', '_', end( $route_parts ) );

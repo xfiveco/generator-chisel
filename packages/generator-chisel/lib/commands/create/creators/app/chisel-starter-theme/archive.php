@@ -5,7 +5,7 @@
  * @package Chisel
  */
 
-use Chisel\Helper\CacheHelpers;
+use Chisel\Helpers\CacheHelpers;
 use Timber\Timber;
 
 $templates = array( 'archive.twig', 'index.twig' );

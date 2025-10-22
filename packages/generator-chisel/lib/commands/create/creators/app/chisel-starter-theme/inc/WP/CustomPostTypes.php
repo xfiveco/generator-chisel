@@ -5,14 +5,14 @@ namespace Chisel\WP;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Factory\RegisterCustomPostType;
+use Chisel\Factories\RegisterCustomPostType;
 
 /**
  * Custom post types and taxonomies wrapper class.
  *
  * @package Chisel
  */
-class CustomPostTypes implements InstanceInterface, HooksInterface {
+final class CustomPostTypes implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -21,21 +21,21 @@ class CustomPostTypes implements InstanceInterface, HooksInterface {
 	 *
 	 * @var array
 	 */
-	private $post_types = array();
+	private array $post_types = array();
 
 	/**
 	 * Default post type supports.
 	 *
 	 * @var array
 	 */
-	private $default_post_type_supports = array();
+	private array $default_post_type_supports = array();
 
 	/**
 	 * Default post type rewrite args.
 	 *
 	 * @var array
 	 */
-	private $default_post_type_rewrite_args = array();
+	private array $default_post_type_rewrite_args = array();
 
 	/**
 	 * Class constructor.
@@ -50,9 +50,9 @@ class CustomPostTypes implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
-		$this->default_post_type_supports     = apply_filters( 'chisel_default_post_type_supports', array( 'title', 'page-attributes', 'revisions', 'author' ) );
-		$this->default_post_type_rewrite_args = apply_filters(
+	public function set_properties(): void {
+		$this->default_post_type_supports     = (array) apply_filters( 'chisel_default_post_type_supports', array( 'title', 'page-attributes', 'revisions', 'author' ) );
+		$this->default_post_type_rewrite_args = (array) apply_filters(
 			'chisel_default_post_type_rewrite_args',
 			array(
 				'slug'       => '',
@@ -69,20 +69,19 @@ class CustomPostTypes implements InstanceInterface, HooksInterface {
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'init', array( $this, 'register_post_types' ) );
 	}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
-	}
+	public function filter_hooks(): void {}
 
 	/**
 	 * Register custom post types.
 	 */
-	public function register_post_types() {
+	public function register_post_types(): void {
 		$this->post_types = apply_filters( 'chisel_custom_post_types', $this->post_types );
 
 		if ( empty( $this->post_types ) ) {
@@ -103,7 +102,7 @@ class CustomPostTypes implements InstanceInterface, HooksInterface {
 	/**
 	 * Set custom post types.
 	 */
-	private function set_post_types() {
+	private function set_post_types(): void {
 		$this->post_types = array(
 			// phpcs:disable
 			// 'chisel-cpt' => array(

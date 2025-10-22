@@ -20,7 +20,7 @@ class Sidebars implements InstanceInterface, HooksInterface {
 	 *
 	 * @var array
 	 */
-	private $sidebars = array();
+	private array $sidebars = array();
 
 	/**
 	 * Class constructor.
@@ -35,7 +35,7 @@ class Sidebars implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		$this->sidebars = array(
 			'blog'      => array(
 				'name'        => __( 'Blog', 'chisel' ),
@@ -67,23 +67,23 @@ class Sidebars implements InstanceInterface, HooksInterface {
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 	}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 	}
 
 	/**
 	 * Register sidebars.
 	 */
-	public function register_sidebars() {
+	public function register_sidebars(): void {
 		$this->sidebars = apply_filters( 'chisel_sidebars', $this->sidebars );
 
-		if ( ! $this->sidebars ) {
+		if ( empty( $this->sidebars ) ) {
 			return;
 		}
 

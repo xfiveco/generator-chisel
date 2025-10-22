@@ -1,26 +1,28 @@
 <?php
 
-namespace Chisel\Helper;
+namespace Chisel\Helpers;
 
 /**
  * Helper functions.
  *
  * @package Chisel
  */
-class CommentsHelpers {
+final class CommentsHelpers {
 
 	/**
 	 * Display comments template - the comments and the form.
 	 *
-	 * @return void
+	 * @return string
 	 */
-	public static function comments_template() {
+	public static function comments_template(): string {
 		if ( ! post_type_supports( get_post_type(), 'comments' ) ) {
-			return;
+			return '';
 		}
 
 		if ( comments_open() ) {
-			return apply_filters( 'the_content', '<!-- wp:pattern {"slug":"chisel/comments"} /-->' );
+			return do_blocks( '<!-- wp:pattern {"slug":"chisel/comments"} /-->' );
 		}
+
+		return '';
 	}
 }

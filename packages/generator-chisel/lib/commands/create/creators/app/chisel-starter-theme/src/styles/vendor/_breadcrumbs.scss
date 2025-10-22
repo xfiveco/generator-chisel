@@ -3,14 +3,17 @@
 
 .c-breadcrumbs {
   position: relative;
-  max-width: get-layout-size('full');
-  margin-inline: auto;
+  margin: get-margin('small') 0;
   font-size: get-font-size('small');
 
   span {
     span {
       display: inline-block;
-      margin-inline: px-rem(8);
+      margin-inline: get-margin('tiny');
+
+      &:first-child {
+        margin-inline-start: 0;
+      }
     }
   }
 }

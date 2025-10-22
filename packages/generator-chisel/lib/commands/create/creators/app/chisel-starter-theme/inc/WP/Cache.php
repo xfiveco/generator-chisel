@@ -7,14 +7,14 @@ use Timber\Loader;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Helper\ThemeHelpers;
+use Chisel\Helpers\ThemeHelpers;
 
 /**
  * Cache related functionalities.
  *
  * @package Chisel
  */
-class Cache implements InstanceInterface, HooksInterface {
+final class Cache implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -23,21 +23,21 @@ class Cache implements InstanceInterface, HooksInterface {
 	 *
 	 * @var int
 	 */
-	public $cache_expiry = HOUR_IN_SECONDS;
+	public int $cache_expiry = HOUR_IN_SECONDS;
 
 	/**
 	 * Cache everything mode. The whole template you render and its data will be cached.
 	 *
 	 * @var int
 	 */
-	public $cache_everything = false;
+	public bool $cache_everything = false;
 
 	/**
 	 * Environment cache.
 	 *
 	 * @var int
 	 */
-	private $environment_cache = false;
+	private bool $environment_cache = false;
 
 	/**
 	 * Class constructor.
@@ -52,7 +52,7 @@ class Cache implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		$this->cache_expiry      = apply_filters( 'chisel_cache_expiry', $this->cache_expiry );
 		$this->cache_everything  = apply_filters( 'chisel_cache_everything', $this->cache_everything );
 		$this->environment_cache = apply_filters( 'chisel_environment_cache', $this->environment_cache );
@@ -61,13 +61,12 @@ class Cache implements InstanceInterface, HooksInterface {
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
-	}
+	public function action_hooks(): void {}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'timber/cache/mode', array( $this, 'cache_mode' ) );
 		add_filter( 'timber/twig/environment/options', array( $this, 'environment_cache' ) );
 	}
@@ -79,7 +78,7 @@ class Cache implements InstanceInterface, HooksInterface {
 	 *
 	 * @return string
 	 */
-	public function cache_mode( $cache_mode ) {
+	public function cache_mode( string $cache_mode ): string {
 		// Available cache modes: 'CACHE_NONE', 'CACHE_OBJECT' (WP Object Cache), 'CACHE_TRANSIENT', 'CACHE_SITE_TRANSIENT', 'CACHE_USE_DEFAULT'.
 		$cache_mode = Loader::CACHE_USE_DEFAULT;
 
@@ -93,7 +92,7 @@ class Cache implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function environment_cache( $options ) {
+	public function environment_cache( array $options ): array {
 		$options['cache']       = $this->environment_cache;
 		$options['auto_reload'] = ThemeHelpers::is_dev_env();
 		$options['debug']       = ThemeHelpers::is_dev_env();

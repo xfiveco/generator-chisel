@@ -6,9 +6,9 @@ trait PageBlocks {
 	/**
 	 * Content blocks from current page
 	 *
-	 * @var array|null
+	 * @var ?array
 	 */
-	private static $content_blocks_names = null;
+	private static ?array $content_blocks_names = null;
 
 	/**
 	 * Get the instance of the class.
@@ -17,8 +17,8 @@ trait PageBlocks {
 	 *
 	 * @return array
 	 */
-	public function get_content_blocks_names( $prefix = 'chisel' ) {
-		if ( self::$content_blocks_names ) {
+	public function get_content_blocks_names( string $prefix = 'chisel' ): array {
+		if ( self::$content_blocks_names !== null ) {
 			return self::$content_blocks_names;
 		}
 
@@ -26,24 +26,24 @@ trait PageBlocks {
 
 		$content_blocks_names = array();
 
-		if ( is_a( $post, 'WP_Post' ) && $post->post_content && has_blocks( $post->post_content ) ) {
+		if ( $post instanceof \WP_Post && ! empty( $post->post_content ) && has_blocks( $post->post_content ) ) {
 			$blocks = parse_blocks( $post->post_content );
 
-			if ( $blocks ) {
+			if ( is_array( $blocks ) && ! empty( $blocks ) ) {
 				$blocks_names = $this->get_blocks_names( $blocks );
 
-				if ( $blocks_names ) {
+				if ( ! empty( $blocks_names ) ) {
 					$blocks_names = array_filter(
 						$blocks_names,
-						function ( $block_name ) use ( $prefix ) {
-							return strpos( $block_name, $prefix ) !== false;
+						function ( string $block_name ) use ( $prefix ): bool {
+							return (bool) strpos( $block_name, $prefix ) !== false;
 						}
 					);
 
-					if ( $blocks_names ) {
+					if ( ! empty( $blocks_names ) ) {
 						$blocks_names         = array_values( array_unique( $blocks_names ) );
 						$blocks_names         = array_map(
-							function ( $block_name ) use ( $prefix ) {
+							function ( string $block_name ) use ( $prefix ): string {
 								return str_replace( $prefix . '/', '', $block_name );
 							},
 							$blocks_names
@@ -66,7 +66,7 @@ trait PageBlocks {
 	 *
 	 * @return array
 	 */
-	private function get_blocks_names( $inner_blocks ) {
+	private function get_blocks_names( array $inner_blocks ): array {
 		$blocks_names = array();
 
 		foreach ( $inner_blocks as $block ) {
@@ -78,10 +78,10 @@ trait PageBlocks {
 
 			$blocks_names[] = $block_name;
 
-			if ( isset( $block['innerBlocks'] ) && $block['innerBlocks'] ) {
+			if ( isset( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) ) {
 				$inner_blocks_names = $this->get_blocks_names( $block['innerBlocks'] );
 
-				if ( $inner_blocks_names ) {
+				if ( ! empty( $inner_blocks_names ) ) {
 					$blocks_names = array_merge( $blocks_names, $inner_blocks_names );
 				}
 			}

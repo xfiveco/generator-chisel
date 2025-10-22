@@ -1,34 +1,34 @@
 <?php
 
-namespace Chisel\Factory;
+namespace Chisel\Factories;
 
 /**
  * Custom post types wrapper class.
  *
  * @package Chisel
  */
-class RegisterCustomPostType {
+final class RegisterCustomPostType {
 
 	/**
 	 * Post type.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	private $post_type;
+	private string $post_type;
 
 	/**
 	 * Arguments.
 	 *
 	 * @var array
 	 */
-	private $args;
+	private array $args;
 
 	/**
 	 * Default arguments.
 	 *
 	 * @var array
 	 */
-	private $defaults;
+	private array $defaults;
 
 	/**
 	 * Class constructor.
@@ -37,7 +37,7 @@ class RegisterCustomPostType {
 	 * @param array  $args Arguments.
 	 * @param array  $defaults Default arguments.
 	 */
-	public function __construct( $post_type, $args, $defaults = array() ) {
+	public function __construct( string $post_type, array $args, array $defaults = array() ) {
 		$this->post_type = $post_type;
 		$this->args      = $args;
 		$this->defaults  = $defaults;
@@ -46,42 +46,46 @@ class RegisterCustomPostType {
 	/**
 	 * Register custom post type.
 	 */
-	public function register_post_type() {
+	public function register_post_type(): void {
 		$post_type      = $this->post_type;
 		$post_type_args = $this->args;
 		$defaults       = $this->defaults;
 
-		$default_supports = isset( $defaults['supports'] ) ? apply_filters( 'chisel_default_post_type_supports_' . $post_type, $defaults['supports'] ) : array();
-		$default_rewrite  = isset( $defaults['rewrite_args'] ) ? apply_filters( 'chisel_default_post_type_rewrite_args_' . $post_type, $defaults['rewrite_args'] ) : array();
+		$default_supports = isset( $defaults['supports'] )
+			? (array) apply_filters( 'chisel_default_post_type_supports_' . $post_type, $defaults['supports'] )
+			: array();
+		$default_rewrite  = isset( $defaults['rewrite_args'] )
+			? (array) apply_filters( 'chisel_default_post_type_rewrite_args_' . $post_type, $defaults['rewrite_args'] )
+			: array();
 
 		$labels = $this->get_post_type_labels();
 
 		$default_rewrite['slug'] = $post_type;
 
-		$description         = isset( $post_type_args['description'] ) ? $post_type_args['description'] : '';
-		$public              = isset( $post_type_args['public'] ) ? $post_type_args['public'] : true;
-		$hierarchical        = isset( $post_type_args['hierarchical'] ) ? $post_type_args['hierarchical'] : false; // true for pages like post type.
-		$exclude_from_search = isset( $post_type_args['exclude_from_search'] ) ? $post_type_args['exclude_from_search'] : ! $public;
-		$publicly_queryable  = isset( $post_type_args['publicly_queryable'] ) ? $post_type_args['publicly_queryable'] : $public;
-		$show_ui             = isset( $post_type_args['show_ui'] ) ? $post_type_args['show_ui'] : $public;  // show in admin.
-		$show_in_menu        = isset( $post_type_args['show_in_menu'] ) ? $post_type_args['show_in_menu'] : $public; // if or where to show in admin menu - show_ui must be true. If a string of an existing top level menu ('tools.php' or 'edit.php?post_type=page', for example), the post type will be placed as a sub-menu of that.
-		$show_in_nav_menus   = isset( $post_type_args['show_in_nav_menus'] ) ? $post_type_args['show_in_nav_menus'] : $public;
-		$show_in_admin_bar   = isset( $post_type_args['show_in_admin_bar'] ) ? $post_type_args['show_in_admin_bar'] : $show_in_menu;
-		$show_in_rest        = isset( $post_type_args['show_in_rest'] ) ? $post_type_args['show_in_rest'] : true; // set to false to disable block editor. Supports array must also include 'editor'.
-		$menu_position       = isset( $post_type_args['menu_position'] ) ? $post_type_args['menu_position'] : null;
-		$menu_icon           = isset( $post_type_args['menu_icon'] ) ? $post_type_args['menu_icon'] : 'dashicons-admin-post';
-		$capability_type     = isset( $post_type_args['capability_type'] ) ? $post_type_args['capability_type'] : 'post';
-		$capabilities        = isset( $post_type_args['capabilities'] ) ? $post_type_args['capabilities'] : array();
-		$supports            = isset( $post_type_args['supports'] ) ? wp_parse_args( $post_type_args['supports'], $default_supports ) : $default_supports;
-		$has_archive         = isset( $post_type_args['has_archive'] ) ? $post_type_args['has_archive'] : true;
-		$rewrite             = isset( $post_type_args['rewrite'] ) ? wp_parse_args( $post_type_args['rewrite'], $default_rewrite ) : $default_rewrite;
-		$query_var           = isset( $post_type_args['query_var'] ) ? $post_type_args['query_var'] : $post_type;
-		$can_export          = isset( $post_type_args['can_export'] ) ? $post_type_args['can_export'] : true;
+		$description         = $post_type_args['description'] ?? '';
+		$public              = (bool) ( $post_type_args['public'] ?? true );
+		$hierarchical        = (bool) ( $post_type_args['hierarchical'] ?? false ); // true for pages like post type.
+		$exclude_from_search = (bool) ( $post_type_args['exclude_from_search'] ?? ! $public );
+		$publicly_queryable  = (bool) ( $post_type_args['publicly_queryable'] ?? $public );
+		$show_ui             = (bool) ( $post_type_args['show_ui'] ?? $public );  // show in admin.
+		$show_in_menu        = $post_type_args['show_in_menu'] ?? $public; // bool|string. If or where to show in admin menu - show_ui must be true. If a string of an existing top level menu ('tools.php' or 'edit.php?post_type=page', for example), the post type will be placed as a sub-menu of that.
+		$show_in_nav_menus   = (bool) ( $post_type_args['show_in_nav_menus'] ?? $public );
+		$show_in_admin_bar   = (bool) ( $post_type_args['show_in_admin_bar'] ?? $show_in_menu );
+		$show_in_rest        = (bool) ( $post_type_args['show_in_rest'] ?? true ); // set to false to disable block editor. Supports array must also include 'editor'.
+		$menu_position       = $post_type_args['menu_position'] ?? null; // int|null are valid.
+		$menu_icon           = (string) ( $post_type_args['menu_icon'] ?? 'dashicons-admin-post' );
+		$capability_type     = $post_type_args['capability_type'] ?? 'post';
+		$capabilities        = (array) ( $post_type_args['capabilities'] ?? array() );
+		$supports            = isset( $post_type_args['supports'] ) ? wp_parse_args( (array) $post_type_args['supports'], $default_supports ) : $default_supports;
+		$has_archive         = (bool) ( $post_type_args['has_archive'] ?? true );
+		$rewrite             = isset( $post_type_args['rewrite'] ) ? wp_parse_args( (array) $post_type_args['rewrite'], $default_rewrite ) : $default_rewrite;
+		$query_var           = $post_type_args['query_var'] ?? $post_type;
+		$can_export          = (bool) ( $post_type_args['can_export'] ?? true );
 
 		if ( in_array( 'thumbnail', $supports, true ) ) {
 			add_filter(
 				'chisel_post_thumbnails_post_types',
-				function ( $pts ) use ( $post_type ) {
+				function ( array $pts ) use ( $post_type ): array {
 					$pts[] = $post_type;
 					return $pts;
 				}
@@ -140,8 +144,16 @@ class RegisterCustomPostType {
 	 *
 	 * @return array
 	 */
-	private function get_post_type_labels() {
+	private function get_post_type_labels(): array {
 		$post_type_args = $this->args;
+
+		if ( empty( $post_type_args['plural'] ) ) {
+			$post_type_args['plural'] = __( 'Items', 'chisel' );
+		}
+
+		if ( empty( $post_type_args['singular'] ) ) {
+			$post_type_args['singular'] = __( 'Item', 'chisel' );
+		}
 
 		$labels = array(
 			'name'                     => $post_type_args['plural'],
@@ -204,7 +216,7 @@ class RegisterCustomPostType {
 			'item_link_description'    => sprintf( __( 'A link to a %s', 'chisel' ), $post_type_args['singular'] ),
 		);
 
-		$custom_labels = isset( $post_type_args['labels'] ) ? $post_type_args['labels'] : array();
+		$custom_labels = isset( $post_type_args['labels'] ) && is_array( $post_type_args['labels'] ) ? $post_type_args['labels'] : array();
 
 		return wp_parse_args( $custom_labels, $labels );
 	}

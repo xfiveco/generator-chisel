@@ -1,18 +1,18 @@
 <?php
 
-namespace Chisel\Plugin;
+namespace Chisel\Plugins;
 
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Helper\YoastHelpers;
+use Chisel\Helpers\YoastHelpers;
 
 /**
  * Yoast SEO plugin related functionalities.
  *
  * @package Chisel
  */
-class Yoast implements InstanceInterface, HooksInterface {
+final class Yoast implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -32,15 +32,15 @@ class Yoast implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {}
+	public function set_properties(): void {}
 
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {}
+	public function action_hooks(): void {}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {}
+	public function filter_hooks(): void {}
 }

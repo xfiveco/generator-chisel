@@ -6,16 +6,17 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     },
     "platform": {
-      "php": "7.4"
+      "php": "8.2"
     }
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.9",
-    "wp-coding-standards/wpcs": "^3.1",
-    "friendsoftwig/twigcs": "^6.1",
-    "vincentlanglet/twig-cs-fixer": "^0.6.1"
+    "squizlabs/php_codesniffer": "^3.13",
+    "wp-coding-standards/wpcs": "^3.2",
+    "friendsoftwig/twigcs": "^6.5",
+    "vincentlanglet/twig-cs-fixer": "^3.10"
   },
   "require": {
-    "timber/timber": "^2.1"
+    "php": "^8.2",
+    "timber/timber": "^2.3"
   }
 }

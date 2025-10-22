@@ -1,113 +1,115 @@
 <?php
 
-namespace Chisel\Factory;
+namespace Chisel\Factories;
 
 use Chisel\WP\Assets;
-use Chisel\Helper\ThemeHelpers;
+use Chisel\Helpers\ThemeHelpers;
+use Chisel\Enums\BlocksType;
 
 /**
  * Class to register custom blocks.
  *
  * @package Chisel
  */
-class RegisterBlocks {
+final class RegisterBlocks {
 
 	/**
 	 * Blocks type.
 	 *
-	 * @var string
+	 * @var BlocksType|string
 	 */
-	private $blocks_type;
+	private BlocksType|string $blocks_type;
 
 	/**
 	 * Blocks path.
 	 *
 	 * @var string
 	 */
-	private $blocks_folder;
+	private string $blocks_folder;
 
 	/**
 	 * Blocks src path.
 	 *
 	 * @var string
 	 */
-	private $blocks_path_src;
+	private string $blocks_path_src;
 
 	/**
 	 * Blocks path.
 	 *
 	 * @var string
 	 */
-	private $blocks_path;
+	private string $blocks_path;
 
 	/**
 	 * Blocks url.
 	 *
 	 * @var string
 	 */
-	private $blocks_url;
+	private string $blocks_url;
 
 	/**
 	 * Blocks.
 	 *
 	 * @var array
 	 */
-	private $blocks = array();
+	private array $blocks = array();
 
 	/**
 	 * Theme.
 	 *
-	 * @var mixed
+	 * @var \WP_Theme
 	 */
-	private $theme = null;
+	private ?\WP_Theme $theme = null;
 
 	/**
 	 * Build folder.
 	 *
 	 * @var string
 	 */
-	private $build_folder = 'build';
+	private string $build_folder = 'build';
 
 	/**
 	 * Src folder.
 	 *
 	 * @var string
 	 */
-	private $src_folder = 'src';
+	private string $src_folder = 'src';
 
 	/**
 	 * Register scripts. By default block styles are inlined and js is registered by wp. Setting this to true will use custom hndles to register and enqueue scripts and styles and styles will not be inlined.
 	 *
 	 * @var bool
 	 */
-	private $register_scripts;
+	private bool $register_scripts;
 
 	/**
 	 * Class constructor.
 	 *
-	 * @param string $blocks_type The blocks type : acf or wp.
+	 * @param BlocksType|string $blocks_type The blocks type : acf or wp.
 	 */
-	public function __construct( $blocks_type ) {
-		$this->blocks_type     = $blocks_type;
+	public function __construct( BlocksType|string $blocks_type ) {
+		$blocks_type           = $blocks_type instanceof BlocksType ? $blocks_type : BlocksType::from( $blocks_type );
+		$this->blocks_type     = $blocks_type->value;
 		$this->theme           = wp_get_theme();
-		$this->blocks_folder   = $this->blocks_type === 'acf' ? 'blocks-acf' : 'blocks';
+		$this->blocks_folder   = $blocks_type->folder_name();
 		$this->blocks_path     = get_template_directory() . '/' . $this->build_folder . '/' . $this->blocks_folder;
 		$this->blocks_path_src = get_template_directory() . '/' . $this->src_folder . '/' . $this->blocks_folder;
 		$this->blocks_url      = get_template_directory_uri() . '/' . $this->build_folder . '/' . $this->blocks_folder;
 		$this->blocks          = $this->get_blocks();
 
-		$this->register_scripts = apply_filters( 'chisel_blocks_register_scripts', true, $this->blocks_type );
+		$this->register_scripts = (bool) apply_filters( 'chisel_blocks_register_scripts', true, $this->blocks_type );
 	}
 
 	/**
 	 * Register custom blocks and their assets.
 	 */
-	public function register_custom_blocks() {
+	public function register_custom_blocks(): void {
 		if ( ! function_exists( 'register_block_type' ) ) {
 			return;
 		}
 
-		if ( ! is_array( $this->blocks ) || ! $this->blocks ) {
+		if ( ! is_array( $this->blocks ) || empty( $this->blocks ) ) {
 			return;
 		}
 
@@ -133,7 +135,13 @@ class RegisterBlocks {
 				$block_url = $this->blocks_url . '/' . $block . '/';
 
 				// Read json file to array.
-				$block_metadata = wp_json_file_decode( $block_json, array( 'associative' => true ) );
+				$decoded = wp_json_file_decode( $block_json, array( 'associative' => true ) );
+				if ( ! is_array( $decoded ) ) {
+					// Skip malformed block.json.
+					continue;
+				}
+
+				$block_metadata = $decoded;
 
 				foreach ( $block_scripts as $script ) {
 					if ( ! isset( $block_metadata[$script] ) ) {
@@ -194,14 +202,17 @@ class RegisterBlocks {
 			}
 
 			if ( $this->register_scripts ) {
+				// Server-side registration with customized asset handles.
 				register_block_type( $block_path, $block_metadata );
 			} else {
+				// Let WP infer assets from block.json.
 				register_block_type( $block_json );
 			}
 
 			// In case we need to do some custom logic. All variables from this method are available in the init file.
-			if ( file_exists( $block_path_src . 'init.php' ) ) {
-				include_once $block_path_src . 'init.php';
+			$init_php = $block_path_src . 'init.php';
+			if ( is_file( $init_php ) ) {
+				include_once $init_php;
 			}
 		}
 	}
@@ -211,7 +222,7 @@ class RegisterBlocks {
 	 *
 	 * @return array
 	 */
-	public function get_blocks() {
+	public function get_blocks(): array {
 		if ( $this->blocks ) {
 			return $this->blocks;
 		}
@@ -240,7 +251,7 @@ class RegisterBlocks {
 	 *
 	 * @return string
 	 */
-	public function get_blocks_url() {
+	public function get_blocks_url(): string {
 		return $this->blocks_url;
 	}
 
@@ -249,7 +260,7 @@ class RegisterBlocks {
 	 *
 	 * @return string
 	 */
-	public function get_blocks_path() {
+	public function get_blocks_path(): string {
 		return $this->blocks_path;
 	}
 
@@ -258,7 +269,7 @@ class RegisterBlocks {
 	 *
 	 * @return string
 	 */
-	public function get_blocks_path_src() {
+	public function get_blocks_path_src(): string {
 		return $this->blocks_path_src;
 	}
 
@@ -270,7 +281,7 @@ class RegisterBlocks {
 	 *
 	 * @return array
 	 */
-	private function get_block_script_asset( $block, $file_name ) {
+	private function get_block_script_asset( string $block, string $file_name ): array {
 		$block_path        = $this->blocks_path . '/' . $block . '/';
 		$assets_file_name  = preg_replace( '/\.[^.]+$/', '', $file_name ) . '.asset.php';
 		$script_asset_path = $block_path . $assets_file_name;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chisel\Helper;
+namespace Chisel\Helpers;
 
 use Timber\Timber;
 
@@ -9,14 +9,17 @@ use Timber\Timber;
  *
  * @package Chisel
  */
-class ImageHelpers {
+final class ImageHelpers {
 
 	/**
 	 * Responsive image data.
 	 *
 	 * @var array
 	 */
-	private static $responsive_image_data = array();
+	private static $responsive_image_data = array(
+		'image_id' => 0,
+		'attrs'    => array(),
+	);
 
 	/**
 	 * Get image url of the theme images.
@@ -26,12 +29,16 @@ class ImageHelpers {
 	 *
 	 * @return string
 	 */
-	public static function get_image_url( $image_name, $is_icon = false ) {
+	public static function get_image_url( string $image_name, bool $is_icon = false ): string {
+		if ( $image_name === '' ) {
+			return '';
+		}
+
 		$folder_name = $is_icon ? 'icons' : 'images';
 		$image_path  = '/assets/' . $folder_name . '/' . $image_name;
 		$file_path   = get_template_directory() . $image_path;
 
-		if ( ! file_exists( $file_path ) ) {
+		if ( ! is_file( $file_path ) ) {
 			return '';
 		}
 
@@ -47,19 +54,17 @@ class ImageHelpers {
 	 *
 	 * @return string|html
 	 */
-	public static function get_responsive_image( $image_id, $image_size = 'medium', $attrs = array() ) {
-		if ( ! $image_id ) {
+	public static function get_responsive_image( int $image_id, string $image_size = 'medium', array $attrs = array() ): string {
+		if ( $image_id <= 0 ) {
 			return '';
 		}
-
-		$image = Timber::get_image( $image_id );
 
 		self::$responsive_image_data = array(
 			'image_id' => $image_id,
 			'attrs'    => $attrs,
 		);
 
-		// Adjust image width and height to prevent layout shifts.
+		// Adjust image width and height to preven content layout shifts (CLS).
 		if ( isset( $attrs['width'] ) && isset( $attrs['height'] ) ) {
 			add_filter(
 				'wp_get_attachment_image_src',
@@ -69,7 +74,8 @@ class ImageHelpers {
 			);
 		}
 
-		$responsive_image = $image ? $image->responsive( $image_size, $attrs ) : '';
+		$image = Timber::get_image( $image_id );
+		$html  = $image ? (string) $image->responsive( $image_size, $attrs ) : '';
 
 		remove_filter(
 			'wp_get_attachment_image_src',
@@ -77,7 +83,7 @@ class ImageHelpers {
 			10
 		);
 
-		return $responsive_image;
+		return $html;
 	}
 
 	/**
@@ -88,13 +94,22 @@ class ImageHelpers {
 	 *
 	 * @return array
 	 */
-	public static function responsive_image_dimensions( $src, $id ) {
+	public static function responsive_image_dimensions( array $src, int $id ) {
+		if ( empty( $src ) ) {
+			return $src;
+		}
+
 		$image_id = self::$responsive_image_data['image_id'] ?? 0;
 		$attrs    = self::$responsive_image_data['attrs'] ?? array();
 
 		if ( $id === $image_id && isset( $attrs['width'] ) && isset( $attrs['height'] ) ) {
-				$src[1] = $attrs['width'];
-				$src[2] = $attrs['height'];
+			$width  = (int) $attrs['width'];
+			$height = (int) $attrs['height'];
+
+			if ( $width > 0 && $height > 0 ) {
+				$src[1] = $width;
+				$src[2] = $height;
+			}
 		}
 
 		return $src;

@@ -7,9 +7,9 @@ use Timber\Timber;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Factory\RegisterBlocks;
-use Chisel\Helper\BlocksHelpers;
-use Chisel\Helper\ThemeHelpers;
+use Chisel\Factories\RegisterBlocks;
+use Chisel\Helpers\BlocksHelpers;
+use Chisel\Helpers\ThemeHelpers;
 use Chisel\Traits\PageBlocks;
 
 /**
@@ -17,7 +17,7 @@ use Chisel\Traits\PageBlocks;
  *
  * @package Chisel
  */
-class Blocks implements InstanceInterface, HooksInterface {
+final class Blocks implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 	use PageBlocks;
@@ -27,21 +27,21 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @var RegisterBlocks
 	 */
-	private $register_blocks_factory;
+	private RegisterBlocks $register_blocks_factory;
 
 	/**
 	 * Blocks.
 	 *
 	 * @var array
 	 */
-	private $blocks = array();
+	private array $blocks = array();
 
 	/**
 	 * Chisel blocks category.
 	 *
 	 * @var string
 	 */
-	private $blocks_category;
+	private string $blocks_category = '';
 
 
 	/**
@@ -49,14 +49,14 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @var array
 	 */
-	private $block_patterns_categories = array();
+	private array $block_patterns_categories = array();
 
 	/**
 	 * Blocks twig file base path.
 	 *
 	 * @var string
 	 */
-	private $blocks_twig_base_path = 'build/blocks/';
+	private string $blocks_twig_base_path = 'build/blocks/';
 
 	/**
 	 * Class constructor.
@@ -74,7 +74,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		$this->blocks_category           = 'chisel-blocks';
 		$this->block_patterns_categories = array(
 			'cta' => array(
@@ -87,7 +87,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		add_action( 'after_setup_theme', array( $this, 'blocks_theme_supports' ) );
 		add_action( 'init', array( $this, 'register_block_patterns_categories' ) );
@@ -97,7 +97,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'block_categories_all', array( $this, 'block_categories' ) );
 		add_filter( 'timber/locations', array( $this, 'tiwg_files_locations' ) );
 		add_filter( 'render_block', array( $this, 'render_block' ), 10, 3 );
@@ -110,14 +110,14 @@ class Blocks implements InstanceInterface, HooksInterface {
 	/**
 	 * Register blocks and their assets.
 	 */
-	public function register_blocks() {
+	public function register_blocks(): void {
 		$this->register_blocks_factory->register_custom_blocks();
 	}
 
 	/**
 	 * Set up theme supports for blocks.
 	 */
-	public function blocks_theme_supports() {
+	public function blocks_theme_supports(): void {
 		add_theme_support( 'wp-block-styles' ); // extra core blocks styles.
 
 		remove_theme_support( 'core-block-patterns' ); // remove default wp patterns and use only custom ones.
@@ -131,7 +131,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function block_categories( $categories ) {
+	public function block_categories( array $categories ): array {
 		$include = true;
 
 		foreach ( $categories as $category ) {
@@ -160,7 +160,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return void
 	 */
-	public function register_block_patterns_categories() {
+	public function register_block_patterns_categories(): void {
 		if ( ! $this->block_patterns_categories || ! function_exists( 'register_block_pattern_category' ) ) {
 			return;
 		}
@@ -177,7 +177,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 * @param array $locations The locations.
 	 * @return array
 	 */
-	public function tiwg_files_locations( $locations ) {
+	public function tiwg_files_locations( array $locations ): array {
 		if ( ! is_array( $this->blocks ) || ! $this->blocks ) {
 			return $locations;
 		}
@@ -198,7 +198,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return string
 	 */
-	public function render_block( $block_content, $block, $block_instance ) {
+	public function render_block( string $block_content, array $block, object $block_instance ): string {
 		if ( is_admin() || wp_doing_ajax() || wp_doing_cron() ) {
 			return $block_content;
 		}
@@ -237,7 +237,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return int
 	 */
-	public function styles_inline_size_limit( $limit ) {
+	public function styles_inline_size_limit( int $limit ): int {
 		$limit = apply_filters( 'chisel_styles_inline_size_limit', 10000 );
 
 		return $limit;
@@ -250,7 +250,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return bool
 	 */
-	public function should_load_separate_core_block_assets( $load ) {
+	public function should_load_separate_core_block_assets( bool $load ): bool {
 		$load = apply_filters( 'chisel_load_separate_core_block_assets', false );
 
 		return $load;
@@ -263,7 +263,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function blocks_alignment_data( $editor_scripts_data ) {
+	public function blocks_alignment_data( array $editor_scripts_data ): array {
 		$editor_scripts_data['editor']['localize']['data']['blocksDefaultAlignment'] = array(
 			'chisel/slider' => 'full',
 		);
@@ -276,7 +276,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return void
 	 */
-	public function dequeue_blocks_styles() {
+	public function dequeue_blocks_styles(): void {
 		if ( is_admin() ) {
 			return;
 		}
@@ -284,7 +284,7 @@ class Blocks implements InstanceInterface, HooksInterface {
 		$blocks_used_on_page = $this->get_content_blocks_names();
 		$blocks              = $this->blocks;
 
-		if ( $blocks ) {
+		if ( ! empty( $blocks ) ) {
 			$blocks_path = $this->register_blocks_factory->get_blocks_path();
 			$blocks_url  = $this->register_blocks_factory->get_blocks_url();
 

@@ -5,14 +5,14 @@ namespace Chisel\WP;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Factory\RegisterCustomTaxonomy;
+use Chisel\Factories\RegisterCustomTaxonomy;
 
 /**
  * Custom post types and taxonomies wrapper class.
  *
  * @package Chisel
  */
-class CustomTaxonomies implements InstanceInterface, HooksInterface {
+final class CustomTaxonomies implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -21,21 +21,21 @@ class CustomTaxonomies implements InstanceInterface, HooksInterface {
 	 *
 	 * @var array
 	 */
-	private $taxonomies = array();
+	private array $taxonomies = array();
 
 	/**
 	 * Default taxonomy rewrite args.
 	 *
 	 * @var array
 	 */
-	private $default_taxonomy_rewrite_args = array();
+	private array $default_taxonomy_rewrite_args = array();
 
 	/**
 	 * Default taxonomy capabilities.
 	 *
 	 * @var array
 	 */
-	private $default_taxonomy_capabilities = array();
+	private array $default_taxonomy_capabilities = array();
 
 	/**
 	 * Class constructor.
@@ -50,8 +50,8 @@ class CustomTaxonomies implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
-		$this->default_taxonomy_capabilities = apply_filters(
+	public function set_properties(): void {
+		$this->default_taxonomy_capabilities = (array) apply_filters(
 			'chisel_default_taxonomy_capabilities',
 			array(
 				'manage_terms' => 'manage_categories',
@@ -60,7 +60,7 @@ class CustomTaxonomies implements InstanceInterface, HooksInterface {
 				'assign_terms' => 'edit_posts',
 			)
 		);
-		$this->default_taxonomy_rewrite_args = apply_filters(
+		$this->default_taxonomy_rewrite_args = (array) apply_filters(
 			'chisel_default_taxonomy_rewrite_args',
 			array(
 				'slug'         => '',
@@ -76,20 +76,19 @@ class CustomTaxonomies implements InstanceInterface, HooksInterface {
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 	}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
-	}
+	public function filter_hooks(): void {}
 
 	/**
 	 * Register custom taxonomies.
 	 */
-	public function register_taxonomies() {
+	public function register_taxonomies(): void {
 		$this->taxonomies = apply_filters( 'chisel_custom_taxonomies', $this->taxonomies );
 
 		if ( empty( $this->taxonomies ) ) {
@@ -111,7 +110,7 @@ class CustomTaxonomies implements InstanceInterface, HooksInterface {
 	/**
 	 * Set custom taxonomies.
 	 */
-	private function set_taxonomies() {
+	private function set_taxonomies(): void {
 		$this->taxonomies = array(
 			// phpcs:disable
 			// 'chisel-term' => array(

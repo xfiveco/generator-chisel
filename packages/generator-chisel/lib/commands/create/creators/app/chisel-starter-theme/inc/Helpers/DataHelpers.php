@@ -1,6 +1,6 @@
 <?php
 
-namespace Chisel\Helper;
+namespace Chisel\Helpers;
 
 use Timber\Timber;
 
@@ -9,7 +9,7 @@ use Timber\Timber;
  *
  * @package Chisel
  */
-class DataHelpers {
+final class DataHelpers {
 
 	/**
 	 * Json decode data for storing in html attribute
@@ -18,7 +18,7 @@ class DataHelpers {
 	 *
 	 * @return string
 	 */
-	public static function json_encode_for_data_attribute( $data ) {
+	public static function json_encode_for_data_attribute( array $data ): string {
 		return htmlspecialchars( wp_json_encode( $data ) );
 	}
 
@@ -29,7 +29,7 @@ class DataHelpers {
 	 *
 	 * @return array
 	 */
-	public static function object_to_array( $object_to_convert ) {
-			return json_decode( wp_json_encode( $object_to_convert ), true );
+	public static function object_to_array( object $object_to_convert ): array {
+		return json_decode( wp_json_encode( $object_to_convert ), true );
 	}
 }

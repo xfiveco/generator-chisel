@@ -1,18 +1,18 @@
 <?php
 
-namespace Chisel\Plugin;
+namespace Chisel\Plugins;
 
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Helper\WoocommerceHelpers;
+use Chisel\Helpers\WoocommerceHelpers;
 
 /**
  * Class used to extend Timber functionality.
  *
  * @package Chisel
  */
-class Woocommerce implements InstanceInterface, HooksInterface {
+final class Woocommerce implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -40,7 +40,7 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		$this->sidebars = array(
 			'woocommerce' => array(
 				'name'        => __( 'Woocommerce', 'chisel' ),
@@ -52,7 +52,7 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		$this->remove_actions();
 
 		add_action( 'after_setup_theme', array( $this, 'add_woocommerce_support' ) );
@@ -66,7 +66,7 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'chisel_sidebars', array( $this, 'register_sidebars' ) );
 		add_filter( 'woocommerce_enqueue_styles', array( $this, 'enqueue_styles' ) );
 		add_filter( 'chisel_frontend_styles', array( $this, 'register_custom_styles' ) );
@@ -102,7 +102,7 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	/**
 	 * Add WooCommerce support.
 	 */
-	public function add_woocommerce_support() {
+	public function add_woocommerce_support(): void {
 		add_theme_support( 'woocommerce' );
 		add_theme_support( 'wc-product-gallery-zoom' );
 		add_theme_support( 'wc-product-gallery-lightbox' );
@@ -112,25 +112,25 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	/**
 	 * Open container for sort bar.
 	 */
-	public function before_shop_loop_div_open() {
+	public function before_shop_loop_div_open(): void {
 		echo '<div class="c-shop__sort"> ';
 	}
 
 	/**
 	 * Close container for sort bar.
 	 */
-	public function before_shop_loop_div_close() {
+	public function before_shop_loop_div_close(): void {
 		echo ' </div> ';
 	}
 
 	/**
 	 * Modify woocommerce customizer settings.
 	 *
-	 * @param WP_Customize_Manager $wp_customize
+	 * @param \WP_Customize_Manager $wp_customize
 	 *
 	 * @return void
 	 */
-	public function modify_customizer( $wp_customize ) {
+	public function modify_customizer( \WP_Customize_Manager $wp_customize ): void {
 		$shop_page_display_control     = $wp_customize->get_control( 'woocommerce_shop_page_display' );
 		$category_page_display_control = $wp_customize->get_control( 'woocommerce_category_archive_display' );
 
@@ -150,7 +150,7 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function register_sidebars( $sidebars ) {
+	public function register_sidebars( array $sidebars ): array {
 		$sidebars = array_merge( $sidebars, $this->sidebars );
 
 		return $sidebars;
@@ -163,7 +163,7 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function enqueue_styles( $enqueue_styles ) {
+	public function enqueue_styles( array $enqueue_styles ): array {
 		unset( $enqueue_styles['woocommerce-layout'] );
 
 		return $enqueue_styles;
@@ -177,7 +177,7 @@ class Woocommerce implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function register_custom_styles( $styles ) {
+	public function register_custom_styles( array $styles ): array {
 		$styles['woocommerce'] = array();
 
 		return $styles;

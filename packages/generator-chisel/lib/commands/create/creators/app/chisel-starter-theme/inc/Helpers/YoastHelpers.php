@@ -1,29 +1,29 @@
 <?php
 
-namespace Chisel\Helper;
+namespace Chisel\Helpers;
 
 /**
  * Helper functions.
  *
  * @package Chisel
  */
-class YoastHelpers {
+final class YoastHelpers {
 
 	/**
 	 * Check if Yoast plugin is active.
 	 *
 	 * @return bool
 	 */
-	public static function is_yoast_active() {
+	public static function is_yoast_active(): bool {
 		return class_exists( '\WPSEO_Options' );
 	}
 
 	/**
 	 * Display breadcrumbs.
 	 *
-	 * @return html
+	 * @return string
 	 */
-	public static function breadcrumbs() {
+	public static function breadcrumbs(): string {
 		if ( ! self::is_yoast_active() ) {
 			return '';
 		}
@@ -32,6 +32,6 @@ class YoastHelpers {
 			return '';
 		}
 
-		return yoast_breadcrumb( '<div class="c-breadcrumbs">', '</div>', false );
+		return (string) yoast_breadcrumb( '<div class="c-breadcrumbs o-wrapper__inner">', '</div>', false );
 	}
 }

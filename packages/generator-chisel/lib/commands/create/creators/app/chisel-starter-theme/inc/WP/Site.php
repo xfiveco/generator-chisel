@@ -15,7 +15,7 @@ use Chisel\Traits\Singleton;
  *
  * @package Chisel
  */
-class Site extends TimberSite implements InstanceInterface, HooksInterface {
+final class Site extends TimberSite implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -34,18 +34,17 @@ class Site extends TimberSite implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {}
+	public function set_properties(): void {}
 
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
-	}
+	public function action_hooks(): void {}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'timber/context', array( $this, 'add_to_context' ) );
 		add_filter( 'timber/post/classmap', array( $this, 'post_classmap' ) );
 		add_filter( 'timber/term/classmap', array( $this, 'term_classmap' ) );
@@ -57,7 +56,7 @@ class Site extends TimberSite implements InstanceInterface, HooksInterface {
 	 * @param array $context The context.
 	 * @return array
 	 */
-	public function add_to_context( $context ) {
+	public function add_to_context( array $context ): array {
 		$context['logo']            = Components::get_logo();
 		$context['menus']           = Components::get_menus();
 		$context['sidebar']         = Components::get_sidebar();
@@ -73,7 +72,7 @@ class Site extends TimberSite implements InstanceInterface, HooksInterface {
 	 * @param array $classmap The class map.
 	 * @return array
 	 */
-	public function post_classmap( $classmap ) {
+	public function post_classmap( array $classmap ): array {
 		$custom_classmap = array(
 			'post'       => ChiselPost::class,
 			'page'       => ChiselPost::class,
@@ -90,7 +89,7 @@ class Site extends TimberSite implements InstanceInterface, HooksInterface {
 	 * @param array $classmap The class map.
 	 * @return array
 	 */
-	public function term_classmap( $classmap ) {
+	public function term_classmap( array $classmap ): array {
 		$custom_classmap = array(
 			'category'    => ChiselTerm::class,
 			'product_cat' => ChiselProductCategory::class,

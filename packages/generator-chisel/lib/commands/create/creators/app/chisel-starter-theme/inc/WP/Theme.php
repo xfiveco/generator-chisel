@@ -5,14 +5,14 @@ namespace Chisel\WP;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Helper\ThemeHelpers;
+use Chisel\Helpers\ThemeHelpers;
 
 /**
  * WordPress Theme setup related functionality.
  *
  * @package Chisel
  */
-class Theme implements InstanceInterface, HooksInterface {
+final class Theme implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -21,14 +21,14 @@ class Theme implements InstanceInterface, HooksInterface {
 	 *
 	 * @var array
 	 */
-	private $post_thumbnails_post_types = array( 'post' );
+	private array $post_thumbnails_post_types = array( 'post' );
 
 	/**
 	 * Navigation menus.
 	 *
 	 * @var array
 	 */
-	private $nav_menus = array();
+	private array $nav_menus = array();
 
 	/**
 	 * Class constructor.
@@ -43,7 +43,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		// Set nav menus to register.
 		$this->nav_menus = array(
 			'chisel_main_nav'   => __( 'Main Navigation', 'chisel' ),
@@ -54,7 +54,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'init', array( $this, 'theme_supports' ), 11 );
 		add_action( 'after_setup_theme', array( $this, 'remove_post_supports' ), 99 );
 		add_action( 'init', array( $this, 'register_nav_menus' ) );
@@ -64,7 +64,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'body_class', array( $this, 'body_classes' ) );
 		add_filter( 'tiny_mce_before_init', array( $this, 'mce_custom_colors' ) );
 		add_filter( 'login_headertext', array( $this, 'login_headertext' ) );
@@ -80,8 +80,8 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Add theme supports.
 	 */
-	public function theme_supports() {
-		$this->post_thumbnails_post_types = apply_filters( 'chisel_post_thumbnails_post_types', $this->post_thumbnails_post_types );
+	public function theme_supports(): void {
+		$this->post_thumbnails_post_types = (array) apply_filters( 'chisel_post_thumbnails_post_types', $this->post_thumbnails_post_types );
 
 		add_theme_support( 'post-formats', array() );
 		add_theme_support( 'post-thumbnails', $this->post_thumbnails_post_types );
@@ -117,7 +117,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Remove post supports.
 	 */
-	public function remove_post_supports() {
+	public function remove_post_supports(): void {
 		remove_post_type_support( 'page', 'excerpt' );
 		remove_post_type_support( 'attachment', 'comments' );
 	}
@@ -125,8 +125,8 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Register navigation menus.
 	 */
-	public function register_nav_menus() {
-		$this->nav_menus = apply_filters( 'chisel_nav_menus', $this->nav_menus );
+	public function register_nav_menus(): void {
+		$this->nav_menus = (array) apply_filters( 'chisel_nav_menus', $this->nav_menus );
 
 		register_nav_menus( $this->nav_menus );
 	}
@@ -134,7 +134,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Load theme internationalization files.
 	 */
-	public function i18n() {
+	public function i18n(): void {
 		// Load user's custom translations from wp-content/languages/ folder.
 		load_textdomain(
 			'chisel',
@@ -163,7 +163,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function body_classes( $classes ) {
+	public function body_classes( array $classes ): array {
 		$classes[] = 'chisel-theme';
 
 		return $classes;
@@ -176,7 +176,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function mce_custom_colors( $settings ) {
+	public function mce_custom_colors( array $settings ): array {
 		$default_colors = '
 			"000000", "Black",
 			"993300", "Burnt orange",
@@ -235,7 +235,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	 *
 	 * @return string
 	 */
-	public function login_headertext( $text ) {
+	public function login_headertext( string $text ): string {
 		$text = esc_attr( get_bloginfo( 'name' ) );
 
 		return $text;
@@ -248,7 +248,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	 *
 	 * @return string
 	 */
-	public function login_headerurl( $url ) {
+	public function login_headerurl( string $url ): string {
 		$url = esc_url( get_bloginfo( 'url' ) );
 
 		return $url;
@@ -257,12 +257,12 @@ class Theme implements InstanceInterface, HooksInterface {
 	/**
 	 * Set the limit of revisions to keep.
 	 *
-	 * @param int    $num
-	 * @param object $post
+	 * @param int      $num
+	 * @param \WP_Post $post
 	 *
 	 * @return int
 	 */
-	public function wp_revisions_to_keep( $num, $post ) {
+	public function wp_revisions_to_keep( int $num, \WP_Post $post ): int {
 		return 10;
 	}
 
@@ -273,7 +273,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function heartbeat_settings( $settings ) {
+	public function heartbeat_settings( array $settings ): array {
 		$settings['interval'] = 30;
 
 		return $settings;
@@ -286,7 +286,7 @@ class Theme implements InstanceInterface, HooksInterface {
 	 *
 	 * @return int
 	 */
-	public function jpeg_quality( $quality ) {
+	public function jpeg_quality( int $quality ): int {
 		return 90;
 	}
 }

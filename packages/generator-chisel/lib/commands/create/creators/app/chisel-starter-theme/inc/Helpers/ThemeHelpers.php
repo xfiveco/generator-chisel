@@ -1,21 +1,21 @@
 <?php
 
-namespace Chisel\Helper;
+namespace Chisel\Helpers;
 
-use Chisel\Helper\ImageHelpers;
+use Chisel\Helpers\ImageHelpers;
 
 /**
  * Helper functions.
  *
  * @package Chisel
  */
-class ThemeHelpers {
+final class ThemeHelpers {
 	/**
 	 * Color palettes.
 	 *
 	 * @var array
 	 */
-	private static $colors_palettes = array(
+	private static array $colors_palettes = array(
 		'acf'     => array(),
 		'tinymce' => '',
 	);
@@ -25,7 +25,7 @@ class ThemeHelpers {
 	 *
 	 * @return bool
 	 */
-	public static function is_dev_env() {
+	public static function is_dev_env(): bool {
 		return wp_get_environment_type() === 'development';
 	}
 
@@ -34,7 +34,7 @@ class ThemeHelpers {
 	 *
 	 * @return bool
 	 */
-	public static function is_fast_refresh() {
+	public static function is_fast_refresh(): bool {
 		$runtime = get_template_directory() . '/build/runtime.js';
 
 		return self::is_dev_env() && is_file( $runtime );
@@ -43,11 +43,11 @@ class ThemeHelpers {
 	/**
 	 * Get theme version.
 	 *
-	 * @return bool
+	 * @return string
 	 */
-	public static function get_theme_version() {
+	public static function get_theme_version(): string {
 		$theme = wp_get_theme();
-		return $theme->get( 'Version' );
+		return (string) $theme->get( 'Version' );
 	}
 
 	/**
@@ -55,8 +55,8 @@ class ThemeHelpers {
 	 *
 	 * @return bool
 	 */
-	public static function get_theme_name() {
-		return esc_attr( get_bloginfo( 'name' ) );
+	public static function get_theme_name(): string {
+		return (string) get_bloginfo( 'name' );
 	}
 
 	/**
@@ -67,8 +67,8 @@ class ThemeHelpers {
 	 *
 	 * @return string
 	 */
-	public static function bem( $name = '', ...$modifiers ) {
-		if ( empty( $name ) || empty( $modifiers ) ) {
+	public static function bem( string $name = '', mixed ...$modifiers ): string {
+		if ( $name === '' || empty( $modifiers ) ) {
 			return '';
 		}
 
@@ -112,27 +112,31 @@ class ThemeHelpers {
 	 *
 	 * @param string $type Type of palette to get.
 	 *
-	 * @return array
+	 * @return string|array
 	 */
-	public static function get_colors_palette( $type ) {
+	public static function get_colors_palette( string $type ): string|array {
 		if ( ! isset( self::$colors_palettes[$type] ) || self::$colors_palettes[$type] ) {
-			return self::$colors_palettes[$type];
+			return apply_filters( 'chisel_' . $type . '_colors_palette', self::$colors_palettes[$type] );
 		}
 
 		$theme_json      = get_template_directory() . '/theme.json';
-		$theme_json_data = wp_json_file_decode( $theme_json, array( 'associative' => true ) );
-		$colors_palette  = $theme_json_data['settings']['color']['palette'];
+		$theme_json_data = is_file( $theme_json ) ? wp_json_file_decode( $theme_json, array( 'associative' => true ) ) : array();
+		$colors_palette  = isset( $theme_json_data['settings']['color']['palette'] ) ? $theme_json_data['settings']['color']['palette'] : array();
 
-		if ( $colors_palette ) {
+		if ( ! empty( $colors_palette ) ) {
 			foreach ( $colors_palette as $color_data ) {
-				$color = sanitize_hex_color( $color_data['color'] );
+				$hex_color = isset( $color_data['color'] ) ? sanitize_hex_color( (string) $color_data['color'] ) : null;
+
+				if ( ! $hex_color ) {
+						continue;
+				}
 
 				if ( $type === 'acf' ) {
-					self::$colors_palettes[$type][] = $color;
+					self::$colors_palettes[$type][] = $hex_color;
 				} elseif ( $type === 'tinymce' ) {
 					self::$colors_palettes[$type] .= sprintf(
 						'"%s", "%s",',
-						str_replace( '#', '', $color ),
+						str_replace( '#', '', $hex_color ),
 						esc_attr( $color_data['name'] )
 					);
 				}
@@ -147,11 +151,11 @@ class ThemeHelpers {
 	 *
 	 * @return array
 	 */
-	public static function get_login_page_logo_data() {
-		$logo_id   = get_theme_mod( 'custom_logo', 0 );
+	public static function get_login_page_logo_data(): array {
+		$logo_id   = (int) get_theme_mod( 'custom_logo', 0 );
 		$logo_data = array();
 
-		if ( $logo_id ) {
+		if ( $logo_id > 0 ) {
 			$logo_data = wp_get_attachment_image_src( $logo_id, 'medium' );
 		} else {
 			$logo_data = array(

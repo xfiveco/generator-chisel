@@ -3,80 +3,75 @@
 namespace Chisel\WP;
 
 use Timber\Timber;
-use Chisel\Helper\ImageHelpers;
-use Chisel\Helper\AcfHelpers;
-use Chisel\Helper\CacheHelpers;
+use Chisel\Helpers\ImageHelpers;
+use Chisel\Helpers\AcfHelpers;
+use Chisel\Helpers\CacheHelpers;
 
 /**
  * Use this class to get site components.
  *
  * @package Chisel
  */
-class Components {
+final class Components {
 
 	/**
 	 * The site nav menus.
 	 *
 	 * @var array
 	 */
-	private static $menus = array();
+	private static array $menus = array();
 
 	/**
 	 * The logo.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	private static $logo = array();
+	private static string $logo = '';
 
 	/**
 	 * The sidebar widgets.
 	 *
-	 * @var array
+	 * @var string
 	 */
-	private static $sidebar = array();
+	private static string $sidebar = '';
 
 	/**
 	 * The footer sidebars.
 	 *
 	 * @var array
 	 */
-	private static $footer_sidebars = array();
+	private static array $footer_sidebars = array();
 
 	/**
 	 * The page / post title.
 	 *
 	 * @var array
 	 */
-	private static $the_title = array();
+	private static array $the_title = array();
 
 	/**
 	 * The svg icons.
 	 *
 	 * @var array
 	 */
-	private static $icons = array();
+	private static array $icons = array();
 
 	/**
 	 * Get the site nav menus.
 	 *
 	 * @return array
 	 */
-	public static function get_menus() {
-		if ( ! self::$menus ) {
-			foreach ( array_keys( get_registered_nav_menus() ) as $menu ) {
+	public static function get_menus(): array {
+		if ( empty( self::$menus ) ) {
+			$nav_menus = get_registered_nav_menus();
+
+			foreach ( array_keys( $nav_menus ) as $menu ) {
 				if ( strpos( $menu, 'chisel', 0 ) === false ) {
 					continue;
 				}
 
-				$menu_name = str_replace( 'chisel_', '', $menu );
-
-				if ( ! has_nav_menu( $menu ) ) {
-					$menus[$menu_name] = '';
-
-					continue;
-				}
-
-				$menus[$menu_name] = Timber::get_menu( $menu );
+				$menu_name         = str_replace( 'chisel_', '', $menu );
+				$menus[$menu_name] = has_nav_menu( $menu ) ? Timber::get_menu( $menu ) : '';
 			}
 		}
 
@@ -88,7 +83,7 @@ class Components {
 	 *
 	 * @return string
 	 */
-	public static function get_logo() {
+	public static function get_logo(): string {
 		if ( self::$logo ) {
 			return self::$logo;
 		}
@@ -107,27 +102,22 @@ class Components {
 	 *
 	 * @param string $sidebar_id The sidebar id.
 	 *
-	 * @return array
+	 * @return string
 	 */
-	public static function get_sidebar( $sidebar_id = false ) {
-		if ( self::$sidebar ) {
+	public static function get_sidebar( string $sidebar_id = '' ): string {
+		if ( self::$sidebar !== '' ) {
 			return self::$sidebar;
 		}
 
 		if ( $sidebar_id ) {
 			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-' . $sidebar_id );
-			return self::$sidebar;
-		}
-
-		if ( is_singular( 'post' ) ) {
+		} elseif ( is_singular( 'post' ) ) {
 			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-blog' );
-		}
-
-		if ( function_exists( 'is_shop' ) && is_shop() ) {
+		} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
 			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-woocommerce' );
 		}
 
-		return self::$sidebar;
+		return (string) self::$sidebar;
 	}
 
 	/**
@@ -135,8 +125,8 @@ class Components {
 	 *
 	 * @return array
 	 */
-	public static function get_footer_sidebars() {
-		if ( self::$footer_sidebars ) {
+	public static function get_footer_sidebars(): array {
+		if ( ! empty( self::$footer_sidebars ) ) {
 			return self::$footer_sidebars;
 		}
 
@@ -154,20 +144,14 @@ class Components {
 			}
 		}
 
-		switch ( count( self::$footer_sidebars['columns'] ) ) {
-			case 4:
-				$column_class = 'o-layout__item--3-large';
-				break;
-			case 3:
-				$column_class = 'o-layout__item--4-large';
-				break;
-			case 2:
-				$column_class = 'o-layout__item--6-large';
-				break;
-			default:
-				$column_class = 'o-layout__item--12';
-				break;
-		}
+		$column_count = count( self::$footer_sidebars['columns'] );
+
+		$column_class = match ( $column_count ) {
+			4 => 'o-layout__item--3-large',
+			3 => 'o-layout__item--4-large',
+			2 => 'o-layout__item--6-large',
+			default => 'o-layout__item--12',
+		};
 
 		self::$footer_sidebars['column_class'] = $column_class;
 
@@ -175,17 +159,16 @@ class Components {
 	}
 
 	/**
-	 * Get the current page title.
+	 * Get the current page title data.
 	 *
 	 * @return array
 	 */
-	public static function get_the_title() {
-		if ( self::$the_title ) {
+	public static function get_the_title(): array {
+		if ( ! empty( self::$the_title ) ) {
 			return self::$the_title;
 		}
 
 		$classname   = 'c-title';
-		$the_title   = array();
 		$title_text  = '';
 		$title_class = '';
 
@@ -202,7 +185,7 @@ class Components {
 				}
 			}
 		} elseif ( is_home() ) {
-			$posts_page_id = absint( get_option( 'page_for_posts' ) );
+			$posts_page_id = (int) get_option( 'page_for_posts' );
 
 			if ( $posts_page_id ) {
 				$title_text = get_the_title( $posts_page_id );
@@ -230,7 +213,7 @@ class Components {
 			$title_text = __( '404 - Page not found', 'chisel' );
 		}
 
-		if ( $title_text ) {
+		if ( $title_text !== '' ) {
 			self::$the_title = array(
 				'text'  => esc_html( $title_text ),
 				'class' => $title_class ? esc_attr( $title_class ) : $classname,
@@ -245,12 +228,12 @@ class Components {
 	 *
 	 * @param array $args
 	 *
-	 * @return html
+	 * @return string
 	 */
-	public static function get_icon( $args ) {
+	public static function get_icon( array $args ): string {
 		$icon_slug = sanitize_title( $args['name'] );
+		$icon_key  = '';
 
-		$icon_key = '';
 		foreach ( $args as $key => $value ) {
 			if ( is_bool( $value ) ) {
 				$value = $value ? 'yes' : 'no';

@@ -16,9 +16,10 @@ class ChiselImage extends TimberImage {
 	 *
 	 * @param string $size Thumbnail size.
 	 * @param array  $attrs Image attributes.
-	 * @return html
+	 *
+	 * @return string The responsive <img> HTML.
 	 */
-	public function responsive( $size = 'medium', $attrs = array() ) {
+	public function responsive( string $size = 'medium', array $attrs = array() ): string {
 		return wp_get_attachment_image( $this->ID, $size, false, $attrs );
 	}
 }

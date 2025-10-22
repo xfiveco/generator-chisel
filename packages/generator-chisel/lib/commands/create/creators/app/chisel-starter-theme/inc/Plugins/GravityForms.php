@@ -1,18 +1,18 @@
 <?php
 
-namespace Chisel\Plugin;
+namespace Chisel\Plugins;
 
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Helper\GravityFormsHelpers;
+use Chisel\Helpers\GravityFormsHelpers;
 
 /**
  * GravityForms related functionalities.
  *
  * @package Chisel
  */
-class GravityForms implements InstanceInterface, HooksInterface {
+final class GravityForms implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -33,19 +33,19 @@ class GravityForms implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {}
+	public function set_properties(): void {}
 
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'wp_enqueue_scripts', array( $this, 'deregister_scripts' ), 999 );
 	}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'chisel_frontend_footer_styles', array( $this, 'register_custom_styles' ) );
 		add_filter( 'chisel_enqueue_frontend_footer_style', array( $this, 'enqueue_custom_styles' ), 10, 3 );
 		add_filter( 'gform_form_theme_slug', array( $this, 'default_form_styles' ), 99, 2 );
@@ -55,7 +55,7 @@ class GravityForms implements InstanceInterface, HooksInterface {
 	/**
 	 * This function will deregister gforms specific scripts
 	 */
-	public function deregister_scripts() {
+	public function deregister_scripts(): void {
 		wp_dequeue_style( 'gforms_reset_css' );
 	}
 
@@ -66,7 +66,7 @@ class GravityForms implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function register_custom_styles( $styles ) {
+	public function register_custom_styles( array $styles ): array {
 		$styles['gravity-forms'] = array();
 
 		return $styles;
@@ -81,14 +81,14 @@ class GravityForms implements InstanceInterface, HooksInterface {
 	 *
 	 * @return bool
 	 */
-	public function enqueue_custom_styles( $enqueue, $handle, $args ) {
+	public function enqueue_custom_styles( bool $enqueue, string $handle, array $args ): bool {
 		if ( $handle !== 'gravity-forms' ) {
 			return $enqueue;
 		}
 
 		global $post;
 
-		if ( $post ) {
+		if ( $post instanceof \WP_Post ) {
 			$enqueue = has_block( 'gravityforms/form', $post );
 		}
 
@@ -103,7 +103,7 @@ class GravityForms implements InstanceInterface, HooksInterface {
 	 *
 	 * @return string
 	 */
-	public function default_form_styles( $slug, $form ) {
+	public function default_form_styles( string $slug, array $form ): string {
 		if ( ! is_admin() ) {
 			$slug = 'gravity-theme';
 		}
@@ -118,10 +118,8 @@ class GravityForms implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function plugin_settings_fields( $fields ) {
-		if ( isset( $fields['default_theme'] ) ) {
-			unset( $fields['default_theme'] );
-		}
+	public function plugin_settings_fields( array $fields ): array {
+		unset( $fields['default_theme'] );
 
 		return $fields;
 	}

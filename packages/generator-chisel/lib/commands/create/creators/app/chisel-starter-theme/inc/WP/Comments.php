@@ -11,7 +11,7 @@ use Chisel\Traits\Singleton;
  *
  * @package Chisel
  */
-class Comments implements InstanceInterface, HooksInterface {
+final class Comments implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -20,14 +20,14 @@ class Comments implements InstanceInterface, HooksInterface {
 	 *
 	 * @var bool
 	 */
-	private $disable_comments;
+	private bool $disable_comments = true;
 
 	/**
 	 *  Post types for which comments are disabled.
 	 *
 	 * @var array
 	 */
-	private $post_types = array(
+	private array $post_types = array(
 		'post',
 		'page',
 	);
@@ -47,14 +47,14 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		$this->disable_comments = apply_filters( 'chisel_disable_comments', true );
 	}
 
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 			add_action( 'after_setup_theme', array( $this, 'disable_comments_for_post_types' ), 99 );
 			add_action( 'admin_menu', array( $this, 'remove_admin_menu' ), 999 );
 
@@ -74,7 +74,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 			add_filter( 'wp_headers', array( $this, 'filter_wp_headers' ) );
 			add_filter( 'pre_option_default_pingback_flag', '__return_zero' );
 			add_filter( 'comments_open', '__return_false', 20 );
@@ -102,7 +102,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	 *
 	 * @return void
 	 */
-	public function disable_comments_for_post_types() {
+	public function disable_comments_for_post_types(): void {
 		$this->post_types = apply_filters( 'chisel_disable_comments_post_types', $this->post_types );
 
 		if ( $this->post_types ) {
@@ -121,7 +121,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Remove comments related admin menus.
 	 */
-	public function remove_admin_menu() {
+	public function remove_admin_menu(): void {
 		global $pagenow;
 
 		if ( in_array( $pagenow, array( 'comment.php', 'edit-comments.php', 'options-discussion.php' ), true ) ) {
@@ -135,7 +135,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Add custom CSS to dashboard.
 	 */
-	public function admin_css() {
+	public function admin_css(): void {
 		?>
 		<style>
 			#dashboard_right_now .comment-count,
@@ -152,14 +152,14 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Remove comments from dashboard.
 	 */
-	public function filter_dashboard() {
+	public function filter_dashboard(): void {
 		remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
 	}
 
 	/**
 	 * Disable recent comments widget.
 	 */
-	public function disable_rc_widget() {
+	public function disable_rc_widget(): void {
 		unregister_widget( 'WP_Widget_Recent_Comments' );
 		add_filter( 'show_recent_comments_widget_style', '__return_false' );
 	}
@@ -167,7 +167,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Filter feed query
 	 */
-	public function filter_query() {
+	public function filter_query(): void {
 		if ( is_comment_feed() ) {
 			wp_die( esc_html__( 'Comments are closed.' ), '', array( 'response' => 403 ) );
 		}
@@ -176,7 +176,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Remove comment links from admin bar.
 	 */
-	public function filter_admin_bar() {
+	public function filter_admin_bar(): void {
 		remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );
 
 		if ( is_multisite() ) {
@@ -187,7 +187,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Disable comments template on single posts.
 	 */
-	public function check_comment_template() {
+	public function check_comment_template(): void {
 		if ( is_singular() ) {
 			// Kill the comments' template.
 			add_filter( 'comments_template', '__return_empty_string', 20 );
@@ -201,14 +201,14 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Add hook to run custom script.
 	 */
-	public function filter_gutenberg() {
+	public function filter_gutenberg(): void {
 		add_action( 'admin_footer', array( $this, 'print_footer_scripts' ) );
 	}
 
 	/**
 	 * Unregister comments blocks and panels.
 	 */
-	public function print_footer_scripts() {
+	public function print_footer_scripts(): void {
 		?>
 		<script>
 			wp.domReady( () => {
@@ -221,7 +221,7 @@ class Comments implements InstanceInterface, HooksInterface {
 					wp.blocks.unregisterBlockType( blockType );
 				}
 
-				wp.data.dispatch( 'core/edit-post')?.removeEditorPanel( 'discussion-panel' ); // Discussion
+				wp.data.dispatch( 'core/editor')?.removeEditorPanel( 'discussion-panel' ); // Discussion
 			} );
 		</script>
 		<?php
@@ -234,16 +234,8 @@ class Comments implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function filter_rest_endpoints( $endpoints ) {
-		if ( isset( $endpoints['comments'] ) ) {
-			unset( $endpoints['comments'] );
-		}
-		if ( isset( $endpoints['/wp/v2/comments'] ) ) {
-			unset( $endpoints['/wp/v2/comments'] );
-		}
-		if ( isset( $endpoints['/wp/v2/comments/(?P<id>[\d]+)'] ) ) {
-			unset( $endpoints['/wp/v2/comments/(?P<id>[\d]+)'] );
-		}
+	public function filter_rest_endpoints( array $endpoints ): array {
+		unset( $endpoints['comments'], $endpoints['/wp/v2/comments'], $endpoints['/wp/v2/comments/(?P<id>[\d]+)'] );
 
 		return $endpoints;
 	}
@@ -255,7 +247,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function disable_xmlrc_comments( $methods ) {
+	public function disable_xmlrc_comments( array $methods ): array {
 		unset( $methods['wp.newComment'] );
 
 		return $methods;
@@ -264,23 +256,23 @@ class Comments implements InstanceInterface, HooksInterface {
 	/**
 	 * Remove comments from REST API
 	 *
-	 * @param array           $prepared_comment
-	 * @param WP_REST_Request $request
+	 * @param array            $prepared_comment
+	 * @param \WP_REST_Request $request
 	 *
-	 * @return WP_Error
+	 * @return \WP_Error
 	 */
-	public function disable_rest_api_comments( $prepared_comment, $request ) {
+	public function disable_rest_api_comments( array $prepared_comment, \WP_REST_Request $request ): \WP_Error {
 		return new \WP_Error( 'rest_comment_disabled', 'Commenting is disabled.', array( 'status' => 403 ) );
 	}
 
 	/**
 	 * Remove comment links from network admin bar.
 	 *
-	 * @param WP_Admin_Bar $wp_admin_bar
+	 * @param \WP_Admin_Bar $wp_admin_bar
 	 *
 	 * @return void
 	 */
-	public function remove_network_comment_links( $wp_admin_bar ) {
+	public function remove_network_comment_links( \WP_Admin_Bar $wp_admin_bar ): void {
 		if ( is_user_logged_in() ) {
 			foreach ( (array) $wp_admin_bar->user->blogs as $blog ) {
 				$wp_admin_bar->remove_menu( 'blog-' . $blog->userblog_id . '-c' );
@@ -295,7 +287,7 @@ class Comments implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function filter_wp_headers( $headers ) {
+	public function filter_wp_headers( array $headers ): array {
 		unset( $headers['X-Pingback'] );
 
 		return $headers;

@@ -3,32 +3,32 @@
 namespace Chisel\WP;
 
 use Timber\Timber;
-use Chisel\Helper\CacheHelpers;
+use Chisel\Helpers\CacheHelpers;
 
 /**
  * Custom Ajax enpoints callbacks
  *
  * @package Chisel
  */
-class AjaxEndpoints {
+final class AjaxEndpoints {
 
 	/**
 	 * Ajax call for load more feature.
 	 *
 	 * @param \WP_REST_Request $request WP_REST_Request.
 	 *
-	 * @return json
+	 * @return \WP_REST_Response
 	 */
-	public function load_more( $request ) {
+	public function load_more( \WP_REST_Request $request ): \WP_REST_Response {
 		if ( ! $request ) {
 			return $this->error( 'No request data' );
 		}
 
 		$data = $this->get_data( $request );
 
-		$post_type = sanitize_text_field( $data['post_type'] );
-		$per_page  = absint( $data['per_page'] );
-		$page      = absint( $data['page'] );
+		$post_type = isset( $data['post_type'] ) ? sanitize_text_field( $data['post_type'] ) : 'post';
+		$per_page  = isset( $data['per_page'] ) ? absint( $data['per_page'] ) : 10;
+		$page      = isset( $data['page'] ) ? absint( $data['page'] ) : 1;
 
 		$response = '';
 
@@ -46,7 +46,7 @@ class AjaxEndpoints {
 			array_unshift( $templates, 'woocommerce/content-product.twig' );
 		}
 
-		if ( $posts ) {
+		if ( ! empty( $posts ) ) {
 			foreach ( $posts as $post ) {
 				$response .= Timber::compile( $templates, array( 'post' => $post ), CacheHelpers::expiry() );
 			}
@@ -62,18 +62,18 @@ class AjaxEndpoints {
 	 *
 	 * @return array
 	 */
-	private function get_data( $request ) {
+	private function get_data( \WP_REST_Request $request ): array {
 		return $request->get_body_params();
 	}
 
 	/**
 	 * This function will return a success response.
 	 *
-	 * @param array $data
+	 * @param mixed $data
 	 *
 	 * @return \WP_REST_Response
 	 */
-	private function success( $data = array() ) {
+	private function success( mixed $data = array() ): \WP_REST_Response {
 		return new \WP_REST_Response(
 			array(
 				'error'   => 0,
@@ -91,13 +91,13 @@ class AjaxEndpoints {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	private function error( $message ) {
+	private function error( string $message ): \WP_REST_Response {
 		return new \WP_REST_Response(
 			array(
 				'error'   => 1,
 				'message' => $message,
 			),
-			400
+			200
 		);
 	}
 }

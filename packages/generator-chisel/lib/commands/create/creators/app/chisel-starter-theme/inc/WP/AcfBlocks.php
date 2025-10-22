@@ -6,17 +6,17 @@ use Timber\Timber;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Factory\RegisterBlocks;
+use Chisel\Factories\RegisterBlocks;
 use Chisel\Traits\PageBlocks;
-use Chisel\Helper\BlocksHelpers;
-use Chisel\Helper\AssetsHelpers;
+use Chisel\Helpers\BlocksHelpers;
+use Chisel\Helpers\AssetsHelpers;
 
 /**
  * ACF blocks related functionalities.
  *
  * @package Chisel
  */
-class AcfBlocks implements InstanceInterface, HooksInterface {
+final class AcfBlocks implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 	use PageBlocks;
@@ -26,21 +26,21 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @var RegisterBlocks
 	 */
-	private $register_blocks_factory;
+	private RegisterBlocks $register_blocks_factory;
 
 	/**
 	 * Blocks.
 	 *
 	 * @var array
 	 */
-	private $blocks = array();
+	private array $blocks = array();
 
 	/**
 	 * Blocks twig file base path.
 	 *
 	 * @var string
 	 */
-	public $blocks_twig_base_path;
+	public string $blocks_twig_base_path = '';
 
 	/**
 	 * Class constructor.
@@ -59,21 +59,21 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {
+	public function set_properties(): void {
 		$this->blocks_twig_base_path = 'build/blocks-acf/';
 	}
 
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
+	public function action_hooks(): void {
 		add_action( 'acf/init', array( $this, 'register_blocks' ) );
 	}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'timber/locations', array( $this, 'tiwg_files_locations' ) );
 		add_filter( 'acf/settings/load_json', array( $this, 'load_acf_field_group' ) );
 		add_filter( 'acf/settings/save_json', array( $this, 'save_acf_field_group' ) );
@@ -82,7 +82,7 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	/**
 	 * Register ACF blocks and their assets.
 	 */
-	public function register_blocks() {
+	public function register_blocks(): void {
 		$this->register_blocks_factory->register_custom_blocks();
 	}
 
@@ -92,8 +92,8 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	 * @param array $locations The locations.
 	 * @return array
 	 */
-	public function tiwg_files_locations( $locations ) {
-		if ( ! is_array( $this->blocks ) || ! $this->blocks ) {
+	public function tiwg_files_locations( array $locations ): array {
+		if ( ! is_array( $this->blocks ) || empty( $this->blocks ) ) {
 			return $locations;
 		}
 
@@ -110,8 +110,8 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	 * @param array $paths The paths.
 	 * @return array
 	 */
-	public function load_acf_field_group( $paths ) {
-		if ( ! is_array( $this->blocks ) || ! $this->blocks ) {
+	public function load_acf_field_group( array $paths ): array {
+		if ( ! is_array( $this->blocks ) || empty( $this->blocks ) ) {
 			return $paths;
 		}
 
@@ -128,7 +128,7 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	 * @param string $path The path.
 	 * @return string
 	 */
-	public function save_acf_field_group( $path ) {
+	public function save_acf_field_group( string $path ): string {
 
 		$action    = isset( $_REQUEST['action'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) : ''; // phpcs:ignore
 		$post_type = isset( $_REQUEST['post_type'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['post_type'] ) ) : ''; // phpcs:ignore
@@ -137,7 +137,7 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 			$location = isset( $_REQUEST['acf_field_group']['location'] ) ? $_REQUEST['acf_field_group']['location'] : array(); // phpcs:ignore
 
 			foreach ( $location as $group ) {
-				foreach ( $group as $rules ) {
+				foreach ( (array) $group as $rules ) {
 					if ( sanitize_text_field( $rules['param'] ) === 'block' && sanitize_text_field( $rules['operator'] ) === '==' ) {
 						$block_name = explode( '/', sanitize_text_field( $rules['value'] ) )[1];
 
@@ -159,7 +159,7 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @return void
 	 */
-	public function dequeue_blocks_styles() {
+	public function dequeue_blocks_styles(): void {
 		if ( is_admin() ) {
 			return;
 		}
@@ -167,7 +167,7 @@ class AcfBlocks implements InstanceInterface, HooksInterface {
 		$blocks_used_on_page = $this->get_content_blocks_names();
 		$blocks              = $this->blocks;
 
-		if ( $blocks ) {
+		if ( ! empty( $blocks ) ) {
 			$blocks_path = $this->register_blocks_factory->get_blocks_path();
 			$blocks_url  = $this->register_blocks_factory->get_blocks_url();
 

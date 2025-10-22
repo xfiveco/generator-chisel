@@ -3,7 +3,7 @@
 namespace Chisel\WP;
 
 use Timber\Term as TimberTerm;
-use Chisel\Helper\ImageHelpers;
+use Chisel\Helpers\ImageHelpers;
 
 /**
  * Extend Timber Term class with custom functionality.
@@ -15,29 +15,29 @@ class ChiselProductCategory extends TimberTerm {
 	/**
 	 * Category thumbnail.
 	 *
-	 * @var html
+	 * @var ?string
 	 */
-	public $thumbnail_html = null;
+	public ?string $thumbnail_html = null;
 
 	/**
 	 * Category thumbnail id.
 	 *
-	 * @var int
+	 * @var ?int
 	 */
-	public $thumbnail_id = null;
+	public ?int $thumbnail_id = null;
 
 	/**
 	 * Get the product thumbnail. Returns the thumbnail responsive image html.
 	 *
 	 * @param string $size Thumbnail size.
 	 *
-	 * @return html
+	 * @return string Responsive <img> HTML, or empty string.
 	 */
-	public function get_thumbnail( $size = 'woocommerce_thumbnail' ) {
+	public function get_thumbnail( string $size = 'woocommerce_thumbnail' ) {
 		$size = apply_filters( 'subcategory_archive_thumbnail_size', $size );
 
 		if ( $this->thumbnail_html === null ) {
-			$thumbnail_id = $this->get_thumbnail_id( $size );
+			$thumbnail_id = $this->get_thumbnail_id();
 
 			$this->thumbnail_html = $thumbnail_id ? ImageHelpers::get_responsive_image( $thumbnail_id, $size ) : '';
 		}
@@ -50,9 +50,9 @@ class ChiselProductCategory extends TimberTerm {
 	 *
 	 * @return int
 	 */
-	public function get_thumbnail_id() {
+	public function get_thumbnail_id(): int {
 		if ( $this->thumbnail_id === null ) {
-			$thumbnail_id = $this->meta( 'thumbnail_id' );
+			$thumbnail_id = (int) $this->meta( 'thumbnail_id' );
 
 			if ( ! $thumbnail_id ) {
 				$thumbnail_id = get_option( 'woocommerce_placeholder_image', 0 );

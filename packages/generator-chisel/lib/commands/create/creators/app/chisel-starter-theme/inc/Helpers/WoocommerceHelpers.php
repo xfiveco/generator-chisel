@@ -1,29 +1,35 @@
 <?php
 
-namespace Chisel\Helper;
+namespace Chisel\Helpers;
 
 /**
  * Helper functions.
  *
  * @package Chisel
  */
-class WoocommerceHelpers {
+final class WoocommerceHelpers {
 
 	/**
 	 * Check if WooCommerce is active.
 	 *
 	 * @return bool
 	 */
-	public static function is_woocommerce_active() {
+	public static function is_woocommerce_active(): bool {
 		return class_exists( '\Woocommerce' );
 	}
 
 	/**
 	 * Set the product object. For some reason, products in the loop don’t get the right context by default. Without this, some elements of the listed products would show the same information as the first product in the loop. This function fixes that.
 	 *
-	 * @param object $post The post object.
+	 * @param object $post
+	 *
+	 * @return void
 	 */
-	public static function timber_set_product( $post ) {
+	public static function timber_set_product( object $post ): void {
+		if ( ! self::is_woocommerce_active() ) {
+			return;
+		}
+
 		global $product;
 
 		if ( is_woocommerce() ) {
@@ -34,13 +40,13 @@ class WoocommerceHelpers {
 	/**
 	 * Get products grid classnames
 	 *
-	 * @param bool $products
-	 * @param bool $has_sidebar
+	 * @param bool $products - Whether there are products to render.
+	 * @param bool $has_sidebar -Whether the layout includes a sidebar.
 	 *
 	 * @return string
 	 */
-	public static function get_products_grid_classnames( $products, $has_sidebar ) {
-		$loop_columns = wc_get_loop_prop( 'columns' );
+	public static function get_products_grid_classnames( bool $products, bool $has_sidebar ): string {
+		$loop_columns = (int) wc_get_loop_prop( 'columns' );
 
 		// Set max columns to 4.
 		if ( $loop_columns > 4 ) {

@@ -7,12 +7,12 @@ use Timber\Timber;
 use Chisel\Interfaces\InstanceInterface;
 use Chisel\Interfaces\HooksInterface;
 use Chisel\Traits\Singleton;
-use Chisel\Helper\CommentsHelpers;
-use Chisel\Helper\DataHelpers;
-use Chisel\Helper\ImageHelpers;
-use Chisel\Helper\ThemeHelpers;
-use Chisel\Helper\WoocommerceHelpers;
-use Chisel\Helper\YoastHelpers;
+use Chisel\Helpers\CommentsHelpers;
+use Chisel\Helpers\DataHelpers;
+use Chisel\Helpers\ImageHelpers;
+use Chisel\Helpers\ThemeHelpers;
+use Chisel\Helpers\WoocommerceHelpers;
+use Chisel\Helpers\YoastHelpers;
 use Chisel\WP\Components;
 
 /**
@@ -20,7 +20,7 @@ use Chisel\WP\Components;
  *
  * @package Chisel
  */
-class Twig implements InstanceInterface, HooksInterface {
+final class Twig implements InstanceInterface, HooksInterface {
 
 	use Singleton;
 
@@ -37,28 +37,27 @@ class Twig implements InstanceInterface, HooksInterface {
 	/**
 	 * Set properties.
 	 */
-	public function set_properties() {}
+	public function set_properties(): void {}
 
 	/**
 	 * Register action hooks.
 	 */
-	public function action_hooks() {
-	}
+	public function action_hooks(): void {}
 
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks() {
+	public function filter_hooks(): void {
 		add_filter( 'timber/twig', array( $this, 'extend_twig' ) );
 	}
 
 	/**
 	 * Extend Twig functionality.
 	 *
-	 * @param \Twig_Environment $twig The Twig environment.
-	 * @return \Twig_Environment
+	 * @param \Twig\Environment $twig The Twig environment.
+	 * @return \Twig\Environment
 	 */
-	public function extend_twig( $twig ) {
+	public function extend_twig( \Twig\Environment $twig ): \Twig\Environment {
 		$twig = $this->register_functions( $twig );
 		$twig = $this->register_filters( $twig );
 		$twig = $this->register_tests( $twig );
@@ -69,10 +68,10 @@ class Twig implements InstanceInterface, HooksInterface {
 	/**
 	 * Register custom Twig functions.
 	 *
-	 * @param \Twig_Environment $twig The Twig environment.
-	 * @return \Twig_Environment
+	 * @param \Twig\Environment $twig The Twig environment.
+	 * @return \Twig\Environment
 	 */
-	public function register_functions( $twig ) {
+	public function register_functions( \Twig\Environment $twig ): \Twig\Environment {
 		$this->register_function( $twig, 'get_nav_menu', array( $this, 'get_nav_menu' ) );
 		$this->register_function( $twig, 'timber_set_product', array( $this, 'timber_set_product' ) );
 		$this->register_function( $twig, 'post_classes', array( $this, 'post_classes' ) );
@@ -89,10 +88,10 @@ class Twig implements InstanceInterface, HooksInterface {
 	/**
 	 * Register custom Twig filters.
 	 *
-	 * @param \Twig_Environment $twig The Twig environment.
-	 * @return \Twig_Environment
+	 * @param \Twig\Environment $twig The Twig environment.
+	 * @return \Twig\Environment
 	 */
-	public function register_filters( $twig ) {
+	public function register_filters( \Twig\Environment $twig ): \Twig\Environment {
 
 		return $twig;
 	}
@@ -100,10 +99,10 @@ class Twig implements InstanceInterface, HooksInterface {
 	/**
 	 * Register custom Twig tests.
 	 *
-	 * @param \Twig_Environment $twig The Twig environment.
-	 * @return \Twig_Environment
+	 * @param \Twig\Environment $twig The Twig environment.
+	 * @return \Twig\Environment
 	 */
-	public function register_tests( $twig ) {
+	public function register_tests( \Twig\Environment $twig ): \Twig\Environment {
 
 		return $twig;
 	}
@@ -111,13 +110,13 @@ class Twig implements InstanceInterface, HooksInterface {
 	/**
 	 * Register a Twig function.
 	 *
-	 * @param   \Twig_Environment $twig The Twig environment.
+	 * @param   \Twig\Environment $twig The Twig environment.
 	 * @param   string            $name The name of the function.
 	 * @param   callable          $callback The callback function.
 	 *
-	 * @return \Twig_Environment
+	 * @return \Twig\Environment
 	 */
-	private function register_function( $twig, $name, $callback ) {
+	private function register_function( $twig, $name, $callback ): \Twig\Environment {
 		$twig->addFunction( new \Twig\TwigFunction( $name, $callback ) );
 
 		return $twig;
@@ -126,13 +125,13 @@ class Twig implements InstanceInterface, HooksInterface {
 	/**
 	 * Register a Twig filter.
 	 *
-	 * @param   \Twig_Environment $twig The Twig environment.
+	 * @param   \Twig\Environment $twig The Twig environment.
 	 * @param   string            $name The name of the function.
 	 * @param   callable          $callback The callback function.
 	 *
-	 * @return \Twig_Environment
+	 * @return \Twig\Environment
 	 */
-	private function register_filter( $twig, $name, $callback ) {
+	private function register_filter( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
 		$twig->addFilter( new \Twig\TwigFilter( $name, $callback ) );
 
 		return $twig;
@@ -141,13 +140,13 @@ class Twig implements InstanceInterface, HooksInterface {
 	/**
 	 * Register a Twig test.
 	 *
-	 * @param   \Twig_Environment $twig The Twig environment.
+	 * @param   \Twig\Environment $twig The Twig environment.
 	 * @param   string            $name The name of the function.
 	 * @param   callable          $callback The callback function.
 	 *
-	 * @return \Twig_Environment
+	 * @return \Twig\Environment
 	 */
-	private function register_test( $twig, $name, $callback ) {
+	private function register_test( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
 		$twig->addTest( new \Twig\TwigTest( $name, $callback ) );
 
 		return $twig;
@@ -159,10 +158,10 @@ class Twig implements InstanceInterface, HooksInterface {
 	 * @param string $menu_name The menu name.
 	 * @return string
 	 */
-	public function get_nav_menu( $menu_name ) {
+	public function get_nav_menu( string $menu_name ): string {
 		$context = Timber::context();
 
-		return $context['menus'][$menu_name];
+		return $context['menus'][$menu_name] ?? '';
 	}
 
 	/**
@@ -170,19 +169,23 @@ class Twig implements InstanceInterface, HooksInterface {
 	 *
 	 * @param object $post The post object.
 	 */
-	public function timber_set_product( $post ) {
-		return WoocommerceHelpers::timber_set_product( $post );
+	public function timber_set_product( object $post ): void {
+		WoocommerceHelpers::timber_set_product( $post );
 	}
 
 	/**
 	 * Prepare post classnames to follow ITCSS structure.
 	 *
-	 * @param string $classes The post classes.
-	 * @param string $prefix The prefix e.g. c-post--.
+	 * @param ?string $classes The post classes.
+	 * @param string  $prefix The prefix e.g. c-post--.
 	 *
 	 * @return string
 	 */
-	public function post_classes( $classes, $prefix = 'c-post--' ) {
+	public function post_classes( ?string $classes, string $prefix = 'c-post--' ): string {
+		if ( empty( $classes ) ) {
+			return '';
+		}
+
 		$classnames = explode( ' ', $classes );
 		$classnames = array_map(
 			function ( $classname ) use ( $prefix ) {
@@ -201,7 +204,7 @@ class Twig implements InstanceInterface, HooksInterface {
 	 *
 	 * @return array
 	 */
-	public function slider_prepare_params( $params ) {
+	public function slider_prepare_params( array $params ): array {
 		$defaults        = array(
 			'type' => 'default',
 		);
@@ -269,16 +272,18 @@ class Twig implements InstanceInterface, HooksInterface {
 	 * @param string $image_size Image size.
 	 * @param array  $attrs Image attributes.
 	 *
-	 * @return string|html
+	 * @return string
 	 */
-	public function get_responsive_image( $image_id, $image_size = 'medium', $attrs = array() ) {
+	public function get_responsive_image( int $image_id, string $image_size = 'medium', array $attrs = array() ): string {
 		return ImageHelpers::get_responsive_image( $image_id, $image_size, $attrs );
 	}
 
 	/**
 	 * Display comments template - the comments and the form.
+	 *
+	 * @return string
 	 */
-	public function comments_template() {
+	public function comments_template(): string {
 		return CommentsHelpers::comments_template();
 	}
 
@@ -290,16 +295,16 @@ class Twig implements InstanceInterface, HooksInterface {
 	 *
 	 * @return string
 	 */
-	public function bem( $name = '', ...$modifiers ) {
+	public function bem( string $name = '', mixed ...$modifiers ): string {
 		return ThemeHelpers::bem( $name, ...$modifiers );
 	}
 
 	/**
 	 * Display breadcrumbs. Requires Yoast plugin.
 	 *
-	 * @return html
+	 * @return string
 	 */
-	public function breadcrumbs() {
+	public function breadcrumbs(): string {
 		return YoastHelpers::breadcrumbs();
 	}
 
@@ -308,9 +313,9 @@ class Twig implements InstanceInterface, HooksInterface {
 	 *
 	 * @param array $args
 	 *
-	 * @return html
+	 * @return string
 	 */
-	public function get_icon( $args ) {
+	public function get_icon( array $args ): string {
 		return Components::get_icon( $args );
 	}
 }

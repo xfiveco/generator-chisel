@@ -1,13 +1,13 @@
 <?php
 
-namespace Chisel\Helper;
+namespace Chisel\Helpers;
 
 /**
  * Helper functions.
  *
  * @package Chisel
  */
-class AssetsHelpers {
+final class AssetsHelpers {
 
 	/**
 	 * Get the final handle for the asset.
@@ -16,7 +16,7 @@ class AssetsHelpers {
 	 *
 	 * @return string
 	 */
-	public static function get_final_handle( $handle ) {
+	public static function get_final_handle( string $handle ): string {
 		$handle = 'chisel-' . $handle;
 
 		if ( ThemeHelpers::is_fast_refresh() ) {
