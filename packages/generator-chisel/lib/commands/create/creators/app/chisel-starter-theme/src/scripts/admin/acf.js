@@ -34,8 +34,7 @@ class ACF {
   }
 
   megaMenuFields() {
-    jQuery(document).on('menu-item-added', (event) => {
-      console.log('menu-item-added', event);
+    jQuery(document).on('menu-item-added', () => {
       this.megaMenuData.submenuFields = document.querySelectorAll(
         this.megaMenuData.submenuFieldsSelector,
       );

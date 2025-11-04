@@ -53,6 +53,10 @@
   &--separator {
     margin: 0 auto get-margin('medium');
   }
+
+  .alignwide {
+    max-width: get-layout-size('wide');
+  }
 }
 
 .wp-element-caption {

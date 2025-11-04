@@ -5,7 +5,7 @@
   @include meta.load-css('../blocks/core-spacer');
 
   .wp-block-spacer {
-    background-color: get-color('light-grey');
+    background-color: get-color('grey-100');
 
     .components-resizable-box__container {
       display: none;

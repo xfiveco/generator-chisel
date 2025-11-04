@@ -13,6 +13,10 @@
 .o-wrapper__inner {
   width: 100%;
   max-width: get-layout-size('content');
-  padding-inline: get-padding('small');
+  padding-inline: get-padding('normal');
   margin-inline: auto;
+
+  &--wide {
+    max-width: get-layout-size('wide');
+  }
 }

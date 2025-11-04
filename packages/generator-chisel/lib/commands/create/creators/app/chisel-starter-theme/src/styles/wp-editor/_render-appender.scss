@@ -15,8 +15,8 @@
     padding: get-padding('normal');
     font-size: get-font-size('normal');
     color: get-color('black');
-    background-color: get-color('light-grey');
-    border: 1px solid get-color('medium-grey');
+    background-color: get-color('grey-100');
+      border: 1px solid get-color('grey-300');
     transition: none;
 
     span {

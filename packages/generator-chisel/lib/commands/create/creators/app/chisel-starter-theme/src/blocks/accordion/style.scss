@@ -23,7 +23,7 @@
   margin: get-margin('small') 0;
   overflow: hidden;
   background-color: get-color('white');
-  border: 1px solid get-color('light-grey');
+  border: 1px solid get-color('grey-100');
   border-radius: get-border-radius('small');
 }
 
@@ -33,7 +33,7 @@
   justify-content: space-between;
   padding: get-padding('small');
   cursor: pointer;
-  background-color: get-color('light-grey');
+  background-color: get-color('grey-100');
 }
 
 .b-accordion__item-title {

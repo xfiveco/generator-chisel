@@ -40,7 +40,7 @@
     text-decoration: none;
 
     &.current {
-      color: get-color('secondary');
+      color: get-color('foreground');
       text-decoration: underline;
     }
   }

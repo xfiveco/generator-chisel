@@ -48,7 +48,7 @@ if ( is_singular( 'product' ) ) {
 		$items = array_map( 'Timber::get_term', $categories );
 	}
 
-	$has_sidebar  = ! empty( $context['sidebar'] );
+	$has_sidebar  = isset( $context['sidebar']['content'] ) && ! empty( $context['sidebar']['content'] );
 	$loop_columns = wc_get_loop_prop( 'columns' );
 	$loop_rows    = wc_get_default_product_rows_per_page();
 

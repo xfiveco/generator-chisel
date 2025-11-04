@@ -51,7 +51,7 @@
       background-color: rgba(255, 255, 255, 100%);
 
       &::after {
-        color: get-color('secondary');
+        color: get-color('foreground');
       }
     }
   }
@@ -100,7 +100,7 @@
 
 .swiper-pagination-bullet-active-main,
 .swiper-pagination:not(.swiper-pagination-dots-dynamic) .swiper-pagination-bullet-active {
-  background-color: get-color('secondary');
+  background-color: get-color('foreground');
   opacity: 1;
 }
 
@@ -120,7 +120,7 @@
     }
 
     &.swiper-slide-thumb-active img {
-      border: 2px solid get-color('secondary');
+      border: 2px solid get-color('foreground');
       opacity: 1;
     }
   }

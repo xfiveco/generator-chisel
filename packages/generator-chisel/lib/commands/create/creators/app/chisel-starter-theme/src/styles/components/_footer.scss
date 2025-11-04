@@ -1,7 +1,7 @@
 @use '~design' as *;
 
 .c-footer {
-  background-color: get-color('light-grey');
+  background-color: get-color('grey-100');
 }
 
 .c-footer__inner {
@@ -15,4 +15,9 @@
       margin-top: 0;
     }
   }
+}
+
+.c-footer__copyright {
+  padding: 0 0 get-padding('normal') 0;
+  font-size: get-font-size('small');
 }

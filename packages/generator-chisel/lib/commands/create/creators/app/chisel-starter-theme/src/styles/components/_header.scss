@@ -1,7 +1,7 @@
 @use '~design' as *;
 
 .c-header {
-  background-color: get-color('light-grey');
+  background-color: get-color('grey-100');
 
   .c-logo {
     max-width: px-rem(200);

@@ -1,0 +1,5 @@
+@use 'theme' as *;
+
+@function rgba-color($color, $alpha: 50%) {
+  @return rgb(from get-color($color) r g b / $alpha);
+}

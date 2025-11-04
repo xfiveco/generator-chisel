@@ -60,6 +60,7 @@ final class Site extends TimberSite implements InstanceInterface, HooksInterface
 		$context['logo']            = Components::get_logo();
 		$context['menus']           = Components::get_menus();
 		$context['sidebar']         = Components::get_sidebar();
+		$context['copyright']       = Components::get_sidebar( 'copyright' );
 		$context['footer_sidebars'] = Components::get_footer_sidebars();
 		$context['the_title']       = Components::get_the_title();
 

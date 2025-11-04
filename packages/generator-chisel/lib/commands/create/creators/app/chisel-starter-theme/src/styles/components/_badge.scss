@@ -8,7 +8,7 @@
   color: get-color('white');
   text-decoration: none;
   text-transform: uppercase;
-  background-color: get-color('secondary');
+  background-color: get-color('foreground');
   border-radius: get-border-radius('little');
   transition: get-transition('normal');
 
@@ -18,7 +18,7 @@
   }
 
   .is-disabled & {
-    color: get-color('grey');
-    background-color: get-color('light-grey');
+    color: get-color('grey-900');
+    background-color: get-color('grey-100');
   }
 }

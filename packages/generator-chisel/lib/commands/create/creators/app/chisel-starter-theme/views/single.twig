@@ -4,10 +4,12 @@
   <article id="post-{{ post.ID }}" class="c-post {{ post_classes(post.class) }}">
     <section class="o-wrapper__inner c-post__inner {{ wrapper_class }}">
 
-      <div class="o-layout c-content{% if sidebar %} has-sidebar{% endif %}">
-        <div class="{{ bem('o-layout__item', (sidebar ? '8' : '12') ~ '-large') }} c-content__inner">
+      <div class="o-layout c-content{% if sidebar.content %} has-sidebar{% endif %}">
+        <div class="{{ bem('o-layout__item', (sidebar.content ? '8' : '12') ~ '-large') }} c-content__inner">
 
-          {% include 'components/the-title.twig' %}
+          {% block the_title %}
+            {% include 'components/the-title.twig' %}
+          {% endblock %}
 
           {% block inner_content %}
 
@@ -48,7 +50,7 @@
           {% endblock %}
         </div>
 
-        {% if sidebar %}
+        {% if sidebar.content %}
           {% include 'sidebar-blog.twig' %}
         {% endif %}
       </div>

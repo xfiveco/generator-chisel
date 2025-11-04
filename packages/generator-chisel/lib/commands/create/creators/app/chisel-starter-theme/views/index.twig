@@ -13,8 +13,8 @@ In order to covert back to a grid, add the following classes to the c-posts-item
     {% endblock %}
 
     <div class="o-layout">
-      <div class="{{ bem('o-layout__item', (sidebar ? '8' : '12') ~ '-large') }}">
-        <div class="c-posts-items {{ bem('o-grid', 'cols-1', 'cols-2-small', (sidebar ? 'cols-2' : 'cols-3') ~ '-medium') }} js-load-more-container">
+      <div class="{{ bem('o-layout__item', (sidebar.content ? '8' : '12') ~ '-large') }}">
+        <div class="c-posts-items {{ bem('o-grid', 'cols-1', 'cols-2-small', (sidebar.content ? 'cols-2' : 'cols-3') ~ '-medium') }} js-load-more-container">
           {% if posts is not empty %}
             {% for post in posts %}
               {% include ['components/' ~ post.post_type ~ '-item.twig', 'components/post-item.twig'] with {post: post} only %}
@@ -27,7 +27,7 @@ In order to covert back to a grid, add the following classes to the c-posts-item
         {% include 'components/pagination.twig' with {type: 'load-more'} %}
       </div>
 
-      {% if sidebar %}
+      {% if sidebar.content %}
         {% include 'sidebar-blog.twig' %}
       {% endif %}
     </div>

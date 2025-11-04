@@ -6,11 +6,21 @@ class Utils {
       ajax: { url, nonce },
     } = chiselScripts;
 
-    const formData = new FormData();
+    let formData;
 
-    Object.entries(ajaxData).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
+    if (ajaxData instanceof FormData) {
+      formData = ajaxData;
+    } else {
+      formData = new FormData();
+
+      Object.entries(ajaxData).forEach(([key, value]) => {
+        if (typeof value === 'object' && value !== null && !['file', 'files'].includes(key)) {
+          formData.append(key, JSON.stringify(value));
+        } else {
+          formData.append(key, value);
+        }
+      });
+    }
 
     const params = {
       method: 'POST',

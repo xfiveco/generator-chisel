@@ -21,14 +21,14 @@
 
 .c-block-edit-selector__inner {
   color: get-color('black');
-  background-color: get-color('light-grey');
+  background-color: get-color('grey-100');
 }
 
 .c-block-edit-selector__button {
   height: auto !important;
   padding: get-padding('tiny') get-padding('little') !important;
   color: get-color('black') !important;
-  border: 1px solid get-color('light-grey');
+  border: 1px solid get-color('grey-100');
   box-shadow: none !important;
 
   &.is-large {

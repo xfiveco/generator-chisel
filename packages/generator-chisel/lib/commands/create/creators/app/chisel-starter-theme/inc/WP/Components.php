@@ -31,9 +31,9 @@ final class Components {
 	/**
 	 * The sidebar widgets.
 	 *
-	 * @var string
+	 * @var array
 	 */
-	private static string $sidebar = '';
+	private static array $sidebar = array();
 
 	/**
 	 * The footer sidebars.
@@ -102,22 +102,36 @@ final class Components {
 	 *
 	 * @param string $sidebar_id The sidebar id.
 	 *
-	 * @return string
+	 * @return ?array
 	 */
-	public static function get_sidebar( string $sidebar_id = '' ): string {
-		if ( self::$sidebar !== '' ) {
-			return self::$sidebar;
-		}
+	public static function get_sidebar( string $sidebar_id = '' ): ?array {
+		$sidebar_name = null;
 
 		if ( $sidebar_id ) {
-			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-' . $sidebar_id );
+			$sidebar_name = 'chisel-sidebar-' . $sidebar_id;
 		} elseif ( is_singular( 'post' ) ) {
-			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-blog' );
+			$sidebar_name = 'chisel-sidebar-blog';
 		} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
-			self::$sidebar = Timber::get_widgets( 'chisel-sidebar-woocommerce' );
+			$sidebar_name = 'chisel-sidebar-woocommerce';
 		}
 
-		return (string) self::$sidebar;
+		if ( ! $sidebar_name ) {
+			return null;
+		}
+
+		if ( isset( self::$sidebar[ $sidebar_name ] ) ) {
+			return self::$sidebar[ $sidebar_name ];
+		}
+
+		$sidebar_content = Timber::get_widgets( $sidebar_name );
+
+		self::$sidebar[ $sidebar_name ] = array(
+			'id'      => $sidebar_id,
+			'name'    => $sidebar_name,
+			'content' => $sidebar_content,
+		);
+
+		return self::$sidebar[ $sidebar_name ];
 	}
 
 	/**

@@ -74,7 +74,7 @@ final class BlocksHelpers {
 		$context['post_id']    = $post_id;
 		$context['slug']       = $slug;
 		$context['is_preview'] = $is_preview;
-		$context['fields']     = function_exists( 'get_fields' ) ? get_fields() : array();
+		$context['fields']     = function_exists( 'get_fields' ) ? get_fields( $block['id'] ) : array();
 		$classes               = array_merge(
 			array( $slug ),
 			isset( $block['className'] ) ? array( $block['className'] ) : array(),

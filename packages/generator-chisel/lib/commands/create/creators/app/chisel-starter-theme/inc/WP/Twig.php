@@ -156,9 +156,9 @@ final class Twig implements InstanceInterface, HooksInterface {
 	 * Get the navigation menu.
 	 *
 	 * @param string $menu_name The menu name.
-	 * @return string
+	 * @return mixed - The menu object or empty string
 	 */
-	public function get_nav_menu( string $menu_name ): string {
+	public function get_nav_menu( string $menu_name ): mixed {
 		$context = Timber::context();
 
 		return $context['menus'][$menu_name] ?? '';

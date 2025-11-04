@@ -6,7 +6,7 @@
 .woocommerce:where(body:not(.woocommerce-uses-block-theme)) {
   div.product span.price,
   div.product p.price {
-    color: get-color('secondary');
+    color: get-color('foreground');
   }
 }
 
@@ -28,7 +28,7 @@
     line-height: get-line-height('large');
     color: get-color('white');
     text-align: center;
-    background-color: get-color('secondary');
+    background-color: get-color('foreground');
     border-radius: 100%;
   }
 

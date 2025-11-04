@@ -6,4 +6,12 @@
       </div>
     {% endfor %}
   </div>
+
+  {% if copyright is not empty %}
+    <div class="c-footer__copyright">
+      <div class="o-wrapper__inner">
+        {{ copyright.content }}
+      </div>
+    </div>
+  {% endif %}
 </footer>

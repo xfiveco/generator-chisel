@@ -108,11 +108,11 @@
   &:focus,
   .current-menu-item > &,
   .current-menu-parent > & {
-    color: get-color('secondary');
+    color: get-color('foreground');
     text-decoration: none;
 
     .c-main-nav__caret::before {
-      border-top-color: get-color('secondary');
+      border-top-color: get-color('foreground');
     }
   }
 }
@@ -210,15 +210,15 @@
   &:hover,
   &:focus,
   .current-menu-item > & {
-    color: get-color('secondary');
+    color: get-color('foreground');
     text-decoration: none;
 
     @include bp(large) {
-      background-color: get-color('light-grey');
+      background-color: get-color('grey-100');
     }
 
     .c-main-nav__caret::before {
-      border-top-color: get-color('secondary');
+      border-top-color: get-color('foreground');
     }
   }
 }

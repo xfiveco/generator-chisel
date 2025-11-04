@@ -13,7 +13,7 @@
         {
           "name": "Foreground",
           "slug": "foreground",
-          "color": "#000000"
+          "color": "#050a18"
         },
         {
           "name": "Background",
@@ -23,12 +23,72 @@
         {
           "name": "Primary",
           "slug": "primary",
-          "color": "#2a1468"
+          "color": "#dd2424"
+        },
+        {
+          "name": "Primary 100",
+          "slug": "primary-100",
+          "color": "#ffecec"
+        },
+        {
+          "name": "Primary 200",
+          "slug": "primary-200",
+          "color": "#f5a5a5"
+        },
+        {
+          "name": "Primary 300",
+          "slug": "primary-300",
+          "color": "#e85f5f"
+        },
+        {
+          "name": "Primary 600",
+          "slug": "primary-600",
+          "color": "#9c1616"
+        },
+        {
+          "name": "Primary 800",
+          "slug": "primary-800",
+          "color": "#641010"
+        },
+        {
+          "name": "Primary 900",
+          "slug": "primary-900",
+          "color": "#2c0707"
         },
         {
           "name": "Secondary",
           "slug": "secondary",
-          "color": "#ff6d54"
+          "color": "#22dbdb"
+        },
+        {
+          "name": "Secondary 100",
+          "slug": "secondary-100",
+          "color": "#f0fefe"
+        },
+        {
+          "name": "Secondary 200",
+          "slug": "secondary-200",
+          "color": "#bff7f7"
+        },
+        {
+          "name": "Secondary 300",
+          "slug": "secondary-300",
+          "color": "#79Ee6e6"
+        },
+        {
+          "name": "Secondary 600",
+          "slug": "secondary-600",
+          "color": "#189999"
+        },
+        {
+          "name": "Secondary 800",
+          "slug": "secondary-800",
+          "color": "#106565"
+        },
+        {
+          "name": "Secondary 900",
+          "slug": "secondary-900",
+          "color": "#0a2e2e"
         },
         {
           "name": "Black",
@@ -41,19 +101,39 @@
           "color": "#ffffff"
         },
         {
-          "name": "Grey",
-          "slug": "grey",
+          "name": "Grey 900",
+          "slug": "grey-900",
           "color": "#343a40"
         },
         {
-          "name": "Medium grey",
-          "slug": "medium-grey",
-          "color": "#cccccc"
+          "name": "Grey 800",
+          "slug": "grey-800",
+          "color": "#444444"
         },
         {
-          "name": "Light grey",
-          "slug": "light-grey",
-          "color": "#f0f1f3"
+          "name": "Grey 600",
+          "slug": "grey-600",
+          "color": "#6E6E6E"
+        },
+        {
+          "name": "Grey 400",
+          "slug": "grey-400",
+          "color": "#999999"
+        },
+        {
+          "name": "Grey 300",
+          "slug": "grey-300",
+          "color": "#c2c2c2"
+        },
+        {
+          "name": "Grey 200",
+          "slug": "grey-200",
+          "color": "#e5e5e5"
+        },
+        {
+          "name": "Grey 100",
+          "slug": "grey-100",
+          "color": "#f8f8f8"
         },
         {
           "name": "Success",
@@ -78,7 +158,7 @@
       ],
       "duotone": [
         {
-          "colors": ["#2a1468", "#ff6d54"],
+          "colors": ["#dd2424", "#22dbdb"],
           "slug": "primary-secondary",
           "name": "Primary & Secondary"
         }
@@ -87,7 +167,12 @@
         {
           "slug": "primary-secondary",
           "name": "Primary & Secondary",
-          "gradient": "linear-gradient(135deg, #2a1468 0%, #ff6d54 100%)"
+          "gradient": "linear-gradient(135deg, #dd2424 0%, #22dbdb 100%)"
+        },
+        {
+          "slug": "secondary-primary",
+          "name": "Secondary & Primary",
+          "gradient": "linear-gradient(135deg, #22dbdb 0%, #dd2424 100%)"
         }
       ]
     },
@@ -105,6 +190,11 @@
       },
       "defaultFontSizes": false,
       "fontSizes": [
+        {
+          "slug": "tiny",
+          "size": "0.75rem",
+          "name": "tiny"
+        },
         {
           "slug": "small",
           "size": "0.875rem",
@@ -126,20 +216,20 @@
         },
         {
           "slug": "large",
-          "size": "1.5rem",
+          "size": "1.25rem",
           "name": "Large",
           "fluid": {
             "min": "1.125rem",
-            "max": "1.5rem"
+            "max": "1.25rem"
           }
         },
         {
           "slug": "extra-large",
-          "size": "1.75rem",
+          "size": "1.5rem",
           "name": "Extra Large",
           "fluid": {
             "min": "1.25rem",
-            "max": "1.75rem"
+            "max": "1.5rem"
           }
         },
         {
@@ -153,44 +243,59 @@
         },
         {
           "slug": "big",
-          "size": "2.25rem",
+          "size": "2.5rem",
           "name": "Big",
           "fluid": {
-            "min": "1.75rem",
-            "max": "2.25rem"
+            "min": "1.5rem",
+            "max": "2.5rem"
           }
         },
         {
           "slug": "huge",
-          "size": "3rem",
+          "size": "3.5rem",
           "name": "Huge",
           "fluid": {
-            "min": "2.25rem",
-            "max": "3rem"
+            "min": "2.5rem",
+            "max": "3.5rem"
           }
         }
       ],
       "fontFamilies": [
         {
-          "fontFamily": "Quicksand,sans-serif",
+          "fontFamily": "Roboto,sans-serif",
           "slug": "body",
-          "name": "Quicksand",
+          "name": "Roboto",
           "fontFace": [
             {
-              "fontFamily": "Quicksand",
-              "fontWeight": "400",
+              "fontFamily": "Roboto",
+              "fontWeight": "300",
               "fontStyle": "normal",
               "fontStretch": "normal",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/quicksand-regular.woff2"]
+              "src": ["file:./assets/fonts/roboto-300.woff2"]
             },
             {
-              "fontFamily": "Quicksand",
+              "fontFamily": "Roboto",
               "fontWeight": "700",
               "fontStyle": "normal",
               "fontStretch": "normal",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/quicksand-700.woff2"]
+              "src": ["file:./assets/fonts/roboto-700.woff2"]
+            }
+          ]
+        },
+        {
+          "fontFamily": "Manrope,sans-serif",
+          "slug": "headings",
+          "name": "Manrope",
+          "fontFace": [
+            {
+              "fontFamily": "Manrope",
+              "fontWeight": "700",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/manrope-700.woff2"]
             }
           ]
         }
@@ -259,6 +364,11 @@
           "size": "2rem",
           "slug": "90",
           "name": "9"
+        },
+        {
+          "size": "3rem",
+          "slug": "100",
+          "name": "10"
         }
       ]
     },
@@ -271,7 +381,8 @@
         "medium": "var(--wp--preset--spacing--60)",
         "large": "var(--wp--preset--spacing--70)",
         "xlarge": "var(--wp--preset--spacing--80)",
-        "big": "var(--wp--preset--spacing--90)"
+        "big": "var(--wp--preset--spacing--90)",
+        "huge": "var(--wp--preset--spacing--100)"
       },
       "padding": {
         "tiny": "var(--wp--preset--spacing--20)",
@@ -281,7 +392,8 @@
         "medium": "var(--wp--preset--spacing--60)",
         "large": "var(--wp--preset--spacing--70)",
         "xlarge": "var(--wp--preset--spacing--80)",
-        "big": "var(--wp--preset--spacing--90)"
+        "big": "var(--wp--preset--spacing--90)",
+        "huge": "var(--wp--preset--spacing--100)"
       },
       "gap": {
         "tiny": "var(--wp--preset--spacing--20)",
@@ -291,7 +403,8 @@
         "medium": "var(--wp--preset--spacing--60)",
         "large": "var(--wp--preset--spacing--70)",
         "xlarge": "var(--wp--preset--spacing--80)",
-        "big": "var(--wp--preset--spacing--90)"
+        "big": "var(--wp--preset--spacing--90)",
+        "huge": "var(--wp--preset--spacing--100)"
       },
       "border-radius": {
         "tiny": "0.25rem",
@@ -324,8 +437,8 @@
       "line-height": {
         "small": 1.15,
         "medium": 1.25,
-        "normal": 1.35,
-        "large": 1.5
+        "normal": 1.5,
+        "large": 1.75
       },
       "transition": {
         "slow": "all ease-in-out 0.5s",
@@ -361,7 +474,7 @@
         },
         ":hover": {
           "color": {
-            "text": "var(--wp--preset--color--secondary)"
+            "text": "var(--wp--preset--color--foreground)"
           },
           "typography": {
             "textDecoration": "underline"
@@ -370,7 +483,7 @@
       },
       "heading": {
         "typography": {
-          "fontFamily": "var(--wp--preset--font-family--body)",
+          "fontFamily": "var(--wp--preset--font-family--headings)",
           "fontWeight": "700",
           "lineHeight": "var(--wp--custom--line-height--normal)"
         },

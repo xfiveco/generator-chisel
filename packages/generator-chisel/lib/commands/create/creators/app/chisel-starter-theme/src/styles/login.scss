@@ -39,7 +39,7 @@ body.login {
       justify-content: center;
       width: 36%;
       padding: 0 7%;
-      background: linear-gradient(180deg, get-color('light-grey') 0%, get-color('white') 100%);
+      background: linear-gradient(180deg, get-color('grey-100') 0%, get-color('white') 100%);
     }
 
     @include bp(large) {
@@ -123,7 +123,7 @@ body.login {
     font-size: get-font-size('large');
     font-weight: 700;
     text-align: center;
-    background: linear-gradient(51deg, get-color('light-grey'), rgba(255, 255, 255, 50%));
+    background: linear-gradient(51deg, get-color('grey-100'), rgba(255, 255, 255, 50%));
     opacity: 0;
     transition: get-transition('normal');
 

@@ -6,7 +6,9 @@
 }
 
 .c-post__inner {
-  margin-bottom: get-margin('medium');
+  .single & {
+    margin-bottom: get-margin('medium');
+  }
 }
 
 .c-post__meta {

@@ -7,8 +7,8 @@
   <article id="post-{{ post.ID }}" itemscope itemtype="https://schema.org/Product" class="{{ post_classes(post.class) }}">
     <section class="o-wrapper__inner {{ wrapper_class }} {{ bem('c-post', post.type|default('page')) }}">
 
-      <div class="o-layout c-content{% if sidebar %} has-sidebar{% endif %} product">
-        <div class="{{ bem('o-layout__item', (sidebar ? '8' : '12') ~ '-large') }} c-content__inner">
+      <div class="o-layout c-content{% if sidebar.content %} has-sidebar{% endif %} product">
+        <div class="{{ bem('o-layout__item', (sidebar.content ? '8' : '12') ~ '-large') }} c-content__inner">
 
           <div class="o-layout c-product__inner">
             <div class="c-product__gallery {{ bem('o-layout__item', '6-large') }}">
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        {% if sidebar %}
+        {% if sidebar.content %}
           {# Register product sidebar in Woocommerce.php if you want to use it #}
           {% include 'sidebar-woocommerce-product.twig' %}
         {% endif %}

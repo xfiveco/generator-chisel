@@ -109,7 +109,7 @@ final class CustomPostTypes implements InstanceInterface, HooksInterface {
 			// 	'singular'      => __( 'Chisel CPT', 'chisel' ),
 			// 	'plural'        => __( 'Chisel CPTs', 'chisel' ),
 			// 	'supports'      => array( 'editor', 'thumbnail', 'excerpt' ),
-			// 	'menu-icon'     => 'location-alt',
+			// 	'menu_icon'     => 'dashicons-location-alt',
 			// 	'hierarchical'  => true,
 			// 	'public'        => true,
 			// 	'menu_position' => 20,

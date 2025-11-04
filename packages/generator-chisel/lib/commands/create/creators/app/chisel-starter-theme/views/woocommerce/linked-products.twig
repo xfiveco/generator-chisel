@@ -5,7 +5,7 @@
   </div>
   {% endif %}
 
-  <div class="{{ bem('o-layout__item', (sidebar ? '8' : '12') ~ '-large') }}">
+  <div class="{{ bem('o-layout__item', (sidebar.content ? '8' : '12') ~ '-large') }}">
     <div class="c-product-linked__items {{ grid_classnames }}">
       {% for post in linked_products %}
         {% include "woocommerce/content-product.twig" with {post: post} %}

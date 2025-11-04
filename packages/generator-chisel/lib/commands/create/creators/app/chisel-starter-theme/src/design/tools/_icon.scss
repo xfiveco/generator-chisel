@@ -23,6 +23,7 @@
 
     mask-repeat: no-repeat;
     mask-size: contain;
+    mask-position: center;
   }
 
   @if map.has-key($o-icon-icons, 'icon-#{$name}') {

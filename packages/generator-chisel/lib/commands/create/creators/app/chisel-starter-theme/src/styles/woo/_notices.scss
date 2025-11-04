@@ -27,7 +27,7 @@
   padding: get-padding('normal') get-padding('large') get-padding('normal') px-rem(48);
   margin: 0 0 get-margin('xlarge');
   color: get-color('foreground');
-  background-color: get-color('light-grey');
+  background-color: get-color('grey-100');
   border-top: 3px solid get-color('info');
 
   &::before {
