@@ -31,16 +31,17 @@ class ChiselProduct extends TimberPost {
 	 * Get the product thumbnail. Returns the thumbnail responsive image html.
 	 *
 	 * @param string $size Thumbnail size.
+	 * @param array  $attrs Image attributes.
 	 *
 	 * @return string Responsive <img> HTML, or empty string.
 	 */
-	public function get_thumbnail( string $size = 'woocommerce_thumbnail' ): string {
+	public function get_thumbnail( string $size = 'woocommerce_thumbnail', array $attrs = array() ): string {
 		$size = apply_filters( 'single_product_archive_thumbnail_size', $size );
 
 		if ( $this->thumbnail_html === null ) {
 			$thumbnail_id = $this->get_thumbnail_id();
 
-			$this->thumbnail_html = $thumbnail_id ? ImageHelpers::get_responsive_image( $thumbnail_id, $size ) : '';
+			$this->thumbnail_html = $thumbnail_id ? ImageHelpers::get_responsive_image( $thumbnail_id, $size, $attrs ) : '';
 		}
 
 		return $this->thumbnail_html;

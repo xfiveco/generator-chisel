@@ -20,6 +20,10 @@ class ChiselImage extends TimberImage {
 	 * @return string The responsive <img> HTML.
 	 */
 	public function responsive( string $size = 'medium', array $attrs = array() ): string {
+		if ( isset( $attrs['class'] ) ) {
+			$attrs['class'] .= sprintf( ' wp-image-%s size-%s', absint( $this->ID ), esc_attr( $size ) );
+		}
+
 		return wp_get_attachment_image( $this->ID, $size, false, $attrs );
 	}
 }
