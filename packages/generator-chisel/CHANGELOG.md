@@ -2,6 +2,12 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.2.1 (2025-11-05)</small>
+
+- fixes and defaults adjustments, improvements ([8d0ceca](https://github.com/xfiveco/generator-chisel/commit/8d0ceca))
+- responsive image and get_thumbnail adjustments ([1d5366f](https://github.com/xfiveco/generator-chisel/commit/1d5366f))
+- update theme version ([8f1b860](https://github.com/xfiveco/generator-chisel/commit/8f1b860))
+
 ## 2.2.0 (2025-10-22)
 
 - composer update, min req php 8.2, refactor to modern php ([d55aae0](https://github.com/xfiveco/generator-chisel/commit/d55aae0))
