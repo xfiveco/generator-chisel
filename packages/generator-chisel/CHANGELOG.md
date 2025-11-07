@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.2.2 (2025-11-07)</small>
+
+- blocks adjustments, new patterns, fixes, block mods ([19f038f](https://github.com/xfiveco/generator-chisel/commit/19f038f))
+
 ## <small>2.2.1 (2025-11-05)</small>
 
 - fixes and defaults adjustments, improvements ([8d0ceca](https://github.com/xfiveco/generator-chisel/commit/8d0ceca))
