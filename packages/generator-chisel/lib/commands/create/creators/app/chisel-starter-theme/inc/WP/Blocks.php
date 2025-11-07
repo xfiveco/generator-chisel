@@ -77,9 +77,17 @@ final class Blocks implements InstanceInterface, HooksInterface {
 	public function set_properties(): void {
 		$this->blocks_category           = 'chisel-blocks';
 		$this->block_patterns_categories = array(
-			'cta' => array(
+			'cta'      => array(
 				'label'       => __( 'Call to Action', 'chisel' ),
 				'description' => __( 'Call to Action Sections.', 'chisel' ),
+			),
+			'features' => array(
+				'label'       => __( 'Features', 'chisel' ),
+				'description' => __( 'Features Sections.', 'chisel' ),
+			),
+			'hero'     => array(
+				'label'       => __( 'Hero', 'chisel' ),
+				'description' => __( 'Hero Sections.', 'chisel' ),
 			),
 		);
 	}

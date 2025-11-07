@@ -16,6 +16,10 @@
 
   margin-bottom: get-margin('normal');
   text-align: center;
+
+  &:hover img {
+    transform: scale(1.05);
+  }
 }
 
 .c-product-item__image {

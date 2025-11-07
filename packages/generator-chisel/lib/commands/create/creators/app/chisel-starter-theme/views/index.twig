@@ -20,7 +20,7 @@ In order to covert back to a grid, add the following classes to the c-posts-item
               {% include ['components/' ~ post.post_type ~ '-item.twig', 'components/post-item.twig'] with {post: post} only %}
             {% endfor %}
           {% else %}
-            <h2>{{ __('No posts found', 'chisel') }}</h2>
+            {% include 'components/no-results.twig' %}
           {% endif %}
         </div>
 

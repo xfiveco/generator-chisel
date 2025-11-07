@@ -1,0 +1,14 @@
+@use '~design' as *;
+
+.wp-block-group-is-layout-constrained {
+  > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+    max-width: get-layout-size('content');
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-inline: get-padding('normal');
+  }
+}
+
+:where(.wp-block-group.has-background.alignfull) {
+  padding: get-padding('small') 0;
+}

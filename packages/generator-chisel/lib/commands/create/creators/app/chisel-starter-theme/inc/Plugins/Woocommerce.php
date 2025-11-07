@@ -61,6 +61,8 @@ final class Woocommerce implements InstanceInterface, HooksInterface {
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'before_shop_loop_div_close' ), 31 );
 
 		add_action( 'customize_register', array( $this, 'modify_customizer' ), 20 );
+
+		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
 	}
 
 	/**
@@ -140,6 +142,19 @@ final class Woocommerce implements InstanceInterface, HooksInterface {
 
 		if ( $category_page_display_control && isset( $category_page_display_control->choices ) ) {
 				unset( $category_page_display_control->choices['both'] );
+		}
+	}
+
+	/**
+	 * Set woocommerce query to get orderby setting from customizer so that is consistent with ajax queries.
+	 *
+	 * @param \WP_Query $query
+	 *
+	 * @return void
+	 */
+	public function pre_get_posts( \WP_Query $query ): void {
+		if ( ! is_admin() && $query->is_main_query() && ( is_shop() || is_product_category() || is_product_tag() ) ) {
+			$query->set( 'orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
 		}
 	}
 

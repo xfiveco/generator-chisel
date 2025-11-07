@@ -111,7 +111,7 @@ final class Components {
 			$sidebar_name = 'chisel-sidebar-' . $sidebar_id;
 		} elseif ( is_singular( 'post' ) ) {
 			$sidebar_name = 'chisel-sidebar-blog';
-		} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
+		} elseif ( function_exists( 'is_shop' ) && ( is_shop() || is_product_category() || is_product_tag() ) ) {
 			$sidebar_name = 'chisel-sidebar-woocommerce';
 		}
 
@@ -123,7 +123,7 @@ final class Components {
 			return self::$sidebar[ $sidebar_name ];
 		}
 
-		$sidebar_content = Timber::get_widgets( $sidebar_name );
+		$sidebar_content = apply_filters( 'chisel_sidebar_content', Timber::get_widgets( $sidebar_name ), $sidebar_name );
 
 		self::$sidebar[ $sidebar_name ] = array(
 			'id'      => $sidebar_id,

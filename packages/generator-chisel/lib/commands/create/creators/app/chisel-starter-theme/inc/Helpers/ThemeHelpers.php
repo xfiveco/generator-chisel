@@ -159,9 +159,9 @@ final class ThemeHelpers {
 			$logo_data = wp_get_attachment_image_src( $logo_id, 'medium' );
 		} else {
 			$logo_data = array(
-				ImageHelpers::get_image_url( 'chisel.png' ),
-				84,
-				84,
+				ImageHelpers::get_image_url( 'chisel.svg' ),
+				200,
+				60,
 				0,
 			);
 		}

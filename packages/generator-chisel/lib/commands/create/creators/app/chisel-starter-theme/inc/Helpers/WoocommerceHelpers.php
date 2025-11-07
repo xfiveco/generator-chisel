@@ -30,9 +30,9 @@ final class WoocommerceHelpers {
 			return;
 		}
 
-		global $product;
+		if ( $post->post_type === 'product' ) {
+			global $product;
 
-		if ( is_woocommerce() ) {
 			$product = wc_get_product( $post->ID );
 		}
 	}
