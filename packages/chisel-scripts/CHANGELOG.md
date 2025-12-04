@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.0.0 (2025-12-04)
+
+- update chisel scripts peerDependencies ([7110a79](https://github.com/xfiveco/generator-chisel/commit/7110a79))
+
 ## 2.0.0-2.0.0-alpha.8.1 (2025-03-18)
 
 - fix Interfaces and Traits namespaces in php < 8, add nvmrc to root folder ([cb60f42](https://github.com/xfiveco/generator-chisel/commit/cb60f42))
