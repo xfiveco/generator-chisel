@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.3.0 (2025-12-15)
+
+- add wp exp-modules support, update wp scripts, build file size limits, auto clear patterns cache, no ([728f566](https://github.com/xfiveco/generator-chisel/commit/728f566))
+- Publish ([0fc6fce](https://github.com/xfiveco/generator-chisel/commit/0fc6fce))
+
 ## <small>2.2.2 (2025-11-07)</small>
 
 - blocks adjustments, new patterns, fixes, block mods ([19f038f](https://github.com/xfiveco/generator-chisel/commit/19f038f))

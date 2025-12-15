@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.1.0 (2025-12-15)
+
+- add wp exp-modules support, update wp scripts, build file size limits, auto clear patterns cache, no ([728f566](https://github.com/xfiveco/generator-chisel/commit/728f566))
+
 ## 2.0.0 (2025-12-04)
 
 - update chisel scripts peerDependencies ([7110a79](https://github.com/xfiveco/generator-chisel/commit/7110a79))
