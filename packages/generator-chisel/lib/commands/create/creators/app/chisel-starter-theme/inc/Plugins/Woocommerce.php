@@ -55,6 +55,8 @@ final class Woocommerce implements InstanceInterface, HooksInterface {
 	public function action_hooks(): void {
 		$this->remove_actions();
 
+		add_action( 'rest_api_init', array( $this, 'register_cart' ) );
+
 		add_action( 'after_setup_theme', array( $this, 'add_woocommerce_support' ) );
 
 		add_action( 'woocommerce_before_shop_loop', array( $this, 'before_shop_loop_div_open' ), 19 );
@@ -99,6 +101,22 @@ final class Woocommerce implements InstanceInterface, HooksInterface {
 
 		remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
 		remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+	}
+
+	/**
+	 * Get access to cart in REST API endpoints.
+	 *
+	 * @return void
+	 */
+	public function register_cart(): void {
+		include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
+		include_once WC_ABSPATH . 'includes/wc-notice-functions.php';
+
+		WC()->initialize_session();
+		WC()->initialize_cart();
+		WC()->session->set_customer_session_cookie( true );
+
+		WC()->cart->get_cart();
 	}
 
 	/**

@@ -20,14 +20,12 @@ function loadExtensions() {
 export default function wpScripts(api) {
   api.registerCommand(
     'build',
-    (command) => command.description('build for production'),
-    // .option(
-    //   '--no-clean',
-    //   'do not remove the dist directory before building the project',
-    // )
-    // .option('--watch', 'watch for changes')
-    // .option('--report', 'generate report to help analyze bundles content')
-    async () => {
+    (command) => command.description('build for production')
+    .option(
+      '--experimental-modules',
+      'do not enable experimental modules',
+    ),
+    async (options) => {
       process.env.NODE_ENV = 'production';
 
       for (const extension of await loadExtensions()) {
@@ -36,7 +34,13 @@ export default function wpScripts(api) {
         await extension.build(api);
       }
 
-      await runLocalWithExit(['wp-scripts', 'build'], {
+      const args = ['wp-scripts', 'build'];
+
+      if (options.experimentalModules) { // Disabled by default. Enable with `--experimental-modules`.
+        args.push('--experimental-modules');
+      }
+
+      await runLocalWithExit(args, {
         cwd: api.resolve(),
       });
     },
@@ -44,8 +48,12 @@ export default function wpScripts(api) {
 
   api.registerCommand(
     'start',
-    (command) => command.description('start development server'),
-    async () => {
+    (command) => command.description('start development server')
+    .option(
+      '--experimental-modules',
+      'do not enable experimental modules',
+    ),
+    async (options) => {
       process.env.NODE_ENV = 'development';
 
       const extensions = await loadExtensions();
@@ -62,7 +70,13 @@ export default function wpScripts(api) {
         await extension.start(api);
       }
 
-      await runLocalWithExit(['wp-scripts', 'start', '--hot'], {
+      const args = ['wp-scripts', 'start', '--hot'];
+
+      if (options.experimentalModules) { // Disabled by default. Enable with `--experimental-modules`.
+        args.push('--experimental-modules');
+      }
+
+      await runLocalWithExit(args, {
         cwd: api.resolve(),
       });
     },

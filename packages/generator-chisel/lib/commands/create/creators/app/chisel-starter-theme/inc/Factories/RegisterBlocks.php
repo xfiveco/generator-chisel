@@ -187,13 +187,22 @@ final class RegisterBlocks {
 
 								// Register ignored scripts in dev mode in order to watch changes.
 								if ( ThemeHelpers::is_fast_refresh() || ( ! ThemeHelpers::is_fast_refresh() && ! in_array( $script, $ignore_scripts, true ) ) ) {
-									wp_register_script(
-										$block_handle,
-										$file_url,
-										$script_asset['dependencies'],
-										$script_asset['version'],
-										$register_script_args,
-									);
+									if ( 'viewscriptmodule' === $script_handle ) {
+										wp_register_script_module(
+											$block_handle,
+											$file_url,
+											$script_asset['dependencies'],
+											$script_asset['version']
+										);
+									} else {
+										wp_register_script(
+											$block_handle,
+											$file_url,
+											$script_asset['dependencies'],
+											$script_asset['version'],
+											$register_script_args
+										);
+									}
 								}
 							}
 						}

@@ -2,7 +2,6 @@
 
 namespace Chisel\WP;
 
-use Automattic\WooCommerce\Internal\Admin\ProductForm\Component;
 use Timber\Timber;
 use Timber\Site as TimberSite;
 

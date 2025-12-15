@@ -1,6 +1,6 @@
 {
   "name": "<%= app.nameSlug %>",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "private": true,
   "license": "UNLICENSED",
   "author": "<%= app.author %>",
@@ -10,10 +10,10 @@
     "devcontainer:up": "npm run --silent devcontainer -- up --workspace-folder ../../..",
     "devcontainer:enter": "/usr/bin/env bash ../../../.devcontainer/exec bash",
     "devcontainer:start": "/usr/bin/env bash ../../../.devcontainer/exec npm run --silent start",
-    "start": "chisel-scripts start",
+    "start": "chisel-scripts start --experimental-modules",
     "dev": "npm run --silent start",
-    "build": "chisel-scripts build && npm run lint && npm run phpcs && npm run twigcs",
-    "build-scripts": "chisel-scripts build",
+    "build-scripts": "chisel-scripts build --experimental-modules",
+    "build": "npm run build-scripts && npm run lint && npm run phpcs && npm run twigcs",
     "add-page": "chisel-scripts add-page",
     "create-block": "chisel-scripts create-block --category=chisel-blocks --namespace=chisel",
     "create-dynamic-block": "npm run create-block --variant=dynamic",
@@ -27,7 +27,7 @@
     "swiper": "^11.1.10"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^27.9.0",
+    "@wordpress/scripts": "^31.1.0",
     "chisel-scripts": "*",
     "cross-env": "^7.0.3"
   },

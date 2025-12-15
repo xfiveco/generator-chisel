@@ -30,6 +30,13 @@ final class Blocks implements InstanceInterface, HooksInterface {
 	private RegisterBlocks $register_blocks_factory;
 
 	/**
+	 * Theme.
+	 *
+	 * @var \WP_Theme
+	 */
+	private ?\WP_Theme $theme = null;
+
+	/**
 	 * Blocks.
 	 *
 	 * @var array
@@ -50,6 +57,14 @@ final class Blocks implements InstanceInterface, HooksInterface {
 	 * @var array
 	 */
 	private array $block_patterns_categories = array();
+
+
+	/**
+	 * Blocks patterns categories namespace.
+	 *
+	 * @var string
+	 */
+	private string $block_patterns_categories_namespace = '';
 
 	/**
 	 * Blocks twig file base path.
@@ -75,8 +90,10 @@ final class Blocks implements InstanceInterface, HooksInterface {
 	 * Set properties.
 	 */
 	public function set_properties(): void {
-		$this->blocks_category           = 'chisel-blocks';
-		$this->block_patterns_categories = array(
+		$this->theme                               = wp_get_theme();
+		$this->blocks_category                     = 'chisel-blocks';
+		$this->block_patterns_categories_namespace = 'chisel-patterns';
+		$this->block_patterns_categories           = array(
 			'cta'      => array(
 				'label'       => __( 'Call to Action', 'chisel' ),
 				'description' => __( 'Call to Action Sections.', 'chisel' ),
@@ -173,9 +190,11 @@ final class Blocks implements InstanceInterface, HooksInterface {
 			return;
 		}
 
+		$this->maybe_clear_patterns_cache();
+
 		foreach ( $this->block_patterns_categories as $slug => $category ) {
 			$category['label'] = sprintf( '[%s] %s', ThemeHelpers::get_theme_name(), esc_attr( $category['label'] ) );
-			register_block_pattern_category( 'chisel-patterns/' . $slug, $category );
+			register_block_pattern_category( $this->block_patterns_categories_namespace . '/' . $slug, $category );
 		}
 	}
 
@@ -311,6 +330,35 @@ final class Blocks implements InstanceInterface, HooksInterface {
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * Maybe clear patterns cache. Clear patterns cache if block patterns categories are changed / added.
+	 *
+	 * @return void
+	 */
+	protected function maybe_clear_patterns_cache() {
+		if ( ! $this->block_patterns_categories ) {
+			return;
+		}
+
+		$theme_patterns      = $this->block_patterns_categories;
+		$cached_patterns     = $this->theme->get_block_patterns();
+		$patterns_categories = array();
+
+		foreach ( $cached_patterns as $pattern ) {
+			foreach ( $pattern['categories'] ?? array() as $category ) {
+				$category = str_replace( $this->block_patterns_categories_namespace . '/', '', $category );
+
+				if ( isset( $theme_patterns[ $category ] ) ) {
+					unset( $theme_patterns[ $category ] );
+				}
+			}
+		}
+
+		if ( ! empty( $theme_patterns ) ) {
+			$this->theme->delete_pattern_cache();
 		}
 	}
 }
