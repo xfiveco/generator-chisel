@@ -77,7 +77,7 @@ export default function wpScripts(api) {
       }
 
       for (const extension of extensions) {
-        if (!extension.module.module.build || (extension.name === 'icons.mjs' && !options.useIconsModule)) continue;
+        if (!extension.module.build || (extension.name === 'icons.mjs' && !options.useIconsModule)) continue;
 
         await extension.module.start(api);
       }
