@@ -1,5 +1,7 @@
 @use 'sass:map';
+@use 'sass:list';
 @use '../settings/icon-settings' as *;
+@use '../settings/' as *;
 
 @mixin icon-svg($name, $multicolor: false, $animated: false) {
   display: block;
@@ -8,17 +10,31 @@
   content: '';
 
   $icons-path: '../../assets/icons';
+  $icon-path: null;
+
+  @if $use-icons-module {
+    $icon-path: '#{$icons-path}/icons.svg#icon-#{$name}-view';
+  } @else {
+    $icon-path: '#{$icons-path}-source/#{$name}.svg';
+  }
 
   @if $multicolor {
-    background-image: url('#{$icons-path}/icons.svg#icon-#{$name}-view');
+    @if list.index($multicolor-icons, $name) {
+      background-image: url($icon-path);
+    }
+
     background-repeat: no-repeat;
     background-size: contain;
   } @else {
     background-color: var(--o-icon-color, currentcolor);
     @if $animated {
-      mask: url('#{$icons-path}/animated/#{$name}.svg');
+      @if list.index($animated-icons, $name) {
+        mask: url('#{$icons-path}/animated/#{$name}.svg');
+      }
     } @else {
-      mask: url('#{$icons-path}/icons.svg#icon-#{$name}-view');
+      @if list.index($static-icons, $name) {
+        mask: url($icon-path);
+      }
     }
 
     mask-repeat: no-repeat;
@@ -26,7 +42,7 @@
     mask-size: contain;
   }
 
-  @if map.has-key($o-icon-icons, 'icon-#{$name}') {
+  @if $use-icons-module and map.has-key($o-icon-icons, 'icon-#{$name}') {
     width: map.get($o-icon-icons, 'icon-#{$name}') * 1em;
   } @else {
     width: 1em;

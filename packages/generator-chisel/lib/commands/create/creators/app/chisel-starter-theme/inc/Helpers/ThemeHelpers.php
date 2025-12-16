@@ -60,6 +60,15 @@ final class ThemeHelpers {
 	}
 
 	/**
+	 * Check if icons module should be used.
+	 *
+	 * @return bool
+	 */
+	public static function should_use_icons_module(): bool {
+		return defined( 'CHISEL_USE_ICONS_MODULE' ) && CHISEL_USE_ICONS_MODULE;
+	}
+
+	/**
 	 * Generate BEM class names with modifiers
 	 *
 	 * @param string $name

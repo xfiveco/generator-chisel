@@ -81,6 +81,7 @@ final class Twig implements InstanceInterface, HooksInterface {
 		$this->register_function( $twig, 'bem', array( $this, 'bem' ) );
 		$this->register_function( $twig, 'breadcrumbs', array( $this, 'breadcrumbs' ) );
 		$this->register_function( $twig, 'get_icon', array( $this, 'get_icon' ) );
+		$this->register_function( $twig, 'should_use_icons_module', array( $this, 'should_use_icons_module' ) );
 
 		return $twig;
 	}
@@ -317,5 +318,14 @@ final class Twig implements InstanceInterface, HooksInterface {
 	 */
 	public function get_icon( array $args ): string {
 		return Components::get_icon( $args );
+	}
+
+	/**
+	 * Check if icons module should be used
+	 *
+	 * @return bool
+	 */
+	public function should_use_icons_module(): bool {
+		return ThemeHelpers::should_use_icons_module();
 	}
 }

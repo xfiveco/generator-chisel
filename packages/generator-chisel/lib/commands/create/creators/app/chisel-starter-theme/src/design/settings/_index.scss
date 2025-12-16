@@ -1,7 +1,14 @@
 @use '../tools/theme' as *;
 
+/*
+ * Settings
+ */
 $scrollbar-width: 15px;
 $root-font-size: 16px;
+
+/*
+ * Layout settings
+ */
 $breakpoints: (
   small: 480px,
   msmall: 640px,
@@ -22,5 +29,13 @@ $gaps: (
   'xlarge': get-gap('xlarge'),
   'big': get-gap('big'),
 );
+
+/*
+ * Icons
+ */
 $static-icons: ('minus', 'plus', 'arrow-right', 'arrow-left');
 $animated-icons: ('loader');
+$multicolor-icons: ();
+
+// Icons module. Also requires packacke.json and wp-config configuration.
+$use-icons-module: false;

@@ -13,7 +13,10 @@ function loadExtensions() {
     .sort();
 
   return Promise.all(
-    files.map((file) => import(pathToFileURL(join(extensionsDir, file)))),
+    files.map(async (file) => {
+      const module = await import(pathToFileURL(join(extensionsDir, file)));
+      return { name: file, module };
+    })
   );
 }
 
@@ -24,14 +27,19 @@ export default function wpScripts(api) {
     .option(
       '--experimental-modules',
       'do not enable experimental modules',
+    )
+    .option(
+      '--use-icons-module',
+      'Use icons generator (sprite) module'
     ),
     async (options) => {
       process.env.NODE_ENV = 'production';
 
       for (const extension of await loadExtensions()) {
-        if (!extension.build) continue;
+         if (!extension.module.build || (extension.name === 'icons.mjs' && !options.useIconsModule)) continue;
 
-        await extension.build(api);
+
+        await extension.module.build(api);
       }
 
       const args = ['wp-scripts', 'build'];
@@ -52,6 +60,10 @@ export default function wpScripts(api) {
     .option(
       '--experimental-modules',
       'do not enable experimental modules',
+    )
+    .option(
+      '--use-icons-module',
+      'Use icons generator (sprite) module'
     ),
     async (options) => {
       process.env.NODE_ENV = 'development';
@@ -59,15 +71,15 @@ export default function wpScripts(api) {
       const extensions = await loadExtensions();
 
       for (const extension of extensions) {
-        if (!extension.build) continue;
+        if (!extension.module.build || (extension.name === 'icons.mjs' && !options.useIconsModule)) continue;
 
-        await extension.build(api);
+        await extension.module.build(api);
       }
 
       for (const extension of extensions) {
-        if (!extension.start) continue;
+        if (!extension.module.module.build || (extension.name === 'icons.mjs' && !options.useIconsModule)) continue;
 
-        await extension.start(api);
+        await extension.module.start(api);
       }
 
       const args = ['wp-scripts', 'start', '--hot'];

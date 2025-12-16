@@ -31,9 +31,11 @@ $_animated-icons: settings.$animated-icons;
     display: inline-flex;
   }
 
-  @each $icon, $width-ratio in $o-icon-icons {
-    &--#{$icon} {
-      width: $width-ratio * 1em;
+  @if settings.$use-icons-module {
+    @each $icon, $width-ratio in $o-icon-icons {
+      &--#{$icon} {
+        width: $width-ratio * 1em;
+      }
     }
   }
 

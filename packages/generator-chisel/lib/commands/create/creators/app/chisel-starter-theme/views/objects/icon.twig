@@ -14,9 +14,15 @@ color: string // css color for the icon
 {% set inline_class = inline ? 'o-icon--inline' : '' %}
 {% set icon_variant_class = is_color ? 'o-icon--color' : 'o-icon--mono' %}
 {% set rectangle_class = rectangle ? 'o-icon--icon-' ~ name : '' %}
-{% set icon_prefix = 'icon-' %}
-{% set icon_name = icon_prefix ~ name %}
-{% set icon_path = fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ icon_name ~ '-view' %}
+
+{% if should_use_icons_module() %}
+  {% set icon_prefix = 'icon-' %}
+  {% set icon_name = icon_prefix ~ name %}
+  {% set icon_path = fn('get_template_directory_uri') ~ '/assets/icons/icons.svg' ~ '#' ~ icon_name ~ '-view' %}
+{% else %}
+  {% set icon_path = fn('get_template_directory_uri') ~ '/assets/icons-source/' ~ name ~ '.svg' %}
+{% endif %}
+
 {% set bg_style_variant = is_color ? 'background-image' : 'mask-image' %}
 {% set color_style_variant = is_css ? 'color' : 'color' %}
 {% set color_style = color ? color_style_variant ~ ': ' ~ color ~ ';' : '' %}
