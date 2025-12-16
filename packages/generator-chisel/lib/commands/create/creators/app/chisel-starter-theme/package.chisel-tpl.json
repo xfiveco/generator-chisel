@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^31.1.0",
+    "@wordpress/interactivity": "^6.36.0",
     "chisel-scripts": "*",
     "cross-env": "^7.0.3"
   },

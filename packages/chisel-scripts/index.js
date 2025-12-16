@@ -59,46 +59,27 @@ function adjustWebpackConfig(baseConfig, directory) {
       })());
   })();
 
-  const performance = {
-    maxAssetSize: 512 * 1024,
-    maxEntrypointSize: 512 * 1024,
-    hints: isProduction ? 'warning' : false,
-  };
-
-  const isMultiConfig = Array.isArray(baseConfig);
-
-  const updatedConfig = isMultiConfig
-  ? baseConfig.map((config, index) => {
-      let configEntry = {};
-
-      // Config 0: standard build - JS + styles
-      if (index === 0) {
-        configEntry = {
-          ...(blockMetadataFiles.length > 0 && typeof config.entry === 'function' ? config.entry() : config.entry || {}),
-          ...entriesFromFiles(scriptsFiles),
-          ...entriesFromFiles(stylesFiles),
-        };
-      }
-      // Config 1: ESM build - For block only
-      else if (index === 1) {
-        configEntry = {
-          ...(blockMetadataFiles.length > 0 && typeof config.entry === 'function' ? config.entry() : config.entry || {}),
-        };
-      }
-
-      return {
-        ...config,
-        entry: configEntry,
-        resolve: {
+  const preparedConfig = (config, index = null) => {
+    return {
+      ...config,
+      output: {
+        ...config.output,
+        clean: isProduction,
+      },
+      resolve: {
         ...(config.resolve || {}),
         alias: {
-            ...((config.resolve && config.resolve.alias) || {}),
-            '~design$': pathMod.join(src, 'design'),
-          },
+          ...((config.resolve && config.resolve.alias) || {}),
+          '~design$': pathMod.join(src, 'design'),
         },
-        performance: performance,
-        devServer: config.devServer && {
-          ...config.devServer,
+      },
+      performance: {
+        maxAssetSize: 512 * 1024,
+        maxEntrypointSize: 512 * 1024,
+        hints: isProduction ? 'warning' : false,
+      },
+      devServer: config.devServer && {
+        ...config.devServer,
         allowedHosts: [new URL(getUrl()).host],
         ...(process.env.CHISEL_PORT && {
           host: '0.0.0.0',
@@ -115,6 +96,15 @@ function adjustWebpackConfig(baseConfig, directory) {
               .replace(process.env.CHISEL_PORT, Number(process.env.CHISEL_PORT) + 1),
           },
         }),
+        setupMiddlewares: (middlewares, devServer) => {
+          if (!devServer) {
+             return middlewares;
+          }
+
+          console.log(`🌐 Dev server ready at: ${getUrl()}`);
+
+          return middlewares;
+        }
       },
       optimization: {
         ...config.optimization,
@@ -132,55 +122,49 @@ function adjustWebpackConfig(baseConfig, directory) {
           ],
         }),
       ],
-      };
-    })
-  : {
-      ...baseConfig,
-      entry,
-      resolve: {
-        ...(baseConfig.resolve || {}),
-        alias: {
-          ...((baseConfig.resolve && baseConfig.resolve.alias) || {}),
-          '~design$': pathMod.join(src, 'design'),
-        },
-      },
-      performance: performance,
-      devServer: baseConfig.devServer && {
-        ...baseConfig.devServer,
-      allowedHosts: [new URL(getUrl()).host],
-      ...(process.env.CHISEL_PORT && {
-        host: '0.0.0.0',
-        port: Number(process.env.CHISEL_PORT) + 1,
-        client: {
-          ...baseConfig.devServer.client,
-          overlay: {
-            errors: true,
-            warnings: false,
-            runtimeErrors: false,
-          },
-          webSocketURL: new URL(getUrl())
-            .toString()
-            .replace(process.env.CHISEL_PORT, Number(process.env.CHISEL_PORT) + 1),
-        },
-      }),
-    },
-    optimization: {
-      ...baseConfig.optimization,
-      ...(!isProduction && { runtimeChunk: 'single' }),
-    },
-    plugins: [
-      ...baseConfig.plugins,
-      new CopyWebpackPlugin({
-        patterns: [
+      module: {
+        ...(config.module || {}),
+        rules: [
+          ...(config.module?.rules || []),
           {
-            from: '**/*.twig',
-            context: 'src',
-            noErrorOnMissing: true,
+            test: /\.(png|jpe?g|gif|svg)$/i,
+            type: 'asset/resource', // Load as file, not base64 in css - for smaller css file size.
           },
         ],
-      }),
-    ],
-  };
+      },
+    }
+  }
+
+  const isMultiConfig = Array.isArray(baseConfig);
+
+  const updatedConfig = isMultiConfig
+  ? baseConfig.map((config, index) => {
+      let configEntry = {};
+
+      // Config 0: standard build - JS + styles
+      if (index === 0) {
+        configEntry = {
+          ...(blockMetadataFiles.length > 0 && typeof config.entry === 'function' ? config.entry() : config.entry || {}),
+          ...entriesFromFiles(scriptsFiles),
+          ...entriesFromFiles(stylesFiles),
+        };
+      }
+      // Config 1: ESM build - For blocks only
+      else if (index === 1) {
+        configEntry = {
+          ...(blockMetadataFiles.length > 0 && typeof config.entry === 'function' ? config.entry() : config.entry || {}),
+        };
+      }
+
+      return {
+        ...preparedConfig(config, index),
+        entry: configEntry,
+      }
+    })
+  : {
+    ...preparedConfig(baseConfig),
+    entry,
+  }
 
   return updatedConfig;
 }
