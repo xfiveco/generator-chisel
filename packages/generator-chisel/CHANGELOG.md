@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.3.2 (2025-12-16)</small>
+
+- make icons module optional ([94e4c6c](https://github.com/xfiveco/generator-chisel/commit/94e4c6c))
+
 ## <small>2.3.1 (2025-12-16)</small>
 
 - add wp interactivity api support, optimize css build, refactor webpack config ([319d822](https://github.com/xfiveco/generator-chisel/commit/319d822))
