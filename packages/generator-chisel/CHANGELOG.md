@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.3.1 (2025-12-16)</small>
+
+- add wp interactivity api support, optimize css build, refactor webpack config ([319d822](https://github.com/xfiveco/generator-chisel/commit/319d822))
+
 ## 2.3.0 (2025-12-15)
 
 - add wp exp-modules support, update wp scripts, build file size limits, auto clear patterns cache, no ([728f566](https://github.com/xfiveco/generator-chisel/commit/728f566))
