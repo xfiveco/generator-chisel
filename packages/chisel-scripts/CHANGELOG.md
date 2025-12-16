@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.1.3 (2025-12-16)</small>
+
+- fix npm start command bug ([7c524bd](https://github.com/xfiveco/generator-chisel/commit/7c524bd))
+
 ## <small>2.1.2 (2025-12-16)</small>
 
 - make icons module optional ([94e4c6c](https://github.com/xfiveco/generator-chisel/commit/94e4c6c))
