@@ -162,7 +162,7 @@ function adjustWebpackConfig(baseConfig, directory) {
       }
     })
   : {
-    ...preparedConfig(baseConfig),
+    ...preparedConfig(baseConfig, 0),
     entry,
   }
 
