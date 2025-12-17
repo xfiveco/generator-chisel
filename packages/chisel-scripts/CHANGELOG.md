@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.1.4 (2025-12-17)</small>
+
+- fix no experimental dev mode runtime chunk ([84817eb](https://github.com/xfiveco/generator-chisel/commit/84817eb))
+
 ## <small>2.1.3 (2025-12-16)</small>
 
 - fix npm start command bug ([7c524bd](https://github.com/xfiveco/generator-chisel/commit/7c524bd))
