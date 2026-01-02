@@ -2,6 +2,12 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.3.3 (2026-01-02)</small>
+
+- Publish ([0e98159](https://github.com/xfiveco/generator-chisel/commit/0e98159))
+- Publish ([2864ed6](https://github.com/xfiveco/generator-chisel/commit/2864ed6))
+- wp-config-updates, wp/scripts lt, icons module define in functions.php ([3c97c63](https://github.com/xfiveco/generator-chisel/commit/3c97c63))
+
 ## <small>2.3.2 (2025-12-16)</small>
 
 - make icons module optional ([94e4c6c](https://github.com/xfiveco/generator-chisel/commit/94e4c6c))

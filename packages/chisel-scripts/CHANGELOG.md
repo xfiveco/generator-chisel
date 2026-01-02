@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.1.5 (2026-01-02)</small>
+
+- wp-config-updates, wp/scripts lt, icons module define in functions.php ([3c97c63](https://github.com/xfiveco/generator-chisel/commit/3c97c63))
+
 ## <small>2.1.4 (2025-12-17)</small>
 
 - fix no experimental dev mode runtime chunk ([84817eb](https://github.com/xfiveco/generator-chisel/commit/84817eb))
