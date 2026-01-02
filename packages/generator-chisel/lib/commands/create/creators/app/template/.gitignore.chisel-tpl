@@ -51,3 +51,4 @@ npm-debug.log
 /dev-vhost.conf
 /wp-content/uploads
 /wp-config-local.php
+/wp-config.php

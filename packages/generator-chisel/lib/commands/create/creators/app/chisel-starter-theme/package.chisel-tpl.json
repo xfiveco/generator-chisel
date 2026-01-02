@@ -10,7 +10,7 @@
     "devcontainer:up": "npm run --silent devcontainer -- up --workspace-folder ../../..",
     "devcontainer:enter": "/usr/bin/env bash ../../../.devcontainer/exec bash",
     "devcontainer:start": "/usr/bin/env bash ../../../.devcontainer/exec npm run --silent start",
-    "//icons-module": "Add --use-icons-module to start and build-scripts jobs to enable icons module. Also requires scss and wp-config configuration.",
+    "//icons-module": "Add --use-icons-module to start and build-scripts jobs to enable icons module. Also requires scss and functions.php configuration.",
     "start": "chisel-scripts start --experimental-modules",
     "dev": "npm run --silent start",
     "build-scripts": "chisel-scripts build --experimental-modules",
@@ -29,7 +29,7 @@
     "@wordpress/interactivity": "^6.36.0"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^31.1.0",
+    "@wordpress/scripts": "^31.2.0",
     "chisel-scripts": "*",
     "cross-env": "^7.0.3"
   },

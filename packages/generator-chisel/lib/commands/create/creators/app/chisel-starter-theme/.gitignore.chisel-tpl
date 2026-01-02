@@ -1,5 +1,4 @@
 /build
 /vendor
 /node_modules
-/assets/hashes.php
 /.use-devcontainer

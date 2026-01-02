@@ -57,8 +57,5 @@ define( 'WP_DEBUG_DISPLAY', false );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_ENVIRONMENT_TYPE', 'development' );
 
-// Icons module. Also requires packacke.json and scss configuration.
-define( 'CHISEL_USE_ICONS_MODULE', false );
-
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
