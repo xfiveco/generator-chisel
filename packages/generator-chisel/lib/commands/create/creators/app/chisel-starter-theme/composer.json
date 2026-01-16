@@ -11,9 +11,9 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.13",
-    "wp-coding-standards/wpcs": "^3.2",
-    "friendsoftwig/twigcs": "^6.5",
-    "vincentlanglet/twig-cs-fixer": "^3.10"
+    "wp-coding-standards/wpcs": "^3.3",
+    "friendsoftwig/twigcs": "^6.6",
+    "vincentlanglet/twig-cs-fixer": "^3.11"
   },
   "require": {
     "php": "^8.2",

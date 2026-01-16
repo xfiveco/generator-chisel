@@ -60,6 +60,15 @@ function adjustWebpackConfig(baseConfig, directory) {
   })();
 
   const preparedConfig = (config, index = null) => {
+    const devSeverClient = config.devServer ? {
+      ...config.devServer.client,
+      overlay: {
+        errors: true,
+        warnings: false,
+        runtimeErrors: false,
+      },
+    } : {}
+
     return {
       ...config,
       output: {
@@ -80,17 +89,15 @@ function adjustWebpackConfig(baseConfig, directory) {
       },
       devServer: config.devServer && {
         ...config.devServer,
+        client: {
+          ...devSeverClient,
+        },
         allowedHosts: [new URL(getUrl()).host],
         ...(process.env.CHISEL_PORT && {
           host: '0.0.0.0',
           port: Number(process.env.CHISEL_PORT) + 1,
           client: {
-            ...config.devServer.client,
-            overlay: {
-              errors: true,
-              warnings: false,
-              runtimeErrors: false,
-            },
+            ...devSeverClient,
             webSocketURL: new URL(getUrl())
               .toString()
               .replace(process.env.CHISEL_PORT, Number(process.env.CHISEL_PORT) + 1),
