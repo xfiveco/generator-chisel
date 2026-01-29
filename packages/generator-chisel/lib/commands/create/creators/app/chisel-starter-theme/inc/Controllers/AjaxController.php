@@ -2,19 +2,18 @@
 
 namespace Chisel\Controllers;
 
-use Chisel\WP\AjaxEndpoints;
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
+use Chisel\Traits\Rest;
 
 /**
  * Custom Ajax class based on REST API.
  *
  * @package Chisel
  */
-final class AjaxController extends \WP_REST_Controller implements InstanceInterface, HooksInterface {
+class AjaxController extends \WP_REST_Controller {
 
-	use Singleton;
+	use HooksSingleton;
+	use Rest;
 
 	/**
 	 * Ajax custom route namespace.
@@ -36,16 +35,6 @@ final class AjaxController extends \WP_REST_Controller implements InstanceInterf
 	 * @var array
 	 */
 	private array $routes = array();
-
-	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
 
 	/**
 	 * Set properties.
@@ -80,6 +69,7 @@ final class AjaxController extends \WP_REST_Controller implements InstanceInterf
 			foreach ( $this->routes as $route_name => $route_params ) {
 				$route   = sprintf( '%s/%s/', self::ROUTE_BASE, $route_name );
 				$methods = isset( $route_params['methods'] ) ? $route_params['methods'] : array( 'POST' );
+				$handler = isset( $route_params['handler'] ) ? $route_params['handler'] : null;
 
 				register_rest_route(
 					self::ROUTE_NAMESPACE,
@@ -89,6 +79,7 @@ final class AjaxController extends \WP_REST_Controller implements InstanceInterf
 						'callback'            => array( $this, 'callback' ),
 						'permission_callback' => array( $this, 'permissions_check' ),
 						'args'                => $this->get_endpoint_args_for_item_schema( true ),
+						'handler'             => $handler,
 					)
 				);
 			}
@@ -103,10 +94,15 @@ final class AjaxController extends \WP_REST_Controller implements InstanceInterf
 	 * @return \WP_REST_Response|\WP_Error|array
 	 */
 	public function callback( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error|array {
-		$callback       = $this->get_callback_name( $request );
-		$ajax_endpoints = new AjaxEndpoints();
+		$endpoint_class = $this->get_endpoint_class( $request );
 
-		if ( method_exists( $ajax_endpoints, $callback ) ) {
+		if ( is_wp_error( $endpoint_class ) ) {
+			return $this->error( $endpoint_class->get_error_message() );
+		}
+
+		$callback = 'handle';
+
+		if ( method_exists( $endpoint_class, $callback ) ) {
 			if ( ! defined( 'DOING_AJAX' ) ) {
 				define( 'DOING_AJAX', true );
 			}
@@ -115,12 +111,11 @@ final class AjaxController extends \WP_REST_Controller implements InstanceInterf
 				define( 'DOING_CHISEL_AJAX', true );
 			}
 
-			$callable = array( $ajax_endpoints, $callback );
-
-			return $callable( $request );
+			$endpoint = new $endpoint_class();
+			return $endpoint->handle( $request );
 		}
 
-		return new \WP_Error( 'chisel_ajax_callback_missing', sprintf( 'Callback %s not found', $callback ), array( 'status' => 404 ) );
+		return $this->error( sprintf( 'Callback `%s()` not found in %s class', $callback, $endpoint_class ) );
 	}
 
 	/**
@@ -128,29 +123,103 @@ final class AjaxController extends \WP_REST_Controller implements InstanceInterf
 	 *
 	 * @param \WP_REST_Request $request WP_REST_Request.
 	 *
-	 * @return boolean
+	 * @return boolean|\WP_REST_Response|\WP_Error
 	 */
-	public function permissions_check( \WP_REST_Request $request ): bool|\WP_Error {
+	public function permissions_check( \WP_REST_Request $request ): bool|\WP_REST_Response|\WP_Error {
 		$verify_nonce = wp_verify_nonce( $request->get_header( 'x_wp_nonce' ), 'wp_rest' );
 		$allowed      = (bool) $verify_nonce;
 
-		$permission = apply_filters( 'chisel_ajax_permissions_check', $allowed, $this->get_callback_name( $request ), $request );
+		$endpoint_class = $this->get_endpoint_class( $request );
+
+		if ( is_wp_error( $endpoint_class ) ) {
+			return $this->error( $endpoint_class->get_error_message() );
+		}
+
+		$endpoint_class = sanitize_key( str_replace( '\\', '-', $endpoint_class ) );
+
+		$permission = apply_filters( 'chisel_ajax_permissions_check', $allowed, $endpoint_class, $request );
 
 		return $permission;
 	}
 
 	/**
-	 * Get callback name from ajax request.
+	 * Get callback class from ajax request.
+	 *
+	 * @param \WP_REST_Request $request
+	 *
+	 * @return string|\WP_Error
+	 */
+	private function get_endpoint_class( \WP_REST_Request $request ): string|\WP_Error {
+		$custom_class_name = $this->get_endpoint_custom_class( $request );
+
+		if ( is_wp_error( $custom_class_name ) ) {
+			return $custom_class_name;
+		}
+
+		if ( $custom_class_name ) {
+			return $custom_class_name;
+		}
+
+		$route          = $request->get_route();
+		$route_parts    = explode( '/', $route );
+		$endpoint       = end( $route_parts );
+		$endpoint_parts = explode( '-', $endpoint );
+		$endpoint_parts = array_map( 'ucfirst', $endpoint_parts );
+		$endpoint_class = implode( '', $endpoint_parts ) . 'Endpoint';
+
+		$custom_class_name  = CHISEL_NAMESPACE . 'Ajax\\Custom\\' . $endpoint_class;
+		$default_class_name = CHISEL_NAMESPACE . 'Ajax\\' . $endpoint_class;
+
+		if ( class_exists( $custom_class_name ) ) {
+			$class_name = $custom_class_name;
+		} elseif ( class_exists( $default_class_name ) ) {
+			$class_name = $default_class_name;
+		} else {
+			$class_name = null;
+		}
+
+		if ( ! $class_name ) {
+			return new \WP_Error( 'chisel_ajax_endpoint_class_missing', sprintf( 'Ajax Endpoint class: %s not found in inc or custom/inc directory', $endpoint_class ), array( 'status' => 404 ) );
+		}
+
+		return $class_name;
+	}
+
+	/**
+	 * Get custom class from ajax request.
+	 *
+	 * @param \WP_REST_Request $request
+	 *
+	 * @return string|bool|\WP_Error
+	 */
+	private function get_endpoint_custom_class( \WP_REST_Request $request ): string|bool|\WP_Error {
+		$attributes = $request->get_attributes();
+
+		$custom_class = $attributes['handler'] ?? null;
+
+		if ( ! $custom_class ) {
+			return false;
+		}
+
+		if ( ! class_exists( $custom_class ) ) {
+			return new \WP_Error( 'chisel_ajax_handler_class_missing', sprintf( 'Ajax custom Endpoint class: %s not found in custom/inc directory', $custom_class ), array( 'status' => 404 ) );
+		}
+
+		return $custom_class;
+	}
+
+	/**
+	 * Get endpoint name from ajax request.
 	 *
 	 * @param \WP_REST_Request $request
 	 *
 	 * @return string
 	 */
-	private function get_callback_name( \WP_REST_Request $request ): string {
+	private function get_endpoint_name( \WP_REST_Request $request ): string {
 		$route       = $request->get_route();
 		$route_parts = explode( '/', $route );
-		$callback    = str_replace( '-', '_', end( $route_parts ) );
+		$endpoint    = str_replace( '-', '_', end( $route_parts ) );
 
-		return $callback;
+		return $endpoint;
 	}
 }

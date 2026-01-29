@@ -1,0 +1,17 @@
+@use '~design' as *;
+
+.c-search-form {
+  display: flex;
+  gap: get-gap('small');
+  align-items: center;
+  margin-bottom: get-margin('large');
+}
+
+.c-search-form__btn,
+.c-search-form__field {
+  margin: 0 !important;
+}
+
+.c-search-form__btn {
+  flex-shrink: 0;
+}

@@ -65,7 +65,7 @@
   .gform_validation_errors {
     padding: get-padding('normal');
     background: none;
-    border: calc($form-field-border-width * 2) solid $form-field-error-color;
+    border: $form-field-border-width solid $form-field-error-color;
     border-radius: $form-field-border-radius;
     box-shadow: none;
 
@@ -81,6 +81,22 @@
 
       .gform-icon {
         display: none;
+      }
+    }
+
+    > ol,
+    > ul {
+      padding-inline-start: 0;
+      list-style-type: none;
+
+      li {
+        list-style-type: none !important;
+      }
+
+      a {
+        font-size: px-rem(14);
+        color: $form-field-error-color;
+        text-decoration: none;
       }
     }
   }

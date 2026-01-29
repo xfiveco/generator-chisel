@@ -2,9 +2,7 @@
 
 namespace Chisel\WP;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Helpers\ThemeHelpers;
 
 /**
@@ -12,9 +10,9 @@ use Chisel\Helpers\ThemeHelpers;
  *
  * @package Chisel
  */
-final class Theme implements InstanceInterface, HooksInterface {
+final class Theme {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
 	 * Post types that support post thumbnails.
@@ -29,16 +27,6 @@ final class Theme implements InstanceInterface, HooksInterface {
 	 * @var array
 	 */
 	private array $nav_menus = array();
-
-	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
 
 	/**
 	 * Set properties.

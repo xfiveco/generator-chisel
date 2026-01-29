@@ -4,6 +4,7 @@ namespace Chisel\Helpers;
 
 use Timber\Timber;
 use Chisel\WP\AcfBlocks;
+use Chisel\WP\Blocks;
 use Chisel\Helpers\CacheHelpers;
 
 /**

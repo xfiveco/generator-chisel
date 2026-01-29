@@ -3,9 +3,7 @@
 namespace Chisel\WP;
 
 use Timber\Timber;
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Factories\RegisterBlocks;
 use Chisel\Traits\PageBlocks;
 use Chisel\Helpers\BlocksHelpers;
@@ -16,9 +14,9 @@ use Chisel\Helpers\AssetsHelpers;
  *
  * @package Chisel
  */
-final class AcfBlocks implements InstanceInterface, HooksInterface {
+final class AcfBlocks {
 
-	use Singleton;
+	use HooksSingleton;
 	use PageBlocks;
 
 	/**
@@ -43,30 +41,19 @@ final class AcfBlocks implements InstanceInterface, HooksInterface {
 	public string $blocks_twig_base_path = '';
 
 	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		$this->register_blocks_factory = new RegisterBlocks( 'acf' );
-		$this->blocks                  = $this->register_blocks_factory->get_blocks();
-
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-		add_action( 'wp_print_styles', array( $this, 'dequeue_blocks_styles' ), 999 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
-
-	/**
 	 * Set properties.
 	 */
 	public function set_properties(): void {
-		$this->blocks_twig_base_path = 'build/blocks-acf/';
+		$this->register_blocks_factory = new RegisterBlocks( 'acf' );
+		$this->blocks                  = $this->register_blocks_factory->get_blocks();
+		$this->blocks_twig_base_path   = 'build/blocks-acf/';
 	}
 
 	/**
 	 * Register action hooks.
 	 */
 	public function action_hooks(): void {
+		add_action( 'wp_print_styles', array( $this, 'dequeue_blocks_styles' ), 999 );
 		add_action( 'acf/init', array( $this, 'register_blocks' ) );
 	}
 

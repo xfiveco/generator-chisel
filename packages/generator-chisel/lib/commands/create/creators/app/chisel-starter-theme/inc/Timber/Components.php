@@ -1,6 +1,6 @@
 <?php
 
-namespace Chisel\WP;
+namespace Chisel\Timber;
 
 use Timber\Timber;
 use Chisel\Helpers\ImageHelpers;

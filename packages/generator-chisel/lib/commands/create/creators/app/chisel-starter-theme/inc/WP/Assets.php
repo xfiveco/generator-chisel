@@ -2,9 +2,7 @@
 
 namespace Chisel\WP;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Helpers\ThemeHelpers;
 use Chisel\Helpers\AjaxHelpers;
 use Chisel\Helpers\AssetsHelpers;
@@ -14,9 +12,9 @@ use Chisel\Helpers\AssetsHelpers;
  *
  * @package Chisel
  */
-final class Assets implements InstanceInterface, HooksInterface {
+class Assets {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
 	 * Front-end styles to be registered and enqueued.
@@ -87,16 +85,6 @@ final class Assets implements InstanceInterface, HooksInterface {
 	 * @var string
 	 */
 	private string $refresh_runtime_dependency = 'wp-react-refresh-runtime';
-
-	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
 
 	/**
 	 * Set properties.

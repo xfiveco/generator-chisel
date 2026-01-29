@@ -1,7 +1,11 @@
 <header id="header" class="c-header o-wrapper">
   <div class="c-header__inner o-wrapper__inner">
-    {% include 'components/logo.twig' %}
+    {% block header_logo %}
+      {% include 'components/logo.twig' %}
+    {% endblock %}
 
-    {% include 'components/main-nav.twig' %}
+    {% block header_nav %}
+      {% include 'components/main-nav.twig' %}
+    {% endblock %}
   </div>
 </header>

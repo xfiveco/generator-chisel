@@ -176,7 +176,15 @@ module.exports = (api) => {
     await wp(['theme', 'activate', themeName]);
   });
 
-  // api.schedule(api.PRIORITIES., async () => {
+  api.schedule(api.PRIORITIES.WP_UPDATE_OPTIONS, async () => {
+    if (api.creator.cmd.skipWpCommands) return;
 
-  // });
+    await wp(['option', 'update', 'permalink_structure', '/%postname%/']);
+    await wp(['option', 'update', 'blog_public', '0']);
+    await wp(['option', 'update', 'default_comment_status', 'closed']);
+    await wp(['option', 'update', 'default_pingback_flag', '0']);
+    await wp(['option', 'update', 'default_ping_status', 'closed']);
+    await wp(['option', 'update', 'comment_moderation', '1']);
+    await wp(['option', 'update', 'comment_registration', '1']);
+  });
 };

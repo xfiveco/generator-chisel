@@ -2,18 +2,16 @@
 
 namespace Chisel\WP;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 
 /**
  * WordPress Sidebars setup related functionality.
  *
  * @package Chisel
  */
-class Sidebars implements InstanceInterface, HooksInterface {
+class Sidebars {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
 	 * Sidebars to register.
@@ -21,16 +19,6 @@ class Sidebars implements InstanceInterface, HooksInterface {
 	 * @var array
 	 */
 	private array $sidebars = array();
-
-	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
 
 	/**
 	 * Set properties.

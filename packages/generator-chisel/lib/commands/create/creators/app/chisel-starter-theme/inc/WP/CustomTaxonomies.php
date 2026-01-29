@@ -2,9 +2,7 @@
 
 namespace Chisel\WP;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Factories\RegisterCustomTaxonomy;
 
 /**
@@ -12,9 +10,9 @@ use Chisel\Factories\RegisterCustomTaxonomy;
  *
  * @package Chisel
  */
-final class CustomTaxonomies implements InstanceInterface, HooksInterface {
+final class CustomTaxonomies {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
 	 * Taxonomies.
@@ -38,16 +36,6 @@ final class CustomTaxonomies implements InstanceInterface, HooksInterface {
 	private array $default_taxonomy_capabilities = array();
 
 	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
-
-	/**
 	 * Set properties.
 	 */
 	public function set_properties(): void {
@@ -69,8 +57,6 @@ final class CustomTaxonomies implements InstanceInterface, HooksInterface {
 				'ep_mask'      => EP_NONE,
 			)
 		);
-
-		$this->set_taxonomies();
 	}
 
 	/**
@@ -84,6 +70,15 @@ final class CustomTaxonomies implements InstanceInterface, HooksInterface {
 	 * Register filter hooks.
 	 */
 	public function filter_hooks(): void {}
+
+	/**
+	 * Get taxonomies.
+	 *
+	 * @return array
+	 */
+	public static function get_taxonomies(): array {
+		return self::get_instance()->taxonomies;
+	}
 
 	/**
 	 * Register custom taxonomies.
@@ -105,24 +100,5 @@ final class CustomTaxonomies implements InstanceInterface, HooksInterface {
 			$register_custom_taxonomy_factory = new RegisterCustomTaxonomy( $taxonomy, $taxonomy_args, $defaults );
 			$register_custom_taxonomy_factory->register_taxonomy();
 		}
-	}
-
-	/**
-	 * Set custom taxonomies.
-	 */
-	private function set_taxonomies(): void {
-		$this->taxonomies = array(
-			// phpcs:disable
-			// 'chisel-term' => array(
-			// 	'singular'   => __( 'Chisel Term', 'chisel' ),
-			// 	'plural'     => __( 'Chisel Terms', 'chisel' ),
-			// 	'post_types' => array( 'chisel-cpt' ),
-			// 	'public'     => true,
-			// 	'rewrite'    => array(
-			// 		'slug' => 'chisel-term',
-			// 	),
-			// ),
-			// phpcs:enable
-		);
 	}
 }

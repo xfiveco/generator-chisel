@@ -4,9 +4,7 @@ namespace Chisel\WP;
 
 use Timber\Timber;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Factories\RegisterBlocks;
 use Chisel\Helpers\BlocksHelpers;
 use Chisel\Helpers\ThemeHelpers;
@@ -17,9 +15,9 @@ use Chisel\Traits\PageBlocks;
  *
  * @package Chisel
  */
-final class Blocks implements InstanceInterface, HooksInterface {
+final class Blocks {
 
-	use Singleton;
+	use HooksSingleton;
 	use PageBlocks;
 
 	/**
@@ -71,25 +69,15 @@ final class Blocks implements InstanceInterface, HooksInterface {
 	 *
 	 * @var string
 	 */
-	private string $blocks_twig_base_path = 'build/blocks/';
-
-	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		$this->register_blocks_factory = new RegisterBlocks( 'wp' );
-		$this->blocks                  = $this->register_blocks_factory->get_blocks();
-
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
+	public string $blocks_twig_base_path = '';
 
 	/**
 	 * Set properties.
 	 */
 	public function set_properties(): void {
+		$this->register_blocks_factory             = new RegisterBlocks( 'wp' );
+		$this->blocks                              = $this->register_blocks_factory->get_blocks();
+		$this->blocks_twig_base_path               = 'build/blocks/';
 		$this->theme                               = wp_get_theme();
 		$this->blocks_category                     = 'chisel-blocks';
 		$this->block_patterns_categories_namespace = 'chisel-patterns';

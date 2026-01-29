@@ -5,35 +5,31 @@ namespace Chisel\WP;
 use Timber\Timber;
 use Timber\Site as TimberSite;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
+use Chisel\Timber\ChiselImage;
+use Chisel\Timber\ChiselPost;
+use Chisel\Timber\ChiselProduct;
+use Chisel\Timber\ChiselProductCategory;
+use Chisel\Timber\ChiselTerm;
+use Chisel\Timber\Components;
 
 /**
  * Site related functionality related to timber.
  *
  * @package Chisel
  */
-final class Site extends TimberSite implements InstanceInterface, HooksInterface {
+class Site extends TimberSite {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
-	 * Class constructor.
+	 * Call parent constructor.
+	 *
+	 * @return bool
 	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-
-		parent::__construct();
+	protected function should_call_parent_construct(): bool {
+		return true;
 	}
-
-	/**
-	 * Set properties.
-	 */
-	public function set_properties(): void {}
 
 	/**
 	 * Register action hooks.
@@ -44,9 +40,31 @@ final class Site extends TimberSite implements InstanceInterface, HooksInterface
 	 * Register filter hooks.
 	 */
 	public function filter_hooks(): void {
+		add_filter( 'timber/locations', array( $this, 'tiwg_files_locations' ) );
 		add_filter( 'timber/context', array( $this, 'add_to_context' ) );
 		add_filter( 'timber/post/classmap', array( $this, 'post_classmap' ) );
 		add_filter( 'timber/term/classmap', array( $this, 'term_classmap' ) );
+	}
+
+	/**
+	 * Add custom Timber files locations. Let views in custom directory override default views.
+	 *
+	 * @param array $locations The locations.
+	 *
+	 * @return array
+	 */
+	public function tiwg_files_locations( array $locations ): array {
+		$custom_templates = get_template_directory() . '/custom/views/';
+
+		if ( is_dir( $custom_templates ) ) {
+			if ( isset( $locations['__main__'] ) ) {
+				array_unshift( $locations['__main__'], $custom_templates );
+			} else {
+				array_unshift( $locations, $custom_templates );
+			}
+		}
+
+		return $locations;
 	}
 
 	/**
@@ -80,6 +98,14 @@ final class Site extends TimberSite implements InstanceInterface, HooksInterface
 			'attachment' => ChiselImage::class,
 		);
 
+		$custom_post_types = CustomPostTypes::get_post_types();
+
+		foreach ( $custom_post_types as $cpt => $data ) {
+			if ( ! isset( $custom_classmap[$cpt] ) ) {
+				$custom_classmap[$cpt] = ChiselPost::class;
+			}
+		}
+
 		return array_merge( $classmap, $custom_classmap );
 	}
 
@@ -94,6 +120,14 @@ final class Site extends TimberSite implements InstanceInterface, HooksInterface
 			'category'    => ChiselTerm::class,
 			'product_cat' => ChiselProductCategory::class,
 		);
+
+		$custom_taxonomies = CustomTaxonomies::get_taxonomies();
+
+		foreach ( $custom_taxonomies as $taxonomy => $data ) {
+			if ( ! isset( $custom_classmap[$taxonomy] ) ) {
+				$custom_classmap[$taxonomy] = ChiselTerm::class;
+			}
+		}
 
 		return array_merge( $classmap, $custom_classmap );
 	}

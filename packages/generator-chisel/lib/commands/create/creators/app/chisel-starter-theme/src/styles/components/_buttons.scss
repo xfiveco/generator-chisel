@@ -115,4 +115,11 @@ $_static-icons: settings.$static-icons;
       display: none;
     }
   }
+
+  &.has-icon-only {
+    &::after,
+    &::before {
+      margin: 0;
+    }
+  }
 }

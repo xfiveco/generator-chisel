@@ -1,10 +1,8 @@
 <?php
 
-namespace Chisel\Plugins;
+namespace Chisel\Plugins\GravityForms;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Helpers\GravityFormsHelpers;
 
 /**
@@ -12,28 +10,20 @@ use Chisel\Helpers\GravityFormsHelpers;
  *
  * @package Chisel
  */
-final class GravityForms implements InstanceInterface, HooksInterface {
+final class GravityForms {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
-	 * Class constructor.
+	 * Initialize.
 	 */
-	private function __construct() {
+	public function init() {
 		if ( ! GravityFormsHelpers::is_gf_active() ) {
-			return;
+			return false;
 		}
 
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
+		return true;
 	}
-
-	/**
-	 * Set properties.
-	 */
-	public function set_properties(): void {}
 
 	/**
 	 * Register action hooks.
@@ -47,8 +37,8 @@ final class GravityForms implements InstanceInterface, HooksInterface {
 	 */
 	public function filter_hooks(): void {
 		add_filter( 'chisel_frontend_footer_styles', array( $this, 'register_custom_styles' ) );
-		add_filter( 'chisel_enqueue_frontend_footer_style', array( $this, 'enqueue_custom_styles' ), 10, 3 );
-		add_filter( 'gform_form_theme_slug', array( $this, 'default_form_styles' ), 99, 2 );
+		add_filter( 'chisel_enqueue_frontend_footer_style', array( $this, 'enqueue_custom_styles' ), 10, 2 );
+		add_filter( 'gform_form_theme_slug', array( $this, 'default_form_styles' ), 99 );
 		add_filter( 'gform_plugin_settings_fields', array( $this, 'plugin_settings_fields' ), 99 );
 	}
 
@@ -77,11 +67,10 @@ final class GravityForms implements InstanceInterface, HooksInterface {
 	 *
 	 * @param bool   $enqueue
 	 * @param string $handle
-	 * @param array  $args
 	 *
 	 * @return bool
 	 */
-	public function enqueue_custom_styles( bool $enqueue, string $handle, array $args ): bool {
+	public function enqueue_custom_styles( bool $enqueue, string $handle ): bool {
 		if ( $handle !== 'gravity-forms' ) {
 			return $enqueue;
 		}
@@ -99,11 +88,10 @@ final class GravityForms implements InstanceInterface, HooksInterface {
 	 * Set default form styles for all forms so that our custom styles can be used.
 	 *
 	 * @param string $slug
-	 * @param array  $form
 	 *
 	 * @return string
 	 */
-	public function default_form_styles( string $slug, array $form ): string {
+	public function default_form_styles( string $slug ): string {
 		if ( ! is_admin() ) {
 			$slug = 'gravity-theme';
 		}

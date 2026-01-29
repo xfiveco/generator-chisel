@@ -1,12 +1,10 @@
 <?php
 
-namespace Chisel\WP;
+namespace Chisel\Timber;
 
 use Timber\Loader;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Helpers\ThemeHelpers;
 
 /**
@@ -14,9 +12,9 @@ use Chisel\Helpers\ThemeHelpers;
  *
  * @package Chisel
  */
-final class Cache implements InstanceInterface, HooksInterface {
+final class Cache {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
 	 * Cache expiry time.
@@ -38,16 +36,6 @@ final class Cache implements InstanceInterface, HooksInterface {
 	 * @var int
 	 */
 	private bool $environment_cache = false;
-
-	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
 
 	/**
 	 * Set properties.

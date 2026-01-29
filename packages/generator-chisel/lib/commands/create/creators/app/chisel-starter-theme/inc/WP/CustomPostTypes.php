@@ -2,9 +2,7 @@
 
 namespace Chisel\WP;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Factories\RegisterCustomPostType;
 
 /**
@@ -12,9 +10,9 @@ use Chisel\Factories\RegisterCustomPostType;
  *
  * @package Chisel
  */
-final class CustomPostTypes implements InstanceInterface, HooksInterface {
+class CustomPostTypes {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
 	 * Post types.
@@ -38,16 +36,6 @@ final class CustomPostTypes implements InstanceInterface, HooksInterface {
 	private array $default_post_type_rewrite_args = array();
 
 	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
-
-	/**
 	 * Set properties.
 	 */
 	public function set_properties(): void {
@@ -62,8 +50,6 @@ final class CustomPostTypes implements InstanceInterface, HooksInterface {
 				'ep_mask'    => EP_PERMALINK,
 			)
 		);
-
-		$this->set_post_types();
 	}
 
 	/**
@@ -100,24 +86,11 @@ final class CustomPostTypes implements InstanceInterface, HooksInterface {
 	}
 
 	/**
-	 * Set custom post types.
+	 * Get custom post types.
+	 *
+	 * @return array
 	 */
-	private function set_post_types(): void {
-		$this->post_types = array(
-			// phpcs:disable
-			// 'chisel-cpt' => array(
-			// 	'singular'      => __( 'Chisel CPT', 'chisel' ),
-			// 	'plural'        => __( 'Chisel CPTs', 'chisel' ),
-			// 	'supports'      => array( 'editor', 'thumbnail', 'excerpt' ),
-			// 	'menu_icon'     => 'dashicons-location-alt',
-			// 	'hierarchical'  => true,
-			// 	'public'        => true,
-			// 	'menu_position' => 20,
-			// 	'rewrite'       => array(
-			// 		'slug' => 'chisel-post',
-			// 	),
-			// ),
-			// phpcs:enable
-		);
+	public static function get_post_types(): array {
+		return self::get_instance()->post_types;
 	}
 }

@@ -1,10 +1,9 @@
 <?php
 
-namespace Chisel\Plugins;
+namespace Chisel\Plugins\Woocommerce;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
+
 use Chisel\Helpers\WoocommerceHelpers;
 
 /**
@@ -12,9 +11,8 @@ use Chisel\Helpers\WoocommerceHelpers;
  *
  * @package Chisel
  */
-final class Woocommerce implements InstanceInterface, HooksInterface {
-
-	use Singleton;
+class Woocommerce {
+	use HooksSingleton;
 
 	/**
 	 * Woocommerce sidebars.
@@ -24,17 +22,14 @@ final class Woocommerce implements InstanceInterface, HooksInterface {
 	private $sidebars = array();
 
 	/**
-	 * Class constructor.
+	 * Initialize.
 	 */
-	private function __construct() {
+	public function init(): bool {
 		if ( ! WoocommerceHelpers::is_woocommerce_active() ) {
-			return;
+			return false;
 		}
 
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
+		return true;
 	}
 
 	/**
@@ -74,6 +69,7 @@ final class Woocommerce implements InstanceInterface, HooksInterface {
 		add_filter( 'chisel_sidebars', array( $this, 'register_sidebars' ) );
 		add_filter( 'woocommerce_enqueue_styles', array( $this, 'enqueue_styles' ) );
 		add_filter( 'chisel_frontend_styles', array( $this, 'register_custom_styles' ) );
+		add_filter( 'woocommerce_template_loader_files', array( $this, 'woocommerce_template_loader_files' ), 99 );
 	}
 
 	/**
@@ -214,5 +210,18 @@ final class Woocommerce implements InstanceInterface, HooksInterface {
 		$styles['woocommerce'] = array();
 
 		return $styles;
+	}
+
+	/**
+	 * Add custom woocommerce template loader files. Lets us override default templates.
+	 *
+	 * @param array $files
+	 *
+	 * @return array
+	 */
+	public function woocommerce_template_loader_files( array $files ): array {
+		$files[] = 'custom/woocommerce.php';
+
+		return $files;
 	}
 }

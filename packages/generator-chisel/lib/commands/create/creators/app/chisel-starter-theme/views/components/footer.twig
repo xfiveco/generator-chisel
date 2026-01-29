@@ -1,17 +1,25 @@
 <footer id="footer" class="o-wrapper c-footer">
+  {% block footer_start %}{% endblock %}
+
   <div class="c-footer__inner o-layout is-flex has-gap-medium o-wrapper__inner">
-    {% for column in footer_sidebars.columns %}
-      <div class="o-layout__item {{ footer_sidebars.column_class }} c-footer__column">
-        {{ column }}
-      </div>
-    {% endfor %}
+    {% block footer_columns %}
+      {% for column in footer_sidebars.columns %}
+        <div class="o-layout__item {{ footer_sidebars.column_class }} c-footer__column">
+          {{ column }}
+        </div>
+      {% endfor %}
+    {% endblock %}
   </div>
 
-  {% if copyright is not empty %}
-    <div class="c-footer__copyright">
-      <div class="o-wrapper__inner">
-        {{ copyright.content }}
+  {% block footer_copyright %}
+    {% if copyright is not empty %}
+      <div class="c-footer__copyright">
+        <div class="o-wrapper__inner">
+          {{ copyright.content }}
+        </div>
       </div>
-    </div>
-  {% endif %}
+    {% endif %}
+  {% endblock %}
+
+  {% block footer_end %}{% endblock %}
 </footer>

@@ -4,9 +4,7 @@ namespace Chisel\WP;
 
 use Timber\Timber;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Helpers\CommentsHelpers;
 use Chisel\Helpers\DataHelpers;
 use Chisel\Helpers\ImageHelpers;
@@ -20,24 +18,9 @@ use Chisel\WP\Components;
  *
  * @package Chisel
  */
-final class Twig implements InstanceInterface, HooksInterface {
+final class Twig {
 
-	use Singleton;
-
-	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
-
-	/**
-	 * Set properties.
-	 */
-	public function set_properties(): void {}
+	use HooksSingleton;
 
 	/**
 	 * Register action hooks.
@@ -83,6 +66,8 @@ final class Twig implements InstanceInterface, HooksInterface {
 		$this->register_function( $twig, 'get_icon', array( $this, 'get_icon' ) );
 		$this->register_function( $twig, 'should_use_icons_module', array( $this, 'should_use_icons_module' ) );
 
+		do_action( 'chisel_twig_register_functions', $twig, $this );
+
 		return $twig;
 	}
 
@@ -93,6 +78,7 @@ final class Twig implements InstanceInterface, HooksInterface {
 	 * @return \Twig\Environment
 	 */
 	public function register_filters( \Twig\Environment $twig ): \Twig\Environment {
+		do_action( 'chisel_twig_register_filters', $twig, $this );
 
 		return $twig;
 	}
@@ -104,6 +90,7 @@ final class Twig implements InstanceInterface, HooksInterface {
 	 * @return \Twig\Environment
 	 */
 	public function register_tests( \Twig\Environment $twig ): \Twig\Environment {
+		do_action( 'chisel_twig_register_tests', $twig, $this );
 
 		return $twig;
 	}
@@ -117,7 +104,7 @@ final class Twig implements InstanceInterface, HooksInterface {
 	 *
 	 * @return \Twig\Environment
 	 */
-	private function register_function( $twig, $name, $callback ): \Twig\Environment {
+	public function register_function( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
 		$twig->addFunction( new \Twig\TwigFunction( $name, $callback ) );
 
 		return $twig;
@@ -132,7 +119,7 @@ final class Twig implements InstanceInterface, HooksInterface {
 	 *
 	 * @return \Twig\Environment
 	 */
-	private function register_filter( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
+	public function register_filter( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
 		$twig->addFilter( new \Twig\TwigFilter( $name, $callback ) );
 
 		return $twig;
@@ -147,7 +134,7 @@ final class Twig implements InstanceInterface, HooksInterface {
 	 *
 	 * @return \Twig\Environment
 	 */
-	private function register_test( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
+	public function register_test( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
 		$twig->addTest( new \Twig\TwigTest( $name, $callback ) );
 
 		return $twig;

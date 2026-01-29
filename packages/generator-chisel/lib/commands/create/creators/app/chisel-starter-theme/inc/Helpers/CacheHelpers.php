@@ -5,7 +5,7 @@ namespace Chisel\Helpers;
 use Timber\Timber;
 use Timber\Loader;
 
-use Chisel\WP\Cache;
+use Chisel\Timber\Cache;
 
 /**
  * Image Helper functions.

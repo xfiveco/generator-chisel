@@ -1,0 +1,6 @@
+<form role="search" method="get" class="c-search-form" action="{{ site.url }}">
+	<label class="screen-reader-text" for="search-form-field">{{ __('Search for:', 'chisel') }}</label>
+	<input type="text" id="search-form-field" class="c-search-form__field" placeholder="Find products" value="{{ search_query }}" name="s">
+	<button type="submit" value="Search" class="c-search-form__btn c-btn c-btn--primary c-btn--small has-icon has-icon-search has-icon-only" aria-label="Search"></button>
+	<input type="hidden" name="post_type" value="product">
+</form>

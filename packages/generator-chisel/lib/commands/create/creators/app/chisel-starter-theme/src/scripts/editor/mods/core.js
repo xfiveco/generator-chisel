@@ -5,7 +5,11 @@ import { InspectorControls } from '@wordpress/blockEditor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
-addFilter('blocks.registerBlockType', 'chisel/add-no-margin-attribute', (settings) => {
+addFilter('blocks.registerBlockType', 'chisel/add-no-margin-attribute', (settings, name) => {
+  if (!name.includes('core/') && !name.includes('chisel/')) {
+    return settings;
+  }
+
   if (typeof settings.attributes !== 'undefined') {
     settings.attributes = {
       ...settings.attributes,
@@ -20,7 +24,12 @@ addFilter('blocks.registerBlockType', 'chisel/add-no-margin-attribute', (setting
 
 const addNoMarginToggle = createHigherOrderComponent((BlockEdit) => {
   return (props) => {
-    const { attributes, setAttributes, isSelected } = props;
+    const { attributes, setAttributes, isSelected, name } = props;
+
+    if (!name.includes('core/') && !name.includes('chisel/')) {
+      return <BlockEdit {...props} />;
+    }
+
     const { disableBottomMargin = false, className = '' } = attributes;
 
     const onToggle = (checked) => {

@@ -2,9 +2,7 @@
 
 namespace Chisel\WP;
 
-use Chisel\Interfaces\InstanceInterface;
-use Chisel\Interfaces\HooksInterface;
-use Chisel\Traits\Singleton;
+use Chisel\Traits\HooksSingleton;
 use Chisel\Factories\RegisterAcfOptionsPage;
 use Chisel\Enums\AcfOptionsPageType;
 
@@ -13,9 +11,9 @@ use Chisel\Enums\AcfOptionsPageType;
  *
  * @package Chisel
  */
-final class Acf implements InstanceInterface, HooksInterface {
+class Acf {
 
-	use Singleton;
+	use HooksSingleton;
 
 	/**
 	 * ACF options pages.
@@ -32,24 +30,6 @@ final class Acf implements InstanceInterface, HooksInterface {
 	private array $acf_options_sub_pages = array();
 
 	/**
-	 * Class constructor.
-	 */
-	private function __construct() {
-		add_action( 'after_setup_theme', array( $this, 'set_properties' ), 7 );
-
-		$this->action_hooks();
-		$this->filter_hooks();
-	}
-
-	/**
-	 * Set properties.
-	 */
-	public function set_properties(): void {
-		$this->set_options_pages();
-		$this->set_options_sub_pages();
-	}
-
-	/**
 	 * Register action hooks.
 	 */
 	public function action_hooks(): void {
@@ -59,38 +39,7 @@ final class Acf implements InstanceInterface, HooksInterface {
 	/**
 	 * Register filter hooks.
 	 */
-	public function filter_hooks(): void {
-	}
-
-	/**
-	 * Set ACF options pages.
-	 */
-	private function set_options_pages(): void {
-		$this->acf_options_pages = array(
-			// phpcs:disable
-			// array(
-			// 	'menu_slug'  => 'theme-settings',
-			// 	'page_title' => __( 'Theme Settings', 'chisel' ),
-			// ),
-			// phpcs:enable
-		);
-	}
-
-	/**
-	 * Set ACF options sub pages.
-	 */
-	private function set_options_sub_pages(): void {
-		$this->acf_options_sub_pages = array(
-			// phpcs:disable
-			// array(
-			// 	'menu_slug'   => 'theme-sub-settings',
-			// 	'page_title'  => __( 'Theme Sub settings', 'chisel' ),
-			// 	'menu_title'  => __( 'Theme Sub settings', 'chisel' ),
-			// 	'parent_slug' => 'theme-settings',
-			// ),
-			// phpcs:enable
-		);
-	}
+	public function filter_hooks(): void {}
 
 	/**
 	 * Register ACF options pages.
@@ -110,6 +59,24 @@ final class Acf implements InstanceInterface, HooksInterface {
 				$this->register_options_page( $data, 'subpage' );
 			}
 		}
+	}
+
+	/**
+	 * Get ACF options pages.
+	 *
+	 * @return array
+	 */
+	public static function get_options_pages(): array {
+		return self::get_instance()->acf_options_pages;
+	}
+
+	/**
+	 * Get ACF options sub pages.
+	 *
+	 * @return array
+	 */
+	public static function get_options_sub_pages(): array {
+		return self::get_instance()->acf_options_sub_pages;
 	}
 
 	/**

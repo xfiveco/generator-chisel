@@ -26,7 +26,7 @@ trait Singleton {
 	/**
 	 * Prevent direct construction; let get_instance() control instantiation.
 	 */
-	private function __construct() {}
+	protected function __construct() {}
 
 	/**
 	 * Prevent cloning.
