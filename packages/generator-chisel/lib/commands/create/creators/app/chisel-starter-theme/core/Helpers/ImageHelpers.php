@@ -10,6 +10,10 @@ use Timber\Timber;
  * @package Chisel
  */
 final class ImageHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Responsive image data.

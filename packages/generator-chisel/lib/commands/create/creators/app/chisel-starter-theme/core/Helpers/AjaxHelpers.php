@@ -10,6 +10,10 @@ use Chisel\Controllers\AjaxController;
  * @package Chisel
  */
 final class AjaxHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Get custom ajax endpint

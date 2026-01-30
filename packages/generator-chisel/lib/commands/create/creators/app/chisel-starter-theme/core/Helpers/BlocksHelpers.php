@@ -13,6 +13,10 @@ use Chisel\Helpers\CacheHelpers;
  * @package Chisel
  */
 final class BlocksHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Get block object classnames

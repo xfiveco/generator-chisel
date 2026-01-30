@@ -8,6 +8,10 @@ namespace Chisel\Helpers;
  * @package Chisel
  */
 final class YoastHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Check if Yoast plugin is active.

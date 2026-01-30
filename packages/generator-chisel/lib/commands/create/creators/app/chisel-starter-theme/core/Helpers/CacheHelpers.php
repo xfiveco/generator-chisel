@@ -13,6 +13,10 @@ use Chisel\Timber\Cache;
  * @package Chisel
  */
 final class CacheHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Get the cache expiry time.

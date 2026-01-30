@@ -11,7 +11,7 @@ use Chisel\Enums\AcfOptionsPageType;
  *
  * @package Chisel
  */
-class Acf {
+final class Acf {
 
 	use HooksSingleton;
 

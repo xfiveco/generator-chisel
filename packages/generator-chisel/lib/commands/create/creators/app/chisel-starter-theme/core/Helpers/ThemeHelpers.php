@@ -11,6 +11,10 @@ use Chisel\Helpers\ImageHelpers;
  */
 final class ThemeHelpers {
 	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
+	/**
 	 * Color palettes.
 	 *
 	 * @var array

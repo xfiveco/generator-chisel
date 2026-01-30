@@ -8,6 +8,10 @@ namespace Chisel\Helpers;
  * @package Chisel
  */
 final class CommentsHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Display comments template - the comments and the form.

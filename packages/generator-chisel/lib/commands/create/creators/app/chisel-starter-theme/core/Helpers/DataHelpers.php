@@ -10,6 +10,10 @@ use Timber\Timber;
  * @package Chisel
  */
 final class DataHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Json decode data for storing in html attribute

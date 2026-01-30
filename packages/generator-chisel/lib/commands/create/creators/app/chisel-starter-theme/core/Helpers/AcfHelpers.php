@@ -8,6 +8,10 @@ namespace Chisel\Helpers;
  * @package Chisel
  */
 final class AcfHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Get the acf field value. Acf get_field() wrapper. If ACF plugin is not active, returns false.

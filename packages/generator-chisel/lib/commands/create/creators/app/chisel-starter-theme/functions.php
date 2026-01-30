@@ -6,20 +6,31 @@ require_once get_template_directory() . '/vendor/autoload.php';
 
 spl_autoload_register(
 	function ( $class_name ) {
-		$base_directory = get_template_directory() . '/inc/';
+		$base_directories = array(
+			get_template_directory() . '/core/',
+			get_template_directory() . '/custom/app/',
+		);
 
 		$namespace_prefix_length = strlen( CHISEL_NAMESPACE );
 
 		if ( strncmp( CHISEL_NAMESPACE, $class_name, $namespace_prefix_length ) !== 0 ) {
-			return;
+				return;
 		}
 
 		$relative_class_name = substr( $class_name, $namespace_prefix_length );
+		$relative_path       = str_replace( '\\', '/', $relative_class_name ) . '.php';
 
-		$class_filename = $base_directory . str_replace( '\\', '/', $relative_class_name ) . '.php';
+		foreach ( $base_directories as $base_directory ) {
+			if ( strpos( $base_directory, 'custom/app' ) !== false ) {
+				$relative_path = preg_replace( '/\/Custom\//', '/', $relative_path, 1 );
+			}
 
-		if ( file_exists( $class_filename ) ) {
-			require $class_filename;
+			$class_filename = $base_directory . $relative_path;
+
+			if ( file_exists( $class_filename ) ) {
+				require $class_filename;
+				return;
+			}
 		}
 	}
 );
@@ -47,3 +58,9 @@ Timber\Timber::init();
 \Chisel\Plugins\Woocommerce\Woocommerce::get_instance();
 \Chisel\Plugins\Yoast\Yoast::get_instance();
 \Chisel\Timber\Cache::get_instance();
+
+$custom_functions_php = get_template_directory() . '/custom/functions.php';
+
+if ( is_file( $custom_functions_php ) ) {
+	require_once $custom_functions_php;
+}

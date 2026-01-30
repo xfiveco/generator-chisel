@@ -10,7 +10,7 @@ use Chisel\Traits\Rest;
  *
  * @package Chisel
  */
-class AjaxController extends \WP_REST_Controller {
+final class AjaxController extends \WP_REST_Controller {
 
 	use HooksSingleton;
 	use Rest;

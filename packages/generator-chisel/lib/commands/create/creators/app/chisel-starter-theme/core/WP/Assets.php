@@ -12,7 +12,7 @@ use Chisel\Helpers\AssetsHelpers;
  *
  * @package Chisel
  */
-class Assets {
+final class Assets {
 
 	use HooksSingleton;
 

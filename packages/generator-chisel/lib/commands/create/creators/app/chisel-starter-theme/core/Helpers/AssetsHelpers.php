@@ -8,6 +8,10 @@ namespace Chisel\Helpers;
  * @package Chisel
  */
 final class AssetsHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Get the final handle for the asset.

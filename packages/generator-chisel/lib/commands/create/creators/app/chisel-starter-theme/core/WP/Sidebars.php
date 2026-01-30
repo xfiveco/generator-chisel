@@ -9,7 +9,7 @@ use Chisel\Traits\HooksSingleton;
  *
  * @package Chisel
  */
-class Sidebars {
+final class Sidebars {
 
 	use HooksSingleton;
 

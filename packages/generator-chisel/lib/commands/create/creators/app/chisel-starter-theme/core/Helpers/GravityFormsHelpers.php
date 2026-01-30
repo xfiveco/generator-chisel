@@ -8,6 +8,10 @@ namespace Chisel\Helpers;
  * @package Chisel
  */
 final class GravityFormsHelpers {
+	/**
+	 * Prevent instantiation.
+	 */
+	private function __construct() {}
 
 	/**
 	 * Check if Gravity Forms plugin is active.

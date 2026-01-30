@@ -4,23 +4,25 @@ namespace Chisel\Traits;
 
 trait Singleton {
 	/**
-	 * Instance of the class.
+	 * Instances of classes using this trait, keyed by class name.
 	 *
-	 * @var object
+	 * @var array<string, static>
 	 */
-	private static ?object $instance = null;
+	private static array $instances = array();
 
 	/**
 	 * Get the instance of the class using the singleton.
 	 *
-	 * @return object
+	 * @return static
 	 */
 	public static function get_instance(): static {
-		if ( ! ( static::$instance instanceof static ) ) {
-			static::$instance = new static();
+		$class = static::class;
+
+		if ( ! isset( self::$instances[ $class ] ) ) {
+			self::$instances[ $class ] = new static();
 		}
 
-		return static::$instance;
+		return self::$instances[ $class ];
 	}
 
 	/**

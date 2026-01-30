@@ -10,7 +10,7 @@ use Chisel\Factories\RegisterCustomPostType;
  *
  * @package Chisel
  */
-class CustomPostTypes {
+final class CustomPostTypes {
 
 	use HooksSingleton;
 

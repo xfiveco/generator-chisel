@@ -18,7 +18,7 @@ use Chisel\Timber\Components;
  *
  * @package Chisel
  */
-class Site extends TimberSite {
+final class Site extends TimberSite {
 
 	use HooksSingleton;
 
