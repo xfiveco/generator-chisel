@@ -63,4 +63,14 @@
     <severity>0</severity>
   </rule>
 
+  <!-- Disable unused function parameter warning - WordPress hooks often require specific signatures -->
+  <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter">
+    <severity>0</severity>
+  </rule>
+
+  <!-- Disable Generic.PHP.Syntax - causes internal errors with PHP 8.2+ due to null to trim() deprecation -->
+  <rule ref="Generic.PHP.Syntax">
+    <severity>0</severity>
+  </rule>
+
 </ruleset>

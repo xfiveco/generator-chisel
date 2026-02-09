@@ -1,0 +1,92 @@
+#!/bin/sh
+# Chisel Core Files Protection Hook
+# This hook warns when committing MODIFICATIONS to core/ folder files
+# which will be overwritten by chisel-update
+
+# ============================================================================
+# CORE FILES CHECK
+# ============================================================================
+
+check_core_files() {
+  # Allow skipping with CHISEL_SKIP_CORE_CHECK=1 or --no-verify
+  if [ "$CHISEL_SKIP_CORE_CHECK" = "1" ]; then
+    return 0
+  fi
+
+  # Check if this is the initial commit (no HEAD exists)
+  if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
+    # Initial commit - allow all files including core/
+    return 0
+  fi
+
+  # Only check for MODIFIED files in core/ (not newly Added files)
+  # M = Modified, R = Renamed (which counts as a modification)
+  CORE_FILES=$(git diff --cached --name-only --diff-filter=MR | grep "/core/" || true)
+  CORE_FILES_ALT=$(git diff --cached --name-only --diff-filter=MR | grep "^core/" || true)
+
+  # Combine results
+  if [ -n "$CORE_FILES_ALT" ]; then
+    if [ -n "$CORE_FILES" ]; then
+      CORE_FILES="$CORE_FILES
+$CORE_FILES_ALT"
+    else
+      CORE_FILES="$CORE_FILES_ALT"
+    fi
+  fi
+
+  # Exit if no core files are staged
+  if [ -z "$CORE_FILES" ]; then
+    return 0
+  fi
+
+  # Warn about core file modifications
+  echo ""
+  echo "                     ⚠️  CHISEL CORE FILES MODIFIED  ⚠️                        "
+  echo "╠══════════════════════════════════════════════════════════════════════════════╣"
+  echo "║                                                                              ║"
+  echo "║  You are about to commit changes to files in the 'core/' folder.             ║"
+  echo "║  These files are managed by Chisel and will be OVERWRITTEN when you run:     ║"
+  echo "║                                                                              ║"
+  echo "║      npm run update-chisel                                                   ║"
+  echo "║                                                                              ║"
+  echo "╠══════════════════════════════════════════════════════════════════════════════╣"
+  echo "║  RECOMMENDATION:                                                             ║"
+  echo "║                                                                              ║"
+  echo "║  Instead of modifying core files, create or modify files in the 'custom/'    ║"
+  echo "║  folder. Custom files extend and override core functionality safely.         ║"
+  echo "║                                                                              ║"
+  echo "║  Examples:                                                                   ║"
+  echo "║    - core/WP/Site.php → custom/app/WP/Site.php                               ║"
+  echo "║    - core/Helpers/ImageHelpers.php → custom/app/Helpers/ImageHelpers.php     ║"
+  echo "║                                                                              ║"
+  echo "╠══════════════════════════════════════════════════════════════════════════════╣"
+  echo "║  Modified core files:                                                        ║"
+  echo "╟──────────────────────────────────────────────────────────────────────────────╢"
+
+  echo "$CORE_FILES" | while read -r file; do
+    printf "║    • %-70s ║\n" "$file"
+  done
+
+  echo "╠══════════════════════════════════════════════════════════════════════════════╣"
+  echo "║  OPTIONS:                                                                    ║"
+  echo "║                                                                              ║"
+  echo "║  1. Move your changes to the 'custom/' folder (recommended)                  ║"
+  echo "║  2. Skip this check if you know what you're doing:                           ║"
+  echo "║                                                                              ║"
+  echo "║     git commit --no-verify                                                   ║"
+  echo "║     # or                                                                     ║"
+  echo "║     CHISEL_SKIP_CORE_CHECK=1 git commit                                      ║"
+  echo "║                                                                              ║"
+  echo "╚══════════════════════════════════════════════════════════════════════════════╝"
+  echo ""
+
+  return 1
+}
+
+# Run core files check
+check_core_files || exit 1
+
+# ============================================================================
+# ADDITIONAL HOOKS
+# ============================================================================
+

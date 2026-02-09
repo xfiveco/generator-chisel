@@ -14,7 +14,10 @@ module.exports = async (api) => {
   let app;
 
   const runLocalCurrent = (args, opts) =>
-    runLocal(args, { ...opts, cwd: api.resolve(app.themePath) });
+    runLocal(args, {
+      ...opts,
+      cwd: api.resolve(app.themePath),
+    });
 
   api.schedule(api.PRIORITIES.PROMPT, async () => {
     const userName = execa('git', ['config', 'user.name'], {
@@ -65,7 +68,10 @@ module.exports = async (api) => {
   let installedPackages;
   api.schedule(api.PRIORITIES.COPY, async () => {
     await api.copy();
-    await api.copy({ from: 'chisel-starter-theme', to: app.themePath });
+    await api.copy({
+      from: 'chisel-starter-theme',
+      to: app.themePath,
+    });
 
     const modifyDependencies = (deps) => {
       Object.keys(deps).forEach((dep) => {
@@ -89,7 +95,9 @@ module.exports = async (api) => {
   api.schedule(api.PRIORITIES.INSTALL_DEPENDENCIES, async () => {
     if (api.creator.cmd.skipDependenciesInstall) return;
 
-    await installDependencies({ cwd: api.resolve(app.themePath) });
+    await installDependencies({
+      cwd: api.resolve(app.themePath),
+    });
 
     // await run(['xfive-coding-standards', '--skip-checks'], {
     //   cwd: api.resolve(app.themePath),
@@ -128,15 +136,23 @@ module.exports = async (api) => {
         .catch(() => false)
     ) {
       await api.modifyFile(preCommitPath, (body) => {
-        const str = [
+        const devcontainerSnippet = [
           '',
+          '# Set up devcontainer alias if needed (for all npx commands)',
           'if [ -f .use-devcontainer ]; then',
           '  alias npx="/usr/bin/env bash ../../../.devcontainer/exec npx"',
           'fi',
           '',
         ].join('\n');
 
-        return body.replace('npx ', str + '\nnpx ');
+        // Insert after shebang line
+        const shebangPattern = /^(#!\/bin\/sh)\n/;
+        if (shebangPattern.test(body)) {
+          return body.replace(shebangPattern, `$1\n${devcontainerSnippet}\n`);
+        }
+
+        // Fallback: prepend to file
+        return devcontainerSnippet + '\n' + body;
       });
     }
 
@@ -148,7 +164,9 @@ module.exports = async (api) => {
 
       for (const pkg of installedAndAvailable) {
         console.log(`Running npm link ${pkg}...`);
-        await run(['npm', 'link', pkg], { cwd: api.resolve(app.themePath) });
+        await run(['npm', 'link', pkg], {
+          cwd: api.resolve(app.themePath),
+        });
       }
     }
   });
@@ -171,7 +189,67 @@ module.exports = async (api) => {
     });
   });
 
-  // api.schedule(api.PRIORITIES.END_MESSAGE, async () => {
-  //   console.log('')
-  // });
+  // Set up git hooks after build
+  api.schedule(api.PRIORITIES.HUSKY, async () => {
+    const themePath = api.resolve(app.themePath);
+
+    // Check if git is initialized (in theme folder or project root)
+    const gitInTheme = await fs
+      .access(path.join(themePath, '.git'))
+      .then(() => true)
+      .catch(() => false);
+    const gitInRoot = await fs
+      .access(api.resolve('.git'))
+      .then(() => true)
+      .catch(() => false);
+
+    if (gitInTheme || gitInRoot) {
+      console.log('');
+      console.log('Setting up git hooks...');
+      try {
+        await runLocalCurrent(['chisel-scripts', 'husky-init'], {
+          execaOpts: { stdio: 'inherit' },
+        });
+        console.log('✔ Git hooks installed successfully');
+      } catch (error) {
+        console.log(
+          '⚠️  Failed to set up git hooks. Run "npm run prepare" manually.',
+        );
+      }
+    } else {
+      console.log('');
+      console.log(
+        '╔══════════════════════════════════════════════════════════════════════════════╗',
+      );
+      console.log(
+        '║  ⚠️  Git not initialized - pre-commit hooks not set up                       ║',
+      );
+      console.log(
+        '╠══════════════════════════════════════════════════════════════════════════════╣',
+      );
+      console.log(
+        '║                                                                              ║',
+      );
+      console.log(
+        '║  To enable core folder protection, run:                                      ║',
+      );
+      console.log(
+        '║                                                                              ║',
+      );
+      console.log(
+        '║    git init                                                                  ║',
+      );
+      console.log(`║    cd ${app.themePath.padEnd(71)}║`);
+      console.log(
+        '║    npm run prepare                                                           ║',
+      );
+      console.log(
+        '║                                                                              ║',
+      );
+      console.log(
+        '╚══════════════════════════════════════════════════════════════════════════════╝',
+      );
+    }
+    console.log('');
+  });
 };

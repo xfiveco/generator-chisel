@@ -14,15 +14,19 @@
     "start": "chisel-scripts start --experimental-modules",
     "dev": "npm run --silent start",
     "build-scripts": "chisel-scripts build --experimental-modules",
-    "build": "npm run build-scripts && npm run lint && npm run phpcs && npm run twigcs",
+    "build": "npm run build-scripts && npm run lint && npm run phpcs && npm run twigcs && npm run check-update",
     "add-page": "chisel-scripts add-page",
     "create-block": "chisel-scripts create-block --category=chisel-blocks --namespace=chisel",
     "create-dynamic-block": "npm run create-block --variant=dynamic",
     "wp": "chisel-scripts wp",
     "composer": "chisel-scripts composer",
     "wp-config": "chisel-scripts wp-config",
-    "phpcs": "cross-env vendor/bin/phpcs --extensions=php",
-    "twigcs": "cross-env vendor/bin/twigcs --config=twig_cs.php"
+    "phpcs": "cross-env vendor/bin/phpcs --extensions=php --exclude=Generic.PHP.Syntax",
+    "twigcs": "cross-env vendor/bin/twigcs --config=twig_cs.php",
+    "check-update": "chisel-scripts check-chisel-update",
+    "update-chisel": "chisel-scripts chisel-update",
+    "update": "npm run check-update && npm run update-chisel",
+    "prepare": "chisel-scripts husky-init || node -e \"\""
   },
   "dependencies": {
     "swiper": "^11.1.10",
@@ -31,7 +35,8 @@
   "devDependencies": {
     "@wordpress/scripts": "^31.2.0",
     "chisel-scripts": "*",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "husky": "^9.1.7"
   },
   "overrides": {
     "@wordpress/scripts": {

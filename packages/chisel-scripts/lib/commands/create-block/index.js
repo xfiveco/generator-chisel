@@ -15,7 +15,7 @@ module.exports = (api) => {
 
       const targetDir = api.resolve(
         'src',
-        template === 'acf' ? 'acf-blocks' : 'blocks',
+        template === 'acf' ? 'blocks-acf' : 'blocks',
       );
 
       const maybeTemplatePath =

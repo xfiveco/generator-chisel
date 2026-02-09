@@ -28,5 +28,7 @@ module.exports = {
 
   BUILD: 3000,
 
+  HUSKY: 4000,
+
   END_MESSAGE: 5000,
 };
