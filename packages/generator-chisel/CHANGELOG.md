@@ -2,6 +2,15 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.4.0 (2026-02-09)
+
+- chisel update scripts and husky precommit hooks ([31c1019](https://github.com/xfiveco/generator-chisel/commit/31c1019))
+- php refactor and optimize, chise install set default wp options, minor fixes ([f742903](https://github.com/xfiveco/generator-chisel/commit/f742903))
+- separate core php from custom, add base for custom, improve code structure ([d3ea3f4](https://github.com/xfiveco/generator-chisel/commit/d3ea3f4))
+- theme improvements, fixes, adjustments ([d2f7420](https://github.com/xfiveco/generator-chisel/commit/d2f7420))
+- update chisel version ([55bfaaf](https://github.com/xfiveco/generator-chisel/commit/55bfaaf))
+- Webpack config chnages: client ovarlay, nvmrc update, composer packages version update ([a07c16c](https://github.com/xfiveco/generator-chisel/commit/a07c16c))
+
 ## <small>2.3.3 (2026-01-02)</small>
 
 - Publish ([0e98159](https://github.com/xfiveco/generator-chisel/commit/0e98159))

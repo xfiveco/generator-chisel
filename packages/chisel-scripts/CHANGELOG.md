@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.2.0 (2026-02-09)
+
+- chisel update scripts and husky precommit hooks ([31c1019](https://github.com/xfiveco/generator-chisel/commit/31c1019))
+- Webpack config chnages: client ovarlay, nvmrc update, composer packages version update ([a07c16c](https://github.com/xfiveco/generator-chisel/commit/a07c16c))
+
 ## <small>2.1.5 (2026-01-02)</small>
 
 - wp-config-updates, wp/scripts lt, icons module define in functions.php ([3c97c63](https://github.com/xfiveco/generator-chisel/commit/3c97c63))
