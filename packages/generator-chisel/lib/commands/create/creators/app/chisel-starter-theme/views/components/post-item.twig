@@ -1,8 +1,8 @@
-<article id="post-{{ post.ID }}" class="{{ post_classes(post.class) }} c-post-item">
+<article id="post-{{ post.ID }}" class="c-post-item {{ post_classes(post.class) }}">
   {% block item_content %}
   <div class="c-post-item__content">
     {% block item_title %}
-      <h2 class="c-post-item__title"><a href="{{ post.link }}">{{ post.title }}{{ post.get_t() }}</a></h2>
+      <h2 class="c-post-item__title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
     {% endblock %}
 
     {% block item_category %}

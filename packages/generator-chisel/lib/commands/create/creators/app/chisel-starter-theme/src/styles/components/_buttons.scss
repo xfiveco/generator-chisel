@@ -81,7 +81,8 @@ $_static-icons: settings.$static-icons;
 }
 
 @each $icon in $_static-icons {
-  .c-btn.has-icon-#{$icon} {
+  .c-btn.has-icon-#{$icon},
+  span.has-icon-#{$icon} {
     &::after,
     &::before {
       @include icon-svg($icon);
@@ -89,7 +90,8 @@ $_static-icons: settings.$static-icons;
   }
 }
 
-.c-btn.has-icon {
+.c-btn.has-icon,
+span.has-icon {
   &::after,
   &::before {
     display: block;

@@ -1,0 +1,66 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// Collapse effect
+// ==================================================
+.c-main-nav__toggle--collapse,
+.c-main-nav__toggle--collapse-r {
+  .c-main-nav__toggle-inner {
+    top: auto;
+    bottom: 0;
+    transition-delay: 0.13s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 0.13s;
+
+    &::after {
+      top: ($hamburger-layer-spacing * 2 + $hamburger-layer-height * 2) * -1;
+      transition:
+        top 0.2s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        opacity 0.1s linear;
+    }
+
+    &::before {
+      transition:
+        top 0.12s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-delay: 0.22s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: translate3d(0, ($hamburger-layer-spacing + $hamburger-layer-height) * -1, 0)
+        rotate(-45deg);
+
+      &::after {
+        top: 0;
+        opacity: 0;
+        transition:
+          top 0.2s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          opacity 0.1s 0.22s linear;
+      }
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.1s 0.16s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--collapse-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: translate3d(0, ($hamburger-layer-spacing + $hamburger-layer-height) * -1, 0)
+        rotate(45deg);
+
+      &::before {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}

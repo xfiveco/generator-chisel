@@ -1,0 +1,56 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// Elastic effect
+// ==================================================
+.c-main-nav__toggle--elastic,
+.c-main-nav__toggle--elastic-r {
+  .c-main-nav__toggle-inner {
+    top: calc($hamburger-layer-height / 2);
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition-duration: 0.275s;
+
+    &::before {
+      top: $hamburger-layer-height + $hamburger-layer-spacing;
+      transition: opacity 0.125s 0.275s ease;
+    }
+
+    &::after {
+      top: ($hamburger-layer-height * 2) + ($hamburger-layer-spacing * 2);
+      transition: transform 0.275s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      $y-offset: $hamburger-layer-spacing + $hamburger-layer-height;
+
+      transition-delay: 0.075s;
+      transform: translate3d(0, $y-offset, 0) rotate(135deg);
+
+      &::before {
+        opacity: 0;
+        transition-delay: 0s;
+      }
+
+      &::after {
+        transition-delay: 0.075s;
+        transform: translate3d(0, $y-offset * -2, 0) rotate(-270deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--elastic-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      $y-offset: $hamburger-layer-spacing + $hamburger-layer-height;
+
+      transform: translate3d(0, $y-offset, 0) rotate(-135deg);
+
+      &::after {
+        transform: translate3d(0, $y-offset * -2, 0) rotate(270deg);
+      }
+    }
+  }
+}

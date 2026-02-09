@@ -20,6 +20,8 @@ class Slider {
 
     const swiperInstance = new this.swiper(this.elements.slider, this.params);
     this.swipers.push(swiperInstance);
+
+    this.initAccessibility();
   }
 
   /*
@@ -369,6 +371,40 @@ class Slider {
 
     this.params.thumbs = moduleParams;
   }
+
+  /**
+   * Initialize accessibility features for screen readers.
+   * Creates an aria-live region that announces slide changes.
+   */
+  initAccessibility() {
+    if (this.swipers.length === 0) {
+      return;
+    }
+
+    const mainSwiper = this.swipers[0];
+    this.elements.liveRegion = this.createLiveRegion();
+
+    mainSwiper.on('slideChange', () => {
+      const currentSlide = mainSwiper.realIndex + 1;
+      const totalSlides = mainSwiper.slides.length;
+      this.elements.liveRegion.textContent = __('Slide %1$d of %2$d', 'chisel')
+        .replace('%1$d', currentSlide)
+        .replace('%2$d', totalSlides);
+    });
+  }
+
+  /**
+   * Create an aria-live region for announcing slide changes.
+   */
+  createLiveRegion() {
+    const liveRegion = document.createElement('div');
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    liveRegion.className = 'u-sr-only';
+    this.elements.sliderContainer.appendChild(liveRegion);
+
+    return liveRegion;
+  }
 }
 
 export default () => {
@@ -392,9 +428,14 @@ export default () => {
     };
   };
 
-  loadModules().then(({ swiper, swiperModules }) => {
-    sliders.forEach((slider) => {
-      new Slider(slider, swiper, swiperModules);
+  loadModules()
+    .then(({ swiper, swiperModules }) => {
+      sliders.forEach((slider) => {
+        new Slider(slider, swiper, swiperModules);
+      });
+    })
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('Failed to load Swiper modules:', error);
     });
-  });
 };

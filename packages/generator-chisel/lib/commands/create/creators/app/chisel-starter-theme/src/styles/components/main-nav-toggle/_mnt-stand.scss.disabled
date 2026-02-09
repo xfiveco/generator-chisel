@@ -1,0 +1,59 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// Stand effect
+// ==================================================
+.c-main-nav__toggle--stand,
+.c-main-nav__toggle--stand-r {
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.075s 0.15s cubic-bezier(0.55, 0.055, 0.675, 0.19),
+      background-color 0s 0.075s linear;
+
+    &::before {
+      transition:
+        top 0.075s 0.075s ease-in,
+        transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    &::after {
+      transition:
+        bottom 0.075s 0.075s ease-in,
+        transform 0.075s 0s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transition:
+        transform 0.075s 0s cubic-bezier(0.215, 0.61, 0.355, 1),
+        background-color 0s 0.15s linear;
+      transform: rotate(90deg);
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.075s 0.1s ease-out,
+          transform 0.075s 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(-45deg);
+      }
+
+      &::after {
+        bottom: 0;
+        transition:
+          bottom 0.075s 0.1s ease-out,
+          transform 0.075s 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--stand-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotate(-90deg);
+    }
+  }
+}

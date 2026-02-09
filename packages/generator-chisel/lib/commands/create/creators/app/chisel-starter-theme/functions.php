@@ -37,7 +37,7 @@ spl_autoload_register(
 
 // Icons module. Also requires packacke.json and scss configuration.
 if ( ! defined( 'CHISEL_USE_ICONS_MODULE' ) ) {
-	define( 'CHISEL_USE_ICONS_MODULE', true );
+	define( 'CHISEL_USE_ICONS_MODULE', false );
 }
 
 Timber\Timber::init();

@@ -1,0 +1,139 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// 3dx effect
+// ==================================================
+.c-main-nav__toggle--three-dx,
+.c-main-nav__toggle--three-dx-r {
+  .c-main-nav__toggle-box {
+    perspective: $hamburger-layer-width * 2;
+  }
+
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transform: rotateY(180deg);
+
+      &::before {
+        transform: translate3d(0, $hamburger-layer-height + $hamburger-layer-spacing, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ($hamburger-layer-height + $hamburger-layer-spacing) * -1, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--three-dx-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotateY(-180deg);
+    }
+  }
+}
+
+// ==================================================
+// 3dy effect
+// ==================================================
+.c-main-nav__toggle--three-dy,
+.c-main-nav__toggle--three-dy-r {
+  .c-main-nav__toggle-box {
+    perspective: $hamburger-layer-width * 2;
+  }
+
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transform: rotateX(-180deg);
+
+      &::before {
+        transform: translate3d(0, $hamburger-layer-height + $hamburger-layer-spacing, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ($hamburger-layer-height + $hamburger-layer-spacing) * -1, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--three-dy-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotateX(180deg);
+    }
+  }
+}
+
+// ==================================================
+// 3dxy effect
+// ==================================================
+.c-main-nav__toggle--three-dxy,
+.c-main-nav__toggle--three-dxy-r {
+  .c-main-nav__toggle-box {
+    perspective: $hamburger-layer-width * 2;
+  }
+
+  .c-main-nav__toggle-inner {
+    transition:
+      transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &::before,
+    &::after {
+      transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transform: rotateX(180deg) rotateY(180deg);
+
+      &::before {
+        transform: translate3d(0, $hamburger-layer-height + $hamburger-layer-spacing, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        transform: translate3d(0, ($hamburger-layer-height + $hamburger-layer-spacing) * -1, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--three-dxy-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotateX(180deg) rotateY(180deg) rotateZ(-180deg);
+    }
+  }
+}

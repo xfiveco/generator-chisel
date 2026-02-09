@@ -2,7 +2,7 @@
 
 namespace Chisel\Timber\Custom;
 
-use Chisel\Timber\ChiselPost as TimberPost;
+use Chisel\Timber\ChiselPost as CoreChiselPost;
 use Timber\Timber;
 
 /**
@@ -10,5 +10,5 @@ use Timber\Timber;
  *
  * @package Chisel
  */
-class ChiselPost extends TimberPost {
+class ChiselPost extends CoreChiselPost {
 }

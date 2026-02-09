@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <article id="post-{{ post.ID }}" class="c-post {{ post_classes(post.class) }}">
+  <article id="post-{{ post.ID }}" class="{{ post_classes(post.class) }}">
     <section class="o-wrapper__inner c-post__inner {{ wrapper_class }}">
 
       <div class="o-layout c-content{% if sidebar.content %} has-sidebar{% endif %}">

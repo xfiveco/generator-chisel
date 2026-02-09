@@ -114,13 +114,13 @@
     img {
       @include object-fit-cover;
 
-      border: 2px solid get-color('primary');
-      opacity: 0.7;
+      border: 2px solid get-color('foreground');
+      opacity: 0.75;
       transition: get-transition('normal');
     }
 
     &.swiper-slide-thumb-active img {
-      border: 2px solid get-color('foreground');
+      border: 2px solid get-color('primary');
       opacity: 1;
     }
   }

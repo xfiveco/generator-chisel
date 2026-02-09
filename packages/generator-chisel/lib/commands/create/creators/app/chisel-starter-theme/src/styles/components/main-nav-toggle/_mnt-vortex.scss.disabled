@@ -1,0 +1,61 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// Vortex effect
+// ==================================================
+.c-main-nav__toggle--vortex,
+.c-main-nav__toggle--vortex-r {
+  .c-main-nav__toggle-inner {
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    transition-duration: 0.2s;
+
+    &::before,
+    &::after {
+      transition-delay: 0.1s;
+      transition-timing-function: linear;
+      transition-duration: 0s;
+    }
+
+    &::before {
+      transition-property: top, opacity;
+    }
+
+    &::after {
+      transition-property: bottom, transform;
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+      transform: rotate(765deg);
+
+      &::before,
+      &::after {
+        transition-delay: 0s;
+      }
+
+      &::before {
+        top: 0;
+        opacity: 0;
+      }
+
+      &::after {
+        bottom: 0;
+        transform: rotate(90deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--vortex-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotate(-765deg);
+
+      &::after {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}

@@ -68,7 +68,7 @@ final class Cache {
 	 */
 	public function cache_mode( string $cache_mode ): string {
 		// Available cache modes: 'CACHE_NONE', 'CACHE_OBJECT' (WP Object Cache), 'CACHE_TRANSIENT', 'CACHE_SITE_TRANSIENT', 'CACHE_USE_DEFAULT'.
-		$cache_mode = Loader::CACHE_USE_DEFAULT;
+		$cache_mode = Loader::CACHE_NONE;
 
 		return $cache_mode;
 	}

@@ -1,4 +1,16 @@
 class MainNav {
+  /**
+   * Delay before adding the 'open' class after 'active'.
+   * This small delay ensures CSS transitions trigger properly.
+   */
+  static ANIMATION_START_DELAY = 10;
+
+  /**
+   * Duration to wait before cleanup after closing.
+   * Should match the CSS transition duration for the nav items.
+   */
+  static TRANSITION_DURATION = 300;
+
   constructor() {
     this.initSelectors();
     this.initElements();
@@ -71,7 +83,7 @@ class MainNav {
 
       setTimeout(() => {
         this.elements.navItems.classList.add(this.classnames.open);
-      }, 10);
+      }, MainNav.ANIMATION_START_DELAY);
 
       const coords = this.elements.navToggle.getBoundingClientRect();
 
@@ -91,7 +103,7 @@ class MainNav {
           right: 'auto',
           position: 'relative',
         });
-      }, 300);
+      }, MainNav.TRANSITION_DURATION);
     }
   }
 }

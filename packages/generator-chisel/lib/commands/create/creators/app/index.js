@@ -222,7 +222,7 @@ module.exports = async (api) => {
         '╔══════════════════════════════════════════════════════════════════════════════╗',
       );
       console.log(
-        '║  ⚠️  Git not initialized - pre-commit hooks not set up                       ║',
+        '║  ⚠️  Git not initialized - pre-commit hooks not set up                        ║',
       );
       console.log(
         '╠══════════════════════════════════════════════════════════════════════════════╣',

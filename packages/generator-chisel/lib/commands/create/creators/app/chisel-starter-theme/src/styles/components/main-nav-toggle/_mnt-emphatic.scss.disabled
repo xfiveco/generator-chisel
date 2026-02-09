@@ -1,0 +1,59 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// Emphatic effect
+// ==================================================
+.c-main-nav__toggle--emphatic {
+  overflow: hidden;
+
+  .c-main-nav__toggle-inner {
+    transition: background-color 0.125s 0.175s ease-in;
+
+    &::before {
+      left: 0;
+      transition:
+        transform 0.125s cubic-bezier(0.6, 0.04, 0.98, 0.335),
+        top 0.05s 0.125s linear,
+        left 0.125s 0.175s ease-in;
+    }
+
+    &::after {
+      top: ($hamburger-layer-height) + ($hamburger-layer-spacing);
+      right: 0;
+      transition:
+        transform 0.125s cubic-bezier(0.6, 0.04, 0.98, 0.335),
+        top 0.05s 0.125s linear,
+        right 0.125s 0.175s ease-in;
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transition-delay: 0s;
+      transition-timing-function: ease-out;
+
+      &::before {
+        top: $hamburger-layer-width * -2;
+        left: $hamburger-layer-width * -2;
+        transition:
+          left 0.125s ease-out,
+          top 0.05s 0.125s linear,
+          transform 0.125s 0.175s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform: translate3d($hamburger-layer-width * 2, $hamburger-layer-width * 2, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        top: $hamburger-layer-width * -2;
+        right: $hamburger-layer-width * -2;
+        transition:
+          right 0.125s ease-out,
+          top 0.05s 0.125s linear,
+          transform 0.125s 0.175s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform: translate3d($hamburger-layer-width * -2, $hamburger-layer-width * 2, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}

@@ -169,20 +169,14 @@ final class Twig {
 	 *
 	 * @return string
 	 */
-	public function post_classes( ?string $classes, string $prefix = 'c-post--' ): string {
+	public function post_classes( ?string $classes, string $prefix = 'c-post' ): string {
 		if ( empty( $classes ) ) {
 			return '';
 		}
 
 		$classnames = explode( ' ', $classes );
-		$classnames = array_map(
-			function ( $classname ) use ( $prefix ) {
-				return $prefix . $classname;
-			},
-			$classnames
-		);
 
-		return implode( ' ', $classnames );
+		return ThemeHelpers::bem( $prefix, ...$classnames );
 	}
 
 	/**

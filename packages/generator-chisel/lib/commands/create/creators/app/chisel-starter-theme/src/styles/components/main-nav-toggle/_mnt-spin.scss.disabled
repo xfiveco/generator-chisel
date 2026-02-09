@@ -1,0 +1,60 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// Spin effect
+// ==================================================
+.c-main-nav__toggle--spin,
+.c-main-nav__toggle--spin-r {
+  .c-main-nav__toggle-inner {
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 0.22s;
+
+    &::before {
+      transition:
+        top 0.1s 0.25s ease-in,
+        opacity 0.1s ease-in;
+    }
+
+    &::after {
+      transition:
+        bottom 0.1s 0.25s ease-in,
+        transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-delay: 0.12s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: rotate(225deg);
+
+      &::before {
+        top: 0;
+        opacity: 0;
+        transition:
+          top 0.1s ease-out,
+          opacity 0.1s 0.12s ease-out;
+      }
+
+      &::after {
+        bottom: 0;
+        transition:
+          bottom 0.1s ease-out,
+          transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--spin-r {
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transform: rotate(-225deg);
+
+      &::after {
+        transform: rotate(90deg);
+      }
+    }
+  }
+}

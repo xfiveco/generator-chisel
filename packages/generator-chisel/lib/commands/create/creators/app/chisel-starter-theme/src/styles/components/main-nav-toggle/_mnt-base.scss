@@ -1,0 +1,117 @@
+@use '~design' as *;
+@use 'mnt-settings' as *;
+
+// Main Nav Toggle - Hamburger Menu Component
+// Based on Hamburgers by Jonathan Suh (https://github.com/jonsuh/hamburgers)
+
+// This component has been split into modular subfiles for better organization.
+// Enable additional animation effects by uncommenting the @use statements below.
+
+// Available effects:
+// - slider (default) - Sliding bars animation
+// - squeeze - Squeeze bars together
+// - spin - Spinning animation
+// - elastic - Elastic bounce animation
+// - emphatic - Dramatic expansion
+// - collapse - Collapsing bars
+// - vortex - Spinning vortex effect
+// - stand - Stand up animation
+// - spring - Spring bounce effect
+// - 3d - 3D rotation effects (3dx, 3dy, 3dxy)
+
+// Required - Base styles and settings
+// 'main-nav-toggle/base';
+
+// Default animation effect
+// 'main-nav-toggle/slider';
+
+// To enable another effect rename the files with the desired effect by removing .disabled from the file name.
+// For example: _mnt-squeeze.scss.disabled -> _mnt-squeeze.scss
+
+// ==================================================
+// Hamburger Base Styles
+// ==================================================
+
+.c-main-nav__toggle {
+  right: px-rem(16);
+  display: inline-block;
+  display: block;
+  padding: $hamburger-padding-y $hamburger-padding-x;
+  margin: 0;
+  overflow: visible;
+
+  // Normalize (<button>)
+  font: inherit;
+  line-height: 1;
+  color: inherit;
+  text-transform: none;
+  appearance: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  transition-timing-function: linear;
+  transition-duration: 0.15s;
+  transition-property: opacity;
+
+  @include bp(large) {
+    display: none;
+  }
+
+  &:hover {
+    opacity: $hamburger-hover-opacity;
+  }
+
+  &.is-active {
+    z-index: 999;
+
+    &:hover {
+      opacity: $hamburger-active-hover-opacity;
+    }
+
+    .c-main-nav__toggle-inner,
+    .c-main-nav__toggle-inner::before,
+    .c-main-nav__toggle-inner::after {
+      background-color: $hamburger-active-layer-color;
+    }
+  }
+}
+
+.c-main-nav__toggle-box {
+  position: relative;
+  display: inline-block;
+  width: $hamburger-layer-width;
+  height: $hamburger-layer-height * 3 + $hamburger-layer-spacing * 2;
+}
+
+.c-main-nav__toggle-inner {
+  top: 50%;
+  display: block;
+  margin-top: calc($hamburger-layer-height / -2);
+
+  &,
+  &::before,
+  &::after {
+    position: absolute;
+    width: $hamburger-layer-width;
+    height: $hamburger-layer-height;
+    background-color: $hamburger-layer-color;
+    border-radius: $hamburger-layer-border-radius;
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+    transition-property: transform;
+  }
+
+  &::before,
+  &::after {
+    display: block;
+    content: '';
+  }
+
+  &::before {
+    top: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+
+  &::after {
+    bottom: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+  }
+}

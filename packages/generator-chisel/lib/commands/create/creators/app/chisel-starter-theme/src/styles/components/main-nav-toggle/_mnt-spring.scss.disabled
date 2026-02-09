@@ -1,0 +1,98 @@
+@use 'mnt-settings' as *;
+
+// ==================================================
+// Spring effect
+// ==================================================
+.c-main-nav__toggle--spring {
+  .c-main-nav__toggle-inner {
+    top: calc($hamburger-layer-height / 2);
+    transition: background-color 0s 0.13s linear;
+
+    &::before {
+      top: $hamburger-layer-height + $hamburger-layer-spacing;
+      transition:
+        top 0.1s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    &::after {
+      top: ($hamburger-layer-height * 2) + ($hamburger-layer-spacing * 2);
+      transition:
+        top 0.2s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      background-color: transparent !important;
+      transition-delay: 0.22s;
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.1s 0.15s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translate3d(0, $hamburger-layer-spacing + $hamburger-layer-height, 0)
+          rotate(45deg);
+      }
+
+      &::after {
+        top: 0;
+        transition:
+          top 0.2s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translate3d(0, $hamburger-layer-spacing + $hamburger-layer-height, 0)
+          rotate(-45deg);
+      }
+    }
+  }
+}
+
+.c-main-nav__toggle--spring-r {
+  .c-main-nav__toggle-inner {
+    top: auto;
+    bottom: 0;
+    transition-delay: 0s;
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transition-duration: 0.13s;
+
+    &::after {
+      top: ($hamburger-layer-spacing * 2 + $hamburger-layer-height * 2) * -1;
+      transition:
+        top 0.2s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        opacity 0s linear;
+    }
+
+    &::before {
+      transition:
+        top 0.1s 0.2s cubic-bezier(0.3333, 0.6667, 0.6667, 1),
+        transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+  }
+
+  &.is-active {
+    .c-main-nav__toggle-inner {
+      transition-delay: 0.22s;
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      transform: translate3d(0, ($hamburger-layer-spacing + $hamburger-layer-height) * -1, 0)
+        rotate(-45deg);
+
+      &::after {
+        top: 0;
+        opacity: 0;
+        transition:
+          top 0.2s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          opacity 0s 0.22s linear;
+      }
+
+      &::before {
+        top: 0;
+        transition:
+          top 0.1s 0.15s cubic-bezier(0.3333, 0, 0.6667, 0.3333),
+          transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: rotate(90deg);
+      }
+    }
+  }
+}

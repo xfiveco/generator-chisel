@@ -71,6 +71,7 @@ final class Theme {
 	public function theme_supports(): void {
 		$this->post_thumbnails_post_types = (array) apply_filters( 'chisel_post_thumbnails_post_types', $this->post_thumbnails_post_types );
 
+		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-formats', array() );
 		add_theme_support( 'post-thumbnails', $this->post_thumbnails_post_types );
 		add_theme_support( 'menus' );

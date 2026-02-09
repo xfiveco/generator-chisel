@@ -32,7 +32,7 @@ class Ajax {
 	 *
 	 * @return array
 	 */
-	public function register_ajax_routes( $routes ) {
+	public function register_ajax_routes( array $routes ): array {
 		// phpcs:disable -- Example of custom ajax route
 		// $routes['custom_route'] = array(
 		// 	'methods'  => 'POST', // default is POST

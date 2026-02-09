@@ -69,7 +69,7 @@ final class ThemeHelpers {
 	 * @return bool
 	 */
 	public static function should_use_icons_module(): bool {
-		return defined( 'CHISEL_USE_ICONS_MODULE' ) && CHISEL_USE_ICONS_MODULE;
+		return defined( 'CHISEL_USE_ICONS_MODULE' ) && CHISEL_USE_ICONS_MODULE === true;
 	}
 
 	/**
@@ -81,11 +81,15 @@ final class ThemeHelpers {
 	 * @return string
 	 */
 	public static function bem( string $name = '', mixed ...$modifiers ): string {
-		if ( $name === '' || empty( $modifiers ) ) {
+		if ( $name === '' ) {
 			return '';
 		}
 
 		$classnames = array( $name );
+
+		if ( empty( $modifiers ) ) {
+			return $name;
+		}
 
 		foreach ( $modifiers as $key => $value ) {
 			if ( is_array( $value ) ) {
