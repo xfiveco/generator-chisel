@@ -48,6 +48,13 @@ final class Blocks {
 	 */
 	private string $blocks_category = '';
 
+	/**
+	 * Block patterns.
+	 *
+	 * @var array
+	 */
+	private array $block_patterns = array();
+
 
 	/**
 	 * Blocks patterns categories.
@@ -65,6 +72,13 @@ final class Blocks {
 	private string $block_patterns_categories_namespace = '';
 
 	/**
+	 * Block patterns path.
+	 *
+	 * @var string
+	 */
+	private string $block_patterns_path = '';
+
+	/**
 	 * Blocks twig file base path.
 	 *
 	 * @var string
@@ -80,19 +94,52 @@ final class Blocks {
 		$this->blocks_twig_base_path               = 'build/blocks/';
 		$this->theme                               = wp_get_theme();
 		$this->blocks_category                     = 'chisel-blocks';
+		$this->block_patterns_path                 = get_template_directory() . '/patterns/';
 		$this->block_patterns_categories_namespace = 'chisel-patterns';
 		$this->block_patterns_categories           = array(
-			'cta'      => array(
-				'label'       => __( 'Call to Action', 'chisel' ),
-				'description' => __( 'Call to Action Sections.', 'chisel' ),
+			'hero'         => array(
+				'label'       => __( 'Hero', 'chisel' ),
+				'description' => __( 'Hero Sections.', 'chisel' ),
 			),
-			'features' => array(
+			'features'     => array(
 				'label'       => __( 'Features', 'chisel' ),
 				'description' => __( 'Features Sections.', 'chisel' ),
 			),
-			'hero'     => array(
-				'label'       => __( 'Hero', 'chisel' ),
-				'description' => __( 'Hero Sections.', 'chisel' ),
+			'cta'          => array(
+				'label'       => __( 'Call to Action', 'chisel' ),
+				'description' => __( 'Call to Action Sections.', 'chisel' ),
+			),
+			'testimonials' => array(
+				'label'       => __( 'Testimonials', 'chisel' ),
+				'description' => __( 'Testimonials Sections.', 'chisel' ),
+			),
+			'team'         => array(
+				'label'       => __( 'Team', 'chisel' ),
+				'description' => __( 'Team Sections.', 'chisel' ),
+			),
+			'pricing'      => array(
+				'label'       => __( 'Pricing', 'chisel' ),
+				'description' => __( 'Pricing Sections.', 'chisel' ),
+			),
+			'text'         => array(
+				'label'       => __( 'Text', 'chisel' ),
+				'description' => __( 'Text Sections.', 'chisel' ),
+			),
+			'gallery'      => array(
+				'label'       => __( 'Gallery', 'chisel' ),
+				'description' => __( 'Gallery Sections.', 'chisel' ),
+			),
+			'faq'          => array(
+				'label'       => __( 'FAQ', 'chisel' ),
+				'description' => __( 'FAQ Sections.', 'chisel' ),
+			),
+			'stats'        => array(
+				'label'       => __( 'Stats', 'chisel' ),
+				'description' => __( 'Statistics Sections.', 'chisel' ),
+			),
+			'logos'        => array(
+				'label'       => __( 'Logos', 'chisel' ),
+				'description' => __( 'Logo Cloud Sections.', 'chisel' ),
 			),
 		);
 	}
@@ -322,6 +369,35 @@ final class Blocks {
 	}
 
 	/**
+	 * Get block patterns from the patterns directory.
+	 *
+	 * @return array
+	 */
+	protected function get_block_patterns(): array {
+		if ( $this->block_patterns ) {
+			return $this->block_patterns;
+		}
+
+		$patterns_list = is_dir( $this->block_patterns_path ) ? new \DirectoryIterator( $this->block_patterns_path ) : array();
+
+		if ( $patterns_list ) {
+			foreach ( $patterns_list as $item ) {
+				if ( $item->isDot() || $item->isDir() || 'php' !== $item->getExtension() ) {
+					continue;
+				}
+
+				$block_name = $item->getFilename();
+
+				if ( ! in_array( $block_name, $this->block_patterns, true ) ) {
+					$this->block_patterns[] = $block_name;
+				}
+			}
+		}
+
+		return $this->block_patterns;
+	}
+
+	/**
 	 * Maybe clear patterns cache. Clear patterns cache if block patterns categories are changed / added.
 	 *
 	 * @return void
@@ -331,21 +407,36 @@ final class Blocks {
 			return;
 		}
 
-		$theme_patterns      = $this->block_patterns_categories;
-		$cached_patterns     = $this->theme->get_block_patterns();
-		$patterns_categories = array();
+		$theme_patterns           = $this->get_block_patterns();
+		$theme_pattern_categories = $this->block_patterns_categories;
+		$cached_patterns          = $this->theme->get_block_patterns();
+		$patterns_categories      = array();
 
 		foreach ( $cached_patterns as $pattern ) {
+			$slug = $pattern['slug'] ?? '';
+			$file = '';
+
+			if ( $slug ) {
+				$file = explode( '/', $slug );
+				$file = end( $file ) . '.php';
+			}
+
+			if ( $file && in_array( $file, $theme_patterns, true ) ) {
+				$key = array_search( $file, $theme_patterns, true );
+
+				unset( $theme_patterns[ $key ] );
+			}
+
 			foreach ( $pattern['categories'] ?? array() as $category ) {
 				$category = str_replace( $this->block_patterns_categories_namespace . '/', '', $category );
 
-				if ( isset( $theme_patterns[ $category ] ) ) {
-					unset( $theme_patterns[ $category ] );
+				if ( isset( $theme_pattern_categories[ $category ] ) ) {
+					unset( $theme_pattern_categories[ $category ] );
 				}
 			}
 		}
 
-		if ( ! empty( $theme_patterns ) ) {
+		if ( ! empty( $theme_pattern_categories ) || ! empty( $theme_patterns ) ) {
 			$this->theme->delete_pattern_cache();
 		}
 	}

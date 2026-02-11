@@ -90,17 +90,27 @@ final class BlocksHelpers {
 		$context['block']['class_names'] = $classes;
 		$context['block']['block_id']    = $block['anchor'] ?? ( $block['id'] ?? '' );
 
-		// allow to use filters to manipulate the output.
+		// Allow to use filters to manipulate the output.
 		$context = apply_filters( 'chisel_timber_acf_blocks_data', $context );
 		$context = apply_filters( 'chisel_timber_acf_blocks_data_' . $block_slug, $context );
 		$context = apply_filters( 'chisel_timber_acf_blocks_data_' . $block['id'], $context );
 
-		$context['wrapper_attributes'] = get_block_wrapper_attributes(
-			array(
-				'id'    => $context['block']['block_id'],
-				'class' => implode( ' ', $context['block']['class_names'] ),
-			)
-		);
+		// Check if WP_Block_Supports has a block to render to avoid warnings.
+		if ( class_exists( '\WP_Block_Supports' ) && \WP_Block_Supports::$block_to_render ) {
+			$context['wrapper_attributes'] = get_block_wrapper_attributes(
+				array(
+					'id'    => $context['block']['block_id'],
+					'class' => implode( ' ', $context['block']['class_names'] ),
+				)
+			);
+		} else {
+			// Fallback: manually construct attributes if block context is missing.
+			$context['wrapper_attributes'] = sprintf(
+				'id="%s" class="%s"',
+				esc_attr( $context['block']['block_id'] ),
+				esc_attr( implode( ' ', $context['block']['class_names'] ) )
+			);
+		}
 
 		Timber::render( AcfBlocks::get_instance()->blocks_twig_base_path . $block_slug . '/' . $block_slug . '.twig', $context, CacheHelpers::expiry() );
 	}
