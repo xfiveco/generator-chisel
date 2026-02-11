@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.2 (2026-02-11)</small>
+
+- Blocks and patterns cache and render fixes ([576fbe9](https://github.com/xfiveco/generator-chisel/commit/576fbe9))
+
 ## <small>2.4.1 (2026-02-11)</small>
 
 - small fixes ([4c74101](https://github.com/xfiveco/generator-chisel/commit/4c74101))
