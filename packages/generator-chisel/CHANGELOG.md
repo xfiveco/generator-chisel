@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.1 (2026-02-11)</small>
+
+- small fixes ([4c74101](https://github.com/xfiveco/generator-chisel/commit/4c74101))
+- update theme version and screenshot ([324db40](https://github.com/xfiveco/generator-chisel/commit/324db40))
+
 ## 2.4.0 (2026-02-09)
 
 - chisel update scripts and husky precommit hooks ([31c1019](https://github.com/xfiveco/generator-chisel/commit/31c1019))

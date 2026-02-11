@@ -1,6 +1,6 @@
 {
   "name": "chisel-scripts",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Chisel scripts",
   "bin": {
     "chisel-scripts": "bin/chisel-scripts.js"
