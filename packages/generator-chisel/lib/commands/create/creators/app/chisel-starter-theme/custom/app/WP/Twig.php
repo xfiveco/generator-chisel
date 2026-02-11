@@ -34,7 +34,7 @@ class Twig {
 	 */
 	public function register_functions( \Twig\Environment $twig, \Chisel\WP\Twig $chisel_twig ): void {
 		// phpcs:disable -- Example of custom function. Remove this line and the phpcs:enable when adding your own custom functions
-		// $twig->addFunction( new \Twig\Function( 'custom_fn', array( $this, 'custom_fn_callback' ) ) );
+		// $chisel_twig->register_function( $twig, 'custom_fn', array( $this, 'custom_fn_callback' ) );
 		// phpcs:enable
 	}
 
@@ -46,7 +46,7 @@ class Twig {
 	 */
 	public function register_filters( \Twig\Environment $twig, \Chisel\WP\Twig $chisel_twig ): void {
 		// phpcs:disable -- Example of custom filter. Remove this line and the phpcs:enable when adding your own custom filters
-		// $twig->addFilter( new \Twig\Filter( 'custom_filter', array( $this, 'custom_filter_callback' ) ) );
+		// $chisel_twig->register_filter( $twig, 'custom_filter', array( $this, 'custom_filter_callback' ) );
 		// phpcs:enable
 	}
 }

@@ -57,8 +57,8 @@ export default function huskyInit(api) {
       const gitRoot = getGitRoot(themeDir);
 
       if (!gitRoot) {
-        console.error('❌ Not inside a git repository.');
-        console.error('   Please run "git init" first at your project root.');
+        console.error('❌ No git repository found.');
+        console.error('   Skipping husky initialization.');
         process.exit(1);
       }
 
