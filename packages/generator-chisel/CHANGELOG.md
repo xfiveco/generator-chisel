@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.3 (2026-03-04)</small>
+
+- fix conditional enqueue, add filre hooks for defer, async, preload, add phcbf ([3befdb5](https://github.com/xfiveco/generator-chisel/commit/3befdb5))
+- update theme version ([7292b1a](https://github.com/xfiveco/generator-chisel/commit/7292b1a))
+
 ## <small>2.4.2 (2026-02-11)</small>
 
 - Blocks and patterns cache and render fixes ([576fbe9](https://github.com/xfiveco/generator-chisel/commit/576fbe9))
