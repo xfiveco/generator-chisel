@@ -161,6 +161,7 @@ final class Blocks {
 		add_filter( 'block_categories_all', array( $this, 'block_categories' ) );
 		add_filter( 'timber/locations', array( $this, 'tiwg_files_locations' ) );
 		add_filter( 'render_block', array( $this, 'render_block' ), 10, 3 );
+		add_filter( 'register_block_type_args', array( $this, 'register_block_type_args' ), 10, 2 );
 
 		add_filter( 'should_load_separate_core_block_assets', array( $this, 'should_load_separate_core_block_assets' ) );
 		add_filter( 'styles_inline_size_limit', array( $this, 'styles_inline_size_limit' ) );
@@ -290,6 +291,36 @@ final class Blocks {
 		}
 
 		return $block_content;
+	}
+
+	/**
+	 * Extend server-registered block attributes with editor-added custom attributes.
+	 *
+	 * This keeps REST block renderer validation in sync with JS filters that add
+	 * custom attributes (e.g. disableBottomMargin in editor mods).
+	 *
+	 * @param array  $args       Block type args.
+	 * @param string $block_name Registered block name.
+	 *
+	 * @return array
+	 */
+	public function register_block_type_args( array $args, string $block_name ): array {
+		if ( strpos( $block_name, 'core/' ) !== 0 && strpos( $block_name, 'chisel/' ) !== 0 ) {
+			return $args;
+		}
+
+		if ( ! isset( $args['attributes'] ) || ! is_array( $args['attributes'] ) ) {
+			$args['attributes'] = array();
+		}
+
+		if ( ! isset( $args['attributes']['disableBottomMargin'] ) ) {
+			$args['attributes']['disableBottomMargin'] = array(
+				'type'    => 'boolean',
+				'default' => false,
+			);
+		}
+
+		return $args;
 	}
 
 	/**

@@ -455,7 +455,7 @@ final class Assets {
 			return $tag;
 		}
 
-		$scripts = array();
+		$scripts = apply_filters( 'chisel_async_scripts', array() );
 
 		if ( $scripts ) {
 			foreach ( $scripts as $script_handle ) {
@@ -481,7 +481,7 @@ final class Assets {
 			return $tag;
 		}
 
-		$scripts = array();
+		$scripts = apply_filters( 'chisel_defer_scripts', array() );
 
 		if ( $scripts ) {
 			foreach ( $scripts as $script_handle ) {
@@ -507,13 +507,19 @@ final class Assets {
 			return $tag;
 		}
 
-		$styles_handles = array(
-			'wp-block-library',
+		$styles_handles = apply_filters(
+			'chisel_preload_styles',
+			array(
+				'wp-block-library',
+			)
 		);
 
-		$styles_handles_start_with = array(
-			'gform_',
-			'block',
+		$styles_handles_start_with = apply_filters(
+			'chisel_preload_styles_start_with',
+			array(
+				'gform_',
+				'block',
+			)
 		);
 
 		if ( $styles_handles ) {
@@ -546,7 +552,7 @@ final class Assets {
 		$preload_tag = str_replace( "rel='stylesheet'", "rel='preload' as='style'", $tag );
 		$tag         = $preload_tag . str_replace( "media='all'", "media='print' onload='this.media=\"all\"'", $tag );
 
-		return $tag;
+		return apply_filters( 'chisel_preload_style', $tag );
 	}
 
 	/**
@@ -561,22 +567,10 @@ final class Assets {
 	private function register_style( string $handle, string $file_name, array $args ): ?array {
 		$asset_data = $this->get_asset( $file_name, 'css' );
 
-		$src       = isset( $args['src'] ) ? $args['src'] : $this->get_style_src( $file_name );
-		$deps      = isset( $args['deps'] ) ? $args['deps'] : array();
-		$ver       = isset( $args['ver'] ) ? $args['ver'] : $asset_data['version'];
-		$media     = isset( $args['media'] ) ? $args['media'] : 'all';
-		$condition = isset( $args['condition'] ) ? $args['condition'] : null;
-
-		// Use condition to determine if the style should be registered. It can be either a boolean or a function.
-		if ( $condition !== null ) {
-			if ( is_callable( $condition ) ) {
-				$condition = call_user_func( $condition );
-			}
-
-			if ( ! $condition ) {
-				return null;
-			}
-		}
+		$src   = isset( $args['src'] ) ? $args['src'] : $this->get_style_src( $file_name );
+		$deps  = isset( $args['deps'] ) ? $args['deps'] : array();
+		$ver   = isset( $args['ver'] ) ? $args['ver'] : $asset_data['version'];
+		$media = isset( $args['media'] ) ? $args['media'] : 'all';
 
 		if ( $asset_data['dependencies'] ) {
 			$deps = wp_parse_args( $asset_data['dependencies'], $deps );
@@ -596,12 +590,11 @@ final class Assets {
 		}
 
 		return array(
-			'src'       => $src,
-			'deps'      => $deps,
-			'ver'       => $ver,
-			'media'     => $media,
-			'condition' => $condition,
-			'handle'    => $handle,
+			'src'    => $src,
+			'deps'   => $deps,
+			'ver'    => $ver,
+			'media'  => $media,
+			'handle' => $handle,
 		);
 	}
 
@@ -611,10 +604,22 @@ final class Assets {
 	 * @param string $handle - full script handle.
 	 * @param array  $args
 	 *
-	 * @return array
+	 * @return ?array
 	 */
-	private function enqueue_style( string $handle, array $args ): array {
-		$inline = isset( $args['inline'] ) ? $args['inline'] : '';
+	private function enqueue_style( string $handle, array $args ): ?array {
+		$condition = isset( $args['condition'] ) ? $args['condition'] : null;
+		$inline    = isset( $args['inline'] ) ? $args['inline'] : '';
+
+		// Use condition to determine if the style should be enqueued. It can be either a boolean or a function.
+		if ( $condition !== null ) {
+			if ( is_callable( $condition ) ) {
+				$condition = call_user_func( $condition );
+			}
+
+			if ( ! $condition ) {
+				return null;
+			}
+		}
 
 		if ( $inline ) {
 			wp_add_inline_style( $handle, $inline['data'] );
@@ -623,7 +628,8 @@ final class Assets {
 		wp_enqueue_style( $handle );
 
 		return array(
-			'handle' => $handle,
+			'handle'    => $handle,
+			'condition' => $condition,
 		);
 	}
 
@@ -639,13 +645,40 @@ final class Assets {
 	private function register_script( string $handle, string $file_name, array $args ): ?array {
 		$asset_data = $this->get_asset( $file_name, 'js' );
 
-		$src       = isset( $args['src'] ) ? $args['src'] : $this->get_script_src( $file_name );
-		$deps      = isset( $args['deps'] ) ? $args['deps'] : array();
-		$ver       = isset( $args['ver'] ) ? $args['ver'] : $asset_data['version'];
-		$strategy  = isset( $args['strategy'] ) ? $args['strategy'] : array(
+		$src      = isset( $args['src'] ) ? $args['src'] : $this->get_script_src( $file_name );
+		$deps     = isset( $args['deps'] ) ? $args['deps'] : array();
+		$ver      = isset( $args['ver'] ) ? $args['ver'] : $asset_data['version'];
+		$strategy = isset( $args['strategy'] ) ? $args['strategy'] : array(
 			'in_footer' => true,
 			'strategy'  => 'defer',
 		); // Strategy can be a boolean, which determines if the script should be enqueued in the footer, or an array with the following keys: 'in_footer':boolean and 'strategy':string (defer or async).
+
+		if ( $asset_data['dependencies'] ) {
+			$deps = wp_parse_args( $asset_data['dependencies'], $deps );
+		}
+
+		wp_register_script( $handle, $src, $deps, $ver, $strategy );
+
+		return array(
+			'src'      => $src,
+			'deps'     => $deps,
+			'ver'      => $ver,
+			'strategy' => $strategy,
+			'handle'   => $handle,
+		);
+	}
+
+	/**
+	 * Enqueue script wrapper function.
+	 *
+	 * @param string $handle - full script handle.
+	 * @param array  $args
+	 *
+	 * @return ?array
+	 */
+	private function enqueue_script( string $handle, array $args ): ?array {
+		$localize  = isset( $args['localize'] ) ? $args['localize'] : array();
+		$inline    = isset( $args['inline'] ) ? $args['inline'] : '';
 		$condition = isset( $args['condition'] ) ? $args['condition'] : null;
 
 		// Use condition to determine if the script should be registered. It can be either a boolean or a function.
@@ -659,34 +692,6 @@ final class Assets {
 			}
 		}
 
-		if ( $asset_data['dependencies'] ) {
-			$deps = wp_parse_args( $asset_data['dependencies'], $deps );
-		}
-
-		wp_register_script( $handle, $src, $deps, $ver, $strategy );
-
-		return array(
-			'src'       => $src,
-			'deps'      => $deps,
-			'ver'       => $ver,
-			'strategy'  => $strategy,
-			'condition' => $condition,
-			'handle'    => $handle,
-		);
-	}
-
-	/**
-	 * Enqueue script wrapper function.
-	 *
-	 * @param string $handle - full script handle.
-	 * @param array  $args
-	 *
-	 * @return array
-	 */
-	private function enqueue_script( string $handle, array $args ): array {
-		$localize = isset( $args['localize'] ) ? $args['localize'] : array();
-		$inline   = isset( $args['inline'] ) ? $args['inline'] : '';
-
 		if ( $localize ) {
 			wp_localize_script( $handle, $localize['name'], $localize['data'] );
 		}
@@ -699,8 +704,9 @@ final class Assets {
 		$this->set_script_translations( $handle, $args );
 
 		return array(
-			'localize' => $localize,
-			'handle'   => $handle,
+			'localize'  => $localize,
+			'condition' => $condition,
+			'handle'    => $handle,
 		);
 	}
 
@@ -727,7 +733,24 @@ final class Assets {
 	 */
 	private function enqueue_style_js_for_dev( string $handle ): void {
 		if ( ThemeHelpers::is_fast_refresh() ) {
-			wp_enqueue_script( 'style-' . AssetsHelpers::get_final_handle( $handle ) );
+			$enqueue = true;
+
+			if ( $args ) {
+				$src = isset( $args['src'] ) ? $args['src'] : '';
+
+				if ( $src ) {
+					$theme      = wp_get_theme();
+					$theme_name = $theme->get_stylesheet();
+
+					if ( strpos( $src, $theme_name ) === false ) {
+						$enqueue = false;
+					}
+				}
+			}
+
+			if ( $enqueue ) {
+				wp_enqueue_script( 'style-' . AssetsHelpers::get_final_handle( $handle ) );
+			}
 		}
 	}
 
