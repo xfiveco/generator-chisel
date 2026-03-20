@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.4 (2026-03-20)</small>
+
+- Update readme, fix husky overwrite ([a24f08f](https://github.com/xfiveco/generator-chisel/commit/a24f08f))
+- Update theme version ([41ab516](https://github.com/xfiveco/generator-chisel/commit/41ab516))
+
 ## <small>2.4.3 (2026-03-04)</small>
 
 - fix conditional enqueue, add filre hooks for defer, async, preload, add phcbf ([3befdb5](https://github.com/xfiveco/generator-chisel/commit/3befdb5))
