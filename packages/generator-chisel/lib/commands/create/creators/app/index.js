@@ -108,6 +108,14 @@ module.exports = async (api) => {
       { cwd: api.resolve(app.themePath) },
     );
 
+    // Restore prepare script after coding-standards may have overwritten it
+    {
+      const themePkgPath = api.resolve(app.themePath, 'package.json');
+      const themePkg = JSON.parse(await fs.readFile(themePkgPath, 'utf8'));
+      themePkg.scripts.prepare = 'chisel-scripts husky-init || node -e ""';
+      await fs.writeFile(themePkgPath, JSON.stringify(themePkg, null, 2) + '\n');
+    }
+
     await api.modifyFile(
       '.devcontainer/devcontainer.json',
       async (body) => {

@@ -1,8 +1,8 @@
 # Chisel WordPress Theme
 
-## WordPress Starter Theme based on Timber library
+A WordPress starter theme built on [Timber](https://timber.github.io/docs/) (Twig templating), Webpack, and ITCSS. Part of the [Chisel](https://getchisel.co/) development framework — scaffolded automatically via `npx generator-chisel`.
 
-Chisel is a custom WordPress development framework we built to make developers’ lives easier. It streamlines theme development with a modern stack — Webpack, Timber, and ITCSS — ensuring faster coding, cleaner structure, and more maintainable projects.
+For full documentation visit [getchisel.co](https://getchisel.co/).
 
 ## Installation
 
