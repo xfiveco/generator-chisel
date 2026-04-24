@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.5 (2026-04-24)</small>
+
+- fix assets and twig components issues ([c6a07d3](https://github.com/xfiveco/generator-chisel/commit/c6a07d3))
+- update theme version ([8671597](https://github.com/xfiveco/generator-chisel/commit/8671597))
+
 ## <small>2.4.4 (2026-03-20)</small>
 
 - Update readme, fix husky overwrite ([a24f08f](https://github.com/xfiveco/generator-chisel/commit/a24f08f))
