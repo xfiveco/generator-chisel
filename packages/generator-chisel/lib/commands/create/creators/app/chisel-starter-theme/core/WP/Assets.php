@@ -296,7 +296,7 @@ final class Assets {
 					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
-					$this->enqueue_style_js_for_dev( $handle );
+					$this->enqueue_style_js_for_dev( $handle, $args );
 				}
 			}
 		}
@@ -328,7 +328,7 @@ final class Assets {
 					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
-					$this->enqueue_style_js_for_dev( $handle );
+					$this->enqueue_style_js_for_dev( $handle, $args );
 				}
 			}
 		}
@@ -350,7 +350,7 @@ final class Assets {
 					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
-					$this->enqueue_style_js_for_dev( $handle );
+					$this->enqueue_style_js_for_dev( $handle, $args );
 				}
 			}
 		}
@@ -383,7 +383,7 @@ final class Assets {
 					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
-					$this->enqueue_style_js_for_dev( $handle );
+					$this->enqueue_style_js_for_dev( $handle, $args );
 				}
 			}
 		}
@@ -425,7 +425,7 @@ final class Assets {
 					$this->enqueue_style( $style_handle, $args );
 
 					// Enqueue js file for fast refresh of the css file.
-					$this->enqueue_style_js_for_dev( $handle );
+					$this->enqueue_style_js_for_dev( $handle, $args );
 				}
 			}
 		}
@@ -728,10 +728,11 @@ final class Assets {
 	 * Enqueue style for development (fast refresh) mode.
 	 *
 	 * @param string $handle
+	 * @param array  $args
 	 *
 	 * @return void
 	 */
-	private function enqueue_style_js_for_dev( string $handle ): void {
+	private function enqueue_style_js_for_dev( string $handle, array $args = array() ): void {
 		if ( ThemeHelpers::is_fast_refresh() ) {
 			$enqueue = true;
 

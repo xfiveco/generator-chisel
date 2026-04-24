@@ -11,7 +11,7 @@ use Chisel\Helpers\ImageHelpers;
 use Chisel\Helpers\ThemeHelpers;
 use Chisel\Helpers\WoocommerceHelpers;
 use Chisel\Helpers\YoastHelpers;
-use Chisel\WP\Components;
+use Chisel\Timber\Components;
 
 /**
  * Class used to extend Timber functionality.
