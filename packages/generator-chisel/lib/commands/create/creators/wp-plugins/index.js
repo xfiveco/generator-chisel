@@ -1,6 +1,9 @@
 const { runLocal } = require('chisel-shared-utils');
 const plugins = require('./plugins.json');
 
+const MCP_PLUGIN_LABEL = 'xfive MCP';
+const MCP_PLUGIN_SLUG = 'xfive-mcp';
+
 module.exports = (api) => {
   if (api.creator.cmd.skipWpPlugins) return;
 
@@ -33,5 +36,16 @@ module.exports = (api) => {
       ],
       { cwd: api.resolve(api.creator.data.app.themePath) },
     );
+  });
+
+  api.schedule(api.PRIORITIES.END_MESSAGE, async () => {
+    const { plugins: selectedPlugins } = api.creator.data.wpPlugins;
+    if (!selectedPlugins.includes(MCP_PLUGIN_LABEL)) return;
+
+    console.log(`
+ℹ️  Xfive MCP plugin was installed.
+   See the plugin's README for coding-agent configuration details:
+   wp-content/plugins/${MCP_PLUGIN_SLUG}/README.md
+`);
   });
 };

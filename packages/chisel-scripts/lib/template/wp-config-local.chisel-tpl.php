@@ -57,5 +57,8 @@ define( 'WP_DEBUG_DISPLAY', false );
 define( 'SCRIPT_DEBUG', true );
 define( 'WP_ENVIRONMENT_TYPE', 'development' );
 
+// MCP Auth open mode for xfive-mcp plugin
+define( 'MCP_OPEN', true );
+
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );

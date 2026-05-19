@@ -622,7 +622,13 @@ final class Assets {
 		}
 
 		if ( $inline ) {
-			wp_add_inline_style( $handle, $inline['data'] );
+			$inline_data = $inline['data'];
+
+			if ( is_callable( $inline_data ) ) {
+				$inline_data = call_user_func( $inline_data );
+			}
+
+			wp_add_inline_style( $handle, $inline_data );
 		}
 
 		wp_enqueue_style( $handle );
@@ -693,11 +699,23 @@ final class Assets {
 		}
 
 		if ( $localize ) {
-			wp_localize_script( $handle, $localize['name'], $localize['data'] );
+			$data = $localize['data'];
+
+			if ( is_callable( $data ) ) {
+				$data = call_user_func( $data );
+			}
+
+			wp_localize_script( $handle, $localize['name'], $data );
 		}
 
 		if ( $inline ) {
-			wp_add_inline_script( $handle, $inline['data'], $inline['position'] );
+			$inline_data = $inline['data'];
+
+			if ( is_callable( $inline_data ) ) {
+				$inline_data = call_user_func( $inline_data );
+			}
+
+			wp_add_inline_script( $handle, $inline_data, $inline['position'] );
 		}
 
 		wp_enqueue_script( $handle );

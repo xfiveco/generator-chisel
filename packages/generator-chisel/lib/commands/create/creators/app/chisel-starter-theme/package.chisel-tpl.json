@@ -1,6 +1,6 @@
 {
   "name": "<%= app.nameSlug %>",
-  "version": "2.4.3",
+  "version": "2.4.6",
   "private": true,
   "license": "UNLICENSED",
   "author": "<%= app.author %>",
@@ -23,8 +23,9 @@
     "phpcs": "cross-env vendor/bin/phpcs --extensions=php --exclude=Generic.PHP.Syntax",
     "phpcbf": "cross-env vendor/bin/phpcbf --extensions=php --exclude=Generic.PHP.Syntax",
     "twigcs": "cross-env vendor/bin/twigcs --config=twig_cs.php",
-    "check-update": "chisel-scripts check-chisel-update",
+    "check-update": "chisel-scripts check-chisel-update && chisel-scripts check-ai-ruleset-update",
     "update-chisel": "chisel-scripts chisel-update",
+    "update-ai-ruleset": "chisel-scripts update-ai-ruleset",
     "update": "npm run check-update && npm run update-chisel",
     "prepare": "chisel-scripts husky-init || node -e \"\""
   },
