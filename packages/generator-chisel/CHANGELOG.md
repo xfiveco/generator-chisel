@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.5.0 (2026-05-19)
+
+- add xfive-mcp and ai ruleset ([c528ad8](https://github.com/xfiveco/generator-chisel/commit/c528ad8))
+- update theme version ([e107fe5](https://github.com/xfiveco/generator-chisel/commit/e107fe5))
+
 ## <small>2.4.5 (2026-04-24)</small>
 
 - fix assets and twig components issues ([c6a07d3](https://github.com/xfiveco/generator-chisel/commit/c6a07d3))

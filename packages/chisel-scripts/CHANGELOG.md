@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.3.0 (2026-05-19)
+
+- add xfive-mcp and ai ruleset ([c528ad8](https://github.com/xfiveco/generator-chisel/commit/c528ad8))
+
 ## <small>2.2.1 (2026-02-11)</small>
 
 - small fixes ([4c74101](https://github.com/xfiveco/generator-chisel/commit/4c74101))
