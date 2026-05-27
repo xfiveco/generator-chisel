@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.5.1 (2026-05-27)</small>
+
+- fix full width ([12cab39](https://github.com/xfiveco/generator-chisel/commit/12cab39))
+
 ## 2.5.0 (2026-05-19)
 
 - add xfive-mcp and ai ruleset ([c528ad8](https://github.com/xfiveco/generator-chisel/commit/c528ad8))
