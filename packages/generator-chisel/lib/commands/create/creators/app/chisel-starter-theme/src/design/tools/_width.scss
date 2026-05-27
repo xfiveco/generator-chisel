@@ -1,9 +1,9 @@
 @use 'theme' as *;
 
 @mixin alignfull() {
-  left: calc(-50vw + (50% + (var(--scrollbar-width) / 2)));
-  width: calc(100vw - var(--scrollbar-width));
-  max-width: calc(100vw - var(--scrollbar-width));
+  left: calc(-50vw + 50%);
+  width: 100vw;
+  max-width: 100vw;
 }
 
 @mixin alignwide() {
