@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.4.0 (2026-06-16)
+
+- add MCP plugin install/update commands ([5b0e130](https://github.com/xfiveco/generator-chisel/commit/5b0e130))
+
 ## 2.3.0 (2026-05-19)
 
 - add xfive-mcp and ai ruleset ([c528ad8](https://github.com/xfiveco/generator-chisel/commit/c528ad8))

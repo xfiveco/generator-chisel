@@ -2,6 +2,12 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.5.2 (2026-06-16)</small>
+
+- add MCP plugin install/update commands ([5b0e130](https://github.com/xfiveco/generator-chisel/commit/5b0e130))
+- refine group/content alignment, icon ext, block pattern categories ([6b4d0d4](https://github.com/xfiveco/generator-chisel/commit/6b4d0d4))
+- support multi-post-type search with load-more ([eb1f8eb](https://github.com/xfiveco/generator-chisel/commit/eb1f8eb))
+
 ## <small>2.5.1 (2026-05-27)</small>
 
 - fix full width ([12cab39](https://github.com/xfiveco/generator-chisel/commit/12cab39))
