@@ -1,14 +1,26 @@
 @use '~design' as *;
 
 .wp-block-group-is-layout-constrained {
-  > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+  > :where(:not(.alignleft, .alignright, .alignfull)) {
     max-width: get-layout-size('content');
-    margin-left: auto !important;
+    padding-inline: get-padding('normal');
     margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  // Nested constrained group: already inside a gutter'd section inner. Don't
+  // re-pad, and don't re-center — auto margins belong on the section rail
+  // (depth 1), not on deeper text, which should align naturally to its column.
+  .wp-block-group-is-layout-constrained > :where(:not(.alignleft, .alignright, .alignfull)),
+  > :where(:not(.alignleft, .alignright, .alignfull)) {
+    padding-inline: 0;
+  }
+
+  > .alignfull > div:where(:not(.alignleft, .alignright, .alignfull)) {
     padding-inline: get-padding('normal');
   }
 }
 
-:where(.wp-block-group.has-background.alignfull) {
-  padding: get-padding('small') 0;
+.wp-block-group.has-background {
+  padding-inline: 0;
 }

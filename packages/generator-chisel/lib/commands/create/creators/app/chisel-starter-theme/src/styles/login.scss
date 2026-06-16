@@ -63,7 +63,8 @@ body.login {
       border: none;
       box-shadow: get-box-shadow('3');
 
-      input[type='submit'] {
+      input[type='submit'],
+      .button {
         @include button;
         @include button-secondary;
 

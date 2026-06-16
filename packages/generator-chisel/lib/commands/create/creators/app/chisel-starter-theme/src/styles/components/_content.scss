@@ -37,5 +37,19 @@
         @include alignwide;
       }
     }
+
+    // --- Edge alignment
+    // Case 1 — plain full sections
+    > .alignfull > :where(:not(.alignfull, .alignwide, .alignleft, .alignright)) {
+      max-width: get-layout-size('content');
+      padding-inline: get-padding('normal');
+      margin-inline: auto;
+    }
+
+    // Case 2 — default/wide sections
+    > :where(:not(.alignfull, .alignleft, .alignright))
+      > :where(:not(.alignfull, .alignwide, .alignleft, .alignright)) {
+      padding-inline: 0;
+    }
   }
 }

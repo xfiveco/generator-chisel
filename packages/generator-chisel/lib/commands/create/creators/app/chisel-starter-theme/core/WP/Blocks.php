@@ -222,6 +222,8 @@ final class Blocks {
 	 * @return void
 	 */
 	public function register_block_patterns_categories(): void {
+		$this->block_patterns_categories = apply_filters( 'chisel_block_patterns_categories', $this->block_patterns_categories );
+
 		if ( ! $this->block_patterns_categories || ! function_exists( 'register_block_pattern_category' ) ) {
 			return;
 		}

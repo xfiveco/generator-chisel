@@ -3,19 +3,24 @@
 @use '../settings/icon-settings' as *;
 @use '../settings/' as *;
 
-@mixin icon-svg($name, $multicolor: false, $animated: false) {
+@mixin icon-svg($name, $multicolor: false, $animated: false, $is-block: false, $ext: svg) {
   display: block;
   height: 1em;
   line-height: 1em;
   content: '';
 
   $icons-path: '../../assets/icons';
+
+  @if $is-block {
+    $icons-path: '../../../assets/icons';
+  }
+
   $icon-path: null;
 
   @if $use-icons-module {
     $icon-path: '#{$icons-path}/icons.svg#icon-#{$name}-view';
   } @else {
-    $icon-path: '#{$icons-path}-source/#{$name}.svg';
+    $icon-path: '#{$icons-path}-source/#{$name}.#{$ext}';
   }
 
   @if $multicolor {
@@ -29,7 +34,7 @@
     background-color: var(--o-icon-color, currentcolor);
     @if $animated {
       @if list.index($animated-icons, $name) {
-        mask: url('#{$icons-path}/animated/#{$name}.svg');
+        mask: url('#{$icons-path}/animated/#{$name}.#{$ext}');
       }
     } @else {
       @if list.index($static-icons, $name) {
