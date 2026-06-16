@@ -6,7 +6,12 @@ const REPO = 'xfiveco/chisel-ai-coding-ruleset';
 const REF = 'master';
 const VERSION_FILE = 'VERSION';
 const LOCAL_VERSION_FILE = '.chisel-ai-ruleset-version';
-const SKIP_PATTERNS = [/^readme(\.|$)/i, /^license(\.|$)/i, /^\.git/i];
+const SKIP_PATTERNS = [
+  /^readme(\.|$)/i,
+  /^license(\.|$)/i,
+  /^\.git/i,
+  /^version$/i,
+];
 
 const VERSION_URL = `https://raw.githubusercontent.com/${REPO}/${REF}/${VERSION_FILE}`;
 

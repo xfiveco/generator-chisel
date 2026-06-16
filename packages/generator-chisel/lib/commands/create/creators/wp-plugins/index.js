@@ -25,17 +25,39 @@ module.exports = (api) => {
     const { plugins: selectedPlugins } = api.creator.data.wpPlugins;
     if (selectedPlugins.length === 0) return;
 
-    await runLocal(
-      [
-        'chisel-scripts',
-        'wp',
-        'plugin',
-        'install',
-        { activate: true },
-        ...selectedPlugins.map((name) => plugins.plugins[name]),
-      ],
-      { cwd: api.resolve(api.creator.data.app.themePath) },
+    const cwd = api.resolve(api.creator.data.app.themePath);
+    const mcpSelected = selectedPlugins.includes(MCP_PLUGIN_LABEL);
+    const regularPlugins = selectedPlugins.filter(
+      (name) => name !== MCP_PLUGIN_LABEL,
     );
+
+    if (regularPlugins.length > 0) {
+      await runLocal(
+        [
+          'chisel-scripts',
+          'wp',
+          'plugin',
+          'install',
+          { activate: true },
+          ...regularPlugins.map((name) => plugins.plugins[name]),
+        ],
+        { cwd },
+      );
+    }
+
+    if (mcpSelected) {
+      await runLocal(
+        [
+          'chisel-scripts',
+          'wp',
+          'plugin',
+          'install',
+          { activate: true, force: true },
+          plugins.plugins[MCP_PLUGIN_LABEL],
+        ],
+        { cwd },
+      );
+    }
   });
 
   api.schedule(api.PRIORITIES.END_MESSAGE, async () => {

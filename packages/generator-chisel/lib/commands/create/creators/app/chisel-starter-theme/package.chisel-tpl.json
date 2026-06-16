@@ -23,9 +23,12 @@
     "phpcs": "cross-env vendor/bin/phpcs --extensions=php --exclude=Generic.PHP.Syntax",
     "phpcbf": "cross-env vendor/bin/phpcbf --extensions=php --exclude=Generic.PHP.Syntax",
     "twigcs": "cross-env vendor/bin/twigcs --config=twig_cs.php",
-    "check-update": "chisel-scripts check-chisel-update && chisel-scripts check-ai-ruleset-update",
+    "check-update": "chisel-scripts check-chisel-update && chisel-scripts check-ai-ruleset-update && chisel-scripts check-mcp-update",
+    "check-update-ai-ruleset": "chisel-scripts check-ai-ruleset-update",
+    "check-update-mcp": "chisel-scripts check-mcp-update",
     "update-chisel": "chisel-scripts chisel-update",
     "update-ai-ruleset": "chisel-scripts update-ai-ruleset",
+    "update-mcp": "chisel-scripts update-mcp",
     "update": "npm run check-update && npm run update-chisel",
     "prepare": "chisel-scripts husky-init || node -e \"\""
   },
