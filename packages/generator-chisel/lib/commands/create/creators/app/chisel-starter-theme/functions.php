@@ -53,6 +53,7 @@ Timber\Timber::init();
 \Chisel\WP\Theme::get_instance();
 \Chisel\WP\CustomPostTypes::get_instance();
 \Chisel\WP\CustomTaxonomies::get_instance();
+\Chisel\WP\Search::get_instance();
 \Chisel\WP\Twig::get_instance();
 \Chisel\Plugins\GravityForms\GravityForms::get_instance();
 \Chisel\Plugins\Woocommerce\Woocommerce::get_instance();

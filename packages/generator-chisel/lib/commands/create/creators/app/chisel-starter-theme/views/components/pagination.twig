@@ -2,7 +2,7 @@
   <nav class="c-pagination">
 
     {% if type == 'load-more' %}
-      <div class="c-load-more js-load-more" data-post-type="{{ load_more.post_type }}" data-per-page="{{ load_more.per_page }}" data-max-page="{{ posts.pagination.total }}">
+      <div class="c-load-more js-load-more" data-post-type="{{ load_more.post_type is iterable ? load_more.post_type|join(',') : load_more.post_type }}" data-per-page="{{ load_more.per_page }}" data-max-page="{{ posts.pagination.total }}"{% if load_more.search %} data-search="{{ load_more.search }}"{% endif %}>
         <button type="button" class="c-load-more__button {{ bem('c-btn', 'primary') }} js-load-more-button">{{ __('Load more', 'chisel') }}</button>
       </div>
     {% else %}

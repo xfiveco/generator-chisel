@@ -16,7 +16,7 @@ class LoadMore {
   }
 
   initState() {
-    const { postType, perPage, maxPage } = this.elements.loadMore.dataset;
+    const { postType, perPage, maxPage, search } = this.elements.loadMore.dataset;
 
     this.state = {
       page: 2,
@@ -24,6 +24,7 @@ class LoadMore {
       postType,
       perPage,
       maxPage,
+      search,
     };
   }
 
@@ -77,6 +78,7 @@ class LoadMore {
       post_type: this.state.postType,
       per_page: this.state.perPage,
       max_page: this.state.maxPage,
+      ...(this.state.search ? { s: this.state.search } : {}),
     }).then((response) => {
       this.elements.loadMoreButton.classList.remove(this.classnames.loading);
       this.elements.container.insertAdjacentHTML('beforeend', response.data);
