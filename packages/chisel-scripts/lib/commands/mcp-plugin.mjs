@@ -1,7 +1,9 @@
 import https from 'https';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { run } from 'chisel-shared-utils';
+import chiselSharedUtils from 'chisel-shared-utils';
+
+const { run } = chiselSharedUtils;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
