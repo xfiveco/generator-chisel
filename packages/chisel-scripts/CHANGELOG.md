@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.1 (2026-06-22)</small>
+
+- fix: default-import run in mcp-plugin ([2ad24ef](https://github.com/xfiveco/generator-chisel/commit/2ad24ef))
+
 ## 2.4.0 (2026-06-16)
 
 - add MCP plugin install/update commands ([5b0e130](https://github.com/xfiveco/generator-chisel/commit/5b0e130))
