@@ -11,8 +11,8 @@ Use Node.js version `24.11.1` (Minimum `20.12.2`)
 Chisel is installed as a npm package using npx command: `npx generator-chisel`, which scaffolds the entire project for you including composer and node dependencies, however when you join the project and clone the repository, follow these steps to start the local development:
 
 1. Go to the theme folder
-2. Run `composer install`
-3. Run `npm install`
+2. Run `npm install`
+3. Run `npm run composer install`
 4. Copy `wp-config-custom.php` and rename it to `wp-config.php` in the project root directory (if you haven't done so already).
 5. Run `npm run wp-config`
 
