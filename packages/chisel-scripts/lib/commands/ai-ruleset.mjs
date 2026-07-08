@@ -11,7 +11,10 @@ const SKIP_PATTERNS = [
   /^license(\.|$)/i,
   /^\.git/i,
   /^version$/i,
+  /^VERSION$/,
 ];
+
+const CLEAN_DIRS = ['ai'];
 
 const VERSION_URL = `https://raw.githubusercontent.com/${REPO}/${REF}/${VERSION_FILE}`;
 
@@ -157,6 +160,14 @@ export default function aiRuleset(api) {
       console.log('🚀 Updating AI coding ruleset...\n');
 
       try {
+        for (const dir of CLEAN_DIRS) {
+          const dirPath = api.resolve(dir);
+          if (fs.existsSync(dirPath)) {
+            fs.rmSync(dirPath, { recursive: true, force: true });
+            console.log(`  🧹 Removed old ${dir}/`);
+          }
+        }
+
         await downloadTree('', localBasePath);
 
         let remoteVersion = null;
