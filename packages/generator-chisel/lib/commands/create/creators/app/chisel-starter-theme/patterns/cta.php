@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Call to Action 01
- * Slug: chisel/cta-01
+ * Title: Call to Action
+ * Slug: chisel/cta
  * Categories: chisel-patterns/cta
- * Description: A CTA section pattern 01
+ * Description: A CTA section pattern
  * Keywords: cta
  *
  * @package Chisel
@@ -11,8 +11,8 @@
 
 ?>
 
-<!-- wp:cover {"overlayColor":"secondary","isUserOverlayColor":true,"isDark":false,"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-secondary-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center"} -->
+<!-- wp:cover {"metadata":{"name":"Call to Action"},"overlayColor":"secondary","isUserOverlayColor":true,"isDark":false,"disableBottomMargin":true,"className":"p-cta u-no-margin-bottom","layout":{"type":"constrained"}} -->
+<div class="wp-block-cover is-light p-cta u-no-margin-bottom"><span aria-hidden="true" class="wp-block-cover__background has-secondary-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center"} -->
 <h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'CTA Title', 'chisel' ); ?></h2>
 <!-- /wp:heading -->
 

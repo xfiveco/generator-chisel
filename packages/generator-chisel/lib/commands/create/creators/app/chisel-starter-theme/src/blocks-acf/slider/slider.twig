@@ -1,16 +1,16 @@
 {% set slides_html = '' %}
-{% set has_thumbnails_nav = 'thumbnails' in fields.slider_options.slider_settings %}
+{% set has_thumbnails_nav = 'thumbnails' in fields.sl_options.slider_settings %}
 
 <div {{ wrapper_attributes }} data-block-id="{{ block.id }}">
   <div class="b-slider__inner alignfull">
-    {% if fields.acf_block_slider_slides is not empty %}
-      {% for slide in fields.acf_block_slider_slides %}
-        {% if slide.acf_bs_image %}
+    {% if fields.sl_slides is not empty %}
+      {% for slide in fields.sl_slides %}
+        {% if slide.sl_slides_image %}
           {% set slides_html %}
             {{ slides_html }}
 
-            <div class="b-slider__slide swiper-slide" {% if has_thumbnails_nav %}data-thumbnail-url="{{ get_image(slide.acf_bs_image).src('medium') }}"{% endif %}>
-              {{ get_responsive_image(slide.acf_bs_image, (block.align == 'full' ? 'full' : 'large'), {fetchpriority: loop.first ? 'high' : 'auto'}) }}
+            <div class="b-slider__slide swiper-slide" {% if has_thumbnails_nav %}data-thumbnail-url="{{ get_image(slide.sl_slides_image).src('medium') }}"{% endif %}>
+              {{ get_responsive_image(slide.sl_slides_image, (block.align == 'full' ? 'full' : 'large'), {fetchpriority: loop.first ? 'high' : 'auto'}) }}
             </div>
           {% endset %}
         {% endif %}
@@ -20,7 +20,7 @@
         slides_html,
         params: {
           'slides-per-view': 1,
-          block_settings: fields.slider_options
+          block_settings: fields.sl_options
         }
       } %}
     {% else %}

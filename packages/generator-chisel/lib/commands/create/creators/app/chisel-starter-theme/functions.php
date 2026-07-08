@@ -57,6 +57,7 @@ Timber\Timber::init();
 \Chisel\WP\Twig::get_instance();
 \Chisel\Plugins\GravityForms\GravityForms::get_instance();
 \Chisel\Plugins\Woocommerce\Woocommerce::get_instance();
+\Chisel\Plugins\Wpml\Wpml::get_instance();
 \Chisel\Plugins\Yoast\Yoast::get_instance();
 \Chisel\Timber\Cache::get_instance();
 

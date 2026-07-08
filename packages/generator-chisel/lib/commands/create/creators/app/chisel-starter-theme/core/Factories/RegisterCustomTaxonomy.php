@@ -74,9 +74,13 @@ final class RegisterCustomTaxonomy {
 		$show_in_quick_edit = (bool) ( $taxonomy_args['show_in_quick_edit'] ?? $show_ui );
 		$show_admin_column  = (bool) ( $taxonomy_args['show_admin_column'] ?? $public );
 		$capabilities       = isset( $taxonomy_args['capabilities'] ) ? wp_parse_args( (array) $taxonomy_args['capabilities'], $default_capabilities ) : $default_capabilities;
-		$rewrite            = isset( $taxonomy_args['rewrite'] ) ? wp_parse_args( (array) $taxonomy_args['rewrite'], $default_rewrite ) : $default_rewrite;
-		$query_var          = $taxonomy_args['query_var'] ?? $taxonomy;
-		$rest_base          = $taxonomy_args['rest_base'] ?? $taxonomy;
+		if ( isset( $taxonomy_args['rewrite'] ) && false === $taxonomy_args['rewrite'] ) {
+			$rewrite = false;
+		} else {
+			$rewrite = isset( $taxonomy_args['rewrite'] ) ? wp_parse_args( (array) $taxonomy_args['rewrite'], $default_rewrite ) : $default_rewrite;
+		}
+		$query_var = $taxonomy_args['query_var'] ?? $taxonomy;
+		$rest_base = $taxonomy_args['rest_base'] ?? $taxonomy;
 
 		$args = array(
 			'labels'             => $labels,

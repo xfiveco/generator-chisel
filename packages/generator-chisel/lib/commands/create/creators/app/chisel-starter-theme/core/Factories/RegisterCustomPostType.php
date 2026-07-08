@@ -78,9 +78,13 @@ final class RegisterCustomPostType {
 		$capabilities        = (array) ( $post_type_args['capabilities'] ?? array() );
 		$supports            = isset( $post_type_args['supports'] ) ? wp_parse_args( (array) $post_type_args['supports'], $default_supports ) : $default_supports;
 		$has_archive         = (bool) ( $post_type_args['has_archive'] ?? true );
-		$rewrite             = isset( $post_type_args['rewrite'] ) ? wp_parse_args( (array) $post_type_args['rewrite'], $default_rewrite ) : $default_rewrite;
-		$query_var           = $post_type_args['query_var'] ?? $post_type;
-		$can_export          = (bool) ( $post_type_args['can_export'] ?? true );
+		if ( isset( $post_type_args['rewrite'] ) && false === $post_type_args['rewrite'] ) {
+			$rewrite = false;
+		} else {
+			$rewrite = isset( $post_type_args['rewrite'] ) ? wp_parse_args( (array) $post_type_args['rewrite'], $default_rewrite ) : $default_rewrite;
+		}
+		$query_var  = $post_type_args['query_var'] ?? $post_type;
+		$can_export = (bool) ( $post_type_args['can_export'] ?? true );
 
 		if ( in_array( 'thumbnail', $supports, true ) ) {
 			add_filter(

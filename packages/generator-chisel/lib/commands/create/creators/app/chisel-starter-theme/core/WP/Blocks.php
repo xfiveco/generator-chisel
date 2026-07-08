@@ -166,6 +166,7 @@ final class Blocks {
 		add_filter( 'should_load_separate_core_block_assets', array( $this, 'should_load_separate_core_block_assets' ) );
 		add_filter( 'styles_inline_size_limit', array( $this, 'styles_inline_size_limit' ) );
 		add_filter( 'chisel_editor_scripts', array( $this, 'blocks_alignment_data' ) );
+		add_filter( 'block_editor_settings_all', array( $this, 'block_editor_settings' ) );
 	}
 
 	/**
@@ -364,6 +365,23 @@ final class Blocks {
 		);
 
 		return $editor_scripts_data;
+	}
+
+	/**
+	 * Modify block editor settings.
+	 *
+	 * WP 7.0 treats blocks carrying metadata.patternName as content-only
+	 * "sections" requiring the Edit pattern step; opt out to keep unsynced
+	 * patterns directly editable.
+	 *
+	 * @param array $settings Editor settings.
+	 *
+	 * @return array
+	 */
+	public function block_editor_settings( array $settings ): array {
+		$settings['disableContentOnlyForUnsyncedPatterns'] = true;
+
+		return $settings;
 	}
 
 	/**

@@ -73,7 +73,7 @@
         {
           "name": "Secondary 300",
           "slug": "secondary-300",
-          "color": "#79Ee6e6"
+          "color": "#79e6e6"
         },
         {
           "name": "Secondary 600",
@@ -328,47 +328,47 @@
         {
           "size": "0.25rem",
           "slug": "20",
-          "name": "2"
+          "name": "Tiny (0.25rem)"
         },
         {
           "size": "0.5rem",
           "slug": "30",
-          "name": "3"
+          "name": "Little (0.5rem)"
         },
         {
           "size": "0.75rem",
           "slug": "40",
-          "name": "4"
+          "name": "Small (0.75rem)"
         },
         {
           "size": "1rem",
           "slug": "50",
-          "name": "5"
+          "name": "Normal (1rem)"
         },
         {
           "size": "1.25rem",
           "slug": "60",
-          "name": "6"
+          "name": "Medium (1.25rem)"
         },
         {
           "size": "1.5rem",
           "slug": "70",
-          "name": "7"
+          "name": "Large (1.5rem)"
         },
         {
           "size": "1.75rem",
           "slug": "80",
-          "name": "8"
+          "name": "XLarge (1.75rem)"
         },
         {
           "size": "2rem",
           "slug": "90",
-          "name": "9"
+          "name": "Big (2rem)"
         },
         {
           "size": "3rem",
           "slug": "100",
-          "name": "10"
+          "name": "Huge (3rem)"
         }
       ]
     },

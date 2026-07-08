@@ -2,3 +2,6 @@
 /vendor
 /node_modules
 /.use-devcontainer
+/.claude/
+/.mcp.json
+/wpml-twig-strings.php

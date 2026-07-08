@@ -12,6 +12,7 @@
   <exclude-pattern>*/vendor/*</exclude-pattern>
   <exclude-pattern>*/views/*</exclude-pattern>
   <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>wpml-twig-strings.php</exclude-pattern>
 
   <!-- Show progress, show the error codes for each message (source). -->
   <arg value="ps" />

@@ -11,7 +11,7 @@ $sidebar-width-full: 450px;
 
     &--core-spacer {
       // Hide the height settings for the spacer block.
-      .block-editor-block-card + div + div {
+      .components-tools-panel:has(.tools-panel-item-spacing, [id^='block-spacer-height-input']) {
         display: none;
       }
     }

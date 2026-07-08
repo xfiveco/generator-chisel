@@ -32,7 +32,7 @@ final class LoadMoreEndpoint implements AjaxEndpointInterface {
 		$post_type = isset( $data['post_type'] ) ? array_map( 'sanitize_text_field', explode( ',', $data['post_type'] ) ) : array( 'post' );
 		$per_page  = isset( $data['per_page'] ) ? absint( $data['per_page'] ) : 10;
 		$page      = isset( $data['page'] ) ? absint( $data['page'] ) : 1;
-		$search    = isset( $data['s'] ) ? sanitize_text_field( $data['s'] ) : '';
+		$search    = isset( $data['s'] ) ? sanitize_text_field( $data['s'] ) : 'is_search';
 
 		$response = '';
 
@@ -43,7 +43,7 @@ final class LoadMoreEndpoint implements AjaxEndpointInterface {
 		);
 
 		if ( $search !== '' ) {
-			$args['s'] = $search;
+			$args['s'] = str_replace( 'is_search', '', $search );
 		}
 
 		if ( $args['post_type'] === 'product' ) {

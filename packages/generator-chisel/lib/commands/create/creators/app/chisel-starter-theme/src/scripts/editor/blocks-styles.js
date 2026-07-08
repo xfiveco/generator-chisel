@@ -67,8 +67,16 @@ class BlocksStyles {
         label: 'XS',
       },
       {
+        name: 'little',
+        label: __('Little', 'chisel'),
+      },
+      {
         name: 'small',
         label: 'S',
+      },
+      {
+        name: 'normal',
+        label: __('Normal', 'chisel'),
       },
       {
         name: 'medium',
@@ -85,6 +93,10 @@ class BlocksStyles {
       {
         name: 'big',
         label: 'BIG',
+      },
+      {
+        name: 'huge',
+        label: __('Huge', 'chisel'),
       },
     ];
 

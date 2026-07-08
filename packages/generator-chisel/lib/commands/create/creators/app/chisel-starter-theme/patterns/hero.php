@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Hero 01
- * Slug: chisel/hero-01
+ * Title: Hero
+ * Slug: chisel/hero
  * Categories: chisel-patterns/hero
- * Description: A hero section pattern 01
+ * Description: A hero section pattern
  * Keywords: hero, banner
  *
  * @package Chisel
@@ -11,8 +11,8 @@
 
 ?>
 
-<!-- wp:cover {"overlayColor":"foreground","isUserOverlayColor":true,"align":"full","layout":{"type":"constrained","contentSize":"848px","wideSize":"1072px"}} -->
-<div class="wp-block-cover alignfull"><span aria-hidden="true" class="wp-block-cover__background has-foreground-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:spacer {"height":"auto","className":"is-style-big"} -->
+<!-- wp:cover {"metadata":{"name":"Hero"},"overlayColor":"foreground","isUserOverlayColor":true,"align":"full","disableBottomMargin":true,"className":"p-hero u-no-margin-bottom","layout":{"type":"constrained","contentSize":"848px","wideSize":"1072px"}} -->
+<div class="wp-block-cover alignfull p-hero u-no-margin-bottom"><span aria-hidden="true" class="wp-block-cover__background has-foreground-background-color has-background-dim-100 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:spacer {"height":"auto","className":"is-style-big"} -->
 <div style="height:auto" aria-hidden="true" class="wp-block-spacer is-style-big"></div>
 <!-- /wp:spacer -->
 
@@ -37,8 +37,8 @@
 <div class="wp-block-button is-style-primary has-icon has-icon-arrow-right"><a class="wp-block-button__link wp-element-button" href="#">Get started</a></div>
 <!-- /wp:button -->
 
-<!-- wp:button {"className":"-right is-style-primary-outline"} -->
-<div class="wp-block-button -right is-style-primary-outline"><a class="wp-block-button__link wp-element-button">Learn more</a></div>
+<!-- wp:button {"className":"is-style-primary-outline"} -->
+<div class="wp-block-button is-style-primary-outline"><a class="wp-block-button__link wp-element-button">Learn more</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 

@@ -23,7 +23,7 @@
       {
           "key": "field_66d59458044f8",
           "label": "Slides",
-          "name": "acf_block_slider_slides",
+          "name": "sl_slides",
           "aria-label": "",
           "type": "repeater",
           "instructions": "",
@@ -45,7 +45,7 @@
               {
                   "key": "field_66d5946c044f9",
                   "label": "Image",
-                  "name": "acf_bs_image",
+                  "name": "sl_slides_image",
                   "aria-label": "",
                   "type": "image",
                   "instructions": "",
@@ -91,7 +91,7 @@
       {
           "key": "field_66d5a56e49a32",
           "label": "Settings",
-          "name": "slider_options",
+          "name": "sl_options",
           "aria-label": "",
           "type": "clone",
           "instructions": "",

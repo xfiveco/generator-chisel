@@ -10,8 +10,16 @@
       padding: get-margin('tiny') 0;
     }
 
+    &-little {
+      padding: get-margin('little') 0;
+    }
+
     &-small {
       padding: get-margin('small') 0;
+    }
+
+    &-normal {
+      padding: get-margin('normal') 0;
     }
 
     &-medium {
@@ -28,6 +36,10 @@
 
     &-big {
       padding: get-margin('big') 0;
+    }
+
+    &-huge {
+      padding: get-margin('huge') 0;
     }
   }
 }
