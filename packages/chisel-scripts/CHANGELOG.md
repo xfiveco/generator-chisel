@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.4 (2026-07-10)</small>
+
+- fix: adjust API call for AI ruleset download to avoid rate limits ([9705af0](https://github.com/xfiveco/generator-chisel/commit/9705af0))
+
 ## <small>2.4.3 (2026-07-10)</small>
 
 - ai rules script adjustments and retry ([9329d16](https://github.com/xfiveco/generator-chisel/commit/9329d16))
