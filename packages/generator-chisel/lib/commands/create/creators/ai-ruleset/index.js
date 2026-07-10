@@ -82,28 +82,27 @@ function shouldSkip(name) {
   return SKIP_PATTERNS.some((re) => re.test(name));
 }
 
-async function downloadTree(remotePath, localPath) {
-  const apiUrl = `https://api.github.com/repos/${REPO}/contents/${remotePath}?ref=${REF}`;
-  const items = await fetchJson(apiUrl);
+function rawUrl(filePath) {
+  const encoded = filePath.split('/').map(encodeURIComponent).join('/');
+  return `https://raw.githubusercontent.com/${REPO}/${REF}/${encoded}`;
+}
 
-  if (!Array.isArray(items)) {
-    if (items.type === 'file') {
-      await downloadFile(items.download_url, localPath);
-    }
-    return;
+async function downloadTree(localPath) {
+  // One REST call lists the whole tree; file contents come from
+  // raw.githubusercontent.com, which doesn't count against the API rate limit.
+  const treeUrl = `https://api.github.com/repos/${REPO}/git/trees/${REF}?recursive=1`;
+  const { tree, truncated } = await fetchJson(treeUrl);
+
+  if (truncated) {
+    throw new Error('Repository tree is too large to list in a single request.');
   }
 
-  for (const item of items) {
-    if (shouldSkip(item.name)) continue;
+  for (const entry of tree) {
+    if (entry.type !== 'blob') continue;
+    if (entry.path.split('/').some((segment) => shouldSkip(segment))) continue;
 
-    const localItemPath = path.join(localPath, item.name);
-
-    if (item.type === 'file') {
-      console.log(`  📄 ${item.path}`);
-      await downloadFile(item.download_url, localItemPath);
-    } else if (item.type === 'dir') {
-      await downloadTree(item.path, localItemPath);
-    }
+    console.log(`  📄 ${entry.path}`);
+    await downloadFile(rawUrl(entry.path), path.join(localPath, entry.path));
   }
 }
 
@@ -128,7 +127,7 @@ module.exports = (api) => {
 
     console.log('\n📥 Downloading AI coding ruleset...');
     try {
-      await downloadTree('', themePath);
+      await downloadTree(themePath);
 
       let remoteVersion = null;
       try {
