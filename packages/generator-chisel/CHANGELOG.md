@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.5.4 (2026-07-10)</small>
+
+- ai rules script adjustments and retry ([9329d16](https://github.com/xfiveco/generator-chisel/commit/9329d16))
+
 ## <small>2.5.3 (2026-07-10)</small>
 
 - Publish ([4751d40](https://github.com/xfiveco/generator-chisel/commit/4751d40))

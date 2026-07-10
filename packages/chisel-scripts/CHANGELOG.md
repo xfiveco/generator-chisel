@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.3 (2026-07-10)</small>
+
+- ai rules script adjustments and retry ([9329d16](https://github.com/xfiveco/generator-chisel/commit/9329d16))
+
 ## <small>2.4.2 (2026-07-10)</small>
 
 - ai rules update - remove folder before downloading ([72b3b21](https://github.com/xfiveco/generator-chisel/commit/72b3b21))
