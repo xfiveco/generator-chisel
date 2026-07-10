@@ -11,7 +11,6 @@ const SKIP_PATTERNS = [
   /^license(\.|$)/i,
   /^\.git/i,
   /^version$/i,
-  /^VERSION$/,
 ];
 
 const CLEAN_DIRS = ['ai'];
@@ -22,14 +21,22 @@ const DEFAULT_OPTIONS = {
   headers: { 'User-Agent': 'Chisel-AI-Ruleset-Script' },
 };
 
-function request(url, options = {}) {
+const MAX_RETRIES = 4;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function requestOnce(url, options = {}) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, { ...DEFAULT_OPTIONS, ...options }, (res) => {
       if (res.statusCode === 301 || res.statusCode === 302) {
-        return resolve(request(res.headers.location, options));
+        return resolve(requestOnce(res.headers.location, options));
       }
       if (res.statusCode < 200 || res.statusCode >= 300) {
-        return reject(new Error(`Status Code: ${res.statusCode} for ${url}`));
+        const err = new Error(`Status Code: ${res.statusCode} for ${url}`);
+        err.statusCode = res.statusCode;
+        return reject(err);
       }
       const data = [];
       res.on('data', (chunk) => data.push(chunk));
@@ -37,6 +44,24 @@ function request(url, options = {}) {
     });
     req.on('error', reject);
   });
+}
+
+function isRetryable(err) {
+  if (err.statusCode) return err.statusCode >= 500 || err.statusCode === 429;
+  return true; // network error (ECONNRESET, ETIMEDOUT, etc.)
+}
+
+async function request(url, options = {}) {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await requestOnce(url, options);
+    } catch (err) {
+      if (attempt >= MAX_RETRIES || !isRetryable(err)) throw err;
+      const delay = 500 * 2 ** attempt;
+      console.warn(`  ⏳ ${err.message} — retrying in ${delay}ms`);
+      await sleep(delay);
+    }
+  }
 }
 
 async function fetchText(url) {
