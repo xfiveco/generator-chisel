@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.4.2 (2026-07-10)</small>
+
+- ai rules update - remove folder before downloading ([72b3b21](https://github.com/xfiveco/generator-chisel/commit/72b3b21))
+
 ## <small>2.4.1 (2026-06-22)</small>
 
 - fix: default-import run in mcp-plugin ([2ad24ef](https://github.com/xfiveco/generator-chisel/commit/2ad24ef))

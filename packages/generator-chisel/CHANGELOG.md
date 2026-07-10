@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.5.3 (2026-07-10)</small>
+
+- Publish ([4751d40](https://github.com/xfiveco/generator-chisel/commit/4751d40))
+- wpml twig scan, blocks fixes and general improvements ([4e33c89](https://github.com/xfiveco/generator-chisel/commit/4e33c89))
+
 ## <small>2.5.2 (2026-06-16)</small>
 
 - add MCP plugin install/update commands ([5b0e130](https://github.com/xfiveco/generator-chisel/commit/5b0e130))
