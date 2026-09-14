@@ -283,13 +283,7 @@ final class Blocks {
 		$processor = new \WP_HTML_Tag_Processor( $block_content );
 
 		if ( $processor->next_tag() ) {
-			$classes_to_remove = array( 'is-layout-flow', 'is-layout-constrained' );
-
 			$processor->add_class( $custom_classnames );
-
-			foreach ( $classes_to_remove as $class ) {
-				$processor->remove_class( $class );
-			}
 
 			if ( $block['blockName'] === 'core/table' ) {
 				$processor->add_class( 'u-table-responsive' );

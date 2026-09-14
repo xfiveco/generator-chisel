@@ -1,14 +1,52 @@
 @use 'theme' as *;
 
-@mixin alignfull() {
-  left: calc(-50vw + 50%);
-  width: 100vw;
-  max-width: 100vw;
+// Page rail. One source of truth for how wide content may be and where its
+// left/right edges sit. Sizes come from theme.json so the editor agrees with
+// the front end.
+@mixin rail-vars() {
+  --rail-gutter: #{get-padding('normal')};
+  --rail-content: #{get-layout-size('content')};
+  --rail-wide: #{get-layout-size('wide')};
+
+  // Track widths resolve against the box they are used in, so the same variable
+  // works on the page rail and inside a full-width section.
+  --rail-track: min(100% - var(--rail-gutter) * 2, var(--rail-content));
+  --rail-track-wide: min(100% - var(--rail-gutter) * 2, var(--rail-wide));
+  --rail-viewport: calc(100vw - var(--scrollbar-width, 0px));
+
+  // Distance from a section's own edge to the content track, for blocks that
+  // have to inset themselves instead of their children. One value for sections
+  // that bleed to the viewport, one for sections that stop at the wide track.
+  --rail-edge: max(var(--rail-gutter), (var(--rail-viewport) - var(--rail-content)) / 2);
+  --rail-edge-wide: max(
+    var(--rail-gutter),
+    (
+        min(var(--rail-viewport) - var(--rail-gutter) * 2, var(--rail-wide)) - min(
+            var(--rail-viewport) - var(--rail-gutter) * 2,
+            var(--rail-content)
+          )
+      ) /
+      2
+  );
 }
 
-@mixin alignwide() {
-  width: get-layout-size('wide');
-  max-width: get-layout-size('wide');
-  margin-right: calc(((get-layout-size('wide') - get-layout-size('content')) / 2) * -1);
-  margin-left: calc(((get-layout-size('wide') - get-layout-size('content')) / 2) * -1);
+// Lay direct children out on the rail: default, wide or full width.
+@mixin rail-children() {
+  > :where(:not(.alignleft, .alignright, .alignwide, .alignfull)) {
+    width: var(--rail-track);
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  > :where(.alignwide) {
+    width: var(--rail-track-wide);
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  > :where(.alignfull) {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
 }

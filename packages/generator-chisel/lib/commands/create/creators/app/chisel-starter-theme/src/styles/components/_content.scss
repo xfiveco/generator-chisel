@@ -13,43 +13,25 @@
   }
 }
 
-.c-blog {
-  padding-top: get-padding('large');
+// Without a sidebar the content column spans the viewport and each block picks
+// its own track, so wide and full width can actually bleed.
+.c-content:not(.has-sidebar) > .c-content__inner {
+  @include rail-children;
 }
 
-.c-content:not(.has-sidebar) {
-  .c-content__inner {
-    > .alignfull {
-      position: relative;
-      left: -16px;
-      width: calc(100% + 32px);
-      max-width: calc(100% + 32px);
+// With a sidebar the column is the rail: the section wrapper already supplies
+// the gutter, and wide/full collapse to the column width.
+.c-content.has-sidebar {
+  --rail-gutter: 0px;
+  --rail-edge: 0px;
 
-      @include bp(xlarge) {
-        @include alignfull;
-      }
-    }
-
-    > .alignwide {
-      position: relative;
-
-      @include bp(full) {
-        @include alignwide;
-      }
-    }
-
-    // --- Edge alignment
-    // Case 1 — plain full sections
-    > .alignfull > :where(:not(.alignfull, .alignwide, .alignleft, .alignright)) {
-      max-width: get-layout-size('content');
-      padding-inline: get-padding('normal');
-      margin-inline: auto;
-    }
-
-    // Case 2 — default/wide sections
-    > :where(:not(.alignfull, .alignleft, .alignright))
-      > :where(:not(.alignfull, .alignwide, .alignleft, .alignright)) {
-      padding-inline: 0;
-    }
+  .alignwide,
+  .alignfull {
+    width: 100%;
+    max-width: 100%;
   }
+}
+
+.c-blog {
+  padding-top: get-padding('large');
 }

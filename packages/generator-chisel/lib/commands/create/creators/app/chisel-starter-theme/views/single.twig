@@ -2,7 +2,7 @@
 
 {% block content %}
   <article id="post-{{ post.ID }}" class="{{ post_classes(post.class) }}">
-    <section class="o-wrapper__inner c-post__inner {{ wrapper_class }}">
+    <section class="c-post__inner {{ wrapper_class }}{{ sidebar.content ? ' o-wrapper__inner' : '' }}">
 
       <div class="o-layout c-content{% if sidebar.content %} has-sidebar{% endif %}">
         <div class="{{ bem('o-layout__item', (sidebar.content ? '8' : '12') ~ '-large') }} c-content__inner">

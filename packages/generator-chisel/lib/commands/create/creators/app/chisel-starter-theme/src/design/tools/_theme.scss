@@ -28,6 +28,10 @@
   @return var(--wp--custom--padding--#{$name});
 }
 
+@function get-spacer($name) {
+  @return var(--wp--custom--spacer--#{$name});
+}
+
 @function get-gap($name) {
   @return var(--wp--custom--gap--#{$name});
 }

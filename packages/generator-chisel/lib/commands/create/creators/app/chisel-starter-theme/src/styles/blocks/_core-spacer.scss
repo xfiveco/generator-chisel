@@ -1,45 +1,17 @@
 @use '~design' as *;
 
+$_spacer-sizes: 'tiny', 'little', 'small', 'normal', 'medium', 'large', 'xlarge', 'big', 'huge';
+
+// The block styles set the size. min-height rather than height, because the
+// editor mod pins height:auto inline and an inline style beats the stylesheet.
 .wp-block-spacer {
-  padding: get-margin('normal') 0;
+  min-height: get-spacer('normal');
+  padding: 0;
   margin: 0 !important;
-  margin-block-start: 0 !important;
 
-  &.is-style {
-    &-tiny {
-      padding: get-margin('tiny') 0;
-    }
-
-    &-little {
-      padding: get-margin('little') 0;
-    }
-
-    &-small {
-      padding: get-margin('small') 0;
-    }
-
-    &-normal {
-      padding: get-margin('normal') 0;
-    }
-
-    &-medium {
-      padding: get-margin('medium') 0;
-    }
-
-    &-large {
-      padding: get-margin('large') 0;
-    }
-
-    &-xlarge {
-      padding: get-margin('xlarge') 0;
-    }
-
-    &-big {
-      padding: get-margin('big') 0;
-    }
-
-    &-huge {
-      padding: get-margin('huge') 0;
+  @each $size in $_spacer-sizes {
+    &.is-style-#{$size} {
+      min-height: get-spacer($size);
     }
   }
 }

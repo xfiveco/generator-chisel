@@ -24,6 +24,7 @@
 
   &--code {
     padding: get-padding('small');
+    overflow-x: auto;
   }
 
   &--pullquote,
@@ -47,16 +48,63 @@
   &--post-featured-image,
   &--post-author,
   &--embed {
-    margin: 0 auto get-margin('large');
+    margin-block: 0 get-margin('medium');
   }
 
   &--separator {
-    margin: 0 auto get-margin('medium');
+    margin-block: 0 get-margin('medium');
   }
+}
 
-  .alignwide {
-    max-width: get-layout-size('wide');
-  }
+// --- Wide and full width sections -------------------------------------------
+// A wide/full block keeps its bleed, but whatever it lays out goes back on the
+// page rail so text still lines up with the page container edge.
+// WordPress emits its own layout CSS in wp_footer for Timber themes, i.e. after
+// main.css, so these rules win on specificity (0,2,0+ against core's 0,1,0).
+
+// Blocks whose whole point is to reach the screen edge.
+$rail-bleed: '.wp-block-image, .wp-block-video, .wp-block-audio, .wp-block-embed, .wp-block-separator, .wp-block-spacer, .wp-block-media-text, .b-slider__inner';
+
+// Blocks that place their own children, handled by the two rules below.
+$rail-self-managed: '.is-layout-flow, .is-layout-constrained';
+
+// "Inner blocks use content width" on: hand the children back to the rail, so
+// nested wide/full still works.
+:is(.alignfull, .alignwide).is-layout-constrained {
+  padding-inline: 0;
+
+  @include rail-children;
+}
+
+// Toggle off (is-layout-flow): children stretch instead of stopping at the
+// content track, but still stop at the page gutter. Wide already sits inside
+// the gutter, so only full width needs it.
+.alignfull.is-layout-flow {
+  padding-inline: var(--rail-gutter);
+}
+
+// Everything else at full width with a background to keep away from (Cover
+// always paints one): the box bleeds, its content sits on the rail.
+.alignfull:is(.has-background, .wp-block-cover):not(#{$rail-self-managed}):not(#{$rail-bleed}) {
+  padding-inline: var(--rail-edge);
+}
+
+// With no background there is no edge to respect, so full width means full
+// width: stretch out to the page gutter.
+.alignfull:not(.has-background):not(.wp-block-cover):not(#{$rail-self-managed}):not(
+    #{$rail-bleed}
+  ) {
+  padding-inline: var(--rail-gutter);
+}
+
+// Wide sections only need pulling in when there is a background edge to keep
+// away from. Cover always paints one.
+.alignwide:is(.has-background, .wp-block-cover):not(#{$rail-self-managed}):not(#{$rail-bleed}) {
+  padding-inline: var(--rail-edge-wide);
+}
+
+.wp-block-preformatted {
+  overflow-x: auto;
 }
 
 .wp-element-caption {

@@ -47,47 +47,49 @@ class BlocksStyles {
   }
 
   registerSpacerStyles() {
+    // Sizes are fluid, so the bracket shows the mobile-to-desktop range. Keep in
+    // sync with settings.custom.spacer in theme.json.
     const spacerStyles = [
       {
         name: 'default',
-        label: __('Default', 'chisel'),
+        label: `${__('Default', 'chisel')} (1.5-2rem)`,
         isDefault: true,
       },
       {
         name: 'tiny',
-        label: 'XS',
+        label: `${__('Tiny', 'chisel')} (0.5rem)`,
       },
       {
         name: 'little',
-        label: __('Little', 'chisel'),
+        label: `${__('Little', 'chisel')} (0.75-1rem)`,
       },
       {
         name: 'small',
-        label: 'S',
+        label: `${__('Small', 'chisel')} (1-1.5rem)`,
       },
       {
         name: 'normal',
-        label: __('Normal', 'chisel'),
+        label: `${__('Normal', 'chisel')} (1.5-2rem)`,
       },
       {
         name: 'medium',
-        label: 'M',
+        label: `${__('Medium', 'chisel')} (2-3rem)`,
       },
       {
         name: 'large',
-        label: 'L',
+        label: `${__('Large', 'chisel')} (2.5-4rem)`,
       },
       {
         name: 'xlarge',
-        label: 'XL',
+        label: `${__('XLarge', 'chisel')} (3-5rem)`,
       },
       {
         name: 'big',
-        label: 'BIG',
+        label: `${__('Big', 'chisel')} (3.5-6rem)`,
       },
       {
         name: 'huge',
-        label: __('Huge', 'chisel'),
+        label: `${__('Huge', 'chisel')} (4-8rem)`,
       },
     ];
 

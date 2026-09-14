@@ -1,0 +1,8 @@
+// Added to every core/table by Blocks::render_block(). Lands on the block's
+// <figure>, so a wide table scrolls inside itself instead of taking the page
+// sideways on mobile.
+.u-table-responsive {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}

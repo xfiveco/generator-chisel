@@ -12,7 +12,7 @@
     }
   }
 
-  *:not(summary) {
+  > *:not(summary) {
     padding-inline: get-padding('small');
   }
 }

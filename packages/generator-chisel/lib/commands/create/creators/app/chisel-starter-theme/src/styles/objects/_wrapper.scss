@@ -1,5 +1,9 @@
 @use '~design' as *;
 
+:root {
+  @include rail-vars;
+}
+
 .o-wrapper {
   box-sizing: border-box;
   width: 100%;
@@ -11,12 +15,10 @@
 }
 
 .o-wrapper__inner {
-  width: 100%;
-  max-width: get-layout-size('content');
-  padding-inline: get-padding('normal');
+  width: var(--rail-track);
   margin-inline: auto;
 
   &--wide {
-    max-width: get-layout-size('wide');
+    width: var(--rail-track-wide);
   }
 }

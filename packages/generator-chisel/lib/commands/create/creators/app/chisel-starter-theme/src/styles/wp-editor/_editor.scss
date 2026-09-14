@@ -1,5 +1,13 @@
 @use '~design' as *;
 
+// The canvas is iframed, so 100vw inside these variables measures the canvas
+// and the section rules from blocks/_core.scss behave as they do on the front end.
+:root {
+  @include rail-vars;
+}
+
 .wp-block-post-content.wp-block-post-content {
   padding-bottom: px-rem(64);
+
+  @include rail-children;
 }

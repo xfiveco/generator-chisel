@@ -422,6 +422,17 @@
         "big": "var(--wp--preset--spacing--90)",
         "huge": "var(--wp--preset--spacing--100)"
       },
+      "spacer": {
+        "tiny": "0.5rem",
+        "little": "clamp(0.75rem, 0.625rem + 0.417vw, 1rem)",
+        "small": "clamp(1rem, 0.75rem + 0.833vw, 1.5rem)",
+        "normal": "clamp(1.5rem, 1.25rem + 0.833vw, 2rem)",
+        "medium": "clamp(2rem, 1.5rem + 1.667vw, 3rem)",
+        "large": "clamp(2.5rem, 1.75rem + 2.5vw, 4rem)",
+        "xlarge": "clamp(3rem, 2rem + 3.333vw, 5rem)",
+        "big": "clamp(3.5rem, 2.25rem + 4.167vw, 6rem)",
+        "huge": "clamp(4rem, 2rem + 6.667vw, 8rem)"
+      },
       "border-radius": {
         "tiny": "0.25rem",
         "little": "0.5rem",

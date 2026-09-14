@@ -37,4 +37,23 @@
       }
     }
   }
+
+  // Full width: the media keeps bleeding to the viewport edge, the text column stops at the page rail.
+  &.alignfull {
+    padding-inline: 0;
+
+    > .wp-block-media-text__content {
+      padding-inline-end: var(--rail-edge);
+    }
+
+    &.has-media-on-the-right > .wp-block-media-text__content {
+      padding-inline: var(--rail-edge) get-padding('big');
+    }
+
+    @include bp-down(medium) {
+      &.is-stacked-on-mobile > .wp-block-media-text__content {
+        padding-inline: var(--rail-edge);
+      }
+    }
+  }
 }
