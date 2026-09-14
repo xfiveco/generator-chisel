@@ -8,6 +8,7 @@ use Chisel\Traits\HooksSingleton;
 use Chisel\Factories\RegisterBlocks;
 use Chisel\Helpers\BlocksHelpers;
 use Chisel\Helpers\ThemeHelpers;
+use Chisel\Helpers\AssetsHelpers;
 use Chisel\Traits\PageBlocks;
 
 /**
@@ -229,7 +230,11 @@ final class Blocks {
 			return;
 		}
 
-		$this->maybe_clear_patterns_cache();
+		// Pattern cache invalidation scans the patterns directory from disk, and only
+		// matters where patterns are consumed (the editor), so skip it on the front end.
+		if ( is_admin() ) {
+			$this->maybe_clear_patterns_cache();
+		}
 
 		foreach ( $this->block_patterns_categories as $slug => $category ) {
 			$category['label'] = sprintf( '[%s] %s', ThemeHelpers::get_theme_name(), esc_attr( $category['label'] ) );
@@ -399,16 +404,15 @@ final class Blocks {
 
 		if ( ! empty( $blocks ) ) {
 			$blocks_path = $this->register_blocks_factory->get_blocks_path();
-			$blocks_url  = $this->register_blocks_factory->get_blocks_url();
 
 			foreach ( $blocks as $block_name ) {
 				if ( ! in_array( $block_name, $blocks_used_on_page, true ) ) {
 					wp_dequeue_style( 'block-wp-' . $block_name . '-style' );
 				} else {
-					$block_critical_css = $blocks_path . '/' . $block_name . '/script.css';
+					$block_critical_css = $blocks_path . '/' . $block_name . '/style-index.css';
 
 					if ( is_file( $block_critical_css ) ) {
-						$css = BlocksHelpers::get_block_inline_css( $blocks_url, $block_name );
+						$css = BlocksHelpers::get_block_inline_css( $blocks_path, $block_name, 'style-index.css' );
 
 						if ( $css ) {
 							$add = wp_add_inline_style( AssetsHelpers::get_final_handle( 'main' ), $css );

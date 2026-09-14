@@ -170,11 +170,9 @@ final class ThemeHelpers {
 	 */
 	public static function get_login_page_logo_data(): array {
 		$logo_id   = (int) get_theme_mod( 'custom_logo', 0 );
-		$logo_data = array();
+		$logo_data = $logo_id > 0 ? wp_get_attachment_image_src( $logo_id, 'medium' ) : false;
 
-		if ( $logo_id > 0 ) {
-			$logo_data = wp_get_attachment_image_src( $logo_id, 'medium' );
-		} else {
+		if ( ! $logo_data ) {
 			$logo_data = array(
 				ImageHelpers::get_image_url( 'chisel.svg' ),
 				200,
@@ -184,5 +182,25 @@ final class ThemeHelpers {
 		}
 
 		return $logo_data;
+	}
+
+	/**
+	 * Get the inline CSS that paints the login page logo.
+	 *
+	 * @return string
+	 */
+	public static function get_login_page_logo_css(): string {
+		$logo_data = self::get_login_page_logo_data();
+
+		// Attachments without stored dimensions (SVG, most often) report 0.
+		$width  = (int) $logo_data[1] > 0 ? min( (int) $logo_data[1], 300 ) : 200;
+		$height = (int) $logo_data[2] > 0 ? min( (int) $logo_data[2], 100 ) : 60;
+
+		return sprintf(
+			'#login h1 a{background-image:url("%1$s");width:%2$dpx;height:%3$dpx;}',
+			esc_url( $logo_data[0] ),
+			$width,
+			$height
+		);
 	}
 }

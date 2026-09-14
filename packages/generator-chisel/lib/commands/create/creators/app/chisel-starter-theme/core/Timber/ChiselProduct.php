@@ -14,11 +14,11 @@ use Chisel\Helpers\ImageHelpers;
 class ChiselProduct extends TimberPost {
 
 	/**
-	 * Product thumbnail.
+	 * Product thumbnail html, keyed by size and attributes.
 	 *
-	 * @var ?string
+	 * @var array
 	 */
-	public ?string $thumbnail_html = null;
+	public array $thumbnail_html = array();
 
 	/**
 	 * Category thumbnail id.
@@ -38,13 +38,15 @@ class ChiselProduct extends TimberPost {
 	public function get_thumbnail( string $size = 'woocommerce_thumbnail', array $attrs = array() ): string {
 		$size = apply_filters( 'single_product_archive_thumbnail_size', $size );
 
-		if ( $this->thumbnail_html === null ) {
+		$cache_key = $size . '|' . md5( (string) wp_json_encode( $attrs ) );
+
+		if ( ! isset( $this->thumbnail_html[ $cache_key ] ) ) {
 			$thumbnail_id = $this->get_thumbnail_id();
 
-			$this->thumbnail_html = $thumbnail_id ? ImageHelpers::get_responsive_image( $thumbnail_id, $size, $attrs ) : '';
+			$this->thumbnail_html[ $cache_key ] = $thumbnail_id ? ImageHelpers::get_responsive_image( $thumbnail_id, $size, $attrs ) : '';
 		}
 
-		return $this->thumbnail_html;
+		return $this->thumbnail_html[ $cache_key ];
 	}
 
 	/**

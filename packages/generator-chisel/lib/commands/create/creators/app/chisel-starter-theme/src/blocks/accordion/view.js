@@ -1,4 +1,14 @@
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 class Accordion {
+  /**
+   * Height animation duration. Cut to near-zero under a reduced-motion preference -
+   * not to 0, so the `onfinish` callback that commits the open state still runs.
+   */
+  static ANIMATION_DURATION = 200;
+
+  static REDUCED_ANIMATION_DURATION = 1;
+
   constructor(accordion) {
     this.accordion = accordion;
 
@@ -84,7 +94,9 @@ class Accordion {
         height: [startHeight, endHeight],
       },
       {
-        duration: 200,
+        duration: prefersReducedMotion()
+          ? Accordion.REDUCED_ANIMATION_DURATION
+          : Accordion.ANIMATION_DURATION,
         easing: 'linear',
       },
     );
@@ -113,7 +125,16 @@ class Accordion {
 
   toggleItems() {
     this.elements.items.forEach((accordionItem) => {
-      accordionItem.addEventListener('click', (e) => {
+      const header = accordionItem.querySelector(this.selectors.header);
+
+      if (!header) {
+        return;
+      }
+
+      // Bound to the header only - on the whole <details> any click inside the open
+      // panel would be prevented (killing links) and would toggle the panel shut.
+      header.addEventListener('click', (e) => {
+        // Stop the native <details> toggle so the height animation can drive `open`.
         e.preventDefault();
 
         if (this.settings.closeOthers && this.opening.item) {

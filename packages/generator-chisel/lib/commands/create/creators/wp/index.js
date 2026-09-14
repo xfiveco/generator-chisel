@@ -22,7 +22,6 @@ module.exports = (api) => {
     ({ themeName, themePath } = api.creator.data.app);
 
     await api.creator.loadCreator('wp-plugins');
-    await api.creator.loadCreator('ai-ruleset');
 
     const userName = gitConfig('user.name');
     const userEmail = gitConfig('user.email');

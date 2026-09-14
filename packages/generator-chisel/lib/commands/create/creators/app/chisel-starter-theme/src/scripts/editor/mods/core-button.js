@@ -72,7 +72,7 @@ const chiselButtonCustomControls = createHigherOrderComponent((BlockEdit) => {
         const icon = className.match(/has-icon-(\w*)/);
         const iconLeft = className.match('has-icon-left');
 
-        if (icon &&icon.length) {
+        if (icon && icon.length) {
           attrs.buttonIcon = icon[1];
         }
 

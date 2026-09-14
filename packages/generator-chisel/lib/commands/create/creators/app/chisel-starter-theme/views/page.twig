@@ -1,6 +1,6 @@
 {% extends "single.twig" %}
 
 {% block inner_content %}
-  {{ post.content }}
+  {{ post.content|raw }}
 {% endblock %}
 

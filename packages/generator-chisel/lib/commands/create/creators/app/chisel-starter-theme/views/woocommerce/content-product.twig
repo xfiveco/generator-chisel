@@ -21,7 +21,7 @@
       #}
       {% do action('woocommerce_before_shop_loop_item_title') %}
 
-      <h2 class="c-product-item__title">{{ post.title }}</h2>
+      <h2 class="c-product-item__title">{{ post.title|raw }}</h2>
 
       {#
       * Hook: woocommerce_after_shop_loop_item_title.
@@ -33,7 +33,7 @@
 
       {% if post.get_thumbnail() %}
         <div class="c-product-item__image">
-          {{ post.get_thumbnail() }}
+          {{ post.get_thumbnail()|raw }}
         </div>
       {% endif %}
 

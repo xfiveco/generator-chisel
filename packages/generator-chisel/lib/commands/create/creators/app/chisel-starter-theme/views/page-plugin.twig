@@ -1,5 +1,6 @@
 {% extends "single.twig" %}
 
 {% block inner_content %}
-  {{ post.content }}
+  {# `content` is the plugin-generated buffer captured in footer.php, not the post body. #}
+  {{ content|raw }}
 {% endblock %}

@@ -17,6 +17,6 @@
   },
   "require": {
     "php": "^8.2",
-    "timber/timber": "^2.3"
+    "timber/timber": "^2.5"
   }
 }

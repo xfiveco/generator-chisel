@@ -2,7 +2,7 @@
   {% block item_content %}
   <div class="c-post-item__content">
     {% block item_title %}
-      <h2 class="c-post-item__title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
+      <h2 class="c-post-item__title"><a href="{{ post.link }}">{{ post.title|raw }}</a></h2>
     {% endblock %}
 
     {% block item_category %}
@@ -14,12 +14,12 @@
     {% block item_meta %}
       <span class="c-post-item__meta">
         <span class="c-post-item__author"><a href="{{ post.author.link }}">{{ __('By', 'chisel') }} {{ post.author.name }}</a></span> •
-        <time datetime="{{ post.date }}">{{ post.date }}</time>
+        <time datetime="{{ post.date('c') }}">{{ post.date }}</time>
       </span>
     {% endblock %}
 
     {% block item_excerpt %}
-      <p class="c-post-item__excerpt">{{ post.excerpt({words: 20, read_more: __('Keep reading', 'chisel'), end: '...', force: true}) }}</p>
+      <p class="c-post-item__excerpt">{{ post.excerpt({words: 20, read_more: __('Keep reading', 'chisel'), end: '...', force: true})|raw }}</p>
     {% endblock %}
 
     {% block item_tags %}
@@ -37,7 +37,7 @@
   {% block item_image %}
     {% if post.get_thumbnail() %}
       <div class="c-post-item__image">
-        <a href="{{ post.link }}" tabindex="-1">{{ post.get_thumbnail() }}</a>
+        <a href="{{ post.link }}" tabindex="-1">{{ post.get_thumbnail()|raw }}</a>
       </div>
     {% endif %}
   {% endblock %}

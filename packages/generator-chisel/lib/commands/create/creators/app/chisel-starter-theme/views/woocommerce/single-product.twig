@@ -62,7 +62,8 @@
 
         {% if sidebar.content %}
           {# Register product sidebar in Woocommerce.php if you want to use it #}
-          {% include 'sidebar-woocommerce-product.twig' %}
+          {# `ignore missing` - the template ships with no default, so registering the widget area must not fatal the page. #}
+          {% include 'sidebar-woocommerce-product.twig' ignore missing %}
         {% endif %}
       </div>
     </section>

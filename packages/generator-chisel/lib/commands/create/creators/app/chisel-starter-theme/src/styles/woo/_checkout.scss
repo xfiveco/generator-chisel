@@ -14,7 +14,7 @@
         &:focus {
           outline: 0;
 
-          &:not([readonly], [disabled]) {
+          &:not([disabled]) {
             box-shadow: $form-field-shadow-focus;
           }
         }

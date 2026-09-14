@@ -50,7 +50,7 @@ class Woocommerce {
 	public function action_hooks(): void {
 		$this->remove_actions();
 
-		add_action( 'rest_api_init', array( $this, 'register_cart' ) );
+		add_filter( 'rest_pre_dispatch', array( $this, 'register_cart' ), 10, 3 );
 
 		add_action( 'after_setup_theme', array( $this, 'add_woocommerce_support' ) );
 
@@ -100,11 +100,52 @@ class Woocommerce {
 	}
 
 	/**
-	 * Get access to cart in REST API endpoints.
+	 * Get access to cart in REST API endpoints that need it.
 	 *
-	 * @return void
+	 * Hooked to `rest_pre_dispatch` so the requested route is known: the
+	 * WooCommerce session/cart is only initialized for cart-bearing routes,
+	 * instead of on every REST request. This keeps other REST responses lean
+	 * and cacheable (no forced customer-session cookie).
+	 *
+	 * @param mixed            $result  Pre-dispatch result (passed through untouched).
+	 * @param \WP_REST_Server  $server  The REST server instance.
+	 * @param \WP_REST_Request $request The current request.
+	 *
+	 * @return mixed
 	 */
-	public function register_cart(): void {
+	public function register_cart( $result, $server, $request ) {
+		if ( ! $request instanceof \WP_REST_Request ) {
+			return $result;
+		}
+
+		$route = $request->get_route();
+
+		/**
+		 * Filters the REST route prefixes that require WooCommerce cart/session access.
+		 *
+		 * Any request whose route starts with one of these prefixes gets the WC
+		 * session and cart initialized. Add your own cart-bearing endpoints here
+		 * (e.g. a custom `chisel/v2/add-to-cart`) rather than initializing globally.
+		 *
+		 * @param string[]         $routes  Route prefixes needing cart access.
+		 * @param string           $route   The current REST route.
+		 * @param \WP_REST_Request $request The current request.
+		 */
+		$cart_routes = apply_filters( 'chisel_wc_cart_rest_routes', array( '/wc/store' ), $route, $request );
+
+		$needs_cart = false;
+
+		foreach ( (array) $cart_routes as $prefix ) {
+			if ( $prefix !== '' && strpos( $route, $prefix ) === 0 ) {
+				$needs_cart = true;
+				break;
+			}
+		}
+
+		if ( ! $needs_cart ) {
+			return $result;
+		}
+
 		include_once WC_ABSPATH . 'includes/wc-cart-functions.php';
 		include_once WC_ABSPATH . 'includes/wc-notice-functions.php';
 
@@ -113,6 +154,8 @@ class Woocommerce {
 		WC()->session->set_customer_session_cookie( true );
 
 		WC()->cart->get_cart();
+
+		return $result;
 	}
 
 	/**
@@ -207,9 +250,37 @@ class Woocommerce {
 	 * @return array
 	 */
 	public function register_custom_styles( array $styles ): array {
-		$styles['woocommerce'] = array();
+		$styles['woocommerce'] = array(
+			'condition' => array( $this, 'is_woocommerce_page' ),
+		);
 
 		return $styles;
+	}
+
+	/**
+	 * Whether the current request is a WooCommerce page that needs the WooCommerce styles.
+	 *
+	 * @return bool
+	 */
+	public function is_woocommerce_page(): bool {
+		if ( ! function_exists( 'is_woocommerce' ) ) {
+			return false;
+		}
+
+		if ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) {
+			return true;
+		}
+
+		// Also load on singular content that embeds any WooCommerce block (mini-cart, product grid, etc.).
+		if ( is_singular() ) {
+			$post = get_post();
+
+			if ( $post instanceof \WP_Post && str_contains( $post->post_content, '<!-- wp:woocommerce/' ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

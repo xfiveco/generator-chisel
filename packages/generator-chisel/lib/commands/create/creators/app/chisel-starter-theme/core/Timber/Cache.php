@@ -68,9 +68,16 @@ final class Cache {
 	 */
 	public function cache_mode( string $cache_mode ): string {
 		// Available cache modes: 'CACHE_NONE', 'CACHE_OBJECT' (WP Object Cache), 'CACHE_TRANSIENT', 'CACHE_SITE_TRANSIENT', 'CACHE_USE_DEFAULT'.
-		$cache_mode = Loader::CACHE_NONE;
 
-		return $cache_mode;
+		/**
+		 * Filters the Timber fragment cache mode.
+		 *
+		 * Defaults to Loader::CACHE_NONE (caching off). Return another Loader::CACHE_*
+		 * constant to enable fragment caching, e.g. Loader::CACHE_TRANSIENT.
+		 *
+		 * @param string $cache_mode The cache mode.
+		 */
+		return apply_filters( 'chisel_cache_mode', Loader::CACHE_NONE );
 	}
 
 	/**

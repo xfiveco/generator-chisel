@@ -1,70 +1,79 @@
 {% if posts.pagination.pages is not empty %}
-  <nav class="c-pagination">
+  {# Without a post type and a page size the button can only query nothing, so fall back to the visible page links. #}
+  {% set is_load_more = type == 'load-more' and load_more.post_type is not empty and load_more.per_page %}
 
-    {% if type == 'load-more' %}
-      <div class="c-load-more js-load-more" data-post-type="{{ load_more.post_type is iterable ? load_more.post_type|join(',') : load_more.post_type }}" data-per-page="{{ load_more.per_page }}" data-max-page="{{ posts.pagination.total }}"{% if load_more.search %} data-search="{{ load_more.search }}"{% endif %}>
-        <button type="button" class="c-load-more__button {{ bem('c-btn', 'primary') }} js-load-more-button">{{ __('Load more', 'chisel') }}</button>
-      </div>
-    {% else %}
-      <ul class="c-pagination__items o-layout is-flex has-gap-small">
-        {# First #}
-        {% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
-          <li class="{{ bem('c-pagination__item', 'first') }}">
-            <a href="{{ posts.pagination.pages|first.link }}" class="c-badge">{{ __('First', 'chisel') }}</a>
+  {# A lone "Load more" button is a control, not a set of navigation links, so it gets no landmark. #}
+  {% if is_load_more %}
+    {# Single element so that removing it on the last page leaves no empty, margined wrapper behind. #}
+    <div class="c-pagination c-load-more js-load-more" data-post-type="{{ load_more.post_type is iterable ? load_more.post_type|join(',') : load_more.post_type }}" data-per-page="{{ load_more.per_page }}" data-max-page="{{ posts.pagination.total }}"{% if load_more.search %} data-search="{{ load_more.search }}"{% endif %}{% if load_more.query is not empty %} data-query="{{ load_more.query|json_encode|e('html_attr') }}"{% endif %}>
+      <button type="button" class="c-load-more__button {{ bem('c-btn', 'primary') }} js-load-more-button">{{ __('Load more', 'chisel') }}</button>
+    </div>
+  {% endif %}
+
+  {#
+  In load-more mode the page links are still rendered, only hidden - the button above
+  replaces them for visitors, but search engines need real hrefs to discover the
+  paginated archive URLs. `display: none` also keeps them out of the tab order.
+  #}
+  <nav class="{{ is_load_more ? bem('c-pagination', 'crawlable') : 'c-pagination' }}" aria-label="{{ __('Pagination', 'chisel') }}">
+    <ul class="c-pagination__items o-layout is-flex has-gap-small">
+      {# First #}
+      {% if posts.pagination.pages|first and posts.pagination.pages|first.current != true %}
+        <li class="{{ bem('c-pagination__item', 'first') }}">
+          <a href="{{ posts.pagination.pages|first.link }}" class="c-badge">{{ __('First', 'chisel') }}</a>
+        </li>
+      {% else %}
+        <li class="{{ bem('c-pagination__item', 'first') }} is-disabled">
+          <span class="c-badge">{{ __('First', 'chisel') }}</span>
+        </li>
+      {% endif %}
+
+      {# Previous #}
+      {% if posts.pagination.prev %}
+        <li class="{{ bem('c-pagination__item', 'prev') }}">
+          <a href="{{ posts.pagination.prev.link }}" class="c-badge">{{ __('Previous', 'chisel') }}</a>
+        </li>
+      {% else %}
+        <li class="{{ bem('c-pagination__item', 'prev') }} is-disabled">
+          <span class="c-badge">{{ __('Previous', 'chisel') }}</span>
+        </li>
+      {% endif %}
+
+      {# Pages #}
+      {% for page in posts.pagination.pages %}
+        {% if page.link %}
+          <li class="{{ bem('c-pagination__item', 'page') }}">
+            {# The visible text is a bare number, so the link needs a spoken label. #}
+            <a href="{{ page.link }}" class="{{ page.class }}" aria-label="{{ __('Go to page %s', 'chisel')|format(page.title)|e('html_attr') }}">{{ page.title }}</a>
           </li>
         {% else %}
-          <li class="{{ bem('c-pagination__item', 'first') }} is-disabled">
-            <span class="c-badge">{{ __('First', 'chisel') }}</span>
+          <li class="{{ bem('c-pagination__item', 'page') }} is-current">
+            <span class="{{ page.class }}"{% if page.current %} aria-current="page" aria-label="{{ __('Page %s', 'chisel')|format(page.title)|e('html_attr') }}"{% endif %}>{{ page.title }}</span>
           </li>
         {% endif %}
+      {% endfor %}
 
-        {# Previous #}
-        {% if posts.pagination.prev %}
-          <li class="{{ bem('c-pagination__item', 'prev') }}">
-            <a href="{{ posts.pagination.prev.link }}" class="c-badge">{{ __('Previous', 'chisel') }}</a>
-          </li>
-        {% else %}
-          <li class="{{ bem('c-pagination__item', 'prev') }} is-disabled">
-            <span class="c-badge">{{ __('Previous', 'chisel') }}</span>
-          </li>
-        {% endif %}
+      {# Next #}
+      {% if posts.pagination.next %}
+        <li class="{{ bem('c-pagination__item', 'next') }}">
+          <a href="{{ posts.pagination.next.link }}" class="c-badge">{{ __('Next', 'chisel') }}</a>
+        </li>
+      {% else %}
+        <li class="{{ bem('c-pagination__item', 'next') }} is-disabled">
+          <span class="c-badge">{{ __('Next', 'chisel') }}</span>
+        </li>
+      {% endif %}
 
-        {# Pages #}
-        {% for page in posts.pagination.pages %}
-          {% if page.link %}
-            <li class="{{ bem('c-pagination__item', 'page') }}">
-              <a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
-            </li>
-          {% else %}
-            <li class="{{ bem('c-pagination__item', 'page') }} is-current">
-              <span class="{{ page.class }}">{{ page.title }}</span>
-            </li>
-          {% endif %}
-        {% endfor %}
-
-        {# Next #}
-        {% if posts.pagination.next %}
-          <li class="{{ bem('c-pagination__item', 'next') }}">
-            <a href="{{ posts.pagination.next.link }}" class="c-badge">{{ __('Next', 'chisel') }}</a>
-          </li>
-        {% else %}
-          <li class="{{ bem('c-pagination__item', 'next') }} is-disabled">
-            <span class="c-badge">{{ __('Next', 'chisel') }}</span>
-          </li>
-        {% endif %}
-
-        {# Last #}
-        {% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
-          <li class="{{ bem('c-pagination__item', 'last') }}">
-            <a href="{{ posts.pagination.pages|last.link }}" class="c-badge">{{ __('Last', 'chisel') }}</a>
-          </li>
-        {% else %}
-            <li class="{{ bem('c-pagination__item', 'last') }} is-disabled">
-              <span class="c-badge">{{ __('Last', 'chisel') }}</span>
-            </li>
-        {% endif %}
-
-      </ul>
-    {% endif %}
+      {# Last #}
+      {% if posts.pagination.pages|last and posts.pagination.pages|last.current != true %}
+        <li class="{{ bem('c-pagination__item', 'last') }}">
+          <a href="{{ posts.pagination.pages|last.link }}" class="c-badge">{{ __('Last', 'chisel') }}</a>
+        </li>
+      {% else %}
+        <li class="{{ bem('c-pagination__item', 'last') }} is-disabled">
+          <span class="c-badge">{{ __('Last', 'chisel') }}</span>
+        </li>
+      {% endif %}
+    </ul>
   </nav>
 {% endif %}

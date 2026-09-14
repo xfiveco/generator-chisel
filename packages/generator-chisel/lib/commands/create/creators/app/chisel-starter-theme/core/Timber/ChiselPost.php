@@ -14,11 +14,11 @@ use Chisel\Helpers\ImageHelpers;
 class ChiselPost extends TimberPost {
 
 	/**
-	 * Post thumbnail.
+	 * Post thumbnail html, keyed by size and attributes.
 	 *
-	 * @var ?string
+	 * @var array
 	 */
-	public ?string $thumbnail_html = null;
+	public array $thumbnail_html = array();
 
 	/**
 	 * Get the post thumbnail. Returns the thumbnail responsive image html.
@@ -29,15 +29,19 @@ class ChiselPost extends TimberPost {
 	 * @return string Responsive <img> HTML, or empty string.
 	 */
 	public function get_thumbnail( string $size = 'medium', array $attrs = array() ): string {
-		if ( $this->thumbnail_html === null ) {
-			$this->thumbnail_html = '';
+		$cache_key = $size . '|' . md5( (string) wp_json_encode( $attrs ) );
+
+		if ( ! isset( $this->thumbnail_html[ $cache_key ] ) ) {
+			$html = '';
 
 			if ( has_post_thumbnail( $this->ID ) ) {
-				$thumbnail_id         = get_post_thumbnail_id( $this->ID );
-				$this->thumbnail_html = ImageHelpers::get_responsive_image( $thumbnail_id, $size, $attrs );
+				$thumbnail_id = get_post_thumbnail_id( $this->ID );
+				$html         = ImageHelpers::get_responsive_image( $thumbnail_id, $size, $attrs );
 			}
+
+			$this->thumbnail_html[ $cache_key ] = $html;
 		}
 
-		return $this->thumbnail_html;
+		return $this->thumbnail_html[ $cache_key ];
 	}
 }

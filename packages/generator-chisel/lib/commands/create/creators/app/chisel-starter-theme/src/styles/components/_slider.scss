@@ -14,6 +14,7 @@
 
   img {
     @include object-fit-cover;
+
     aspect-ratio: 16 / 9;
   }
 }
@@ -31,15 +32,15 @@
 
   .swiper-button {
     top: 50%;
-    transform: translateY(-50%);
-    margin: 0;
     width: px-rem(48);
     height: px-rem(48);
+    margin: 0;
     appearance: none;
     background-color: rgba(255, 255, 255, 30%);
     border: none;
     opacity: 1;
     transition: get-transition('normal');
+    transform: translateY(-50%);
 
     &::after {
       font-size: px-rem(24);
@@ -73,12 +74,12 @@
   display: flex;
   justify-content: center;
   padding: get-padding('tiny');
+  font-size: 0;
+  line-height: 1;
   background-color: rgba(255, 255, 255, 30%);
   border-radius: get-border-radius('tiny');
   transition: get-transition('normal');
   transform: translateX(-50%);
-  line-height: 1;
-  font-size: 0;
 
   &:hover {
     background-color: rgba(255, 255, 255, 100%);
@@ -89,6 +90,51 @@
     height: px-rem(10);
     background-color: get-color('primary');
     opacity: 0.3;
+  }
+}
+
+.swiper-autoplay-toggle {
+  position: absolute;
+  top: px-rem(10);
+  right: px-rem(10);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: px-rem(32);
+  height: px-rem(32);
+  padding: 0;
+  appearance: none;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 30%);
+  border: none;
+  border-radius: get-border-radius('tiny');
+  transition: get-transition('normal');
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 100%);
+  }
+
+  // Pause glyph: two bars drawn as the left and right border of the box, with the
+  // box width acting as the gap between them.
+  &::before {
+    // The reset sets border-box globally, which would eat the gap into the borders.
+    box-sizing: content-box;
+    width: px-rem(4);
+    height: px-rem(12);
+    content: '';
+    border-right: px-rem(3) solid get-color('primary');
+    border-left: px-rem(3) solid get-color('primary');
+  }
+
+  // Play glyph, shown once the visitor has paused the rotation.
+  &.is-paused::before {
+    width: 0;
+    height: 0;
+    border-top: px-rem(6) solid transparent;
+    border-right: 0;
+    border-bottom: px-rem(6) solid transparent;
+    border-left: px-rem(10) solid get-color('primary');
   }
 }
 

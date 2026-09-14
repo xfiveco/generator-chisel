@@ -3,72 +3,82 @@
 namespace Chisel\Traits;
 
 use Timber\Timber;
+use Chisel\Helpers\BlocksHelpers;
 
 trait PageBlocks {
 	/**
-	 * Content blocks from current page
+	 * Get the block names used on the current page, filtered by prefix.
 	 *
-	 * @var ?array
-	 */
-	private static ?array $content_blocks_names = null;
-
-	/**
-	 * Get the instance of the class.
+	 * The parsed content is cached on BlocksHelpers rather than on the trait,
+	 * because trait statics are per-class: every class using this trait would
+	 * otherwise parse the page content again.
 	 *
 	 * @param string $prefix
 	 *
 	 * @return array
 	 */
 	public function get_content_blocks_names( string $prefix = 'chisel' ): array {
-		if ( self::$content_blocks_names !== null ) {
-			return self::$content_blocks_names;
+		$cached = BlocksHelpers::get_page_blocks_names_by_prefix( $prefix );
+
+		if ( $cached !== null ) {
+			return $cached;
 		}
 
+		$page_blocks_names = BlocksHelpers::get_page_blocks_names();
+
+		if ( $page_blocks_names === null ) {
+			$page_blocks_names = $this->parse_page_blocks_names();
+
+			BlocksHelpers::set_page_blocks_names( $page_blocks_names );
+		}
+
+		$content_blocks_names = array_filter(
+			$page_blocks_names,
+			function ( string $block_name ) use ( $prefix ): bool {
+				return strpos( $block_name, $prefix ) !== false;
+			}
+		);
+
+		if ( ! empty( $content_blocks_names ) ) {
+			$content_blocks_names = array_values( array_unique( $content_blocks_names ) );
+			$content_blocks_names = array_map(
+				function ( string $block_name ) use ( $prefix ): string {
+					return str_replace( $prefix . '/', '', $block_name );
+				},
+				$content_blocks_names
+			);
+		}
+
+		BlocksHelpers::set_page_blocks_names_by_prefix( $prefix, $content_blocks_names );
+
+		return $content_blocks_names;
+	}
+
+	/**
+	 * Parse all block names out of the current page content. Prefix agnostic.
+	 *
+	 * @return array
+	 */
+	private function parse_page_blocks_names(): array {
 		global $post;
 
-		$content_blocks_names = array();
-
-		if ( $post instanceof \WP_Post ) {
-			$content = $post->post_content . $this->get_sidebar_content();
-
-			if ( empty( $content ) ) {
-				return $content_blocks_names;
-			}
-
-			if ( ! has_blocks( $content ) ) {
-				return $content_blocks_names;
-			}
-
-			$blocks = parse_blocks( $content );
-
-			if ( is_array( $blocks ) && ! empty( $blocks ) ) {
-				$blocks_names = $this->get_blocks_names( $blocks );
-
-				if ( ! empty( $blocks_names ) ) {
-					$blocks_names = array_filter(
-						$blocks_names,
-						function ( string $block_name ) use ( $prefix ): bool {
-							return strpos( $block_name, $prefix ) !== false;
-						}
-					);
-
-					if ( ! empty( $blocks_names ) ) {
-						$blocks_names         = array_values( array_unique( $blocks_names ) );
-						$blocks_names         = array_map(
-							function ( string $block_name ) use ( $prefix ): string {
-								return str_replace( $prefix . '/', '', $block_name );
-							},
-							$blocks_names
-						);
-						$content_blocks_names = array_merge( $content_blocks_names, $blocks_names );
-					}
-				}
-			}
+		if ( ! $post instanceof \WP_Post ) {
+			return array();
 		}
 
-		self::$content_blocks_names = $content_blocks_names;
+		$content = $post->post_content . $this->get_sidebar_content();
 
-		return self::$content_blocks_names;
+		if ( empty( $content ) || ! has_blocks( $content ) ) {
+			return array();
+		}
+
+		$blocks = parse_blocks( $content );
+
+		if ( ! is_array( $blocks ) || empty( $blocks ) ) {
+			return array();
+		}
+
+		return $this->get_blocks_names( $blocks );
 	}
 
 	/**

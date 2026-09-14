@@ -29,8 +29,8 @@
 <div class="wp-block-button is-style-primary-outline"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'Click me!', 'chisel' ); ?></a></div>
 <!-- /wp:button -->
 
-<!-- wp:button {"className":"is-style-tertiary"} -->
-<div class="wp-block-button is-style-tertiary"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'No, click me!', 'chisel' ); ?></a></div>
+<!-- wp:button {"className":"is-style-secondary"} -->
+<div class="wp-block-button is-style-secondary"><a class="wp-block-button__link wp-element-button"><?php esc_html_e( 'No, click me!', 'chisel' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div></div>
 <!-- /wp:cover -->

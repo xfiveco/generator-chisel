@@ -21,7 +21,7 @@ final class AjaxHelpers {
 	 * @return string
 	 */
 	public static function get_ajax_endpoint_url(): string {
-		return sprintf( '%s/wp-json/%s/%s', rtrim( get_bloginfo( 'url' ), '/' ), AjaxController::ROUTE_NAMESPACE, AjaxController::ROUTE_BASE );
+		return untrailingslashit( rest_url( AjaxController::ROUTE_NAMESPACE . '/' . AjaxController::ROUTE_BASE ) );
 	}
 
 	/**

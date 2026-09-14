@@ -39,8 +39,26 @@ final class Comments {
 
 	/**
 	 * Register action hooks.
+	 *
+	 * Deferred: `chisel_disable_comments` is only resolved in set_properties() on
+	 * after_setup_theme:7, so testing the property at boot time would always read
+	 * the default and the filter could never turn comments back on.
 	 */
 	public function action_hooks(): void {
+		add_action( 'after_setup_theme', array( $this, 'register_action_hooks' ), 8 );
+	}
+
+	/**
+	 * Register filter hooks.
+	 */
+	public function filter_hooks(): void {
+		add_action( 'after_setup_theme', array( $this, 'register_filter_hooks' ), 8 );
+	}
+
+	/**
+	 * Register the action hooks that disable comments.
+	 */
+	public function register_action_hooks(): void {
 		if ( $this->disable_comments === false ) {
 			return;
 		}
@@ -62,10 +80,9 @@ final class Comments {
 	}
 
 	/**
-	 * Register filter hooks.
+	 * Register the filter hooks that disable comments.
 	 */
-	public function filter_hooks(): void {
-
+	public function register_filter_hooks(): void {
 		if ( $this->disable_comments === false ) {
 			return;
 		}
@@ -164,7 +181,7 @@ final class Comments {
 	 */
 	public function filter_query(): void {
 		if ( is_comment_feed() ) {
-			wp_die( esc_html__( 'Comments are closed.' ), '', array( 'response' => 403 ) );
+			wp_die( esc_html__( 'Comments are closed.', 'chisel' ), '', array( 'response' => 403 ) );
 		}
 	}
 

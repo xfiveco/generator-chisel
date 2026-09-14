@@ -7,6 +7,7 @@
 
 use Timber\Timber;
 use Chisel\Helpers\CacheHelpers;
+use Chisel\Helpers\LoadMoreHelpers;
 use Chisel\Helpers\WoocommerceHelpers;
 
 $context = Timber::context();
@@ -58,9 +59,13 @@ if ( is_singular( 'product' ) ) {
 	$context['items']              = $items;
 	$context['categories']         = $categories;
 	$context['loop_columns_class'] = $grid_classnames;
-	$context['load_more']          = array(
-		'per_page'  => absint( $loop_columns * $loop_rows ),
-		'post_type' => 'product',
+	// The helper carries the product category / tag scope; the loop props own the page size.
+	$context['load_more'] = array_merge(
+		LoadMoreHelpers::get_context(),
+		array(
+			'per_page'  => absint( $loop_columns * $loop_rows ),
+			'post_type' => 'product',
+		)
 	);
 
 	Timber::render( 'woocommerce/archive-product.twig', $context, CacheHelpers::expiry() );

@@ -131,8 +131,10 @@ final class AjaxController extends \WP_REST_Controller {
 
 		$endpoint_class = $this->get_endpoint_class( $request );
 
+		// The WP_Error itself, not an error response - the REST server only denies on
+		// false, null or WP_Error, so a WP_REST_Response here reads as "permitted".
 		if ( is_wp_error( $endpoint_class ) ) {
-			return $this->error( $endpoint_class->get_error_message() );
+			return $endpoint_class;
 		}
 
 		$endpoint_class = sanitize_key( str_replace( '\\', '-', $endpoint_class ) );

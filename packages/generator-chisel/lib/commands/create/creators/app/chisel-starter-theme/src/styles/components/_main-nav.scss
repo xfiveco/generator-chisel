@@ -36,8 +36,18 @@
   }
 }
 
+// The caret button is a sibling of the link (never nested inside it), so the item
+// is a wrapping flex row: link + caret share a line, the submenu wraps below.
+.c-main-nav__item,
+.c-main-nav__subitem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .c-main-nav__item {
   position: relative;
+  justify-content: center;
   margin-bottom: 0;
 }
 
@@ -85,6 +95,17 @@
     }
   }
 
+  &:hover::before,
+  &:focus::before,
+  .c-main-nav__link:hover ~ &::before,
+  .c-main-nav__link:focus ~ &::before,
+  .c-main-nav__sublink:hover ~ &::before,
+  .c-main-nav__sublink:focus ~ &::before,
+  .current-menu-item > &::before,
+  .current-menu-parent > &::before {
+    border-top-color: get-color('foreground');
+  }
+
   .c-main-nav__subitems & {
     @include bp-down(large) {
       display: none;
@@ -110,10 +131,6 @@
   .current-menu-parent > & {
     color: get-color('foreground');
     text-decoration: none;
-
-    .c-main-nav__caret::before {
-      border-top-color: get-color('foreground');
-    }
   }
 }
 
@@ -150,6 +167,17 @@
       margin 0.3s ease-in-out,
       z-index 0s ease-in-out 0.3s;
 
+    // Transparent bridge across the gap between the item and the dropdown, so
+    // moving the cursor down does not drop :hover and close the submenu.
+    &::before {
+      position: absolute;
+      top: px-rem(-16);
+      right: 0;
+      left: 0;
+      height: px-rem(16);
+      content: '';
+    }
+
     &::after {
       position: absolute;
       inset: 0;
@@ -173,7 +201,10 @@
       }
     }
 
-    .menu-item-has-children:hover > & {
+    // :focus-within keeps the dropdown open while tabbing through it, so desktop
+    // submenus are reachable without a pointer.
+    .menu-item-has-children:hover > &,
+    .menu-item-has-children:focus-within > & {
       z-index: 999;
       margin-top: 0;
       visibility: visible;
@@ -199,6 +230,7 @@
 
 .c-main-nav__sublink {
   display: block;
+  flex-grow: 1;
   padding: get-padding('little') get-padding('small');
   font-size: get-font-size('large');
   text-decoration: none;
@@ -215,10 +247,6 @@
 
     @include bp(large) {
       background-color: get-color('grey-100');
-    }
-
-    .c-main-nav__caret::before {
-      border-top-color: get-color('foreground');
     }
   }
 }

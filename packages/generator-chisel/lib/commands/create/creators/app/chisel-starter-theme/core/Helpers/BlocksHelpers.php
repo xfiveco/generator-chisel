@@ -14,9 +14,78 @@ use Chisel\Helpers\CacheHelpers;
  */
 final class BlocksHelpers {
 	/**
+	 * All block names parsed from the current page content.
+	 *
+	 * Shared by every class using the PageBlocks trait.
+	 *
+	 * @var ?array
+	 */
+	private static ?array $page_blocks_names = null;
+
+	/**
+	 * Page block names already filtered per prefix, keyed by prefix.
+	 *
+	 * @var array
+	 */
+	private static array $page_blocks_names_by_prefix = array();
+
+	/**
 	 * Prevent instantiation.
 	 */
 	private function __construct() {}
+
+	/**
+	 * Get the cached block names of the current page content. Null when not parsed yet.
+	 *
+	 * @return ?array
+	 */
+	public static function get_page_blocks_names(): ?array {
+		return self::$page_blocks_names;
+	}
+
+	/**
+	 * Cache the block names parsed from the current page content.
+	 *
+	 * @param array $blocks_names
+	 *
+	 * @return void
+	 */
+	public static function set_page_blocks_names( array $blocks_names ): void {
+		self::$page_blocks_names = $blocks_names;
+	}
+
+	/**
+	 * Get the cached page block names for a prefix. Null when not cached yet.
+	 *
+	 * @param string $prefix
+	 *
+	 * @return ?array
+	 */
+	public static function get_page_blocks_names_by_prefix( string $prefix ): ?array {
+		return self::$page_blocks_names_by_prefix[ $prefix ] ?? null;
+	}
+
+	/**
+	 * Cache the page block names for a prefix.
+	 *
+	 * @param string $prefix
+	 * @param array  $blocks_names
+	 *
+	 * @return void
+	 */
+	public static function set_page_blocks_names_by_prefix( string $prefix, array $blocks_names ): void {
+		self::$page_blocks_names_by_prefix[ $prefix ] = $blocks_names;
+	}
+
+	/**
+	 * Clear the cached page block names.
+	 *
+	 * @return void
+	 */
+	public static function clear_page_blocks_names(): void {
+		self::$page_blocks_names           = null;
+		self::$page_blocks_names_by_prefix = array();
+	}
 
 	/**
 	 * Get block object classnames
@@ -116,21 +185,27 @@ final class BlocksHelpers {
 	}
 
 	/**
-	 * Get block inline css from url. The critical.scss imported into script.js will be built into script.css.
+	 * Get block inline css from disk. The block style.scss is built into the entry css file
+	 * (`style-index.css` for WP blocks, `style-script.css` for ACF blocks).
 	 *
-	 * @param string $blocks_url
+	 * @param string $blocks_path Absolute filesystem path to the blocks build directory.
 	 * @param string $block_name
+	 * @param string $file_name   Built css file name for the block.
 	 *
 	 * @return string
 	 */
-	public static function get_block_inline_css( string $blocks_url, string $block_name ): string {
-		$css_url  = rtrim( $blocks_url, '/' ) . '/' . $block_name . '/script.css';
-		$response = wp_remote_get( $css_url );
-		$css      = '';
+	public static function get_block_inline_css( string $blocks_path, string $block_name, string $file_name = 'style-index.css' ): string {
+		static $cache = array();
 
-		if ( is_array( $response ) && ! is_wp_error( $response ) ) {
-			$css = wp_remote_retrieve_body( $response );
+		$css_file = rtrim( $blocks_path, '/' ) . '/' . $block_name . '/' . $file_name;
+
+		if ( isset( $cache[ $css_file ] ) ) {
+			return $cache[ $css_file ];
 		}
+
+		$css = is_file( $css_file ) ? (string) file_get_contents( $css_file ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+		$cache[ $css_file ] = $css;
 
 		return $css;
 	}

@@ -6,11 +6,14 @@
  */
 
 use Chisel\Helpers\CacheHelpers;
+use Chisel\Helpers\LoadMoreHelpers;
 use Timber\Timber;
 
 $templates = array( 'archive.twig', 'index.twig' );
 
 $context = Timber::context();
+
+$context['load_more'] = LoadMoreHelpers::get_context();
 
 if ( is_tag() ) {
 	array_unshift( $templates, 'archive-' . get_queried_object()->slug . '.twig' );

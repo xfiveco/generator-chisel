@@ -97,7 +97,7 @@ final class RegisterCustomPostType {
 		}
 
 		$args = array(
-			'label'               => $post_type_args['plural'],
+			'label'               => $labels['name'],
 			'labels'              => $labels,
 			'description'         => $description,
 			'public'              => $public,

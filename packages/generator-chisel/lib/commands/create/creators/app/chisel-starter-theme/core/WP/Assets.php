@@ -106,7 +106,6 @@ final class Assets {
 			$this->frontend_scripts = array(
 				'runtime' => $runtime_script,
 				'app'     => array(
-					'deps'     => array( 'wp-i18n' ),
 					'localize' => array(
 						'name' => 'chiselScripts',
 						'data' => array(
@@ -114,6 +113,7 @@ final class Assets {
 								'url'   => esc_url( AjaxHelpers::get_ajax_endpoint_url() ),
 								'nonce' => wp_create_nonce( 'wp_rest' ), // this (wp_rest) authenticates users and allows using get_current_user functions in rest api endpoints.
 							),
+							'i18n' => $this->get_frontend_strings(),
 						),
 					),
 				),
@@ -121,19 +121,16 @@ final class Assets {
 
 			if ( is_login() ) {
 				$this->login_styles = array(
-					'login' => array(),
+					'login' => array(
+						'inline' => array(
+							'data' => array( ThemeHelpers::class, 'get_login_page_logo_css' ),
+						),
+					),
 				);
 
 				$this->login_scripts = array(
 					'runtime' => $runtime_script,
-					'login'   => array(
-						'localize' => array(
-							'name' => 'chiselScripts',
-							'data' => array(
-								'logoData' => ThemeHelpers::get_login_page_logo_data(),
-							),
-						),
-					),
+					'login'   => array(),
 				);
 			}
 		} else {
@@ -176,6 +173,41 @@ final class Assets {
 	}
 
 	/**
+	 * Get the translated strings used by the front-end scripts.
+	 *
+	 * Localized into `chiselScripts` so the front end does not have to load the
+	 * `wp-i18n` / `wp-hooks` bundles just for a handful of strings.
+	 *
+	 * @return array
+	 */
+	public function get_frontend_strings(): array {
+		/**
+		 * Filters the translated strings passed to the front-end scripts.
+		 *
+		 * @param array $strings Key => translated string.
+		 */
+		return apply_filters(
+			'chisel_frontend_strings',
+			array(
+				'previousSlide'  => __( 'Previous slide', 'chisel' ),
+				'nextSlide'      => __( 'Next slide', 'chisel' ),
+				'firstSlide'     => __( 'This is the first slide', 'chisel' ),
+				'lastSlide'      => __( 'This is the last slide', 'chisel' ),
+				/* translators: {{index}} is replaced by Swiper with the slide number. */
+				'goToSlide'      => __( 'Go to slide {{index}}', 'chisel' ),
+				/* translators: {{index}} and {{slidesLength}} are replaced by Swiper with the slide number and the total number of slides. */
+				'slideLabel'     => __( 'Slide {{index}} of {{slidesLength}}', 'chisel' ),
+				'pauseAutoplay'  => __( 'Pause automatic slide rotation', 'chisel' ),
+				'playAutoplay'   => __( 'Start automatic slide rotation', 'chisel' ),
+				/* translators: %d: number of items added to the list. */
+				'itemsLoaded'    => __( '%d more items loaded.', 'chisel' ),
+				'allItemsLoaded' => __( 'All items loaded.', 'chisel' ),
+				'loadMoreError'  => __( 'Could not load more items.', 'chisel' ),
+			)
+		);
+	}
+
+	/**
 	 * Register action hooks.
 	 */
 	public function action_hooks(): void {
@@ -198,6 +230,57 @@ final class Assets {
 		add_filter( 'script_loader_tag', array( $this, 'async_script' ), 99, 2 );
 		add_filter( 'script_loader_tag', array( $this, 'defer_script' ), 99, 2 );
 		add_filter( 'style_loader_tag', array( $this, 'preload_styles' ), 99, 2 );
+		add_filter( 'wp_preload_resources', array( $this, 'preload_fonts' ) );
+	}
+
+	/**
+	 * Preload theme fonts.
+	 *
+	 * Fonts declared in theme.json are only discovered after the browser has parsed
+	 * the generated @font-face css, which delays text rendering. Preloading the body
+	 * font starts that download immediately.
+	 *
+	 * @param array $preload_resources
+	 *
+	 * @return array
+	 */
+	public function preload_fonts( array $preload_resources ): array {
+		if ( is_admin() ) {
+			return $preload_resources;
+		}
+
+		/**
+		 * Filters the theme font files preloaded on the front end.
+		 *
+		 * File names are resolved against the theme fonts directory. Keep this list
+		 * short: preloading competes with other render-blocking resources, so only
+		 * the fonts used for above-the-fold text belong here.
+		 *
+		 * @param string[] $fonts Font file names.
+		 */
+		$fonts = apply_filters(
+			'chisel_preload_fonts',
+			array(
+				'roboto-regular.woff2',
+			)
+		);
+
+		foreach ( (array) $fonts as $font ) {
+			$font_url = AssetsHelpers::get_font_url( $font );
+
+			if ( ! $font_url ) {
+				continue;
+			}
+
+			$preload_resources[] = array(
+				'href'        => $font_url,
+				'as'          => 'font',
+				'type'        => 'font/woff2',
+				'crossorigin' => 'anonymous',
+			);
+		}
+
+		return $preload_resources;
 	}
 
 	/**
@@ -406,15 +489,15 @@ final class Assets {
 	public function enqueue_login_page_assets(): void {
 		$stylesheet = wp_get_global_stylesheet();
 
-		if ( empty( $stylesheet ) ) {
-			return;
-		}
-
 		$this->login_styles  = apply_filters( 'chisel_pre_enqueue_login_styles', $this->login_styles );
 		$this->login_scripts = apply_filters( 'chisel_pre_enqueue_login_scripts', $this->login_scripts );
 
-		wp_add_inline_style( 'global-styles', $stylesheet );
-		wp_enqueue_style( 'global-styles' );
+		// Only the global styles depend on this - bailing out of the whole method would
+		// drop the theme's own login stylesheet and scripts with it.
+		if ( ! empty( $stylesheet ) ) {
+			wp_add_inline_style( 'global-styles', $stylesheet );
+			wp_enqueue_style( 'global-styles' );
+		}
 
 		if ( $this->login_styles ) {
 			foreach ( $this->login_styles as $handle => $args ) {
@@ -731,14 +814,20 @@ final class Assets {
 	/**
 	 * Wrapper for wp_set_script_translations function.
 	 *
-	 * @param string $handle
+	 * @param string $handle - full script handle.
 	 * @param array  $args
 	 *
 	 * @return void
 	 */
 	private function set_script_translations( string $handle, array $args ): void {
-		if ( isset( $args['deps'] ) && in_array( 'wp-i18n', $args['deps'], true ) ) {
-			wp_set_script_translations( AssetsHelpers::get_final_handle( $handle ), 'chisel', get_template_directory() . '/languages' );
+		// The registered dependencies, not `$args['deps']` - webpack writes `wp-i18n`
+		// into the generated asset file, and those are only merged in at registration.
+		$registered = wp_scripts()->query( $handle );
+		$deps       = $registered ? $registered->deps : ( isset( $args['deps'] ) ? $args['deps'] : array() );
+
+		if ( in_array( 'wp-i18n', $deps, true ) ) {
+			// `$handle` is already final here - prefixing it again would target a script that does not exist.
+			wp_set_script_translations( $handle, 'chisel', get_template_directory() . '/languages' );
 		}
 	}
 

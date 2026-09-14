@@ -117,7 +117,7 @@ final class RegisterCustomTaxonomy {
 			}
 		}
 
-		register_taxonomy( $taxonomy, (array) $taxonomy_args['post_types'], $args );
+		register_taxonomy( $taxonomy, (array) ( $taxonomy_args['post_types'] ?? array() ), $args );
 	}
 
 	/**

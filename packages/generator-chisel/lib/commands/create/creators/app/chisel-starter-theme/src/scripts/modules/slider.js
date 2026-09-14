@@ -1,4 +1,23 @@
-import { __ } from '@wordpress/i18n';
+/* global chiselScripts */
+
+const i18n = (key, fallback) => chiselScripts?.i18n?.[key] ?? fallback;
+
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/*
+ * Data attributes are always strings. Swiper expects numbers for these options and
+ * silently misbehaves on a string, so every numeric option goes through this.
+ *
+ * @param {string} value - The raw data attribute value.
+ * @param {number} fallback - Used when the attribute is absent or not a number.
+ *
+ * @return {number}
+ */
+const toNumber = (value, fallback) => {
+  const number = parseFloat(value);
+
+  return Number.isNaN(number) ? fallback : number;
+};
 
 class Slider {
   constructor(slider, swiper, swiperModules) {
@@ -21,7 +40,7 @@ class Slider {
     const swiperInstance = new this.swiper(this.elements.slider, this.params);
     this.swipers.push(swiperInstance);
 
-    this.initAccessibility();
+    this.initAutoplayToggle(swiperInstance);
   }
 
   /*
@@ -52,6 +71,7 @@ class Slider {
       paginationWrapper: null,
       pagination: null,
       scrollbar: null,
+      autoplayToggle: null,
     };
   }
 
@@ -72,6 +92,8 @@ class Slider {
       scrollbar: 'swiper-scrollbar',
       thumbs: 'swiper-thumbs',
       sliderThumbs: 'c-slider__thumbs',
+      autoplayToggle: 'swiper-autoplay-toggle',
+      autoplayPaused: 'is-paused',
     };
   }
 
@@ -111,30 +133,56 @@ class Slider {
       centeredSlides: center === 'yes',
       direction,
       effect,
-      freeMode,
-      initialSlide,
+      freeMode: freeMode === 'yes',
+      initialSlide: toNumber(initialSlide, 0),
       loop: loop === 'yes',
       parallax: parallax === 'yes',
-      slidesPerView,
-      spaceBetween,
-      speed,
+      slidesPerView: slidesPerView === 'auto' ? 'auto' : toNumber(slidesPerView, 1),
+      spaceBetween: toNumber(spaceBetween, 10),
+      // Slides still change, they just do not glide there.
+      speed: prefersReducedMotion() ? 0 : toNumber(speed, 1000),
       watchSlidesProgress: true,
     };
 
     this.params = params;
+
+    // A11y and Keyboard are not part of Swiper core, so they ship no defaults and
+    // must always be registered - without them the slider is keyboard-inoperable
+    // and pagination bullets are bare, unlabelled spans.
+    this.use.push(this.swiperModules.A11y, this.swiperModules.Keyboard);
+
+    // {{index}} and {{slidesLength}} are placeholders replaced by Swiper.
+    this.params.a11y = {
+      enabled: true,
+      prevSlideMessage: i18n('previousSlide', 'Previous slide'),
+      nextSlideMessage: i18n('nextSlide', 'Next slide'),
+      firstSlideMessage: i18n('firstSlide', 'This is the first slide'),
+      lastSlideMessage: i18n('lastSlide', 'This is the last slide'),
+      paginationBulletMessage: i18n('goToSlide', 'Go to slide {{index}}'),
+      slideLabelMessage: i18n('slideLabel', 'Slide {{index}} of {{slidesLength}}'),
+    };
+
+    this.params.keyboard = {
+      enabled: true,
+      onlyInViewport: true,
+    };
 
     // Enable thumbnails.
     if (thumbnails !== '0') {
       this.createThumbnails();
     }
 
-    // Enable autoplay.
-    if (autoplay === 'yes') {
+    // Enable autoplay. Skipped entirely when the visitor asked for reduced motion.
+    if (autoplay === 'yes' && !prefersReducedMotion()) {
+      const delay = toNumber(autoplayTimeout, 5000);
+
       this.use.push(this.swiperModules.Autoplay);
       this.params.autoplay = {
-        delay: autoplayTimeout < 1000 ? 1000 : autoplayTimeout,
+        delay: delay < 1000 ? 1000 : delay,
         disableOnInteraction: false,
       };
+
+      this.createAutoplayToggle();
     }
 
     // Enable scrollbar.
@@ -204,13 +252,13 @@ class Slider {
     const navigationButtonPrev = Object.assign(document.createElement('button'), {
       type: 'button',
       className: `${this.classNames.navigationButton} ${this.classNames.navigationPrev}`,
-      ariaLabel: __('Previous slide', 'chisel'),
+      ariaLabel: i18n('previousSlide', 'Previous slide'),
     });
 
     const navigationButtonNext = Object.assign(document.createElement('button'), {
       type: 'button',
       className: `${this.classNames.navigationButton} ${this.classNames.navigationNext}`,
-      ariaLabel: __('Next slide', 'chisel'),
+      ariaLabel: i18n('nextSlide', 'Next slide'),
     });
 
     this.elements.slider.appendChild(wrapper);
@@ -231,6 +279,53 @@ class Slider {
       nextEl: this.selectors.navigationNext,
       prevEl: this.selectors.navigationPrev,
     };
+  }
+
+  /*
+   * Create the autoplay pause/play control. Auto-advancing content must be
+   * stoppable by the visitor (WCAG 2.2.2).
+   */
+  createAutoplayToggle() {
+    const button = Object.assign(document.createElement('button'), {
+      type: 'button',
+      className: this.classNames.autoplayToggle,
+      ariaLabel: i18n('pauseAutoplay', 'Pause automatic slide rotation'),
+    });
+
+    this.elements.slider.appendChild(button);
+
+    this.elements.autoplayToggle = button;
+  }
+
+  /*
+   * Wire the autoplay pause/play control to the swiper instance.
+   *
+   * @param {object} swiperInstance - The initialized swiper.
+   */
+  initAutoplayToggle(swiperInstance) {
+    const button = this.elements.autoplayToggle;
+
+    if (!button || !swiperInstance.autoplay) {
+      return;
+    }
+
+    button.addEventListener('click', () => {
+      const isPlaying = !button.classList.contains(this.classNames.autoplayPaused);
+
+      if (isPlaying) {
+        swiperInstance.autoplay.stop();
+      } else {
+        swiperInstance.autoplay.start();
+      }
+
+      button.classList.toggle(this.classNames.autoplayPaused, isPlaying);
+      button.setAttribute(
+        'aria-label',
+        isPlaying
+          ? i18n('playAutoplay', 'Start automatic slide rotation')
+          : i18n('pauseAutoplay', 'Pause automatic slide rotation'),
+      );
+    });
   }
 
   /*
@@ -310,15 +405,22 @@ class Slider {
       const { thumbnailUrl } = slide.dataset;
       const slideImg = slide.querySelector('img');
 
+      // Checked before the attributes are stripped - bailing afterwards would leave
+      // the thumbnail with no src at all. One unusable slide skips itself rather
+      // than taking down the whole slider.
+      if (!slideImg || !thumbnailUrl) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          'Slider thumbnail skipped: slide needs an img and a data-thumbnail-url.',
+          slide,
+        );
+
+        return;
+      }
+
       ['src', 'srcset', 'sizes', 'width', 'height'].forEach((attr) => {
         slideImg.removeAttribute(attr);
       });
-
-      if (!thumbnailUrl) {
-        throw new Error(
-          'data-thumbnail-url attribute must be present on each swiper-slide element.',
-        );
-      }
 
       const imageSize = thumbnailUrl.match(/(\d+)x(\d+)\./i);
 
@@ -346,7 +448,7 @@ class Slider {
     let params = {
       loop: true,
       spaceBetween: 10,
-      slidesPerView: thumbnails,
+      slidesPerView: toNumber(thumbnails, 1),
       freeMode: false,
       navigation: false,
       watchSlidesProgress: true,
@@ -370,40 +472,6 @@ class Slider {
     this.use.push(this.swiperModules.Thumbs);
 
     this.params.thumbs = moduleParams;
-  }
-
-  /**
-   * Initialize accessibility features for screen readers.
-   * Creates an aria-live region that announces slide changes.
-   */
-  initAccessibility() {
-    if (this.swipers.length === 0) {
-      return;
-    }
-
-    const mainSwiper = this.swipers[0];
-    this.elements.liveRegion = this.createLiveRegion();
-
-    mainSwiper.on('slideChange', () => {
-      const currentSlide = mainSwiper.realIndex + 1;
-      const totalSlides = mainSwiper.slides.length;
-      this.elements.liveRegion.textContent = __('Slide %1$d of %2$d', 'chisel')
-        .replace('%1$d', currentSlide)
-        .replace('%2$d', totalSlides);
-    });
-  }
-
-  /**
-   * Create an aria-live region for announcing slide changes.
-   */
-  createLiveRegion() {
-    const liveRegion = document.createElement('div');
-    liveRegion.setAttribute('aria-live', 'polite');
-    liveRegion.setAttribute('aria-atomic', 'true');
-    liveRegion.className = 'u-sr-only';
-    this.elements.sliderContainer.appendChild(liveRegion);
-
-    return liveRegion;
   }
 }
 
@@ -431,7 +499,14 @@ export default () => {
   loadModules()
     .then(({ swiper, swiperModules }) => {
       sliders.forEach((slider) => {
-        new Slider(slider, swiper, swiperModules);
+        // Isolated per slider - without this one malformed slider throws out of the
+        // loop into the catch below and every other slider on the page stays dead.
+        try {
+          new Slider(slider, swiper, swiperModules);
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Failed to initialize slider:', error, slider);
+        }
       });
     })
     .catch((error) => {

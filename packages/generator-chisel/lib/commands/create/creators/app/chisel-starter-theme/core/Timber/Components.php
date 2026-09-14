@@ -70,12 +70,12 @@ final class Components {
 					continue;
 				}
 
-				$menu_name         = str_replace( 'chisel_', '', $menu );
-				$menus[$menu_name] = has_nav_menu( $menu ) ? Timber::get_menu( $menu ) : '';
+				$menu_name               = str_replace( 'chisel_', '', $menu );
+				self::$menus[$menu_name] = has_nav_menu( $menu ) ? Timber::get_menu( $menu ) : '';
 			}
 		}
 
-		return $menus;
+		return self::$menus;
 	}
 
 	/**
@@ -201,9 +201,11 @@ final class Components {
 		} elseif ( is_home() ) {
 			$posts_page_id = (int) get_option( 'page_for_posts' );
 
-			if ( $posts_page_id ) {
-				$title_text = get_the_title( $posts_page_id );
-			}
+			// A "latest posts" front page has no posts page, so fall back rather than
+			// render the blog index with no h1 at all.
+			$title_text = $posts_page_id
+				? get_the_title( $posts_page_id )
+				: ( get_bloginfo( 'name' ) ?: __( 'Blog', 'chisel' ) );
 		} elseif ( is_author() ) {
 			$author     = Timber::get_user( get_queried_object_id() );
 			$title_text = __( 'Author: ', 'chisel' ) . $author->name;
@@ -245,8 +247,9 @@ final class Components {
 	 * @return string
 	 */
 	public static function get_icon( array $args ): string {
-		$icon_slug = sanitize_title( $args['name'] );
-		$icon_key  = '';
+		$icon_slug    = sanitize_title( $args['name'] );
+		$args['name'] = $icon_slug;
+		$icon_key     = '';
 
 		foreach ( $args as $key => $value ) {
 			if ( is_bool( $value ) ) {

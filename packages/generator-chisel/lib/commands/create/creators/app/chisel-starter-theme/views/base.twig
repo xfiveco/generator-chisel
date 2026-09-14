@@ -3,7 +3,6 @@
 <head>
   <meta charset="{{ site.charset }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="pingback" href="{{ site.pingback_url }}" />
 
   {{ function('wp_head') }}
 
@@ -16,10 +15,10 @@
 
   {{ function('wp_body_open') }}
 
-  <div class="u-sr-only u-sr-only-focusable">
-    <a href="#navigation">{{ __('Jump to Navigation', 'chisel') }}</a>
-    <a href="#main">{{ __('Jump to Main Content', 'chisel') }}</a>
-    <a href="#footer">{{ __('Jump to Footer', 'chisel') }}</a>
+  <div>
+    <a class="u-sr-only u-sr-only-focusable" href="#navigation">{{ __('Jump to Navigation', 'chisel') }}</a>
+    <a class="u-sr-only u-sr-only-focusable" href="#main">{{ __('Jump to Main Content', 'chisel') }}</a>
+    <a class="u-sr-only u-sr-only-focusable" href="#footer">{{ __('Jump to Footer', 'chisel') }}</a>
   </div>
 
   {% block header %}

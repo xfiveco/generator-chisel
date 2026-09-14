@@ -4,6 +4,11 @@
   width: 100%;
   margin: get-padding('large') auto;
   clear: both;
+
+  // Page links kept in the markup for crawlers only, alongside a "Load more" button.
+  &--crawlable {
+    display: none;
+  }
 }
 
 .c-pagination__items {

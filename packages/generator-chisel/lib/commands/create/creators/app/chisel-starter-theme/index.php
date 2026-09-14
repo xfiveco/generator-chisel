@@ -10,6 +10,7 @@
  */
 
 use Chisel\Helpers\CacheHelpers;
+use Chisel\Helpers\LoadMoreHelpers;
 use Timber\Timber;
 
 $context   = Timber::context();
@@ -19,9 +20,6 @@ if ( is_home() ) {
 	array_unshift( $templates, 'home.twig' );
 }
 
-$context['load_more'] = array(
-	'per_page'  => absint( get_option( 'posts_per_page' ) ),
-	'post_type' => 'post',
-);
+$context['load_more'] = LoadMoreHelpers::get_context();
 
 Timber::render( $templates, $context, CacheHelpers::expiry() );

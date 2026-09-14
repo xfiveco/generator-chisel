@@ -4,7 +4,6 @@
     "SVG Support": "svg-support",
     "Yoast SEO": "wordpress-seo",
     "Yoast SEO ACF": "acf-content-analysis-for-yoast-seo",
-    "xfive Aristotle - Monitor Site Errors with Sentry": "xfive-sentry-integration",
-    "xfive MCP": "https://github.com/xfiveco/xfive-mcp/archive/v2.zip"
+    "xfive Aristotle - Monitor Site Errors with Sentry": "xfive-sentry-integration"
   }
 }

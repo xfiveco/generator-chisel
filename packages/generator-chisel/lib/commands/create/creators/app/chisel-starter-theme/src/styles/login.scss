@@ -125,7 +125,6 @@ body.login {
     font-weight: 700;
     text-align: center;
     background: linear-gradient(51deg, get-color('grey-100'), rgba(255, 255, 255, 50%));
-    opacity: 0;
     transition: get-transition('normal');
 
     @include bp(medium) {
@@ -154,10 +153,6 @@ body.login {
       @include bp(medium) {
         max-width: px-rem(300);
       }
-    }
-
-    &.has-loaded {
-      opacity: 1;
     }
   }
 }

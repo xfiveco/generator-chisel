@@ -25,7 +25,7 @@
 
       {% if term.get_thumbnail() %}
         <div class="c-product-item__image">
-          {{ term.get_thumbnail() }}
+          {{ term.get_thumbnail()|raw }}
         </div>
       {% endif %}
 

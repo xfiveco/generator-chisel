@@ -56,13 +56,13 @@ input::file-selector-button {
   transition: $form-field-transition;
 
   :read-only:not(
-      :disabled,
-      label,
-      button,
-      input[type='button'],
-      input[type='submit'],
-      input[type='reset']
-    ) {
+    :disabled,
+    label,
+    button,
+    input[type='button'],
+    input[type='submit'],
+    input[type='reset']
+  ) {
     cursor: default;
   }
 
@@ -99,10 +99,12 @@ input[type='week'] {
   border-radius: $form-field-border-radius;
   box-shadow: $form-field-box-shadow;
 
+  // Readonly fields are still tabbable, so they must keep a focus indicator.
+  // Disabled fields cannot receive focus at all, which makes the carve-out moot.
   &:focus {
     outline: 0;
 
-    &:not([readonly], [disabled]) {
+    &:not([disabled]) {
       box-shadow: $form-field-shadow-focus;
     }
   }
@@ -208,8 +210,10 @@ input[type='color'] {
     outline: 0;
   }
 
+  // A border-colour change alone is too weak to stand in for the native outline.
   &:focus:not([disabled]) {
     border-color: $form-field-focus-border-color;
+    box-shadow: $form-field-shadow-focus;
   }
 }
 

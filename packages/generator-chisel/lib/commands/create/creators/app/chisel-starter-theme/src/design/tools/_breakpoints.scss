@@ -1,6 +1,6 @@
 @use 'sass:meta';
 @use 'sass:map';
-@use 'sass:list'; 
+@use 'sass:list';
 @use '../settings';
 
 $_breakpoints: settings.$breakpoints;

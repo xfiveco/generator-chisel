@@ -32,7 +32,6 @@ class BlocksStyles {
       {
         name: 'primary-outline',
         label: __('Primary Outlined', 'chisel'),
-        isDefault: true,
       },
       {
         name: 'secondary',
@@ -41,14 +40,6 @@ class BlocksStyles {
       {
         name: 'secondary-outline',
         label: __('Secondary Outlined', 'chisel'),
-      },
-      {
-        name: 'tertiary',
-        label: __('Tertiary', 'chisel'),
-      },
-      {
-        name: 'tertiary-outline',
-        label: __('Tertiary Outlined', 'chisel'),
       },
     ];
 

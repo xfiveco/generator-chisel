@@ -82,3 +82,19 @@ fieldset {
   min-width: 0; /* [1] */
   border: 0;
 }
+
+/**
+ * 10. Respect a reduced-motion preference.
+ *     Animations are cut to a duration the browser treats as instant rather than
+ *     to 0, so `animationend` / `transitionend` handlers still fire.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

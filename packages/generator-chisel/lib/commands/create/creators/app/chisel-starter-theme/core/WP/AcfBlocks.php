@@ -125,10 +125,16 @@ final class AcfBlocks {
 
 			foreach ( $location as $group ) {
 				foreach ( (array) $group as $rules ) {
-					if ( sanitize_text_field( $rules['param'] ) === 'block' && sanitize_text_field( $rules['operator'] ) === '==' ) {
-						$block_name = explode( '/', sanitize_text_field( $rules['value'] ) )[1];
+					// The location rules come straight off the request, so a malformed
+					// entry must not warn (or hand an array to sanitize_text_field).
+					if ( ! is_array( $rules ) || ! isset( $rules['param'], $rules['operator'], $rules['value'] ) ) {
+						continue;
+					}
 
-						if ( ! $block_name ) {
+					if ( sanitize_text_field( $rules['param'] ) === 'block' && sanitize_text_field( $rules['operator'] ) === '==' ) {
+						$block_name = explode( '/', sanitize_text_field( $rules['value'] ) )[1] ?? '';
+
+						if ( ! $block_name || ! in_array( $block_name, (array) $this->blocks, true ) ) {
 							return $path;
 						}
 
@@ -156,16 +162,15 @@ final class AcfBlocks {
 
 		if ( ! empty( $blocks ) ) {
 			$blocks_path = $this->register_blocks_factory->get_blocks_path();
-			$blocks_url  = $this->register_blocks_factory->get_blocks_url();
 
 			foreach ( $blocks as $block_name ) {
 				if ( ! in_array( $block_name, $blocks_used_on_page, true ) ) {
 					wp_dequeue_style( 'block-acf-' . $block_name . '-style' );
 				} else {
-					$block_critical_css = $blocks_path . '/' . $block_name . '/script.css';
+					$block_critical_css = $blocks_path . '/' . $block_name . '/style-script.css';
 
 					if ( is_file( $block_critical_css ) ) {
-						$css = BlocksHelpers::get_block_inline_css( $blocks_url, $block_name );
+						$css = BlocksHelpers::get_block_inline_css( $blocks_path, $block_name, 'style-script.css' );
 
 						if ( $css ) {
 							$add = wp_add_inline_style( AssetsHelpers::get_final_handle( 'main' ), $css );

@@ -276,6 +276,14 @@
             },
             {
               "fontFamily": "Roboto",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/roboto-regular.woff2"]
+            },
+            {
+              "fontFamily": "Roboto",
               "fontWeight": "700",
               "fontStyle": "normal",
               "fontStretch": "normal",
@@ -289,6 +297,14 @@
           "slug": "headings",
           "name": "Manrope",
           "fontFace": [
+            {
+              "fontFamily": "Manrope",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/manrope-regular.woff2"]
+            },
             {
               "fontFamily": "Manrope",
               "fontWeight": "700",

@@ -1,5 +1,5 @@
 <form role="search" method="get" class="c-search-form" action="{{ site.url }}">
-	<label class="screen-reader-text" for="search-form-field">{{ label ?: __('Search for:', 'chisel') }}</label>
+	<label class="u-sr-only" for="search-form-field">{{ label ?: __('Search for:', 'chisel') }}</label>
 	<input type="text" id="search-form-field" class="c-search-form__field" placeholder="{{ placeholder ?: __('Search...', 'chisel') }}" value="{{ search_query }}" name="s">
 	<button type="submit" value="Search" class="c-search-form__btn {{ bem('c-btn', 'primary', 'small') }} has-icon has-icon-search has-icon-only" aria-label="{{ __('Search', 'chisel') }}"></button>
 	{% if post_type %}

@@ -5,7 +5,7 @@
     {% block footer_columns %}
       {% for column in footer_sidebars.columns %}
         <div class="o-layout__item {{ footer_sidebars.column_class }} c-footer__column">
-          {{ column }}
+          {{ column|raw }}
         </div>
       {% endfor %}
     {% endblock %}
@@ -15,7 +15,7 @@
     {% if copyright is not empty %}
       <div class="c-footer__copyright">
         <div class="o-wrapper__inner">
-          {{ copyright.content }}
+          {{ copyright.content|raw }}
         </div>
       </div>
     {% endif %}

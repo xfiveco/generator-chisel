@@ -11,10 +11,10 @@
   }
 
   .swiper-slide {
-    width: 100%;
     flex: 1 0 100%;
+    width: 100%;
 
-    &:nth-child(n+2) {
+    &:nth-child(n + 2) {
       display: none;
     }
   }

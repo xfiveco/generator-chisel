@@ -3,7 +3,7 @@
     <span class="u-sr-only">{{ site.title }}</span>
     {% if logo %}
       {% block logo_image %}
-        {{ logo }}
+        {{ logo|raw }}
       {% endblock %}
     {% else %}
       {% block logo_text %}

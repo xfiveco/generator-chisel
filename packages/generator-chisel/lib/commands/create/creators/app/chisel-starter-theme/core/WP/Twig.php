@@ -32,6 +32,22 @@ final class Twig {
 	 */
 	public function filter_hooks(): void {
 		add_filter( 'timber/twig', array( $this, 'extend_twig' ) );
+		add_filter( 'timber/twig/environment/options', array( $this, 'set_environment_options' ) );
+	}
+
+	/**
+	 * Set Twig environment options.
+	 *
+	 * Enables HTML autoescaping so templates are safe-by-default; intentional
+	 * HTML output must be marked with the `|raw` filter.
+	 *
+	 * @param array $options The Twig environment options.
+	 * @return array
+	 */
+	public function set_environment_options( array $options ): array {
+		$options['autoescape'] = 'html';
+
+		return $options;
 	}
 
 	/**
@@ -59,11 +75,11 @@ final class Twig {
 		$this->register_function( $twig, 'timber_set_product', array( $this, 'timber_set_product' ) );
 		$this->register_function( $twig, 'post_classes', array( $this, 'post_classes' ) );
 		$this->register_function( $twig, 'slider_prepare_params', array( $this, 'slider_prepare_params' ) );
-		$this->register_function( $twig, 'get_responsive_image', array( $this, 'get_responsive_image' ) );
-		$this->register_function( $twig, 'comments_template', array( $this, 'comments_template' ) );
+		$this->register_function( $twig, 'get_responsive_image', array( $this, 'get_responsive_image' ), array( 'is_safe' => array( 'html' ) ) );
+		$this->register_function( $twig, 'comments_template', array( $this, 'comments_template' ), array( 'is_safe' => array( 'html' ) ) );
 		$this->register_function( $twig, 'bem', array( $this, 'bem' ) );
-		$this->register_function( $twig, 'breadcrumbs', array( $this, 'breadcrumbs' ) );
-		$this->register_function( $twig, 'get_icon', array( $this, 'get_icon' ) );
+		$this->register_function( $twig, 'breadcrumbs', array( $this, 'breadcrumbs' ), array( 'is_safe' => array( 'html' ) ) );
+		$this->register_function( $twig, 'get_icon', array( $this, 'get_icon' ), array( 'is_safe' => array( 'html' ) ) );
 		$this->register_function( $twig, 'should_use_icons_module', array( $this, 'should_use_icons_module' ) );
 
 		do_action( 'chisel_twig_register_functions', $twig, $this );
@@ -101,11 +117,12 @@ final class Twig {
 	 * @param   \Twig\Environment $twig The Twig environment.
 	 * @param   string            $name The name of the function.
 	 * @param   callable          $callback The callback function.
+	 * @param   array             $options the twig options.
 	 *
 	 * @return \Twig\Environment
 	 */
-	public function register_function( \Twig\Environment $twig, string $name, callable $callback ): \Twig\Environment {
-		$twig->addFunction( new \Twig\TwigFunction( $name, $callback ) );
+	public function register_function( \Twig\Environment $twig, string $name, callable $callback, array $options = array() ): \Twig\Environment {
+		$twig->addFunction( new \Twig\TwigFunction( $name, $callback, $options ) );
 
 		return $twig;
 	}

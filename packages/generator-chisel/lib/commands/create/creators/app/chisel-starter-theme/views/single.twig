@@ -16,14 +16,14 @@
             {% block post_meta %}
               <div class="c-post__meta">
                 <span class="c-post__author"><a href="{{ post.author.link }}">{{ __('By', 'chisel') }} {{ post.author.name }}</a></span> •
-                <time datetime="{{ post.date }}">{{ post.date }}</time></span>
+                <time datetime="{{ post.date('c') }}">{{ post.date }}</time>
               </div>
             {% endblock %}
 
             {% block post_image %}
               {% if post.get_thumbnail('large') %}
                 <div class="c-post__image">
-                  {{ post.get_thumbnail() }}
+                  {{ post.get_thumbnail()|raw }}
                 </div>
               {% endif %}
             {% endblock %}
@@ -51,7 +51,7 @@
             {% endblock %}
 
             {% block post_content %}
-              {{ post.content }}
+              {{ post.content|raw }}
             {% endblock %}
 
             {% block post_comments %}
