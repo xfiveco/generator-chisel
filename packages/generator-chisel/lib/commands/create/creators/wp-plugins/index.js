@@ -6,7 +6,9 @@ module.exports = (api) => {
 
   api.schedule(api.PRIORITIES.PROMPT, async () => {
     console.log('Advanced Custom Fields Pro is installed by default.');
-    console.log('X5 Plato - Reliable Sync Watcher for ACF is installed by default.');
+    console.log(
+      'X5 Plato - Reliable Sync Watcher for ACF is installed by default.',
+    );
 
     await api.prompt([
       {
@@ -35,5 +37,16 @@ module.exports = (api) => {
       ],
       { cwd },
     );
+  });
+
+  api.schedule(api.PRIORITIES.END_MESSAGE, async () => {
+    const { plugins: selectedPlugins } = api.creator.data.wpPlugins;
+    if (!selectedPlugins.includes('xfive MCP')) return;
+
+    console.log(`
+ℹ️  Xfive MCP plugin was installed.
+   See the plugin's README for coding-agent configuration details:
+   wp-content/plugins/xfive-mcp/README.md
+`);
   });
 };

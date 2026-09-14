@@ -13,6 +13,7 @@ module.exports = {
   // UPDATE_CONFIG: 900,
 
   INSTALL_DEPENDENCIES: 1000,
+  AI_TOOLKIT: 1050,
 
   // we need chisel-scripts and plugins installed to run wp commands
   // we separate different steps as future proofing
