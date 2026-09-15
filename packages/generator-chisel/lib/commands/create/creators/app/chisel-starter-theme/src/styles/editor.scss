@@ -1,4 +1,8 @@
 /* Gutenberg editor custom styles */
 
+// Loaded into the editor canvas iframe and the admin page around it (see
+// Assets::enqueue_editor_styles), so both canvas rules (.editor-styles-wrapper,
+// .wp-block-*) and sidebar/UI rules (.block-editor-block-inspector) belong here.
+
 @use 'wp-editor';
 @use 'blocks';

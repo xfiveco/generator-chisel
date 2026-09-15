@@ -3,7 +3,7 @@ import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment, useEffect } from '@wordpress/element';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
-import { InspectorControls } from '@wordpress/blockEditor';
+import { InspectorControls } from '@wordpress/block-editor';
 import Utils from '../utils';
 
 const blockName = 'core/button';

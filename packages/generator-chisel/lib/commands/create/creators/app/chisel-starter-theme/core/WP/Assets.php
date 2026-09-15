@@ -54,6 +54,8 @@ final class Assets {
 	/**
 	 * Editor styles to be registered and enqueued.
 	 *
+	 * Enqueued on `enqueue_block_assets` (admin only), so they reach the iframed editor canvas - `enqueue_block_editor_assets` only reaches the admin page around it. WordPress loads them on the admin page as well, so sidebar/UI rules still work from here.
+	 *
 	 * @var array
 	 */
 	private array $editor_styles = array();
@@ -216,6 +218,7 @@ final class Assets {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ), 99 ); // Higher priority, overwrite plugins if needed.
 		add_action( 'wp_footer', array( $this, 'enqueue_frontend_assets_in_footer' ), 11 ); // Higher priority, overwrite plugins if needed.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ), 11 );
+		add_action( 'enqueue_block_assets', array( $this, 'enqueue_editor_styles' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ) );
 		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_login_page_assets' ), 99 );
 
@@ -451,11 +454,17 @@ final class Assets {
 	}
 
 	/**
-	 * Enqueue editor scripts.
+	 * Enqueue editor styles.
+	 *
+	 * Runs on `enqueue_block_assets`, which also fires on the front end and while
+	 * WordPress collects the assets for the editor canvas iframe - hence the admin guard.
 	 */
-	public function enqueue_editor_scripts(): void {
-		$this->editor_styles  = apply_filters( 'chisel_pre_enqueue_editor_styles', $this->editor_styles );
-		$this->editor_scripts = apply_filters( 'chisel_pre_enqueue_editor_scripts', $this->editor_scripts );
+	public function enqueue_editor_styles(): void {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$this->editor_styles = apply_filters( 'chisel_pre_enqueue_editor_styles', $this->editor_styles );
 
 		if ( $this->editor_styles ) {
 			foreach ( $this->editor_styles as $handle => $args ) {
@@ -470,6 +479,13 @@ final class Assets {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Enqueue editor scripts.
+	 */
+	public function enqueue_editor_scripts(): void {
+		$this->editor_scripts = apply_filters( 'chisel_pre_enqueue_editor_scripts', $this->editor_scripts );
 
 		if ( $this->editor_scripts ) {
 			foreach ( $this->editor_scripts as $handle => $args ) {

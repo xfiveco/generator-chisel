@@ -1,11 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InnerBlocks } from '@wordpress/block-editor';
+import { RichText, InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { cleanForSlug } from '@wordpress/url';
-import { Fragment, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import BlockEditSelector from '../../scripts/editor/components/BlockEditSelector.js';
 
 registerBlockType('chisel/accordion-item', {
+  apiVersion: 3,
   title: __('Accordion Item', 'chisel'),
   icon: 'admin-comments',
   category: 'chisel-blocks',
@@ -25,13 +26,14 @@ registerBlockType('chisel/accordion-item', {
     const { attributes, setAttributes, clientId, context } = props;
     const { title } = attributes;
     const itemId = cleanForSlug(title);
+    const blockProps = useBlockProps();
 
     useEffect(() => {
       setAttributes({ titleTag: context.chiselAccordionTitleTag });
     }, [context.chiselAccordionTitleTag]);
 
     return (
-      <Fragment>
+      <div {...blockProps}>
         <BlockEditSelector
           clientId={clientId}
           blockName={__('Accordion Item', 'chisel')}
@@ -43,7 +45,7 @@ registerBlockType('chisel/accordion-item', {
               tagName={context.chiselAccordionTitleTag}
               className="b-accordion__item-title"
               placeholder={__('Title', 'chisel')}
-              indentifier="title"
+              identifier="title"
               allowedFormats={['core/bold', 'core/italic']}
               value={title}
               onChange={(title) => setAttributes({ title })}
@@ -53,7 +55,7 @@ registerBlockType('chisel/accordion-item', {
             <InnerBlocks />
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   },
   save: ({ attributes }) => {
@@ -61,7 +63,9 @@ registerBlockType('chisel/accordion-item', {
     const itemId = cleanForSlug(title);
 
     return (
-      <details className="b-accordion__item js-accordion-item" id={itemId}>
+      <details
+        {...useBlockProps.save({ className: 'b-accordion__item js-accordion-item', id: itemId })}
+      >
         <summary className="b-accordion__item-header js-accordion-header">
           <RichText.Content tagName={titleTag} className="b-accordion__item-title" value={title} />
 
