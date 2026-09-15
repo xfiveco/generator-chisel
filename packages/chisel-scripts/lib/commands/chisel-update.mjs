@@ -55,12 +55,12 @@ function request(url, options = {}) {
   });
 }
 
-async function fetchText(url) {
+export async function fetchText(url) {
   const buffer = await request(url);
   return buffer.toString();
 }
 
-async function fetchJson(url) {
+export async function fetchJson(url) {
   const buffer = await request(url);
   return JSON.parse(buffer.toString());
 }
@@ -69,12 +69,12 @@ async function fetchJson(url) {
 // Version Utilities
 // ============================================================================
 
-function extractVersion(css) {
+export function extractVersion(css) {
   const match = css.match(VERSION_REGEX);
   return match ? match[2] : null;
 }
 
-function readLocalVersion(filePath) {
+export function readLocalVersion(filePath) {
   if (!fs.existsSync(filePath)) return null;
   return extractVersion(fs.readFileSync(filePath, 'utf8'));
 }
@@ -96,7 +96,7 @@ function updateLocalVersion(filePath, newVersion) {
   return true;
 }
 
-function compareVersions(a, b) {
+export function compareVersions(a, b) {
   const pa = a.split('.').map(Number);
   const pb = b.split('.').map(Number);
 

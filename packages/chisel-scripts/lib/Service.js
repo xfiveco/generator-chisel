@@ -28,6 +28,8 @@ module.exports = class Service {
     const builtInPlugins = [
       'wp-scripts.mjs', // start, build
       'chisel-update.mjs', // check-chisel-update, chisel-update
+      'ai-toolkit.mjs', // check-ai-toolkit-update, update-ai-toolkit
+      'mcp-plugin.mjs', // check-mcp-update, update-mcp
       'husky-init.mjs', // husky-init
       'composer',
       'wp',
