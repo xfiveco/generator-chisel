@@ -2,6 +2,16 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.6.0 (2026-09-22)
+
+- refactor theme layout: rail-based alignment, spacer adjustments ([32c4b91](https://github.com/xfiveco/generator-chisel/commit/32c4b91))
+- update theme version ([97e508d](https://github.com/xfiveco/generator-chisel/commit/97e508d))
+- feat: check/update commands for AI toolkit and MCP plugin ([743d441](https://github.com/xfiveco/generator-chisel/commit/743d441))
+- feat: print site url at end of installation ([247f8a3](https://github.com/xfiveco/generator-chisel/commit/247f8a3))
+- feat: xfive MCP plugin and chisel-ai-toolkit as optional installs ([9ab25b1](https://github.com/xfiveco/generator-chisel/commit/9ab25b1))
+- fix(editor): WordPress 7.1 iframed editor compatibility ([0de6a40](https://github.com/xfiveco/generator-chisel/commit/0de6a40))
+- refactor: scoped load-more with filters, remove ai-ruleset/mcp-plugin integration, bump timber to 2. ([db67a34](https://github.com/xfiveco/generator-chisel/commit/db67a34))
+
 ## <small>2.5.5 (2026-07-10)</small>
 
 - fix: adjust API call for AI ruleset download to avoid rate limits ([9705af0](https://github.com/xfiveco/generator-chisel/commit/9705af0))

@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.5.0 (2026-09-22)
+
+- feat: check/update commands for AI toolkit and MCP plugin ([743d441](https://github.com/xfiveco/generator-chisel/commit/743d441))
+- refactor: scoped load-more with filters, remove ai-ruleset/mcp-plugin integration, bump timber to 2. ([db67a34](https://github.com/xfiveco/generator-chisel/commit/db67a34))
+
 ## <small>2.4.4 (2026-07-10)</small>
 
 - fix: adjust API call for AI ruleset download to avoid rate limits ([9705af0](https://github.com/xfiveco/generator-chisel/commit/9705af0))
