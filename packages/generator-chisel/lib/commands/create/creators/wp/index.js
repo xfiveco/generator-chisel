@@ -188,4 +188,8 @@ module.exports = (api) => {
     await wp(['option', 'update', 'comment_moderation', '1']);
     await wp(['option', 'update', 'comment_registration', '1']);
   });
+
+  api.schedule(api.PRIORITIES.END_MESSAGE, async () => {
+    console.log(`\nYour local url is: ${api.creator.data.wp.url}\n`);
+  });
 };
