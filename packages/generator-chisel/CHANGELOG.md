@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.6.1 (2026-10-05)</small>
+
+- minor fixes ([c8b2d22](https://github.com/xfiveco/generator-chisel/commit/c8b2d22))
+
 ## 2.6.0 (2026-09-22)
 
 - refactor theme layout: rail-based alignment, spacer adjustments ([32c4b91](https://github.com/xfiveco/generator-chisel/commit/32c4b91))
