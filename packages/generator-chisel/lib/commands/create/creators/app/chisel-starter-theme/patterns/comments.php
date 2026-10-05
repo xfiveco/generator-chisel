@@ -14,8 +14,8 @@
 
 ?>
 
-<!-- wp:comments -->
-<div class="wp-block-comments"><!-- wp:comments-title {"level":3} /-->
+<!-- wp:comments {"className":"p-comments"} -->
+<div class="wp-block-comments p-comments"><!-- wp:comments-title {"level":3} /-->
 
 <!-- wp:comment-template -->
 <!-- wp:columns -->

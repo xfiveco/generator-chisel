@@ -4,6 +4,7 @@
 body.login {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
 
   &::after {
@@ -27,9 +28,10 @@ body.login {
     z-index: 2;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     align-items: center;
     justify-content: flex-start;
-    width: 100%;
+    width: auto;
     padding: get-padding('normal') 5%;
     margin: 0;
     overflow: auto;
@@ -64,7 +66,7 @@ body.login {
       box-shadow: get-box-shadow('3');
 
       input[type='submit'],
-      .button {
+      .button:not(.wp-hide-pw) {
         @include button;
         @include button-secondary;
 
@@ -72,6 +74,11 @@ body.login {
         &:focus {
           @include button-secondary-hover;
         }
+      }
+
+      // The show-password eye keeps WordPress's plain icon button, in the theme's colour.
+      .wp-hide-pw {
+        color: get-color('foreground');
       }
 
       input {
@@ -112,7 +119,51 @@ body.login {
     border-color: get-color('error');
   }
 
-  h1 {
+  // A language switcher (WordPress's own or WPML's) follows #login. The page is a column, so the
+  // switcher sits below the login box, in front of the gradient; from medium up it stays in the
+  // login half, on the white that ends the login box's background.
+  .language-switcher,
+  .wpml-login-ls {
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    padding-right: get-padding('normal');
+    padding-left: get-padding('normal');
+
+    @include bp(medium) {
+      width: 50%;
+      margin: 0;
+      background-color: get-color('white');
+    }
+
+    // The icon, the select and the button in a centred row, wrapping on phones.
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: get-gap('tiny');
+      align-items: center;
+      justify-content: center;
+    }
+
+    // WordPress's tall select line height on top of the theme's padding; as tall as the login fields.
+    select {
+      line-height: normal;
+    }
+
+    // The Change button, like the login form's button.
+    input[type='submit'] {
+      @include button;
+      @include button-secondary;
+
+      &:hover,
+      &:focus {
+        @include button-secondary-hover;
+      }
+    }
+  }
+
+  // The logo. WordPress's screen-reader "Log In" heading is an h1 too, and keeps its own styles.
+  h1:not(.screen-reader-text) {
     position: relative;
     z-index: 3;
     display: flex;
@@ -155,4 +206,242 @@ body.login {
       }
     }
   }
+}
+
+// Staff sign-in through Entra ID (DemoHandshake.php, entra-sign-in.js). The panel stands in for the
+// password form until the demo's toggle brings the form back.
+body.login.has-entra-sign-in {
+  &:not(.is-password-login) {
+    #loginform,
+    #nav {
+      display: none;
+    }
+  }
+
+  &.is-password-login .c-entra-sign-in {
+    display: none;
+  }
+}
+
+.c-entra-sign-in,
+.c-entra-no-access {
+  padding: get-padding('large');
+  background-color: get-color('white');
+  box-shadow: get-box-shadow('3');
+}
+
+.c-entra-sign-in__title,
+.c-entra-no-access__title {
+  margin: 0 0 get-margin('tiny');
+  font-size: get-font-size('medium');
+  font-weight: 700;
+}
+
+.c-entra-sign-in__text,
+.c-entra-no-access__text {
+  margin: 0 0 get-margin('tiny');
+  font-size: get-font-size('small');
+}
+
+.c-entra-sign-in__button {
+  @include button;
+  @include button-secondary;
+
+  justify-content: center;
+  width: 100%;
+  margin: get-margin('small') 0;
+  font-family: inherit;
+
+  &:hover,
+  &:focus {
+    @include button-secondary-hover;
+  }
+}
+
+.c-entra-sign-in__note,
+.c-entra-no-access__note {
+  padding-top: get-padding('small');
+  margin: 0;
+  font-size: get-font-size('small');
+  color: get-color('grey-900');
+  border-top: get-border-width('tiny') solid get-color('grey-300');
+}
+
+.c-entra-no-access__note + .c-entra-no-access__note {
+  padding-top: 0;
+  margin-top: get-margin('tiny');
+  border-top: 0;
+}
+
+.c-entra-no-access__sites {
+  padding-left: get-padding('normal');
+  margin: 0 0 get-margin('small');
+  font-weight: 700;
+
+  a {
+    color: get-color('primary');
+  }
+}
+
+// The demo-only switch in the top-left corner.
+.c-entra-toggle {
+  position: fixed;
+  top: get-padding('small');
+  left: get-padding('small');
+  z-index: 4;
+  display: inline-flex;
+  gap: get-gap('tiny');
+  align-items: center;
+  padding: get-padding('tiny');
+  font-family: inherit;
+  font-size: get-font-size('tiny');
+  color: get-color('grey-900');
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  opacity: 0.6;
+  transition: get-transition('normal');
+
+  &:hover,
+  &:focus-visible,
+  &[aria-pressed='true'] {
+    opacity: 1;
+  }
+}
+
+.c-entra-toggle__switch {
+  position: relative;
+  flex-shrink: 0;
+  width: px-rem(28);
+  height: px-rem(16);
+  background-color: get-color('grey-300');
+  border-radius: get-border-radius('full');
+  transition: get-transition('normal');
+
+  &::after {
+    position: absolute;
+    top: px-rem(2);
+    left: px-rem(2);
+    width: px-rem(12);
+    height: px-rem(12);
+    content: '';
+    background-color: get-color('white');
+    border-radius: get-border-radius('full');
+    transition: get-transition('normal');
+  }
+
+  [aria-pressed='true'] > & {
+    background-color: get-color('primary');
+
+    &::after {
+      transform: translateX(px-rem(12));
+    }
+  }
+}
+
+// The picker and the pause, in the look of the HubSpot save's pause (woo/_account.scss), which the
+// login screen doesn't load. The reset takes the margin that centres a modal dialog.
+.c-entra-dialog {
+  box-sizing: border-box;
+  width: min(calc(100% - #{get-padding('normal')} * 2), 26em);
+  padding: get-padding('normal');
+  margin: auto;
+  border: 0;
+  outline: 0;
+  box-shadow: get-box-shadow('3');
+
+  &::backdrop {
+    background-color: rgba-color('foreground', 50%);
+  }
+}
+
+.c-entra-dialog--pause {
+  text-align: center;
+}
+
+.c-entra-dialog__loader {
+  display: inline-block;
+  font-size: px-rem(40);
+  color: get-color('primary');
+
+  &::before {
+    @include icon-svg('loader', false, true);
+  }
+}
+
+.c-entra-dialog__title {
+  margin: 0 0 get-margin('tiny');
+  font-size: get-font-size('medium');
+  font-weight: 700;
+}
+
+.c-entra-dialog__text {
+  margin: 0;
+  font-size: get-font-size('small');
+}
+
+.c-entra-dialog__people {
+  display: grid;
+  gap: get-gap('tiny');
+  padding: 0;
+  margin: get-margin('small') 0;
+  list-style: none;
+}
+
+// The picker's buttons sit in a form, so the theme's form button styles (elements/form) would make
+// them primary buttons; one class deeper wins over them. So does WordPress's own form box.
+.login .c-entra-dialog__form {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.c-entra-dialog .c-entra-person {
+  box-sizing: border-box;
+  display: grid;
+  gap: px-rem(2);
+  justify-items: start;
+  width: 100%;
+  padding: get-padding('small');
+  margin: 0;
+  font-family: inherit;
+  font-weight: 400;
+  color: get-color('foreground');
+  text-align: left;
+  cursor: pointer;
+  background-color: get-color('white');
+  border: get-border-width('tiny') solid get-color('grey-300');
+  transition: get-transition('normal');
+
+  &:hover,
+  &:focus-visible {
+    background-color: get-color('grey-100');
+    border-color: get-color('primary');
+  }
+}
+
+.c-entra-person__name {
+  font-size: get-font-size('normal');
+  font-weight: 700;
+}
+
+.c-entra-person__meta {
+  font-size: get-font-size('small');
+  color: get-color('grey-900');
+}
+
+.c-entra-dialog .c-entra-dialog__cancel {
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: get-font-size('small');
+  font-weight: 400;
+  line-height: inherit;
+  color: get-color('foreground');
+  text-decoration: underline;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
 }
