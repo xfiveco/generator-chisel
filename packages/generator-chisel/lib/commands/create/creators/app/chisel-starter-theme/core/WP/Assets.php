@@ -606,20 +606,9 @@ final class Assets {
 			return $tag;
 		}
 
-		$styles_handles = apply_filters(
-			'chisel_preload_styles',
-			array(
-				'wp-block-library',
-			)
-		);
+		$styles_handles = apply_filters( 'chisel_preload_styles', array() );
 
-		$styles_handles_start_with = apply_filters(
-			'chisel_preload_styles_start_with',
-			array(
-				'gform_',
-				'block',
-			)
-		);
+		$styles_handles_start_with = apply_filters( 'chisel_preload_styles_start_with', array() );
 
 		if ( $styles_handles ) {
 			foreach ( $styles_handles as $style_handle ) {

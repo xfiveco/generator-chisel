@@ -346,7 +346,7 @@ final class Blocks {
 	 * @return bool
 	 */
 	public function should_load_separate_core_block_assets( bool $load ): bool {
-		$load = apply_filters( 'chisel_load_separate_core_block_assets', false );
+		$load = apply_filters( 'chisel_load_separate_core_block_assets', true );
 
 		return $load;
 	}
