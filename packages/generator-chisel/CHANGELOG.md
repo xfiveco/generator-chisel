@@ -2,6 +2,11 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.6.2 (2026-10-13)</small>
+
+- minor optimization, flash of unstyled content fixes ([65bf3f4](https://github.com/xfiveco/generator-chisel/commit/65bf3f4))
+- update theme version ([3eb1428](https://github.com/xfiveco/generator-chisel/commit/3eb1428))
+
 ## <small>2.6.1 (2026-10-05)</small>
 
 - minor fixes ([c8b2d22](https://github.com/xfiveco/generator-chisel/commit/c8b2d22))
