@@ -98,9 +98,12 @@ function adjustWebpackConfig(baseConfig, directory) {
           port: Number(process.env.CHISEL_PORT) + 1,
           client: {
             ...devSeverClient,
-            webSocketURL: new URL(getUrl())
-              .toString()
-              .replace(process.env.CHISEL_PORT, Number(process.env.CHISEL_PORT) + 1),
+            webSocketURL: (() => {
+              const url = new URL(getUrl());
+              url.port = Number(process.env.CHISEL_PORT) + 1;
+              url.pathname = '/ws';
+              return url.toString();
+            })(),
           },
         }),
         setupMiddlewares: (middlewares, devServer) => {
