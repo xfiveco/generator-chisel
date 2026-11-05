@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## <small>2.6.3 (2026-11-05)</small>
+
+- Disable auto updates except minor core, add joining guide to README template ([d4c786e](https://github.com/xfiveco/generator-chisel/commit/d4c786e))
+
 ## <small>2.6.2 (2026-10-13)</small>
 
 - minor optimization, flash of unstyled content fixes ([65bf3f4](https://github.com/xfiveco/generator-chisel/commit/65bf3f4))
