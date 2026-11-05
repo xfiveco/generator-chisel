@@ -63,6 +63,12 @@ final class Theme {
 
 		// Disable legacy support for XML-RPC.
 		add_filter( 'xmlrpc_enabled', '__return_false' );
+
+		// Disable auto updates. Leave only minor core updates, e.g. security fixes.
+		add_filter( 'allow_major_auto_core_updates', '__return_false' );
+		add_filter( 'allow_minor_auto_core_updates', '__return_true' );
+		add_filter( 'auto_update_plugin', '__return_false', 999 );
+		add_filter( 'auto_update_theme', '__return_false' );
 	}
 
 	/**
