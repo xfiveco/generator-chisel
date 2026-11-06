@@ -1,9 +1,12 @@
+import { fileURLToPath } from 'node:url';
+import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import globals from 'globals';
 import react from 'eslint-plugin-react';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default [
+  includeIgnoreFile(fileURLToPath(new URL('.gitignore', import.meta.url))),
   { ignores: ['**/dist/', '**/build/', '**/vendor/', '.claude/'] },
   { files: ['**/*.jsx'] },
 

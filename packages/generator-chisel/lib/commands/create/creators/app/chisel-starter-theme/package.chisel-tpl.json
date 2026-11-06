@@ -42,6 +42,7 @@
     "@wordpress/interactivity": "^8.1.0"
   },
   "devDependencies": {
+    "@eslint/compat": "^2.1.1",
     "@eslint/js": "^10.0.1",
     "@wordpress/scripts": "^37.1.0",
     "chisel-scripts": "*",

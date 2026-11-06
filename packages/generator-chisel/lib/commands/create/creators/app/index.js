@@ -89,8 +89,6 @@ module.exports = async (api) => {
 
       modifyDependencies(body.dependencies);
       modifyDependencies(body.devDependencies);
-
-      return `${JSON.stringify(body, null, 2)}\n`;
     });
   });
 

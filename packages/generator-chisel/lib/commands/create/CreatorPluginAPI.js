@@ -98,7 +98,7 @@ module.exports = class CreatorPluginAPI {
       modified = sortPackage(modified);
       modified = `${JSON.stringify(modified, null, 2)}\n`;
     } else if (isJson && typeof modified === 'object') {
-      modified = JSON.stringify(modified);
+      modified = `${JSON.stringify(modified, null, 2)}\n`;
     }
 
     return fs.writeFile(file, modified);

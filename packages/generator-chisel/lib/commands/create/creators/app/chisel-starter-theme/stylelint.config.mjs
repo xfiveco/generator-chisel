@@ -21,6 +21,7 @@ const stylelintConfig = {
     'scss/dollar-variable-pattern': null,
     'scss/at-extend-no-missing-placeholder': null,
     'no-descending-specificity': null,
+    'no-duplicate-selectors': true,
   },
 };
 
