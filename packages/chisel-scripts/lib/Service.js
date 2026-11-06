@@ -34,8 +34,6 @@ module.exports = class Service {
       'composer',
       'wp',
       'wp-config',
-      'add-page',
-      'create-block',
     ].map((id) => `./commands/${id}`);
 
     const plugins = [];

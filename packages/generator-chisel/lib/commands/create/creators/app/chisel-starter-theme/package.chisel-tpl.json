@@ -15,8 +15,6 @@
     "dev": "npm run --silent start",
     "build-scripts": "chisel-scripts build --experimental-modules",
     "build": "npm run build-scripts && npm run lint && npm run phpcs && npm run twigcs && npm run check-update",
-    "add-page": "chisel-scripts add-page",
-    "create-block": "chisel-scripts create-block --category=chisel-blocks --namespace=chisel",
     "wp": "chisel-scripts wp",
     "composer": "chisel-scripts composer",
     "wp-config": "chisel-scripts wp-config",
@@ -64,9 +62,31 @@
     "stylelint-prettier": "^5.0.3"
   },
   "overrides": {
+    "eslint-plugin-import": {
+      "eslint": "$eslint"
+    },
+    "eslint-plugin-jsx-a11y": {
+      "eslint": "$eslint"
+    },
     "eslint-plugin-react": {
       "eslint": "$eslint"
-    }
+    },
+    "js-yaml@5": "^5.5.0",
+    "katex": "^0.19.1",
+    "minimatch@10": "^11.0.5",
+    "npm-packlist": {
+      "glob": "^14.0.4"
+    },
+    "serialize-javascript": "^7.1.4",
+    "smol-toml": "^1.9.1",
+    "source-map-loader": "^5.0.0",
+    "tmp": "^0.2.7"
+  },
+  "allowScripts": {
+    "@parcel/watcher": false,
+    "@xfive/chisel-ai-toolkit": true,
+    "core-js": false,
+    "core-js-pure": false
   },
   "chisel": {
     "url": "http://<%= app.nameSlug %>.test/",
