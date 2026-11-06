@@ -6,7 +6,7 @@ For full documentation visit [getchisel.co](https://getchisel.co/).
 
 ## Installation
 
-Use Node.js version `24.11.1` (Minimum `20.12.2`)
+Use Node.js version `26.13.0` (Minimum `22.22.2` or `24.15.0`)
 
 Chisel is installed as a npm package using npx command: `npx generator-chisel`, which scaffolds the entire project for you including composer and node dependencies, however when you join the project and clone the repository, follow these steps to start the local development:
 

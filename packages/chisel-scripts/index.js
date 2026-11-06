@@ -165,6 +165,8 @@ function adjustWebpackConfig(baseConfig, directory) {
 
       return {
         ...preparedConfig(config, index),
+        // webpack-dev-server 6 needs named builds to tell their hot update signals apart.
+        name: config.name || (index === 0 ? 'scripts' : `modules-${index}`),
         entry: configEntry,
       }
     })
