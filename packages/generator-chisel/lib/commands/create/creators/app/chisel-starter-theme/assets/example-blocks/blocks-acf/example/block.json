@@ -8,9 +8,9 @@
   "keywords": ["example", "block"],
   "textdomain": "chisel",
   "acf": {
-      "mode": "preview",
-      "usePostMeta": false,
-      "renderCallback": "\\Chisel\\AcfBlocks::acf_block_render"
+    "mode": "preview",
+    "usePostMeta": false,
+    "renderCallback": "\\Chisel\\AcfBlocks::acf_block_render"
   },
   "styles": [
     { "name": "default", "label": "Default", "isDefault": true },

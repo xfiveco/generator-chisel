@@ -24,7 +24,7 @@ check_core_files() {
   # happens to live elsewhere in the same repo.
   HOOK_DIR=$(dirname "$0")
   THEME_ROOT=$(cd "$HOOK_DIR/.." && pwd)
-  REPO_ROOT=$(git rev-parse --show-toplevel)
+  REPO_ROOT=$(cd "$(git rev-parse --show-toplevel)" && pwd)
   # Prefix is the theme dir relative to the repo root (empty if theme IS the root)
   case "$THEME_ROOT/" in
     "$REPO_ROOT/") THEME_PREFIX="" ;;
@@ -92,3 +92,5 @@ check_core_files || exit 1
 # ADDITIONAL HOOKS
 # ============================================================================
 
+cd "$(dirname -- "$0")/.."
+npx lint-staged

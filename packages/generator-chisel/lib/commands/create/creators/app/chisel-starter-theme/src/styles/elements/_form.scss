@@ -17,14 +17,14 @@ $form-field-accent-contrast: get-color('white');
 $form-field-border-color: get-color('grey-300');
 $form-field-focus-border-color: $form-field-accent;
 $form-field-placeholder-color: get-color('grey-900');
-$form-field-shadow-focus: 0 0 0 3px hsla(256deg, 68%, 24%, 50%);
+$form-field-shadow-focus: 0 0 0 3px hsl(256deg, 68%, 24%, 50%);
 $form-field-bg-color: get-color('white');
 $form-field-bg-range-track: get-color('foreground');
-$form-field-range-shadow-focus: 0 0 0 2px hsla(9deg, 100%, 66%, 50%);
-$form-field-range-thumb-shadow-focus: 0 0 0 2px hsla(256deg, 68%, 24%, 50%);
+$form-field-range-shadow-focus: 0 0 0 2px hsl(9deg, 100%, 66%, 50%);
+$form-field-range-thumb-shadow-focus: 0 0 0 2px hsl(256deg, 68%, 24%, 50%);
 $form-field-error-color: get-color('error');
 $form-field-success-color: get-color('success');
-$form-field-error-shadow-focus: 0 0 0 3px hsla(6deg, 98%, 58%, 50%);
+$form-field-error-shadow-focus: 0 0 0 3px hsl(6deg, 98%, 58%, 50%);
 $form-textarea-width: 100%;
 $form-textarea-height: px-rem(250);
 $form-checkbox-radio-width: px-rem(18);
@@ -50,9 +50,9 @@ input::file-selector-button {
   color: inherit;
   appearance: none;
   accent-color: $form-field-accent;
+  outline: none;
   background: none;
   border: none;
-  outline: none;
   transition: $form-field-transition;
 
   :read-only:not(
@@ -143,8 +143,8 @@ input[type='radio'] {
     height: 65%;
     content: '';
     box-shadow: inset 1em 1em $form-field-accent;
-    transition: 120ms transform ease-in-out;
     transform: scale(0);
+    transition: 120ms transform ease-in-out;
   }
 
   &:checked {

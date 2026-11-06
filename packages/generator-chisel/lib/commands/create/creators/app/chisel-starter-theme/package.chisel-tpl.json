@@ -30,22 +30,41 @@
     "update-ai-toolkit": "chisel-scripts update-ai-toolkit",
     "update-mcp": "chisel-scripts update-mcp",
     "update": "npm run check-update && npm run update-chisel",
-    "prepare": "chisel-scripts husky-init || node -e \"\""
+    "prepare": "chisel-scripts husky-init || node -e \"\"",
+    "lint:script": "eslint . --fix && echo Linting scripts completed successfully",
+    "lint:style": "stylelint \"**/*.{css,scss,vue}\" --aei --fix --ignore-path .stylelintignore --ignore-path .gitignore && echo Linting styles completed successfully",
+    "lint": "npm run --silent lint:script && npm run --silent lint:style",
+    "format": "prettier --write --ignore-unknown --log-level warn \"**/*\" && echo Formatting completed successfully",
+    "format-and-lint": "npm run --silent format && npm run --silent lint"
   },
   "dependencies": {
     "swiper": "^14.4.0",
     "@wordpress/interactivity": "^8.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@wordpress/scripts": "^37.1.0",
     "chisel-scripts": "*",
     "cross-env": "^10.1.0",
-    "husky": "^9.1.7"
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.10",
+    "stylelint": "^17.16.0",
+    "stylelint-config-css-modules": "^4.6.0",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-recess-order": "^7.10.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-order": "^8.1.3",
+    "stylelint-prettier": "^5.0.3"
   },
   "overrides": {
-    "@wordpress/scripts": {
-      "eslint-config-prettier": "^9.0.0",
-      "prettier": "^3.0.0"
+    "eslint-plugin-react": {
+      "eslint": "$eslint"
     }
   },
   "chisel": {

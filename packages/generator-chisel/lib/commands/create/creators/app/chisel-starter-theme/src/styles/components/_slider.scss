@@ -37,11 +37,11 @@
     margin: 0;
     color: get-color('primary');
     appearance: none;
-    background-color: rgba(255, 255, 255, 30%);
+    background-color: rgb(255, 255, 255, 30%);
     border: none;
     opacity: 1;
-    transition: get-transition('normal');
     transform: translateY(-50%);
+    transition: get-transition('normal');
 
     svg {
       width: px-rem(24);
@@ -50,7 +50,7 @@
 
     &:hover {
       color: get-color('foreground');
-      background-color: rgba(255, 255, 255, 100%);
+      background-color: rgb(255, 255, 255, 100%);
     }
   }
 
@@ -73,13 +73,13 @@
   padding: get-padding('tiny');
   font-size: 0;
   line-height: 1;
-  background-color: rgba(255, 255, 255, 30%);
+  background-color: rgb(255, 255, 255, 30%);
   border-radius: get-border-radius('tiny');
-  transition: get-transition('normal');
   transform: translateX(-50%);
+  transition: get-transition('normal');
 
   &:hover {
-    background-color: rgba(255, 255, 255, 100%);
+    background-color: rgb(255, 255, 255, 100%);
   }
 
   .swiper-pagination-bullet {
@@ -103,13 +103,13 @@
   padding: 0;
   appearance: none;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 30%);
+  background-color: rgb(255, 255, 255, 30%);
   border: none;
   border-radius: get-border-radius('tiny');
   transition: get-transition('normal');
 
   &:hover {
-    background-color: rgba(255, 255, 255, 100%);
+    background-color: rgb(255, 255, 255, 100%);
   }
 
   // Pause glyph: two bars drawn as the left and right border of the box, with the

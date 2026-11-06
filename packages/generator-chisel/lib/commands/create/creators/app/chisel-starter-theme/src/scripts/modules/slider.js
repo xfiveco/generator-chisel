@@ -409,7 +409,6 @@ class Slider {
       // the thumbnail with no src at all. One unusable slide skips itself rather
       // than taking down the whole slider.
       if (!slideImg || !thumbnailUrl) {
-        // eslint-disable-next-line no-console
         console.warn(
           'Slider thumbnail skipped: slide needs an img and a data-thumbnail-url.',
           slide,
@@ -504,13 +503,11 @@ export default () => {
         try {
           new Slider(slider, swiper, swiperModules);
         } catch (error) {
-          // eslint-disable-next-line no-console
           console.error('Failed to initialize slider:', error, slider);
         }
       });
     })
     .catch((error) => {
-      // eslint-disable-next-line no-console
       console.error('Failed to load Swiper modules:', error);
     });
 };

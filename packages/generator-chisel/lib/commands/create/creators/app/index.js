@@ -89,6 +89,8 @@ module.exports = async (api) => {
 
       modifyDependencies(body.dependencies);
       modifyDependencies(body.devDependencies);
+
+      return `${JSON.stringify(body, null, 2)}\n`;
     });
   });
 
@@ -98,23 +100,6 @@ module.exports = async (api) => {
     await installDependencies({
       cwd: api.resolve(app.themePath),
     });
-
-    // await run(['xfive-coding-standards', '--skip-checks'], {
-    //   cwd: api.resolve(app.themePath),
-    // });
-
-    await run(
-      ['npx', '--yes', '@xfive/coding-standards@latest', '--skip-checks'],
-      { cwd: api.resolve(app.themePath) },
-    );
-
-    // Restore prepare script after coding-standards may have overwritten it
-    {
-      const themePkgPath = api.resolve(app.themePath, 'package.json');
-      const themePkg = JSON.parse(await fs.readFile(themePkgPath, 'utf8'));
-      themePkg.scripts.prepare = 'chisel-scripts husky-init || node -e ""';
-      await fs.writeFile(themePkgPath, JSON.stringify(themePkg, null, 2) + '\n');
-    }
 
     await api.modifyFile(
       '.devcontainer/devcontainer.json',
@@ -179,14 +164,21 @@ module.exports = async (api) => {
     }
   });
 
-  // formatting done during coding standards installation but we may do extra for php and twig
-  // api.schedule(api.PRIORITIES.FORMAT, async () => {
-  //   if (api.creator.cmd.skipFormatAndBuild) return;
+  api.schedule(api.PRIORITIES.FORMAT, async () => {
+    if (api.creator.cmd.skipFormatAndBuild) return;
 
-  //   // console.log('Formatting code...');
-  //   // console.log('TODO');
-  //   // await runLocalCurrent(['chisel-scripts', 'lint'], { silent: true });
-  // });
+    console.log('Formatting code...');
+    try {
+      await run(['npm', 'run', '--silent', 'format-and-lint'], {
+        cwd: api.resolve(app.themePath),
+        execaOpts: { stdio: 'inherit' },
+      });
+    } catch (error) {
+      console.log(
+        '⚠️  Formatting failed. Run "npm run format-and-lint" manually.',
+      );
+    }
+  });
 
   api.schedule(api.PRIORITIES.BUILD, async () => {
     if (api.creator.cmd.skipFormatAndBuild) return;
