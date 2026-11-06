@@ -2,6 +2,40 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.7.0: what changed and how to update
+
+### Breaking changes
+
+- Node.js 26 or newer is required. `chisel create` and `update-packages` refuse to run on older versions.
+- New projects require PHP 8.3 or newer. Existing projects keep their current PHP setting.
+- The `add-page` and `create-block` commands are removed. The AI toolkit doesn't use them.
+- Swiper 14 needs Chrome or Edge 110+, Safari 16.4+ or Firefox 110+.
+
+### What's new
+
+- New projects use `@wordpress/scripts` 37, Swiper 14 and `@wordpress/interactivity` 8.
+- New projects get their lint packages directly, including ESLint 10 and Stylelint 17, instead of through `@xfive/coding-standards`.
+- `update-packages` updates an existing project's Node version, npm and Composer packages, and GitLab pipeline.
+- Browsers now pick up new versions of lazy-loaded CSS after an update.
+- The pre-commit warning about `core/` changes now works on Windows when the theme is inside a larger repository.
+
+### Updating an existing project
+
+1. Switch to Node.js 26: `nvm install 26.13.0`, then `nvm use 26.13.0`. Everyone on the project needs to switch, because a lockfile written on an older version can make `npm ci` fail.
+2. Commit or undo any changes to `package.json`, the lockfiles, `composer.json` and `.nvmrc`. The command stops if it finds any.
+3. In the theme folder, run `npx chisel-scripts@latest update-packages`. Add `--dry-run` to see the changes first.
+4. Run `npm run update-chisel` before `npm start`. The dev server needs the new core files.
+5. Check sliders and blocks in a browser.
+6. Review the changes with `git diff`, then commit.
+
+### Check after updating
+
+- **Custom slider arrows:** Swiper now adds its own SVG arrow to each button. The command updates the default Chisel arrow styles, but a button with its own icon on `::before` shows two arrows until you hide the SVG, for example `.my-slider .swiper-button svg { display: none; }`.
+- **GitLab pipelines:** the command updates `image: node:...` lines in `.gitlab-ci.yml`. If your pipeline sets the image another way, change it by hand. Preview servers don't need a Node update, because the pipeline builds in GitLab and only copies the finished files over.
+- **PHP on servers:** before deploying a new project, check that the server runs PHP 8.3 or newer.
+- **Lint packages:** existing projects stay on ESLint 8 and Stylelint 16, and moving them is a manual job. Until then, installs show some peer dependency and deprecation warnings. They don't stop anything.
+- **Security report:** `npm audit` still reports 5 or 6 low severity issues, depending on the project. They include one in `deepmerge`, a build tool inside `@wordpress/scripts`, which has no fix yet.
+
 ## <small>2.6.3 (2026-11-05)</small>
 
 - Disable auto updates except minor core, add joining guide to README template ([d4c786e](https://github.com/xfiveco/generator-chisel/commit/d4c786e))

@@ -73,15 +73,20 @@ const fixSliderArrows = (body) => {
     );
 };
 
-const isSupportedNode = (version) => {
-  const [major, minor, patch] = version.split('.').map(Number);
+const MINIMUM_NODE_MAJOR = 26;
+const PIPELINE_FILE = '.gitlab-ci.yml';
 
-  if (major >= 26) return true;
-  if (major === 24) return minor >= 15;
-  if (major === 22) return minor > 22 || (minor === 22 && patch >= 2);
+const nodeMajor = (version) => Number(version.split('.')[0]);
 
-  return false;
-};
+// Handles images such as node:24.11.1, node:24 and node:24-alpine.
+const updatePipelineNode = (body) =>
+  body.replace(
+    /(image:\s*['"]?node:)(\d+(?:\.\d+)*)((?:-[\w.-]+)?)/g,
+    (match, before, version, suffix) =>
+      nodeMajor(version) >= MINIMUM_NODE_MAJOR
+        ? match
+        : `${before}${NODE_VERSION}${suffix}`,
+  );
 
 // '^1.2.3' gives '1.2.3'. Values with no version, such as '*' or 'file:...', give null.
 const versionOf = (range) =>
@@ -133,12 +138,33 @@ export default function updatePackages(api) {
         process.exit(1);
       };
 
-      if (!isSupportedNode(process.versions.node)) {
+      if (nodeMajor(process.versions.node) < MINIMUM_NODE_MAJOR) {
         stop(
-          `Node ${process.versions.node} is too old for these packages. Switch first, then run this again:\n\n` +
+          `Chisel needs Node ${MINIMUM_NODE_MAJOR} or newer, and this is Node ${process.versions.node}. Switch first, then run this again:\n\n` +
             `   nvm install ${NODE_VERSION}\n   nvm use ${NODE_VERSION}`,
         );
       }
+
+      let repoRootPath;
+      try {
+        const { stdout } = await run(['git', 'rev-parse', '--show-cdup'], {
+          silent: true,
+          cwd: api.resolve(),
+        });
+        repoRootPath = stdout.trim();
+      } catch {
+        stop(
+          'This project is not in a git repository, so the update could not be undone. Run `git init` and commit first.',
+        );
+      }
+
+      const pipelineFile = `${repoRootPath}${PIPELINE_FILE}`;
+      const pipelinePath = api.resolve(pipelineFile);
+      const pipelineBody = fs.existsSync(pipelinePath)
+        ? fs.readFileSync(pipelinePath, 'utf8')
+        : '';
+      const updatedPipeline = updatePipelineNode(pipelineBody);
+      const fixPipeline = updatedPipeline !== pipelineBody;
 
       const pkgPath = api.resolve('package.json');
       const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
@@ -187,22 +213,16 @@ export default function updatePackages(api) {
         'package.json',
         ...(fixHook ? [HOOK_FILE] : []),
         ...(fixedSlider ? [SLIDER_FILE] : []),
+        ...(fixPipeline ? [pipelineFile] : []),
         'package-lock.json',
         ...(hasComposer ? ['composer.json', 'composer.lock'] : []),
       ];
 
-      let dirtyFiles;
-      try {
-        const { stdout } = await run(
-          ['git', 'status', '--porcelain', '--', ...touchedFiles],
-          { silent: true, cwd: api.resolve() },
-        );
-        dirtyFiles = stdout.split(/\r?\n/).filter(Boolean);
-      } catch {
-        stop(
-          'This project is not in a git repository, so the update could not be undone. Run `git init` and commit first.',
-        );
-      }
+      const { stdout: dirtyOutput } = await run(
+        ['git', 'status', '--porcelain', '--', ...touchedFiles],
+        { silent: true, cwd: api.resolve() },
+      );
+      const dirtyFiles = dirtyOutput.split(/\r?\n/).filter(Boolean);
 
       console.log(`\nChisel package update (chisel-scripts ${ownVersion})\n`);
 
@@ -235,11 +255,15 @@ export default function updatePackages(api) {
       if (fixedSlider) {
         console.log(`  ${SLIDER_FILE}: updating the arrow styles for Swiper`);
       }
+      if (fixPipeline) {
+        console.log(`  ${PIPELINE_FILE}: Node image → ${NODE_VERSION}`);
+      }
 
       if (
         !nodeChange &&
         !hasPackageJsonChange &&
         !fixHook &&
+        !fixPipeline &&
         kept.length === 0
       ) {
         console.log('  Already on the tested versions.');
@@ -306,6 +330,10 @@ export default function updatePackages(api) {
 
       if (fixedSlider) {
         fs.writeFileSync(sliderPath, fixedSlider);
+      }
+
+      if (fixPipeline) {
+        fs.writeFileSync(pipelinePath, updatedPipeline);
       }
 
       const composerPhar = fileURLToPath(
