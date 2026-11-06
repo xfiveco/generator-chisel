@@ -38,5 +38,10 @@
   },
   "peerDependencies": {
     "@wordpress/scripts": "^27.9.0 || ^31.0.0 || ^31.1.0 || ^31.2.0 || ^37.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@wordpress/scripts": {
+      "optional": true
+    }
   }
 }

@@ -27,6 +27,7 @@
     "update-chisel": "chisel-scripts chisel-update",
     "update-ai-toolkit": "chisel-scripts update-ai-toolkit",
     "update-mcp": "chisel-scripts update-mcp",
+    "update-packages": "chisel-scripts update-packages",
     "update": "npm run check-update && npm run update-chisel",
     "prepare": "chisel-scripts husky-init || node -e \"\"",
     "lint:script": "eslint . --fix && echo Linting scripts completed successfully",

@@ -56,6 +56,14 @@ npm run update
 
 **Note:** The update command will overwrite all files in the `core/` folder.
 
+To update the Node version and the npm and Composer packages to the set tested with this Chisel release:
+
+```bash
+npm run update-packages
+```
+
+Add `-- --dry-run` to see what would change first. Projects that don't have this script yet can run `npx chisel-scripts@latest update-packages`.
+
 ## Core Folder Protection
 
 The `core/` folder contains base Chisel files that are updated automatically when you run `npm run update-chisel`. A pre-commit hook will warn you if you try to commit changes to these files.
