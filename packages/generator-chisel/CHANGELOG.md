@@ -15,14 +15,14 @@
 
 - New projects use `@wordpress/scripts` 37, Swiper 14 and `@wordpress/interactivity` 8.
 - New projects get their lint packages directly, including ESLint 10 and Stylelint 17, instead of through `@xfive/coding-standards`.
-- `update-packages` updates an existing project's Node version, npm and Composer packages, and GitLab pipeline.
+- `update-packages` updates an existing project's Node version, npm, Composer and lint packages, and GitLab pipeline, then applies automatic lint fixes.
 - Browsers now pick up new versions of lazy-loaded CSS after an update.
 - The pre-commit warning about `core/` changes now works on Windows when the theme is inside a larger repository.
 
 ### Updating an existing project
 
 1. Switch to Node.js 26: `nvm install 26.13.0`, then `nvm use 26.13.0`. Everyone on the project needs to switch, because a lockfile written on an older version can make `npm ci` fail.
-2. Commit or undo any changes to `package.json`, the lockfiles, `composer.json` and `.nvmrc`. The command stops if it finds any.
+2. Commit or undo any changes to JS, CSS and SCSS files, `package.json`, the lockfiles, `composer.json` and `.nvmrc`. The command stops if it finds any.
 3. In the theme folder, run `npx chisel-scripts@latest update-packages`. Add `--dry-run` to see the changes first.
 4. Run `npm run update-chisel` before `npm start`. The dev server needs the new core files.
 5. Check sliders and blocks in a browser.
@@ -33,8 +33,10 @@
 - **Custom slider arrows:** Swiper now adds its own SVG arrow to each button. The command updates the default Chisel arrow styles, but a button with its own icon on `::before` shows two arrows until you hide the SVG, for example `.my-slider .swiper-button svg { display: none; }`.
 - **GitLab pipelines:** the command updates `image: node:...` lines in `.gitlab-ci.yml`. If your pipeline sets the image another way, change it by hand. Preview servers don't need a Node update, because the pipeline builds in GitLab and only copies the finished files over.
 - **PHP on servers:** before deploying a new project, check that the server runs PHP 8.3 or newer.
-- **Lint packages:** existing projects stay on ESLint 8 and Stylelint 16, and moving them is a manual job. Until then, installs show some peer dependency and deprecation warnings. They don't stop anything.
-- **Security report:** `npm audit` still reports 5 or 6 low severity issues, depending on the project. They include one in `deepmerge`, a build tool inside `@wordpress/scripts`, which has no fix yet.
+- **Lint changes:** the command moves the project to ESLint 10 and Stylelint 17, and the stricter rules automatically rewrite some JS and SCSS. Review them with `git diff`. If lint reports something it can't fix, run `npm run lint` to see it.
+- **Customised lint settings:** if `.eslintrc.cjs` has custom settings, ESLint stays on its current version until you move them to `eslint.config.mjs`, and installs keep showing some warnings until then. A customised `stylelint.config.mjs` is kept, and Stylelint is still updated.
+- **Rebuilt lockfile:** `package-lock.json` and `node_modules` are rebuilt, so other packages also move to their newest allowed versions. This can include the AI toolkit, which updates its own files in `.claude` and `CLAUDE.md`.
+- **Security report:** `npm audit` still reports 5 low severity issues, all from `deepmerge`, a build tool inside `@wordpress/scripts`, which has no fix yet.
 
 ## <small>2.6.3 (2026-11-05)</small>
 
