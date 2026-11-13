@@ -2,6 +2,15 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.6.0 (2026-11-13)
+
+- Add update-packages command for existing projects ([08b40f0](https://github.com/xfiveco/generator-chisel/commit/08b40f0))
+- Clean up install warnings, remove add-page and create-block ([1aa2bcd](https://github.com/xfiveco/generator-chisel/commit/1aa2bcd))
+- Move lint packages and apply fixes in update-packages ([b15c9cb](https://github.com/xfiveco/generator-chisel/commit/b15c9cb))
+- Require Node 26, update pipelines, add 2.7.0 release notes ([a225405](https://github.com/xfiveco/generator-chisel/commit/a225405))
+- Support Node 26, PHP 8.3 and wp-scripts 37 ([196e101](https://github.com/xfiveco/generator-chisel/commit/196e101))
+- Update starter theme packages and fix Swiper 14 styles ([97cf9df](https://github.com/xfiveco/generator-chisel/commit/97cf9df))
+
 ## 2.5.0 (2026-09-22)
 
 - feat: check/update commands for AI toolkit and MCP plugin ([743d441](https://github.com/xfiveco/generator-chisel/commit/743d441))
