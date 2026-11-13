@@ -12,7 +12,7 @@
       "username": "wordpress"
     },
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "20"
+      "version": "26"
     },
     "ghcr.io/devcontainers/features/git:1": {}
   },

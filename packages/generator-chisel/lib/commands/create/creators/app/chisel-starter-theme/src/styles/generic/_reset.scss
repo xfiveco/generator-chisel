@@ -25,10 +25,10 @@
  */
 body {
   line-height: 1.5;
+  isolation: isolate;
+  text-rendering: optimizelegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
-  isolation: isolate;
 }
 
 /*

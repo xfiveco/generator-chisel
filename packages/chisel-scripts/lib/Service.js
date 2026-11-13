@@ -31,11 +31,10 @@ module.exports = class Service {
       'ai-toolkit.mjs', // check-ai-toolkit-update, update-ai-toolkit
       'mcp-plugin.mjs', // check-mcp-update, update-mcp
       'husky-init.mjs', // husky-init
+      'update-packages.mjs', // update-packages
       'composer',
       'wp',
       'wp-config',
-      'add-page',
-      'create-block',
     ].map((id) => `./commands/${id}`);
 
     const plugins = [];

@@ -6,7 +6,7 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     },
     "platform": {
-      "php": "8.2"
+      "php": "8.3"
     }
   },
   "require-dev": {
@@ -16,7 +16,7 @@
     "vincentlanglet/twig-cs-fixer": "^3.11"
   },
   "require": {
-    "php": "^8.2",
+    "php": "^8.3",
     "timber/timber": "^2.5"
   }
 }

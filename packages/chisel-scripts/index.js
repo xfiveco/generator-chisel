@@ -60,6 +60,13 @@ function adjustWebpackConfig(baseConfig, directory) {
   })();
 
   const preparedConfig = (config, index = null) => {
+    // Lazy loaded CSS has no version by default, so browsers keep the old file after an update.
+    config.plugins
+      .filter((plugin) => plugin?.constructor?.name === 'MiniCssExtractPlugin')
+      .forEach((plugin) => {
+        plugin.options.chunkFilename = '[id].[contenthash].css';
+      });
+
     const devSeverClient = config.devServer ? {
       ...config.devServer.client,
       overlay: {
@@ -165,6 +172,8 @@ function adjustWebpackConfig(baseConfig, directory) {
 
       return {
         ...preparedConfig(config, index),
+        // webpack-dev-server 6 needs named builds to tell their hot update signals apart.
+        name: config.name || (index === 0 ? 'scripts' : `modules-${index}`),
         entry: configEntry,
       }
     })

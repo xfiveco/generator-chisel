@@ -91,7 +91,32 @@ final class Components {
 		$logo_id = get_theme_mod( 'custom_logo', 0 );
 
 		if ( $logo_id ) {
-			self::$logo = ImageHelpers::get_responsive_image( $logo_id );
+			/**
+			 * Filter the logo image attributes.
+			 *
+			 * The logo sits at the top of every page, so by default it loads straight away and ahead of other images.
+			 *
+			 * @param array $attrs   The image attributes.
+			 * @param int   $logo_id The logo attachment ID.
+			 */
+			$logo_attrs = apply_filters(
+				'chisel_logo_image_attributes',
+				array(
+					'loading'       => 'eager',
+					'fetchpriority' => 'high',
+				),
+				(int) $logo_id
+			);
+
+			/**
+			 * Filter the logo image size.
+			 *
+			 * @param string $size    The registered image size name.
+			 * @param int    $logo_id The logo attachment ID.
+			 */
+			$logo_size = apply_filters( 'chisel_logo_image_size', 'medium', (int) $logo_id );
+
+			self::$logo = ImageHelpers::get_responsive_image( $logo_id, $logo_size, $logo_attrs );
 		}
 
 		return self::$logo;

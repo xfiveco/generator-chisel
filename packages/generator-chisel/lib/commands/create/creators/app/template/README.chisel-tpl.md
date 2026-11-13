@@ -6,7 +6,7 @@
 
 Based on the Chisel [Existing Project](https://getchisel.co/docs/installation-setup/) guide.
 
-Requirements: Node.js 20+, PHP 8.2+, Composer, and a local server serving the site at `<%= siteUrl %>`.
+Requirements: Node.js 26, PHP 8.3+, Composer, and a local server serving the site at `<%= siteUrl %>`.
 
 1. Clone the repository and go to the theme folder:
 

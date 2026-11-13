@@ -2,6 +2,42 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.7.0: what changed and how to update
+
+### Breaking changes
+
+- Node.js 26 or newer is required. `chisel create` and `update-packages` refuse to run on older versions.
+- New projects require PHP 8.3 or newer. Existing projects keep their current PHP setting.
+- The `add-page` and `create-block` commands are removed. The AI toolkit doesn't use them.
+- Swiper 14 needs Chrome or Edge 110+, Safari 16.4+ or Firefox 110+.
+
+### What's new
+
+- New projects use `@wordpress/scripts` 37, Swiper 14 and `@wordpress/interactivity` 8.
+- New projects get their lint packages directly, including ESLint 10 and Stylelint 17, instead of through `@xfive/coding-standards`.
+- `update-packages` updates an existing project's Node version, npm, Composer and lint packages, and GitLab pipeline, then applies automatic lint fixes.
+- Browsers now pick up new versions of lazy-loaded CSS after an update.
+- The pre-commit warning about `core/` changes now works on Windows when the theme is inside a larger repository.
+
+### Updating an existing project
+
+1. Switch to Node.js 26: `nvm install 26.13.0`, then `nvm use 26.13.0`. Everyone on the project needs to switch, because a lockfile written on an older version can make `npm ci` fail.
+2. Commit or undo any changes to JS, CSS and SCSS files, `package.json`, the lockfiles, `composer.json` and `.nvmrc`. The command stops if it finds any.
+3. In the theme folder, run `npx chisel-scripts@latest update-packages`. Add `--dry-run` to see the changes first.
+4. Run `npm run update-chisel` before `npm start`. The dev server needs the new core files.
+5. Check sliders and blocks in a browser.
+6. Review the changes with `git diff`, then commit.
+
+### Check after updating
+
+- **Custom slider arrows:** Swiper now adds its own SVG arrow to each button. The command updates the default Chisel arrow styles, but a button with its own icon on `::before` shows two arrows until you hide the SVG, for example `.my-slider .swiper-button svg { display: none; }`.
+- **GitLab pipelines:** the command updates `image: node:...` lines in `.gitlab-ci.yml`. If your pipeline sets the image another way, change it by hand. Preview servers don't need a Node update, because the pipeline builds in GitLab and only copies the finished files over.
+- **PHP on servers:** before deploying a new project, check that the server runs PHP 8.3 or newer.
+- **Lint changes:** the command moves the project to ESLint 10 and Stylelint 17, and the stricter rules automatically rewrite some JS and SCSS. Review them with `git diff`. If lint reports something it can't fix, run `npm run lint` to see it.
+- **Customised lint settings:** if `.eslintrc.cjs` has custom settings, ESLint stays on its current version until you move them to `eslint.config.mjs`, and installs keep showing some warnings until then. A customised `stylelint.config.mjs` is kept, and Stylelint is still updated.
+- **Rebuilt lockfile:** `package-lock.json` and `node_modules` are rebuilt, so other packages also move to their newest allowed versions. This can include the AI toolkit, which updates its own files in `.claude` and `CLAUDE.md`.
+- **Security report:** `npm audit` still reports 5 low severity issues, all from `deepmerge`, a build tool inside `@wordpress/scripts`, which has no fix yet.
+
 ## <small>2.6.3 (2026-11-05)</small>
 
 - Disable auto updates except minor core, add joining guide to README template ([d4c786e](https://github.com/xfiveco/generator-chisel/commit/d4c786e))
@@ -259,82 +295,3 @@
 - update timber ([1f4d08c](https://github.com/xfiveco/generator-chisel/commit/1f4d08c))
 - WiP ([802891c](https://github.com/xfiveco/generator-chisel/commit/802891c))
 - working setup with composer ([abd16db](https://github.com/xfiveco/generator-chisel/commit/abd16db))
-
-## 1.0.0 (2021-12-17)
-
-- Rewrite with Webpack (#509) ([14fa2d0](https://github.com/xfiveco/generator-chisel/commit/14fa2d0)), closes [#509](https://github.com/xfiveco/generator-chisel/issues/509)
-
-## 1.0.0-alpha.14 (2021-12-16)
-
-- Fix ::before and ::after ([adf82b3](https://github.com/xfiveco/generator-chisel/commit/adf82b3)), closes [#508](https://github.com/xfiveco/generator-chisel/issues/508)
-
-## 1.0.0-alpha.13 (2021-09-29)
-
-- Change postcss-normalize package ([f1b9ea4](https://github.com/xfiveco/generator-chisel/commit/f1b9ea4))
-- Fix Eslint import error (#493) (#496) ([0e0fabe](https://github.com/xfiveco/generator-chisel/commit/0e0fabe)), closes [#493](https://github.com/xfiveco/generator-chisel/issues/493) [#496](https://github.com/xfiveco/generator-chisel/issues/496)
-- Minify Styles & Update Tests (#501) ([4a2e720](https://github.com/xfiveco/generator-chisel/commit/4a2e720)), closes [#501](https://github.com/xfiveco/generator-chisel/issues/501)
-- Update chisel index page (#497) (#499) ([7219131](https://github.com/xfiveco/generator-chisel/commit/7219131)), closes [#497](https://github.com/xfiveco/generator-chisel/issues/497) [#499](https://github.com/xfiveco/generator-chisel/issues/499) [#499](https://github.com/xfiveco/generator-chisel/issues/499)
-
-## 1.0.0-alpha.12 (2021-01-23)
-
-- Support Node 14 ([c7da9a6](https://github.com/xfiveco/generator-chisel/commit/c7da9a6))
-
-## 1.0.0-alpha.11 (2020-09-21)
-
-- Change gitignore file name to ensure they're include in npm package ([f09752e](https://github.com/xfiveco/generator-chisel/commit/f09752e))
-- Publish ([f804f33](https://github.com/xfiveco/generator-chisel/commit/f804f33))
-
-## 1.0.0-alpha.10 (2020-08-04)
-
-- Add frontend generator and commands tests ([c32fa26](https://github.com/xfiveco/generator-chisel/commit/c32fa26))
-- Change minimum node version per earlier tests with travis ([b809708](https://github.com/xfiveco/generator-chisel/commit/b809708))
-- Improve config template ([a4cff31](https://github.com/xfiveco/generator-chisel/commit/a4cff31))
-- Improve default ignore files ([44ce712](https://github.com/xfiveco/generator-chisel/commit/44ce712))
-- Publish ([6a85f99](https://github.com/xfiveco/generator-chisel/commit/6a85f99))
-- Publish ([f770d3c](https://github.com/xfiveco/generator-chisel/commit/f770d3c))
-
-## 1.0.0-alpha.9 (2020-07-21)
-
-- Ignore dist in generated projects ([f9c76a0](https://github.com/xfiveco/generator-chisel/commit/f9c76a0))
-
-## 1.0.0-alpha.8 (2020-07-21)
-
-- Add Changelogs ([25d6245](https://github.com/xfiveco/generator-chisel/commit/25d6245))
-- Add Readmes ([35fd430](https://github.com/xfiveco/generator-chisel/commit/35fd430))
-- Add some tests and travis config ([7b89252](https://github.com/xfiveco/generator-chisel/commit/7b89252))
-- Add Static Frontend ([0c6db7a](https://github.com/xfiveco/generator-chisel/commit/0c6db7a))
-- Update incorrect log & comment ([f7037a3](https://github.com/xfiveco/generator-chisel/commit/f7037a3))
-
-## 1.0.0-alpha.7 (2020-07-06)
-
-- Add hooks to modify webpack options and few other things ([9ec1f07](https://github.com/xfiveco/generator-chisel/commit/9ec1f07))
-
-## 1.0.0-alpha.6 (2020-07-06)
-
-- Add build report support ([048a84a](https://github.com/xfiveco/generator-chisel/commit/048a84a))
-
-## 1.0.0-alpha.5 (2020-07-06)
-
-- Add add-page command ([1a98eb4](https://github.com/xfiveco/generator-chisel/commit/1a98eb4))
-- Fix templates in php files ([87f1258](https://github.com/xfiveco/generator-chisel/commit/87f1258))
-- Format Settings and initManifest in ChiselTwig.php ([55f6b20](https://github.com/xfiveco/generator-chisel/commit/55f6b20))
-
-## 1.0.0-alpha.4 (2020-07-06)
-
-- Include license when sorting package.json ([fd206c2](https://github.com/xfiveco/generator-chisel/commit/fd206c2))
-
-## 1.0.0-alpha.3 (2020-07-03)
-
-- Fix lint/buid with npm ([d81791b](https://github.com/xfiveco/generator-chisel/commit/d81791b))
-
-## 1.0.0-alpha.2 (2020-07-03)
-
-- Fix command with npm, remove unused variable ([e1c1d07](https://github.com/xfiveco/generator-chisel/commit/e1c1d07))
-
-## 1.0.0-alpha.1 (2020-07-03)
-
-- Fix typo, make browsersync port configurable ([a76890e](https://github.com/xfiveco/generator-chisel/commit/a76890e))
-
-## 1.0.0-alpha.0 (2020-07-01)
-
-- Rewrite with webpack ([75952b3](https://github.com/xfiveco/generator-chisel/commit/75952b3))

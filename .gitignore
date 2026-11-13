@@ -33,6 +33,7 @@ nbproject
 *.sublime-workspace
 .idea
 .vscode
+!packages/generator-chisel/lib/commands/create/creators/app/chisel-starter-theme/.vscode
 
 # Folders to ignore
 temp

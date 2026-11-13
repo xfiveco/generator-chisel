@@ -1,0 +1,19 @@
+{
+  "git.openRepositoryInParentFolders": "always",
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "[javascript][javascriptreact][typescript][typescriptreact][vue][css][scss]": {
+    "editor.formatOnSave": false
+  },
+
+  "stylelint.validate": ["css", "scss", "vue"],
+  "css.validate": false,
+  "scss.validate": false
+}

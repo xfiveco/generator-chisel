@@ -62,8 +62,8 @@
   padding: 0;
   margin: 0 0 0 get-margin('tiny');
   line-height: 1;
-  text-align: center;
   vertical-align: middle;
+  text-align: center;
   appearance: none;
   cursor: pointer;
   background: none;
@@ -155,10 +155,10 @@
     left: px-rem(16);
     z-index: -999;
     display: block;
+    visibility: hidden;
     width: px-rem(160);
     padding: get-padding('little') 0;
     margin-top: get-margin('small');
-    visibility: hidden;
     box-shadow: none;
     opacity: 0;
     transition:
@@ -206,8 +206,8 @@
     .menu-item-has-children:hover > &,
     .menu-item-has-children:focus-within > & {
       z-index: 999;
-      margin-top: 0;
       visibility: visible;
+      margin-top: 0;
       opacity: 1;
       transition:
         opacity 0.3s ease-in-out,
@@ -300,10 +300,10 @@
         top: 0;
         left: 0;
         z-index: 1;
+        visibility: visible;
         width: 100%;
         padding: 0;
         margin-top: 0;
-        visibility: visible;
         opacity: 1;
 
         &::after {

@@ -96,6 +96,7 @@ final class Assets {
 		$runtime_script = array(
 			'src'       => get_template_directory_uri() . '/build/runtime.js',
 			'deps'      => array( $this->refresh_runtime_dependency ),
+			'ver'       => $this->get_file_version( get_template_directory() . '/build/runtime.js' ),
 			'strategy'  => false,
 			'condition' => array( ThemeHelpers::class, 'is_fast_refresh' ),
 		);
@@ -673,6 +674,7 @@ final class Assets {
 				$file_name,
 				array(
 					'src' => $this->get_style_src( $file_name, true ),
+					'ver' => $this->get_file_version( get_template_directory() . '/build/styles/' . $file_name . '.js' ),
 				),
 			);
 		}
@@ -892,6 +894,17 @@ final class Assets {
 		}
 
 		return get_template_directory_uri() . '/build/styles/' . $file_name . '.css';
+	}
+
+	/**
+	 * Get a version from the file's modified time. Fast refresh files have no asset version, and without a changing version browsers keep an old copy, which makes the page reload endlessly.
+	 *
+	 * @param string $path
+	 *
+	 * @return string
+	 */
+	private function get_file_version( string $path ): string {
+		return is_file( $path ) ? (string) filemtime( $path ) : ThemeHelpers::get_theme_version();
 	}
 
 	/**

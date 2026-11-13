@@ -6,7 +6,7 @@ For full documentation visit [getchisel.co](https://getchisel.co/).
 
 ## Installation
 
-Use Node.js version `24.11.1` (Minimum `20.12.2`)
+Use Node.js version `26.13.0`
 
 Chisel is installed as a npm package using npx command: `npx generator-chisel`, which scaffolds the entire project for you including composer and node dependencies, however when you join the project and clone the repository, follow these steps to start the local development:
 
@@ -16,21 +16,21 @@ Chisel is installed as a npm package using npx command: `npx generator-chisel`, 
 4. Copy `wp-config-custom.php` and rename it to `wp-config.php` in the project root directory (if you haven't done so already).
 5. Run `npm run wp-config`
 
-    After creating the `wp-config-local.php` file make sure you have these lines in the file:
+   After creating the `wp-config-local.php` file make sure you have these lines in the file:
 
-    ```php
-    define( 'WP_DEBUG', true );
-    define( 'WP_DEBUG_LOG', true );
-    define( 'WP_DEBUG_DISPLAY', false );
+   ```php
+   define( 'WP_DEBUG', true );
+   define( 'WP_DEBUG_LOG', true );
+   define( 'WP_DEBUG_DISPLAY', false );
 
-    // Required for the theme fast refresh mode.
-    define( 'SCRIPT_DEBUG', true );
-    define( 'WP_ENVIRONMENT_TYPE', 'development' );
-    ```
+   // Required for the theme fast refresh mode.
+   define( 'SCRIPT_DEBUG', true );
+   define( 'WP_ENVIRONMENT_TYPE', 'development' );
+   ```
 
 6. Run `npm run build`
 
-    The local URL for the new project should be `project-name.test`
+   The local URL for the new project should be `project-name.test`
 
 7. Run `npm run dev` to start local development. The URL for local development is the same with "Fast Refresh" mode enabled for CSS and JavaScript.
 
@@ -56,6 +56,14 @@ npm run update
 
 **Note:** The update command will overwrite all files in the `core/` folder.
 
+To update the Node version and the npm and Composer packages to the set tested with this Chisel release:
+
+```bash
+npm run update-packages
+```
+
+Add `-- --dry-run` to see what would change first. Projects that don't have this script yet can run `npx chisel-scripts@latest update-packages`.
+
 ## Core Folder Protection
 
 The `core/` folder contains base Chisel files that are updated automatically when you run `npm run update-chisel`. A pre-commit hook will warn you if you try to commit changes to these files.
@@ -72,11 +80,11 @@ npm run prepare
 
 Instead of modifying core files directly, create corresponding files in the `custom/` folder:
 
-| Instead of modifying...          | Create/modify...                       |
-|----------------------------------|----------------------------------------|
-| `core/WP/Site.php`               | `custom/app/WP/Site.php`               |
-| `core/Helpers/ImageHelpers.php`  | `custom/app/Helpers/ImageHelpers.php`  |
-| `core/Timber/ChiselPost.php`     | `custom/app/Timber/ChiselPost.php`     |
+| Instead of modifying...         | Create/modify...                      |
+| ------------------------------- | ------------------------------------- |
+| `core/WP/Site.php`              | `custom/app/WP/Site.php`              |
+| `core/Helpers/ImageHelpers.php` | `custom/app/Helpers/ImageHelpers.php` |
+| `core/Timber/ChiselPost.php`    | `custom/app/Timber/ChiselPost.php`    |
 
 ### Bypassing the Hook
 
@@ -92,5 +100,5 @@ CHISEL_SKIP_CORE_CHECK=1 git commit
 
 ## Known issues
 
-1. Browser keeps refreshing after starting the dev mode - *Open dev tools (Chrome) Network tab, select "Disable cache" checkbox and refresh the browser*.
-2. Css does not refresh after modifying the styles - *Same as #1*
+1. Browser keeps refreshing after starting the dev mode - _Open dev tools (Chrome) Network tab, select "Disable cache" checkbox and refresh the browser_.
+2. Css does not refresh after modifying the styles - _Same as #1_
