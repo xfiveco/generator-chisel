@@ -5,6 +5,7 @@ namespace Chisel\Helpers;
 use Timber\Timber;
 use Chisel\WP\AcfBlocks;
 use Chisel\WP\Blocks;
+use Chisel\WP\Twig;
 use Chisel\Helpers\CacheHelpers;
 
 /**
@@ -181,7 +182,18 @@ final class BlocksHelpers {
 			);
 		}
 
-		Timber::render( AcfBlocks::get_instance()->blocks_twig_base_path . $block_slug . '/' . $block_slug . '.twig', $context, CacheHelpers::expiry() );
+		$template    = AcfBlocks::get_instance()->blocks_twig_base_path . $block_slug . '/' . $block_slug . '.twig';
+		$expiry      = CacheHelpers::expiry();
+		$environment = Twig::get_instance()->get_environment();
+
+		// Render in the Twig environment already in use: Timber::render() would build a new one for every block.
+		// Timber::render() stays for "cache everything" mode (its caching lives there) and before any environment exists.
+		if ( $environment && ! $expiry ) {
+			echo $environment->render( $template, $context ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Twig output, escaped in the template.
+			return;
+		}
+
+		Timber::render( $template, $context, $expiry );
 	}
 
 	/**

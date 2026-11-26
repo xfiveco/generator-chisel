@@ -23,6 +23,13 @@ final class Twig {
 	use HooksSingleton;
 
 	/**
+	 * The newest Twig environment Timber built: the one rendering the current page or block.
+	 *
+	 * @var ?\Twig\Environment
+	 */
+	private ?\Twig\Environment $environment = null;
+
+	/**
 	 * Register action hooks.
 	 */
 	public function action_hooks(): void {}
@@ -57,6 +64,8 @@ final class Twig {
 	 * @return \Twig\Environment
 	 */
 	public function extend_twig( \Twig\Environment $twig ): \Twig\Environment {
+		$this->environment = $twig;
+
 		$twig = $this->register_functions( $twig );
 		$twig = $this->register_filters( $twig );
 		$twig = $this->register_tests( $twig );
@@ -308,14 +317,31 @@ final class Twig {
 	}
 
 	/**
+	 * The Twig environment in use: the newest one Timber built, or null before Timber has built one.
+	 *
+	 * @return ?\Twig\Environment
+	 */
+	public function get_environment(): ?\Twig\Environment {
+		return $this->environment;
+	}
+
+	/**
 	 * Get svg icon. The arguments are described in objects/icon.twig file
+	 *
+	 * Rendered in the Twig environment already in use, where the icon template is loaded once.
+	 * Components::get_icon() (for PHP callers) goes through Timber::compile(), which builds a new
+	 * environment for every icon.
 	 *
 	 * @param array $args
 	 *
 	 * @return string
 	 */
 	public function get_icon( array $args ): string {
-		return Components::get_icon( $args );
+		if ( ! $this->environment ) {
+			return Components::get_icon( $args );
+		}
+
+		return $this->environment->render( 'objects/icon.twig', $args );
 	}
 
 	/**

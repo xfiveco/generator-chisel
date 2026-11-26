@@ -50,5 +50,6 @@ npm-debug.log
 # Chisel
 /dev-vhost.conf
 /wp-content/uploads
+/wp-content/cache
 /wp-config-local.php
 /wp-config.php

@@ -30,9 +30,26 @@ final class Acf {
 	private array $acf_options_sub_pages = array();
 
 	/**
+	 * Whether ACF options are saved as autoloaded (fetched with WordPress's first query instead of one or two
+	 * queries per field). The default for options pages that don't set `autoload` and for options saved
+	 * outside an options page (code, imports, REST tools).
+	 *
+	 * @var bool
+	 */
+	private bool $options_autoload = true;
+
+	/**
+	 * Set properties.
+	 */
+	public function set_properties(): void {
+		$this->options_autoload = (bool) apply_filters( 'chisel_acf_options_autoload', $this->options_autoload );
+	}
+
+	/**
 	 * Register action hooks.
 	 */
 	public function action_hooks(): void {
+		add_action( 'acf/init', array( $this, 'options_autoload' ) );
 		add_action( 'acf/init', array( $this, 'options_pages' ) );
 	}
 
@@ -40,6 +57,14 @@ final class Acf {
 	 * Register filter hooks.
 	 */
 	public function filter_hooks(): void {}
+
+	/**
+	 * Make `chisel_acf_options_autoload` ACF's own default for saving options. An options page's `autoload`
+	 * still wins on that page's screen: ACF sets it while saving the page.
+	 */
+	public function options_autoload(): void {
+		acf_update_setting( 'autoload', $this->options_autoload );
+	}
 
 	/**
 	 * Register ACF options pages.
@@ -88,6 +113,8 @@ final class Acf {
 	 * @return void
 	 */
 	private function register_options_page( array $data, AcfOptionsPageType|string $type = AcfOptionsPageType::Page ): void {
+		$data['autoload'] ??= $this->options_autoload;
+
 		( new RegisterAcfOptionsPage( $data, $type ) )->register();
 	}
 }

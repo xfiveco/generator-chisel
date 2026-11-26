@@ -22,6 +22,15 @@ class Woocommerce {
 	private $sidebars = array();
 
 	/**
+	 * Load WooCommerce's front-end stylesheets and jQuery scripts only on WooCommerce pages. Off by
+	 * default: a site that shows WooCommerce's own add-to-cart buttons or product lists outside shop
+	 * pages needs them there.
+	 *
+	 * @var bool
+	 */
+	private bool $limit_assets = false;
+
+	/**
 	 * Initialize.
 	 */
 	public function init(): bool {
@@ -42,6 +51,8 @@ class Woocommerce {
 				'description' => __( 'Sidebar for shop pages', 'chisel' ),
 			),
 		);
+
+		$this->limit_assets = (bool) apply_filters( 'chisel_woocommerce_limit_assets', $this->limit_assets );
 	}
 
 	/**
@@ -60,6 +71,9 @@ class Woocommerce {
 		add_action( 'customize_register', array( $this, 'modify_customizer' ), 20 );
 
 		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
+
+		// After the plugins and the theme's own files (99).
+		add_action( 'wp_enqueue_scripts', array( $this, 'limit_assets' ), 100 );
 	}
 
 	/**
@@ -238,7 +252,54 @@ class Woocommerce {
 	public function enqueue_styles( array $enqueue_styles ): array {
 		unset( $enqueue_styles['woocommerce-layout'] );
 
+		if ( ! $this->needs_assets() ) {
+			return array();
+		}
+
 		return $enqueue_styles;
+	}
+
+	/**
+	 * With `chisel_woocommerce_limit_assets` on, drop WooCommerce's jQuery scripts outside WooCommerce
+	 * pages; jQuery itself then drops wherever nothing else needs it. Order attribution is never dropped:
+	 * it records the page a visitor first arrives on, needs no jQuery and loads at the end of the page.
+	 */
+	public function limit_assets(): void {
+		if ( $this->needs_assets() ) {
+			return;
+		}
+
+		/**
+		 * Filters the WooCommerce scripts dropped outside WooCommerce pages when
+		 * `chisel_woocommerce_limit_assets` is on.
+		 *
+		 * @param string[] $handles Script handles.
+		 */
+		$scripts = apply_filters( 'chisel_woocommerce_limited_scripts', array( 'wc-add-to-cart', 'woocommerce', 'wc-js-cookie', 'wc-jquery-blockui' ) );
+
+		foreach ( (array) $scripts as $handle ) {
+			wp_dequeue_script( $handle );
+		}
+	}
+
+	/**
+	 * Whether WooCommerce's front-end files load on this page: always, unless `chisel_woocommerce_limit_assets`
+	 * is on and the page isn't a WooCommerce page.
+	 *
+	 * @return bool
+	 */
+	private function needs_assets(): bool {
+		if ( ! $this->limit_assets ) {
+			return true;
+		}
+
+		/**
+		 * Filters whether the current page needs WooCommerce's front-end files when
+		 * `chisel_woocommerce_limit_assets` is on.
+		 *
+		 * @param bool $needs_assets Whether it is a WooCommerce page (see is_woocommerce_page()).
+		 */
+		return (bool) apply_filters( 'chisel_woocommerce_assets_page', $this->is_woocommerce_page() );
 	}
 
 
