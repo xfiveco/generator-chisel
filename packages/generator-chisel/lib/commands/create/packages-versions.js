@@ -1,5 +1,5 @@
 module.exports = {
   'chisel-scripts': '2.6.0',
   'chisel-shared-utils': '2.0.0-alpha.1',
-  'generator-chisel': '2.7.0',
+  'generator-chisel': '2.8.0',
 };

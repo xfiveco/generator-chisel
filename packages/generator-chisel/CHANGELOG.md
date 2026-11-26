@@ -2,6 +2,10 @@
 
 <!-- INSERT-NEW-ENTRIES-HERE -->
 
+## 2.8.0 (2026-11-26)
+
+- starter theme performance improvements ([8494a59](https://github.com/xfiveco/generator-chisel/commit/8494a59))
+
 ## 2.7.0 (2026-11-13)
 
 - add logo filter hooks and eager loading by default ([87ad052](https://github.com/xfiveco/generator-chisel/commit/87ad052))
