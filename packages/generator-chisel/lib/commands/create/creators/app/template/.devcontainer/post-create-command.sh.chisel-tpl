@@ -7,6 +7,7 @@ touch .use-devcontainer
 
 pushd ../../..
 
+sudo touch wp-config.php
 sudo chown "$USER:$USER" . index.php wp-config.php
 if [ -d .git ] ; then sudo chown "$USER:$USER" .git ; fi
 chmod +x .devcontainer/compose .devcontainer/exec
